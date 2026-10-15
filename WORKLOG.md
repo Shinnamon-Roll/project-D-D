@@ -9,3 +9,7 @@ Work log by date (newest at bottom).
 - Research (agent `researcher` x2) saved to `docs/research/dnd-basics.md` and `docs/research/vtt-and-player-needs.md`; linked from `CLAUDE.md` Knowledge.
 - Web flow draft (white label, lobby → character creation → map) + Salem campaign stub + docs structure (`docs/README.md`: conversations, decisions, open-questions, ideas).
 - Salem research → `docs/research/salem-1692.md`; campaign design draft (proposal) → `docs/campaigns/salem/README.md`; Q12–Q17 open.
+- Campaign menu (DM picks) added to flow; Salem paused. Starter Set research → `docs/research/starter-set.md`; plan → `docs/campaigns/starter-set/README.md` (DoSI, start with free intro).
+- Tech stack confirmed: Go backend + React/TS frontend (`docs/design/tech-stack.md`). Open: hosting (Q12), room number (Q13).
+- v0 step 1 scaffold: Go server (`cmd/server`, embed `internal/webui`), Vite React TS `web/` v0.1.0, Makefile (dev/build/test). Verified: binary serves page, WS echo, WS upgrade via Vite proxy (101).
+- Agents added: `backend`, `frontend`, `auditor` (`.claude/agents/`).

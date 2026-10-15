@@ -5,7 +5,7 @@
 | โฟลเดอร์/ไฟล์ | เก็บอะไร | อัปเดตเมื่อ |
 |---|---|---|
 | [`conversations/`](conversations/) | บันทึกการคุยแต่ละรอบ: คำขอผู้ใช้ (คำต่อคำ) + สรุป + สิ่งที่ตัดสินใจ | ทุกครั้งที่ผู้ใช้ให้ requirement/feedback ใหม่ |
-| [`design/`](design/) | flow การทำงานของเว็บ, หน้าจอ, data model | เมื่อ requirement เปลี่ยน |
+| [`design/`](design/) | flow การทำงานของเว็บ, หน้าจอ, data model, tech stack | เมื่อ requirement เปลี่ยน |
 | [`campaigns/`](campaigns/) | เนื้อเรื่อง/ฉาก/NPC ของแต่ละแคมเปญ (เช่น Salem) | เมื่อออกแบบเนื้อเรื่อง |
 | [`research/`](research/) | ความรู้พื้นฐานจาก agent `researcher` (มี citation) | เมื่อ research เรื่องใหม่ |
 | [`features/`](features/) | spec ทีละฟีเจอร์ (จาก `/new-feature`) | ก่อนเขียนโค้ดแต่ละฟีเจอร์ |

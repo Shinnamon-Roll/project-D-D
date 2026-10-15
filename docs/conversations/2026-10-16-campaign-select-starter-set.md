@@ -19,3 +19,16 @@ Starter Set เป็นลิขสิทธิ์ Wizards of the Coast (ไม
 
 ## งานที่สั่ง
 - agent `researcher` → `docs/research/starter-set.md` + `docs/campaigns/starter-set/README.md`
+
+## คำตอบรอบถัดไป (คำต่อคำ)
+> DM เลือก ไม่มีกล่อง starter set เลือกมาซักเซ็๖ อยากลองเล่น
+
+- Q18 → **DM เลือกแคมเปญ**
+- Q19 → ไม่มีกล่อง ให้เลือกให้ → เลือก **Dragons of Stormwreck Isle** เริ่มจาก **Intro to Stormwreck Isle** (ฟรีบน D&D Beyond, 2 encounter)
+  - เหตุผล: ลองเล่นได้ฟรีไม่ต้องซื้อ, ต่อเข้าเรื่องหลักได้ ถ้าชอบค่อยซื้อฉบับเต็ม
+  - ข้อเสีย: กฎ 2014 vs preset 2024 → รอ research สรุปการแปลง
+
+## ผล research
+- ข้อเท็จจริง: [`../research/starter-set.md`](../research/starter-set.md) — researcher แนะนำ DoSI ตรงกับที่เลือก
+- แผนเล่นในแอป: [`../campaigns/starter-set/README.md`](../campaigns/starter-set/README.md)
+- คำถามใหม่ Q20–Q21

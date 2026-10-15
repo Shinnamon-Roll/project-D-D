@@ -48,11 +48,11 @@ stateDiagram-v2
 ### 0. เมนูเลือกแคมเปญ (หน้าแรก) — ยืนยันแล้ว 2026-10-16
 | แคมเปญ | สถานะ |
 |---|---|
-| **D&D Starter Set** | เล่นได้ (แคมเปญแรก) — [`../campaigns/starter-set/`](../campaigns/starter-set/) |
+| **Starter Set: Dragons of Stormwreck Isle** (เริ่มจากบทนำฟรี) | เล่นได้ (แคมเปญแรก) — [`../campaigns/starter-set/`](../campaigns/starter-set/) |
 | **Salem** | "Coming soon" กดไม่ได้ — [`../campaigns/salem/`](../campaigns/salem/) |
 
 - แคมเปญกำหนด: ruleset preset เริ่มต้น, รายชื่อฉาก/แมพที่ DM ต้องอัป, NPC ที่เตรียมไว้
-- (สมมติ) DM เป็นคนเลือก ดู Q18 ใน [`../open-questions.md`](../open-questions.md)
+- **DM เป็นคนเลือก** (ยืนยันแล้ว)
 - ห้องยังมีห้องเดียว → ถ้ามีเกมค้างอยู่ หน้าแรกพาเข้าห้องนั้นเลย (สมมติ)
 
 ### 1. ห้องกลาง / Lobby

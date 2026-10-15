@@ -24,3 +24,9 @@
 | 2026-10-16 | **หน้าแรก = เมนูเลือกแคมเปญ** | [conv](conversations/2026-10-16-campaign-select-starter-set.md) |
 | 2026-10-16 | แคมเปญแรก = **D&D Starter Set**; **Salem พักไว้** แสดงเป็น "Coming soon" | [conv](conversations/2026-10-16-campaign-select-starter-set.md) |
 | 2026-10-16 | เนื้อหา Starter Set ไม่ bundle ในแอป/repo: เก็บแค่สรุป, DM ใช้เล่มของตัวเอง, คู่มือกฎทำจาก SRD | [conv](conversations/2026-10-16-campaign-select-starter-set.md) |
+| 2026-10-16 | **DM เป็นคนเลือกแคมเปญ** ที่หน้าแรก | [conv](conversations/2026-10-16-campaign-select-starter-set.md#คำตอบรอบถัดไป-คำต่อคำ) |
+| 2026-10-16 | Starter Set = **Dragons of Stormwreck Isle**; เริ่มจาก **Intro to Stormwreck Isle** (ฟรี, D&D Beyond); ไม่มีกล่อง — ซื้อฉบับเต็มถ้าชอบ | [conv](conversations/2026-10-16-campaign-select-starter-set.md#คำตอบรอบถัดไป-คำต่อคำ) |
+| 2026-10-16 | v0 **ตามลิสต์เดิม** — ไม่เพิ่ม initiative / HP มอนสเตอร์ลับ จนกว่าจะได้ลองเล่น | [conv](conversations/2026-10-16-tech-stack.md) |
+| 2026-10-16 | Starter Set: ใช้ตัวละครสำเร็จรูป **ตามชีทเดิม (กฎ 2014)** ไม่แปลง | [conv](conversations/2026-10-16-tech-stack.md) |
+| 2026-10-16 | **Tech stack: backend Go 1.26 (`net/http` + WebSocket), frontend React + Vite + TypeScript + react-konva + Zustand**; server-authoritative, state ใน memory, binary ไฟล์เดียว embed หน้าเว็บ | [conv](conversations/2026-10-16-tech-stack.md#ยืนยัน-คำต่อคำ) · [design](design/tech-stack.md) |
+| 2026-10-16 | Q12: **รันบนคอมตัวเอง (localhost)** ทดสอบคนเดียวก่อน; LAN/tunnel ค่อยตัดสินทีหลัง · Q13 ข้ามไปก่อน (กลับเข้าห้องด้วย clientId ใน browser) | conversation 2026-10-16 |
