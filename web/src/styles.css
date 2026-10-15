@@ -22,9 +22,10 @@
 
   --font-display: 'Cinzel', 'Trirong', Georgia, serif;
   --font-body: 'Trirong', Georgia, serif;
-  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --stains: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.008' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .38 0 0 0 0 .16 0 0 0 .5 -.12'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
-  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 .09' numOctaves='4' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .05 0 0 0 0 .03 0 0 0 0 .01 0 0 0 .9 -.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
+  /* feTurbulence textures pre-rendered once to WebP: runtime SVG filters re-ran on every raster (scroll/click jank). */
+  --noise: url('./assets/tex-noise.webp');
+  --stains: url('./assets/tex-stains.webp');
+  --grain: url('./assets/tex-grain.webp');
 
   font-family: var(--font-body);
   font-size: 16px;
@@ -39,12 +40,19 @@ body {
   margin: 0;
   min-height: 100vh;
   color: var(--text);
+}
+/* Fixed wood backdrop as its own layer: background-attachment: fixed repaints the whole viewport on every scroll. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background:
     radial-gradient(ellipse at 50% 0%, rgba(201, 140, 60, 0.16), transparent 55%),
     radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.6) 100%),
     var(--grain),
     linear-gradient(180deg, #23180f, var(--wood) 60%);
-  background-attachment: fixed;
 }
 img { max-width: 100%; }
 

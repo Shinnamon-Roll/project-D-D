@@ -38,7 +38,7 @@ Contrast: `--ink` บน `--parchment` ≈ 12:1, ข้อความ `--parchm
 | `stormwreck.svg` | การ์ดแคมเปญ Starter Set: ทะเลพายุ เกาะ ประภาคาร (ภาพต้นฉบับ ไม่อิงอาร์ตจากเล่ม) |
 | `salem.svg` | การ์ด Salem (ล็อก): หมู่บ้านใต้พระจันทร์ เทียน + ตราขี้ผึ้ง "Coming soon" |
 | `divider.svg` | เส้นคั่นลายเถาใต้หัวข้อ |
-| ผิวกระดาษ | SVG `feTurbulence` แบบ data URI ใน CSS (ไม่ต้องมีไฟล์) |
+| `tex-noise.webp` `tex-stains.webp` `tex-grain.webp` | ผิวกระดาษ/ไม้ — pre-render จาก SVG `feTurbulence` เป็น WebP แล้ว (ห้ามกลับไปใช้ filter แบบ runtime: ทำให้ repaint หนักมาก ดู perf ใน WORKLOG 0.6.1) |
 
 ## แมพ (Konva)
 grid สีซีเปีย `rgba(43,29,18,.45)`, token ผู้เล่นขอบ `--parchment`, เลือกแล้วขอบ `--gold`, token NPC พื้น `--iron`,
@@ -46,3 +46,7 @@ fog ผู้เล่นเห็นเป็นหมอกดำอมน้�
 
 ## ห้าม
 อาร์ต/โลโก้ WotC, ชื่อ "D&D" เป็นแบรนด์, ฟอนต์/ลายจากชีทตัวละครทางการ
+
+## Performance rules
+- ห้ามใช้ SVG filter (`feTurbulence` ฯลฯ) เป็น background แบบ runtime → ใช้ภาพ raster ที่ render ไว้แล้ว
+- ห้าม `background-attachment: fixed` → ใช้ `body::before { position: fixed }` แยก layer
