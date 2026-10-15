@@ -1,5 +1,7 @@
 # Research: animation ทอยลูกเต๋า (2026-10-16)
 
+> **ไม่ใช้แล้ว** — ผู้ใช้ตัดสินใจใช้ลูกเต๋าจริง ตัดระบบเต๋าออกจากแอป ([conv](../conversations/2026-10-16-remove-dice.md)) · เก็บไว้อ้างอิง
+
 ที่มา: [`../conversations/2026-10-16-perf-and-dice-anim.md`](../conversations/2026-10-16-perf-and-dice-anim.md) · agent `researcher` · ขนาด bundle วัดจริงด้วย esbuild + `gzip -9`, วันที่/license จาก `npm view`
 
 ## สรุปสั้น

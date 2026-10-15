@@ -62,7 +62,7 @@ Roles: **DM** = seat kind `dm` or `codm` (co-DM has every DM right except removi
 | `character.submit` | `{name, portraitUrl, stats, skillIds}` | player without character | `creating` | every stat key present, `min ≤ v ≤ max`, `Σ(v − base) == statPoints`; exactly `startingSkillPicks` distinct known skills; inventory = startingItems; when every player has a character → `playing` |
 | `character.grant` | `{characterId, setStats?, addSkillIds?, removeSkillIds?, addItems?, removeItems?}` | DM | `creating`/`playing` | DM bypasses min/max; skills/items must exist in ruleset; qty > 0; item qty never below 0 (removed at 0) |
 | `scene.add` | `{name, imageUrl, grid}` | DM | `creating`/`playing` | imageUrl must start with `/uploads/`; grid: cellSize 10–400, cols/rows 1–200 |
-| `scene.update` | `{sceneId, name, grid}` | DM | `creating`/`playing` | same grid limits |
+| `scene.update` | `{sceneId, name, grid}` | DM | `creating`/`playing` | same grid limits (cellSize is an int: send `round(imgW/cols)`; offsetX/offsetY 0). Grid shrink: that scene's tokens clamp to the nearest edge cell `[0,cols-1]×[0,rows-1]`; fog rects clip to the grid, rects fully outside are dropped |
 | `scene.select` | `{sceneId}` | DM | `playing` | sets `currentSceneId`; adds a token for every character without one in that scene, at row 0, col 0..n |
 | `token.addNpc` | `{sceneId, name, imageUrl}` | DM | `playing` | placed at col 0, row 0; imageUrl "" or `/uploads/...` |
 | `token.move` | `{tokenId, col, row}` | DM any token; player only own character's token | `playing` | 0 ≤ col < cols, 0 ≤ row < rows of the token's scene |
@@ -95,7 +95,7 @@ preferred first: 192.168 → 10 → 172.16 (Docker/VM bridges usually last). Loo
 - Names (DM, seat, character, scene, NPC): 1–32 chars.
 - `hello.clientId`: 8–64 chars `[A-Za-z0-9_-]`; any event before `hello`, or a second `hello` → error.
 - Image URLs: exactly `/uploads/<name>` (no extra `/`, `..`, `?`, `#`; name ≤64).
-- `scene.update` clamps tokens into a shrunken grid; `scene.select` wraps auto-placed tokens to the next row.
+- `scene.update` clamps tokens and clips/drops fog in a shrunken grid; `scene.select` wraps auto-placed tokens to the next row.
 - `character.grant`: `setStats` keys and `removeSkillIds` must exist.
 - A co-DM may remove their own seat; an empty co-DM seat survives `game.start`.
 - Preset HP and AC: min = max = base = 10 (DM sets them via grant).
