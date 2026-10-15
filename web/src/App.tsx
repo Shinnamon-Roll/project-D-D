@@ -3,6 +3,7 @@ import CampaignMenu from './screens/CampaignMenu'
 import Lobby from './screens/Lobby'
 import CharacterCreate, { CreatingDmView } from './screens/CharacterCreate'
 import Table from './screens/Table'
+import crest from './assets/crest.svg'
 
 export default function App() {
   const room = useStore((s) => s.room)
@@ -23,13 +24,17 @@ export default function App() {
   return (
     <div className="app">
       <header className="topbar">
-        <strong>Tabletop</strong> <small>v{__APP_VERSION__}</small>
+        <span className="brand">
+          <img src={crest} alt="" />
+          <strong>Tabletop</strong> <small>v{__APP_VERSION__}</small>
+        </span>
         {seat && (
           <span className="me" data-testid="my-seat">
             {seat.name} · {seat.kind === 'player' ? 'ผู้เล่น / Player' : seat.kind === 'dm' ? 'DM' : 'Co-DM'}
           </span>
         )}
-        <span className={connected ? 'ok' : 'bad'} data-testid="ws-status">
+        <span className={`status ${connected ? 'ok' : 'bad'}`} data-testid="ws-status">
+          <span className="flame" aria-hidden="true" />
           {connected ? 'connected' : 'disconnected'}
         </span>
       </header>

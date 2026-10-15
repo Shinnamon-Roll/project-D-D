@@ -29,6 +29,18 @@ interface Props {
 
 type Cell = { col: number; row: number }
 
+// Konva can't read CSS vars; mirrors the tokens in docs/design/visual-theme.md.
+const C = {
+  grid: 'rgba(43,29,18,.45)',
+  parchment: '#efe2c3',
+  gold: '#c9a227',
+  oxblood: '#7a1f1f',
+  oxbloodHi: '#9b2d2d',
+  iron: '#4a4f55',
+  fog: '#120d09',
+  font: 'Trirong, Georgia, serif',
+}
+
 export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fogMode }: Props) {
   const map = useImg(scene.imageUrl)
   const [selected, setSelected] = useState('')
@@ -103,7 +115,7 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
         <Layer listening={false}>
           {map && <KImage image={map} />}
           {lines.map((p, i) => (
-            <Line key={i} points={p} stroke="rgba(255,255,255,0.45)" strokeWidth={1} />
+            <Line key={i} points={p} stroke={C.grid} strokeWidth={1} />
           ))}
         </Layer>
         <Layer listening={!fogMode}>
@@ -125,9 +137,10 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
               y={oy + f.row * cs}
               width={f.w * cs}
               height={f.h * cs}
-              fill="#0b0b0f"
+              fill={C.fog}
               opacity={isDm ? 0.5 : 1}
-              stroke={isDm ? '#ef4444' : undefined}
+              stroke={isDm ? C.oxblood : undefined}
+              strokeWidth={2}
               onPointerDown={(e) => (e.cancelBubble = true)}
               onPointerClick={(e) => {
                 e.cancelBubble = true
@@ -135,7 +148,7 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
               }}
             />
           ))}
-          {dragRect && <Rect {...dragRect} fill="rgba(239,68,68,0.25)" stroke="#ef4444" dash={[6, 4]} listening={false} />}
+          {dragRect && <Rect {...dragRect} fill="rgba(122,31,31,0.3)" stroke={C.oxbloodHi} dash={[6, 4]} listening={false} />}
         </Layer>
       </Stage>
     </div>
@@ -158,15 +171,23 @@ function TokenNode({ t, grid, selected, onSelect }: { t: Token; grid: Grid; sele
         })
       }
     >
-      <Circle radius={r} fill="#4b5563" stroke={selected ? '#f59e0b' : '#fff'} strokeWidth={selected ? 4 : 2} />
+      <Circle
+        radius={r}
+        fill={t.characterId ? C.oxblood : C.iron}
+        stroke={selected ? C.gold : C.parchment}
+        strokeWidth={selected ? 4 : 2}
+        shadowColor={selected ? C.gold : '#000'}
+        shadowBlur={selected ? 12 : 4}
+        shadowOpacity={0.8}
+      />
       {img ? (
         <Group clipFunc={(ctx) => ctx.arc(0, 0, r, 0, Math.PI * 2)}>
           <KImage image={img} x={-r} y={-r} width={r * 2} height={r * 2} />
         </Group>
       ) : (
-        <Text text={t.name.slice(0, 1).toUpperCase()} x={-r} y={-r} width={r * 2} height={r * 2} align="center" verticalAlign="middle" fontSize={r} fill="#fff" />
+        <Text text={t.name.slice(0, 1).toUpperCase()} x={-r} y={-r} width={r * 2} height={r * 2} align="center" verticalAlign="middle" fontSize={r} fontFamily={C.font} fill={C.parchment} />
       )}
-      <Text text={t.name} x={-cs} y={r + 2} width={cs * 2} align="center" fontSize={12} fill="#fff" shadowColor="#000" shadowBlur={3} shadowOpacity={1} />
+      <Text text={t.name} x={-cs} y={r + 2} width={cs * 2} align="center" fontSize={12} fontFamily={C.font} fill={C.parchment} shadowColor="#000" shadowBlur={3} shadowOpacity={1} />
     </Group>
   )
 }

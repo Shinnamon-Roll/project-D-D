@@ -20,7 +20,7 @@ export default function Lobby() {
     <div className="columns">
       <section className="panel">
         <h1>ห้องรอ / Lobby</h1>
-        <p>{campaign?.name}</p>
+        <p className="subtitle">{campaign?.name}</p>
 
         {!me && (
           <label>
@@ -35,7 +35,7 @@ export default function Lobby() {
               <span className="kind">{kindLabel[s.kind]}</span>
               <span className="who">{s.occupied ? s.name : <em>ว่าง / empty</em>}</span>
               {s.kind === 'player' && s.occupied && (
-                <span className={s.ready ? 'ok' : 'muted'} data-testid={`seat-ready-${s.id}`}>
+                <span className={`seal ${s.ready ? 'ok' : ''}`} data-testid={`seat-ready-${s.id}`}>
                   {s.ready ? 'พร้อม / Ready' : 'ยังไม่พร้อม / Not ready'}
                 </span>
               )}
