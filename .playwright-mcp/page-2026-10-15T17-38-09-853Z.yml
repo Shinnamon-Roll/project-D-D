@@ -1,0 +1,1281 @@
+- generic [active] [ref=f118e1]:
+  - link "Skip to main content" [ref=f118e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f118e6]:
+    - generic:
+      - generic: "Foundry's API changes are strangling its own ecosystem : r/FoundryVTT"
+      - banner [ref=f118e10]:
+        - navigation [ref=f118e11]:
+          - link "Home" [ref=f118e15] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - search [ref=f118e34]:
+            - generic [ref=f118e36]:
+              - generic "Remove r/FoundryVTT filter and expand search to all of Reddit" [ref=f118e42] [cursor=pointer]:
+                - button [pressed] [ref=f118e43]:
+                  - generic [aria-hidden] [ref=f118e47]: r/FoundryVTT
+              - textbox "Remove r/FoundryVTT filter and expand search to all of Reddit" [ref=f118e53]:
+                - /placeholder: Search in ⁨r/FoundryVTT⁩
+          - generic [ref=f118e54]:
+            - link "Sign Up" [ref=f118e60] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Log In" [ref=f118e66] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Expand user menu" [ref=f118e73] [cursor=pointer]
+      - generic [ref=f118e79]:
+        - generic [ref=f118e80]:
+          - generic [ref=f118e81]:
+            - generic:
+              - generic:
+                - link "Skip to Sign up" [ref=f118e82] [cursor=pointer]:
+                  - /url: "#left-sidebar-container"
+                - link "Skip to Right Sidebar" [ref=f118e83] [cursor=pointer]:
+                  - /url: "#right-sidebar-container"
+          - generic [ref=f118e84]:
+            - main [ref=f118e85]:
+              - 'generic "Foundry''s API changes are strangling its own ecosystem : r/FoundryVTT"'
+              - generic [ref=f118e86]:
+                - generic [ref=f118e87]:
+                  - generic [ref=f118e88]:
+                    - button "Back" [ref=f118e90] [cursor=pointer]
+                    - link "Go to FoundryVTT" [ref=f118e98] [cursor=pointer]:
+                      - /url: https://www.reddit.com/r/FoundryVTT/
+                    - group [ref=f118e103]:
+                      - generic [ref=f118e104]:
+                        - link "r/FoundryVTT" [ref=f118e108] [cursor=pointer]:
+                          - /url: https://www.reddit.com/r/FoundryVTT/
+                        - generic [aria-hidden] [ref=f118e109]: •
+                        - time [ref=f118e111]: 27d ago
+                      - generic [ref=f118e112]:
+                        - 'link "Author: SobranDM" [ref=f118e117] [cursor=pointer]':
+                          - /url: https://www.reddit.com/user/SobranDM/
+                          - generic [ref=f118e118]: u/SobranDM
+                        - generic [ref=f118e121] [cursor=pointer]:
+                          - img "Profile Badge for the Achievement Top 1% Poster" [ref=f118e122]
+                          - text: Top 1% Poster
+                  - button "Open user actions" [ref=f118e126] [cursor=pointer]
+                - generic [ref=f118e132]:
+                  - 'heading "Post Title: Foundry''s API changes are strangling its own ecosystem" [level=1] [ref=f118e133]': Foundry's API changes are strangling its own ecosystem
+                  - 'link "Flair: Discussion" [ref=f118e136] [cursor=pointer]':
+                    - /url: /r/FoundryVTT/?f=flair_name%3A%22Discussion%22
+                    - 'generic "Flair: Discussion" [ref=f118e138]': Discussion
+                - generic [ref=f118e142]:
+                  - paragraph [ref=f118e143]: For anyone who doesn't know me, I'm a developer for the Worlds Without Number system. I'm a full-stack web developer in my day job, but that came after. I taught myself how to code by creating WWN, which is either a cool origin story or pretty silly depending on how you feel about learning JavaScript through a VTT's API. Since then I've spent a lot of time working on weird hobby projects, trying to untangle the spaghetti code I created in WWN while learning how to program, and recently submitting pull requests to other people's systems and modules to help get them working under v14.
+                  - paragraph [ref=f118e144]: I love Foundry. I want it to succeed. That's the only reason I'm bothering to write any of this and I think it's important to note that up front because... you're about to see a fair amount of vitriol.
+                  - heading "The Problem" [level=1] [ref=f118e145]
+                  - paragraph [ref=f118e146]: "Every major version of Foundry ships a pile of breaking API changes. Most systems and modules need updates to work with the new version. On its face, that seems right: if you're a developer you know that a major version change typically means breaking changes. The problem is the cadence. Foundry ships a major version roughly once a year, which means the entire community-maintained library of systems and modules gets rebuilt on a yearly cycle. Forever."
+                  - paragraph [ref=f118e147]: Foundry does use a deprecation system that is supposed to soften this and I think they implemented this in response to earlier developer criticism. It doesn't really help. Some things get flagged as deprecated, with a warning that you have a few versions to migrate that thing. But think about the numbers. If every version breaks two things outright (it's more) and deprecates three more (it's more), you're still doing the same volume of work, it's just smeared across different versions.
+                  - paragraph [ref=f118e148]: Foundry has said that they intend to have fewer breaking changes going forward and I hope that's true. I'm writing this post because I have personally spent weekends submitting PRs for systems and modules whose authors haven't updated them to v14 yet. In all cases, the work isn't nothing. All of the things are still breaking.
+                  - paragraph [ref=f118e149]:
+                    - text: This is sort of tangential, but I also feel like it's worth mentioning that the quality of Foundry's feature documentation has slipped recently as well. The
+                    - link "Measurements and Templates" [ref=f118e150] [cursor=pointer]:
+                      - /url: https://foundryvtt.com/article/measurement/
+                    - text: knowledge base article describes and shows screenshots of tools that don't even exist in v14. And as near as I can tell, the only documentation that exists for the new levels feature is the v14 release announcement (and the preceding beta announcements). It's not exactly the comprehensive guide that levels needs, given that it a genuinely complicated and finnicky feature particularly where it relates to getting vision working correctly.
+                  - paragraph [ref=f118e151]: At least on the developer side, we're used to reverse-engineering Foundry behavior from the source code to make cool things happen. Don't make the users do that too...
+                  - heading "Developers" [level=1] [ref=f118e152]
+                  - paragraph [ref=f118e153]: Most of the module and system developers in this community are volunteers. They're not being paid, there's no compensation outside of community appreciation and the rare donation of a few bucks to their Ko-Fi. They're doing this because they love a game, or they love Foundry and want some cool feature to exist. Every year, these volunteers are handed a fresh round of unpaid maintenance they didn't ask for and may or may not have time to address.
+                  - paragraph [ref=f118e154]: "Then the users show up. Not maliciously--mostly--but the questions start immediately: is it updated yet?; when will it be updated?; what's the ETA? That pressure lands on people who are donating their labor and their passion, completely free of charge, and that labor directly increases the value of a commercial product. Foundry VTT sells more licenses because of its ecosystem of modules and the reward for that is an annual migration project."
+                  - paragraph [ref=f118e155]: A lot of them just stop. I almost have on a few occasions. Burnout is very common in this community and it is seldom announced. It's usually just a module repo somewhere that stops getting updates and that thing quietly dies. I can't count the number of modules I used to use that are just... gone now.
+                  - heading "Users" [level=1] [ref=f118e156]
+                  - paragraph [ref=f118e157]: For users, all of this introduces uncertainty. Every single major release is a gamble if you're the GM. You have to gamble whether your system or some module you've come to depend on and maybe forgot wasn't a core feature is going to get updated. You don't know what will break, you don't know what workflows you'll have to relearn because you need a different module or Foundry changed the way something works.
+                  - paragraph [ref=f118e158]: For many, the rational response is to just not upgrade. Hell, the common consensus is that you shouldn't commit to a major Foundry release until it's been out for a year. But Foundry releases new major versions every year. That's insane. So the userbase is now fragmented across versions, which introduces more complications I'm just going to gloss over because this is way too fucking long already.
+                  - heading "Publishers" [level=1] [ref=f118e159]
+                  - paragraph [ref=f118e160]: This is where things stop being an annoying community problem and starts becoming a business problem. This is what motivated me to finally make this post, which has been bouncing around in my head for over a year now.
+                  - paragraph [ref=f118e161]: If you are a publisher and you are considering a content module for Foundry marketplace, the math is simple and it's.. not great. Your revenue is finite. There are only so many people who will ever buy your adventure, or sourcebook, or whatever. Your maintenance cost is--in theory--infinite. It continues indefinitely, increasing with every single major version, and it happens on someone else's release schedule. You likely have no input on this process unless you're one of the big publishers.
+                  - paragraph [ref=f118e162]: Finite income against unbounded cost is not a very hard call to make. So publishers do one of a few things to try to mitigate this.
+                  - paragraph [ref=f118e163]: "Some ship content, maintain it for a version or two, then abandon it when the upkeep stops being worth it. That kicks off its own spiral which I think we're just starting to see now: buyers learn that Foundry content gets abandoned, so they hesitate to buy, so revenue drops, so maintenance gets harder to justify, and trust erodes--both in the publisher and as Foundry as a platform. Other publishers just leave Foundry entirely, either partially or entirely, in favor of VTTs where the cost side is predictable and finite."
+                  - paragraph [ref=f118e164]:
+                    - text: I ran into this directly recently with Free League. My
+                    - link "PR for a v14 update" [ref=f118e165] [cursor=pointer]:
+                      - /url: https://github.com/hodpub/yze-coriolis/pull/336
+                    - text: for Coriolis was declined. The reasoning was because they didn't want to commit to the cost of updating all the associated paid modules for Coriolis to v14. Honestly, I don't blame them. That's the rational decision, given everything I've outlined.
+                  - paragraph [ref=f118e166]: The other path that publishers take is to lean on volunteer labor, sometimes to a degree that I personally consider unethical. The community builds and maintains the system for free because they love the game, then the publisher sells paid content off the sweat of their brow. Sometimes, there's an arrangement with the system developers where those system devs also do the paid content development and so they get a cut of that. Other times, the volunteers aren't part of that at all.
+                  - paragraph [ref=f118e167]: I recently ran into this with Delta Green. That system is "semi-official". The maintainers are all volunteers. A totally different guy, either a contractor or employee of Arc Dream--I'm not sure which--is in charge of creating and maintaining the paid modules for Delta Green.
+                  - paragraph [ref=f118e168]: My first reaction is that this is predatory and unethical. I said as much, loudly, because--as you can probably tell if you've read this far--I have no fucking chill. But as I've thought about it more... I'm not so sure. When you look at the economics a small publisher faces on this platform, I'm honestly not sure what else they are supposed to do.
+                  - paragraph [ref=f118e169]:
+                    - text: And that, in a nutshell, is my entire point. Foundry VTT's method of development is nurturing dysfunction in the ecosystem. Blaming the small publisher for responding to it rationally is letting the Foundry team off the hook for an environment
+                    - emphasis [ref=f118e170]: they
+                    - text: created.
+                  - heading "Where it ends" [level=1] [ref=f118e171]
+                  - paragraph [ref=f118e172]: I don't know. I really hope that Foundry chooses to make a real change here but I've seen some really tone-deaf responses from them over the years regarding this very issue. What I'm worried about is the very thing that makes Foundry awesome and that I love and which no other VTT can compete with--its robust ecosystem of systems and modules--is going to be the very rope by which Foundry strangles itself.
+                - generic "Actions available for this post" [ref=f118e174]:
+                  - generic [ref=f118e177]:
+                    - button "Upvote" [ref=f118e178] [cursor=pointer]
+                    - generic [ref=f118e183]: "904"
+                    - button "Downvote" [ref=f118e185] [cursor=pointer]
+                  - button "174 Go to comments" [ref=f118e190] [cursor=pointer]:
+                    - generic [ref=f118e191]: "174"
+                    - generic [ref=f118e197]: Go to comments
+                  - button "Share" [ref=f118e201] [cursor=pointer]
+              - generic [ref=f118e209]:
+                - generic:
+                  - generic [ref=f118e210]:
+                    - button "Button to add a comment" [disabled]:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - textbox [disabled]:
+                                  - /placeholder: Join the conversation
+                  - generic [ref=f118e215]:
+                    - generic [ref=f118e217]:
+                      - generic [aria-hidden] [ref=f118e218]: "Sort by:"
+                      - button "Sort by Best" [ref=f118e223] [cursor=pointer]:
+                        - generic [ref=f118e224]: Best
+                    - button "Search Comments Expand comment search" [ref=f118e232] [cursor=pointer]:
+                      - generic [ref=f118e233]: Search Comments
+                      - generic [ref=f118e240]: Expand comment search
+              - region "Comments" [ref=f118e243]:
+                - heading "Comments Section" [level=1] [ref=f118e244]
+                - article "Comment from sixthcupofjoe 27 days ago" [ref=f118e246]:
+                  - generic [ref=f118e247] [cursor=pointer]:
+                    - link "sixthcupofjoe's profile --- avatar" [ref=f118e253]:
+                      - /url: https://www.reddit.com/user/sixthcupofjoe/
+                      - img "u/sixthcupofjoe avatar" [ref=f118e256]
+                    - generic [ref=f118e259]:
+                      - generic [ref=f118e260]:
+                        - link "sixthcupofjoe's profile" [ref=f118e264]:
+                          - /url: https://www.reddit.com/user/sixthcupofjoe/
+                          - generic [ref=f118e265]: sixthcupofjoe
+                        - generic [aria-hidden] [ref=f118e267]: •
+                        - link [ref=f118e269]:
+                          - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paocvfb/
+                          - time [ref=f118e271]: 27d ago
+                        - generic [aria-hidden] [ref=f118e272]: •
+                        - generic [ref=f118e273]:
+                          - text: Edited
+                          - time [ref=f118e275]: 27d ago
+                      - generic [ref=f118e278]:
+                        - img "Profile Badge for the Achievement Top 1% Commenter" [ref=f118e279]
+                        - text: Top 1% Commenter
+                  - generic [ref=f118e281]:
+                    - generic [ref=f118e284]:
+                      - paragraph [ref=f118e285]: The move from 13 to 14 was pretty smooth on the dev side (at least for what I maintain) so hopefully that's a sign of how things are going to be going forward.
+                      - paragraph [ref=f118e286]: Going to 13 was basically a rewrite due to appv2, which was a bit :|
+                      - paragraph [ref=f118e287]: But I'm just a sole dev so I can set my own level legacy support.
+                    - generic [ref=f118e290]:
+                      - 'article "Comment thread level 1: Reply from SobranDM 27 days ago" [ref=f118e292]':
+                        - generic [ref=f118e293] [cursor=pointer]:
+                          - link "SobranDM's profile --- avatar" [ref=f118e299]:
+                            - /url: https://www.reddit.com/user/SobranDM/
+                          - generic [ref=f118e308]:
+                            - generic [ref=f118e309]:
+                              - link "SobranDM's profile" [ref=f118e313]:
+                                - /url: https://www.reddit.com/user/SobranDM/
+                                - generic [ref=f118e314]: SobranDM
+                              - generic "Comment distinguished as the original poster" [ref=f118e318]: OP
+                              - generic [aria-hidden] [ref=f118e319]: •
+                              - link [ref=f118e321]:
+                                - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paodxbm/
+                                - time [ref=f118e323]: 27d ago
+                            - generic [ref=f118e326]:
+                              - img "Profile Badge for the Achievement Top 1% Poster" [ref=f118e327]
+                              - text: Top 1% Poster
+                        - generic [ref=f118e329]:
+                          - paragraph [ref=f118e333]: Yeah, v14 was certainly smoother for most things. Systems and modules that interacted with measurement tools probably had it a little harder. Then again, the bar set by v13 was... something.
+                          - button "6 more replies" [ref=f118e340] [cursor=pointer]:
+                            - generic [ref=f118e345]:
+                              - generic [ref=f118e346]: "6"
+                              - text: more replies
+                      - button "5 more replies" [ref=f118e350] [cursor=pointer]:
+                        - generic [ref=f118e355]:
+                          - generic [ref=f118e356]: "5"
+                          - text: more replies
+                - article "Comment from Sir_Edgelordington 27 days ago" [ref=f118e358]:
+                  - generic [ref=f118e359] [cursor=pointer]:
+                    - link "Sir_Edgelordington's profile --- avatar" [ref=f118e365]:
+                      - /url: https://www.reddit.com/user/Sir_Edgelordington/
+                    - generic [ref=f118e375]:
+                      - link "Sir_Edgelordington's profile" [ref=f118e379]:
+                        - /url: https://www.reddit.com/user/Sir_Edgelordington/
+                        - generic [ref=f118e380]: Sir_Edgelordington
+                      - generic [aria-hidden] [ref=f118e382]: •
+                      - link [ref=f118e384]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paosr28/
+                        - time [ref=f118e386]: 27d ago
+                  - generic [ref=f118e388]:
+                    - paragraph [ref=f118e392]: I’m not a developer so can’t really add anything, however I ran a WWN campaign over a year ago that kinda fizzled out due to work etc, but I just want to take this opportunity to thank you for all the hard work you and other devs do, it is really appreciated by the community. It’s a great system. Haha weird timing, I upgraded to v14 for other games, and just last night was looking at my WWN game thinking it would be good to boot it up again, but when the game wouldn’t launch I was thinking of seeking you out to see if you had posted info about a v14 update anywhere 🙂
+                    - 'article "Comment thread level 1: Reply from SobranDM 27 days ago" [ref=f118e397]':
+                      - generic [ref=f118e398] [cursor=pointer]:
+                        - link "SobranDM's profile --- avatar" [ref=f118e404]:
+                          - /url: https://www.reddit.com/user/SobranDM/
+                        - generic [ref=f118e413]:
+                          - generic [ref=f118e414]:
+                            - link "SobranDM's profile" [ref=f118e418]:
+                              - /url: https://www.reddit.com/user/SobranDM/
+                              - generic [ref=f118e419]: SobranDM
+                            - generic "Comment distinguished as the original poster" [ref=f118e423]: OP
+                            - generic [aria-hidden] [ref=f118e424]: •
+                            - link [ref=f118e426]:
+                              - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paotwab/
+                              - time [ref=f118e428]: 27d ago
+                          - generic [ref=f118e431]:
+                            - img "Profile Badge for the Achievement Top 1% Poster" [ref=f118e432]
+                            - text: Top 1% Poster
+                      - generic [ref=f118e434]:
+                        - generic [ref=f118e437]:
+                          - paragraph [ref=f118e438]: Hey, glad it worked well for you!
+                          - paragraph [ref=f118e439]: WWN for v14 is currently in development. While making some AppV2 updates I had put off, I saw a lot of things I would like to work differently so I started on a rather... ambitious update. It'll do a lot once it's out but right now I'm still in beta working out the kinks. Should be a big upgrade once it's ready!
+                        - button "1 more reply" [ref=f118e446] [cursor=pointer]:
+                          - generic [ref=f118e451]:
+                            - generic [ref=f118e452]: "1"
+                            - text: more reply
+                - article "Comment from boyhowdy-rc 27 days ago" [ref=f118e454]:
+                  - generic [ref=f118e455] [cursor=pointer]:
+                    - link "boyhowdy-rc's profile --- avatar" [ref=f118e461]:
+                      - /url: https://www.reddit.com/user/boyhowdy-rc/
+                    - generic [ref=f118e471]:
+                      - link "boyhowdy-rc's profile" [ref=f118e475]:
+                        - /url: https://www.reddit.com/user/boyhowdy-rc/
+                        - generic [ref=f118e476]: boyhowdy-rc
+                      - generic [aria-hidden] [ref=f118e478]: •
+                      - link [ref=f118e480]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paod4it/
+                        - time [ref=f118e482]: 27d ago
+                  - generic [ref=f118e484]:
+                    - paragraph [ref=f118e488]: Don't forget that publishers have to pay to keep their titles listed on the Foundry store, which is causing some to delist their older products.
+                    - generic [ref=f118e491]:
+                      - 'article "Comment thread level 1: Reply from SobranDM 27 days ago" [ref=f118e493]':
+                        - generic [ref=f118e494] [cursor=pointer]:
+                          - link "SobranDM's profile --- avatar" [ref=f118e500]:
+                            - /url: https://www.reddit.com/user/SobranDM/
+                          - generic [ref=f118e509]:
+                            - generic [ref=f118e510]:
+                              - link "SobranDM's profile" [ref=f118e514]:
+                                - /url: https://www.reddit.com/user/SobranDM/
+                                - generic [ref=f118e515]: SobranDM
+                              - generic "Comment distinguished as the original poster" [ref=f118e519]: OP
+                              - generic [aria-hidden] [ref=f118e520]: •
+                              - link [ref=f118e522]:
+                                - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paoe7c6/
+                                - time [ref=f118e524]: 27d ago
+                            - generic [ref=f118e527]:
+                              - img "Profile Badge for the Achievement Top 1% Poster" [ref=f118e528]
+                              - text: Top 1% Poster
+                        - paragraph [ref=f118e534]: I wasn't even aware this was a thing. That certainly doesn't improve the math, if that's the case.
+                      - button "11 more replies" [ref=f118e540] [cursor=pointer]:
+                        - generic [ref=f118e545]:
+                          - generic [ref=f118e546]: "11"
+                          - text: more replies
+                - article "Comment from WhatGravitas 27 days ago" [ref=f118e548]:
+                  - generic [ref=f118e549] [cursor=pointer]:
+                    - link "WhatGravitas's profile --- avatar" [ref=f118e555]:
+                      - /url: https://www.reddit.com/user/WhatGravitas/
+                    - generic [ref=f118e571]:
+                      - link "WhatGravitas's profile" [ref=f118e575]:
+                        - /url: https://www.reddit.com/user/WhatGravitas/
+                        - generic [ref=f118e576]: WhatGravitas
+                      - generic [aria-hidden] [ref=f118e578]: •
+                      - link [ref=f118e580]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paobp3c/
+                        - time [ref=f118e582]: 27d ago
+                  - generic [ref=f118e584]:
+                    - generic [ref=f118e587]:
+                      - paragraph [ref=f118e588]: As mostly user and contributor to a system, I agree with most of it. I think the recent release cadence has reduced from the old v7-v11 days and that has helped and smaller modules seemed to suffer less breakages between v12-v14. But for systems that’s absolutely not true, a version update can be a major issue.
+                      - paragraph [ref=f118e589]: With the Foundry store (which is a separate entity but clearly close ties to Foundry itself), this is even more aggravating because they seem to really encourage smaller creators to participate in the programme.
+                      - paragraph [ref=f118e590]: I get that Foundry wants to and needs to improve itself, but especially the dire state of documentation makes this more painful than it has to be.
+                    - generic [ref=f118e593]:
+                      - 'article "Comment thread level 1: Reply from SobranDM 27 days ago" [ref=f118e595]':
+                        - generic [ref=f118e596] [cursor=pointer]:
+                          - link "SobranDM's profile --- avatar" [ref=f118e602]:
+                            - /url: https://www.reddit.com/user/SobranDM/
+                          - generic [ref=f118e611]:
+                            - generic [ref=f118e612]:
+                              - link "SobranDM's profile" [ref=f118e616]:
+                                - /url: https://www.reddit.com/user/SobranDM/
+                                - generic [ref=f118e617]: SobranDM
+                              - generic "Comment distinguished as the original poster" [ref=f118e621]: OP
+                              - generic [aria-hidden] [ref=f118e622]: •
+                              - link [ref=f118e624]:
+                                - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paocbm7/
+                                - time [ref=f118e626]: 27d ago
+                            - generic [ref=f118e629]:
+                              - img "Profile Badge for the Achievement Top 1% Poster" [ref=f118e630]
+                              - text: Top 1% Poster
+                        - paragraph [ref=f118e636]: You're right that it's slowed down a little. It's been a yearly cadence since v11 if I'm remembering correctly, but it used to be closer to every six months or so. I feel like that was more forgivable in those days, when Foundry was trying to get a solid set of features under their belt and still finding their way.
+                      - button "8 more replies" [ref=f118e642] [cursor=pointer]:
+                        - generic [ref=f118e647]:
+                          - generic [ref=f118e648]: "8"
+                          - text: more replies
+                - article "Comment from jaswert 27 days ago" [ref=f118e650]:
+                  - generic [ref=f118e651] [cursor=pointer]:
+                    - link "jaswert's profile --- avatar" [ref=f118e657]:
+                      - /url: https://www.reddit.com/user/jaswert/
+                      - img "u/jaswert avatar" [ref=f118e660]
+                    - generic [ref=f118e664]:
+                      - link "jaswert's profile" [ref=f118e668]:
+                        - /url: https://www.reddit.com/user/jaswert/
+                        - generic [ref=f118e669]: jaswert
+                      - generic [aria-hidden] [ref=f118e671]: •
+                      - link [ref=f118e673]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paoq3sf/
+                        - time [ref=f118e675]: 27d ago
+                  - generic [ref=f118e677]:
+                    - generic [ref=f118e680]:
+                      - paragraph [ref=f118e681]: I'm a software developer at one of the large tech companies. I used to work on an "older" service with major version releases which maintained backward compatibility with previous releases essentially indefinitely, you just wouldn't be able to use the new features unless you updated.
+                      - paragraph [ref=f118e682]: I was moved to working on an AI product and in 8 months there have been 4 non-backward compatible changes shipped to customers causing outages. It is really the pressure of being able to write what looks like a good implementation in hours, trusting unit tests too much, and shipping to prod the same day.
+                      - paragraph [ref=f118e683]: All this is to lament how if big tech is shrugging their shoulders and accepting massive outages for velocity I don't have a lot of hope for smaller companies supporting stable software.
+                      - paragraph [ref=f118e684]: This is also a slight dig at people saying; "just prompt Claude, why are you complaining?".
+                    - 'article "Comment thread level 1: Reply from SobranDM 27 days ago" [ref=f118e689]':
+                      - generic [ref=f118e690] [cursor=pointer]:
+                        - link "SobranDM's profile --- avatar" [ref=f118e696]:
+                          - /url: https://www.reddit.com/user/SobranDM/
+                        - generic [ref=f118e705]:
+                          - generic [ref=f118e706]:
+                            - link "SobranDM's profile" [ref=f118e710]:
+                              - /url: https://www.reddit.com/user/SobranDM/
+                              - generic [ref=f118e711]: SobranDM
+                            - generic "Comment distinguished as the original poster" [ref=f118e715]: OP
+                            - generic [aria-hidden] [ref=f118e716]: •
+                            - link [ref=f118e718]:
+                              - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paosabs/
+                              - time [ref=f118e720]: 27d ago
+                          - generic [ref=f118e723]:
+                            - img "Profile Badge for the Achievement Top 1% Poster" [ref=f118e724]
+                            - text: Top 1% Poster
+                      - generic [ref=f118e726]:
+                        - generic [ref=f118e729]:
+                          - paragraph [ref=f118e730]:
+                            - text: I'm not at one of the big tech companies, but it
+                            - emphasis [ref=f118e731]: is
+                            - text: one with legacy architecture that
+                            - emphasis [ref=f118e732]: has
+                            - text: "to be maintained or we'd be ruining relationships with partners. Same thing as you describe: the service adds features without breaking things for partners, because no one wants to explain to the CTO why he's getting uncomfortable calls from a partner that pays our bills and is experiencing an outage."
+                          - paragraph [ref=f118e733]: I agree this isn't easy, particularly for smaller companies, if there's someone high up hammering on velocity all the time. In the case of Foundry, I'm not sure what's going on. I don't think the company is large enough to have some oblivious business major steering the boat. And there's no one nipping at their heels. There isn't another VTT that is even close in terms of features. I think they can afford to slow down and start doing things right.
+                        - button "10 more replies" [ref=f118e740] [cursor=pointer]:
+                          - generic [ref=f118e745]:
+                            - generic [ref=f118e746]: "10"
+                            - text: more replies
+                - article "Comment from sparkas 27 days ago" [ref=f118e748]:
+                  - generic [ref=f118e749] [cursor=pointer]:
+                    - link "sparkas's profile --- avatar" [ref=f118e755]:
+                      - /url: https://www.reddit.com/user/sparkas/
+                    - generic [ref=f118e770]:
+                      - generic [ref=f118e771]:
+                        - link "sparkas's profile" [ref=f118e775]:
+                          - /url: https://www.reddit.com/user/sparkas/
+                          - generic [ref=f118e776]: sparkas
+                        - generic [aria-hidden] [ref=f118e778]: •
+                        - link [ref=f118e780]:
+                          - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paoabj9/
+                          - time [ref=f118e782]: 27d ago
+                      - generic [ref=f118e785]:
+                        - img "Profile Badge for the Achievement Top 1% Commenter" [ref=f118e786]
+                        - text: Top 1% Commenter
+                  - paragraph [ref=f118e792]: Well written and absolutely accurate. I love FVTT, I love the modules, I've loved learning more how things tick in the background. But I'm already a software engineer in my work life. The time I have to endlessly upgrade and churn is limited even for small modules.
+                - article "Comment from Ekilibri 27 days ago" [ref=f118e796]:
+                  - generic [ref=f118e797] [cursor=pointer]:
+                    - link "Ekilibri's profile --- avatar" [ref=f118e803]:
+                      - /url: https://www.reddit.com/user/Ekilibri/
+                    - generic [ref=f118e819]:
+                      - link "Ekilibri's profile" [ref=f118e823]:
+                        - /url: https://www.reddit.com/user/Ekilibri/
+                        - generic [ref=f118e824]: Ekilibri
+                      - generic [aria-hidden] [ref=f118e826]: •
+                      - link [ref=f118e828]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paol40n/
+                        - time [ref=f118e830]: 27d ago
+                  - paragraph [ref=f118e836]: You make some really good points. I have been developing systems and modules on foundry for the last 6 years (Alien RPG, Symbaroum and Tales of the Old West). The annual need to rewrite code due to breaking changes is becoming wearing. I appreciate the Foundry team need to keep enhancing the system for their patrons but we can see more and more developers abandoning systems because of the required effort.The developer “documentation” is still poor to say the least.They (Foundry devs) forget that this is not our full time job and we do not have the level of familiarity of the internals that they have.As you say the majority of us don’t get any compensation for the systems we write and maintain.Foundry is a fantastic infrastructure and I hope it continues but my fear is that the bubble will burst if they continue to stop respecting the individual developers who write and maintain the systems that keep Foundry afloat.
+                - article "Comment from Guardian014 27 days ago" [ref=f118e840]:
+                  - generic [ref=f118e841] [cursor=pointer]:
+                    - link "Guardian014's profile --- avatar" [ref=f118e847]:
+                      - /url: https://www.reddit.com/user/Guardian014/
+                    - generic [ref=f118e857]:
+                      - link "Guardian014's profile" [ref=f118e861]:
+                        - /url: https://www.reddit.com/user/Guardian014/
+                        - generic [ref=f118e862]: Guardian014
+                      - generic [aria-hidden] [ref=f118e864]: •
+                      - link [ref=f118e866]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paovf6s/
+                        - time [ref=f118e868]: 27d ago
+                  - generic [ref=f118e870]:
+                    - paragraph [ref=f118e874]: I have simply stopped updating, whatever version I am on is what it's gonna be until my campaign is over.
+                    - button "7 more replies" [ref=f118e881] [cursor=pointer]:
+                      - generic [ref=f118e886]:
+                        - generic [ref=f118e887]: "7"
+                        - text: more replies
+                - article "Comment from BrightbornKnight 27 days ago" [ref=f118e889]:
+                  - generic [ref=f118e890] [cursor=pointer]:
+                    - link "BrightbornKnight's profile --- avatar" [ref=f118e896]:
+                      - /url: https://www.reddit.com/user/BrightbornKnight/
+                    - generic [ref=f118e905]:
+                      - generic [ref=f118e906]:
+                        - link "BrightbornKnight's profile" [ref=f118e910]:
+                          - /url: https://www.reddit.com/user/BrightbornKnight/
+                          - generic [ref=f118e911]: BrightbornKnight
+                        - generic [aria-hidden] [ref=f118e913]: •
+                        - link [ref=f118e915]:
+                          - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paoatw8/
+                          - time [ref=f118e917]: 27d ago
+                      - generic [ref=f118e920]:
+                        - img "Profile Badge for the Achievement Top 1% Commenter" [ref=f118e921]
+                        - text: Top 1% Commenter
+                  - paragraph [ref=f118e927]: Even as a non developer, I've been feeling this. Way too much revolution. Every update is breaking. It's exhausting.
+                - article "Comment from Electrical-Echidna63 27 days ago" [ref=f118e931]:
+                  - generic [ref=f118e932] [cursor=pointer]:
+                    - link "Electrical-Echidna63's profile --- avatar" [ref=f118e938]:
+                      - /url: https://www.reddit.com/user/Electrical-Echidna63/
+                      - img "u/Electrical-Echidna63 avatar" [ref=f118e941]
+                    - generic [ref=f118e945]:
+                      - link "Electrical-Echidna63's profile" [ref=f118e949]:
+                        - /url: https://www.reddit.com/user/Electrical-Echidna63/
+                        - generic [ref=f118e950]: Electrical-Echidna63
+                      - generic [aria-hidden] [ref=f118e952]: •
+                      - link [ref=f118e954]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paolmja/
+                        - time [ref=f118e956]: 27d ago
+                  - generic [ref=f118e958]:
+                    - generic [ref=f118e961]:
+                      - paragraph [ref=f118e962]: "\"for many, the rational response is just not to upgrade\""
+                      - paragraph [ref=f118e963]:
+                        - emphasis [ref=f118e964]: Cries in (Pf2e) Bastion of Blasphemies released for ONLY Build 368.
+                      - paragraph [ref=f118e965]: Seriously though, as a developer by trade but just a casual user — it sucks to feel like I must choose between paid adventures I own and premoum modules that haven't been updated yet. I can't imagine a virtual tabletop needs to both make breaking annually AND release new stuff requiring those breaks.
+                    - button "8 more replies" [ref=f118e972] [cursor=pointer]:
+                      - generic [ref=f118e977]:
+                        - generic [ref=f118e978]: "8"
+                        - text: more replies
+                - article "Comment from PyramKing 27 days ago" [ref=f118e980]:
+                  - generic [ref=f118e981] [cursor=pointer]:
+                    - link "PyramKing's profile --- avatar" [ref=f118e987]:
+                      - /url: https://www.reddit.com/user/PyramKing/
+                      - img "u/PyramKing avatar" [ref=f118e990]
+                    - generic [ref=f118e994]:
+                      - link "PyramKing's profile" [ref=f118e998]:
+                        - /url: https://www.reddit.com/user/PyramKing/
+                        - generic [ref=f118e999]: PyramKing
+                      - generic [aria-hidden] [ref=f118e1001]: •
+                      - link [ref=f118e1003]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/pap5ajl/
+                        - time [ref=f118e1005]: 27d ago
+                  - generic [ref=f118e1010]:
+                    - paragraph [ref=f118e1011]: I have written over 40 adventure modules for Foundry since v7. I usually update every other release and do my best to make them forward compatible. Currently designing and releasing in v13 and forward compatible to v14. Still have an epic campaign in v12, working to update.
+                    - paragraph [ref=f118e1012]: I only have one third party I rely on, Monk's Active Tiles.
+                    - paragraph [ref=f118e1013]: Be nice if updates slowed to 2 year cycle.
+                    - paragraph [ref=f118e1014]: I don't know the answer.
+                - article "Comment from Crafty-Pirate-6481 27 days ago" [ref=f118e1018]:
+                  - generic [ref=f118e1019] [cursor=pointer]:
+                    - link "Crafty-Pirate-6481's profile --- avatar" [ref=f118e1025]:
+                      - /url: https://www.reddit.com/user/Crafty-Pirate-6481/
+                    - generic [ref=f118e1035]:
+                      - link "Crafty-Pirate-6481's profile" [ref=f118e1039]:
+                        - /url: https://www.reddit.com/user/Crafty-Pirate-6481/
+                        - generic [ref=f118e1040]: Crafty-Pirate-6481
+                      - generic [aria-hidden] [ref=f118e1042]: •
+                      - link [ref=f118e1044]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paohsum/
+                        - time [ref=f118e1046]: 27d ago
+                  - generic [ref=f118e1051]:
+                    - paragraph [ref=f118e1052]: That’s a really good text. Enjoy reading it and agree on most things.
+                    - paragraph [ref=f118e1053]: Hope this get some tractions
+                - article "Comment from rcgy 27 days ago" [ref=f118e1057]:
+                  - generic [ref=f118e1058] [cursor=pointer]:
+                    - link "rcgy's profile --- avatar" [ref=f118e1064]:
+                      - /url: https://www.reddit.com/user/rcgy/
+                    - generic [ref=f118e1074]:
+                      - link "rcgy's profile" [ref=f118e1078]:
+                        - /url: https://www.reddit.com/user/rcgy/
+                        - generic [ref=f118e1079]: rcgy
+                      - generic [aria-hidden] [ref=f118e1081]: •
+                      - link [ref=f118e1083]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/pap9d0a/
+                        - time [ref=f118e1085]: 27d ago
+                  - generic [ref=f118e1087]:
+                    - paragraph [ref=f118e1091]: It's kinda crazy how much churn there is. Any other product would be killed by how many breaking changes are pushed through, year after year.
+                    - button "1 more reply" [ref=f118e1098] [cursor=pointer]:
+                      - generic [ref=f118e1103]:
+                        - generic [ref=f118e1104]: "1"
+                        - text: more reply
+                - article "Comment from WanderingMacUser 27 days ago" [ref=f118e1106]:
+                  - generic [ref=f118e1107] [cursor=pointer]:
+                    - link "WanderingMacUser's profile --- avatar" [ref=f118e1113]:
+                      - /url: https://www.reddit.com/user/WanderingMacUser/
+                      - img "u/WanderingMacUser avatar" [ref=f118e1116]
+                    - generic [ref=f118e1120]:
+                      - link "WanderingMacUser's profile" [ref=f118e1124]:
+                        - /url: https://www.reddit.com/user/WanderingMacUser/
+                        - generic [ref=f118e1125]: WanderingMacUser
+                      - generic [aria-hidden] [ref=f118e1127]: •
+                      - link [ref=f118e1129]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/papeyoy/
+                        - time [ref=f118e1131]: 27d ago
+                  - paragraph [ref=f118e1137]: I am a user of Foundry and not a module dev, but I have really felt the documentation issues as of late. I was pretty hyped for levels functionality when v14 released, and then ran into a massive brick wall trying to actually use it when I discovered that there was barely any documentation. I had to learn how to set up a levels scene from random tutorial youtube videos, which isn't a great experience.
+                - article "Comment from AtomikCrow 27 days ago" [ref=f118e1141]:
+                  - generic [ref=f118e1142] [cursor=pointer]:
+                    - link "AtomikCrow's profile --- avatar" [ref=f118e1148]:
+                      - /url: https://www.reddit.com/user/AtomikCrow/
+                      - img "u/AtomikCrow avatar" [ref=f118e1151]
+                    - generic [ref=f118e1155]:
+                      - link "AtomikCrow's profile" [ref=f118e1159]:
+                        - /url: https://www.reddit.com/user/AtomikCrow/
+                        - generic [ref=f118e1160]: AtomikCrow
+                      - generic [aria-hidden] [ref=f118e1162]: •
+                      - link [ref=f118e1164]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paoidby/
+                        - time [ref=f118e1166]: 27d ago
+                  - generic [ref=f118e1171]:
+                    - paragraph [ref=f118e1172]: I'll chime in as someone who's had similar experiences. I learned to code to make my first FVTT module, and then developed a passion for it. Made a host of modules for myself and for commissions. Even a simple system or two.
+                    - paragraph [ref=f118e1173]: But then the updates came. Sometimes it was just a quick one or two line fix. Sometimes I had to basically rewrite the package from scratch. And as I made more and more modules, the workload seemed to increase exponentially. And eventually... I just stopped. I haven't bothered updating any of my modules in, oof, years now. I feel bad for my (small) userbase, but like you said, I was volunteering my own time and it just wasn't worth it anymore.
+                    - paragraph [ref=f118e1174]: It's tough because I love Foundry. I think it's still the best VTT on the market right now. And a big reason I think that is because the community is able to so easily create content for it. If only maintaining that content was more reasonable.
+                - article "Comment from Wokeye27 27 days ago" [ref=f118e1178]:
+                  - generic [ref=f118e1179] [cursor=pointer]:
+                    - link "Wokeye27's profile --- avatar" [ref=f118e1185]:
+                      - /url: https://www.reddit.com/user/Wokeye27/
+                    - generic [ref=f118e1195]:
+                      - link "Wokeye27's profile" [ref=f118e1199]:
+                        - /url: https://www.reddit.com/user/Wokeye27/
+                        - generic [ref=f118e1200]: Wokeye27
+                      - generic [aria-hidden] [ref=f118e1202]: •
+                      - link [ref=f118e1204]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paol8dq/
+                        - time [ref=f118e1206]: 27d ago
+                      - generic [aria-hidden] [ref=f118e1207]: •
+                      - generic [ref=f118e1208]:
+                        - text: Edited
+                        - time [ref=f118e1210]: 27d ago
+                  - generic [ref=f118e1212]:
+                    - generic [ref=f118e1215]:
+                      - paragraph [ref=f118e1216]: "As a user: the number of great modules I've seen abandoned and had to drop from my module list is sad to reflect upon."
+                      - paragraph [ref=f118e1217]: I've wondered if would it be possible to lock down a stable foundry core, with the Foundry devs instead deployed to add quality of life frills [eg integrate the best modules) and assist with systems implementation to reduce this issue? Update core only once every 3 years or something?
+                    - button "3 more replies" [ref=f118e1224] [cursor=pointer]:
+                      - generic [ref=f118e1229]:
+                        - generic [ref=f118e1230]: "3"
+                        - text: more replies
+                - article "Comment from PublicFlamingo7832 27 days ago" [ref=f118e1232]:
+                  - generic [ref=f118e1233] [cursor=pointer]:
+                    - link "PublicFlamingo7832's profile --- avatar" [ref=f118e1239]:
+                      - /url: https://www.reddit.com/user/PublicFlamingo7832/
+                      - img "u/PublicFlamingo7832 avatar" [ref=f118e1242]
+                    - generic [ref=f118e1246]:
+                      - link "PublicFlamingo7832's profile" [ref=f118e1250]:
+                        - /url: https://www.reddit.com/user/PublicFlamingo7832/
+                        - generic [ref=f118e1251]: PublicFlamingo7832
+                      - generic [aria-hidden] [ref=f118e1253]: •
+                      - link [ref=f118e1255]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paocx2f/
+                        - time [ref=f118e1257]: 27d ago
+                  - generic [ref=f118e1259]:
+                    - generic [ref=f118e1262]:
+                      - paragraph [ref=f118e1263]: That's why I have a v12 (cyberpunk red) normal install, v13 for dnd via node (some modules aren't v14 yet) and v14 via portable.
+                      - paragraph [ref=f118e1264]: Im working in it so not so difficult for me but people who are not into tech might have a hard time
+                    - button "2 more replies" [ref=f118e1271] [cursor=pointer]:
+                      - generic [ref=f118e1276]:
+                        - generic [ref=f118e1277]: "2"
+                        - text: more replies
+                - article "Comment from Null_zero 27 days ago" [ref=f118e1279]:
+                  - generic [ref=f118e1280] [cursor=pointer]:
+                    - link "Null_zero's profile --- avatar" [ref=f118e1286]:
+                      - /url: https://www.reddit.com/user/Null_zero/
+                    - generic [ref=f118e1296]:
+                      - link "Null_zero's profile" [ref=f118e1300]:
+                        - /url: https://www.reddit.com/user/Null_zero/
+                        - generic [ref=f118e1301]: Null_zero
+                      - generic [aria-hidden] [ref=f118e1303]: •
+                      - link [ref=f118e1305]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/pap65v2/
+                        - time [ref=f118e1307]: 27d ago
+                  - generic [ref=f118e1312]:
+                    - paragraph [ref=f118e1313]: Im a gm and not a dev for foundry vtt but I agree with everything youve said. The whole reason to even have an app is to allow calls to maintain the same syntax even if you change the underlying code. Sure add constructors and methods but leave the existing calls to be backwards compatible.
+                    - paragraph [ref=f118e1314]: Also like you said. Before paid modules this wasn't nearly as much of an issue but if you paid 40 bucks for some systems core rules and they break because of a version update even if the underlying system gets updated you as a consumer get screwed.
+                    - paragraph [ref=f118e1315]: Foundry is no longer the scrappy little vtt that could and it needs to grow up along with its base. Im already getting jealous because fantasy grounds gets updates and content for some of the systems I play faster than foundry does and im sure the reason is they have to constantly weigh the sales vs the maintenance costs.
+                - article "Comment from Skill_Academic 27 days ago" [ref=f118e1319]:
+                  - generic [ref=f118e1320] [cursor=pointer]:
+                    - link "Skill_Academic's profile --- avatar" [ref=f118e1326]:
+                      - /url: https://www.reddit.com/user/Skill_Academic/
+                    - generic [ref=f118e1336]:
+                      - link "Skill_Academic's profile" [ref=f118e1340]:
+                        - /url: https://www.reddit.com/user/Skill_Academic/
+                        - generic [ref=f118e1341]: Skill_Academic
+                      - generic [aria-hidden] [ref=f118e1343]: •
+                      - link [ref=f118e1345]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paogbov/
+                        - time [ref=f118e1347]: 27d ago
+                  - paragraph [ref=f118e1353]: Nice write up, I can’t imagine the difficulty as a developer.As a user I’ve found Foundry to be the best one, but with a huge caveat. It takes soo long to figure it all out and then all your modules break and you’re starting over. At some point, I’d like to have a “finished” version so I can just run my games.
+                - article "Comment from Nickfoot9 27 days ago" [ref=f118e1357]:
+                  - generic [ref=f118e1358] [cursor=pointer]:
+                    - link "Nickfoot9's profile --- avatar" [ref=f118e1364]:
+                      - /url: https://www.reddit.com/user/Nickfoot9/
+                      - img "u/Nickfoot9 avatar" [ref=f118e1367]
+                    - generic [ref=f118e1371]:
+                      - link "Nickfoot9's profile" [ref=f118e1375]:
+                        - /url: https://www.reddit.com/user/Nickfoot9/
+                        - generic [ref=f118e1376]: Nickfoot9
+                      - generic [aria-hidden] [ref=f118e1378]: •
+                      - link [ref=f118e1380]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/comment/paoqu5s/
+                        - time [ref=f118e1382]: 27d ago
+                  - generic [ref=f118e1384]:
+                    - generic [ref=f118e1387]:
+                      - paragraph [ref=f118e1388]: From a mostly non technical end user’s perspective this is why I left the platform. I came over about 6 years ago from Roll20. I was in love. I could do anything I wanted. There were so many modules. Over time it started to become a burden. Foundry changes a version or does an update. One module does an update to be compatible but another module hasn’t updated yet. So I have to pick which module I still want to use for this session because they don’t both work right now.
+                      - paragraph [ref=f118e1389]: It got to a point where all of the modules were more of a burden than anything so I left. Started running Draw Steel in the Codex and it is a breath of fresh air. Everything just works. I don’t need to go hunt down a module that does what I want because everything is already built in. I don’t worry about compatibility and I don’t have to join 10 different Patreons to get it to work the way I want.
+                    - button "1 more reply" [ref=f118e1396] [cursor=pointer]:
+                      - generic [ref=f118e1401]:
+                        - generic [ref=f118e1402]: "1"
+                        - text: more reply
+            - generic [ref=f118e1405]:
+              - generic [ref=f118e1406]:
+                - complementary "People also ask about section" [ref=f118e1407]:
+                  - heading "People also ask about section" [level=1] [ref=f118e1408]
+                  - generic [ref=f118e1409]: People also ask about
+                  - generic [ref=f118e1414]:
+                    - link "FoundryVTT API changes and their impact" [ref=f118e1416] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/ea164a92-b94b-4ba9-81e2-dbadc032bec3/?q=FoundryVTT+API+changes+and+their+impact&source=PDP&ep=pdp_unit&relatedPostId=t3_1wk6be3
+                    - link "Modules for enhancing gameplay in FoundryVTT" [ref=f118e1425] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/cfd80b0e-5994-4e92-bcbd-c8cb64df913d/?q=Modules+for+enhancing+gameplay+in+FoundryVTT&source=PDP&ep=pdp_unit&relatedPostId=t3_1wk6be3
+                    - link "Tips for new GMs using FoundryVTT" [ref=f118e1434] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/40d211eb-52dc-4d56-b625-2d46b4a32cd1/?q=Tips+for+new+GMs+using+FoundryVTT&source=PDP&ep=pdp_unit&relatedPostId=t3_1wk6be3
+                    - link "Creating custom assets for FoundryVTT" [ref=f118e1443] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/f23fff3b-e660-480f-b73b-d06ed0cbc5cc/?q=Creating+custom+assets+for+FoundryVTT&source=PDP&ep=pdp_unit&relatedPostId=t3_1wk6be3
+                    - link "How to optimize performance in FoundryVTT" [ref=f118e1452] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/370c8b13-1b83-4d9b-bdac-82f76602cf2a/?q=How+to+optimize+performance+in+FoundryVTT&source=PDP&ep=pdp_unit&relatedPostId=t3_1wk6be3
+                - generic [ref=f118e1460]:
+                  - complementary "Related Posts Section" [ref=f118e1461]:
+                    - heading "Related Posts Section" [level=1] [ref=f118e1462]: More posts you may like
+                    - generic [ref=f118e1463]: Related posts
+                    - list [ref=f118e1469]:
+                      - listitem [ref=f118e1470]:
+                        - generic [ref=f118e1471]:
+                          - generic [ref=f118e1472]:
+                            - 'link "Intel Foundry: How They Got Here and Scenarios for Improvement" [ref=f118e1473] [cursor=pointer]':
+                              - /url: https://www.reddit.com/r/hardware/comments/1rqz95a/intel_foundry_how_they_got_here_and_scenarios_for/
+                            - generic [ref=f118e1475]:
+                              - generic [ref=f118e1476]:
+                                - generic [ref=f118e1479]:
+                                  - link "r/hardware" [ref=f118e1480] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/hardware/
+                                  - generic [aria-hidden] [ref=f118e1485]: •
+                                  - time [ref=f118e1487]: 7mo ago
+                                - link [ref=f118e1489] [cursor=pointer]:
+                                  - /url: /r/hardware/comments/1rqz95a/intel_foundry_how_they_got_here_and_scenarios_for/
+                                  - 'heading "List item post - Intel Foundry: How They Got Here and Scenarios for Improvem..." [level=3] [ref=f118e1492]': "Intel Foundry: How They Got Here and Scenarios for Improvement"
+                              - 'link "r/hardware - Intel Foundry: How They Got Here and Scenarios for Improvement" [ref=f118e1495] [cursor=pointer]':
+                                - /url: https://semiwiki.com/semiconductor-services/mkw-ventures-consulting/367405-intel-foundry-how-they-got-here-and-scenarios-for-improvement/
+                                - 'img "r/hardware - Intel Foundry: How They Got Here and Scenarios for Improvement" [ref=f118e1496]'
+                            - generic [ref=f118e1498]:
+                              - generic [ref=f118e1499]: "43"
+                              - text: upvotes ·
+                              - generic [ref=f118e1500]: "11"
+                              - text: comments
+                          - separator [ref=f118e1501]
+                      - listitem [ref=f118e1502]:
+                        - generic [ref=f118e1503]:
+                          - generic [ref=f118e1504]:
+                            - link "This is why we need to hear from people on the ground doing the work. Expose the corruption early" [ref=f118e1505] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/aiecosystem/comments/1wmyghs/this_is_why_we_need_to_hear_from_people_on_the/
+                            - generic [ref=f118e1507]:
+                              - generic [ref=f118e1508]:
+                                - generic [ref=f118e1511]:
+                                  - link "r/aiecosystem" [ref=f118e1512] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/aiecosystem/
+                                  - generic [aria-hidden] [ref=f118e1517]: •
+                                  - time [ref=f118e1519]: 24d ago
+                                - link [ref=f118e1521] [cursor=pointer]:
+                                  - /url: /r/aiecosystem/comments/1wmyghs/this_is_why_we_need_to_hear_from_people_on_the/
+                                  - heading "List item post - This is why we need to hear from people on the ground doing..." [level=3] [ref=f118e1524]: This is why we need to hear from people on the ground doing the work. Expose the corruption early
+                              - link "r/aiecosystem - This is why we need to hear from people on the ground doing the work. Expose the corruption early" [ref=f118e1527] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/aiecosystem/comments/1wmyghs/this_is_why_we_need_to_hear_from_people_on_the/
+                                - img "r/aiecosystem - This is why we need to hear from people on the ground doing the work. Expose the corruption early" [ref=f118e1528]
+                            - generic [ref=f118e1530]:
+                              - generic [ref=f118e1531]: 2.3K
+                              - text: upvotes ·
+                              - generic [ref=f118e1532]: "144"
+                              - text: comments
+                          - separator [ref=f118e1533]
+                      - listitem [ref=f118e1534]:
+                        - generic [ref=f118e1535]:
+                          - generic [ref=f118e1536]:
+                            - link "Foundry Basics - A Practical Guide to v14 Levels [tutorial] [system agnostic]" [ref=f118e1537] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/FoundryVTT/comments/1up8gfp/foundry_basics_a_practical_guide_to_v14_levels/
+                            - generic [ref=f118e1539]:
+                              - generic [ref=f118e1540]:
+                                - generic [ref=f118e1543]:
+                                  - link "r/FoundryVTT" [ref=f118e1544] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/FoundryVTT/
+                                  - generic [aria-hidden] [ref=f118e1549]: •
+                                  - time [ref=f118e1551]: 3mo ago
+                                - link [ref=f118e1553] [cursor=pointer]:
+                                  - /url: /r/FoundryVTT/comments/1up8gfp/foundry_basics_a_practical_guide_to_v14_levels/
+                                  - heading "List item post - Foundry Basics - A Practical Guide to v14 Levels [tutorial]..." [level=3] [ref=f118e1556]: Foundry Basics - A Practical Guide to v14 Levels [tutorial] [system agnostic]
+                              - link "r/FoundryVTT - Foundry Basics - A Practical Guide to v14 Levels [tutorial] [system agnostic]" [ref=f118e1559] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/FoundryVTT/comments/1up8gfp/foundry_basics_a_practical_guide_to_v14_levels/
+                                - img "r/FoundryVTT - Foundry Basics - A Practical Guide to v14 Levels [tutorial] [system agnostic]" [ref=f118e1560]
+                            - generic [ref=f118e1562]:
+                              - generic [ref=f118e1563]: "83"
+                              - text: upvotes ·
+                              - generic [ref=f118e1564]: "10"
+                              - text: comments
+                          - separator [ref=f118e1565]
+                      - listitem
+                      - listitem [ref=f118e1566]:
+                        - generic [ref=f118e1567]:
+                          - generic [ref=f118e1568]:
+                            - 'link "AMA: We are the Foundry Virtual Tabletop team! Ask Us Anything! (6th Anniversary!)" [ref=f118e1569] [cursor=pointer]':
+                              - /url: https://www.reddit.com/r/FoundryVTT/comments/1toxrus/ama_we_are_the_foundry_virtual_tabletop_team_ask/
+                            - generic [ref=f118e1571]:
+                              - generic [ref=f118e1572]:
+                                - generic [ref=f118e1575]:
+                                  - link "r/FoundryVTT" [ref=f118e1576] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/FoundryVTT/
+                                  - generic [aria-hidden] [ref=f118e1581]: •
+                                  - time [ref=f118e1583]: 5mo ago
+                                - link [ref=f118e1585] [cursor=pointer]:
+                                  - /url: /r/FoundryVTT/comments/1toxrus/ama_we_are_the_foundry_virtual_tabletop_team_ask/
+                                  - 'heading "List item post - AMA: We are the Foundry Virtual Tabletop team! Ask Us Anyth..." [level=3] [ref=f118e1588]': "AMA: We are the Foundry Virtual Tabletop team! Ask Us Anything! (6th Anniversary!)"
+                              - 'link "r/FoundryVTT - AMA: We are the Foundry Virtual Tabletop team! Ask Us Anything! (6th Anniversary!)" [ref=f118e1591] [cursor=pointer]':
+                                - /url: https://www.reddit.com/r/FoundryVTT/comments/1toxrus/ama_we_are_the_foundry_virtual_tabletop_team_ask/
+                                - 'img "r/FoundryVTT - AMA: We are the Foundry Virtual Tabletop team! Ask Us Anything! (6th Anniversary!)" [ref=f118e1592]'
+                            - generic [ref=f118e1594]:
+                              - generic [ref=f118e1595]: "319"
+                              - text: upvotes ·
+                              - generic [ref=f118e1596]: "366"
+                              - text: comments
+                          - separator [ref=f118e1597]
+                      - listitem [ref=f118e1598]:
+                        - generic [ref=f118e1599]:
+                          - generic [ref=f118e1600]:
+                            - link "I’ve been seeing way too many posts recently of people’s Foundry’s being borked after updating to v13, so I would kindly ask that you watch the first 12 seconds of my newest video. Thanks!" [ref=f118e1601] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/FoundryVTT/comments/1keoe3g/ive_been_seeing_way_too_many_posts_recently_of/
+                            - generic [ref=f118e1603]:
+                              - generic [ref=f118e1604]:
+                                - generic [ref=f118e1607]:
+                                  - link "r/FoundryVTT" [ref=f118e1608] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/FoundryVTT/
+                                  - generic [aria-hidden] [ref=f118e1613]: •
+                                  - time [ref=f118e1615]: 1y ago
+                                - link [ref=f118e1617] [cursor=pointer]:
+                                  - /url: /r/FoundryVTT/comments/1keoe3g/ive_been_seeing_way_too_many_posts_recently_of/
+                                  - heading "List item post - I’ve been seeing way too many posts recently of people’s Fo..." [level=3] [ref=f118e1620]: I’ve been seeing way too many posts recently of people’s Foundry’s being borked after updating to v13, so I would kindly ask that you watch the first 12 seconds of my newest video. Thanks!
+                              - link "r/FoundryVTT - I’ve been seeing way too many posts recently of people’s Foundry’s being borked after updating to v13, so I would kindly ask that you watch the first 12 seconds of my newest video. Thanks!" [ref=f118e1623] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/FoundryVTT/comments/1keoe3g/ive_been_seeing_way_too_many_posts_recently_of/
+                                - img "r/FoundryVTT - I’ve been seeing way too many posts recently of people’s Foundry’s being borked after updating to v13, so I would kindly ask that you watch the first 12 seconds of my newest video. Thanks!" [ref=f118e1624]
+                            - generic [ref=f118e1626]:
+                              - generic [ref=f118e1627]: "109"
+                              - text: upvotes ·
+                              - generic [ref=f118e1628]: "54"
+                              - text: comments
+                          - separator [ref=f118e1629]
+                      - listitem [ref=f118e1630]:
+                        - generic [ref=f118e1631]:
+                          - generic [ref=f118e1632]:
+                            - link "Foundry VTT Overview 2025 - What To Know About Foundry and Is It The Right VTT For You? [system agnostic]" [ref=f118e1633] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/FoundryVTT/comments/1p5r0qr/foundry_vtt_overview_2025_what_to_know_about/
+                            - generic [ref=f118e1635]:
+                              - generic [ref=f118e1636]:
+                                - generic [ref=f118e1639]:
+                                  - link "r/FoundryVTT" [ref=f118e1640] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/FoundryVTT/
+                                  - generic [aria-hidden] [ref=f118e1645]: •
+                                  - time [ref=f118e1647]: 1y ago
+                                - link [ref=f118e1649] [cursor=pointer]:
+                                  - /url: /r/FoundryVTT/comments/1p5r0qr/foundry_vtt_overview_2025_what_to_know_about/
+                                  - heading "List item post - Foundry VTT Overview 2025 - What To Know About Foundry and ..." [level=3] [ref=f118e1652]: Foundry VTT Overview 2025 - What To Know About Foundry and Is It The Right VTT For You? [system agnostic]
+                              - link "r/FoundryVTT - Foundry VTT Overview 2025 - What To Know About Foundry and Is It The Right VTT For You? [system agnostic]" [ref=f118e1655] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/FoundryVTT/comments/1p5r0qr/foundry_vtt_overview_2025_what_to_know_about/
+                                - img "r/FoundryVTT - Foundry VTT Overview 2025 - What To Know About Foundry and Is It The Right VTT For You? [system agnostic]" [ref=f118e1656]
+                            - generic [ref=f118e1658]:
+                              - generic [ref=f118e1659]: "62"
+                              - text: upvotes ·
+                              - generic [ref=f118e1660]: "4"
+                              - text: comments
+                          - separator [ref=f118e1661]
+                      - listitem [ref=f118e1662]:
+                        - generic [ref=f118e1663]:
+                          - generic [ref=f118e1664]:
+                            - link "[System Agnostic] Foundry VTT V14 - What Changed" [ref=f118e1665] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/FoundryVTT/comments/1sjkux6/system_agnostic_foundry_vtt_v14_what_changed/
+                            - generic [ref=f118e1667]:
+                              - generic [ref=f118e1668]:
+                                - generic [ref=f118e1671]:
+                                  - link "r/FoundryVTT" [ref=f118e1672] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/FoundryVTT/
+                                  - generic [aria-hidden] [ref=f118e1677]: •
+                                  - time [ref=f118e1679]: 6mo ago
+                                - link [ref=f118e1681] [cursor=pointer]:
+                                  - /url: /r/FoundryVTT/comments/1sjkux6/system_agnostic_foundry_vtt_v14_what_changed/
+                                  - heading "List item post - [System Agnostic] Foundry VTT V14 - What Changed" [level=3] [ref=f118e1684]: "[System Agnostic] Foundry VTT V14 - What Changed"
+                              - link "r/FoundryVTT - [System Agnostic] Foundry VTT V14 - What Changed" [ref=f118e1687] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/FoundryVTT/comments/1sjkux6/system_agnostic_foundry_vtt_v14_what_changed/
+                                - img "r/FoundryVTT - [System Agnostic] Foundry VTT V14 - What Changed" [ref=f118e1688]
+                            - generic [ref=f118e1690]:
+                              - generic [ref=f118e1691]: "200"
+                              - text: upvotes ·
+                              - generic [ref=f118e1692]: "27"
+                              - text: comments
+                          - separator [ref=f118e1693]
+                      - listitem [ref=f118e1694]:
+                        - generic [ref=f118e1695]:
+                          - generic [ref=f118e1696]:
+                            - link "Foundry slow for some of my players but not for me or the others / optimization?" [ref=f118e1697] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/FoundryVTT/comments/1qyr80r/foundry_slow_for_some_of_my_players_but_not_for/
+                            - generic [ref=f118e1700]:
+                              - generic [ref=f118e1703]:
+                                - link "r/FoundryVTT" [ref=f118e1704] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/FoundryVTT/
+                                - generic [aria-hidden] [ref=f118e1709]: •
+                                - time [ref=f118e1711]: 8mo ago
+                              - link [ref=f118e1713] [cursor=pointer]:
+                                - /url: /r/FoundryVTT/comments/1qyr80r/foundry_slow_for_some_of_my_players_but_not_for/
+                                - heading "List item post - Foundry slow for some of my players but not for me or the o..." [level=3] [ref=f118e1716]: Foundry slow for some of my players but not for me or the others / optimization?
+                            - generic [ref=f118e1718]:
+                              - generic [ref=f118e1719]: "29"
+                              - text: upvotes ·
+                              - generic [ref=f118e1720]: "28"
+                              - text: comments
+                          - separator [ref=f118e1721]
+                      - listitem
+                      - listitem [ref=f118e1722]:
+                        - generic [ref=f118e1723]:
+                          - generic [ref=f118e1724]:
+                            - link "If I wanted to learn to use Foundry’s API, what would be the best way to learn scripting?" [ref=f118e1725] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/FoundryVTT/comments/igt634/if_i_wanted_to_learn_to_use_foundrys_api_what/
+                            - generic [ref=f118e1728]:
+                              - generic [ref=f118e1731]:
+                                - link "r/FoundryVTT" [ref=f118e1732] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/FoundryVTT/
+                                - generic [aria-hidden] [ref=f118e1737]: •
+                                - time [ref=f118e1739]: 6y ago
+                              - link [ref=f118e1741] [cursor=pointer]:
+                                - /url: /r/FoundryVTT/comments/igt634/if_i_wanted_to_learn_to_use_foundrys_api_what/
+                                - heading "List item post - If I wanted to learn to use Foundry’s API, what would be th..." [level=3] [ref=f118e1744]: If I wanted to learn to use Foundry’s API, what would be the best way to learn scripting?
+                            - generic [ref=f118e1746]:
+                              - generic [ref=f118e1747]: "9"
+                              - text: upvotes ·
+                              - generic [ref=f118e1748]: "15"
+                              - text: comments
+                          - separator [ref=f118e1749]
+                      - listitem [ref=f118e1750]:
+                        - generic [ref=f118e1751]:
+                          - generic [ref=f118e1752]:
+                            - link "Intel Foundry Breakeven Target For 2027 Now Looks a Lot More Real, Driven By 18A, 14A & a Surprising Advanced Packaging Surge" [ref=f118e1753] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/intel/comments/1rkwxmw/intel_foundry_breakeven_target_for_2027_now_looks/
+                            - generic [ref=f118e1755]:
+                              - generic [ref=f118e1756]:
+                                - generic [ref=f118e1759]:
+                                  - link "r/intel" [ref=f118e1760] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/intel/
+                                  - generic [aria-hidden] [ref=f118e1765]: •
+                                  - time [ref=f118e1767]: 7mo ago
+                                - link [ref=f118e1769] [cursor=pointer]:
+                                  - /url: /r/intel/comments/1rkwxmw/intel_foundry_breakeven_target_for_2027_now_looks/
+                                  - heading "List item post - Intel Foundry Breakeven Target For 2027 Now Looks a Lot Mor..." [level=3] [ref=f118e1772]: Intel Foundry Breakeven Target For 2027 Now Looks a Lot More Real, Driven By 18A, 14A & a Surprising Advanced Packaging Surge
+                              - link "r/intel - Intel Foundry Breakeven Target For 2027 Now Looks a Lot More Real, Driven By 18A, 14A & a Surprising Advanced Packaging Surge" [ref=f118e1775] [cursor=pointer]:
+                                - /url: https://wccftech.com/intel-foundry-breakeven-target-for-2027-now-looks-a-lot-more-real/
+                                - img "r/intel - Intel Foundry Breakeven Target For 2027 Now Looks a Lot More Real, Driven By 18A, 14A & a Surprising Advanced Packaging Surge" [ref=f118e1776]
+                            - generic [ref=f118e1778]:
+                              - generic [ref=f118e1779]: "133"
+                              - text: upvotes ·
+                              - generic [ref=f118e1780]: "47"
+                              - text: comments
+                          - separator [ref=f118e1781]
+                      - listitem [ref=f118e1782]:
+                        - generic [ref=f118e1783]:
+                          - generic [ref=f118e1784]:
+                            - link "Foundry V14 Stable Release" [ref=f118e1785] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/FoundryVTT/comments/1sa0he5/foundry_v14_stable_release/
+                            - generic [ref=f118e1788]:
+                              - generic [ref=f118e1791]:
+                                - link "r/FoundryVTT" [ref=f118e1792] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/FoundryVTT/
+                                - generic [aria-hidden] [ref=f118e1797]: •
+                                - time [ref=f118e1799]: 7mo ago
+                              - link [ref=f118e1801] [cursor=pointer]:
+                                - /url: /r/FoundryVTT/comments/1sa0he5/foundry_v14_stable_release/
+                                - heading "List item post - Foundry V14 Stable Release" [level=3] [ref=f118e1804]: Foundry V14 Stable Release
+                            - generic [ref=f118e1806]:
+                              - generic [ref=f118e1807]: "242"
+                              - text: upvotes ·
+                              - generic [ref=f118e1808]: "77"
+                              - text: comments
+                          - separator [ref=f118e1809]
+                      - listitem [ref=f118e1810]:
+                        - generic [ref=f118e1811]:
+                          - generic [ref=f118e1812]:
+                            - link "Release date and more information for Bastion of Blasphemies on Foundry VTT" [ref=f118e1813] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Pathfinder2e/comments/1w5s65s/release_date_and_more_information_for_bastion_of/
+                            - generic [ref=f118e1815]:
+                              - generic [ref=f118e1816]:
+                                - generic [ref=f118e1819]:
+                                  - link "r/Pathfinder2e" [ref=f118e1820] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/Pathfinder2e/
+                                  - generic [aria-hidden] [ref=f118e1825]: •
+                                  - time [ref=f118e1827]: 1mo ago
+                                - link [ref=f118e1829] [cursor=pointer]:
+                                  - /url: /r/Pathfinder2e/comments/1w5s65s/release_date_and_more_information_for_bastion_of/
+                                  - heading "List item post - Release date and more information for Bastion of Blasphemie..." [level=3] [ref=f118e1832]: Release date and more information for Bastion of Blasphemies on Foundry VTT
+                              - link "r/Pathfinder2e - Release date and more information for Bastion of Blasphemies on Foundry VTT" [ref=f118e1835] [cursor=pointer]:
+                                - /url: https://paizo.com/blog/bastion-of-blasphemies-on-foundry-vtt
+                                - img "r/Pathfinder2e - Release date and more information for Bastion of Blasphemies on Foundry VTT" [ref=f118e1836]
+                            - generic [ref=f118e1838]:
+                              - generic [ref=f118e1839]: "110"
+                              - text: upvotes ·
+                              - generic [ref=f118e1840]: "14"
+                              - text: comments
+                          - separator [ref=f118e1841]
+                      - listitem [ref=f118e1842]:
+                        - generic [ref=f118e1843]:
+                          - generic [ref=f118e1844]:
+                            - link "Getting Started with Foundry, 2026 Edition! [system agnostic]" [ref=f118e1845] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/FoundryVTT/comments/1qkbx5g/getting_started_with_foundry_2026_edition_system/
+                            - generic [ref=f118e1847]:
+                              - generic [ref=f118e1848]:
+                                - generic [ref=f118e1851]:
+                                  - link "r/FoundryVTT" [ref=f118e1852] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/FoundryVTT/
+                                  - generic [aria-hidden] [ref=f118e1857]: •
+                                  - time [ref=f118e1859]: 9mo ago
+                                - link [ref=f118e1861] [cursor=pointer]:
+                                  - /url: /r/FoundryVTT/comments/1qkbx5g/getting_started_with_foundry_2026_edition_system/
+                                  - heading "List item post - Getting Started with Foundry, 2026 Edition! [system agnosti..." [level=3] [ref=f118e1864]: Getting Started with Foundry, 2026 Edition! [system agnostic]
+                              - link "r/FoundryVTT - Getting Started with Foundry, 2026 Edition! [system agnostic]" [ref=f118e1867] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/FoundryVTT/comments/1qkbx5g/getting_started_with_foundry_2026_edition_system/
+                                - img "r/FoundryVTT - Getting Started with Foundry, 2026 Edition! [system agnostic]" [ref=f118e1868]
+                            - generic [ref=f118e1870]:
+                              - generic [ref=f118e1871]: "130"
+                              - text: upvotes ·
+                              - generic [ref=f118e1872]: "8"
+                              - text: comments
+                          - separator [ref=f118e1873]
+                      - listitem [ref=f118e1874]:
+                        - generic [ref=f118e1875]:
+                          - generic [ref=f118e1876]:
+                            - link "Introducing PlaneShift, a REST Api for FoundryVTT." [ref=f118e1877] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/FoundryVTT/comments/1m4yshx/introducing_planeshift_a_rest_api_for_foundryvtt/
+                            - generic [ref=f118e1880]:
+                              - generic [ref=f118e1883]:
+                                - link "r/FoundryVTT" [ref=f118e1884] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/FoundryVTT/
+                                - generic [aria-hidden] [ref=f118e1889]: •
+                                - time [ref=f118e1891]: 1y ago
+                              - link [ref=f118e1893] [cursor=pointer]:
+                                - /url: /r/FoundryVTT/comments/1m4yshx/introducing_planeshift_a_rest_api_for_foundryvtt/
+                                - heading "List item post - Introducing PlaneShift, a REST Api for FoundryVTT." [level=3] [ref=f118e1896]: Introducing PlaneShift, a REST Api for FoundryVTT.
+                            - generic [ref=f118e1898]:
+                              - generic [ref=f118e1899]: "128"
+                              - text: upvotes ·
+                              - generic [ref=f118e1900]: "41"
+                              - text: comments
+                          - separator [ref=f118e1901]
+                      - listitem [ref=f118e1902]:
+                        - generic [ref=f118e1903]:
+                          - generic [ref=f118e1904]:
+                            - link "AI Foundry" [ref=f118e1905] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/AZURE/comments/1rtohv4/ai_foundry/
+                            - generic [ref=f118e1908]:
+                              - generic [ref=f118e1911]:
+                                - link "r/AZURE" [ref=f118e1912] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/AZURE/
+                                - generic [aria-hidden] [ref=f118e1917]: •
+                                - time [ref=f118e1919]: 7mo ago
+                              - link [ref=f118e1921] [cursor=pointer]:
+                                - /url: /r/AZURE/comments/1rtohv4/ai_foundry/
+                                - heading "List item post - AI Foundry" [level=3] [ref=f118e1924]: AI Foundry
+                            - generic [ref=f118e1926]:
+                              - generic [ref=f118e1927]: "6"
+                              - text: upvotes ·
+                              - generic [ref=f118e1928]: "26"
+                              - text: comments
+                          - separator [ref=f118e1929]
+                      - listitem [ref=f118e1930]:
+                        - generic [ref=f118e1931]:
+                          - generic [ref=f118e1932]:
+                            - link "Foundry v14 Level documentation" [ref=f118e1933] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/FoundryVTT/comments/1sc2m33/foundry_v14_level_documentation/
+                            - generic [ref=f118e1936]:
+                              - generic [ref=f118e1939]:
+                                - link "r/FoundryVTT" [ref=f118e1940] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/FoundryVTT/
+                                - generic [aria-hidden] [ref=f118e1945]: •
+                                - time [ref=f118e1947]: 6mo ago
+                              - link [ref=f118e1949] [cursor=pointer]:
+                                - /url: /r/FoundryVTT/comments/1sc2m33/foundry_v14_level_documentation/
+                                - heading "List item post - Foundry v14 Level documentation" [level=3] [ref=f118e1952]: Foundry v14 Level documentation
+                            - generic [ref=f118e1954]:
+                              - generic [ref=f118e1955]: "21"
+                              - text: upvotes ·
+                              - generic [ref=f118e1956]: "13"
+                              - text: comments
+                          - separator [ref=f118e1957]
+                      - listitem [ref=f118e1958]:
+                        - generic [ref=f118e1959]:
+                          - generic [ref=f118e1960]:
+                            - link "Foundry VTT Year In Review 2026" [ref=f118e1961] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/FoundryVTT/comments/1tjuej3/foundry_vtt_year_in_review_2026/
+                            - generic [ref=f118e1963]:
+                              - generic [ref=f118e1964]:
+                                - generic [ref=f118e1967]:
+                                  - link "r/FoundryVTT" [ref=f118e1968] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/FoundryVTT/
+                                  - generic [aria-hidden] [ref=f118e1973]: •
+                                  - time [ref=f118e1975]: 5mo ago
+                                - link [ref=f118e1977] [cursor=pointer]:
+                                  - /url: /r/FoundryVTT/comments/1tjuej3/foundry_vtt_year_in_review_2026/
+                                  - heading "List item post - Foundry VTT Year In Review 2026" [level=3] [ref=f118e1980]: Foundry VTT Year In Review 2026
+                              - link "r/FoundryVTT - Foundry VTT Year In Review 2026" [ref=f118e1983] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/FoundryVTT/comments/1tjuej3/foundry_vtt_year_in_review_2026/
+                                - img "r/FoundryVTT - Foundry VTT Year In Review 2026" [ref=f118e1984]
+                            - generic [ref=f118e1986]:
+                              - generic [ref=f118e1987]: "93"
+                              - text: upvotes ·
+                              - generic [ref=f118e1988]: "16"
+                              - text: comments
+                          - separator [ref=f118e1989]
+                      - listitem [ref=f118e1990]:
+                        - generic [ref=f118e1991]:
+                          - generic [ref=f118e1992]:
+                            - link "\"Some people at frontier AI labs told me they believe startups are over. OpenAI, Anthropic, Google, xAI will absorb every industry as AGI nears. Coding today, science, medicine, and finance next. Then everything else.\" ⏩ Do you agree this will likely happen? Why?" [ref=f118e1993] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/LovingAI/comments/1rx8gc6/some_people_at_frontier_ai_labs_told_me_they/
+                            - generic [ref=f118e1995]:
+                              - generic [ref=f118e1996]:
+                                - generic [ref=f118e1999]:
+                                  - link "r/LovingAI" [ref=f118e2000] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/LovingAI/
+                                  - generic [aria-hidden] [ref=f118e2005]: •
+                                  - time [ref=f118e2007]: 7mo ago
+                                - link [ref=f118e2009] [cursor=pointer]:
+                                  - /url: /r/LovingAI/comments/1rx8gc6/some_people_at_frontier_ai_labs_told_me_they/
+                                  - heading "List item post - \"Some people at frontier AI labs told me they believe start..." [level=3] [ref=f118e2012]: "\"Some people at frontier AI labs told me they believe startups are over. OpenAI, Anthropic, Google, xAI will absorb every industry as AGI nears. Coding today, science, medicine, and finance next. Then everything else.\" ⏩ Do you agree this will likely happen? Why?"
+                              - link "r/LovingAI - \"Some people at frontier AI labs told me they believe startups are over. OpenAI, Anthropic, Google, xAI will absorb every industry as AGI nears. Coding today, science, medicine, and finance next. Then everything else.\" ⏩ Do you agree this will likely happen? Why?" [ref=f118e2015] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/LovingAI/comments/1rx8gc6/some_people_at_frontier_ai_labs_told_me_they/
+                                - img "r/LovingAI - \"Some people at frontier AI labs told me they believe startups are over. OpenAI, Anthropic, Google, xAI will absorb every industry as AGI nears. Coding today, science, medicine, and finance next. Then everything else.\" ⏩ Do you agree this will likely happen? Why?" [ref=f118e2016]
+                            - generic [ref=f118e2018]:
+                              - generic [ref=f118e2019]: "53"
+                              - text: upvotes ·
+                              - generic [ref=f118e2020]: "178"
+                              - text: comments
+                          - separator [ref=f118e2021]
+                      - listitem [ref=f118e2022]:
+                        - generic [ref=f118e2023]:
+                          - generic [ref=f118e2024]:
+                            - link "I spent 15+ years at ASML and Intel. AMA about transitioning from a PhD/Research background (or other industries) into Semiconductors." [ref=f118e2025] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Semiconductors/comments/1rzaueq/i_spent_15_years_at_asml_and_intel_ama_about/
+                            - generic [ref=f118e2028]:
+                              - generic [ref=f118e2031]:
+                                - link "r/Semiconductors" [ref=f118e2032] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/Semiconductors/
+                                - generic [aria-hidden] [ref=f118e2037]: •
+                                - time [ref=f118e2039]: 7mo ago
+                              - link [ref=f118e2041] [cursor=pointer]:
+                                - /url: /r/Semiconductors/comments/1rzaueq/i_spent_15_years_at_asml_and_intel_ama_about/
+                                - heading "List item post - I spent 15+ years at ASML and Intel. AMA about transitionin..." [level=3] [ref=f118e2044]: I spent 15+ years at ASML and Intel. AMA about transitioning from a PhD/Research background (or other industries) into Semiconductors.
+                            - generic [ref=f118e2046]:
+                              - generic [ref=f118e2047]: "115"
+                              - text: upvotes ·
+                              - generic [ref=f118e2048]: "62"
+                              - text: comments
+                          - separator [ref=f118e2049]
+                      - listitem [ref=f118e2050]:
+                        - generic [ref=f118e2051]:
+                          - generic [ref=f118e2052]:
+                            - link "V14 Feature Article" [ref=f118e2053] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/FoundryVTT/comments/1kt0vs5/v14_feature_article/
+                            - generic [ref=f118e2056]:
+                              - generic [ref=f118e2059]:
+                                - link "r/FoundryVTT" [ref=f118e2060] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/FoundryVTT/
+                                - generic [aria-hidden] [ref=f118e2065]: •
+                                - time [ref=f118e2067]: 1y ago
+                              - link [ref=f118e2069] [cursor=pointer]:
+                                - /url: /r/FoundryVTT/comments/1kt0vs5/v14_feature_article/
+                                - heading "List item post - V14 Feature Article" [level=3] [ref=f118e2072]: V14 Feature Article
+                            - generic [ref=f118e2074]:
+                              - generic [ref=f118e2075]: "128"
+                              - text: upvotes ·
+                              - generic [ref=f118e2076]: "72"
+                              - text: comments
+                          - separator [ref=f118e2077]
+                      - listitem [ref=f118e2078]:
+                        - generic [ref=f118e2079]:
+                          - generic [ref=f118e2080]:
+                            - 'link "LBT Interview: Intel’s transformation and the future of AI infrastructure. \"The AI Opportunity: Silicon to Systems | Intel Business\"" [ref=f118e2081] [cursor=pointer]':
+                              - /url: https://www.reddit.com/r/intelstock/comments/1wieplj/lbt_interview_intels_transformation_and_the/
+                            - generic [ref=f118e2083]:
+                              - generic [ref=f118e2084]:
+                                - generic [ref=f118e2087]:
+                                  - link "r/intelstock" [ref=f118e2088] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/intelstock/
+                                  - generic [aria-hidden] [ref=f118e2093]: •
+                                  - time [ref=f118e2095]: 1mo ago
+                                - link [ref=f118e2097] [cursor=pointer]:
+                                  - /url: /r/intelstock/comments/1wieplj/lbt_interview_intels_transformation_and_the/
+                                  - 'heading "List item post - LBT Interview: Intel’s transformation and the future of AI ..." [level=3] [ref=f118e2100]': "LBT Interview: Intel’s transformation and the future of AI infrastructure. \"The AI Opportunity: Silicon to Systems | Intel Business\""
+                              - 'link "r/intelstock - LBT Interview: Intel’s transformation and the future of AI infrastructure. \"The AI Opportunity: Silicon to Systems | Intel Business\"" [ref=f118e2103] [cursor=pointer]':
+                                - /url: https://www.reddit.com/r/intelstock/comments/1wieplj/lbt_interview_intels_transformation_and_the/
+                                - 'img "r/intelstock - LBT Interview: Intel’s transformation and the future of AI infrastructure. \"The AI Opportunity: Silicon to Systems | Intel Business\"" [ref=f118e2104]'
+                            - generic [ref=f118e2106]:
+                              - generic [ref=f118e2107]: "50"
+                              - text: upvotes ·
+                              - generic [ref=f118e2108]: "8"
+                              - text: comments
+                          - separator [ref=f118e2109]
+                      - listitem [ref=f118e2110]:
+                        - generic [ref=f118e2111]:
+                          - generic [ref=f118e2112]:
+                            - link "Foundry VTT Version 14 is now recommended on The Forge!" [ref=f118e2113] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/ForgeVTT/comments/1v8api5/foundry_vtt_version_14_is_now_recommended_on_the/
+                            - generic [ref=f118e2115]:
+                              - generic [ref=f118e2116]:
+                                - generic [ref=f118e2119]:
+                                  - link "r/ForgeVTT" [ref=f118e2120] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/ForgeVTT/
+                                  - generic [aria-hidden] [ref=f118e2125]: •
+                                  - time [ref=f118e2127]: 3mo ago
+                                - link [ref=f118e2129] [cursor=pointer]:
+                                  - /url: /r/ForgeVTT/comments/1v8api5/foundry_vtt_version_14_is_now_recommended_on_the/
+                                  - heading "List item post - Foundry VTT Version 14 is now recommended on The Forge!" [level=3] [ref=f118e2132]: Foundry VTT Version 14 is now recommended on The Forge!
+                              - link "r/ForgeVTT - Foundry VTT Version 14 is now recommended on The Forge!" [ref=f118e2135] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/ForgeVTT/comments/1v8api5/foundry_vtt_version_14_is_now_recommended_on_the/
+                                - img "r/ForgeVTT - Foundry VTT Version 14 is now recommended on The Forge!" [ref=f118e2136]
+                            - generic [ref=f118e2138]:
+                              - generic [ref=f118e2139]: "24"
+                              - text: upvotes
+                          - separator [ref=f118e2140]
+                      - listitem [ref=f118e2141]:
+                        - generic [ref=f118e2142]:
+                          - generic [ref=f118e2143]:
+                            - link "Foundry Issues?" [ref=f118e2144] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/FoundryVTT/comments/1sh0bh2/foundry_issues/
+                            - generic [ref=f118e2146]:
+                              - generic [ref=f118e2147]:
+                                - generic [ref=f118e2150]:
+                                  - link "r/FoundryVTT" [ref=f118e2151] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/FoundryVTT/
+                                  - generic [aria-hidden] [ref=f118e2156]: •
+                                  - time [ref=f118e2158]: 6mo ago
+                                - link [ref=f118e2160] [cursor=pointer]:
+                                  - /url: /r/FoundryVTT/comments/1sh0bh2/foundry_issues/
+                                  - heading "List item post - Foundry Issues?" [level=3] [ref=f118e2163]: Foundry Issues?
+                              - link "r/FoundryVTT - Foundry Issues?" [ref=f118e2166] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/FoundryVTT/comments/1sh0bh2/foundry_issues/
+                                - img "r/FoundryVTT - Foundry Issues?" [ref=f118e2167]
+                            - generic [ref=f118e2169]:
+                              - generic [ref=f118e2170]: "3"
+                              - text: upvotes ·
+                              - generic [ref=f118e2171]: "6"
+                              - text: comments
+                          - separator [ref=f118e2172]
+                      - listitem [ref=f118e2173]:
+                        - generic [ref=f118e2174]:
+                          - generic [ref=f118e2175]:
+                            - link "everybody suddenly technical" [ref=f118e2176] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/OpenAI/comments/1tp5b77/everybody_suddenly_technical/
+                            - generic [ref=f118e2178]:
+                              - generic [ref=f118e2179]:
+                                - generic [ref=f118e2182]:
+                                  - link "r/OpenAI" [ref=f118e2183] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/OpenAI/
+                                  - generic [aria-hidden] [ref=f118e2188]: •
+                                  - time [ref=f118e2190]: 5mo ago
+                                - link [ref=f118e2192] [cursor=pointer]:
+                                  - /url: /r/OpenAI/comments/1tp5b77/everybody_suddenly_technical/
+                                  - heading "List item post - everybody suddenly technical" [level=3] [ref=f118e2195]: everybody suddenly technical
+                              - link "r/OpenAI - everybody suddenly technical" [ref=f118e2198] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/OpenAI/comments/1tp5b77/everybody_suddenly_technical/
+                                - img "r/OpenAI - everybody suddenly technical" [ref=f118e2199]
+                            - generic [ref=f118e2201]:
+                              - generic [ref=f118e2202]: "858"
+                              - text: upvotes ·
+                              - generic [ref=f118e2203]: "45"
+                              - text: comments
+                          - separator [ref=f118e2204]
+                      - listitem [ref=f118e2205]:
+                        - generic [ref=f118e2207]:
+                          - link "Can we please stop hiring competent, enthusiastic scientists, and place them under incompetent, insecure managers?" [ref=f118e2208] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/biotech/comments/1wv44gg/can_we_please_stop_hiring_competent_enthusiastic/
+                          - generic [ref=f118e2211]:
+                            - generic [ref=f118e2214]:
+                              - link "r/biotech" [ref=f118e2215] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/biotech/
+                              - generic [aria-hidden] [ref=f118e2220]: •
+                              - time [ref=f118e2222]: 14d ago
+                            - link [ref=f118e2224] [cursor=pointer]:
+                              - /url: /r/biotech/comments/1wv44gg/can_we_please_stop_hiring_competent_enthusiastic/
+                              - heading "List item post - Can we please stop hiring competent, enthusiastic scientist..." [level=3] [ref=f118e2227]: Can we please stop hiring competent, enthusiastic scientists, and place them under incompetent, insecure managers?
+                          - generic [ref=f118e2229]:
+                            - generic [ref=f118e2230]: "425"
+                            - text: upvotes ·
+                            - generic [ref=f118e2231]: "66"
+                            - text: comments
+                  - generic [ref=f118e2232]:
+                    - heading "View Post in" [level=2] [ref=f118e2234]
+                    - generic [ref=f118e2236]:
+                      - link "Français" [ref=f118e2238] [cursor=pointer]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/foundrys_api_changes_are_strangling_its_own/?tl=fr
+                      - link "Português (Brasil)" [ref=f118e2240] [cursor=pointer]:
+                        - /url: https://www.reddit.com/r/FoundryVTT/comments/1wk6be3/foundrys_api_changes_are_strangling_its_own/?tl=pt-br
+                      - group [ref=f118e2241]:
+                        - generic "See more" [ref=f118e2242] [cursor=pointer]
+                  - complementary "Community information" [ref=f118e2247]:
+                    - generic [ref=f118e2249]:
+                      - heading "Community Info Section" [level=1] [ref=f118e2250]
+                      - generic [ref=f118e2251]:
+                        - link "r/FoundryVTT" [ref=f118e2253] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/
+                        - button "Join" [ref=f118e2258] [cursor=pointer]
+                      - generic [ref=f118e2259]:
+                        - generic [ref=f118e2260]: FoundryVTT
+                        - generic [ref=f118e2262]: Discussion about the virtual tabletop software FoundryVTT. This is an UNOFFICIAL, authorized, Fan-operated subreddit. For Official Foundry support, join the Discord (link below).
+                        - button "Show more" [ref=f118e2263] [cursor=pointer]
+                        - generic: Public
+              - list [ref=f118e2272]:
+                - listitem [ref=f118e2273]:
+                  - link "Home" [ref=f118e2275] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f118e2276]:
+                  - link "Popular" [ref=f118e2278] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f118e2279]:
+                  - link "News" [ref=f118e2281] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f118e2282]:
+                  - link "Explore" [ref=f118e2284] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f118e2285]:
+                  - link "Best of Reddit" [ref=f118e2287] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f118e2288]:
+                  - link "Best of Reddit in Portuguese" [ref=f118e2290] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f118e2291]:
+                  - link "Best of Reddit in German" [ref=f118e2293] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f118e2294]:
+                  - link "Reddit Rules" [ref=f118e2296] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f118e2297]:
+                  - link "Privacy Policy" [ref=f118e2299] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f118e2300]:
+                  - link "User Agreement" [ref=f118e2302] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f118e2303]:
+                  - link "Accessibility" [ref=f118e2305] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f118e2306]:
+                  - link "Reddit, Inc. © 2026. All rights reserved." [ref=f118e2307] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f118e2310]:
+          - paragraph [ref=f118e2311]: Join the most real place on the internet
+          - generic [ref=f118e2313]:
+            - generic [ref=f118e2316]:
+              - iframe [ref=f118e2321]:
+                - button "Continue with Google. Opens in new tab" [ref=f119e3] [cursor=pointer]:
+                  - generic [ref=f119e5]: Continue with Google
+              - generic [ref=f118e2323] [cursor=pointer]:
+                - generic [ref=f118e2324]: Continue with Apple
+                - button "Sign in with Apple" [ref=f118e2330]:
+                  - generic [ref=f118e2331]:
+                    - img:
+                      - generic:
+                        - img:
+                          - generic:  Sign in with Apple
+            - link "Continue with Phone Number" [ref=f118e2336] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - link "Continue with Email" [ref=f118e2345] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+          - paragraph [ref=f118e2352]:
+            - text: By continuing, you agree to our
+            - link "User Agreement" [ref=f118e2353] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: and acknowledge that you understand the
+            - link "Privacy Policy" [ref=f118e2354] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: .

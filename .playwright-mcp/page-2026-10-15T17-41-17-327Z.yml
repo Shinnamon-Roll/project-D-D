@@ -1,0 +1,94 @@
+- generic [active] [ref=f176e1]:
+  - generic [ref=f176e2]:
+    - banner [ref=f176e3]:
+      - generic [ref=f176e6]:
+        - generic [ref=f176e11]:
+          - link [ref=f176e14] [cursor=pointer]:
+            - /url: https://2minutetabletop.com
+            - img "2-Minute Tabletop" [ref=f176e16]
+          - search [ref=f176e20]:
+            - button [ref=f176e22] [cursor=pointer]
+            - searchbox "Search" [ref=f176e28]
+        - generic [ref=f176e33]:
+          - list [ref=f176e41]:
+            - listitem [ref=f176e42] [cursor=pointer]:
+              - link "Home" [ref=f176e43]:
+                - /url: https://2minutetabletop.com
+            - listitem [ref=f176e48] [cursor=pointer]:
+              - link "Maps & Assets" [ref=f176e49]:
+                - /url: https://2minutetabletop.com/gallery/
+            - listitem [ref=f176e54] [cursor=pointer]:
+              - link "Articles" [ref=f176e55]:
+                - /url: https://2minutetabletop.com/product-category/handbooks/
+            - listitem [ref=f176e60] [cursor=pointer]:
+              - link "Tokens" [ref=f176e61]:
+                - /url: https://tools.2minutetabletop.com/
+            - listitem [ref=f176e66] [cursor=pointer]:
+              - link "Dungeondraft" [ref=f176e67]:
+                - /url: https://2minutetabletop.com/dungeondraft/
+            - listitem [ref=f176e72] [cursor=pointer]:
+              - link "Gifts" [ref=f176e73]:
+                - /url: https://2minutetabletop.com/gm-gifts-guide/
+            - listitem [ref=f176e78] [cursor=pointer]:
+              - link "About" [ref=f176e79]:
+                - /url: https://2minutetabletop.com/about/
+            - listitem [ref=f176e84] [cursor=pointer]:
+              - link "Account" [ref=f176e85]:
+                - /url: https://2minutetabletop.com/my-account/
+          - generic [ref=f176e93] [cursor=pointer]
+    - generic [ref=f176e102]:
+      - paragraph [ref=f176e103]
+      - generic [ref=f176e106]:
+        - img [ref=f176e107] [cursor=pointer]
+        - textbox "Search Input" [ref=f176e110]:
+          - /placeholder: Search
+      - paragraph [ref=f176e111]
+      - paragraph [ref=f176e113]
+      - paragraph [ref=f176e114]
+    - contentinfo [ref=f176e116]:
+      - generic [ref=f176e372]:
+        - generic [ref=f176e374]:
+          - generic [ref=f176e376]:
+            - paragraph [ref=f176e378]:
+              - link "About" [ref=f176e379] [cursor=pointer]:
+                - /url: https://2minutetabletop.com/about/
+            - paragraph [ref=f176e381]:
+              - link "Contact" [ref=f176e383] [cursor=pointer]:
+                - /url: https://2minutetabletop.com/contact/
+            - paragraph [ref=f176e385]:
+              - link "Frequently Asked Questions" [ref=f176e386] [cursor=pointer]:
+                - /url: https://2minutetabletop.com/faq/
+          - generic [ref=f176e388]:
+            - paragraph [ref=f176e390]:
+              - link "GDPR Privacy Policy" [ref=f176e391] [cursor=pointer]:
+                - /url: https://2minutetabletop.com/legal/gdpr-privacy-policy/
+            - paragraph [ref=f176e393]:
+              - link "Privacy policy" [ref=f176e395] [cursor=pointer]:
+                - /url: https://2minutetabletop.com/legal/privacy-policy/
+            - paragraph [ref=f176e397]:
+              - link "Terms and Conditions" [ref=f176e399] [cursor=pointer]:
+                - /url: https://2minutetabletop.com/legal/terms-and-conditions/
+          - generic [ref=f176e401]:
+            - generic [ref=f176e403]:
+              - link [ref=f176e405] [cursor=pointer]:
+                - /url: https://www.patreon.com/2minutetabletop
+              - link [ref=f176e410] [cursor=pointer]:
+                - /url: https://www.instagram.com/2minutetabletop/
+              - link [ref=f176e415] [cursor=pointer]:
+                - /url: https://facebook.com/2minutetabletop/
+              - link [ref=f176e420] [cursor=pointer]:
+                - /url: https://twitter.com/2minutetabletop
+              - link [ref=f176e425] [cursor=pointer]:
+                - /url: https://youtube.com/2minutetabletop
+              - link [ref=f176e430] [cursor=pointer]:
+                - /url: https://www.pinterest.com/2minutetabletop/
+              - link [ref=f176e435] [cursor=pointer]:
+                - /url: https://www.tumblr.com/blog/2minutetabletop
+            - paragraph [ref=f176e440]:
+              - text: We improve our products and advertising by using Microsoft Clarity to see how you use our website. By using our site, you agree that we and Microsoft can collect and use this data. Our
+              - link "Privacy Policy" [ref=f176e441] [cursor=pointer]:
+                - /url: https://2minutetabletop.com/legal/privacy-policy/
+              - text: has more details.
+            - button "Manage Cookie Preferences" [ref=f176e444] [cursor=pointer]
+        - paragraph [ref=f176e447]: Copyright 2026 2-Minute Tabletop, all rights reserved.
+  - text: 

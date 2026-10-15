@@ -1,0 +1,453 @@
+- generic [active] [ref=f125e1]:
+  - link "Skip to main content" [ref=f125e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f125e6]:
+    - generic:
+      - generic: VTT prep takes hours - Reddit Search!
+      - banner [ref=f125e10]:
+        - navigation [ref=f125e11]:
+          - link "Home" [ref=f125e15] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - search [ref=f125e34]:
+            - generic [ref=f125e36]:
+              - generic "Remove r/DMAcademy filter and expand search to all of Reddit" [ref=f125e42] [cursor=pointer]:
+                - button [pressed] [ref=f125e43]:
+                  - generic [aria-hidden] [ref=f125e47]: r/DMAcademy
+              - textbox "Remove r/DMAcademy filter and expand search to all of Reddit Clear search" [ref=f125e53]:
+                - /placeholder: Search in ⁨r/DMAcademy⁩
+                - text: VTT prep takes hours
+              - button "Clear search" [ref=f125e55] [cursor=pointer]
+          - generic [ref=f125e61]:
+            - link "Sign Up" [ref=f125e67] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Log In" [ref=f125e73] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Expand user menu" [ref=f125e80] [cursor=pointer]
+      - generic "VTT prep takes hours - Reddit Search!"
+      - generic [ref=f125e89]:
+        - generic [ref=f125e90]:
+          - generic [ref=f125e93]:
+            - generic [ref=f125e94]:
+              - generic [ref=f125e97]:
+                - tablist [ref=f125e98]:
+                  - tab [selected] [ref=f125e99]:
+                    - link "Posts" [ref=f125e100] [cursor=pointer]:
+                      - /url: /r/DMAcademy/search/?q=VTT+prep+takes+hours&type=posts&iId=ec739681-45db-4430-929c-aa38f8dced02
+                  - tab [ref=f125e106]:
+                    - link "Comments" [ref=f125e107] [cursor=pointer]:
+                      - /url: /r/DMAcademy/search/?q=VTT+prep+takes+hours&type=comments&iId=ec739681-45db-4430-929c-aa38f8dced02
+                  - tab [ref=f125e113]:
+                    - link "Media" [ref=f125e114] [cursor=pointer]:
+                      - /url: /r/DMAcademy/search/?q=VTT+prep+takes+hours&type=media&iId=ec739681-45db-4430-929c-aa38f8dced02
+                - button "forward" [ref=f125e121] [cursor=pointer]
+                - button "back" [ref=f125e128] [cursor=pointer]
+              - generic:
+                - generic:
+                  - tabpanel
+            - generic [ref=f125e135]:
+              - button "Top" [ref=f125e139] [cursor=pointer]
+              - button "All time" [ref=f125e148] [cursor=pointer]
+          - generic [ref=f125e155]:
+            - generic:
+              - generic:
+                - link "Skip to Sign up" [ref=f125e156] [cursor=pointer]:
+                  - /url: "#left-sidebar-container"
+                - link "Skip to Right Sidebar" [ref=f125e157] [cursor=pointer]:
+                  - /url: "#right-sidebar-container"
+          - generic [ref=f125e158]:
+            - main [ref=f125e159]:
+              - generic [ref=f125e160]:
+                - paragraph [ref=f125e163]:
+                  - text: Show results from
+                  - link "all of Reddit" [ref=f125e165] [cursor=pointer]:
+                    - /url: /search/?q=VTT+prep+takes+hours
+                - generic [ref=f125e171]:
+                  - generic:
+                    - heading "The REAL Matt Mercer Effect" [level=2]:
+                      - link "The REAL Matt Mercer Effect" [ref=f125e172] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/bj8rky/the_real_matt_mercer_effect/
+                  - generic [ref=f125e174]:
+                    - generic [ref=f125e177]:
+                      - link "r/DMAcademy" [ref=f125e180] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f125e185]: ·
+                      - time [ref=f125e187]: 8y ago
+                    - link "The REAL Matt Mercer Effect" [ref=f125e188] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/bj8rky/the_real_matt_mercer_effect/
+                    - generic [ref=f125e189]:
+                      - generic [ref=f125e190]:
+                        - generic [ref=f125e191]: 8K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f125e192]:
+                        - generic [ref=f125e193]: "392"
+                        - text: comments
+                - separator [ref=f125e194]
+                - generic [ref=f125e197]:
+                  - generic:
+                    - heading "Why PCs Don't Care About The NPC You Put Hours Into; Why They Love That Random Goatherd You Made Up On The Spot; Why They Ignore Your Plot; And Why They Do Weird Things" [level=2]:
+                      - link "Why PCs Don't Care About The NPC You Put Hours Into; Why They Love That Random Goatherd You Made Up On The Spot; Why They Ignore Your Plot; And Why They Do Weird Things" [ref=f125e198] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/jwpkgu/why_pcs_dont_care_about_the_npc_you_put_hours/
+                  - generic [ref=f125e200]:
+                    - generic [ref=f125e203]:
+                      - link "r/DMAcademy" [ref=f125e206] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f125e211]: ·
+                      - time [ref=f125e213]: 6y ago
+                    - link "Why PCs Don't Care About The NPC You Put Hours Into; Why They Love That Random Goatherd You Made Up On The Spot; Why They Ignore Your Plot; And Why They Do Weird Things" [ref=f125e214] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/jwpkgu/why_pcs_dont_care_about_the_npc_you_put_hours/
+                    - generic [ref=f125e215]:
+                      - generic [ref=f125e216]:
+                        - generic [ref=f125e217]: 6.5K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f125e218]:
+                        - generic [ref=f125e219]: "289"
+                        - text: comments
+                - separator [ref=f125e220]
+                - generic [ref=f125e223]:
+                  - generic:
+                    - heading "Japanese Storytelling Saved My Campaign" [level=2]:
+                      - link "Japanese Storytelling Saved My Campaign" [ref=f125e224] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/gnezcn/japanese_storytelling_saved_my_campaign/
+                  - generic [ref=f125e226]:
+                    - generic [ref=f125e229]:
+                      - link "r/DMAcademy" [ref=f125e232] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f125e237]: ·
+                      - time [ref=f125e239]: 6y ago
+                    - link "Japanese Storytelling Saved My Campaign" [ref=f125e240] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/gnezcn/japanese_storytelling_saved_my_campaign/
+                    - generic [ref=f125e241]:
+                      - generic [ref=f125e242]:
+                        - generic [ref=f125e243]: 6.3K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f125e244]:
+                        - generic [ref=f125e245]: "304"
+                        - text: comments
+                - separator [ref=f125e246]
+                - generic [ref=f125e249]:
+                  - generic:
+                    - heading "I was a nervous new DM and no amount of prep fixed it, but once I started doing a \"Two Page Notes\" method everything started to click" [level=2]:
+                      - link "I was a nervous new DM and no amount of prep fixed it, but once I started doing a \"Two Page Notes\" method everything started to click" [ref=f125e250] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/furz47/i_was_a_nervous_new_dm_and_no_amount_of_prep/
+                  - generic [ref=f125e252]:
+                    - generic [ref=f125e255]:
+                      - link "r/DMAcademy" [ref=f125e258] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f125e263]: ·
+                      - time [ref=f125e265]: 7y ago
+                    - link "I was a nervous new DM and no amount of prep fixed it, but once I started doing a \"Two Page Notes\" method everything started to click" [ref=f125e266] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/furz47/i_was_a_nervous_new_dm_and_no_amount_of_prep/
+                    - generic [ref=f125e267]:
+                      - generic [ref=f125e268]:
+                        - generic [ref=f125e269]: 5.5K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f125e270]:
+                        - generic [ref=f125e271]: "120"
+                        - text: comments
+                - separator [ref=f125e272]
+                - generic [ref=f125e275]:
+                  - generic:
+                    - 'heading "The Witcher Effect: A Defense Against Murderhobos And an Additional to Any Game" [level=2]':
+                      - 'link "The Witcher Effect: A Defense Against Murderhobos And an Additional to Any Game" [ref=f125e276] [cursor=pointer]':
+                        - /url: /r/DMAcademy/comments/eknpms/the_witcher_effect_a_defense_against_murderhobos/
+                  - generic [ref=f125e278]:
+                    - generic [ref=f125e281]:
+                      - link "r/DMAcademy" [ref=f125e284] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f125e289]: ·
+                      - time [ref=f125e291]: 7y ago
+                    - 'link "The Witcher Effect: A Defense Against Murderhobos And an Additional to Any Game" [ref=f125e292] [cursor=pointer]':
+                      - /url: /r/DMAcademy/comments/eknpms/the_witcher_effect_a_defense_against_murderhobos/
+                    - generic [ref=f125e293]:
+                      - generic [ref=f125e294]:
+                        - generic [ref=f125e295]: 5.2K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f125e296]:
+                        - generic [ref=f125e297]: "245"
+                        - text: comments
+                - separator [ref=f125e298]
+                - generic [ref=f125e301]:
+                  - generic:
+                    - heading "When creating puzzles, try to follow the rule of three answers" [level=2]:
+                      - link "When creating puzzles, try to follow the rule of three answers" [ref=f125e302] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/k6fmn8/when_creating_puzzles_try_to_follow_the_rule_of/
+                  - generic [ref=f125e304]:
+                    - generic [ref=f125e307]:
+                      - link "r/DMAcademy" [ref=f125e310] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f125e315]: ·
+                      - time [ref=f125e317]: 6y ago
+                    - link "When creating puzzles, try to follow the rule of three answers" [ref=f125e318] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/k6fmn8/when_creating_puzzles_try_to_follow_the_rule_of/
+                    - generic [ref=f125e319]:
+                      - generic [ref=f125e320]:
+                        - generic [ref=f125e321]: 4.7K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f125e322]:
+                        - generic [ref=f125e323]: "123"
+                        - text: comments
+                - separator [ref=f125e324]
+                - generic [ref=f125e327]:
+                  - generic:
+                    - heading "I don't want to sound like a jerk, but some of you DMs out there need to just stand your damn ground." [level=2]:
+                      - link "I don't want to sound like a jerk, but some of you DMs out there need to just stand your damn ground." [ref=f125e328] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/c8yok8/i_dont_want_to_sound_like_a_jerk_but_some_of_you/
+                  - generic [ref=f125e330]:
+                    - generic [ref=f125e333]:
+                      - link "r/DMAcademy" [ref=f125e336] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f125e341]: ·
+                      - time [ref=f125e343]: 7y ago
+                    - link "I don't want to sound like a jerk, but some of you DMs out there need to just stand your damn ground." [ref=f125e344] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/c8yok8/i_dont_want_to_sound_like_a_jerk_but_some_of_you/
+                    - generic [ref=f125e345]:
+                      - generic [ref=f125e346]:
+                        - generic [ref=f125e347]: 4.5K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f125e348]:
+                        - generic [ref=f125e349]: "318"
+                        - text: comments
+                - separator [ref=f125e350]
+                - generic [ref=f125e353]:
+                  - generic:
+                    - heading "Not fudging rolls does not make you a better DM" [level=2]:
+                      - link "Not fudging rolls does not make you a better DM" [ref=f125e354] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/f5e02a/not_fudging_rolls_does_not_make_you_a_better_dm/
+                  - generic [ref=f125e356]:
+                    - generic [ref=f125e359]:
+                      - link "r/DMAcademy" [ref=f125e361] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f125e366]: ·
+                      - time [ref=f125e368]: 7y ago
+                    - link "Not fudging rolls does not make you a better DM" [ref=f125e369] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/f5e02a/not_fudging_rolls_does_not_make_you_a_better_dm/
+                    - generic [ref=f125e370]:
+                      - generic [ref=f125e371]:
+                        - generic [ref=f125e372]: 4.2K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f125e373]:
+                        - generic [ref=f125e374]: "695"
+                        - text: comments
+                - separator [ref=f125e375]
+                - generic [ref=f125e378]:
+                  - generic:
+                    - 'heading "Tip: Don''t tell your players what might have been" [level=2]':
+                      - 'link "Tip: Don''t tell your players what might have been" [ref=f125e379] [cursor=pointer]':
+                        - /url: /r/DMAcademy/comments/kux5ok/tip_dont_tell_your_players_what_might_have_been/
+                  - generic [ref=f125e381]:
+                    - generic [ref=f125e384]:
+                      - link "r/DMAcademy" [ref=f125e386] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f125e391]: ·
+                      - time [ref=f125e393]: 6y ago
+                    - 'link "Tip: Don''t tell your players what might have been" [ref=f125e394] [cursor=pointer]':
+                      - /url: /r/DMAcademy/comments/kux5ok/tip_dont_tell_your_players_what_might_have_been/
+                    - generic [ref=f125e395]:
+                      - generic [ref=f125e396]:
+                        - generic [ref=f125e397]: 4.2K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f125e398]:
+                        - generic [ref=f125e399]: "199"
+                        - text: comments
+                - separator [ref=f125e400]
+                - generic [ref=f125e403]:
+                  - generic:
+                    - 'heading "Running a level 1-20 six-player campaign… weekly for 4 years! What I learned: AMA!" [level=2]':
+                      - 'link "Running a level 1-20 six-player campaign… weekly for 4 years! What I learned: AMA!" [ref=f125e404] [cursor=pointer]':
+                        - /url: /r/DMAcademy/comments/i6l4w3/running_a_level_120_sixplayer_campaign_weekly_for/
+                  - generic [ref=f125e406]:
+                    - generic [ref=f125e409]:
+                      - link "r/DMAcademy" [ref=f125e411] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f125e416]: ·
+                      - time [ref=f125e418]: 6y ago
+                    - 'link "Running a level 1-20 six-player campaign… weekly for 4 years! What I learned: AMA!" [ref=f125e419] [cursor=pointer]':
+                      - /url: /r/DMAcademy/comments/i6l4w3/running_a_level_120_sixplayer_campaign_weekly_for/
+                    - generic [ref=f125e420]:
+                      - generic [ref=f125e421]:
+                        - generic [ref=f125e422]: 4.1K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f125e423]:
+                        - generic [ref=f125e424]: "156"
+                        - text: comments
+                - separator [ref=f125e425]
+                - generic [ref=f125e428]:
+                  - generic:
+                    - heading "My nine year old DM'd tonight and it was awesome." [level=2]:
+                      - link "My nine year old DM'd tonight and it was awesome." [ref=f125e429] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/gp01lr/my_nine_year_old_dmd_tonight_and_it_was_awesome/
+                  - generic [ref=f125e431]:
+                    - generic [ref=f125e434]:
+                      - link "r/DMAcademy" [ref=f125e436] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f125e441]: ·
+                      - time [ref=f125e443]: 6y ago
+                    - link "My nine year old DM'd tonight and it was awesome." [ref=f125e444] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/gp01lr/my_nine_year_old_dmd_tonight_and_it_was_awesome/
+                    - generic [ref=f125e445]:
+                      - generic [ref=f125e446]:
+                        - generic [ref=f125e447]: 4K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f125e448]:
+                        - generic [ref=f125e449]: "116"
+                        - text: comments
+                - separator [ref=f125e450]
+                - generic [ref=f125e453]:
+                  - generic:
+                    - 'heading "Reminder to all DMs: Just because the players didn''t take much damage doesn''t mean the fight was easy" [level=2]':
+                      - 'link "Reminder to all DMs: Just because the players didn''t take much damage doesn''t mean the fight was easy" [ref=f125e454] [cursor=pointer]':
+                        - /url: /r/DMAcademy/comments/fjmg9s/reminder_to_all_dms_just_because_the_players/
+                  - generic [ref=f125e456]:
+                    - generic [ref=f125e459]:
+                      - link "r/DMAcademy" [ref=f125e461] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f125e466]: ·
+                      - time [ref=f125e468]: 7y ago
+                    - 'link "Reminder to all DMs: Just because the players didn''t take much damage doesn''t mean the fight was easy" [ref=f125e469] [cursor=pointer]':
+                      - /url: /r/DMAcademy/comments/fjmg9s/reminder_to_all_dms_just_because_the_players/
+                    - generic [ref=f125e470]:
+                      - generic [ref=f125e471]:
+                        - generic [ref=f125e472]: 3.9K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f125e473]:
+                        - generic [ref=f125e474]: "97"
+                        - text: comments
+                - separator [ref=f125e475]
+                - generic [ref=f125e478]:
+                  - generic:
+                    - heading "Need fantastical-sounding names but don't want to sound like Tolkien? Google Translate is the answer" [level=2]:
+                      - link "Need fantastical-sounding names but don't want to sound like Tolkien? Google Translate is the answer" [ref=f125e479] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/l2ncw0/need_fantasticalsounding_names_but_dont_want_to/
+                  - generic [ref=f125e481]:
+                    - generic [ref=f125e484]:
+                      - link "r/DMAcademy" [ref=f125e486] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f125e491]: ·
+                      - time [ref=f125e493]: 6y ago
+                    - link "Need fantastical-sounding names but don't want to sound like Tolkien? Google Translate is the answer" [ref=f125e494] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/l2ncw0/need_fantasticalsounding_names_but_dont_want_to/
+                    - generic [ref=f125e495]:
+                      - generic [ref=f125e496]:
+                        - generic [ref=f125e497]: 3.8K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f125e498]:
+                        - generic [ref=f125e499]: "230"
+                        - text: comments
+                - separator [ref=f125e500]
+                - generic [ref=f125e503]:
+                  - generic:
+                    - heading "Hate travel? Find your world is flat? Want to avoid fantasy cliches? Try a Single City campaign." [level=2]:
+                      - link "Hate travel? Find your world is flat? Want to avoid fantasy cliches? Try a Single City campaign." [ref=f125e504] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/hg0cfd/hate_travel_find_your_world_is_flat_want_to_avoid/
+                  - generic [ref=f125e506]:
+                    - generic [ref=f125e509]:
+                      - link "r/DMAcademy" [ref=f125e511] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f125e516]: ·
+                      - time [ref=f125e518]: 6y ago
+                    - link "Hate travel? Find your world is flat? Want to avoid fantasy cliches? Try a Single City campaign." [ref=f125e519] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/hg0cfd/hate_travel_find_your_world_is_flat_want_to_avoid/
+                    - generic [ref=f125e520]:
+                      - generic [ref=f125e521]:
+                        - generic [ref=f125e522]: 3.7K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f125e523]:
+                        - generic [ref=f125e524]: "194"
+                        - text: comments
+                - separator [ref=f125e525]
+            - generic [ref=f125e529]:
+              - generic [ref=f125e534]:
+                - heading "Community Info Section" [level=1] [ref=f125e535]
+                - generic [ref=f125e536]:
+                  - generic [ref=f125e537]: DMAcademy
+                  - generic [ref=f125e539]: /r/DMAcademy is a subreddit for Dungeons & Dragons Dungeon Masters to ask questions - new and experienced, all are welcome!
+                  - generic [ref=f125e540]:
+                    - generic [ref=f125e541]: Created Jun 23, 2016
+                    - generic [ref=f125e545]: Public
+                - generic [ref=f125e549]:
+                  - generic [ref=f125e550]:
+                    - strong [ref=f125e552]:
+                      - generic: 172K
+                    - generic [ref=f125e553]: Weekly visitors
+                  - generic [ref=f125e554]:
+                    - strong [ref=f125e556]:
+                      - generic: 6K
+                    - generic [ref=f125e557]: Weekly contributions
+              - list [ref=f125e559]:
+                - listitem [ref=f125e560]:
+                  - link "Home" [ref=f125e562] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f125e563]:
+                  - link "Popular" [ref=f125e565] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f125e566]:
+                  - link "News" [ref=f125e568] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f125e569]:
+                  - link "Explore" [ref=f125e571] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f125e572]:
+                  - link "Best of Reddit" [ref=f125e574] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f125e575]:
+                  - link "Best of Reddit in Portuguese" [ref=f125e577] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f125e578]:
+                  - link "Best of Reddit in German" [ref=f125e580] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f125e581]:
+                  - link "Reddit Rules" [ref=f125e583] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f125e584]:
+                  - link "Privacy Policy" [ref=f125e586] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f125e587]:
+                  - link "User Agreement" [ref=f125e589] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f125e590]:
+                  - link "Accessibility" [ref=f125e592] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f125e593]:
+                  - link "Reddit, Inc. © 2026. All rights reserved." [ref=f125e594] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f125e597]:
+          - paragraph [ref=f125e598]: Join the most real place on the internet
+          - generic [ref=f125e600]:
+            - generic [ref=f125e603]:
+              - iframe [ref=f125e608]:
+                - button "Continue with Google. Opens in new tab" [ref=f127e3] [cursor=pointer]:
+                  - generic [ref=f127e5]: Continue with Google
+              - generic [ref=f125e610] [cursor=pointer]:
+                - generic [ref=f125e611]: Continue with Apple
+                - button "Sign in with Apple" [ref=f125e617]:
+                  - generic [ref=f125e618]:
+                    - img:
+                      - generic:
+                        - img:
+                          - generic:  Sign in with Apple
+            - link "Continue with Phone Number" [ref=f125e623] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - link "Continue with Email" [ref=f125e632] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+          - paragraph [ref=f125e639]:
+            - text: By continuing, you agree to our
+            - link "User Agreement" [ref=f125e640] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: and acknowledge that you understand the
+            - link "Privacy Policy" [ref=f125e641] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: .

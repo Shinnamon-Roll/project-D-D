@@ -1,0 +1,1348 @@
+- generic [active] [ref=f27e1]:
+  - link "Skip to main content" [ref=f27e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f27e6]:
+    - generic:
+      - generic: "I just want a program where I can put in my map and drag stuff around. Why does it have to be so hard : r/DMAcademy"
+      - banner [ref=f27e10]:
+        - navigation [ref=f27e11]:
+          - link "Home" [ref=f27e15] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - search [ref=f27e34]:
+            - generic [ref=f27e36]:
+              - generic "Remove r/DMAcademy filter and expand search to all of Reddit" [ref=f27e42] [cursor=pointer]:
+                - button [pressed] [ref=f27e43]:
+                  - generic [aria-hidden] [ref=f27e47]: r/DMAcademy
+              - textbox "Remove r/DMAcademy filter and expand search to all of Reddit" [ref=f27e53]:
+                - /placeholder: Search in ⁨r/DMAcademy⁩
+          - generic [ref=f27e54]:
+            - link "Sign Up" [ref=f27e60] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Log In" [ref=f27e66] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Expand user menu" [ref=f27e73] [cursor=pointer]
+      - generic [ref=f27e79]:
+        - generic [ref=f27e80]:
+          - generic [ref=f27e81]:
+            - generic:
+              - generic:
+                - link "Skip to Sign up" [ref=f27e82] [cursor=pointer]:
+                  - /url: "#left-sidebar-container"
+                - link "Skip to Right Sidebar" [ref=f27e83] [cursor=pointer]:
+                  - /url: "#right-sidebar-container"
+          - generic [ref=f27e84]:
+            - main [ref=f27e85]:
+              - 'generic "I just want a program where I can put in my map and drag stuff around. Why does it have to be so hard : r/DMAcademy"'
+              - generic [ref=f27e86]:
+                - generic [ref=f27e87]:
+                  - generic [ref=f27e88]:
+                    - button "Back" [ref=f27e90] [cursor=pointer]
+                    - link "Go to DMAcademy" [ref=f27e98] [cursor=pointer]:
+                      - /url: https://www.reddit.com/r/DMAcademy/
+                    - group [ref=f27e103]:
+                      - generic [ref=f27e104]:
+                        - link "r/DMAcademy" [ref=f27e108] [cursor=pointer]:
+                          - /url: https://www.reddit.com/r/DMAcademy/
+                        - generic [aria-hidden] [ref=f27e109]: •
+                        - time [ref=f27e111]: 5y ago
+                      - 'link "Author: Logan_Maddox" [ref=f27e117] [cursor=pointer]':
+                        - /url: https://www.reddit.com/user/Logan_Maddox/
+                        - generic [ref=f27e118]: u/Logan_Maddox
+                  - generic [ref=f27e120]:
+                    - img "Archived post" [ref=f27e124]
+                    - button "Open user actions" [ref=f27e128] [cursor=pointer]
+                - generic [ref=f27e134]:
+                  - 'heading "Post Title: I just want a program where I can put in my map and drag stuff around. Why does it have to be so hard" [level=1] [ref=f27e135]': I just want a program where I can put in my map and drag stuff around. Why does it have to be so hard
+                  - 'link "Flair: Need Advice" [ref=f27e138] [cursor=pointer]':
+                    - /url: /r/DMAcademy/?f=flair_name%3A%22Need%20Advice%22
+                    - 'generic "Flair: Need Advice" [ref=f27e140]': Need Advice
+                - generic [ref=f27e143]:
+                  - generic [ref=f27e144]:
+                    - paragraph [ref=f27e145]:
+                      - text: Hi, sorry if I sound frustrated but this is something that really gets my goat. So I'm about to run, this friday, a game of Alien RPG. The community is amazing and I found some rad maps. However, I don't much care for tactics in RPG - much respect to everyone out there who does, but it's not how me or my group likes to play. Alien, however, has got this cool system in which distance is tracked in Zones, so the guy being 3 or 4 meters away doesn't really matter, just that he's on the same room as you and close enough to touch you or not. Because of that, the map I want to use end up looking
+                      - link "real simple" [ref=f27e146] [cursor=pointer]:
+                        - /url: https://lh6.googleusercontent.com/JiSL7cH6mxjSfHpqXaxJBSnbwb2--5_bYwxstDRTa-PRglaGSHGC6RTQsJf8pzISbXjUAw8lcyVlDhG5NXTQA4Q5nOYNdkWd7LCMQmTGj9O2ZqJ45F9eaEa0gW7SmYMTFw=w1280
+                      - text: .
+                    - paragraph [ref=f27e147]: "Here's what I wanted: a program that allows me to put in things to represent the characters (could be colored balls for all I care) in such a way that I can drag them around whichever way I want and put them in the same room. I don't need my players on the same site as me (they all already have the map), I don't need the program tracking initiative or HP or whatever, I just need to drag around pictures in the foreground. That's it."
+                    - paragraph [ref=f27e148]: 3D Virtual Tabletop comes real close to this, but it limits me to 2 maps, when I need about 5 because it's a 5 story building that the players will go on walking around, and I feel like there must be an easier way to do this than erasing the maps as I go.
+                    - paragraph [ref=f27e149]: Someone said Google Slides in another thread, but the maps I have refuse to be uploaded to google, and I don't know why, it just says "there was a problem" or whatever.
+                    - paragraph [ref=f27e150]: I feel like this is a very simple functionality. Do I need to get Photoshop to do it? Because I know some people who can lend it to me, but I feel like there should be an easier way. Please, suggest anything, I can do with barebones interface or whatever, but I've already searched around before this game and I cannot seem to find what I'm looking for. Roll20 and adjacents really aren't what I'm looking for.
+                    - paragraph [ref=f27e151]: Thanks in advance!
+                    - paragraph [ref=f27e152]: "EDIT: I'll be using Owlbear Rodeo, thanks everyone who introduced me to all these amazing programs!"
+                  - button "Read more" [ref=f27e153] [cursor=pointer]
+                - generic: Archived post. New comments cannot be posted and votes cannot be cast.
+                - generic "Actions available for this post" [ref=f27e166]:
+                  - generic [ref=f27e169]:
+                    - button "Upvote" [disabled]
+                    - generic [ref=f27e170]: "116"
+                    - button "Downvote" [disabled]
+                  - button "40 Go to comments" [ref=f27e172] [cursor=pointer]:
+                    - generic [ref=f27e173]: "40"
+                    - generic [ref=f27e179]: Go to comments
+                  - button "Share" [ref=f27e183] [cursor=pointer]
+              - generic "Make every idea move faster and further with tools that evolve with you. Get 25% off your first year." [ref=f27e190]:
+                - generic [ref=f27e191]:
+                  - 'link "Advertisement: Make every idea move faster and further with tools that evolve with you. Get 25% off your first year." [ref=f27e192] [cursor=pointer]':
+                    - /url: https://alb.reddit.com/cr?za=b32H5SK_N2TZJ6GxpSgMr34qn9Otc9bvAvgZP-Kf_eyTcxdEFzVRi00A-PD8r1cwTzIxin6KaoaEsFD1esKpmGr_wRiy7p3VWrrUcdVZeiaI2TsrDy6LHu6sUjRjH9iYnm3fReaRKnvFF3bwYbjSaBi01Jfnmv1N8YerraSlRxpMUEFL45R7iUyLUDsqEag0BLBSW1l2FK7DMOYS_o24GmftIylmPcogydGsPVpo6oC4n01lP0RW-NtqAze1JIGSfNpa3M5xYuOgiJ2QZYDsEm3fQMU5C0tp7NcSmt1mE1P_Yua6zqQ9E4lgxMBSgaqLYaIJUCBy_ymjpWu7AMymqg69uatSOv_bEzVArGBZQoKhg08DcbtLGOtsSewTqgORMniSc7VRQ4Eh_mkCcxXFdly7Sd4XT39k6-A1MP8IQIpNuQ7AArMtNJ9PKCPSbxABriR6NUm8axWLp4puLllxBGUapxedTSkhvZMZayZ3vzKWjw3wDXBt8iuoIDY54QQqDc8TKHWa50sLpAKA8zfW4Pa0QpGCEPICpnrswlRPS29NlVsbtYCcsSkcJ4RIYm6VwAuVH6ZATkMm7O2wW7lfzv-_PNQCfwIGXr99A5rU9auodxy1AefUVKepD_qmPlxlY-3oRRzA3KKacvBBwKblSepLL1eDR5nTMEMhgXMYKmZoPA70oAVNETZ0PbJo82ckOwxhKNNPnGuStdEsHA1TStVs146j1kOWtmqt9vIBrbIFzUkqU3b7saJdc47RQITG&zp=vCShJOhhd7a-QXKvs8zRQg4PCGLhhOFJWgAbS7345guhOT1Gn-13g4-UobjKyMF4N2bPGXnPwpPrq2zY1EuFaDO0LKr23x2YRXkhVgKFboHYvpZxEUwWcqMJvPLFd5-6HYkVol_bX6o9ltFQSe0CKFkna03aGmAoVXrxtEQQuW8_4ipKli-6wMEhWZ0eDa1twmcs4xDbq8QR_rN1gdevBdXG9UsVUtYNeEyFhNHy08cOxs2Anb87IbNckxRSb00K8ZbXnNo1dKffZZ5I7Oi8zE-zGbrDjREjPaQj2_-X-DPgOHkvozVzr0w6Tvo5jTC19OMCs90NmKOXFQf_bZ8ykg
+                  - generic [ref=f27e193]:
+                    - generic [ref=f27e194]:
+                      - link "adobe" [ref=f27e197] [cursor=pointer]:
+                        - /url: /user/adobe/
+                        - img "u/adobe avatar" [ref=f27e200]
+                      - generic [ref=f27e202]: •
+                      - link "Ad" [ref=f27e204] [cursor=pointer]:
+                        - /url: /user/adobe/
+                      - link [ref=f27e206] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=b32H5SK_N2TZJ6GxpSgMr34qn9Otc9bvAvgZP-Kf_eyTcxdEFzVRi00A-PD8r1cwTzIxin6KaoaEsFD1esKpmGr_wRiy7p3VWrrUcdVZeiaI2TsrDy6LHu6sUjRjH9iYnm3fReaRKnvFF3bwYbjSaBi01Jfnmv1N8YerraSlRxpMUEFL45R7iUyLUDsqEag0BLBSW1l2FK7DMOYS_o24GmftIylmPcogydGsPVpo6oC4n01lP0RW-NtqAze1JIGSfNpa3M5xYuOgiJ2QZYDsEm3fQMU5C0tp7NcSmt1mE1P_Yua6zqQ9E4lgxMBSgaqLYaIJUCBy_ymjpWu7AMymqg69uatSOv_bEzVArGBZQoKhg08DcbtLGOtsSewTqgORMniSc7VRQ4Eh_mkCcxXFdly7Sd4XT39k6-A1MP8IQIpNuQ7AArMtNJ9PKCPSbxABriR6NUm8axWLp4puLllxBGUapxedTSkhvZMZayZ3vzKWjw3wDXBt8iuoIDY54QQqDc8TKHWa50sLpAKA8zfW4Pa0QpGCEPICpnrswlRPS29NlVsbtYCcsSkcJ4RIYm6VwAuVH6ZATkMm7O2wW7lfzv-_PNQCfwIGXr99A5rU9auodxy1AefUVKepD_qmPlxlY-3oRRzA3KKacvBBwKblSepLL1eDR5nTMEMhgXMYKmZoPA70oAVNETZ0PbJo82ckOwxhKNNPnGuStdEsHA1TStVs146j1kOWtmqt9vIBrbIFzUkqU3b7saJdc47RQITG&zp=vCShJOhhd7a-QXKvs8zRQg4PCGLhhOFJWgAbS7345guhOT1Gn-13g4-UobjKyMF4N2bPGXnPwpPrq2zY1EuFaDO0LKr23x2YRXkhVgKFboHYvpZxEUwWcqMJvPLFd5-6HYkVol_bX6o9ltFQSe0CKFkna03aGmAoVXrxtEQQuW8_4ipKli-6wMEhWZ0eDa1twmcs4xDbq8QR_rN1gdevBdXG9UsVUtYNeEyFhNHy08cOxs2Anb87IbNckxRSb00K8ZbXnNo1dKffZZ5I7Oi8zE-zGbrDjREjPaQj2_-X-DPgOHkvozVzr0w6Tvo5jTC19OMCs90NmKOXFQf_bZ8ykg
+                    - button "Open user actions" [ref=f27e212] [cursor=pointer]
+                  - generic [ref=f27e217]:
+                    - link "Make every idea move faster and further with tools that evolve with you. Get 25% off your first year." [ref=f27e219] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=b32H5SK_N2TZJ6GxpSgMr34qn9Otc9bvAvgZP-Kf_eyTcxdEFzVRi00A-PD8r1cwTzIxin6KaoaEsFD1esKpmGr_wRiy7p3VWrrUcdVZeiaI2TsrDy6LHu6sUjRjH9iYnm3fReaRKnvFF3bwYbjSaBi01Jfnmv1N8YerraSlRxpMUEFL45R7iUyLUDsqEag0BLBSW1l2FK7DMOYS_o24GmftIylmPcogydGsPVpo6oC4n01lP0RW-NtqAze1JIGSfNpa3M5xYuOgiJ2QZYDsEm3fQMU5C0tp7NcSmt1mE1P_Yua6zqQ9E4lgxMBSgaqLYaIJUCBy_ymjpWu7AMymqg69uatSOv_bEzVArGBZQoKhg08DcbtLGOtsSewTqgORMniSc7VRQ4Eh_mkCcxXFdly7Sd4XT39k6-A1MP8IQIpNuQ7AArMtNJ9PKCPSbxABriR6NUm8axWLp4puLllxBGUapxedTSkhvZMZayZ3vzKWjw3wDXBt8iuoIDY54QQqDc8TKHWa50sLpAKA8zfW4Pa0QpGCEPICpnrswlRPS29NlVsbtYCcsSkcJ4RIYm6VwAuVH6ZATkMm7O2wW7lfzv-_PNQCfwIGXr99A5rU9auodxy1AefUVKepD_qmPlxlY-3oRRzA3KKacvBBwKblSepLL1eDR5nTMEMhgXMYKmZoPA70oAVNETZ0PbJo82ckOwxhKNNPnGuStdEsHA1TStVs146j1kOWtmqt9vIBrbIFzUkqU3b7saJdc47RQITG&zp=vCShJOhhd7a-QXKvs8zRQg4PCGLhhOFJWgAbS7345guhOT1Gn-13g4-UobjKyMF4N2bPGXnPwpPrq2zY1EuFaDO0LKr23x2YRXkhVgKFboHYvpZxEUwWcqMJvPLFd5-6HYkVol_bX6o9ltFQSe0CKFkna03aGmAoVXrxtEQQuW8_4ipKli-6wMEhWZ0eDa1twmcs4xDbq8QR_rN1gdevBdXG9UsVUtYNeEyFhNHy08cOxs2Anb87IbNckxRSb00K8ZbXnNo1dKffZZ5I7Oi8zE-zGbrDjREjPaQj2_-X-DPgOHkvozVzr0w6Tvo5jTC19OMCs90NmKOXFQf_bZ8ykg
+                    - list [ref=f27e223]:
+                      - generic:
+                        - listitem [ref=f27e224]:
+                          - generic [ref=f27e225]:
+                            - link [ref=f27e226] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=b32H5SK_N2TZJ6GxpSgMr34qn9Otc9bvAvgZP-Kf_eyTcxdEFzVRi00A-PD8r1cwTzIxin6KaoaEsFD1esKpmGr_wRiy7p3VWrrUcdVZeiaI2TsrDy6LHu6sUjRjH9iYnm3fReaRKnvFF3bwYbjSaBi01Jfnmv1N8YerraSlRxpMUEFL45R7iUyLUDsqEag0BLBSW1l2FK7DMOYS_o24GmftIylmPcogydGsPVpo6oC4n01lP0RW-NtqAze1JIGSfNpa3M5xYuOgiJ2QZYDsEm3fQMU5C0tp7NcSmt1mE1P_Yua6zqQ9E4lgxMBSgaqLYaIJUCBy_ymjpWu7AMymqg69uatSOv_bEzVArGBZQoKhg08DcbtLGOtsSewTqgORMniSc7VRQ4Eh_mkCcxXFdly7Sd4XT39k6-A1MP8IQIpNuQ7AArMtNJ9PKCPSbxABriR6NUm8axWLp4puLllxBGUapxedTSkhvZMZayZ3vzKWjw3wDXBt8iuoIDY54QQqDc8TKHWa50sLpAKA8zfW4Pa0QpGCEPICpnrswlRPS29NlVsbtYCcsSkcJ4RIYm6VwAuVH6ZATkMm7O2wW7lfzv-_PNQCfwIGXr99A5rU9auodxy1AefUVKepD_qmPlxlY-3oRRzA3KKacvBBwKblSepLL1eDR5nTMEMhgXMYKmZoPA70oAVNETZ0PbJo82ckOwxhKNNPnGuStdEsHA1TStVs146j1kOWtmqt9vIBrbIFzUkqU3b7saJdc47RQITG&zp=vCShJOhhd7a-QXKvs8zRQg4PCGLhhOFJWgAbS7345guhOT1Gn-13g4-UobjKyMF4N2bPGXnPwpPrq2zY1EuFaDO0LKr23x2YRXkhVgKFboHYvpZxEUwWcqMJvPLFd5-6HYkVol_bX6o9ltFQSe0CKFkna03aGmAoVXrxtEQQuW8_4ipKli-6wMEhWZ0eDa1twmcs4xDbq8QR_rN1gdevBdXG9UsVUtYNeEyFhNHy08cOxs2Anb87IbNckxRSb00K8ZbXnNo1dKffZZ5I7Oi8zE-zGbrDjREjPaQj2_-X-DPgOHkvozVzr0w6Tvo5jTC19OMCs90NmKOXFQf_bZ8ykg
+                            - link [ref=f27e229] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=b32H5SK_N2TZJ6GxpSgMr34qn9Otc9bvAvgZP-Kf_eyTcxdEFzVRi00A-PD8r1cwTzIxin6KaoaEsFD1esKpmGr_wRiy7p3VWrrUcdVZeiaI2TsrDy6LHu6sUjRjH9iYnm3fReaRKnvFF3bwYbjSaBi01Jfnmv1N8YerraSlRxpMUEFL45R7iUyLUDsqEag0BLBSW1l2FK7DMOYS_o24GmftIylmPcogydGsPVpo6oC4n01lP0RW-NtqAze1JIGSfNpa3M5xYuOgiJ2QZYDsEm3fQMU5C0tp7NcSmt1mE1P_Yua6zqQ9E4lgxMBSgaqLYaIJUCBy_ymjpWu7AMymqg69uatSOv_bEzVArGBZQoKhg08DcbtLGOtsSewTqgORMniSc7VRQ4Eh_mkCcxXFdly7Sd4XT39k6-A1MP8IQIpNuQ7AArMtNJ9PKCPSbxABriR6NUm8axWLp4puLllxBGUapxedTSkhvZMZayZ3vzKWjw3wDXBt8iuoIDY54QQqDc8TKHWa50sLpAKA8zfW4Pa0QpGCEPICpnrswlRPS29NlVsbtYCcsSkcJ4RIYm6VwAuVH6ZATkMm7O2wW7lfzv-_PNQCfwIGXr99A5rU9auodxy1AefUVKepD_qmPlxlY-3oRRzA3KKacvBBwKblSepLL1eDR5nTMEMhgXMYKmZoPA70oAVNETZ0PbJo82ckOwxhKNNPnGuStdEsHA1TStVs146j1kOWtmqt9vIBrbIFzUkqU3b7saJdc47RQITG&zp=vCShJOhhd7a-QXKvs8zRQg4PCGLhhOFJWgAbS7345guhOT1Gn-13g4-UobjKyMF4N2bPGXnPwpPrq2zY1EuFaDO0LKr23x2YRXkhVgKFboHYvpZxEUwWcqMJvPLFd5-6HYkVol_bX6o9ltFQSe0CKFkna03aGmAoVXrxtEQQuW8_4ipKli-6wMEhWZ0eDa1twmcs4xDbq8QR_rN1gdevBdXG9UsVUtYNeEyFhNHy08cOxs2Anb87IbNckxRSb00K8ZbXnNo1dKffZZ5I7Oi8zE-zGbrDjREjPaQj2_-X-DPgOHkvozVzr0w6Tvo5jTC19OMCs90NmKOXFQf_bZ8ykg
+                              - img "Make every idea move faster and further with tools that evolve with you. Get 25% off your first year." [ref=f27e230]
+                        - listitem [ref=f27e231]:
+                          - generic [ref=f27e232]:
+                            - link [ref=f27e233] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=b32H5SK_N2TZJ6GxpSgMr34qn9Otc9bvAvgZP-Kf_eyTcxdEFzVRi00A-PD8r1cwTzIxin6KaoaEsFD1esKpmGr_wRiy7p3VWrrUcdVZeiaI2TsrDy6LHu6sUjRjH9iYnm3fReaRKnvFF3bwYbjSaBi01Jfnmv1N8YerraSlRxpMUEFL45R7iUyLUDsqEag0BLBSW1l2FK7DMOYS_o24GmftIylmPcogydGsPVpo6oC4n01lP0RW-NtqAze1JIGSfNpa3M5xYuOgiJ2QZYDsEm3fQMU5C0tp7NcSmt1mE1P_Yua6zqQ9E4lgxMBSgaqLYaIJUCBy_ymjpWu7AMymqg69uatSOv_bEzVArGBZQoKhg08DcbtLGOtsSewTqgORMniSc7VRQ4Eh_mkCcxXFdly7Sd4XT39k6-A1MP8IQIpNuQ7AArMtNJ9PKCPSbxABriR6NUm8axWLp4puLllxBGUapxedTSkhvZMZayZ3vzKWjw3wDXBt8iuoIDY54QQqDc8TKHWa50sLpAKA8zfW4Pa0QpGCEPICpnrswlRPS29NlVsbtYCcsSkcJ4RIYm6VwAuVH6ZATkMm7O2wW7lfzv-_PNQCfwIGXr99A5rU9auodxy1AefUVKepD_qmPlxlY-3oRRzA3KKacvBBwKblSepLL1eDR5nTMEMhgXMYKmZoPA70oAVNETZ0PbJo82ckOwxhKNNPnGuStdEsHA1TStVs146j1kOWtmqt9vIBrbIFzUkqU3b7saJdc47RQITG&zp=sGlsNQZpX6Ivuiske2BjxW1O5-qglKTo3wy3QyNMoRDbF9s8clHlSEGQGwUfvkSMYLXMio5dBlwUySYAMeWWT-fcznNGqneaOfjc381NE6vNpRq18syPbkDkkXCDHK5tn_YhFZw7BjOkN3mzcRZJeIwLtovg4Dct9-9kZyaCHqAXui3GJ4h6xOt7SxYj--NYmPRhJgakz0knhcibB_5JXf6RscwnDWuzOa3luaIwb_0igb3A-NE3nTnFzFR8yKIXakoEE8SwAA1sftdnQviMpREl2rnVkWFyQSWLdjEqgX2jQUOdYA2HRXzmglc2MsbN7NLOyAPfNj6ynrIfyb4_8w
+                            - link [ref=f27e236] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=b32H5SK_N2TZJ6GxpSgMr34qn9Otc9bvAvgZP-Kf_eyTcxdEFzVRi00A-PD8r1cwTzIxin6KaoaEsFD1esKpmGr_wRiy7p3VWrrUcdVZeiaI2TsrDy6LHu6sUjRjH9iYnm3fReaRKnvFF3bwYbjSaBi01Jfnmv1N8YerraSlRxpMUEFL45R7iUyLUDsqEag0BLBSW1l2FK7DMOYS_o24GmftIylmPcogydGsPVpo6oC4n01lP0RW-NtqAze1JIGSfNpa3M5xYuOgiJ2QZYDsEm3fQMU5C0tp7NcSmt1mE1P_Yua6zqQ9E4lgxMBSgaqLYaIJUCBy_ymjpWu7AMymqg69uatSOv_bEzVArGBZQoKhg08DcbtLGOtsSewTqgORMniSc7VRQ4Eh_mkCcxXFdly7Sd4XT39k6-A1MP8IQIpNuQ7AArMtNJ9PKCPSbxABriR6NUm8axWLp4puLllxBGUapxedTSkhvZMZayZ3vzKWjw3wDXBt8iuoIDY54QQqDc8TKHWa50sLpAKA8zfW4Pa0QpGCEPICpnrswlRPS29NlVsbtYCcsSkcJ4RIYm6VwAuVH6ZATkMm7O2wW7lfzv-_PNQCfwIGXr99A5rU9auodxy1AefUVKepD_qmPlxlY-3oRRzA3KKacvBBwKblSepLL1eDR5nTMEMhgXMYKmZoPA70oAVNETZ0PbJo82ckOwxhKNNPnGuStdEsHA1TStVs146j1kOWtmqt9vIBrbIFzUkqU3b7saJdc47RQITG&zp=sGlsNQZpX6Ivuiske2BjxW1O5-qglKTo3wy3QyNMoRDbF9s8clHlSEGQGwUfvkSMYLXMio5dBlwUySYAMeWWT-fcznNGqneaOfjc381NE6vNpRq18syPbkDkkXCDHK5tn_YhFZw7BjOkN3mzcRZJeIwLtovg4Dct9-9kZyaCHqAXui3GJ4h6xOt7SxYj--NYmPRhJgakz0knhcibB_5JXf6RscwnDWuzOa3luaIwb_0igb3A-NE3nTnFzFR8yKIXakoEE8SwAA1sftdnQviMpREl2rnVkWFyQSWLdjEqgX2jQUOdYA2HRXzmglc2MsbN7NLOyAPfNj6ynrIfyb4_8w
+                              - img "Make every idea move faster and further with tools that evolve with you. Get 25% off your first year." [ref=f27e237]
+                        - listitem [ref=f27e238]:
+                          - generic [ref=f27e239]:
+                            - link [ref=f27e240] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=b32H5SK_N2TZJ6GxpSgMr34qn9Otc9bvAvgZP-Kf_eyTcxdEFzVRi00A-PD8r1cwTzIxin6KaoaEsFD1esKpmGr_wRiy7p3VWrrUcdVZeiaI2TsrDy6LHu6sUjRjH9iYnm3fReaRKnvFF3bwYbjSaBi01Jfnmv1N8YerraSlRxpMUEFL45R7iUyLUDsqEag0BLBSW1l2FK7DMOYS_o24GmftIylmPcogydGsPVpo6oC4n01lP0RW-NtqAze1JIGSfNpa3M5xYuOgiJ2QZYDsEm3fQMU5C0tp7NcSmt1mE1P_Yua6zqQ9E4lgxMBSgaqLYaIJUCBy_ymjpWu7AMymqg69uatSOv_bEzVArGBZQoKhg08DcbtLGOtsSewTqgORMniSc7VRQ4Eh_mkCcxXFdly7Sd4XT39k6-A1MP8IQIpNuQ7AArMtNJ9PKCPSbxABriR6NUm8axWLp4puLllxBGUapxedTSkhvZMZayZ3vzKWjw3wDXBt8iuoIDY54QQqDc8TKHWa50sLpAKA8zfW4Pa0QpGCEPICpnrswlRPS29NlVsbtYCcsSkcJ4RIYm6VwAuVH6ZATkMm7O2wW7lfzv-_PNQCfwIGXr99A5rU9auodxy1AefUVKepD_qmPlxlY-3oRRzA3KKacvBBwKblSepLL1eDR5nTMEMhgXMYKmZoPA70oAVNETZ0PbJo82ckOwxhKNNPnGuStdEsHA1TStVs146j1kOWtmqt9vIBrbIFzUkqU3b7saJdc47RQITG&zp=lGyv4YoMDLqokBxAiyQaDr3azniPFQAyqbe4spMlr8KABUEZePWD_bM1k5x5ZXkoi5dbBNagVziw1pBfltJcyWJsHl1mrwOaSZSmNUZDO5wpB56MB5scjpJ_VJt3haEROrUeYkTMCkRduqH6M4iqlONBBgOZKKntbYB3EPaFaitI0am2N0bwWwMmrEBFt3IAzM2YaWsBRpfdeaU5tj99PCZtOoyC9Xgchmf8Nh6heeOygVwx5r0GwcAWLecI5rbMFxFRpWzrz7BE_G2GRr3XvDPNwFZv6NZ9LCZY1il4C1fPUZgc0FyjZ4nHtFIIaQkUFaPctbKY8TkEghRN2Ns3XA
+                            - link [ref=f27e243] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=b32H5SK_N2TZJ6GxpSgMr34qn9Otc9bvAvgZP-Kf_eyTcxdEFzVRi00A-PD8r1cwTzIxin6KaoaEsFD1esKpmGr_wRiy7p3VWrrUcdVZeiaI2TsrDy6LHu6sUjRjH9iYnm3fReaRKnvFF3bwYbjSaBi01Jfnmv1N8YerraSlRxpMUEFL45R7iUyLUDsqEag0BLBSW1l2FK7DMOYS_o24GmftIylmPcogydGsPVpo6oC4n01lP0RW-NtqAze1JIGSfNpa3M5xYuOgiJ2QZYDsEm3fQMU5C0tp7NcSmt1mE1P_Yua6zqQ9E4lgxMBSgaqLYaIJUCBy_ymjpWu7AMymqg69uatSOv_bEzVArGBZQoKhg08DcbtLGOtsSewTqgORMniSc7VRQ4Eh_mkCcxXFdly7Sd4XT39k6-A1MP8IQIpNuQ7AArMtNJ9PKCPSbxABriR6NUm8axWLp4puLllxBGUapxedTSkhvZMZayZ3vzKWjw3wDXBt8iuoIDY54QQqDc8TKHWa50sLpAKA8zfW4Pa0QpGCEPICpnrswlRPS29NlVsbtYCcsSkcJ4RIYm6VwAuVH6ZATkMm7O2wW7lfzv-_PNQCfwIGXr99A5rU9auodxy1AefUVKepD_qmPlxlY-3oRRzA3KKacvBBwKblSepLL1eDR5nTMEMhgXMYKmZoPA70oAVNETZ0PbJo82ckOwxhKNNPnGuStdEsHA1TStVs146j1kOWtmqt9vIBrbIFzUkqU3b7saJdc47RQITG&zp=lGyv4YoMDLqokBxAiyQaDr3azniPFQAyqbe4spMlr8KABUEZePWD_bM1k5x5ZXkoi5dbBNagVziw1pBfltJcyWJsHl1mrwOaSZSmNUZDO5wpB56MB5scjpJ_VJt3haEROrUeYkTMCkRduqH6M4iqlONBBgOZKKntbYB3EPaFaitI0am2N0bwWwMmrEBFt3IAzM2YaWsBRpfdeaU5tj99PCZtOoyC9Xgchmf8Nh6heeOygVwx5r0GwcAWLecI5rbMFxFRpWzrz7BE_G2GRr3XvDPNwFZv6NZ9LCZY1il4C1fPUZgc0FyjZ4nHtFIIaQkUFaPctbKY8TkEghRN2Ns3XA
+                              - img "Make every idea move faster and further with tools that evolve with you. Get 25% off your first year." [ref=f27e244]
+                    - generic [ref=f27e245]:
+                      - link [ref=f27e246] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=b32H5SK_N2TZJ6GxpSgMr34qn9Otc9bvAvgZP-Kf_eyTcxdEFzVRi00A-PD8r1cwTzIxin6KaoaEsFD1esKpmGr_wRiy7p3VWrrUcdVZeiaI2TsrDy6LHu6sUjRjH9iYnm3fReaRKnvFF3bwYbjSaBi01Jfnmv1N8YerraSlRxpMUEFL45R7iUyLUDsqEag0BLBSW1l2FK7DMOYS_o24GmftIylmPcogydGsPVpo6oC4n01lP0RW-NtqAze1JIGSfNpa3M5xYuOgiJ2QZYDsEm3fQMU5C0tp7NcSmt1mE1P_Yua6zqQ9E4lgxMBSgaqLYaIJUCBy_ymjpWu7AMymqg69uatSOv_bEzVArGBZQoKhg08DcbtLGOtsSewTqgORMniSc7VRQ4Eh_mkCcxXFdly7Sd4XT39k6-A1MP8IQIpNuQ7AArMtNJ9PKCPSbxABriR6NUm8axWLp4puLllxBGUapxedTSkhvZMZayZ3vzKWjw3wDXBt8iuoIDY54QQqDc8TKHWa50sLpAKA8zfW4Pa0QpGCEPICpnrswlRPS29NlVsbtYCcsSkcJ4RIYm6VwAuVH6ZATkMm7O2wW7lfzv-_PNQCfwIGXr99A5rU9auodxy1AefUVKepD_qmPlxlY-3oRRzA3KKacvBBwKblSepLL1eDR5nTMEMhgXMYKmZoPA70oAVNETZ0PbJo82ckOwxhKNNPnGuStdEsHA1TStVs146j1kOWtmqt9vIBrbIFzUkqU3b7saJdc47RQITG&zp=vCShJOhhd7a-QXKvs8zRQg4PCGLhhOFJWgAbS7345guhOT1Gn-13g4-UobjKyMF4N2bPGXnPwpPrq2zY1EuFaDO0LKr23x2YRXkhVgKFboHYvpZxEUwWcqMJvPLFd5-6HYkVol_bX6o9ltFQSe0CKFkna03aGmAoVXrxtEQQuW8_4ipKli-6wMEhWZ0eDa1twmcs4xDbq8QR_rN1gdevBdXG9UsVUtYNeEyFhNHy08cOxs2Anb87IbNckxRSb00K8ZbXnNo1dKffZZ5I7Oi8zE-zGbrDjREjPaQj2_-X-DPgOHkvozVzr0w6Tvo5jTC19OMCs90NmKOXFQf_bZ8ykg
+                      - generic [ref=f27e247]:
+                        - link "adobe.com" [ref=f27e250] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=b32H5SK_N2TZJ6GxpSgMr34qn9Otc9bvAvgZP-Kf_eyTcxdEFzVRi00A-PD8r1cwTzIxin6KaoaEsFD1esKpmGr_wRiy7p3VWrrUcdVZeiaI2TsrDy6LHu6sUjRjH9iYnm3fReaRKnvFF3bwYbjSaBi01Jfnmv1N8YerraSlRxpMUEFL45R7iUyLUDsqEag0BLBSW1l2FK7DMOYS_o24GmftIylmPcogydGsPVpo6oC4n01lP0RW-NtqAze1JIGSfNpa3M5xYuOgiJ2QZYDsEm3fQMU5C0tp7NcSmt1mE1P_Yua6zqQ9E4lgxMBSgaqLYaIJUCBy_ymjpWu7AMymqg69uatSOv_bEzVArGBZQoKhg08DcbtLGOtsSewTqgORMniSc7VRQ4Eh_mkCcxXFdly7Sd4XT39k6-A1MP8IQIpNuQ7AArMtNJ9PKCPSbxABriR6NUm8axWLp4puLllxBGUapxedTSkhvZMZayZ3vzKWjw3wDXBt8iuoIDY54QQqDc8TKHWa50sLpAKA8zfW4Pa0QpGCEPICpnrswlRPS29NlVsbtYCcsSkcJ4RIYm6VwAuVH6ZATkMm7O2wW7lfzv-_PNQCfwIGXr99A5rU9auodxy1AefUVKepD_qmPlxlY-3oRRzA3KKacvBBwKblSepLL1eDR5nTMEMhgXMYKmZoPA70oAVNETZ0PbJo82ckOwxhKNNPnGuStdEsHA1TStVs146j1kOWtmqt9vIBrbIFzUkqU3b7saJdc47RQITG&zp=vCShJOhhd7a-QXKvs8zRQg4PCGLhhOFJWgAbS7345guhOT1Gn-13g4-UobjKyMF4N2bPGXnPwpPrq2zY1EuFaDO0LKr23x2YRXkhVgKFboHYvpZxEUwWcqMJvPLFd5-6HYkVol_bX6o9ltFQSe0CKFkna03aGmAoVXrxtEQQuW8_4ipKli-6wMEhWZ0eDa1twmcs4xDbq8QR_rN1gdevBdXG9UsVUtYNeEyFhNHy08cOxs2Anb87IbNckxRSb00K8ZbXnNo1dKffZZ5I7Oi8zE-zGbrDjREjPaQj2_-X-DPgOHkvozVzr0w6Tvo5jTC19OMCs90NmKOXFQf_bZ8ykg
+                        - link "Learn More" [ref=f27e251] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=b32H5SK_N2TZJ6GxpSgMr34qn9Otc9bvAvgZP-Kf_eyTcxdEFzVRi00A-PD8r1cwTzIxin6KaoaEsFD1esKpmGr_wRiy7p3VWrrUcdVZeiaI2TsrDy6LHu6sUjRjH9iYnm3fReaRKnvFF3bwYbjSaBi01Jfnmv1N8YerraSlRxpMUEFL45R7iUyLUDsqEag0BLBSW1l2FK7DMOYS_o24GmftIylmPcogydGsPVpo6oC4n01lP0RW-NtqAze1JIGSfNpa3M5xYuOgiJ2QZYDsEm3fQMU5C0tp7NcSmt1mE1P_Yua6zqQ9E4lgxMBSgaqLYaIJUCBy_ymjpWu7AMymqg69uatSOv_bEzVArGBZQoKhg08DcbtLGOtsSewTqgORMniSc7VRQ4Eh_mkCcxXFdly7Sd4XT39k6-A1MP8IQIpNuQ7AArMtNJ9PKCPSbxABriR6NUm8axWLp4puLllxBGUapxedTSkhvZMZayZ3vzKWjw3wDXBt8iuoIDY54QQqDc8TKHWa50sLpAKA8zfW4Pa0QpGCEPICpnrswlRPS29NlVsbtYCcsSkcJ4RIYm6VwAuVH6ZATkMm7O2wW7lfzv-_PNQCfwIGXr99A5rU9auodxy1AefUVKepD_qmPlxlY-3oRRzA3KKacvBBwKblSepLL1eDR5nTMEMhgXMYKmZoPA70oAVNETZ0PbJo82ckOwxhKNNPnGuStdEsHA1TStVs146j1kOWtmqt9vIBrbIFzUkqU3b7saJdc47RQITG&zp=vCShJOhhd7a-QXKvs8zRQg4PCGLhhOFJWgAbS7345guhOT1Gn-13g4-UobjKyMF4N2bPGXnPwpPrq2zY1EuFaDO0LKr23x2YRXkhVgKFboHYvpZxEUwWcqMJvPLFd5-6HYkVol_bX6o9ltFQSe0CKFkna03aGmAoVXrxtEQQuW8_4ipKli-6wMEhWZ0eDa1twmcs4xDbq8QR_rN1gdevBdXG9UsVUtYNeEyFhNHy08cOxs2Anb87IbNckxRSb00K8ZbXnNo1dKffZZ5I7Oi8zE-zGbrDjREjPaQj2_-X-DPgOHkvozVzr0w6Tvo5jTC19OMCs90NmKOXFQf_bZ8ykg
+              - generic [ref=f27e260]:
+                - generic [ref=f27e262]:
+                  - generic [aria-hidden] [ref=f27e263]: "Sort by:"
+                  - button "Sort by Best" [ref=f27e268] [cursor=pointer]:
+                    - generic [ref=f27e269]: Best
+                - button "Search Comments Expand comment search" [ref=f27e277] [cursor=pointer]:
+                  - generic [ref=f27e278]: Search Comments
+                  - generic [ref=f27e285]: Expand comment search
+              - region "Comments" [ref=f27e288]:
+                - heading "Comments Section" [level=1] [ref=f27e289]
+                - article "Comment from nemaline 5 years ago" [ref=f27e291]:
+                  - generic [ref=f27e292] [cursor=pointer]:
+                    - link "nemaline's profile --- avatar" [ref=f27e298]:
+                      - /url: https://www.reddit.com/user/nemaline/
+                    - generic [ref=f27e308]:
+                      - link "nemaline's profile" [ref=f27e312]:
+                        - /url: https://www.reddit.com/user/nemaline/
+                        - generic [ref=f27e313]: nemaline
+                      - generic [aria-hidden] [ref=f27e315]: •
+                      - link [ref=f27e317]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2pa2ot/
+                        - time [ref=f27e319]: 5y ago
+                  - generic [ref=f27e321]:
+                    - paragraph [ref=f27e325]: Owlbear Rodeo, maybe?
+                    - generic [ref=f27e331]:
+                      - generic [ref=f27e333]:
+                        - button "Upvote" [disabled]
+                        - generic [ref=f27e334]: "69"
+                        - button "Downvote" [disabled]
+                      - button "Give award" [ref=f27e337] [cursor=pointer]:
+                        - generic [aria-hidden] [ref=f27e345]: Award
+                      - button "Share" [ref=f27e348] [cursor=pointer]
+                      - button "Open user actions" [ref=f27e357] [cursor=pointer]
+                    - generic [ref=f27e362]:
+                      - 'article "Comment thread level 1: Reply from Logan_Maddox 5 years ago" [ref=f27e364]':
+                        - generic [ref=f27e365] [cursor=pointer]:
+                          - link "Logan_Maddox's profile --- avatar" [ref=f27e371]:
+                            - /url: https://www.reddit.com/user/Logan_Maddox/
+                            - img "u/Logan_Maddox avatar" [ref=f27e374]
+                          - generic [ref=f27e378]:
+                            - link "Logan_Maddox's profile" [ref=f27e382]:
+                              - /url: https://www.reddit.com/user/Logan_Maddox/
+                              - generic [ref=f27e383]: Logan_Maddox
+                            - generic "Comment distinguished as the original poster" [ref=f27e387]: OP
+                            - generic [aria-hidden] [ref=f27e388]: •
+                            - link [ref=f27e390]:
+                              - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2pgu3j/
+                              - time [ref=f27e392]: 5y ago
+                        - generic [ref=f27e394]:
+                          - paragraph [ref=f27e398]: Ooooh I think this one takes it. It's so easy to use and I can just choose my maps, oh lord, it's impressive that this is free. Thanks a lot!
+                          - generic [ref=f27e404]:
+                            - generic [ref=f27e406]:
+                              - button "Upvote" [disabled]
+                              - generic [ref=f27e407]: "32"
+                              - button "Downvote" [disabled]
+                            - button "Give award" [ref=f27e410] [cursor=pointer]:
+                              - generic [aria-hidden] [ref=f27e418]: Award
+                            - button "Share" [ref=f27e421] [cursor=pointer]
+                            - button "Open user actions" [ref=f27e430] [cursor=pointer]
+                          - generic [ref=f27e435]:
+                            - 'article "Comment thread level 2: Reply from LightofNew 5 years ago" [ref=f27e437]':
+                              - generic [ref=f27e438] [cursor=pointer]:
+                                - link "LightofNew's profile --- avatar" [ref=f27e444]:
+                                  - /url: https://www.reddit.com/user/LightofNew/
+                                - generic [ref=f27e453]:
+                                  - generic [ref=f27e454]:
+                                    - link "LightofNew's profile" [ref=f27e458]:
+                                      - /url: https://www.reddit.com/user/LightofNew/
+                                      - generic [ref=f27e459]: LightofNew
+                                    - generic [aria-hidden] [ref=f27e461]: •
+                                    - link [ref=f27e463]:
+                                      - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2qln5d/
+                                      - time [ref=f27e465]: 5y ago
+                                  - generic [ref=f27e468]:
+                                    - img "Profile Badge for the Achievement Top 1% Commenter" [ref=f27e469]
+                                    - text: Top 1% Commenter
+                              - generic [ref=f27e474]:
+                                - paragraph [ref=f27e475]: Came here to say this.
+                                - paragraph [ref=f27e476]: You can drag and drop any image into the maps or token folder. (Make any image a token on token stamp 2) Then organize the images by category.
+                                - paragraph [ref=f27e477]: You can make any tokens you add invisible so they don't clog up your sidebar.
+                                - paragraph [ref=f27e478]: There are several "features" you can add by adding images that function as tools. I have an aoe map that comes out when we want to program area.
+                                - paragraph [ref=f27e479]: Each map also saves any changes to it, so you can hop between maps and campeigns.
+                                - paragraph [ref=f27e480]: Players can label tokens, add their own tokens, draw, use highlighters. It's great.
+                            - button "1 more reply" [ref=f27e486] [cursor=pointer]:
+                              - generic [ref=f27e491]:
+                                - generic [ref=f27e492]: "1"
+                                - text: more reply
+                      - 'article "Comment thread level 1: Reply from Mshea0001 5 years ago" [ref=f27e494]':
+                        - generic [ref=f27e495] [cursor=pointer]:
+                          - link "Mshea0001's profile --- avatar" [ref=f27e501]:
+                            - /url: https://www.reddit.com/user/Mshea0001/
+                            - img "u/Mshea0001 avatar" [ref=f27e504]
+                          - generic [ref=f27e508]:
+                            - link "Mshea0001's profile" [ref=f27e512]:
+                              - /url: https://www.reddit.com/user/Mshea0001/
+                              - generic [ref=f27e513]: Mshea0001
+                            - generic [aria-hidden] [ref=f27e515]: •
+                            - link [ref=f27e517]:
+                              - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2rcdbp/
+                              - time [ref=f27e519]: 5y ago
+                        - generic [ref=f27e524]:
+                          - paragraph [ref=f27e525]: I loooove Owlbear Rodeo.
+                          - paragraph [ref=f27e526]:
+                            - link "https://slyflourish.com/owlbear_rodeo.html" [ref=f27e527] [cursor=pointer]:
+                              - /url: https://slyflourish.com/owlbear_rodeo.html
+                      - 'article "Comment thread level 1: Reply from handmadenut 5 years ago" [ref=f27e531]':
+                        - generic [ref=f27e532] [cursor=pointer]:
+                          - link "handmadenut's profile --- avatar" [ref=f27e538]:
+                            - /url: https://www.reddit.com/user/handmadenut/
+                          - generic [ref=f27e554]:
+                            - link "handmadenut's profile" [ref=f27e558]:
+                              - /url: https://www.reddit.com/user/handmadenut/
+                              - generic [ref=f27e559]: handmadenut
+                            - generic [aria-hidden] [ref=f27e561]: •
+                            - link [ref=f27e563]:
+                              - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2qc1en/
+                              - time [ref=f27e565]: 5y ago
+                        - generic [ref=f27e567]:
+                          - paragraph [ref=f27e571]: Yep, this
+                          - 'article "Comment thread level 2: Reply from thallium45 5 years ago" [ref=f27e576]':
+                            - generic [ref=f27e577] [cursor=pointer]:
+                              - link "thallium45's profile --- avatar" [ref=f27e583]:
+                                - /url: https://www.reddit.com/user/thallium45/
+                              - generic [ref=f27e593]:
+                                - link "thallium45's profile" [ref=f27e597]:
+                                  - /url: https://www.reddit.com/user/thallium45/
+                                  - generic [ref=f27e598]: thallium45
+                                - img "Cake icon" [ref=f27e602]
+                                - generic [aria-hidden] [ref=f27e603]: •
+                                - link [ref=f27e605]:
+                                  - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2qey7p/
+                                  - time [ref=f27e607]: 5y ago
+                            - paragraph [ref=f27e613]: I came here to say the same
+                - article "Comment from takeshikun 5 years ago" [ref=f27e617]:
+                  - generic [ref=f27e618] [cursor=pointer]:
+                    - link "takeshikun's profile --- avatar" [ref=f27e624]:
+                      - /url: https://www.reddit.com/user/takeshikun/
+                      - img "u/takeshikun avatar" [ref=f27e627]
+                    - generic [ref=f27e631]:
+                      - link "takeshikun's profile" [ref=f27e635]:
+                        - /url: https://www.reddit.com/user/takeshikun/
+                        - generic [ref=f27e636]: takeshikun
+                      - generic [aria-hidden] [ref=f27e638]: •
+                      - link [ref=f27e640]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2p99u5/
+                        - time [ref=f27e642]: 5y ago
+                  - generic [ref=f27e644]:
+                    - paragraph [ref=f27e648]:
+                      - text: Sounds like
+                      - link "Tableplop" [ref=f27e649] [cursor=pointer]:
+                        - /url: https://tableplop.com/
+                      - text: may fit your needs nicely.
+                    - 'article "Comment thread level 1: Reply from Logan_Maddox 5 years ago" [ref=f27e654]':
+                      - generic [ref=f27e655] [cursor=pointer]:
+                        - link "Logan_Maddox's profile --- avatar" [ref=f27e661]:
+                          - /url: https://www.reddit.com/user/Logan_Maddox/
+                          - img "u/Logan_Maddox avatar" [ref=f27e664]
+                        - generic [ref=f27e668]:
+                          - link "Logan_Maddox's profile" [ref=f27e672]:
+                            - /url: https://www.reddit.com/user/Logan_Maddox/
+                            - generic [ref=f27e673]: Logan_Maddox
+                          - generic "Comment distinguished as the original poster" [ref=f27e677]: OP
+                          - generic [aria-hidden] [ref=f27e678]: •
+                          - link [ref=f27e680]:
+                            - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2pgwn9/
+                            - time [ref=f27e682]: 5y ago
+                      - paragraph [ref=f27e688]: It does indeed, however Owlbear Rodeo has about the same functionalities I want whilst being a bit simpler to use, I feel. Who knows, I might end up using both. Thanks a bunch!
+                - article "Comment from doot99 5 years ago" [ref=f27e692]:
+                  - generic [ref=f27e693] [cursor=pointer]:
+                    - link "doot99's profile --- avatar" [ref=f27e699]:
+                      - /url: https://www.reddit.com/user/doot99/
+                      - img "u/doot99 avatar" [ref=f27e702]
+                    - generic [ref=f27e706]:
+                      - link "doot99's profile" [ref=f27e710]:
+                        - /url: https://www.reddit.com/user/doot99/
+                        - generic [ref=f27e711]: doot99
+                      - generic [aria-hidden] [ref=f27e713]: •
+                      - link [ref=f27e715]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2pax9m/
+                        - time [ref=f27e717]: 5y ago
+                  - generic [ref=f27e719]:
+                    - generic [ref=f27e722]:
+                      - paragraph [ref=f27e723]: GIMP or Krita are free, offline, art programs that do the same thing - you don't need photoshop - and both allow you to move things around like that. You just put the images in on different layers.
+                      - paragraph [ref=f27e724]: I think they're still free anyway.
+                    - generic [ref=f27e727]:
+                      - 'article "Comment thread level 1: Reply from Logan_Maddox 5 years ago" [ref=f27e729]':
+                        - generic [ref=f27e730] [cursor=pointer]:
+                          - link "Logan_Maddox's profile --- avatar" [ref=f27e736]:
+                            - /url: https://www.reddit.com/user/Logan_Maddox/
+                            - img "u/Logan_Maddox avatar" [ref=f27e739]
+                          - generic [ref=f27e743]:
+                            - link "Logan_Maddox's profile" [ref=f27e747]:
+                              - /url: https://www.reddit.com/user/Logan_Maddox/
+                              - generic [ref=f27e748]: Logan_Maddox
+                            - generic "Comment distinguished as the original poster" [ref=f27e752]: OP
+                            - generic [aria-hidden] [ref=f27e753]: •
+                            - link [ref=f27e755]:
+                              - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2pgzwu/
+                              - time [ref=f27e757]: 5y ago
+                        - generic [ref=f27e759]:
+                          - paragraph [ref=f27e763]: Oh yeah, forgot about GIMP. I have it on my PC even. I'll end up using Owlbear Rodeo, but it's amazing that I had a program that could do exactly what I wanted to do so many times just staring me in the face. Thanks!
+                          - button "1 more reply" [ref=f27e770] [cursor=pointer]:
+                            - generic [ref=f27e775]:
+                              - generic [ref=f27e776]: "1"
+                              - text: more reply
+                      - 'article "Comment thread level 1: Reply from Centumviri 5 years ago" [ref=f27e778]':
+                        - generic [ref=f27e779] [cursor=pointer]:
+                          - link "Centumviri's profile --- avatar" [ref=f27e785]:
+                            - /url: https://www.reddit.com/user/Centumviri/
+                          - generic [ref=f27e795]:
+                            - link "Centumviri's profile" [ref=f27e799]:
+                              - /url: https://www.reddit.com/user/Centumviri/
+                              - generic [ref=f27e800]: Centumviri
+                            - generic [aria-hidden] [ref=f27e802]: •
+                            - link [ref=f27e804]:
+                              - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2po979/
+                              - time [ref=f27e806]: 5y ago
+                        - generic [ref=f27e808]:
+                          - paragraph [ref=f27e812]: PowerPoint, I used it for years to describe what your doing
+                          - button "1 more reply" [ref=f27e819] [cursor=pointer]:
+                            - generic [ref=f27e824]:
+                              - generic [ref=f27e825]: "1"
+                              - text: more reply
+                - article "Comment from Donut_Boi13 5 years ago" [ref=f27e827]:
+                  - generic [ref=f27e828] [cursor=pointer]:
+                    - link "Donut_Boi13's profile --- avatar" [ref=f27e834]:
+                      - /url: https://www.reddit.com/user/Donut_Boi13/
+                    - generic [ref=f27e844]:
+                      - link "Donut_Boi13's profile" [ref=f27e848]:
+                        - /url: https://www.reddit.com/user/Donut_Boi13/
+                        - generic [ref=f27e849]: Donut_Boi13
+                      - generic [aria-hidden] [ref=f27e851]: •
+                      - link [ref=f27e853]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2pg755/
+                        - time [ref=f27e855]: 5y ago
+                  - generic [ref=f27e857]:
+                    - paragraph [ref=f27e861]: what if you took a screenshot of your stubborn maps, so you have the same thing as a different file. i use that to get around google annoyances all the time
+                    - 'article "Comment thread level 1: Reply from Logan_Maddox 5 years ago" [ref=f27e866]':
+                      - generic [ref=f27e867] [cursor=pointer]:
+                        - link "Logan_Maddox's profile --- avatar" [ref=f27e873]:
+                          - /url: https://www.reddit.com/user/Logan_Maddox/
+                          - img "u/Logan_Maddox avatar" [ref=f27e876]
+                        - generic [ref=f27e880]:
+                          - link "Logan_Maddox's profile" [ref=f27e884]:
+                            - /url: https://www.reddit.com/user/Logan_Maddox/
+                            - generic [ref=f27e885]: Logan_Maddox
+                          - generic "Comment distinguished as the original poster" [ref=f27e889]: OP
+                          - generic [aria-hidden] [ref=f27e890]: •
+                          - link [ref=f27e892]:
+                            - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2ph50z/
+                            - time [ref=f27e894]: 5y ago
+                      - paragraph [ref=f27e900]: Hopefully that won't be necessary, but I'll keep that in mind if I need it. Thanks!
+                - generic "You won't believe how much you get for this price!" [ref=f27e904]:
+                  - generic [ref=f27e905]:
+                    - 'link "Advertisement: You won''t believe how much you get for this price!" [ref=f27e906] [cursor=pointer]':
+                      - /url: https://alb.reddit.com/cr?za=Y5XryLZSWwfSGDslrakruXywF2xkNQWxqN2kx_L9pOQ8KFmJw64opI3bwFXcbp-RrOn0dV9XFK_ic8a4sL4RDU3vQ3MI8Q0-wXl-qGyrdv33fdgi8Bgx4BB1JUqB9da0jbqyFLUNA0hEjYBxTqUJLQCxWWBScM4FW31cqe1VCYlM4kV5TK9L8s3iWQhzZJIy2JoGeGwsiuIhyeEOu4tMzbpiJlH17RGUwRy_XQ0sbUBo_gVItMYuehSDfuY6IkrtXwwora_rxz_eYDwWu-vmBHqaqtB_h6OqkJQ4VsScD9dSSzgy-WCvDXCLjQE-jYh2Hm4FDMp6QDm87uySBnAv7U0RkmGMV-fbTiSMCroWmxnrwZ9cQA481i4KZVXP2MRbqEAvLDC9qrpzouoQ7ot0XOuV2T-VmbbdOwLv0gqRdDYIiMUop-w-RlbpugJI3zID_kGs3OJdqK_1IGE-xiO8kNRM5FdiXsYixrdqe3nxtbiucbuXjiBZnIP9Crsod_kVavPyI3MFt7L9RDEy_8L1eoE3mItTaDZLgywwS_Ul3q8-r31bgsUx9Vx8Zv4c7UKLzlE4_fa-T4h2Tg82405qDS7FxJy3lQljm_n4UE0pk6W4lmwDiZ6KjWyaslXoPyU6ZN_W1WY2GtblsL0qh_-YmAHAUS9G4v32PIcLRtTAhp9IOzr4uyviWVFR-2dYNdCmfTR3380z_yuWtaQyRc9TdcHsqtFzDRK11H_BfmVe69uaZaPCncSH7-BiHPojYg1CBI8&zp=qyhKiagRu4w2yU9uyPpoEIGga103Bc85HAkAZJ8FXp6v1etzd4IVHQ9S27LNz7tobeLy3euVe40qhkbnCfJ4N3zy6mK7hIGPCnWZxE3Ci8xeQ8paKrtDtMJDJq91CXogVAysH98EwJLlxTgoAfyJGN5ciuPTqpY6jFuj9cujfaYhwLuBo5T1Cudb_HruvAR7pxc8S3_KmD2l4b_PvYNMezHIoCc7vND-BtHt7rhBESr9JRVP5cW2t5Viipc7RVRzoAhIKpFTGzFi3MHLTUK-gC_UPjLriPi8AyKusF0fFV0ovezCPSHpc5gHHEgRU3_vyEJUBCJt7nODnr-l4WrYiHkKQzlCp7uLm4kqUQb4dIPaD5ccr7MVFVLgCkKZ6foHh6Mv57TF2R7bnBZdY2vz-t_muqU3lQqO0Xkfr4EHQpalHQ3qvnsLAhh7kCPdkPTMjnPbn9wPq4XcF_xPHYRekeKZx-4OZ5RpC5BDJnxj425DUgGQJzh6eZd_UU1Y0Q3g--FdfihPx0Y8EVQ6E2fL3aeNEfVaYFLW8LbfZZRSpXAOYjMrR-AEx5xo77JKOrL3L9CuelB2ueJSypsrMzvIOmmPxPIAM9SitzeDK4cJTMWiiTwl6MxKZjSyualdHvMui8E0byMDqkcreaTu9pkLOr0W9Mf0FyiNhLnKgAHMSyC3SjzLs0taSTECcwGIJYjP-i_sSzTHofVu28ELxsyNpw9c-Csa06-XlIbK7it2rDoK4rvcz2CyofxPt0REJyG3N3BNiM5NOIhS-Wrh3j7_5h420WocizFsY5_3GbYlk_wfLqZFHBuX
+                    - generic [ref=f27e907]:
+                      - generic [ref=f27e908]:
+                        - link "u/Alibaba_B2B" [ref=f27e911] [cursor=pointer]:
+                          - /url: /user/Alibaba_B2B/
+                          - img "u/Alibaba_B2B avatar" [ref=f27e914]
+                        - generic [ref=f27e916]: •
+                        - link "Ad" [ref=f27e918] [cursor=pointer]:
+                          - /url: /user/Alibaba_B2B/
+                        - link [ref=f27e920] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=Y5XryLZSWwfSGDslrakruXywF2xkNQWxqN2kx_L9pOQ8KFmJw64opI3bwFXcbp-RrOn0dV9XFK_ic8a4sL4RDU3vQ3MI8Q0-wXl-qGyrdv33fdgi8Bgx4BB1JUqB9da0jbqyFLUNA0hEjYBxTqUJLQCxWWBScM4FW31cqe1VCYlM4kV5TK9L8s3iWQhzZJIy2JoGeGwsiuIhyeEOu4tMzbpiJlH17RGUwRy_XQ0sbUBo_gVItMYuehSDfuY6IkrtXwwora_rxz_eYDwWu-vmBHqaqtB_h6OqkJQ4VsScD9dSSzgy-WCvDXCLjQE-jYh2Hm4FDMp6QDm87uySBnAv7U0RkmGMV-fbTiSMCroWmxnrwZ9cQA481i4KZVXP2MRbqEAvLDC9qrpzouoQ7ot0XOuV2T-VmbbdOwLv0gqRdDYIiMUop-w-RlbpugJI3zID_kGs3OJdqK_1IGE-xiO8kNRM5FdiXsYixrdqe3nxtbiucbuXjiBZnIP9Crsod_kVavPyI3MFt7L9RDEy_8L1eoE3mItTaDZLgywwS_Ul3q8-r31bgsUx9Vx8Zv4c7UKLzlE4_fa-T4h2Tg82405qDS7FxJy3lQljm_n4UE0pk6W4lmwDiZ6KjWyaslXoPyU6ZN_W1WY2GtblsL0qh_-YmAHAUS9G4v32PIcLRtTAhp9IOzr4uyviWVFR-2dYNdCmfTR3380z_yuWtaQyRc9TdcHsqtFzDRK11H_BfmVe69uaZaPCncSH7-BiHPojYg1CBI8&zp=qyhKiagRu4w2yU9uyPpoEIGga103Bc85HAkAZJ8FXp6v1etzd4IVHQ9S27LNz7tobeLy3euVe40qhkbnCfJ4N3zy6mK7hIGPCnWZxE3Ci8xeQ8paKrtDtMJDJq91CXogVAysH98EwJLlxTgoAfyJGN5ciuPTqpY6jFuj9cujfaYhwLuBo5T1Cudb_HruvAR7pxc8S3_KmD2l4b_PvYNMezHIoCc7vND-BtHt7rhBESr9JRVP5cW2t5Viipc7RVRzoAhIKpFTGzFi3MHLTUK-gC_UPjLriPi8AyKusF0fFV0ovezCPSHpc5gHHEgRU3_vyEJUBCJt7nODnr-l4WrYiHkKQzlCp7uLm4kqUQb4dIPaD5ccr7MVFVLgCkKZ6foHh6Mv57TF2R7bnBZdY2vz-t_muqU3lQqO0Xkfr4EHQpalHQ3qvnsLAhh7kCPdkPTMjnPbn9wPq4XcF_xPHYRekeKZx-4OZ5RpC5BDJnxj425DUgGQJzh6eZd_UU1Y0Q3g--FdfihPx0Y8EVQ6E2fL3aeNEfVaYFLW8LbfZZRSpXAOYjMrR-AEx5xo77JKOrL3L9CuelB2ueJSypsrMzvIOmmPxPIAM9SitzeDK4cJTMWiiTwl6MxKZjSyualdHvMui8E0byMDqkcreaTu9pkLOr0W9Mf0FyiNhLnKgAHMSyC3SjzLs0taSTECcwGIJYjP-i_sSzTHofVu28ELxsyNpw9c-Csa06-XlIbK7it2rDoK4rvcz2CyofxPt0REJyG3N3BNiM5NOIhS-Wrh3j7_5h420WocizFsY5_3GbYlk_wfLqZFHBuX
+                      - button "Open user actions" [ref=f27e926] [cursor=pointer]
+                    - generic [ref=f27e932]:
+                      - generic [ref=f27e933]:
+                        - link "You won't believe how much you get for this price!" [ref=f27e935] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=Y5XryLZSWwfSGDslrakruXywF2xkNQWxqN2kx_L9pOQ8KFmJw64opI3bwFXcbp-RrOn0dV9XFK_ic8a4sL4RDU3vQ3MI8Q0-wXl-qGyrdv33fdgi8Bgx4BB1JUqB9da0jbqyFLUNA0hEjYBxTqUJLQCxWWBScM4FW31cqe1VCYlM4kV5TK9L8s3iWQhzZJIy2JoGeGwsiuIhyeEOu4tMzbpiJlH17RGUwRy_XQ0sbUBo_gVItMYuehSDfuY6IkrtXwwora_rxz_eYDwWu-vmBHqaqtB_h6OqkJQ4VsScD9dSSzgy-WCvDXCLjQE-jYh2Hm4FDMp6QDm87uySBnAv7U0RkmGMV-fbTiSMCroWmxnrwZ9cQA481i4KZVXP2MRbqEAvLDC9qrpzouoQ7ot0XOuV2T-VmbbdOwLv0gqRdDYIiMUop-w-RlbpugJI3zID_kGs3OJdqK_1IGE-xiO8kNRM5FdiXsYixrdqe3nxtbiucbuXjiBZnIP9Crsod_kVavPyI3MFt7L9RDEy_8L1eoE3mItTaDZLgywwS_Ul3q8-r31bgsUx9Vx8Zv4c7UKLzlE4_fa-T4h2Tg82405qDS7FxJy3lQljm_n4UE0pk6W4lmwDiZ6KjWyaslXoPyU6ZN_W1WY2GtblsL0qh_-YmAHAUS9G4v32PIcLRtTAhp9IOzr4uyviWVFR-2dYNdCmfTR3380z_yuWtaQyRc9TdcHsqtFzDRK11H_BfmVe69uaZaPCncSH7-BiHPojYg1CBI8&zp=qyhKiagRu4w2yU9uyPpoEIGga103Bc85HAkAZJ8FXp6v1etzd4IVHQ9S27LNz7tobeLy3euVe40qhkbnCfJ4N3zy6mK7hIGPCnWZxE3Ci8xeQ8paKrtDtMJDJq91CXogVAysH98EwJLlxTgoAfyJGN5ciuPTqpY6jFuj9cujfaYhwLuBo5T1Cudb_HruvAR7pxc8S3_KmD2l4b_PvYNMezHIoCc7vND-BtHt7rhBESr9JRVP5cW2t5Viipc7RVRzoAhIKpFTGzFi3MHLTUK-gC_UPjLriPi8AyKusF0fFV0ovezCPSHpc5gHHEgRU3_vyEJUBCJt7nODnr-l4WrYiHkKQzlCp7uLm4kqUQb4dIPaD5ccr7MVFVLgCkKZ6foHh6Mv57TF2R7bnBZdY2vz-t_muqU3lQqO0Xkfr4EHQpalHQ3qvnsLAhh7kCPdkPTMjnPbn9wPq4XcF_xPHYRekeKZx-4OZ5RpC5BDJnxj425DUgGQJzh6eZd_UU1Y0Q3g--FdfihPx0Y8EVQ6E2fL3aeNEfVaYFLW8LbfZZRSpXAOYjMrR-AEx5xo77JKOrL3L9CuelB2ueJSypsrMzvIOmmPxPIAM9SitzeDK4cJTMWiiTwl6MxKZjSyualdHvMui8E0byMDqkcreaTu9pkLOr0W9Mf0FyiNhLnKgAHMSyC3SjzLs0taSTECcwGIJYjP-i_sSzTHofVu28ELxsyNpw9c-Csa06-XlIbK7it2rDoK4rvcz2CyofxPt0REJyG3N3BNiM5NOIhS-Wrh3j7_5h420WocizFsY5_3GbYlk_wfLqZFHBuX
+                        - generic [ref=f27e936]:
+                          - link [ref=f27e937] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=Y5XryLZSWwfSGDslrakruXywF2xkNQWxqN2kx_L9pOQ8KFmJw64opI3bwFXcbp-RrOn0dV9XFK_ic8a4sL4RDU3vQ3MI8Q0-wXl-qGyrdv33fdgi8Bgx4BB1JUqB9da0jbqyFLUNA0hEjYBxTqUJLQCxWWBScM4FW31cqe1VCYlM4kV5TK9L8s3iWQhzZJIy2JoGeGwsiuIhyeEOu4tMzbpiJlH17RGUwRy_XQ0sbUBo_gVItMYuehSDfuY6IkrtXwwora_rxz_eYDwWu-vmBHqaqtB_h6OqkJQ4VsScD9dSSzgy-WCvDXCLjQE-jYh2Hm4FDMp6QDm87uySBnAv7U0RkmGMV-fbTiSMCroWmxnrwZ9cQA481i4KZVXP2MRbqEAvLDC9qrpzouoQ7ot0XOuV2T-VmbbdOwLv0gqRdDYIiMUop-w-RlbpugJI3zID_kGs3OJdqK_1IGE-xiO8kNRM5FdiXsYixrdqe3nxtbiucbuXjiBZnIP9Crsod_kVavPyI3MFt7L9RDEy_8L1eoE3mItTaDZLgywwS_Ul3q8-r31bgsUx9Vx8Zv4c7UKLzlE4_fa-T4h2Tg82405qDS7FxJy3lQljm_n4UE0pk6W4lmwDiZ6KjWyaslXoPyU6ZN_W1WY2GtblsL0qh_-YmAHAUS9G4v32PIcLRtTAhp9IOzr4uyviWVFR-2dYNdCmfTR3380z_yuWtaQyRc9TdcHsqtFzDRK11H_BfmVe69uaZaPCncSH7-BiHPojYg1CBI8&zp=qyhKiagRu4w2yU9uyPpoEIGga103Bc85HAkAZJ8FXp6v1etzd4IVHQ9S27LNz7tobeLy3euVe40qhkbnCfJ4N3zy6mK7hIGPCnWZxE3Ci8xeQ8paKrtDtMJDJq91CXogVAysH98EwJLlxTgoAfyJGN5ciuPTqpY6jFuj9cujfaYhwLuBo5T1Cudb_HruvAR7pxc8S3_KmD2l4b_PvYNMezHIoCc7vND-BtHt7rhBESr9JRVP5cW2t5Viipc7RVRzoAhIKpFTGzFi3MHLTUK-gC_UPjLriPi8AyKusF0fFV0ovezCPSHpc5gHHEgRU3_vyEJUBCJt7nODnr-l4WrYiHkKQzlCp7uLm4kqUQb4dIPaD5ccr7MVFVLgCkKZ6foHh6Mv57TF2R7bnBZdY2vz-t_muqU3lQqO0Xkfr4EHQpalHQ3qvnsLAhh7kCPdkPTMjnPbn9wPq4XcF_xPHYRekeKZx-4OZ5RpC5BDJnxj425DUgGQJzh6eZd_UU1Y0Q3g--FdfihPx0Y8EVQ6E2fL3aeNEfVaYFLW8LbfZZRSpXAOYjMrR-AEx5xo77JKOrL3L9CuelB2ueJSypsrMzvIOmmPxPIAM9SitzeDK4cJTMWiiTwl6MxKZjSyualdHvMui8E0byMDqkcreaTu9pkLOr0W9Mf0FyiNhLnKgAHMSyC3SjzLs0taSTECcwGIJYjP-i_sSzTHofVu28ELxsyNpw9c-Csa06-XlIbK7it2rDoK4rvcz2CyofxPt0REJyG3N3BNiM5NOIhS-Wrh3j7_5h420WocizFsY5_3GbYlk_wfLqZFHBuX
+                          - generic [ref=f27e938]:
+                            - link "Learn More" [ref=f27e939] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=Y5XryLZSWwfSGDslrakruXywF2xkNQWxqN2kx_L9pOQ8KFmJw64opI3bwFXcbp-RrOn0dV9XFK_ic8a4sL4RDU3vQ3MI8Q0-wXl-qGyrdv33fdgi8Bgx4BB1JUqB9da0jbqyFLUNA0hEjYBxTqUJLQCxWWBScM4FW31cqe1VCYlM4kV5TK9L8s3iWQhzZJIy2JoGeGwsiuIhyeEOu4tMzbpiJlH17RGUwRy_XQ0sbUBo_gVItMYuehSDfuY6IkrtXwwora_rxz_eYDwWu-vmBHqaqtB_h6OqkJQ4VsScD9dSSzgy-WCvDXCLjQE-jYh2Hm4FDMp6QDm87uySBnAv7U0RkmGMV-fbTiSMCroWmxnrwZ9cQA481i4KZVXP2MRbqEAvLDC9qrpzouoQ7ot0XOuV2T-VmbbdOwLv0gqRdDYIiMUop-w-RlbpugJI3zID_kGs3OJdqK_1IGE-xiO8kNRM5FdiXsYixrdqe3nxtbiucbuXjiBZnIP9Crsod_kVavPyI3MFt7L9RDEy_8L1eoE3mItTaDZLgywwS_Ul3q8-r31bgsUx9Vx8Zv4c7UKLzlE4_fa-T4h2Tg82405qDS7FxJy3lQljm_n4UE0pk6W4lmwDiZ6KjWyaslXoPyU6ZN_W1WY2GtblsL0qh_-YmAHAUS9G4v32PIcLRtTAhp9IOzr4uyviWVFR-2dYNdCmfTR3380z_yuWtaQyRc9TdcHsqtFzDRK11H_BfmVe69uaZaPCncSH7-BiHPojYg1CBI8&zp=qyhKiagRu4w2yU9uyPpoEIGga103Bc85HAkAZJ8FXp6v1etzd4IVHQ9S27LNz7tobeLy3euVe40qhkbnCfJ4N3zy6mK7hIGPCnWZxE3Ci8xeQ8paKrtDtMJDJq91CXogVAysH98EwJLlxTgoAfyJGN5ciuPTqpY6jFuj9cujfaYhwLuBo5T1Cudb_HruvAR7pxc8S3_KmD2l4b_PvYNMezHIoCc7vND-BtHt7rhBESr9JRVP5cW2t5Viipc7RVRzoAhIKpFTGzFi3MHLTUK-gC_UPjLriPi8AyKusF0fFV0ovezCPSHpc5gHHEgRU3_vyEJUBCJt7nODnr-l4WrYiHkKQzlCp7uLm4kqUQb4dIPaD5ccr7MVFVLgCkKZ6foHh6Mv57TF2R7bnBZdY2vz-t_muqU3lQqO0Xkfr4EHQpalHQ3qvnsLAhh7kCPdkPTMjnPbn9wPq4XcF_xPHYRekeKZx-4OZ5RpC5BDJnxj425DUgGQJzh6eZd_UU1Y0Q3g--FdfihPx0Y8EVQ6E2fL3aeNEfVaYFLW8LbfZZRSpXAOYjMrR-AEx5xo77JKOrL3L9CuelB2ueJSypsrMzvIOmmPxPIAM9SitzeDK4cJTMWiiTwl6MxKZjSyualdHvMui8E0byMDqkcreaTu9pkLOr0W9Mf0FyiNhLnKgAHMSyC3SjzLs0taSTECcwGIJYjP-i_sSzTHofVu28ELxsyNpw9c-Csa06-XlIbK7it2rDoK4rvcz2CyofxPt0REJyG3N3BNiM5NOIhS-Wrh3j7_5h420WocizFsY5_3GbYlk_wfLqZFHBuX
+                            - link "alibaba.com" [ref=f27e943] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=Y5XryLZSWwfSGDslrakruXywF2xkNQWxqN2kx_L9pOQ8KFmJw64opI3bwFXcbp-RrOn0dV9XFK_ic8a4sL4RDU3vQ3MI8Q0-wXl-qGyrdv33fdgi8Bgx4BB1JUqB9da0jbqyFLUNA0hEjYBxTqUJLQCxWWBScM4FW31cqe1VCYlM4kV5TK9L8s3iWQhzZJIy2JoGeGwsiuIhyeEOu4tMzbpiJlH17RGUwRy_XQ0sbUBo_gVItMYuehSDfuY6IkrtXwwora_rxz_eYDwWu-vmBHqaqtB_h6OqkJQ4VsScD9dSSzgy-WCvDXCLjQE-jYh2Hm4FDMp6QDm87uySBnAv7U0RkmGMV-fbTiSMCroWmxnrwZ9cQA481i4KZVXP2MRbqEAvLDC9qrpzouoQ7ot0XOuV2T-VmbbdOwLv0gqRdDYIiMUop-w-RlbpugJI3zID_kGs3OJdqK_1IGE-xiO8kNRM5FdiXsYixrdqe3nxtbiucbuXjiBZnIP9Crsod_kVavPyI3MFt7L9RDEy_8L1eoE3mItTaDZLgywwS_Ul3q8-r31bgsUx9Vx8Zv4c7UKLzlE4_fa-T4h2Tg82405qDS7FxJy3lQljm_n4UE0pk6W4lmwDiZ6KjWyaslXoPyU6ZN_W1WY2GtblsL0qh_-YmAHAUS9G4v32PIcLRtTAhp9IOzr4uyviWVFR-2dYNdCmfTR3380z_yuWtaQyRc9TdcHsqtFzDRK11H_BfmVe69uaZaPCncSH7-BiHPojYg1CBI8&zp=qyhKiagRu4w2yU9uyPpoEIGga103Bc85HAkAZJ8FXp6v1etzd4IVHQ9S27LNz7tobeLy3euVe40qhkbnCfJ4N3zy6mK7hIGPCnWZxE3Ci8xeQ8paKrtDtMJDJq91CXogVAysH98EwJLlxTgoAfyJGN5ciuPTqpY6jFuj9cujfaYhwLuBo5T1Cudb_HruvAR7pxc8S3_KmD2l4b_PvYNMezHIoCc7vND-BtHt7rhBESr9JRVP5cW2t5Viipc7RVRzoAhIKpFTGzFi3MHLTUK-gC_UPjLriPi8AyKusF0fFV0ovezCPSHpc5gHHEgRU3_vyEJUBCJt7nODnr-l4WrYiHkKQzlCp7uLm4kqUQb4dIPaD5ccr7MVFVLgCkKZ6foHh6Mv57TF2R7bnBZdY2vz-t_muqU3lQqO0Xkfr4EHQpalHQ3qvnsLAhh7kCPdkPTMjnPbn9wPq4XcF_xPHYRekeKZx-4OZ5RpC5BDJnxj425DUgGQJzh6eZd_UU1Y0Q3g--FdfihPx0Y8EVQ6E2fL3aeNEfVaYFLW8LbfZZRSpXAOYjMrR-AEx5xo77JKOrL3L9CuelB2ueJSypsrMzvIOmmPxPIAM9SitzeDK4cJTMWiiTwl6MxKZjSyualdHvMui8E0byMDqkcreaTu9pkLOr0W9Mf0FyiNhLnKgAHMSyC3SjzLs0taSTECcwGIJYjP-i_sSzTHofVu28ELxsyNpw9c-Csa06-XlIbK7it2rDoK4rvcz2CyofxPt0REJyG3N3BNiM5NOIhS-Wrh3j7_5h420WocizFsY5_3GbYlk_wfLqZFHBuX
+                      - generic [ref=f27e944] [cursor=pointer]:
+                        - 'img "Clickable image which will reveal the video player: You won''t believe how much you get for this price!" [ref=f27e945]'
+                        - button "Play video" [ref=f27e946]
+                    - button "Collapse video player" [ref=f27e949] [cursor=pointer]
+                - article "Comment from aRandomOstrich 5 years ago" [ref=f27e958]:
+                  - generic [ref=f27e959] [cursor=pointer]:
+                    - link "aRandomOstrich's profile --- avatar" [ref=f27e965]:
+                      - /url: https://www.reddit.com/user/aRandomOstrich/
+                    - generic [ref=f27e975]:
+                      - link "aRandomOstrich's profile" [ref=f27e979]:
+                        - /url: https://www.reddit.com/user/aRandomOstrich/
+                        - generic [ref=f27e980]: aRandomOstrich
+                      - generic [aria-hidden] [ref=f27e982]: •
+                      - link [ref=f27e984]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2pk2er/
+                        - time [ref=f27e986]: 5y ago
+                  - paragraph [ref=f27e992]: Save your tokens as images on your desktop, make your desktop background your map and go to town :)
+                - article "Comment from NessOnett8 5 years ago" [ref=f27e996]:
+                  - generic [ref=f27e997] [cursor=pointer]:
+                    - link "NessOnett8's profile --- avatar" [ref=f27e1003]:
+                      - /url: https://www.reddit.com/user/NessOnett8/
+                    - generic [ref=f27e1013]:
+                      - link "NessOnett8's profile" [ref=f27e1017]:
+                        - /url: https://www.reddit.com/user/NessOnett8/
+                        - generic [ref=f27e1018]: NessOnett8
+                      - generic [aria-hidden] [ref=f27e1020]: •
+                      - link [ref=f27e1022]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2q140l/
+                        - time [ref=f27e1024]: 5y ago
+                  - generic [ref=f27e1026]:
+                    - generic [ref=f27e1029]:
+                      - paragraph [ref=f27e1030]: I don't get why people have such an issue with roll20. I always hear "I don't need an initiative tracker" and I always think..."Then don't use it?"
+                      - paragraph [ref=f27e1031]: It has exactly what you're asking for. Drop in a map. Have tokens that you can move over it. You aren't forced into using any more advanced features if you don't need them. It is as barebones as you want it to be. And actually simpler to use than Owlbear Rodeo. I just don't understand the logic of "It has optional features I don't need, so I can't use it."
+                    - generic [ref=f27e1034]:
+                      - 'article "Comment thread level 1: Reply from Overlord_of_Citrus 5 years ago" [ref=f27e1036]':
+                        - generic [ref=f27e1037] [cursor=pointer]:
+                          - link "Overlord_of_Citrus's profile --- avatar" [ref=f27e1043]:
+                            - /url: https://www.reddit.com/user/Overlord_of_Citrus/
+                            - img "u/Overlord_of_Citrus avatar" [ref=f27e1046]
+                          - generic [ref=f27e1050]:
+                            - link "Overlord_of_Citrus's profile" [ref=f27e1054]:
+                              - /url: https://www.reddit.com/user/Overlord_of_Citrus/
+                              - generic [ref=f27e1055]: Overlord_of_Citrus
+                            - generic [aria-hidden] [ref=f27e1057]: •
+                            - link [ref=f27e1059]:
+                              - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2qkicr/
+                              - time [ref=f27e1061]: 5y ago
+                        - paragraph [ref=f27e1067]: Yeah, I'm really confused this sounds like a prime case for using r20...
+                      - 'article "Comment thread level 1: Reply from doodiethealpaca 5 years ago" [ref=f27e1071]':
+                        - generic [ref=f27e1072] [cursor=pointer]:
+                          - link "doodiethealpaca's profile --- avatar" [ref=f27e1078]:
+                            - /url: https://www.reddit.com/user/doodiethealpaca/
+                          - generic [ref=f27e1088]:
+                            - link "doodiethealpaca's profile" [ref=f27e1092]:
+                              - /url: https://www.reddit.com/user/doodiethealpaca/
+                              - generic [ref=f27e1093]: doodiethealpaca
+                            - generic [aria-hidden] [ref=f27e1095]: •
+                            - link [ref=f27e1097]:
+                              - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2rjf7r/
+                              - time [ref=f27e1099]: 5y ago
+                        - generic [ref=f27e1101]:
+                          - generic [ref=f27e1104]:
+                            - paragraph [ref=f27e1105]: "Yep. Basically, this is what roll20 is : a virtual tabletop, where one can put maps, tokens, music, draw on and around maps, and create handouts for the players."
+                            - paragraph [ref=f27e1106]: The other stuff is just bonus for QoL in specific RPG systems, but are almost invisible if you don't use them.
+                            - paragraph [ref=f27e1107]: But I guess some people don't use roll20 because "eh, I just don't want to use roll20 !"
+                          - button "1 more reply" [ref=f27e1114] [cursor=pointer]:
+                            - generic [ref=f27e1119]:
+                              - generic [ref=f27e1120]: "1"
+                              - text: more reply
+                      - 'article "Comment thread level 1: Reply from DARG0N 5 years ago" [ref=f27e1122]':
+                        - generic [ref=f27e1123] [cursor=pointer]:
+                          - link "DARG0N's profile --- avatar" [ref=f27e1129]:
+                            - /url: https://www.reddit.com/user/DARG0N/
+                          - generic [ref=f27e1139]:
+                            - link "DARG0N's profile" [ref=f27e1143]:
+                              - /url: https://www.reddit.com/user/DARG0N/
+                              - generic [ref=f27e1144]: DARG0N
+                            - generic [aria-hidden] [ref=f27e1146]: •
+                            - link [ref=f27e1148]:
+                              - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2ruwgx/
+                              - time [ref=f27e1150]: 5y ago
+                        - paragraph [ref=f27e1156]: as a player i find it incredibly buggy and clunky to use, especially if the dm wants to play around with visibility. Tabletop Simulator is a bit more effort to build maps on, but a massively better experience for the players overall. we use it in conjunction with discord dice and music bots
+                      - button "3 more replies" [ref=f27e1162] [cursor=pointer]:
+                        - generic [ref=f27e1167]:
+                          - generic [ref=f27e1168]: "3"
+                          - text: more replies
+                - article "Comment from BlueFromTheWest 5 years ago" [ref=f27e1170]:
+                  - generic [ref=f27e1171] [cursor=pointer]:
+                    - link "BlueFromTheWest's profile --- avatar" [ref=f27e1177]:
+                      - /url: https://www.reddit.com/user/BlueFromTheWest/
+                    - generic [ref=f27e1187]:
+                      - link "BlueFromTheWest's profile" [ref=f27e1191]:
+                        - /url: https://www.reddit.com/user/BlueFromTheWest/
+                        - generic [ref=f27e1192]: BlueFromTheWest
+                      - generic [aria-hidden] [ref=f27e1194]: •
+                      - link [ref=f27e1196]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2pn3s7/
+                        - time [ref=f27e1198]: 5y ago
+                  - paragraph [ref=f27e1204]: I havent read all the comments and I did see your edit. My group uses Miro. Upload a map, make a filled shape for a character or structure, change colors for conditions, create empty shapes for spell aoes, etc. Make tables and text boxes. Anyone can move their own token, cover maps you dont want others to see in 1 big black square or multiple squares to cover different rooms. Annotate maps. Simple and easy to use - been working great for us.
+                - article "Comment from NarboGazeb 5 years ago" [ref=f27e1208]:
+                  - generic [ref=f27e1209] [cursor=pointer]:
+                    - link "NarboGazeb's profile --- avatar" [ref=f27e1215]:
+                      - /url: https://www.reddit.com/user/NarboGazeb/
+                      - img "u/NarboGazeb avatar" [ref=f27e1218]
+                    - generic [ref=f27e1222]:
+                      - link "NarboGazeb's profile" [ref=f27e1226]:
+                        - /url: https://www.reddit.com/user/NarboGazeb/
+                        - generic [ref=f27e1227]: NarboGazeb
+                      - generic [aria-hidden] [ref=f27e1229]: •
+                      - link [ref=f27e1231]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2poaz4/
+                        - time [ref=f27e1233]: 5y ago
+                  - paragraph [ref=f27e1239]: I just use Photoshop and put everyone on their own layer.
+                - article "Comment from ramrod_extranjero 5 years ago" [ref=f27e1243]:
+                  - generic [ref=f27e1244] [cursor=pointer]:
+                    - link "ramrod_extranjero's profile --- avatar" [ref=f27e1250]:
+                      - /url: https://www.reddit.com/user/ramrod_extranjero/
+                      - img "u/ramrod_extranjero avatar" [ref=f27e1253]
+                    - generic [ref=f27e1257]:
+                      - link "ramrod_extranjero's profile" [ref=f27e1261]:
+                        - /url: https://www.reddit.com/user/ramrod_extranjero/
+                        - generic [ref=f27e1262]: ramrod_extranjero
+                      - generic [aria-hidden] [ref=f27e1264]: •
+                      - link [ref=f27e1266]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2pqgfd/
+                        - time [ref=f27e1268]: 5y ago
+                  - paragraph [ref=f27e1274]: I use Lucidchart for all of my maps and play sessions. I have all my maps as pages and can track everything there.
+                - article "Comment from [deleted] 5 years ago" [ref=f27e1278]:
+                  - generic "[deleted] 5y ago" [ref=f27e1279] [cursor=pointer]:
+                    - generic [ref=f27e1293]:
+                      - generic [ref=f27e1294]: "[deleted]"
+                      - generic [aria-hidden] [ref=f27e1297]: •
+                      - link [ref=f27e1299]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2ptkzs/
+                        - time [ref=f27e1301]: 5y ago
+                  - paragraph [ref=f27e1307]: Try using Photoshop. Load your map and lock into a background layer, then creat objects on a another layer you can drag around.
+                - generic "When the pressure’s on and every second counts, stay ahead with real-time insights trusted by the NFL and businesses everywhere." [ref=f27e1311]:
+                  - generic [ref=f27e1312]:
+                    - 'link "Advertisement: When the pressure’s on and every second counts, stay ahead with real-time insights trusted by the NFL and businesses everywhere." [ref=f27e1313] [cursor=pointer]':
+                      - /url: https://alb.reddit.com/cr?za=q6JB0S2g5jzzO89I0cKN4WWM1VNn1GA1zb5bm9djGBAl4deKYDeKlau41RJxqaD0rMkXS2-0WRxhlCuoeUOJFxaLhV8h4N8XT8V0bZelZYzP7AEW6Fz84G2yjb94skFRuvU3h1_WQQcNy66SHe6hKAAa6xUsjirO15MfmZvnhktoawRj9GNLBqGU_CDj03dXxcaXg29cdboqQRA4WKaoQZd_Sai0V5mSC-5YEJNy0xpymsB0EFWFBm1JIBj62y3LEPMqeW1bDCfvk_CMhbeZ4EGfbwTlaSE3Oih_eazWqh7OVWl9zZej0t2XcIakmki3EqGC4LZo0v0iGkQ0531B_CVlLn-T9-0SNcVDwvbQ4PyKKI3Eawb8uEXz8fj25Ytsx2zayzz1hfBT7HJW4kPhbByAUAbipBV9DjrwLC0O9JKnroOJJjYrMk0QF-0CxwWpi71j1oiB3gU4EJxFgNGnCfrslrZJyurnL5HXKIUrcMIVSd9OkfxhYMJ_Bdioa6lDP35c-Th6OCp3eu2ux6LCj1k9ah7VdzPZEGl-xlFh9jc19ScuT4jR4FnHvbgokma6FfzBkXDvqUPL2uUhVvL3yi4rKG6yrrKU8yyrSeEaTvbUXAcSzPZajgpOjutHhKJ5C0vohTPjM0TLX_B5ecaVyfrjNvVz4BWr5DTGEP0ZjXwKj7XMMp-qEE3zSBaNqR-wMOfsCurhde9vrjnolQ2Y2yxpOIkunNove97CRkSjCV_u2YndYYbAZKdc7jxqigw8&zp=DIOX6syeogyZcXnGdF4dzqz2JpuLMXgsSsO15WOUKfOePUE2FiUkRiZVTelP1fCM0_Vxmh20gMr9lk23RUlvGj38kjlH2oXLwB0B8M8lm9kfafngmazf3tI6aYPXu6k0yoGI531v31BpG5AXGti2rIc0qQDKI3IptHRd0ZdAnTlvpj4o1LNW-oAynCPEFQlFvQydbXf2W4DY9x6V_vD7Tk2XTn9K-NVwQ_bBjl5y5OaUi4MOcnLdQG0NhGx7kE1peTh9a2nxt6HA0rZ-V4QffWuCNO035z2H_ww5zW9WfjCUWhWatwzOLZBtAW-CldHkY9Atiwwrd-C0drZp9hFS-zTiw-cEm5rXiD5H5aHcZBXEXLHoIep1htqm2eRnWhZWBUn1qNYYp2EAii2waUIzFgaK3Ec2Urhv_SOFpT6ywNUCtnYh6gEUQ3muNV0BrEVrc7oEMIa87aXRXzSsiF7Zd1ygNHTletMeDO7AC3DxCAdvbgxg9zHpgPK0_KN-jctwr9bruXf1-4U-7npV96tdb0qRSYzLYlJaXlILl4JREUigUrc84LZZ3hMoT52gsphKP6NMWeMtUuR207tI-lhKc69fKPiodTU1yBPKgkOT6mEOw6MbHJfSurbDw8c2
+                    - generic [ref=f27e1314]:
+                      - generic [ref=f27e1315]:
+                        - link "u/zebratechnologies" [ref=f27e1318] [cursor=pointer]:
+                          - /url: /user/zebratechnologies/
+                          - img "u/zebratechnologies avatar" [ref=f27e1321]
+                        - generic [ref=f27e1323]: •
+                        - link "Ad" [ref=f27e1325] [cursor=pointer]:
+                          - /url: /user/zebratechnologies/
+                        - link [ref=f27e1327] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=q6JB0S2g5jzzO89I0cKN4WWM1VNn1GA1zb5bm9djGBAl4deKYDeKlau41RJxqaD0rMkXS2-0WRxhlCuoeUOJFxaLhV8h4N8XT8V0bZelZYzP7AEW6Fz84G2yjb94skFRuvU3h1_WQQcNy66SHe6hKAAa6xUsjirO15MfmZvnhktoawRj9GNLBqGU_CDj03dXxcaXg29cdboqQRA4WKaoQZd_Sai0V5mSC-5YEJNy0xpymsB0EFWFBm1JIBj62y3LEPMqeW1bDCfvk_CMhbeZ4EGfbwTlaSE3Oih_eazWqh7OVWl9zZej0t2XcIakmki3EqGC4LZo0v0iGkQ0531B_CVlLn-T9-0SNcVDwvbQ4PyKKI3Eawb8uEXz8fj25Ytsx2zayzz1hfBT7HJW4kPhbByAUAbipBV9DjrwLC0O9JKnroOJJjYrMk0QF-0CxwWpi71j1oiB3gU4EJxFgNGnCfrslrZJyurnL5HXKIUrcMIVSd9OkfxhYMJ_Bdioa6lDP35c-Th6OCp3eu2ux6LCj1k9ah7VdzPZEGl-xlFh9jc19ScuT4jR4FnHvbgokma6FfzBkXDvqUPL2uUhVvL3yi4rKG6yrrKU8yyrSeEaTvbUXAcSzPZajgpOjutHhKJ5C0vohTPjM0TLX_B5ecaVyfrjNvVz4BWr5DTGEP0ZjXwKj7XMMp-qEE3zSBaNqR-wMOfsCurhde9vrjnolQ2Y2yxpOIkunNove97CRkSjCV_u2YndYYbAZKdc7jxqigw8&zp=DIOX6syeogyZcXnGdF4dzqz2JpuLMXgsSsO15WOUKfOePUE2FiUkRiZVTelP1fCM0_Vxmh20gMr9lk23RUlvGj38kjlH2oXLwB0B8M8lm9kfafngmazf3tI6aYPXu6k0yoGI531v31BpG5AXGti2rIc0qQDKI3IptHRd0ZdAnTlvpj4o1LNW-oAynCPEFQlFvQydbXf2W4DY9x6V_vD7Tk2XTn9K-NVwQ_bBjl5y5OaUi4MOcnLdQG0NhGx7kE1peTh9a2nxt6HA0rZ-V4QffWuCNO035z2H_ww5zW9WfjCUWhWatwzOLZBtAW-CldHkY9Atiwwrd-C0drZp9hFS-zTiw-cEm5rXiD5H5aHcZBXEXLHoIep1htqm2eRnWhZWBUn1qNYYp2EAii2waUIzFgaK3Ec2Urhv_SOFpT6ywNUCtnYh6gEUQ3muNV0BrEVrc7oEMIa87aXRXzSsiF7Zd1ygNHTletMeDO7AC3DxCAdvbgxg9zHpgPK0_KN-jctwr9bruXf1-4U-7npV96tdb0qRSYzLYlJaXlILl4JREUigUrc84LZZ3hMoT52gsphKP6NMWeMtUuR207tI-lhKc69fKPiodTU1yBPKgkOT6mEOw6MbHJfSurbDw8c2
+                      - button "Open user actions" [ref=f27e1333] [cursor=pointer]
+                    - generic [ref=f27e1339]:
+                      - generic [ref=f27e1340]:
+                        - link "When the pressure’s on and every second counts, stay ahead with real-time insights trusted by the NFL and businesses everywhere." [ref=f27e1342] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=q6JB0S2g5jzzO89I0cKN4WWM1VNn1GA1zb5bm9djGBAl4deKYDeKlau41RJxqaD0rMkXS2-0WRxhlCuoeUOJFxaLhV8h4N8XT8V0bZelZYzP7AEW6Fz84G2yjb94skFRuvU3h1_WQQcNy66SHe6hKAAa6xUsjirO15MfmZvnhktoawRj9GNLBqGU_CDj03dXxcaXg29cdboqQRA4WKaoQZd_Sai0V5mSC-5YEJNy0xpymsB0EFWFBm1JIBj62y3LEPMqeW1bDCfvk_CMhbeZ4EGfbwTlaSE3Oih_eazWqh7OVWl9zZej0t2XcIakmki3EqGC4LZo0v0iGkQ0531B_CVlLn-T9-0SNcVDwvbQ4PyKKI3Eawb8uEXz8fj25Ytsx2zayzz1hfBT7HJW4kPhbByAUAbipBV9DjrwLC0O9JKnroOJJjYrMk0QF-0CxwWpi71j1oiB3gU4EJxFgNGnCfrslrZJyurnL5HXKIUrcMIVSd9OkfxhYMJ_Bdioa6lDP35c-Th6OCp3eu2ux6LCj1k9ah7VdzPZEGl-xlFh9jc19ScuT4jR4FnHvbgokma6FfzBkXDvqUPL2uUhVvL3yi4rKG6yrrKU8yyrSeEaTvbUXAcSzPZajgpOjutHhKJ5C0vohTPjM0TLX_B5ecaVyfrjNvVz4BWr5DTGEP0ZjXwKj7XMMp-qEE3zSBaNqR-wMOfsCurhde9vrjnolQ2Y2yxpOIkunNove97CRkSjCV_u2YndYYbAZKdc7jxqigw8&zp=DIOX6syeogyZcXnGdF4dzqz2JpuLMXgsSsO15WOUKfOePUE2FiUkRiZVTelP1fCM0_Vxmh20gMr9lk23RUlvGj38kjlH2oXLwB0B8M8lm9kfafngmazf3tI6aYPXu6k0yoGI531v31BpG5AXGti2rIc0qQDKI3IptHRd0ZdAnTlvpj4o1LNW-oAynCPEFQlFvQydbXf2W4DY9x6V_vD7Tk2XTn9K-NVwQ_bBjl5y5OaUi4MOcnLdQG0NhGx7kE1peTh9a2nxt6HA0rZ-V4QffWuCNO035z2H_ww5zW9WfjCUWhWatwzOLZBtAW-CldHkY9Atiwwrd-C0drZp9hFS-zTiw-cEm5rXiD5H5aHcZBXEXLHoIep1htqm2eRnWhZWBUn1qNYYp2EAii2waUIzFgaK3Ec2Urhv_SOFpT6ywNUCtnYh6gEUQ3muNV0BrEVrc7oEMIa87aXRXzSsiF7Zd1ygNHTletMeDO7AC3DxCAdvbgxg9zHpgPK0_KN-jctwr9bruXf1-4U-7npV96tdb0qRSYzLYlJaXlILl4JREUigUrc84LZZ3hMoT52gsphKP6NMWeMtUuR207tI-lhKc69fKPiodTU1yBPKgkOT6mEOw6MbHJfSurbDw8c2
+                        - generic [ref=f27e1343]:
+                          - link [ref=f27e1344] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=q6JB0S2g5jzzO89I0cKN4WWM1VNn1GA1zb5bm9djGBAl4deKYDeKlau41RJxqaD0rMkXS2-0WRxhlCuoeUOJFxaLhV8h4N8XT8V0bZelZYzP7AEW6Fz84G2yjb94skFRuvU3h1_WQQcNy66SHe6hKAAa6xUsjirO15MfmZvnhktoawRj9GNLBqGU_CDj03dXxcaXg29cdboqQRA4WKaoQZd_Sai0V5mSC-5YEJNy0xpymsB0EFWFBm1JIBj62y3LEPMqeW1bDCfvk_CMhbeZ4EGfbwTlaSE3Oih_eazWqh7OVWl9zZej0t2XcIakmki3EqGC4LZo0v0iGkQ0531B_CVlLn-T9-0SNcVDwvbQ4PyKKI3Eawb8uEXz8fj25Ytsx2zayzz1hfBT7HJW4kPhbByAUAbipBV9DjrwLC0O9JKnroOJJjYrMk0QF-0CxwWpi71j1oiB3gU4EJxFgNGnCfrslrZJyurnL5HXKIUrcMIVSd9OkfxhYMJ_Bdioa6lDP35c-Th6OCp3eu2ux6LCj1k9ah7VdzPZEGl-xlFh9jc19ScuT4jR4FnHvbgokma6FfzBkXDvqUPL2uUhVvL3yi4rKG6yrrKU8yyrSeEaTvbUXAcSzPZajgpOjutHhKJ5C0vohTPjM0TLX_B5ecaVyfrjNvVz4BWr5DTGEP0ZjXwKj7XMMp-qEE3zSBaNqR-wMOfsCurhde9vrjnolQ2Y2yxpOIkunNove97CRkSjCV_u2YndYYbAZKdc7jxqigw8&zp=DIOX6syeogyZcXnGdF4dzqz2JpuLMXgsSsO15WOUKfOePUE2FiUkRiZVTelP1fCM0_Vxmh20gMr9lk23RUlvGj38kjlH2oXLwB0B8M8lm9kfafngmazf3tI6aYPXu6k0yoGI531v31BpG5AXGti2rIc0qQDKI3IptHRd0ZdAnTlvpj4o1LNW-oAynCPEFQlFvQydbXf2W4DY9x6V_vD7Tk2XTn9K-NVwQ_bBjl5y5OaUi4MOcnLdQG0NhGx7kE1peTh9a2nxt6HA0rZ-V4QffWuCNO035z2H_ww5zW9WfjCUWhWatwzOLZBtAW-CldHkY9Atiwwrd-C0drZp9hFS-zTiw-cEm5rXiD5H5aHcZBXEXLHoIep1htqm2eRnWhZWBUn1qNYYp2EAii2waUIzFgaK3Ec2Urhv_SOFpT6ywNUCtnYh6gEUQ3muNV0BrEVrc7oEMIa87aXRXzSsiF7Zd1ygNHTletMeDO7AC3DxCAdvbgxg9zHpgPK0_KN-jctwr9bruXf1-4U-7npV96tdb0qRSYzLYlJaXlILl4JREUigUrc84LZZ3hMoT52gsphKP6NMWeMtUuR207tI-lhKc69fKPiodTU1yBPKgkOT6mEOw6MbHJfSurbDw8c2
+                          - generic [ref=f27e1345]:
+                            - link "Learn More" [ref=f27e1346] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=q6JB0S2g5jzzO89I0cKN4WWM1VNn1GA1zb5bm9djGBAl4deKYDeKlau41RJxqaD0rMkXS2-0WRxhlCuoeUOJFxaLhV8h4N8XT8V0bZelZYzP7AEW6Fz84G2yjb94skFRuvU3h1_WQQcNy66SHe6hKAAa6xUsjirO15MfmZvnhktoawRj9GNLBqGU_CDj03dXxcaXg29cdboqQRA4WKaoQZd_Sai0V5mSC-5YEJNy0xpymsB0EFWFBm1JIBj62y3LEPMqeW1bDCfvk_CMhbeZ4EGfbwTlaSE3Oih_eazWqh7OVWl9zZej0t2XcIakmki3EqGC4LZo0v0iGkQ0531B_CVlLn-T9-0SNcVDwvbQ4PyKKI3Eawb8uEXz8fj25Ytsx2zayzz1hfBT7HJW4kPhbByAUAbipBV9DjrwLC0O9JKnroOJJjYrMk0QF-0CxwWpi71j1oiB3gU4EJxFgNGnCfrslrZJyurnL5HXKIUrcMIVSd9OkfxhYMJ_Bdioa6lDP35c-Th6OCp3eu2ux6LCj1k9ah7VdzPZEGl-xlFh9jc19ScuT4jR4FnHvbgokma6FfzBkXDvqUPL2uUhVvL3yi4rKG6yrrKU8yyrSeEaTvbUXAcSzPZajgpOjutHhKJ5C0vohTPjM0TLX_B5ecaVyfrjNvVz4BWr5DTGEP0ZjXwKj7XMMp-qEE3zSBaNqR-wMOfsCurhde9vrjnolQ2Y2yxpOIkunNove97CRkSjCV_u2YndYYbAZKdc7jxqigw8&zp=DIOX6syeogyZcXnGdF4dzqz2JpuLMXgsSsO15WOUKfOePUE2FiUkRiZVTelP1fCM0_Vxmh20gMr9lk23RUlvGj38kjlH2oXLwB0B8M8lm9kfafngmazf3tI6aYPXu6k0yoGI531v31BpG5AXGti2rIc0qQDKI3IptHRd0ZdAnTlvpj4o1LNW-oAynCPEFQlFvQydbXf2W4DY9x6V_vD7Tk2XTn9K-NVwQ_bBjl5y5OaUi4MOcnLdQG0NhGx7kE1peTh9a2nxt6HA0rZ-V4QffWuCNO035z2H_ww5zW9WfjCUWhWatwzOLZBtAW-CldHkY9Atiwwrd-C0drZp9hFS-zTiw-cEm5rXiD5H5aHcZBXEXLHoIep1htqm2eRnWhZWBUn1qNYYp2EAii2waUIzFgaK3Ec2Urhv_SOFpT6ywNUCtnYh6gEUQ3muNV0BrEVrc7oEMIa87aXRXzSsiF7Zd1ygNHTletMeDO7AC3DxCAdvbgxg9zHpgPK0_KN-jctwr9bruXf1-4U-7npV96tdb0qRSYzLYlJaXlILl4JREUigUrc84LZZ3hMoT52gsphKP6NMWeMtUuR207tI-lhKc69fKPiodTU1yBPKgkOT6mEOw6MbHJfSurbDw8c2
+                            - link "zebra.com" [ref=f27e1350] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=q6JB0S2g5jzzO89I0cKN4WWM1VNn1GA1zb5bm9djGBAl4deKYDeKlau41RJxqaD0rMkXS2-0WRxhlCuoeUOJFxaLhV8h4N8XT8V0bZelZYzP7AEW6Fz84G2yjb94skFRuvU3h1_WQQcNy66SHe6hKAAa6xUsjirO15MfmZvnhktoawRj9GNLBqGU_CDj03dXxcaXg29cdboqQRA4WKaoQZd_Sai0V5mSC-5YEJNy0xpymsB0EFWFBm1JIBj62y3LEPMqeW1bDCfvk_CMhbeZ4EGfbwTlaSE3Oih_eazWqh7OVWl9zZej0t2XcIakmki3EqGC4LZo0v0iGkQ0531B_CVlLn-T9-0SNcVDwvbQ4PyKKI3Eawb8uEXz8fj25Ytsx2zayzz1hfBT7HJW4kPhbByAUAbipBV9DjrwLC0O9JKnroOJJjYrMk0QF-0CxwWpi71j1oiB3gU4EJxFgNGnCfrslrZJyurnL5HXKIUrcMIVSd9OkfxhYMJ_Bdioa6lDP35c-Th6OCp3eu2ux6LCj1k9ah7VdzPZEGl-xlFh9jc19ScuT4jR4FnHvbgokma6FfzBkXDvqUPL2uUhVvL3yi4rKG6yrrKU8yyrSeEaTvbUXAcSzPZajgpOjutHhKJ5C0vohTPjM0TLX_B5ecaVyfrjNvVz4BWr5DTGEP0ZjXwKj7XMMp-qEE3zSBaNqR-wMOfsCurhde9vrjnolQ2Y2yxpOIkunNove97CRkSjCV_u2YndYYbAZKdc7jxqigw8&zp=DIOX6syeogyZcXnGdF4dzqz2JpuLMXgsSsO15WOUKfOePUE2FiUkRiZVTelP1fCM0_Vxmh20gMr9lk23RUlvGj38kjlH2oXLwB0B8M8lm9kfafngmazf3tI6aYPXu6k0yoGI531v31BpG5AXGti2rIc0qQDKI3IptHRd0ZdAnTlvpj4o1LNW-oAynCPEFQlFvQydbXf2W4DY9x6V_vD7Tk2XTn9K-NVwQ_bBjl5y5OaUi4MOcnLdQG0NhGx7kE1peTh9a2nxt6HA0rZ-V4QffWuCNO035z2H_ww5zW9WfjCUWhWatwzOLZBtAW-CldHkY9Atiwwrd-C0drZp9hFS-zTiw-cEm5rXiD5H5aHcZBXEXLHoIep1htqm2eRnWhZWBUn1qNYYp2EAii2waUIzFgaK3Ec2Urhv_SOFpT6ywNUCtnYh6gEUQ3muNV0BrEVrc7oEMIa87aXRXzSsiF7Zd1ygNHTletMeDO7AC3DxCAdvbgxg9zHpgPK0_KN-jctwr9bruXf1-4U-7npV96tdb0qRSYzLYlJaXlILl4JREUigUrc84LZZ3hMoT52gsphKP6NMWeMtUuR207tI-lhKc69fKPiodTU1yBPKgkOT6mEOw6MbHJfSurbDw8c2
+                      - generic [ref=f27e1351] [cursor=pointer]:
+                        - 'img "Clickable image which will reveal the video player: When the pressure’s on and every second counts, stay ahead with real-time insights trusted by the NFL and businesses everywhere." [ref=f27e1352]'
+                        - button "Play video" [ref=f27e1353]
+                    - button "Collapse video player" [ref=f27e1356] [cursor=pointer]
+                - article "Comment from Solomon_Grungy 5 years ago" [ref=f27e1365]:
+                  - generic [ref=f27e1366] [cursor=pointer]:
+                    - link "Solomon_Grungy's profile --- avatar" [ref=f27e1372]:
+                      - /url: https://www.reddit.com/user/Solomon_Grungy/
+                    - generic [ref=f27e1388]:
+                      - link "Solomon_Grungy's profile" [ref=f27e1392]:
+                        - /url: https://www.reddit.com/user/Solomon_Grungy/
+                        - generic [ref=f27e1393]: Solomon_Grungy
+                      - generic [aria-hidden] [ref=f27e1395]: •
+                      - link [ref=f27e1397]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2qqb8v/
+                        - time [ref=f27e1399]: 5y ago
+                  - paragraph [ref=f27e1405]: Astral Tabletop is fantastic! I'm always confused when I see posts like this and Astral isn't mentioned at all. I loved it as a player, now as a DM I'm so fond of it i finally decided to drop a little money into it so I have a lot more assets available at my fingertips. I also have a LOT more storage capacity to upload custom assets. Owlbear is cool for the simple and straightforward but it's not aesthetically pretty enough for me.
+                - article "Comment from mymumsaradiator 5 years ago" [ref=f27e1409]:
+                  - generic [ref=f27e1410] [cursor=pointer]:
+                    - link "mymumsaradiator's profile --- avatar" [ref=f27e1416]:
+                      - /url: https://www.reddit.com/user/mymumsaradiator/
+                    - generic [ref=f27e1426]:
+                      - link "mymumsaradiator's profile" [ref=f27e1430]:
+                        - /url: https://www.reddit.com/user/mymumsaradiator/
+                        - generic [ref=f27e1431]: mymumsaradiator
+                      - generic [aria-hidden] [ref=f27e1433]: •
+                      - link [ref=f27e1435]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2qesen/
+                        - time [ref=f27e1437]: 5y ago
+                  - paragraph [ref=f27e1443]: Use roll20! You don't have to use any of the added features it has but it's by far the simplest to use and has exactly that drag and drop feature you're looking for.
+                - article "Comment from Khuras 5 years ago" [ref=f27e1447]:
+                  - generic [ref=f27e1448] [cursor=pointer]:
+                    - link "Khuras's profile --- avatar" [ref=f27e1454]:
+                      - /url: https://www.reddit.com/user/Khuras/
+                    - generic [ref=f27e1464]:
+                      - link "Khuras's profile" [ref=f27e1468]:
+                        - /url: https://www.reddit.com/user/Khuras/
+                        - generic [ref=f27e1469]: Khuras
+                      - generic [aria-hidden] [ref=f27e1471]: •
+                      - link [ref=f27e1473]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/comment/h2qvaxi/
+                        - time [ref=f27e1475]: 5y ago
+                  - paragraph [ref=f27e1481]: Sounds like roll20, just ignore all features you don't want /need
+            - generic [ref=f27e1486]:
+              - generic [ref=f27e1487]:
+                - complementary "People also ask about section" [ref=f27e1488]:
+                  - heading "People also ask about section" [level=1] [ref=f27e1489]
+                  - generic [ref=f27e1490]: People also ask about
+                  - generic [ref=f27e1495]:
+                    - link "Best tools for editing maps in RPGs" [ref=f27e1497] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/e05011ff-a66f-42fa-ba78-8ffb7eccaa50/?q=Best+tools+for+editing+maps+in+RPGs&source=PDP&ep=pdp_unit&relatedPostId=t3_o5yfe9
+                    - link "Unique ways to create memorable NPCs" [ref=f27e1506] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/bca7d219-c7da-4ed8-a890-f5a7bc6a4510/?q=Unique+ways+to+create+memorable+NPCs&source=PDP&ep=pdp_unit&relatedPostId=t3_o5yfe9
+                    - link "Best resources for new DMs" [ref=f27e1515] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/fabb66ac-89ab-470b-9a27-e5d0fe2e874f/?q=Best+resources+for+new+DMs&source=PDP&ep=pdp_unit&relatedPostId=t3_o5yfe9
+                    - link "Tips for balancing combat encounters" [ref=f27e1524] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/57c3cd5b-8ae8-429d-94b2-2d96c6e343ac/?q=Tips+for+balancing+combat+encounters&source=PDP&ep=pdp_unit&relatedPostId=t3_o5yfe9
+                    - link "How to handle player character deaths" [ref=f27e1533] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/1a9c349e-4048-4be8-bd45-29641e268469/?q=How+to+handle+player+character+deaths&source=PDP&ep=pdp_unit&relatedPostId=t3_o5yfe9
+                - generic [ref=f27e1541]:
+                  - complementary "Related Posts Section" [ref=f27e1542]:
+                    - heading "Related Posts Section" [level=1] [ref=f27e1543]: More posts you may like
+                    - generic [ref=f27e1544]: Related posts
+                    - list [ref=f27e1550]:
+                      - listitem [ref=f27e1551]:
+                        - generic [ref=f27e1552]:
+                          - generic [ref=f27e1553]:
+                            - link "Which app did this person use, and is it free?" [ref=f27e1554] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/OculusQuest/comments/1o9jhpj/which_app_did_this_person_use_and_is_it_free/
+                            - generic [ref=f27e1556]:
+                              - generic [ref=f27e1557]:
+                                - generic [ref=f27e1560]:
+                                  - link "r/OculusQuest" [ref=f27e1561] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/OculusQuest/
+                                  - generic [aria-hidden] [ref=f27e1566]: •
+                                  - time [ref=f27e1568]: 1y ago
+                                - link [ref=f27e1570] [cursor=pointer]:
+                                  - /url: /r/OculusQuest/comments/1o9jhpj/which_app_did_this_person_use_and_is_it_free/
+                                  - heading "List item post - Which app did this person use, and is it free?" [level=3] [ref=f27e1573]: Which app did this person use, and is it free?
+                              - link "r/OculusQuest - Which app did this person use, and is it free?" [ref=f27e1576] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/OculusQuest/comments/1o9jhpj/which_app_did_this_person_use_and_is_it_free/
+                                - img "r/OculusQuest - Which app did this person use, and is it free?" [ref=f27e1577]
+                            - generic [ref=f27e1579]:
+                              - generic [ref=f27e1580]: 4.8K
+                              - text: upvotes ·
+                              - generic [ref=f27e1581]: "159"
+                              - text: comments
+                          - separator [ref=f27e1582]
+                      - listitem [ref=f27e1583]:
+                        - generic [ref=f27e1585]:
+                          - generic:
+                            - 'link "Advertisement: Make your savings work for you. New Xapo Bank members get 4.6% APY on USD savings, paid daily in Bitcoin." [ref=f27e1586] [cursor=pointer]':
+                              - /url: https://alb.reddit.com/cr?za=eww4esV-fdtw9wTyK64DIXcvIARLsN-wqvmMssAzAkg7oIVV4SCRo2RyUa0mvccy6hiFjTOM_JaPIv1DrTXU-3VoX5daMeK2YPJSmxL-HdEMp1fbMLWk5rob0hO35jJVA1LRDuYWCRkDQ7PnSuFIKXjKoKxFbv0yez0jW7cSx4Lhg2Q-cp2O7ei_BaPNVsZW8xA0aSXZsAFx_rgl46s_QJdxYkxEuEUHEB7v1Mq2EnvNHm0Wq9Jmz9s6Yo5y_ghXGgzeng5qhIx5TAF8S46ox3zxbADztzEEi3gpwaspijmSzighi8s1LbPA_zQiYMpxBMjliU9VLQEMLvhDfb1vv-I8AjR5goBINk77K14dBEgjMyr2jxlmKdug18sUtr3mAUM7NOxUeLKjFUc2yO9LFBMBKzgRfhjyxW7hlJjbgyJQIf5MYQ1HqVPmRxZLkMX4uvmh31SMn2GwPGqSeFnTIt693Hy3ri5YfnHmCvcFeEB8Ye472v5TDdGcRHDmxQ-82jJoclFta_HV5ILlNppyd5HaABhfVlZnbh83OqK83R3OyZWnoKBLomv2O0a3MNpNNwsX6JJggj3NRkS_DSHQxr4_2JBHjt-26gSZnjJbojd_g2ulcd4dmSt9ObAxHgVLirbHnJpNaAh3oxXOFfITdCuxZq9EAJ7Jn4XArwfOxnbc5qD0l2CBummY1nV6saF0F-a9u47s1Y-FtuQKWl2tfqM4nutNkNE6yv6_lfxI7Lg75ggnhZQE58Nktg4i5deN&zp=qc4fYVwM6SibKB1w4c65l-VouA9tI72DLv1wKg9PkZk9blR-QR0aHLfYYviua1VI1rhrJbOKci3ZtaXDxu59HXe1wjhl1RGMkjURnfRts89fOfF3ADhGsQ5dFKYW3OTWAbfNGPdgAWj7U6tfcx6PE-cJHCTVOkB-VbwkXMlukhdCblAZeX5-ae2ti-ftRv3blYvrBsefQRXBWfuB2MqSNxRg68CSul9PCLMd-UDlU2zCzF5qd_JlTLATTYXMGeZKEquLBoFNO9xWN_9UcQLtxEe2veF0sWM5VNOnrSabXEzgeXHZH7bCPADrlfZMDFrkQKHvi95V3ACfxOxX3z2TT6EeyjKGDNyEROvgFVDo24KBN2LETTPM3561AsDx6SGNa87YSN16kGYousdIAsYSgVKJiz4UNatXIvV9h7fE5h0bJAKXEJVv8H4_HKous6hFvQcWkVyll5Qec6bpLJlJ5Db6_-V9SOpg9udVj9k8pU4GdCZ78zpNURLVZYt8awT_
+                            - generic [ref=f27e1587]:
+                              - generic [ref=f27e1588]:
+                                - generic [ref=f27e1589]:
+                                  - generic [ref=f27e1590]:
+                                    - generic [ref=f27e1591]:
+                                      - link "u/XapoBank avatar XapoBank" [ref=f27e1594] [cursor=pointer]:
+                                        - /url: /user/XapoBank/
+                                        - img "u/XapoBank avatar" [ref=f27e1597]
+                                        - generic [ref=f27e1598]: XapoBank
+                                      - generic [ref=f27e1599]: •
+                                      - link "Ad" [ref=f27e1601] [cursor=pointer]:
+                                        - /url: /user/XapoBank/
+                                      - link [ref=f27e1603] [cursor=pointer]:
+                                        - /url: https://alb.reddit.com/cr?za=eww4esV-fdtw9wTyK64DIXcvIARLsN-wqvmMssAzAkg7oIVV4SCRo2RyUa0mvccy6hiFjTOM_JaPIv1DrTXU-3VoX5daMeK2YPJSmxL-HdEMp1fbMLWk5rob0hO35jJVA1LRDuYWCRkDQ7PnSuFIKXjKoKxFbv0yez0jW7cSx4Lhg2Q-cp2O7ei_BaPNVsZW8xA0aSXZsAFx_rgl46s_QJdxYkxEuEUHEB7v1Mq2EnvNHm0Wq9Jmz9s6Yo5y_ghXGgzeng5qhIx5TAF8S46ox3zxbADztzEEi3gpwaspijmSzighi8s1LbPA_zQiYMpxBMjliU9VLQEMLvhDfb1vv-I8AjR5goBINk77K14dBEgjMyr2jxlmKdug18sUtr3mAUM7NOxUeLKjFUc2yO9LFBMBKzgRfhjyxW7hlJjbgyJQIf5MYQ1HqVPmRxZLkMX4uvmh31SMn2GwPGqSeFnTIt693Hy3ri5YfnHmCvcFeEB8Ye472v5TDdGcRHDmxQ-82jJoclFta_HV5ILlNppyd5HaABhfVlZnbh83OqK83R3OyZWnoKBLomv2O0a3MNpNNwsX6JJggj3NRkS_DSHQxr4_2JBHjt-26gSZnjJbojd_g2ulcd4dmSt9ObAxHgVLirbHnJpNaAh3oxXOFfITdCuxZq9EAJ7Jn4XArwfOxnbc5qD0l2CBummY1nV6saF0F-a9u47s1Y-FtuQKWl2tfqM4nutNkNE6yv6_lfxI7Lg75ggnhZQE58Nktg4i5deN&zp=qc4fYVwM6SibKB1w4c65l-VouA9tI72DLv1wKg9PkZk9blR-QR0aHLfYYviua1VI1rhrJbOKci3ZtaXDxu59HXe1wjhl1RGMkjURnfRts89fOfF3ADhGsQ5dFKYW3OTWAbfNGPdgAWj7U6tfcx6PE-cJHCTVOkB-VbwkXMlukhdCblAZeX5-ae2ti-ftRv3blYvrBsefQRXBWfuB2MqSNxRg68CSul9PCLMd-UDlU2zCzF5qd_JlTLATTYXMGeZKEquLBoFNO9xWN_9UcQLtxEe2veF0sWM5VNOnrSabXEzgeXHZH7bCPADrlfZMDFrkQKHvi95V3ACfxOxX3z2TT6EeyjKGDNyEROvgFVDo24KBN2LETTPM3561AsDx6SGNa87YSN16kGYousdIAsYSgVKJiz4UNatXIvV9h7fE5h0bJAKXEJVv8H4_HKous6hFvQcWkVyll5Qec6bpLJlJ5Db6_-V9SOpg9udVj9k8pU4GdCZ78zpNURLVZYt8awT_
+                                    - button "Open user actions" [ref=f27e1609] [cursor=pointer]
+                                  - link "Make your savings work for you. New Xapo Bank members get 4.6% APY on USD savings, paid daily in Bitcoin." [ref=f27e1616] [cursor=pointer]:
+                                    - /url: https://alb.reddit.com/cr?za=eww4esV-fdtw9wTyK64DIXcvIARLsN-wqvmMssAzAkg7oIVV4SCRo2RyUa0mvccy6hiFjTOM_JaPIv1DrTXU-3VoX5daMeK2YPJSmxL-HdEMp1fbMLWk5rob0hO35jJVA1LRDuYWCRkDQ7PnSuFIKXjKoKxFbv0yez0jW7cSx4Lhg2Q-cp2O7ei_BaPNVsZW8xA0aSXZsAFx_rgl46s_QJdxYkxEuEUHEB7v1Mq2EnvNHm0Wq9Jmz9s6Yo5y_ghXGgzeng5qhIx5TAF8S46ox3zxbADztzEEi3gpwaspijmSzighi8s1LbPA_zQiYMpxBMjliU9VLQEMLvhDfb1vv-I8AjR5goBINk77K14dBEgjMyr2jxlmKdug18sUtr3mAUM7NOxUeLKjFUc2yO9LFBMBKzgRfhjyxW7hlJjbgyJQIf5MYQ1HqVPmRxZLkMX4uvmh31SMn2GwPGqSeFnTIt693Hy3ri5YfnHmCvcFeEB8Ye472v5TDdGcRHDmxQ-82jJoclFta_HV5ILlNppyd5HaABhfVlZnbh83OqK83R3OyZWnoKBLomv2O0a3MNpNNwsX6JJggj3NRkS_DSHQxr4_2JBHjt-26gSZnjJbojd_g2ulcd4dmSt9ObAxHgVLirbHnJpNaAh3oxXOFfITdCuxZq9EAJ7Jn4XArwfOxnbc5qD0l2CBummY1nV6saF0F-a9u47s1Y-FtuQKWl2tfqM4nutNkNE6yv6_lfxI7Lg75ggnhZQE58Nktg4i5deN&zp=qc4fYVwM6SibKB1w4c65l-VouA9tI72DLv1wKg9PkZk9blR-QR0aHLfYYviua1VI1rhrJbOKci3ZtaXDxu59HXe1wjhl1RGMkjURnfRts89fOfF3ADhGsQ5dFKYW3OTWAbfNGPdgAWj7U6tfcx6PE-cJHCTVOkB-VbwkXMlukhdCblAZeX5-ae2ti-ftRv3blYvrBsefQRXBWfuB2MqSNxRg68CSul9PCLMd-UDlU2zCzF5qd_JlTLATTYXMGeZKEquLBoFNO9xWN_9UcQLtxEe2veF0sWM5VNOnrSabXEzgeXHZH7bCPADrlfZMDFrkQKHvi95V3ACfxOxX3z2TT6EeyjKGDNyEROvgFVDo24KBN2LETTPM3561AsDx6SGNa87YSN16kGYousdIAsYSgVKJiz4UNatXIvV9h7fE5h0bJAKXEJVv8H4_HKous6hFvQcWkVyll5Qec6bpLJlJ5Db6_-V9SOpg9udVj9k8pU4GdCZ78zpNURLVZYt8awT_
+                                    - generic "Make your savings work for you. New Xapo Bank members get 4.6% APY on USD savings, paid daily in Bitcoin." [ref=f27e1617]
+                                - link [ref=f27e1620] [cursor=pointer]:
+                                  - /url: /user/XapoBank/comments/1wyjl18/make_your_savings_work_for_you_new_xapo_bank/?p=1&impressionid=5659684077326855550
+                                  - generic:
+                                    - 'img "Thumbnail image: Make your savings work for you. New Xapo Bank members get 4.6% APY on USD savings, paid daily in Bitcoin." [ref=f27e1621]'
+                                    - generic "Play video"
+                              - generic [ref=f27e1622]:
+                                - link [ref=f27e1623] [cursor=pointer]:
+                                  - /url: https://alb.reddit.com/cr?za=eww4esV-fdtw9wTyK64DIXcvIARLsN-wqvmMssAzAkg7oIVV4SCRo2RyUa0mvccy6hiFjTOM_JaPIv1DrTXU-3VoX5daMeK2YPJSmxL-HdEMp1fbMLWk5rob0hO35jJVA1LRDuYWCRkDQ7PnSuFIKXjKoKxFbv0yez0jW7cSx4Lhg2Q-cp2O7ei_BaPNVsZW8xA0aSXZsAFx_rgl46s_QJdxYkxEuEUHEB7v1Mq2EnvNHm0Wq9Jmz9s6Yo5y_ghXGgzeng5qhIx5TAF8S46ox3zxbADztzEEi3gpwaspijmSzighi8s1LbPA_zQiYMpxBMjliU9VLQEMLvhDfb1vv-I8AjR5goBINk77K14dBEgjMyr2jxlmKdug18sUtr3mAUM7NOxUeLKjFUc2yO9LFBMBKzgRfhjyxW7hlJjbgyJQIf5MYQ1HqVPmRxZLkMX4uvmh31SMn2GwPGqSeFnTIt693Hy3ri5YfnHmCvcFeEB8Ye472v5TDdGcRHDmxQ-82jJoclFta_HV5ILlNppyd5HaABhfVlZnbh83OqK83R3OyZWnoKBLomv2O0a3MNpNNwsX6JJggj3NRkS_DSHQxr4_2JBHjt-26gSZnjJbojd_g2ulcd4dmSt9ObAxHgVLirbHnJpNaAh3oxXOFfITdCuxZq9EAJ7Jn4XArwfOxnbc5qD0l2CBummY1nV6saF0F-a9u47s1Y-FtuQKWl2tfqM4nutNkNE6yv6_lfxI7Lg75ggnhZQE58Nktg4i5deN&zp=qc4fYVwM6SibKB1w4c65l-VouA9tI72DLv1wKg9PkZk9blR-QR0aHLfYYviua1VI1rhrJbOKci3ZtaXDxu59HXe1wjhl1RGMkjURnfRts89fOfF3ADhGsQ5dFKYW3OTWAbfNGPdgAWj7U6tfcx6PE-cJHCTVOkB-VbwkXMlukhdCblAZeX5-ae2ti-ftRv3blYvrBsefQRXBWfuB2MqSNxRg68CSul9PCLMd-UDlU2zCzF5qd_JlTLATTYXMGeZKEquLBoFNO9xWN_9UcQLtxEe2veF0sWM5VNOnrSabXEzgeXHZH7bCPADrlfZMDFrkQKHvi95V3ACfxOxX3z2TT6EeyjKGDNyEROvgFVDo24KBN2LETTPM3561AsDx6SGNa87YSN16kGYousdIAsYSgVKJiz4UNatXIvV9h7fE5h0bJAKXEJVv8H4_HKous6hFvQcWkVyll5Qec6bpLJlJ5Db6_-V9SOpg9udVj9k8pU4GdCZ78zpNURLVZYt8awT_
+                                - generic [ref=f27e1624]:
+                                  - link "xapobank.com" [ref=f27e1626] [cursor=pointer]:
+                                    - /url: https://alb.reddit.com/cr?za=eww4esV-fdtw9wTyK64DIXcvIARLsN-wqvmMssAzAkg7oIVV4SCRo2RyUa0mvccy6hiFjTOM_JaPIv1DrTXU-3VoX5daMeK2YPJSmxL-HdEMp1fbMLWk5rob0hO35jJVA1LRDuYWCRkDQ7PnSuFIKXjKoKxFbv0yez0jW7cSx4Lhg2Q-cp2O7ei_BaPNVsZW8xA0aSXZsAFx_rgl46s_QJdxYkxEuEUHEB7v1Mq2EnvNHm0Wq9Jmz9s6Yo5y_ghXGgzeng5qhIx5TAF8S46ox3zxbADztzEEi3gpwaspijmSzighi8s1LbPA_zQiYMpxBMjliU9VLQEMLvhDfb1vv-I8AjR5goBINk77K14dBEgjMyr2jxlmKdug18sUtr3mAUM7NOxUeLKjFUc2yO9LFBMBKzgRfhjyxW7hlJjbgyJQIf5MYQ1HqVPmRxZLkMX4uvmh31SMn2GwPGqSeFnTIt693Hy3ri5YfnHmCvcFeEB8Ye472v5TDdGcRHDmxQ-82jJoclFta_HV5ILlNppyd5HaABhfVlZnbh83OqK83R3OyZWnoKBLomv2O0a3MNpNNwsX6JJggj3NRkS_DSHQxr4_2JBHjt-26gSZnjJbojd_g2ulcd4dmSt9ObAxHgVLirbHnJpNaAh3oxXOFfITdCuxZq9EAJ7Jn4XArwfOxnbc5qD0l2CBummY1nV6saF0F-a9u47s1Y-FtuQKWl2tfqM4nutNkNE6yv6_lfxI7Lg75ggnhZQE58Nktg4i5deN&zp=qc4fYVwM6SibKB1w4c65l-VouA9tI72DLv1wKg9PkZk9blR-QR0aHLfYYviua1VI1rhrJbOKci3ZtaXDxu59HXe1wjhl1RGMkjURnfRts89fOfF3ADhGsQ5dFKYW3OTWAbfNGPdgAWj7U6tfcx6PE-cJHCTVOkB-VbwkXMlukhdCblAZeX5-ae2ti-ftRv3blYvrBsefQRXBWfuB2MqSNxRg68CSul9PCLMd-UDlU2zCzF5qd_JlTLATTYXMGeZKEquLBoFNO9xWN_9UcQLtxEe2veF0sWM5VNOnrSabXEzgeXHZH7bCPADrlfZMDFrkQKHvi95V3ACfxOxX3z2TT6EeyjKGDNyEROvgFVDo24KBN2LETTPM3561AsDx6SGNa87YSN16kGYousdIAsYSgVKJiz4UNatXIvV9h7fE5h0bJAKXEJVv8H4_HKous6hFvQcWkVyll5Qec6bpLJlJ5Db6_-V9SOpg9udVj9k8pU4GdCZ78zpNURLVZYt8awT_
+                                  - link "Learn More" [ref=f27e1627] [cursor=pointer]:
+                                    - /url: https://alb.reddit.com/cr?za=eww4esV-fdtw9wTyK64DIXcvIARLsN-wqvmMssAzAkg7oIVV4SCRo2RyUa0mvccy6hiFjTOM_JaPIv1DrTXU-3VoX5daMeK2YPJSmxL-HdEMp1fbMLWk5rob0hO35jJVA1LRDuYWCRkDQ7PnSuFIKXjKoKxFbv0yez0jW7cSx4Lhg2Q-cp2O7ei_BaPNVsZW8xA0aSXZsAFx_rgl46s_QJdxYkxEuEUHEB7v1Mq2EnvNHm0Wq9Jmz9s6Yo5y_ghXGgzeng5qhIx5TAF8S46ox3zxbADztzEEi3gpwaspijmSzighi8s1LbPA_zQiYMpxBMjliU9VLQEMLvhDfb1vv-I8AjR5goBINk77K14dBEgjMyr2jxlmKdug18sUtr3mAUM7NOxUeLKjFUc2yO9LFBMBKzgRfhjyxW7hlJjbgyJQIf5MYQ1HqVPmRxZLkMX4uvmh31SMn2GwPGqSeFnTIt693Hy3ri5YfnHmCvcFeEB8Ye472v5TDdGcRHDmxQ-82jJoclFta_HV5ILlNppyd5HaABhfVlZnbh83OqK83R3OyZWnoKBLomv2O0a3MNpNNwsX6JJggj3NRkS_DSHQxr4_2JBHjt-26gSZnjJbojd_g2ulcd4dmSt9ObAxHgVLirbHnJpNaAh3oxXOFfITdCuxZq9EAJ7Jn4XArwfOxnbc5qD0l2CBummY1nV6saF0F-a9u47s1Y-FtuQKWl2tfqM4nutNkNE6yv6_lfxI7Lg75ggnhZQE58Nktg4i5deN&zp=qc4fYVwM6SibKB1w4c65l-VouA9tI72DLv1wKg9PkZk9blR-QR0aHLfYYviua1VI1rhrJbOKci3ZtaXDxu59HXe1wjhl1RGMkjURnfRts89fOfF3ADhGsQ5dFKYW3OTWAbfNGPdgAWj7U6tfcx6PE-cJHCTVOkB-VbwkXMlukhdCblAZeX5-ae2ti-ftRv3blYvrBsefQRXBWfuB2MqSNxRg68CSul9PCLMd-UDlU2zCzF5qd_JlTLATTYXMGeZKEquLBoFNO9xWN_9UcQLtxEe2veF0sWM5VNOnrSabXEzgeXHZH7bCPADrlfZMDFrkQKHvi95V3ACfxOxX3z2TT6EeyjKGDNyEROvgFVDo24KBN2LETTPM3561AsDx6SGNa87YSN16kGYousdIAsYSgVKJiz4UNatXIvV9h7fE5h0bJAKXEJVv8H4_HKous6hFvQcWkVyll5Qec6bpLJlJ5Db6_-V9SOpg9udVj9k8pU4GdCZ78zpNURLVZYt8awT_
+                        - separator [ref=f27e1630]
+                      - listitem [ref=f27e1631]:
+                        - generic [ref=f27e1632]:
+                          - generic [ref=f27e1633]:
+                            - link "A Critical Look at the 'Hallow' App" [ref=f27e1634] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Catholicism/comments/17em0jo/a_critical_look_at_the_hallow_app/
+                            - generic [ref=f27e1637]:
+                              - generic [ref=f27e1640]:
+                                - link "r/Catholicism" [ref=f27e1641] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/Catholicism/
+                                - generic [aria-hidden] [ref=f27e1646]: •
+                                - time [ref=f27e1648]: 3y ago
+                              - link [ref=f27e1650] [cursor=pointer]:
+                                - /url: /r/Catholicism/comments/17em0jo/a_critical_look_at_the_hallow_app/
+                                - heading "List item post - A Critical Look at the 'Hallow' App" [level=3] [ref=f27e1653]: A Critical Look at the 'Hallow' App
+                            - generic [ref=f27e1655]:
+                              - generic [ref=f27e1656]: "55"
+                              - text: upvotes ·
+                              - generic [ref=f27e1657]: "71"
+                              - text: comments
+                          - separator [ref=f27e1658]
+                      - listitem [ref=f27e1659]:
+                        - generic [ref=f27e1660]:
+                          - generic [ref=f27e1661]:
+                            - link "[OC] An attempt to put years of mapmaking experience in a single tool" [ref=f27e1662] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DnD/comments/1uyyr0i/oc_an_attempt_to_put_years_of_mapmaking/
+                            - generic [ref=f27e1664]:
+                              - generic [ref=f27e1665]:
+                                - generic [ref=f27e1668]:
+                                  - link "r/DnD" [ref=f27e1669] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/DnD/
+                                  - generic [aria-hidden] [ref=f27e1674]: •
+                                  - time [ref=f27e1676]: 3mo ago
+                                - link [ref=f27e1678] [cursor=pointer]:
+                                  - /url: /r/DnD/comments/1uyyr0i/oc_an_attempt_to_put_years_of_mapmaking/
+                                  - heading "List item post - [OC] An attempt to put years of mapmaking experience in a s..." [level=3] [ref=f27e1681]: "[OC] An attempt to put years of mapmaking experience in a single tool"
+                              - link "r/DnD - [OC] An attempt to put years of mapmaking experience in a single tool" [ref=f27e1684] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/DnD/comments/1uyyr0i/oc_an_attempt_to_put_years_of_mapmaking/
+                                - img "r/DnD - [OC] An attempt to put years of mapmaking experience in a single tool" [ref=f27e1685]
+                            - generic [ref=f27e1687]:
+                              - generic [ref=f27e1688]: "424"
+                              - text: upvotes ·
+                              - generic [ref=f27e1689]: "55"
+                              - text: comments
+                          - separator [ref=f27e1690]
+                      - listitem
+                      - listitem [ref=f27e1691]:
+                        - generic [ref=f27e1692]:
+                          - generic [ref=f27e1693]:
+                            - link "Google changed maps logo to have a wider hole" [ref=f27e1694] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/google/comments/1roantu/google_changed_maps_logo_to_have_a_wider_hole/
+                            - generic [ref=f27e1696]:
+                              - generic [ref=f27e1697]:
+                                - generic [ref=f27e1700]:
+                                  - link "r/google" [ref=f27e1701] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/google/
+                                  - generic [aria-hidden] [ref=f27e1706]: •
+                                  - time [ref=f27e1708]: 7mo ago
+                                - link [ref=f27e1710] [cursor=pointer]:
+                                  - /url: /r/google/comments/1roantu/google_changed_maps_logo_to_have_a_wider_hole/
+                                  - heading "List item post - Google changed maps logo to have a wider hole" [level=3] [ref=f27e1713]: Google changed maps logo to have a wider hole
+                              - link "r/google - Google changed maps logo to have a wider hole" [ref=f27e1716] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/google/comments/1roantu/google_changed_maps_logo_to_have_a_wider_hole/
+                                - img "r/google - Google changed maps logo to have a wider hole" [ref=f27e1717]
+                            - generic [ref=f27e1719]:
+                              - generic [ref=f27e1720]: 3.3K
+                              - text: upvotes ·
+                              - generic [ref=f27e1721]: "220"
+                              - text: comments
+                          - separator [ref=f27e1722]
+                      - listitem [ref=f27e1723]:
+                        - generic [ref=f27e1724]:
+                          - generic [ref=f27e1725]:
+                            - link "YouTube Non-Premim Picture in Picture works for specific channels (MKBHD)?" [ref=f27e1726] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/iphone/comments/16nra19/youtube_nonpremim_picture_in_picture_works_for/
+                            - generic [ref=f27e1728]:
+                              - generic [ref=f27e1729]:
+                                - generic [ref=f27e1732]:
+                                  - link "r/iphone" [ref=f27e1733] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/iphone/
+                                  - generic [aria-hidden] [ref=f27e1738]: •
+                                  - time [ref=f27e1740]: 3y ago
+                                - link [ref=f27e1742] [cursor=pointer]:
+                                  - /url: /r/iphone/comments/16nra19/youtube_nonpremim_picture_in_picture_works_for/
+                                  - heading "List item post - YouTube Non-Premim Picture in Picture works for specific ch..." [level=3] [ref=f27e1745]: YouTube Non-Premim Picture in Picture works for specific channels (MKBHD)?
+                              - link "r/iphone - YouTube Non-Premim Picture in Picture works for specific channels (MKBHD)?" [ref=f27e1748] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/iphone/comments/16nra19/youtube_nonpremim_picture_in_picture_works_for/
+                                - img "r/iphone - YouTube Non-Premim Picture in Picture works for specific channels (MKBHD)?" [ref=f27e1749]
+                            - generic [ref=f27e1751]:
+                              - generic [ref=f27e1752]: "139"
+                              - text: upvotes ·
+                              - generic [ref=f27e1753]: "100"
+                              - text: comments
+                          - separator [ref=f27e1754]
+                      - listitem [ref=f27e1755]:
+                        - generic [ref=f27e1756]:
+                          - generic [ref=f27e1757]:
+                            - link "What alarm app should i use to make me get up in the morning" [ref=f27e1758] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/productivity/comments/1iplx72/what_alarm_app_should_i_use_to_make_me_get_up_in/
+                            - generic [ref=f27e1761]:
+                              - generic [ref=f27e1764]:
+                                - link "r/productivity" [ref=f27e1765] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/productivity/
+                                - generic [aria-hidden] [ref=f27e1770]: •
+                                - time [ref=f27e1772]: 2y ago
+                              - link [ref=f27e1774] [cursor=pointer]:
+                                - /url: /r/productivity/comments/1iplx72/what_alarm_app_should_i_use_to_make_me_get_up_in/
+                                - heading "List item post - What alarm app should i use to make me get up in the morning" [level=3] [ref=f27e1777]: What alarm app should i use to make me get up in the morning
+                            - generic [ref=f27e1779]:
+                              - generic [ref=f27e1780]: "5"
+                              - text: upvotes ·
+                              - generic [ref=f27e1781]: "10"
+                              - text: comments
+                          - separator [ref=f27e1782]
+                      - listitem [ref=f27e1783]:
+                        - generic [ref=f27e1784]:
+                          - generic [ref=f27e1785]:
+                            - link "Google updated the Google Maps logo" [ref=f27e1786] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/google/comments/1rlhtmu/google_updated_the_google_maps_logo/
+                            - generic [ref=f27e1788]:
+                              - generic [ref=f27e1789]:
+                                - generic [ref=f27e1792]:
+                                  - link "r/google" [ref=f27e1793] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/google/
+                                  - generic [aria-hidden] [ref=f27e1798]: •
+                                  - time [ref=f27e1800]: 7mo ago
+                                - link [ref=f27e1802] [cursor=pointer]:
+                                  - /url: /r/google/comments/1rlhtmu/google_updated_the_google_maps_logo/
+                                  - heading "List item post - Google updated the Google Maps logo" [level=3] [ref=f27e1805]: Google updated the Google Maps logo
+                              - link "r/google - Google updated the Google Maps logo" [ref=f27e1808] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/google/comments/1rlhtmu/google_updated_the_google_maps_logo/
+                                - img "r/google - Google updated the Google Maps logo" [ref=f27e1809]
+                            - generic [ref=f27e1811]:
+                              - generic [ref=f27e1812]: "165"
+                              - text: upvotes ·
+                              - generic [ref=f27e1813]: "44"
+                              - text: comments
+                          - separator [ref=f27e1814]
+                      - listitem [ref=f27e1815]:
+                        - generic [ref=f27e1816]:
+                          - generic [ref=f27e1817]:
+                            - link "Map generator" [ref=f27e1818] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DMAcademy/comments/1r5wswe/map_generator/
+                            - generic [ref=f27e1821]:
+                              - generic [ref=f27e1824]:
+                                - link "r/DMAcademy" [ref=f27e1825] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/DMAcademy/
+                                - generic [aria-hidden] [ref=f27e1830]: •
+                                - time [ref=f27e1832]: 8mo ago
+                              - link [ref=f27e1834] [cursor=pointer]:
+                                - /url: /r/DMAcademy/comments/1r5wswe/map_generator/
+                                - heading "List item post - Map generator" [level=3] [ref=f27e1837]: Map generator
+                            - generic [ref=f27e1839]:
+                              - generic [ref=f27e1840]: "8"
+                              - text: upvotes ·
+                              - generic [ref=f27e1841]: "8"
+                              - text: comments
+                          - separator [ref=f27e1842]
+                      - listitem
+                      - listitem [ref=f27e1843]:
+                        - generic [ref=f27e1844]:
+                          - generic [ref=f27e1845]:
+                            - link "Simple app to go to the hidden Android Settings" [ref=f27e1846] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/OculusQuest/comments/1j67k70/simple_app_to_go_to_the_hidden_android_settings/
+                            - generic [ref=f27e1849]:
+                              - generic [ref=f27e1852]:
+                                - link "r/OculusQuest" [ref=f27e1853] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/OculusQuest/
+                                - generic [aria-hidden] [ref=f27e1858]: •
+                                - time [ref=f27e1860]: 2y ago
+                              - link [ref=f27e1862] [cursor=pointer]:
+                                - /url: /r/OculusQuest/comments/1j67k70/simple_app_to_go_to_the_hidden_android_settings/
+                                - heading "List item post - Simple app to go to the hidden Android Settings" [level=3] [ref=f27e1865]: Simple app to go to the hidden Android Settings
+                            - generic [ref=f27e1867]:
+                              - generic [ref=f27e1868]: "9"
+                              - text: upvotes ·
+                              - generic [ref=f27e1869]: "42"
+                              - text: comments
+                          - separator [ref=f27e1870]
+                      - listitem [ref=f27e1871]:
+                        - generic [ref=f27e1872]:
+                          - generic [ref=f27e1873]:
+                            - link "Sharing my D&D map making project" [ref=f27e1874] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/mapmaking/comments/1wzz53g/sharing_my_dd_map_making_project/
+                            - generic [ref=f27e1876]:
+                              - generic [ref=f27e1877]:
+                                - generic [ref=f27e1880]:
+                                  - link "r/mapmaking" [ref=f27e1881] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/mapmaking/
+                                  - generic [aria-hidden] [ref=f27e1886]: •
+                                  - time [ref=f27e1888]: 8d ago
+                                - link [ref=f27e1890] [cursor=pointer]:
+                                  - /url: /r/mapmaking/comments/1wzz53g/sharing_my_dd_map_making_project/
+                                  - heading "List item post - Sharing my D&D map making project" [level=3] [ref=f27e1893]: Sharing my D&D map making project
+                              - link "r/mapmaking - Sharing my D&D map making project" [ref=f27e1896] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/mapmaking/comments/1wzz53g/sharing_my_dd_map_making_project/
+                                - img "r/mapmaking - Sharing my D&D map making project" [ref=f27e1897]
+                            - generic [ref=f27e1899]:
+                              - generic [ref=f27e1900]: "204"
+                              - text: upvotes ·
+                              - generic [ref=f27e1901]: "7"
+                              - text: comments
+                          - separator [ref=f27e1902]
+                      - listitem [ref=f27e1903]:
+                        - generic [ref=f27e1904]:
+                          - generic [ref=f27e1905]:
+                            - link "I'm looking for a map making program" [ref=f27e1906] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DungeonMasters/comments/1sruyyc/im_looking_for_a_map_making_program/
+                            - generic [ref=f27e1909]:
+                              - generic [ref=f27e1912]:
+                                - link "r/DungeonMasters" [ref=f27e1913] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/DungeonMasters/
+                                - generic [aria-hidden] [ref=f27e1920]: •
+                                - time [ref=f27e1922]: 6mo ago
+                              - link [ref=f27e1924] [cursor=pointer]:
+                                - /url: /r/DungeonMasters/comments/1sruyyc/im_looking_for_a_map_making_program/
+                                - heading "List item post - I'm looking for a map making program" [level=3] [ref=f27e1927]: I'm looking for a map making program
+                            - generic [ref=f27e1929]:
+                              - generic [ref=f27e1930]: "37"
+                              - text: upvotes ·
+                              - generic [ref=f27e1931]: "27"
+                              - text: comments
+                          - separator [ref=f27e1932]
+                      - listitem [ref=f27e1933]:
+                        - generic [ref=f27e1934]:
+                          - generic [ref=f27e1935]:
+                            - link "I've made this map with my own mapmaking app" [ref=f27e1936] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/dndmaps/comments/1wvtiyo/ive_made_this_map_with_my_own_mapmaking_app/
+                            - generic [ref=f27e1938]:
+                              - generic [ref=f27e1939]:
+                                - generic [ref=f27e1942]:
+                                  - link "r/dndmaps" [ref=f27e1943] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/dndmaps/
+                                  - generic [aria-hidden] [ref=f27e1948]: •
+                                  - time [ref=f27e1950]: 13d ago
+                                - link [ref=f27e1952] [cursor=pointer]:
+                                  - /url: /r/dndmaps/comments/1wvtiyo/ive_made_this_map_with_my_own_mapmaking_app/
+                                  - heading "List item post - I've made this map with my own mapmaking app" [level=3] [ref=f27e1955]: I've made this map with my own mapmaking app
+                              - link "r/dndmaps - I've made this map with my own mapmaking app" [ref=f27e1958] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/dndmaps/comments/1wvtiyo/ive_made_this_map_with_my_own_mapmaking_app/
+                                - img "r/dndmaps - I've made this map with my own mapmaking app" [ref=f27e1959]
+                            - generic [ref=f27e1961]:
+                              - generic [ref=f27e1962]: "313"
+                              - text: upvotes ·
+                              - generic [ref=f27e1963]: "18"
+                              - text: comments
+                          - separator [ref=f27e1964]
+                      - listitem [ref=f27e1965]:
+                        - generic [ref=f27e1966]:
+                          - generic [ref=f27e1967]:
+                            - link "WORK IN PROGRESS ON NEW MAP!" [ref=f27e1968] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/dndmaps/comments/1x0kqqs/work_in_progress_on_new_map/
+                            - generic [ref=f27e1970]:
+                              - generic [ref=f27e1971]:
+                                - generic [ref=f27e1974]:
+                                  - link "r/dndmaps" [ref=f27e1975] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/dndmaps/
+                                  - generic [aria-hidden] [ref=f27e1980]: •
+                                  - time [ref=f27e1982]: 7d ago
+                                - link [ref=f27e1984] [cursor=pointer]:
+                                  - /url: /r/dndmaps/comments/1x0kqqs/work_in_progress_on_new_map/
+                                  - heading "List item post - WORK IN PROGRESS ON NEW MAP!" [level=3] [ref=f27e1987]: WORK IN PROGRESS ON NEW MAP!
+                              - link "r/dndmaps - WORK IN PROGRESS ON NEW MAP!" [ref=f27e1990] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/dndmaps/comments/1x0kqqs/work_in_progress_on_new_map/
+                                - img "r/dndmaps - WORK IN PROGRESS ON NEW MAP!" [ref=f27e1991]
+                            - generic [ref=f27e1993]:
+                              - generic [ref=f27e1994]: "207"
+                              - text: upvotes ·
+                              - generic [ref=f27e1995]: "9"
+                              - text: comments
+                          - separator [ref=f27e1996]
+                      - listitem [ref=f27e1997]:
+                        - generic [ref=f27e1998]:
+                          - generic [ref=f27e1999]:
+                            - link "First Attempt" [ref=f27e2000] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/mapmaking/comments/1voeumd/first_attempt/
+                            - generic [ref=f27e2002]:
+                              - generic [ref=f27e2003]:
+                                - generic [ref=f27e2006]:
+                                  - link "r/mapmaking" [ref=f27e2007] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/mapmaking/
+                                  - generic [aria-hidden] [ref=f27e2012]: •
+                                  - time [ref=f27e2014]: 2mo ago
+                                - link [ref=f27e2016] [cursor=pointer]:
+                                  - /url: /r/mapmaking/comments/1voeumd/first_attempt/
+                                  - heading "List item post - First Attempt" [level=3] [ref=f27e2019]: First Attempt
+                              - link "r/mapmaking - First Attempt" [ref=f27e2022] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/mapmaking/comments/1voeumd/first_attempt/
+                                - img "r/mapmaking - First Attempt" [ref=f27e2023]
+                            - generic [ref=f27e2025]:
+                              - generic [ref=f27e2026]: "132"
+                              - text: upvotes ·
+                              - generic [ref=f27e2027]: "17"
+                              - text: comments
+                          - separator [ref=f27e2028]
+                      - listitem [ref=f27e2029]:
+                        - generic [ref=f27e2030]:
+                          - generic [ref=f27e2031]:
+                            - link "My app became App of the Day this week – here’s the story (and I’m giving away free access)" [ref=f27e2032] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/apple/comments/1jy73za/my_app_became_app_of_the_day_this_week_heres_the/
+                            - generic [ref=f27e2035]:
+                              - generic [ref=f27e2038]:
+                                - link "r/apple" [ref=f27e2039] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/apple/
+                                - generic [aria-hidden] [ref=f27e2044]: •
+                                - time [ref=f27e2046]: 2y ago
+                              - link [ref=f27e2048] [cursor=pointer]:
+                                - /url: /r/apple/comments/1jy73za/my_app_became_app_of_the_day_this_week_heres_the/
+                                - heading "List item post - My app became App of the Day this week – here’s the story (..." [level=3] [ref=f27e2051]: My app became App of the Day this week – here’s the story (and I’m giving away free access)
+                            - generic [ref=f27e2053]:
+                              - generic [ref=f27e2054]: "464"
+                              - text: upvotes ·
+                              - generic [ref=f27e2055]: "636"
+                              - text: comments
+                          - separator [ref=f27e2056]
+                      - listitem [ref=f27e2057]:
+                        - generic [ref=f27e2058]:
+                          - generic [ref=f27e2059]:
+                            - link "Completely overwhelmed by Hallow app" [ref=f27e2060] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Catholicism/comments/1gyt1oz/completely_overwhelmed_by_hallow_app/
+                            - generic [ref=f27e2063]:
+                              - generic [ref=f27e2066]:
+                                - link "r/Catholicism" [ref=f27e2067] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/Catholicism/
+                                - generic [aria-hidden] [ref=f27e2072]: •
+                                - time [ref=f27e2074]: 2y ago
+                              - link [ref=f27e2076] [cursor=pointer]:
+                                - /url: /r/Catholicism/comments/1gyt1oz/completely_overwhelmed_by_hallow_app/
+                                - heading "List item post - Completely overwhelmed by Hallow app" [level=3] [ref=f27e2079]: Completely overwhelmed by Hallow app
+                            - generic [ref=f27e2081]:
+                              - generic [ref=f27e2082]: "32"
+                              - text: upvotes ·
+                              - generic [ref=f27e2083]: "30"
+                              - text: comments
+                          - separator [ref=f27e2084]
+                      - listitem [ref=f27e2085]:
+                        - generic [ref=f27e2086]:
+                          - generic [ref=f27e2087]:
+                            - link "How can you mess up so badly when making a mapping program lmao" [ref=f27e2088] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/mapporncirclejerk/comments/1whcajv/how_can_you_mess_up_so_badly_when_making_a/
+                            - generic [ref=f27e2090]:
+                              - generic [ref=f27e2091]:
+                                - generic [ref=f27e2094]:
+                                  - link "r/mapporncirclejerk" [ref=f27e2095] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/mapporncirclejerk/
+                                  - generic [aria-hidden] [ref=f27e2100]: •
+                                  - time [ref=f27e2102]: 1mo ago
+                                - link [ref=f27e2104] [cursor=pointer]:
+                                  - /url: /r/mapporncirclejerk/comments/1whcajv/how_can_you_mess_up_so_badly_when_making_a/
+                                  - heading "List item post - How can you mess up so badly when making a mapping program ..." [level=3] [ref=f27e2107]: How can you mess up so badly when making a mapping program lmao
+                              - link "r/mapporncirclejerk - How can you mess up so badly when making a mapping program lmao" [ref=f27e2110] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/mapporncirclejerk/comments/1whcajv/how_can_you_mess_up_so_badly_when_making_a/
+                                - img "r/mapporncirclejerk - How can you mess up so badly when making a mapping program lmao" [ref=f27e2111]
+                            - generic [ref=f27e2113]:
+                              - generic [ref=f27e2114]: 1.7K
+                              - text: upvotes ·
+                              - generic [ref=f27e2115]: "53"
+                              - text: comments
+                          - separator [ref=f27e2116]
+                      - listitem [ref=f27e2117]:
+                        - generic [ref=f27e2118]:
+                          - generic [ref=f27e2119]:
+                            - link "My work in progress" [ref=f27e2120] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/mapmaking/comments/1vs8bqn/my_work_in_progress/
+                            - generic [ref=f27e2122]:
+                              - generic [ref=f27e2123]:
+                                - generic [ref=f27e2126]:
+                                  - link "r/mapmaking" [ref=f27e2127] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/mapmaking/
+                                  - generic [aria-hidden] [ref=f27e2132]: •
+                                  - time [ref=f27e2134]: 2mo ago
+                                - link [ref=f27e2136] [cursor=pointer]:
+                                  - /url: /r/mapmaking/comments/1vs8bqn/my_work_in_progress/
+                                  - heading "List item post - My work in progress" [level=3] [ref=f27e2139]: My work in progress
+                              - link "r/mapmaking - My work in progress" [ref=f27e2142] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/mapmaking/comments/1vs8bqn/my_work_in_progress/
+                                - img "r/mapmaking - My work in progress" [ref=f27e2143]
+                            - generic [ref=f27e2145]:
+                              - generic [ref=f27e2146]: "49"
+                              - text: upvotes ·
+                              - generic [ref=f27e2147]: "8"
+                              - text: comments
+                          - separator [ref=f27e2148]
+                      - listitem [ref=f27e2149]:
+                        - generic [ref=f27e2150]:
+                          - generic [ref=f27e2151]:
+                            - link "What's a program / software that I can use to make maps like this?" [ref=f27e2152] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/mapmaking/comments/1wqgbap/whats_a_program_software_that_i_can_use_to_make/
+                            - generic [ref=f27e2154]:
+                              - generic [ref=f27e2155]:
+                                - generic [ref=f27e2158]:
+                                  - link "r/mapmaking" [ref=f27e2159] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/mapmaking/
+                                  - generic [aria-hidden] [ref=f27e2164]: •
+                                  - time [ref=f27e2166]: 20d ago
+                                - link [ref=f27e2168] [cursor=pointer]:
+                                  - /url: /r/mapmaking/comments/1wqgbap/whats_a_program_software_that_i_can_use_to_make/
+                                  - heading "List item post - What's a program / software that I can use to make maps lik..." [level=3] [ref=f27e2171]: What's a program / software that I can use to make maps like this?
+                              - link "r/mapmaking - What's a program / software that I can use to make maps like this?" [ref=f27e2174] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/mapmaking/comments/1wqgbap/whats_a_program_software_that_i_can_use_to_make/
+                                - img "r/mapmaking - What's a program / software that I can use to make maps like this?" [ref=f27e2175]
+                            - generic [ref=f27e2177]:
+                              - generic [ref=f27e2178]: "151"
+                              - text: upvotes ·
+                              - generic [ref=f27e2179]: "12"
+                              - text: comments
+                          - separator [ref=f27e2180]
+                      - listitem [ref=f27e2181]:
+                        - generic [ref=f27e2182]:
+                          - generic [ref=f27e2183]:
+                            - link "I would love some ideas" [ref=f27e2184] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/mapmaking/comments/1u9b3mf/i_would_love_some_ideas/
+                            - generic [ref=f27e2186]:
+                              - generic [ref=f27e2187]:
+                                - generic [ref=f27e2190]:
+                                  - link "r/mapmaking" [ref=f27e2191] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/mapmaking/
+                                  - generic [aria-hidden] [ref=f27e2196]: •
+                                  - time [ref=f27e2198]: 4mo ago
+                                - link [ref=f27e2200] [cursor=pointer]:
+                                  - /url: /r/mapmaking/comments/1u9b3mf/i_would_love_some_ideas/
+                                  - heading "List item post - I would love some ideas" [level=3] [ref=f27e2203]: I would love some ideas
+                              - link "r/mapmaking - I would love some ideas" [ref=f27e2206] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/mapmaking/comments/1u9b3mf/i_would_love_some_ideas/
+                                - img "r/mapmaking - I would love some ideas" [ref=f27e2207]
+                            - generic [ref=f27e2209]:
+                              - generic [ref=f27e2210]: "35"
+                              - text: upvotes ·
+                              - generic [ref=f27e2211]: "13"
+                              - text: comments
+                          - separator [ref=f27e2212]
+                      - listitem [ref=f27e2213]:
+                        - generic [ref=f27e2214]:
+                          - generic [ref=f27e2215]:
+                            - link "is the hallow prayer app worth it for a protestant?" [ref=f27e2216] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Christianity/comments/zmwvv3/is_the_hallow_prayer_app_worth_it_for_a_protestant/
+                            - generic [ref=f27e2219]:
+                              - generic [ref=f27e2222]:
+                                - link "r/Christianity" [ref=f27e2223] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/Christianity/
+                                - generic [aria-hidden] [ref=f27e2228]: •
+                                - time [ref=f27e2230]: 4y ago
+                              - link [ref=f27e2232] [cursor=pointer]:
+                                - /url: /r/Christianity/comments/zmwvv3/is_the_hallow_prayer_app_worth_it_for_a_protestant/
+                                - heading "List item post - is the hallow prayer app worth it for a protestant?" [level=3] [ref=f27e2235]: is the hallow prayer app worth it for a protestant?
+                            - generic [ref=f27e2237]:
+                              - generic [ref=f27e2238]: "13"
+                              - text: upvotes ·
+                              - generic [ref=f27e2239]: "26"
+                              - text: comments
+                          - separator [ref=f27e2240]
+                      - listitem [ref=f27e2241]:
+                        - generic [ref=f27e2242]:
+                          - generic [ref=f27e2243]:
+                            - link "Are there any tools to help make a map that aren't AI?" [ref=f27e2244] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DMAcademy/comments/1r9fwml/are_there_any_tools_to_help_make_a_map_that_arent/
+                            - generic [ref=f27e2247]:
+                              - generic [ref=f27e2250]:
+                                - link "r/DMAcademy" [ref=f27e2251] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/DMAcademy/
+                                - generic [aria-hidden] [ref=f27e2256]: •
+                                - time [ref=f27e2258]: 8mo ago
+                              - link [ref=f27e2260] [cursor=pointer]:
+                                - /url: /r/DMAcademy/comments/1r9fwml/are_there_any_tools_to_help_make_a_map_that_arent/
+                                - heading "List item post - Are there any tools to help make a map that aren't AI?" [level=3] [ref=f27e2263]: Are there any tools to help make a map that aren't AI?
+                            - generic [ref=f27e2265]:
+                              - generic [ref=f27e2266]: "25"
+                              - text: upvotes ·
+                              - generic [ref=f27e2267]: "34"
+                              - text: comments
+                          - separator [ref=f27e2268]
+                      - listitem [ref=f27e2269]:
+                        - generic [ref=f27e2270]:
+                          - generic [ref=f27e2271]:
+                            - link "How did I do" [ref=f27e2272] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/mapmaking/comments/1wwxwlj/how_did_i_do/
+                            - generic [ref=f27e2274]:
+                              - generic [ref=f27e2275]:
+                                - generic [ref=f27e2278]:
+                                  - link "r/mapmaking" [ref=f27e2279] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/mapmaking/
+                                  - generic [aria-hidden] [ref=f27e2284]: •
+                                  - time [ref=f27e2286]: 12d ago
+                                - link [ref=f27e2288] [cursor=pointer]:
+                                  - /url: /r/mapmaking/comments/1wwxwlj/how_did_i_do/
+                                  - heading "List item post - How did I do" [level=3] [ref=f27e2291]: How did I do
+                              - link "r/mapmaking - How did I do" [ref=f27e2294] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/mapmaking/comments/1wwxwlj/how_did_i_do/
+                                - img "r/mapmaking - How did I do" [ref=f27e2295]
+                            - generic [ref=f27e2297]:
+                              - generic [ref=f27e2298]: "128"
+                              - text: upvotes ·
+                              - generic [ref=f27e2299]: "17"
+                              - text: comments
+                          - separator [ref=f27e2300]
+                      - listitem [ref=f27e2301]:
+                        - generic [ref=f27e2302]:
+                          - generic [ref=f27e2303]:
+                            - link "Is this worth uploading to the App Store?" [ref=f27e2304] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/iOSProgramming/comments/1pc1wcl/is_this_worth_uploading_to_the_app_store/
+                            - generic [ref=f27e2306]:
+                              - generic [ref=f27e2307]:
+                                - generic [ref=f27e2310]:
+                                  - link "r/iOSProgramming" [ref=f27e2311] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/iOSProgramming/
+                                  - generic [aria-hidden] [ref=f27e2316]: •
+                                  - time [ref=f27e2318]: 1y ago
+                                - link [ref=f27e2320] [cursor=pointer]:
+                                  - /url: /r/iOSProgramming/comments/1pc1wcl/is_this_worth_uploading_to_the_app_store/
+                                  - heading "List item post - Is this worth uploading to the App Store?" [level=3] [ref=f27e2323]: Is this worth uploading to the App Store?
+                              - link "r/iOSProgramming - Is this worth uploading to the App Store?" [ref=f27e2326] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/iOSProgramming/comments/1pc1wcl/is_this_worth_uploading_to_the_app_store/
+                                - img "r/iOSProgramming - Is this worth uploading to the App Store?" [ref=f27e2327]
+                            - generic [ref=f27e2329]:
+                              - generic [ref=f27e2330]: "10"
+                              - text: comments
+                          - separator [ref=f27e2331]
+                      - listitem [ref=f27e2332]:
+                        - generic [ref=f27e2334]:
+                          - link "Any advice for my map?" [ref=f27e2335] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/mapmaking/comments/1w4hz9n/any_advice_for_my_map/
+                          - generic [ref=f27e2337]:
+                            - generic [ref=f27e2338]:
+                              - generic [ref=f27e2341]:
+                                - link "r/mapmaking" [ref=f27e2342] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/mapmaking/
+                                - generic [aria-hidden] [ref=f27e2347]: •
+                                - time [ref=f27e2349]: 1mo ago
+                              - link [ref=f27e2351] [cursor=pointer]:
+                                - /url: /r/mapmaking/comments/1w4hz9n/any_advice_for_my_map/
+                                - heading "List item post - Any advice for my map?" [level=3] [ref=f27e2354]: Any advice for my map?
+                            - link "r/mapmaking - Any advice for my map?" [ref=f27e2357] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/mapmaking/comments/1w4hz9n/any_advice_for_my_map/
+                              - img "r/mapmaking - Any advice for my map?" [ref=f27e2358]
+                          - generic [ref=f27e2360]:
+                            - generic [ref=f27e2361]: "26"
+                            - text: upvotes ·
+                            - generic [ref=f27e2362]: "17"
+                            - text: comments
+                  - generic [ref=f27e2363]:
+                    - heading "View Post in" [level=2] [ref=f27e2365]
+                    - generic [ref=f27e2367]:
+                      - link "简体中文" [ref=f27e2369] [cursor=pointer]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/i_just_want_a_program_where_i_can_put_in_my_map/?tl=zh-hans
+                      - link "Русский" [ref=f27e2371] [cursor=pointer]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/i_just_want_a_program_where_i_can_put_in_my_map/?tl=ru
+                      - link "繁體中文" [ref=f27e2373] [cursor=pointer]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/i_just_want_a_program_where_i_can_put_in_my_map/?tl=zh-hant
+                      - link "हिन्दी" [ref=f27e2375] [cursor=pointer]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/i_just_want_a_program_where_i_can_put_in_my_map/?tl=hi
+                      - link "Tiếng Việt" [ref=f27e2377] [cursor=pointer]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/o5yfe9/i_just_want_a_program_where_i_can_put_in_my_map/?tl=vi
+                      - group [ref=f27e2378]:
+                        - generic "See more" [ref=f27e2379] [cursor=pointer]
+                  - complementary "Community information" [ref=f27e2384]:
+                    - generic [ref=f27e2386]:
+                      - heading "Community Info Section" [level=1] [ref=f27e2387]
+                      - generic [ref=f27e2388]:
+                        - link "r/DMAcademy" [ref=f27e2390] [cursor=pointer]:
+                          - /url: /r/DMAcademy/
+                        - button "Join" [ref=f27e2395] [cursor=pointer]
+                      - generic [ref=f27e2396]:
+                        - generic [ref=f27e2397]: DMAcademy
+                        - generic [ref=f27e2399]: /r/DMAcademy is a subreddit for Dungeons & Dragons Dungeon Masters to ask questions - new and experienced, all are welcome!
+                        - button "Show more" [ref=f27e2400] [cursor=pointer]
+                        - generic: Public
+                  - generic [ref=f27e2408]:
+                    - heading "Top Posts" [level=2] [ref=f27e2409]
+                    - list [ref=f27e2410]:
+                      - listitem [ref=f27e2411]:
+                        - 'link "Reddit reReddit: Top posts of June 22, 2021" [ref=f27e2412] [cursor=pointer]':
+                          - /url: https://www.reddit.com/posts/2021/june-22-1/global/
+                          - generic [ref=f27e2413]: Reddit
+                          - generic [ref=f27e2428]: "reReddit: Top posts of June 22, 2021"
+                          - separator [ref=f27e2429]
+                      - listitem [ref=f27e2430]:
+                        - 'link "Reddit reReddit: Top posts of June 2021" [ref=f27e2431] [cursor=pointer]':
+                          - /url: https://www.reddit.com/posts/2021/june/global/
+                          - generic [ref=f27e2432]: Reddit
+                          - generic [ref=f27e2447]: "reReddit: Top posts of June 2021"
+                          - separator [ref=f27e2448]
+                      - listitem [ref=f27e2449]:
+                        - 'link "Reddit reReddit: Top posts of 2021" [ref=f27e2450] [cursor=pointer]':
+                          - /url: https://www.reddit.com/posts/2021/global/
+                          - generic [ref=f27e2451]: Reddit
+                          - generic [ref=f27e2466]: "reReddit: Top posts of 2021"
+                          - separator [ref=f27e2467]
+              - list [ref=f27e2469]:
+                - listitem [ref=f27e2470]:
+                  - link "Home" [ref=f27e2472] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f27e2473]:
+                  - link "Popular" [ref=f27e2475] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f27e2476]:
+                  - link "News" [ref=f27e2478] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f27e2479]:
+                  - link "Explore" [ref=f27e2481] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f27e2482]:
+                  - link "Best of Reddit" [ref=f27e2484] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f27e2485]:
+                  - link "Best of Reddit in Portuguese" [ref=f27e2487] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f27e2488]:
+                  - link "Best of Reddit in German" [ref=f27e2490] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f27e2491]:
+                  - link "Reddit Rules" [ref=f27e2493] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f27e2494]:
+                  - link "Privacy Policy" [ref=f27e2496] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f27e2497]:
+                  - link "User Agreement" [ref=f27e2499] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f27e2500]:
+                  - link "Accessibility" [ref=f27e2502] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f27e2503]:
+                  - link "Reddit, Inc. © 2026. All rights reserved." [ref=f27e2504] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f27e2507]:
+          - paragraph [ref=f27e2508]: Join the most real place on the internet
+          - generic [ref=f27e2510]:
+            - generic [ref=f27e2513]:
+              - iframe [ref=f27e2518]:
+                - button "Continue with Google. Opens in new tab" [ref=f28e3] [cursor=pointer]:
+                  - generic [ref=f28e5]: Continue with Google
+              - generic [ref=f27e2520] [cursor=pointer]:
+                - generic [ref=f27e2521]: Continue with Apple
+                - button "Sign in with Apple" [ref=f27e2527]:
+                  - generic [ref=f27e2528]:
+                    - img:
+                      - generic:
+                        - img:
+                          - generic:  Sign in with Apple
+            - link "Continue with Phone Number" [ref=f27e2533] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - link "Continue with Email" [ref=f27e2542] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+          - paragraph [ref=f27e2549]:
+            - text: By continuing, you agree to our
+            - link "User Agreement" [ref=f27e2550] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: and acknowledge that you understand the
+            - link "Privacy Policy" [ref=f27e2551] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: .

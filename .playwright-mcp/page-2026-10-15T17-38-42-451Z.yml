@@ -1,0 +1,1357 @@
+- generic [active] [ref=f138e1]:
+  - link "Skip to main content" [ref=f138e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f138e6]:
+    - generic:
+      - generic: "What Virtual TableTop Do You Use? : r/DMAcademy"
+      - banner [ref=f138e10]:
+        - navigation [ref=f138e11]:
+          - link "Home" [ref=f138e15] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - search [ref=f138e34]:
+            - generic [ref=f138e36]:
+              - generic "Remove r/DMAcademy filter and expand search to all of Reddit" [ref=f138e42] [cursor=pointer]:
+                - button [pressed] [ref=f138e43]:
+                  - generic [aria-hidden] [ref=f138e47]: r/DMAcademy
+              - textbox "Remove r/DMAcademy filter and expand search to all of Reddit" [ref=f138e53]:
+                - /placeholder: Search in ⁨r/DMAcademy⁩
+          - generic [ref=f138e54]:
+            - link "Sign Up" [ref=f138e60] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Log In" [ref=f138e66] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Expand user menu" [ref=f138e73] [cursor=pointer]
+      - generic [ref=f138e79]:
+        - generic [ref=f138e80]:
+          - generic [ref=f138e81]:
+            - generic:
+              - generic:
+                - link "Skip to Sign up" [ref=f138e82] [cursor=pointer]:
+                  - /url: "#left-sidebar-container"
+                - link "Skip to Right Sidebar" [ref=f138e83] [cursor=pointer]:
+                  - /url: "#right-sidebar-container"
+          - generic [ref=f138e84]:
+            - main [ref=f138e85]:
+              - 'generic "What Virtual TableTop Do You Use? : r/DMAcademy"'
+              - generic [ref=f138e86]:
+                - generic [ref=f138e87]:
+                  - generic [ref=f138e88]:
+                    - button "Back" [ref=f138e90] [cursor=pointer]
+                    - link "Go to DMAcademy" [ref=f138e98] [cursor=pointer]:
+                      - /url: https://www.reddit.com/r/DMAcademy/
+                    - group [ref=f138e103]:
+                      - generic [ref=f138e104]:
+                        - link "r/DMAcademy" [ref=f138e108] [cursor=pointer]:
+                          - /url: https://www.reddit.com/r/DMAcademy/
+                        - generic [aria-hidden] [ref=f138e109]: •
+                        - time [ref=f138e111]: 2y ago
+                      - 'link "Author: Aranthar" [ref=f138e117] [cursor=pointer]':
+                        - /url: https://www.reddit.com/user/Aranthar/
+                        - generic [ref=f138e118]: u/Aranthar
+                  - generic [ref=f138e120]:
+                    - img "Archived post" [ref=f138e124]
+                    - button "Open user actions" [ref=f138e128] [cursor=pointer]
+                - generic [ref=f138e134]:
+                  - 'heading "Post Title: What Virtual TableTop Do You Use?" [level=1] [ref=f138e135]': What Virtual TableTop Do You Use?
+                  - 'link "Flair: Need Advice: Other" [ref=f138e138] [cursor=pointer]':
+                    - /url: /r/DMAcademy/?f=flair_name%3A%22Need%20Advice%3A%20Other%22
+                    - 'generic "Flair: Need Advice: Other" [ref=f138e140]': "Need Advice: Other"
+                - generic [ref=f138e144]:
+                  - paragraph [ref=f138e145]: I have a group meeting in-person once a month. We're considering adding a 2nd session that would be Virtual. My players all have their characters in DnDBeyond.
+                  - paragraph [ref=f138e146]: What virtual tabletop interfaces do you folks uses for virtual play? I've been doing some reading and see Owlbear Rodeo, Foundry, and Roll20 mentioned a lot, but I've also read about others.
+                  - paragraph [ref=f138e147]:
+                    - text: "I would appreciate your thoughts, and I've also made an online poll:"
+                    - link "https://poll-maker.com/poll5221473xAF5f44EE-158" [ref=f138e148] [cursor=pointer]:
+                      - /url: https://poll-maker.com/poll5221473xAF5f44EE-158
+                - generic: Archived post. New comments cannot be posted and votes cannot be cast.
+                - generic "Actions available for this post" [ref=f138e156]:
+                  - generic [ref=f138e159]:
+                    - button "Upvote" [disabled]
+                    - generic [ref=f138e160]: "56"
+                    - button "Downvote" [disabled]
+                  - button "130 Go to comments" [ref=f138e162] [cursor=pointer]:
+                    - generic [ref=f138e163]: "130"
+                    - generic [ref=f138e169]: Go to comments
+                  - button "Share" [ref=f138e173] [cursor=pointer]
+              - generic "There’s always a trend, a fashion, a fad, but gold has always been timeless. Visit invest.gold" [ref=f138e180]:
+                - generic [ref=f138e181]:
+                  - 'link "Advertisement: There’s always a trend, a fashion, a fad, but gold has always been timeless. Visit invest.gold" [ref=f138e182] [cursor=pointer]':
+                    - /url: https://alb.reddit.com/cr?za=Qg82f788aXA3-8Tb2wBBQ-VESbeOcM8R8OhpN2aeSYnsplxrv60arEUVa7nmEzkauVaBoBHStdP75LCB9VHS0jaH0FB-Wv4lRB3QbFve7X91cdNPPqe7LoWeM4VHcLQ7em5eL-ONSyVxaasdQVTTdN7KfVNIQLmxwRCOTs2sSgFkEUBaHS99HPMzZ-odO6ekCcDhitmrZPc0SyiHGLHdpDZlmr_x6TQybega6AuBZ8qWuFdiqJiUh1xV5G7_Rsl0qaaD18fbfVYWQWeyOgkL2Xi4cqGBskuu6fOp13UKVEqoAfh3sUZ2Im_EoKW7705Kiao4GvjTVcR06BJhAjCyUbNtyLGWCuKNTQ5H8TkMIURgPVM-Z9QgbGPZkp1g7aoF-q71xMxAXa2HLr6wwEhVJURnwqW7zalHVxLrAUXO8H52cGa7IZalufh4tej98ZgxyuQE9H_rFk_j0BU-sjGkvXhwUZtplP-huUGp9z_hnHhySVI2j46TqNctjoFeN4IdbKNkSI7uGfNGMXennWGgBTU0Ztdkdc9TQ2s6L2AJ7wCH5lZ3mBccFmzjLpwQHck8p8SPnS2z5W9VNaHN7xDxpVYI5-zAD5gP2X7XYRjjy29WFxzMTs1jnKVncYQYF1CCGNFk1jStj92l_IkmR_4wi8H5dox6cm2hzv9BEAixSFf01-ge51U_pHvrFmlscI3h1ed-b7RahOqsmrR6zcqYRnMoWEyROYDI67iBqE5NOlyAwdur5co4grWlU1qziNljv9Y&zp=nSt6a5a_k430liEM4tgcb4GlnAclmi6PhWkGmwjurlGQ8TjFM1vRGYiCN8CqC3TyAKvHiYEEeFcJ8tVlA0q5TY-0ifozvZKj9XOlYAivRtZkrvfLPIBcQzcN46OqFxYB-Jro3jk7N6IfxeIGq0K8v7Yxa25rib_jKv87GycRtJejvgIUQ0Wy37YUKR0kuPOtvIEZM6F5WJfgnS2XV-XgK2XPIOf7-GWJzh0FcIVnbo6Mn-x7EppmiB_N7fSTyNJSdul7s4hC_7bKlBkAxM507aIxYzwG7VXTx_Arlv5g-p-Ed4aqh3sDMaSnG4D2k64SsvJetm5umtDZCQLzEP2fST66UpsmQxGUuw0fByXySV9n_HKnmKaArATDKl3qvfRENOhbIjrOmNPJLNFmEhQdqmJV5w
+                  - generic [ref=f138e183]:
+                    - generic [ref=f138e184]:
+                      - link "GoldInsights" [ref=f138e187] [cursor=pointer]:
+                        - /url: /user/GoldInsights/
+                        - img "u/GoldInsights avatar" [ref=f138e190]
+                      - generic [ref=f138e192]: •
+                      - link "Ad" [ref=f138e194] [cursor=pointer]:
+                        - /url: /user/GoldInsights/
+                      - link [ref=f138e196] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=Qg82f788aXA3-8Tb2wBBQ-VESbeOcM8R8OhpN2aeSYnsplxrv60arEUVa7nmEzkauVaBoBHStdP75LCB9VHS0jaH0FB-Wv4lRB3QbFve7X91cdNPPqe7LoWeM4VHcLQ7em5eL-ONSyVxaasdQVTTdN7KfVNIQLmxwRCOTs2sSgFkEUBaHS99HPMzZ-odO6ekCcDhitmrZPc0SyiHGLHdpDZlmr_x6TQybega6AuBZ8qWuFdiqJiUh1xV5G7_Rsl0qaaD18fbfVYWQWeyOgkL2Xi4cqGBskuu6fOp13UKVEqoAfh3sUZ2Im_EoKW7705Kiao4GvjTVcR06BJhAjCyUbNtyLGWCuKNTQ5H8TkMIURgPVM-Z9QgbGPZkp1g7aoF-q71xMxAXa2HLr6wwEhVJURnwqW7zalHVxLrAUXO8H52cGa7IZalufh4tej98ZgxyuQE9H_rFk_j0BU-sjGkvXhwUZtplP-huUGp9z_hnHhySVI2j46TqNctjoFeN4IdbKNkSI7uGfNGMXennWGgBTU0Ztdkdc9TQ2s6L2AJ7wCH5lZ3mBccFmzjLpwQHck8p8SPnS2z5W9VNaHN7xDxpVYI5-zAD5gP2X7XYRjjy29WFxzMTs1jnKVncYQYF1CCGNFk1jStj92l_IkmR_4wi8H5dox6cm2hzv9BEAixSFf01-ge51U_pHvrFmlscI3h1ed-b7RahOqsmrR6zcqYRnMoWEyROYDI67iBqE5NOlyAwdur5co4grWlU1qziNljv9Y&zp=nSt6a5a_k430liEM4tgcb4GlnAclmi6PhWkGmwjurlGQ8TjFM1vRGYiCN8CqC3TyAKvHiYEEeFcJ8tVlA0q5TY-0ifozvZKj9XOlYAivRtZkrvfLPIBcQzcN46OqFxYB-Jro3jk7N6IfxeIGq0K8v7Yxa25rib_jKv87GycRtJejvgIUQ0Wy37YUKR0kuPOtvIEZM6F5WJfgnS2XV-XgK2XPIOf7-GWJzh0FcIVnbo6Mn-x7EppmiB_N7fSTyNJSdul7s4hC_7bKlBkAxM507aIxYzwG7VXTx_Arlv5g-p-Ed4aqh3sDMaSnG4D2k64SsvJetm5umtDZCQLzEP2fST66UpsmQxGUuw0fByXySV9n_HKnmKaArATDKl3qvfRENOhbIjrOmNPJLNFmEhQdqmJV5w
+                    - button "Open user actions" [ref=f138e202] [cursor=pointer]
+                  - generic [ref=f138e207]:
+                    - link "There’s always a trend, a fashion, a fad, but gold has always been timeless. Visit invest.gold" [ref=f138e209] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=Qg82f788aXA3-8Tb2wBBQ-VESbeOcM8R8OhpN2aeSYnsplxrv60arEUVa7nmEzkauVaBoBHStdP75LCB9VHS0jaH0FB-Wv4lRB3QbFve7X91cdNPPqe7LoWeM4VHcLQ7em5eL-ONSyVxaasdQVTTdN7KfVNIQLmxwRCOTs2sSgFkEUBaHS99HPMzZ-odO6ekCcDhitmrZPc0SyiHGLHdpDZlmr_x6TQybega6AuBZ8qWuFdiqJiUh1xV5G7_Rsl0qaaD18fbfVYWQWeyOgkL2Xi4cqGBskuu6fOp13UKVEqoAfh3sUZ2Im_EoKW7705Kiao4GvjTVcR06BJhAjCyUbNtyLGWCuKNTQ5H8TkMIURgPVM-Z9QgbGPZkp1g7aoF-q71xMxAXa2HLr6wwEhVJURnwqW7zalHVxLrAUXO8H52cGa7IZalufh4tej98ZgxyuQE9H_rFk_j0BU-sjGkvXhwUZtplP-huUGp9z_hnHhySVI2j46TqNctjoFeN4IdbKNkSI7uGfNGMXennWGgBTU0Ztdkdc9TQ2s6L2AJ7wCH5lZ3mBccFmzjLpwQHck8p8SPnS2z5W9VNaHN7xDxpVYI5-zAD5gP2X7XYRjjy29WFxzMTs1jnKVncYQYF1CCGNFk1jStj92l_IkmR_4wi8H5dox6cm2hzv9BEAixSFf01-ge51U_pHvrFmlscI3h1ed-b7RahOqsmrR6zcqYRnMoWEyROYDI67iBqE5NOlyAwdur5co4grWlU1qziNljv9Y&zp=nSt6a5a_k430liEM4tgcb4GlnAclmi6PhWkGmwjurlGQ8TjFM1vRGYiCN8CqC3TyAKvHiYEEeFcJ8tVlA0q5TY-0ifozvZKj9XOlYAivRtZkrvfLPIBcQzcN46OqFxYB-Jro3jk7N6IfxeIGq0K8v7Yxa25rib_jKv87GycRtJejvgIUQ0Wy37YUKR0kuPOtvIEZM6F5WJfgnS2XV-XgK2XPIOf7-GWJzh0FcIVnbo6Mn-x7EppmiB_N7fSTyNJSdul7s4hC_7bKlBkAxM507aIxYzwG7VXTx_Arlv5g-p-Ed4aqh3sDMaSnG4D2k64SsvJetm5umtDZCQLzEP2fST66UpsmQxGUuw0fByXySV9n_HKnmKaArATDKl3qvfRENOhbIjrOmNPJLNFmEhQdqmJV5w
+                    - list [ref=f138e213]:
+                      - generic:
+                        - listitem [ref=f138e214]:
+                          - generic [ref=f138e215]:
+                            - link [ref=f138e216] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=Qg82f788aXA3-8Tb2wBBQ-VESbeOcM8R8OhpN2aeSYnsplxrv60arEUVa7nmEzkauVaBoBHStdP75LCB9VHS0jaH0FB-Wv4lRB3QbFve7X91cdNPPqe7LoWeM4VHcLQ7em5eL-ONSyVxaasdQVTTdN7KfVNIQLmxwRCOTs2sSgFkEUBaHS99HPMzZ-odO6ekCcDhitmrZPc0SyiHGLHdpDZlmr_x6TQybega6AuBZ8qWuFdiqJiUh1xV5G7_Rsl0qaaD18fbfVYWQWeyOgkL2Xi4cqGBskuu6fOp13UKVEqoAfh3sUZ2Im_EoKW7705Kiao4GvjTVcR06BJhAjCyUbNtyLGWCuKNTQ5H8TkMIURgPVM-Z9QgbGPZkp1g7aoF-q71xMxAXa2HLr6wwEhVJURnwqW7zalHVxLrAUXO8H52cGa7IZalufh4tej98ZgxyuQE9H_rFk_j0BU-sjGkvXhwUZtplP-huUGp9z_hnHhySVI2j46TqNctjoFeN4IdbKNkSI7uGfNGMXennWGgBTU0Ztdkdc9TQ2s6L2AJ7wCH5lZ3mBccFmzjLpwQHck8p8SPnS2z5W9VNaHN7xDxpVYI5-zAD5gP2X7XYRjjy29WFxzMTs1jnKVncYQYF1CCGNFk1jStj92l_IkmR_4wi8H5dox6cm2hzv9BEAixSFf01-ge51U_pHvrFmlscI3h1ed-b7RahOqsmrR6zcqYRnMoWEyROYDI67iBqE5NOlyAwdur5co4grWlU1qziNljv9Y&zp=nSt6a5a_k430liEM4tgcb4GlnAclmi6PhWkGmwjurlGQ8TjFM1vRGYiCN8CqC3TyAKvHiYEEeFcJ8tVlA0q5TY-0ifozvZKj9XOlYAivRtZkrvfLPIBcQzcN46OqFxYB-Jro3jk7N6IfxeIGq0K8v7Yxa25rib_jKv87GycRtJejvgIUQ0Wy37YUKR0kuPOtvIEZM6F5WJfgnS2XV-XgK2XPIOf7-GWJzh0FcIVnbo6Mn-x7EppmiB_N7fSTyNJSdul7s4hC_7bKlBkAxM507aIxYzwG7VXTx_Arlv5g-p-Ed4aqh3sDMaSnG4D2k64SsvJetm5umtDZCQLzEP2fST66UpsmQxGUuw0fByXySV9n_HKnmKaArATDKl3qvfRENOhbIjrOmNPJLNFmEhQdqmJV5w
+                            - link [ref=f138e219] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=Qg82f788aXA3-8Tb2wBBQ-VESbeOcM8R8OhpN2aeSYnsplxrv60arEUVa7nmEzkauVaBoBHStdP75LCB9VHS0jaH0FB-Wv4lRB3QbFve7X91cdNPPqe7LoWeM4VHcLQ7em5eL-ONSyVxaasdQVTTdN7KfVNIQLmxwRCOTs2sSgFkEUBaHS99HPMzZ-odO6ekCcDhitmrZPc0SyiHGLHdpDZlmr_x6TQybega6AuBZ8qWuFdiqJiUh1xV5G7_Rsl0qaaD18fbfVYWQWeyOgkL2Xi4cqGBskuu6fOp13UKVEqoAfh3sUZ2Im_EoKW7705Kiao4GvjTVcR06BJhAjCyUbNtyLGWCuKNTQ5H8TkMIURgPVM-Z9QgbGPZkp1g7aoF-q71xMxAXa2HLr6wwEhVJURnwqW7zalHVxLrAUXO8H52cGa7IZalufh4tej98ZgxyuQE9H_rFk_j0BU-sjGkvXhwUZtplP-huUGp9z_hnHhySVI2j46TqNctjoFeN4IdbKNkSI7uGfNGMXennWGgBTU0Ztdkdc9TQ2s6L2AJ7wCH5lZ3mBccFmzjLpwQHck8p8SPnS2z5W9VNaHN7xDxpVYI5-zAD5gP2X7XYRjjy29WFxzMTs1jnKVncYQYF1CCGNFk1jStj92l_IkmR_4wi8H5dox6cm2hzv9BEAixSFf01-ge51U_pHvrFmlscI3h1ed-b7RahOqsmrR6zcqYRnMoWEyROYDI67iBqE5NOlyAwdur5co4grWlU1qziNljv9Y&zp=nSt6a5a_k430liEM4tgcb4GlnAclmi6PhWkGmwjurlGQ8TjFM1vRGYiCN8CqC3TyAKvHiYEEeFcJ8tVlA0q5TY-0ifozvZKj9XOlYAivRtZkrvfLPIBcQzcN46OqFxYB-Jro3jk7N6IfxeIGq0K8v7Yxa25rib_jKv87GycRtJejvgIUQ0Wy37YUKR0kuPOtvIEZM6F5WJfgnS2XV-XgK2XPIOf7-GWJzh0FcIVnbo6Mn-x7EppmiB_N7fSTyNJSdul7s4hC_7bKlBkAxM507aIxYzwG7VXTx_Arlv5g-p-Ed4aqh3sDMaSnG4D2k64SsvJetm5umtDZCQLzEP2fST66UpsmQxGUuw0fByXySV9n_HKnmKaArATDKl3qvfRENOhbIjrOmNPJLNFmEhQdqmJV5w
+                              - img "There’s always a trend, a fashion, a fad, but gold has always been timeless. Visit invest.gold" [ref=f138e220]
+                        - listitem [ref=f138e221]:
+                          - generic [ref=f138e222]:
+                            - link [ref=f138e223] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=Qg82f788aXA3-8Tb2wBBQ-VESbeOcM8R8OhpN2aeSYnsplxrv60arEUVa7nmEzkauVaBoBHStdP75LCB9VHS0jaH0FB-Wv4lRB3QbFve7X91cdNPPqe7LoWeM4VHcLQ7em5eL-ONSyVxaasdQVTTdN7KfVNIQLmxwRCOTs2sSgFkEUBaHS99HPMzZ-odO6ekCcDhitmrZPc0SyiHGLHdpDZlmr_x6TQybega6AuBZ8qWuFdiqJiUh1xV5G7_Rsl0qaaD18fbfVYWQWeyOgkL2Xi4cqGBskuu6fOp13UKVEqoAfh3sUZ2Im_EoKW7705Kiao4GvjTVcR06BJhAjCyUbNtyLGWCuKNTQ5H8TkMIURgPVM-Z9QgbGPZkp1g7aoF-q71xMxAXa2HLr6wwEhVJURnwqW7zalHVxLrAUXO8H52cGa7IZalufh4tej98ZgxyuQE9H_rFk_j0BU-sjGkvXhwUZtplP-huUGp9z_hnHhySVI2j46TqNctjoFeN4IdbKNkSI7uGfNGMXennWGgBTU0Ztdkdc9TQ2s6L2AJ7wCH5lZ3mBccFmzjLpwQHck8p8SPnS2z5W9VNaHN7xDxpVYI5-zAD5gP2X7XYRjjy29WFxzMTs1jnKVncYQYF1CCGNFk1jStj92l_IkmR_4wi8H5dox6cm2hzv9BEAixSFf01-ge51U_pHvrFmlscI3h1ed-b7RahOqsmrR6zcqYRnMoWEyROYDI67iBqE5NOlyAwdur5co4grWlU1qziNljv9Y&zp=ug8noK69sPTcFkRwpIf1f_tRZYu3yL4Z7yFUYZ_KC4e9-cQwM-NMp6Iy5Vlaj9FRgJ5OHDNXsQTjU5Ej5TOxt5oI0UazzY3vYYo9eWSwzfBfuxsb9OIP6iIaByMnhevz2PD4s5bE3-OgZV70wkKbWpImLk5ZxB3CqQVyd5harpxAXYhqINd8hNcTuuUPa8R_BDDgAgzXlvVTIKo9rEeboXJOIpj0sJFiRr5ECacri4lzzrgFvCoahLtLGvV_6BdDYb4tTPnt85HC21u8Fm4XP65cJErzveifhgWkOElPfQNimLFBuzTnZGYdkCkFvoIV2QD0K90JRwA8bSef9D0mVCzQ81rbFRfNh5fuxtw_Ak0ckbYVHkm119MUxx81BaVWjdpyTMPCVe4JXB2VxYHHbdCTyg
+                            - link [ref=f138e226] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=Qg82f788aXA3-8Tb2wBBQ-VESbeOcM8R8OhpN2aeSYnsplxrv60arEUVa7nmEzkauVaBoBHStdP75LCB9VHS0jaH0FB-Wv4lRB3QbFve7X91cdNPPqe7LoWeM4VHcLQ7em5eL-ONSyVxaasdQVTTdN7KfVNIQLmxwRCOTs2sSgFkEUBaHS99HPMzZ-odO6ekCcDhitmrZPc0SyiHGLHdpDZlmr_x6TQybega6AuBZ8qWuFdiqJiUh1xV5G7_Rsl0qaaD18fbfVYWQWeyOgkL2Xi4cqGBskuu6fOp13UKVEqoAfh3sUZ2Im_EoKW7705Kiao4GvjTVcR06BJhAjCyUbNtyLGWCuKNTQ5H8TkMIURgPVM-Z9QgbGPZkp1g7aoF-q71xMxAXa2HLr6wwEhVJURnwqW7zalHVxLrAUXO8H52cGa7IZalufh4tej98ZgxyuQE9H_rFk_j0BU-sjGkvXhwUZtplP-huUGp9z_hnHhySVI2j46TqNctjoFeN4IdbKNkSI7uGfNGMXennWGgBTU0Ztdkdc9TQ2s6L2AJ7wCH5lZ3mBccFmzjLpwQHck8p8SPnS2z5W9VNaHN7xDxpVYI5-zAD5gP2X7XYRjjy29WFxzMTs1jnKVncYQYF1CCGNFk1jStj92l_IkmR_4wi8H5dox6cm2hzv9BEAixSFf01-ge51U_pHvrFmlscI3h1ed-b7RahOqsmrR6zcqYRnMoWEyROYDI67iBqE5NOlyAwdur5co4grWlU1qziNljv9Y&zp=ug8noK69sPTcFkRwpIf1f_tRZYu3yL4Z7yFUYZ_KC4e9-cQwM-NMp6Iy5Vlaj9FRgJ5OHDNXsQTjU5Ej5TOxt5oI0UazzY3vYYo9eWSwzfBfuxsb9OIP6iIaByMnhevz2PD4s5bE3-OgZV70wkKbWpImLk5ZxB3CqQVyd5harpxAXYhqINd8hNcTuuUPa8R_BDDgAgzXlvVTIKo9rEeboXJOIpj0sJFiRr5ECacri4lzzrgFvCoahLtLGvV_6BdDYb4tTPnt85HC21u8Fm4XP65cJErzveifhgWkOElPfQNimLFBuzTnZGYdkCkFvoIV2QD0K90JRwA8bSef9D0mVCzQ81rbFRfNh5fuxtw_Ak0ckbYVHkm119MUxx81BaVWjdpyTMPCVe4JXB2VxYHHbdCTyg
+                              - img "There’s always a trend, a fashion, a fad, but gold has always been timeless. Visit invest.gold" [ref=f138e227]
+                        - listitem [ref=f138e228]:
+                          - generic [ref=f138e229]:
+                            - link [ref=f138e230] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=Qg82f788aXA3-8Tb2wBBQ-VESbeOcM8R8OhpN2aeSYnsplxrv60arEUVa7nmEzkauVaBoBHStdP75LCB9VHS0jaH0FB-Wv4lRB3QbFve7X91cdNPPqe7LoWeM4VHcLQ7em5eL-ONSyVxaasdQVTTdN7KfVNIQLmxwRCOTs2sSgFkEUBaHS99HPMzZ-odO6ekCcDhitmrZPc0SyiHGLHdpDZlmr_x6TQybega6AuBZ8qWuFdiqJiUh1xV5G7_Rsl0qaaD18fbfVYWQWeyOgkL2Xi4cqGBskuu6fOp13UKVEqoAfh3sUZ2Im_EoKW7705Kiao4GvjTVcR06BJhAjCyUbNtyLGWCuKNTQ5H8TkMIURgPVM-Z9QgbGPZkp1g7aoF-q71xMxAXa2HLr6wwEhVJURnwqW7zalHVxLrAUXO8H52cGa7IZalufh4tej98ZgxyuQE9H_rFk_j0BU-sjGkvXhwUZtplP-huUGp9z_hnHhySVI2j46TqNctjoFeN4IdbKNkSI7uGfNGMXennWGgBTU0Ztdkdc9TQ2s6L2AJ7wCH5lZ3mBccFmzjLpwQHck8p8SPnS2z5W9VNaHN7xDxpVYI5-zAD5gP2X7XYRjjy29WFxzMTs1jnKVncYQYF1CCGNFk1jStj92l_IkmR_4wi8H5dox6cm2hzv9BEAixSFf01-ge51U_pHvrFmlscI3h1ed-b7RahOqsmrR6zcqYRnMoWEyROYDI67iBqE5NOlyAwdur5co4grWlU1qziNljv9Y&zp=hB2Yo0zLhh6GJi90Hh6A8fD6LIbyfV8gAWuiomhyrHVNXcV2uf7S3pkZt0Hy85iQ32fIREulfSZhnCvEsmLI484zoqn_eKKYQVg7uLZIKPeCDvwpUZ7cKX0GnEUV9BFm1CdXMIGfmgWKR7ITCXXhNkuNFxBrhYWbJ4SCFRNOnJTg6VO5JrDrCIPJ6-VTQqTupQ07jU2h2txx7BhjEaCOa7Kc0Wn-sXSXwAHee3rXXr-EIyKcJSruR2gzOFOpjq0Yd9SBBpedWsnwQa0tMdATpqnzZK9zIRgsUUWxXFZEX6RYMNkjMtLdv7j4kzmVkyvatbzB6WGTrty1BovqzeJsHffS7yyrZAph_bVrOPYHb54WYkJCRhjpRCDHbT63lEM5EMXOvzM3EnUVpZcirCkuN0I95A
+                            - link [ref=f138e233] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=Qg82f788aXA3-8Tb2wBBQ-VESbeOcM8R8OhpN2aeSYnsplxrv60arEUVa7nmEzkauVaBoBHStdP75LCB9VHS0jaH0FB-Wv4lRB3QbFve7X91cdNPPqe7LoWeM4VHcLQ7em5eL-ONSyVxaasdQVTTdN7KfVNIQLmxwRCOTs2sSgFkEUBaHS99HPMzZ-odO6ekCcDhitmrZPc0SyiHGLHdpDZlmr_x6TQybega6AuBZ8qWuFdiqJiUh1xV5G7_Rsl0qaaD18fbfVYWQWeyOgkL2Xi4cqGBskuu6fOp13UKVEqoAfh3sUZ2Im_EoKW7705Kiao4GvjTVcR06BJhAjCyUbNtyLGWCuKNTQ5H8TkMIURgPVM-Z9QgbGPZkp1g7aoF-q71xMxAXa2HLr6wwEhVJURnwqW7zalHVxLrAUXO8H52cGa7IZalufh4tej98ZgxyuQE9H_rFk_j0BU-sjGkvXhwUZtplP-huUGp9z_hnHhySVI2j46TqNctjoFeN4IdbKNkSI7uGfNGMXennWGgBTU0Ztdkdc9TQ2s6L2AJ7wCH5lZ3mBccFmzjLpwQHck8p8SPnS2z5W9VNaHN7xDxpVYI5-zAD5gP2X7XYRjjy29WFxzMTs1jnKVncYQYF1CCGNFk1jStj92l_IkmR_4wi8H5dox6cm2hzv9BEAixSFf01-ge51U_pHvrFmlscI3h1ed-b7RahOqsmrR6zcqYRnMoWEyROYDI67iBqE5NOlyAwdur5co4grWlU1qziNljv9Y&zp=hB2Yo0zLhh6GJi90Hh6A8fD6LIbyfV8gAWuiomhyrHVNXcV2uf7S3pkZt0Hy85iQ32fIREulfSZhnCvEsmLI484zoqn_eKKYQVg7uLZIKPeCDvwpUZ7cKX0GnEUV9BFm1CdXMIGfmgWKR7ITCXXhNkuNFxBrhYWbJ4SCFRNOnJTg6VO5JrDrCIPJ6-VTQqTupQ07jU2h2txx7BhjEaCOa7Kc0Wn-sXSXwAHee3rXXr-EIyKcJSruR2gzOFOpjq0Yd9SBBpedWsnwQa0tMdATpqnzZK9zIRgsUUWxXFZEX6RYMNkjMtLdv7j4kzmVkyvatbzB6WGTrty1BovqzeJsHffS7yyrZAph_bVrOPYHb54WYkJCRhjpRCDHbT63lEM5EMXOvzM3EnUVpZcirCkuN0I95A
+                              - img "There’s always a trend, a fashion, a fad, but gold has always been timeless. Visit invest.gold" [ref=f138e234]
+                        - listitem [ref=f138e235]:
+                          - generic [ref=f138e236]:
+                            - link [ref=f138e237] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=Qg82f788aXA3-8Tb2wBBQ-VESbeOcM8R8OhpN2aeSYnsplxrv60arEUVa7nmEzkauVaBoBHStdP75LCB9VHS0jaH0FB-Wv4lRB3QbFve7X91cdNPPqe7LoWeM4VHcLQ7em5eL-ONSyVxaasdQVTTdN7KfVNIQLmxwRCOTs2sSgFkEUBaHS99HPMzZ-odO6ekCcDhitmrZPc0SyiHGLHdpDZlmr_x6TQybega6AuBZ8qWuFdiqJiUh1xV5G7_Rsl0qaaD18fbfVYWQWeyOgkL2Xi4cqGBskuu6fOp13UKVEqoAfh3sUZ2Im_EoKW7705Kiao4GvjTVcR06BJhAjCyUbNtyLGWCuKNTQ5H8TkMIURgPVM-Z9QgbGPZkp1g7aoF-q71xMxAXa2HLr6wwEhVJURnwqW7zalHVxLrAUXO8H52cGa7IZalufh4tej98ZgxyuQE9H_rFk_j0BU-sjGkvXhwUZtplP-huUGp9z_hnHhySVI2j46TqNctjoFeN4IdbKNkSI7uGfNGMXennWGgBTU0Ztdkdc9TQ2s6L2AJ7wCH5lZ3mBccFmzjLpwQHck8p8SPnS2z5W9VNaHN7xDxpVYI5-zAD5gP2X7XYRjjy29WFxzMTs1jnKVncYQYF1CCGNFk1jStj92l_IkmR_4wi8H5dox6cm2hzv9BEAixSFf01-ge51U_pHvrFmlscI3h1ed-b7RahOqsmrR6zcqYRnMoWEyROYDI67iBqE5NOlyAwdur5co4grWlU1qziNljv9Y&zp=t2XAaFmoKqkCL7Orj05iGhbaKNr-0JeeD2hAlLjVYwnWcoOvEZ6xpMJDqBclpySnTz-_H8mpa4ffvaJhdjChtZYwdytd1Kzen9YvPtzRVf81rd_qnnnX3x5kuhdIL5rMiEDK7RT3-550MFX_kVLD58H3kwVlkK9u35AmHcd5nSmce8WZGP-c1XQbfKimenwY8avgoeLKEHJAE7ryjOsIAkNouQssy7jc1t_daLCoVKo9TTi7rPd7UjyNckYqGrL572I1bhe6Gd4fXW9hJA8hewmHSLgrnETLBst4m1C8bQIVECHiOcwzxGAZvrElKMEVcmOzQm3TTWd8otgYOC2tycZK0DrRlLTPUS-z-GuveAVrzGSpxC7TsuLRImnCugzT9sG_9EytceTYeje6KPAMAR1GgA
+                            - link [ref=f138e240] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=Qg82f788aXA3-8Tb2wBBQ-VESbeOcM8R8OhpN2aeSYnsplxrv60arEUVa7nmEzkauVaBoBHStdP75LCB9VHS0jaH0FB-Wv4lRB3QbFve7X91cdNPPqe7LoWeM4VHcLQ7em5eL-ONSyVxaasdQVTTdN7KfVNIQLmxwRCOTs2sSgFkEUBaHS99HPMzZ-odO6ekCcDhitmrZPc0SyiHGLHdpDZlmr_x6TQybega6AuBZ8qWuFdiqJiUh1xV5G7_Rsl0qaaD18fbfVYWQWeyOgkL2Xi4cqGBskuu6fOp13UKVEqoAfh3sUZ2Im_EoKW7705Kiao4GvjTVcR06BJhAjCyUbNtyLGWCuKNTQ5H8TkMIURgPVM-Z9QgbGPZkp1g7aoF-q71xMxAXa2HLr6wwEhVJURnwqW7zalHVxLrAUXO8H52cGa7IZalufh4tej98ZgxyuQE9H_rFk_j0BU-sjGkvXhwUZtplP-huUGp9z_hnHhySVI2j46TqNctjoFeN4IdbKNkSI7uGfNGMXennWGgBTU0Ztdkdc9TQ2s6L2AJ7wCH5lZ3mBccFmzjLpwQHck8p8SPnS2z5W9VNaHN7xDxpVYI5-zAD5gP2X7XYRjjy29WFxzMTs1jnKVncYQYF1CCGNFk1jStj92l_IkmR_4wi8H5dox6cm2hzv9BEAixSFf01-ge51U_pHvrFmlscI3h1ed-b7RahOqsmrR6zcqYRnMoWEyROYDI67iBqE5NOlyAwdur5co4grWlU1qziNljv9Y&zp=t2XAaFmoKqkCL7Orj05iGhbaKNr-0JeeD2hAlLjVYwnWcoOvEZ6xpMJDqBclpySnTz-_H8mpa4ffvaJhdjChtZYwdytd1Kzen9YvPtzRVf81rd_qnnnX3x5kuhdIL5rMiEDK7RT3-550MFX_kVLD58H3kwVlkK9u35AmHcd5nSmce8WZGP-c1XQbfKimenwY8avgoeLKEHJAE7ryjOsIAkNouQssy7jc1t_daLCoVKo9TTi7rPd7UjyNckYqGrL572I1bhe6Gd4fXW9hJA8hewmHSLgrnETLBst4m1C8bQIVECHiOcwzxGAZvrElKMEVcmOzQm3TTWd8otgYOC2tycZK0DrRlLTPUS-z-GuveAVrzGSpxC7TsuLRImnCugzT9sG_9EytceTYeje6KPAMAR1GgA
+                              - img "There’s always a trend, a fashion, a fad, but gold has always been timeless. Visit invest.gold" [ref=f138e241]
+                    - generic [ref=f138e242]:
+                      - link [ref=f138e243] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=Qg82f788aXA3-8Tb2wBBQ-VESbeOcM8R8OhpN2aeSYnsplxrv60arEUVa7nmEzkauVaBoBHStdP75LCB9VHS0jaH0FB-Wv4lRB3QbFve7X91cdNPPqe7LoWeM4VHcLQ7em5eL-ONSyVxaasdQVTTdN7KfVNIQLmxwRCOTs2sSgFkEUBaHS99HPMzZ-odO6ekCcDhitmrZPc0SyiHGLHdpDZlmr_x6TQybega6AuBZ8qWuFdiqJiUh1xV5G7_Rsl0qaaD18fbfVYWQWeyOgkL2Xi4cqGBskuu6fOp13UKVEqoAfh3sUZ2Im_EoKW7705Kiao4GvjTVcR06BJhAjCyUbNtyLGWCuKNTQ5H8TkMIURgPVM-Z9QgbGPZkp1g7aoF-q71xMxAXa2HLr6wwEhVJURnwqW7zalHVxLrAUXO8H52cGa7IZalufh4tej98ZgxyuQE9H_rFk_j0BU-sjGkvXhwUZtplP-huUGp9z_hnHhySVI2j46TqNctjoFeN4IdbKNkSI7uGfNGMXennWGgBTU0Ztdkdc9TQ2s6L2AJ7wCH5lZ3mBccFmzjLpwQHck8p8SPnS2z5W9VNaHN7xDxpVYI5-zAD5gP2X7XYRjjy29WFxzMTs1jnKVncYQYF1CCGNFk1jStj92l_IkmR_4wi8H5dox6cm2hzv9BEAixSFf01-ge51U_pHvrFmlscI3h1ed-b7RahOqsmrR6zcqYRnMoWEyROYDI67iBqE5NOlyAwdur5co4grWlU1qziNljv9Y&zp=nSt6a5a_k430liEM4tgcb4GlnAclmi6PhWkGmwjurlGQ8TjFM1vRGYiCN8CqC3TyAKvHiYEEeFcJ8tVlA0q5TY-0ifozvZKj9XOlYAivRtZkrvfLPIBcQzcN46OqFxYB-Jro3jk7N6IfxeIGq0K8v7Yxa25rib_jKv87GycRtJejvgIUQ0Wy37YUKR0kuPOtvIEZM6F5WJfgnS2XV-XgK2XPIOf7-GWJzh0FcIVnbo6Mn-x7EppmiB_N7fSTyNJSdul7s4hC_7bKlBkAxM507aIxYzwG7VXTx_Arlv5g-p-Ed4aqh3sDMaSnG4D2k64SsvJetm5umtDZCQLzEP2fST66UpsmQxGUuw0fByXySV9n_HKnmKaArATDKl3qvfRENOhbIjrOmNPJLNFmEhQdqmJV5w
+                      - link "invest.gold" [ref=f138e247] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=Qg82f788aXA3-8Tb2wBBQ-VESbeOcM8R8OhpN2aeSYnsplxrv60arEUVa7nmEzkauVaBoBHStdP75LCB9VHS0jaH0FB-Wv4lRB3QbFve7X91cdNPPqe7LoWeM4VHcLQ7em5eL-ONSyVxaasdQVTTdN7KfVNIQLmxwRCOTs2sSgFkEUBaHS99HPMzZ-odO6ekCcDhitmrZPc0SyiHGLHdpDZlmr_x6TQybega6AuBZ8qWuFdiqJiUh1xV5G7_Rsl0qaaD18fbfVYWQWeyOgkL2Xi4cqGBskuu6fOp13UKVEqoAfh3sUZ2Im_EoKW7705Kiao4GvjTVcR06BJhAjCyUbNtyLGWCuKNTQ5H8TkMIURgPVM-Z9QgbGPZkp1g7aoF-q71xMxAXa2HLr6wwEhVJURnwqW7zalHVxLrAUXO8H52cGa7IZalufh4tej98ZgxyuQE9H_rFk_j0BU-sjGkvXhwUZtplP-huUGp9z_hnHhySVI2j46TqNctjoFeN4IdbKNkSI7uGfNGMXennWGgBTU0Ztdkdc9TQ2s6L2AJ7wCH5lZ3mBccFmzjLpwQHck8p8SPnS2z5W9VNaHN7xDxpVYI5-zAD5gP2X7XYRjjy29WFxzMTs1jnKVncYQYF1CCGNFk1jStj92l_IkmR_4wi8H5dox6cm2hzv9BEAixSFf01-ge51U_pHvrFmlscI3h1ed-b7RahOqsmrR6zcqYRnMoWEyROYDI67iBqE5NOlyAwdur5co4grWlU1qziNljv9Y&zp=nSt6a5a_k430liEM4tgcb4GlnAclmi6PhWkGmwjurlGQ8TjFM1vRGYiCN8CqC3TyAKvHiYEEeFcJ8tVlA0q5TY-0ifozvZKj9XOlYAivRtZkrvfLPIBcQzcN46OqFxYB-Jro3jk7N6IfxeIGq0K8v7Yxa25rib_jKv87GycRtJejvgIUQ0Wy37YUKR0kuPOtvIEZM6F5WJfgnS2XV-XgK2XPIOf7-GWJzh0FcIVnbo6Mn-x7EppmiB_N7fSTyNJSdul7s4hC_7bKlBkAxM507aIxYzwG7VXTx_Arlv5g-p-Ed4aqh3sDMaSnG4D2k64SsvJetm5umtDZCQLzEP2fST66UpsmQxGUuw0fByXySV9n_HKnmKaArATDKl3qvfRENOhbIjrOmNPJLNFmEhQdqmJV5w
+              - generic [ref=f138e254]:
+                - generic [ref=f138e256]:
+                  - generic [aria-hidden] [ref=f138e257]: "Sort by:"
+                  - button "Sort by Best" [ref=f138e262] [cursor=pointer]:
+                    - generic [ref=f138e263]: Best
+                - button "Search Comments Expand comment search" [ref=f138e271] [cursor=pointer]:
+                  - generic [ref=f138e272]: Search Comments
+                  - generic [ref=f138e279]: Expand comment search
+              - region "Comments" [ref=f138e282]:
+                - heading "Comments Section" [level=1] [ref=f138e283]
+                - article "Comment from handmadeby 2 years ago" [ref=f138e285]:
+                  - generic [ref=f138e286] [cursor=pointer]:
+                    - link "handmadeby's profile --- avatar" [ref=f138e292]:
+                      - /url: https://www.reddit.com/user/handmadeby/
+                    - generic [ref=f138e302]:
+                      - link "handmadeby's profile" [ref=f138e306]:
+                        - /url: https://www.reddit.com/user/handmadeby/
+                        - generic [ref=f138e307]: handmadeby
+                      - generic [aria-hidden] [ref=f138e309]: •
+                      - link [ref=f138e311]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/lacn7sj/
+                        - time [ref=f138e313]: 2y ago
+                  - generic [ref=f138e315]:
+                    - generic [ref=f138e318]:
+                      - paragraph [ref=f138e319]: We’ve been doing online since 2020 now.
+                      - paragraph [ref=f138e320]: Discord for voice, owlbear for combat. DM tracks the combat and initiative in dndbeyond.
+                    - generic [ref=f138e326]:
+                      - generic [ref=f138e328]:
+                        - button "Upvote" [disabled]
+                        - generic [ref=f138e329]: "43"
+                        - button "Downvote" [disabled]
+                      - button "Give award" [ref=f138e332] [cursor=pointer]:
+                        - generic [aria-hidden] [ref=f138e340]: Award
+                      - button "Share" [ref=f138e343] [cursor=pointer]
+                      - button "Open user actions" [ref=f138e352] [cursor=pointer]
+                    - generic [ref=f138e357]:
+                      - 'article "Comment thread level 1: Reply from Aranthar 2 years ago" [ref=f138e359]':
+                        - generic [ref=f138e360] [cursor=pointer]:
+                          - link "Aranthar's profile --- avatar" [ref=f138e366]:
+                            - /url: https://www.reddit.com/user/Aranthar/
+                          - generic [ref=f138e376]:
+                            - link "Aranthar's profile" [ref=f138e380]:
+                              - /url: https://www.reddit.com/user/Aranthar/
+                              - generic [ref=f138e381]: Aranthar
+                            - generic "Comment distinguished as the original poster" [ref=f138e385]: OP
+                            - generic [aria-hidden] [ref=f138e386]: •
+                            - link [ref=f138e388]:
+                              - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/lacnet3/
+                              - time [ref=f138e390]: 2y ago
+                        - generic [ref=f138e392]:
+                          - paragraph [ref=f138e396]: Are the owlbear extensions generally solid? We have a big table so ideally the system would track mob HP. I often have 10+ mobs because our group is 7 players.
+                          - generic [ref=f138e402]:
+                            - generic [ref=f138e404]:
+                              - button "Upvote" [disabled]
+                              - generic [ref=f138e405]: "14"
+                              - button "Downvote" [disabled]
+                            - button "Give award" [ref=f138e408] [cursor=pointer]:
+                              - generic [aria-hidden] [ref=f138e416]: Award
+                            - button "Share" [ref=f138e419] [cursor=pointer]
+                            - button "Open user actions" [ref=f138e428] [cursor=pointer]
+                          - button "7 more replies" [ref=f138e437] [cursor=pointer]:
+                            - generic [ref=f138e442]:
+                              - generic [ref=f138e443]: "7"
+                              - text: more replies
+                      - button "2 more replies" [ref=f138e447] [cursor=pointer]:
+                        - generic [ref=f138e452]:
+                          - generic [ref=f138e453]: "2"
+                          - text: more replies
+                - article "Comment from James360789 2 years ago" [ref=f138e455]:
+                  - generic [ref=f138e456] [cursor=pointer]:
+                    - link "James360789's profile --- avatar" [ref=f138e462]:
+                      - /url: https://www.reddit.com/user/James360789/
+                    - generic [ref=f138e472]:
+                      - link "James360789's profile" [ref=f138e476]:
+                        - /url: https://www.reddit.com/user/James360789/
+                        - generic [ref=f138e477]: James360789
+                      - generic [aria-hidden] [ref=f138e479]: •
+                      - link [ref=f138e481]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/lae6bct/
+                        - time [ref=f138e483]: 2y ago
+                  - generic [ref=f138e485]:
+                    - generic [ref=f138e488]:
+                      - paragraph [ref=f138e489]: I have played on owlbear rodeo, roll 20 and fantasy grounds. Out of all of them as a player I prefer fantasy grounds. As a gm I think roll 20 is easier to use.
+                      - paragraph [ref=f138e490]: The bad thing about fantasy grounds is you have to buy the book modules to use in the program but can't access them out of the program so that is a pain in the butt if you want to read the material.
+                      - paragraph [ref=f138e491]: One good advantage is if you buy a complete license you will never have to pay a subscription to use the program and your players don't need to pay anything to join a campaign.
+                      - paragraph [ref=f138e492]: It's just a matter of slowly adding the materials you want to use.
+                    - button "2 more replies" [ref=f138e499] [cursor=pointer]:
+                      - generic [ref=f138e504]:
+                        - generic [ref=f138e505]: "2"
+                        - text: more replies
+                - article "Comment from minethulhu 2 years ago" [ref=f138e507]:
+                  - generic [ref=f138e508] [cursor=pointer]:
+                    - link "minethulhu's profile --- avatar" [ref=f138e514]:
+                      - /url: https://www.reddit.com/user/minethulhu/
+                    - generic [ref=f138e524]:
+                      - link "minethulhu's profile" [ref=f138e528]:
+                        - /url: https://www.reddit.com/user/minethulhu/
+                        - generic [ref=f138e529]: minethulhu
+                      - generic [aria-hidden] [ref=f138e531]: •
+                      - link [ref=f138e533]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/laenoxb/
+                        - time [ref=f138e535]: 2y ago
+                  - generic [ref=f138e537]:
+                    - generic [ref=f138e540]:
+                      - paragraph [ref=f138e541]: "I have used the following:"
+                      - paragraph [ref=f138e542]: Fantasy Grounds - DM and occasional player for 5E for the past several years.
+                      - list [ref=f138e543]:
+                        - listitem [ref=f138e544]:
+                          - paragraph [ref=f138e545]: Pros - Automation is fantastic. Dice rolls have the "feel" of an in person game. Purchased books have the same feel as a PDF (which mimics the layout of the physical books). Does not require port forwarding.
+                        - listitem [ref=f138e546]:
+                          - paragraph [ref=f138e547]: Cons - For best experience, you will need to buy digital versions of books. Some feel the UI is dated. Steep learning curve.
+                      - paragraph [ref=f138e548]: Foundry - DM of Pathfinder 2E for about 6 months
+                      - list [ref=f138e549]:
+                        - listitem [ref=f138e550]:
+                          - paragraph [ref=f138e551]: Pros - At least for pathfinder, all the core books data is integrated (although you may still want to own physical or PDF). UI feels modern (web based).
+                        - listitem [ref=f138e552]:
+                          - paragraph [ref=f138e553]: Cons - If self hosting, either requires port forwarding or something like playit or ngrok. Due to either design methodology or other reasons, DM needs to still apply damage / effects to mobs/npcs. Also a steep learning curve.
+                      - paragraph [ref=f138e554]: Owlbear Rodeo - Player for 1-2 years
+                      - list [ref=f138e555]:
+                        - listitem [ref=f138e556]:
+                          - paragraph [ref=f138e557]: Pros - Lightweight and simple if you don't want a fully integrated system with character sheets, etc. Has a lot of add-on modules. A lot simpler out of the box than above.
+                        - listitem [ref=f138e558]:
+                          - paragraph [ref=f138e559]: Cons - Natively only displays dice rolls, maps, and tracks initiative (no rules info or character info). Has a lot of add-on modules that can confuse the DM that switched to this platform for it's simplicity.
+                      - paragraph [ref=f138e560]: I believe Owlbear Rodeo has some integration with DND Beyond, but I haven't even looked at it because a) I'm too cheap to pay for a monthly subscription (plus I don't like Hasbro) b) I'm not running the game, so am leaving that to the DM. However, if you only need something to display maps and show dice rolls, it may be your best option. If you want something more fully integrated, I would suggest looking at feature / functionality differences (and perhaps if there are other game systems you want) between Fantasy Grounds and Foundry. I personally would choose the former for D&D, but that is likely a personal preference and years of experience.
+                    - button "1 more reply" [ref=f138e567] [cursor=pointer]:
+                      - generic [ref=f138e572]:
+                        - generic [ref=f138e573]: "1"
+                        - text: more reply
+                - article "Comment from [deleted] 2 years ago" [ref=f138e575]:
+                  - generic "[deleted] 2y ago" [ref=f138e576] [cursor=pointer]:
+                    - generic [ref=f138e590]:
+                      - generic [ref=f138e591]: "[deleted]"
+                      - generic [aria-hidden] [ref=f138e594]: •
+                      - link [ref=f138e596]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/lad21c2/
+                        - time [ref=f138e598]: 2y ago
+                  - generic [ref=f138e600]:
+                    - paragraph [ref=f138e604]: I use basic foundry for vtt, no major setup required. Just downloading foundry, installing it, configuring port forwarding and then you just need to create your maps and stuff. Foundry has amazing tools for basically everything built right in. Before that I used roll20, that was also fine but became a hassle once I wanted to use walls and lighting, but that might have improved over the years. Also, a roll20 subscription runs you the same or more in a year than just buying foundry once, so I quite quickly switched from roll20 to foundry. But I'm so happy with foundry that I'm not looking back. Foundry also integrates really well with dndbeyond with the beyond20 browser extension.
+                    - generic [ref=f138e607]:
+                      - 'article "Comment thread level 1: Reply from Harpshadow 2 years ago" [ref=f138e609]':
+                        - generic [ref=f138e610] [cursor=pointer]:
+                          - link "Harpshadow's profile --- avatar" [ref=f138e616]:
+                            - /url: https://www.reddit.com/user/Harpshadow/
+                            - img "u/Harpshadow avatar" [ref=f138e619]
+                          - generic [ref=f138e623]:
+                            - link "Harpshadow's profile" [ref=f138e627]:
+                              - /url: https://www.reddit.com/user/Harpshadow/
+                              - generic [ref=f138e628]: Harpshadow
+                            - generic [aria-hidden] [ref=f138e630]: •
+                            - link [ref=f138e632]:
+                              - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/ladppc3/
+                              - time [ref=f138e634]: 2y ago
+                        - generic [ref=f138e636]:
+                          - paragraph [ref=f138e640]: I hated the upgrade of walls and lighting in roll20 back from 2020-2022 where you would log in sometimes and everything would be screwed on a scene that you spent hours on.
+                          - button "2 more replies" [ref=f138e647] [cursor=pointer]:
+                            - generic [ref=f138e652]:
+                              - generic [ref=f138e653]: "2"
+                              - text: more replies
+                      - 'article "Comment thread level 1: Reply from Tarcion 2 years ago" [ref=f138e655]':
+                        - generic [ref=f138e656] [cursor=pointer]:
+                          - link "Tarcion's profile --- avatar" [ref=f138e662]:
+                            - /url: https://www.reddit.com/user/Tarcion/
+                          - generic [ref=f138e672]:
+                            - link "Tarcion's profile" [ref=f138e676]:
+                              - /url: https://www.reddit.com/user/Tarcion/
+                              - generic [ref=f138e677]: Tarcion
+                            - generic [aria-hidden] [ref=f138e679]: •
+                            - link [ref=f138e681]:
+                              - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/lae2f7x/
+                              - time [ref=f138e683]: 2y ago
+                        - generic [ref=f138e685]:
+                          - generic [ref=f138e688]:
+                            - paragraph [ref=f138e689]: Our group has been playing virtually for about 10 years and started on roll20 but we switched to Foundry about 4 years ago and it's just phenomenal. Discord for voice/foundry for vtt is what I would always recommend at this point.
+                            - paragraph [ref=f138e690]: I'll add, as well, that while the 5e integration in Foundry is good, the Pathfinder 2e integration is absolutely incredible. The system just does so much for you, it's crazy.
+                          - button "1 more reply" [ref=f138e697] [cursor=pointer]:
+                            - generic [ref=f138e702]:
+                              - generic [ref=f138e703]: "1"
+                              - text: more reply
+                      - button "2 more replies" [ref=f138e707] [cursor=pointer]:
+                        - generic [ref=f138e712]:
+                          - generic [ref=f138e713]: "2"
+                          - text: more replies
+                - article "Comment from Snowystar122 2 years ago" [ref=f138e715]:
+                  - generic [ref=f138e716] [cursor=pointer]:
+                    - link "Snowystar122's profile --- avatar" [ref=f138e722]:
+                      - /url: https://www.reddit.com/user/Snowystar122/
+                      - img "u/Snowystar122 avatar" [ref=f138e725]
+                    - generic [ref=f138e729]:
+                      - link "Snowystar122's profile" [ref=f138e733]:
+                        - /url: https://www.reddit.com/user/Snowystar122/
+                        - generic [ref=f138e734]: Snowystar122
+                      - generic [aria-hidden] [ref=f138e736]: •
+                      - link [ref=f138e738]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/lad8ogg/
+                        - time [ref=f138e740]: 2y ago
+                  - generic [ref=f138e742]:
+                    - paragraph [ref=f138e746]: Foundry - it's a one time purchase, and I can import my walls/doors/lighting from maps in seconds 😊
+                    - 'article "Comment thread level 1: Reply from markwomack11 2 years ago" [ref=f138e751]':
+                      - generic [ref=f138e752] [cursor=pointer]:
+                        - link "markwomack11's profile --- avatar" [ref=f138e758]:
+                          - /url: https://www.reddit.com/user/markwomack11/
+                          - img "u/markwomack11 avatar" [ref=f138e761]
+                        - generic [ref=f138e765]:
+                          - link "markwomack11's profile" [ref=f138e769]:
+                            - /url: https://www.reddit.com/user/markwomack11/
+                            - generic [ref=f138e770]: markwomack11
+                          - generic [aria-hidden] [ref=f138e772]: •
+                          - link [ref=f138e774]:
+                            - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/ladromh/
+                            - time [ref=f138e776]: 2y ago
+                      - paragraph [ref=f138e782]: Strong second for Foundry. I used Fantasy Grounds for a year, but made the switch to Foundry because it wanted a system that could be browser based.
+                - generic "Brew coffee, fight nightmares." [ref=f138e786]:
+                  - generic [ref=f138e787]:
+                    - 'link "Advertisement: Brew coffee, fight nightmares." [ref=f138e788] [cursor=pointer]':
+                      - /url: https://alb.reddit.com/cr?za=IS1o9xdFNN1I6SxO8sVDTmn9QhU3MSw201fG9DUTII3qZZ9FFPXA4erN7ZSWR3jDy0yE0cGvqJP3fWYhP75q6Vv8IIdkgT9TzpXp319D7u9O9bnGLePIoF5ycTVjQ69_eeKzgcHm9m6P-dUVZ6vt2MFXBO1CkFl_suVK0MW3boDxqf8GTLw2t_l-Ot27kDXd6XbuwduiGh_JZsM7-zXQ56sHavpKkdlVSbmo3LEqE0I-HE1dQHlU6L14Lh1Qtk-eqTk4HmC94pp-mAHydwW0Z8oZnc0hBXCUbkaPYwiq3FLuOnBq1l3OPBUmGl0hPnNtXwgwhgU02y7F6BbkkYeoaTylzZnPkPvC1OBOt56OXz3E8atkBtWZtlftz7-L4lqNwykttb5Y4X1k6l0ftKmsZ6GWlClvtlPDjIgMhChX7EcLsmtwZViU6ow3tLh3ipYQMNC66Lp-T1cs8j35pQUnjLEW5QG9uxX41-f6aFw5CoemJojTSiY8SnkwoYDJkVAgVCpepn1Vv-sayfn1qM1fLon_JqJD0EgzLzYQP92QC3BuHCGw9bTY-jXL7pgGvFwyCoJ67BUmA-qcarwf6RmLmpLHY6KTGOE2oVW5IQft0id326p4UJx2e1r0zUKJxhw3tF144b7sGivP01RmNEi9XM_JCYXBDS2L-i-7CO4R6Sgu9kMNa23rL1mFUFImYDTaMHry3q7wkq0o39zfyG9syVbqus0T0UhO3f7kgsrjgxATbd11hn_7CDrv7gaFUOeeIjU&zp=Kc6ODprqS0-kag_jOB5mn1L4jv4IYF8SCG0tT3FM4G-tfH0ujChCyMo4LAGeG_YW6BuBw7wcKB_FFnOW21J-4hqrO6wgh-fO7rlItJam413PRXp8qMwnXUSzQ6WLaCWTfkvr3RKeeR-PuQpOhh0kID-atDBtcbYhU3zU6rd0uWhj-65vKPtIo4JdC9KUHAznHer4pREOvJ0CK33DoSGyIznMmBzTBhTxqh7q3D75UQaC1xfmigyuNVycqCYoakjfq8V4uvd22239i5zTIareHIJg1sleQUdO_778CtW8B5JKtbB8qcfCEA9r-LCYhBQHb7Go2e0vNComvavr8Pf728tUJpV65vToiESm3u-dlaW_SaXbAuohaVzpglaV
+                    - generic [ref=f138e789]:
+                      - generic [ref=f138e790]:
+                        - link "u/PepperStones96" [ref=f138e793] [cursor=pointer]:
+                          - /url: /user/PepperStones96/
+                          - img "u/PepperStones96 avatar" [ref=f138e796]
+                        - generic [ref=f138e798]: •
+                        - link "Ad" [ref=f138e800] [cursor=pointer]:
+                          - /url: /user/PepperStones96/
+                        - link [ref=f138e802] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=IS1o9xdFNN1I6SxO8sVDTmn9QhU3MSw201fG9DUTII3qZZ9FFPXA4erN7ZSWR3jDy0yE0cGvqJP3fWYhP75q6Vv8IIdkgT9TzpXp319D7u9O9bnGLePIoF5ycTVjQ69_eeKzgcHm9m6P-dUVZ6vt2MFXBO1CkFl_suVK0MW3boDxqf8GTLw2t_l-Ot27kDXd6XbuwduiGh_JZsM7-zXQ56sHavpKkdlVSbmo3LEqE0I-HE1dQHlU6L14Lh1Qtk-eqTk4HmC94pp-mAHydwW0Z8oZnc0hBXCUbkaPYwiq3FLuOnBq1l3OPBUmGl0hPnNtXwgwhgU02y7F6BbkkYeoaTylzZnPkPvC1OBOt56OXz3E8atkBtWZtlftz7-L4lqNwykttb5Y4X1k6l0ftKmsZ6GWlClvtlPDjIgMhChX7EcLsmtwZViU6ow3tLh3ipYQMNC66Lp-T1cs8j35pQUnjLEW5QG9uxX41-f6aFw5CoemJojTSiY8SnkwoYDJkVAgVCpepn1Vv-sayfn1qM1fLon_JqJD0EgzLzYQP92QC3BuHCGw9bTY-jXL7pgGvFwyCoJ67BUmA-qcarwf6RmLmpLHY6KTGOE2oVW5IQft0id326p4UJx2e1r0zUKJxhw3tF144b7sGivP01RmNEi9XM_JCYXBDS2L-i-7CO4R6Sgu9kMNa23rL1mFUFImYDTaMHry3q7wkq0o39zfyG9syVbqus0T0UhO3f7kgsrjgxATbd11hn_7CDrv7gaFUOeeIjU&zp=Kc6ODprqS0-kag_jOB5mn1L4jv4IYF8SCG0tT3FM4G-tfH0ujChCyMo4LAGeG_YW6BuBw7wcKB_FFnOW21J-4hqrO6wgh-fO7rlItJam413PRXp8qMwnXUSzQ6WLaCWTfkvr3RKeeR-PuQpOhh0kID-atDBtcbYhU3zU6rd0uWhj-65vKPtIo4JdC9KUHAznHer4pREOvJ0CK33DoSGyIznMmBzTBhTxqh7q3D75UQaC1xfmigyuNVycqCYoakjfq8V4uvd22239i5zTIareHIJg1sleQUdO_778CtW8B5JKtbB8qcfCEA9r-LCYhBQHb7Go2e0vNComvavr8Pf728tUJpV65vToiESm3u-dlaW_SaXbAuohaVzpglaV
+                      - button "Open user actions" [ref=f138e808] [cursor=pointer]
+                    - generic [ref=f138e814]:
+                      - generic [ref=f138e815]:
+                        - link "Brew coffee, fight nightmares." [ref=f138e817] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=IS1o9xdFNN1I6SxO8sVDTmn9QhU3MSw201fG9DUTII3qZZ9FFPXA4erN7ZSWR3jDy0yE0cGvqJP3fWYhP75q6Vv8IIdkgT9TzpXp319D7u9O9bnGLePIoF5ycTVjQ69_eeKzgcHm9m6P-dUVZ6vt2MFXBO1CkFl_suVK0MW3boDxqf8GTLw2t_l-Ot27kDXd6XbuwduiGh_JZsM7-zXQ56sHavpKkdlVSbmo3LEqE0I-HE1dQHlU6L14Lh1Qtk-eqTk4HmC94pp-mAHydwW0Z8oZnc0hBXCUbkaPYwiq3FLuOnBq1l3OPBUmGl0hPnNtXwgwhgU02y7F6BbkkYeoaTylzZnPkPvC1OBOt56OXz3E8atkBtWZtlftz7-L4lqNwykttb5Y4X1k6l0ftKmsZ6GWlClvtlPDjIgMhChX7EcLsmtwZViU6ow3tLh3ipYQMNC66Lp-T1cs8j35pQUnjLEW5QG9uxX41-f6aFw5CoemJojTSiY8SnkwoYDJkVAgVCpepn1Vv-sayfn1qM1fLon_JqJD0EgzLzYQP92QC3BuHCGw9bTY-jXL7pgGvFwyCoJ67BUmA-qcarwf6RmLmpLHY6KTGOE2oVW5IQft0id326p4UJx2e1r0zUKJxhw3tF144b7sGivP01RmNEi9XM_JCYXBDS2L-i-7CO4R6Sgu9kMNa23rL1mFUFImYDTaMHry3q7wkq0o39zfyG9syVbqus0T0UhO3f7kgsrjgxATbd11hn_7CDrv7gaFUOeeIjU&zp=Kc6ODprqS0-kag_jOB5mn1L4jv4IYF8SCG0tT3FM4G-tfH0ujChCyMo4LAGeG_YW6BuBw7wcKB_FFnOW21J-4hqrO6wgh-fO7rlItJam413PRXp8qMwnXUSzQ6WLaCWTfkvr3RKeeR-PuQpOhh0kID-atDBtcbYhU3zU6rd0uWhj-65vKPtIo4JdC9KUHAznHer4pREOvJ0CK33DoSGyIznMmBzTBhTxqh7q3D75UQaC1xfmigyuNVycqCYoakjfq8V4uvd22239i5zTIareHIJg1sleQUdO_778CtW8B5JKtbB8qcfCEA9r-LCYhBQHb7Go2e0vNComvavr8Pf728tUJpV65vToiESm3u-dlaW_SaXbAuohaVzpglaV
+                        - generic [ref=f138e818]:
+                          - link [ref=f138e819] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=IS1o9xdFNN1I6SxO8sVDTmn9QhU3MSw201fG9DUTII3qZZ9FFPXA4erN7ZSWR3jDy0yE0cGvqJP3fWYhP75q6Vv8IIdkgT9TzpXp319D7u9O9bnGLePIoF5ycTVjQ69_eeKzgcHm9m6P-dUVZ6vt2MFXBO1CkFl_suVK0MW3boDxqf8GTLw2t_l-Ot27kDXd6XbuwduiGh_JZsM7-zXQ56sHavpKkdlVSbmo3LEqE0I-HE1dQHlU6L14Lh1Qtk-eqTk4HmC94pp-mAHydwW0Z8oZnc0hBXCUbkaPYwiq3FLuOnBq1l3OPBUmGl0hPnNtXwgwhgU02y7F6BbkkYeoaTylzZnPkPvC1OBOt56OXz3E8atkBtWZtlftz7-L4lqNwykttb5Y4X1k6l0ftKmsZ6GWlClvtlPDjIgMhChX7EcLsmtwZViU6ow3tLh3ipYQMNC66Lp-T1cs8j35pQUnjLEW5QG9uxX41-f6aFw5CoemJojTSiY8SnkwoYDJkVAgVCpepn1Vv-sayfn1qM1fLon_JqJD0EgzLzYQP92QC3BuHCGw9bTY-jXL7pgGvFwyCoJ67BUmA-qcarwf6RmLmpLHY6KTGOE2oVW5IQft0id326p4UJx2e1r0zUKJxhw3tF144b7sGivP01RmNEi9XM_JCYXBDS2L-i-7CO4R6Sgu9kMNa23rL1mFUFImYDTaMHry3q7wkq0o39zfyG9syVbqus0T0UhO3f7kgsrjgxATbd11hn_7CDrv7gaFUOeeIjU&zp=Kc6ODprqS0-kag_jOB5mn1L4jv4IYF8SCG0tT3FM4G-tfH0ujChCyMo4LAGeG_YW6BuBw7wcKB_FFnOW21J-4hqrO6wgh-fO7rlItJam413PRXp8qMwnXUSzQ6WLaCWTfkvr3RKeeR-PuQpOhh0kID-atDBtcbYhU3zU6rd0uWhj-65vKPtIo4JdC9KUHAznHer4pREOvJ0CK33DoSGyIznMmBzTBhTxqh7q3D75UQaC1xfmigyuNVycqCYoakjfq8V4uvd22239i5zTIareHIJg1sleQUdO_778CtW8B5JKtbB8qcfCEA9r-LCYhBQHb7Go2e0vNComvavr8Pf728tUJpV65vToiESm3u-dlaW_SaXbAuohaVzpglaV
+                          - generic [ref=f138e820]:
+                            - link "View More" [ref=f138e821] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=IS1o9xdFNN1I6SxO8sVDTmn9QhU3MSw201fG9DUTII3qZZ9FFPXA4erN7ZSWR3jDy0yE0cGvqJP3fWYhP75q6Vv8IIdkgT9TzpXp319D7u9O9bnGLePIoF5ycTVjQ69_eeKzgcHm9m6P-dUVZ6vt2MFXBO1CkFl_suVK0MW3boDxqf8GTLw2t_l-Ot27kDXd6XbuwduiGh_JZsM7-zXQ56sHavpKkdlVSbmo3LEqE0I-HE1dQHlU6L14Lh1Qtk-eqTk4HmC94pp-mAHydwW0Z8oZnc0hBXCUbkaPYwiq3FLuOnBq1l3OPBUmGl0hPnNtXwgwhgU02y7F6BbkkYeoaTylzZnPkPvC1OBOt56OXz3E8atkBtWZtlftz7-L4lqNwykttb5Y4X1k6l0ftKmsZ6GWlClvtlPDjIgMhChX7EcLsmtwZViU6ow3tLh3ipYQMNC66Lp-T1cs8j35pQUnjLEW5QG9uxX41-f6aFw5CoemJojTSiY8SnkwoYDJkVAgVCpepn1Vv-sayfn1qM1fLon_JqJD0EgzLzYQP92QC3BuHCGw9bTY-jXL7pgGvFwyCoJ67BUmA-qcarwf6RmLmpLHY6KTGOE2oVW5IQft0id326p4UJx2e1r0zUKJxhw3tF144b7sGivP01RmNEi9XM_JCYXBDS2L-i-7CO4R6Sgu9kMNa23rL1mFUFImYDTaMHry3q7wkq0o39zfyG9syVbqus0T0UhO3f7kgsrjgxATbd11hn_7CDrv7gaFUOeeIjU&zp=Kc6ODprqS0-kag_jOB5mn1L4jv4IYF8SCG0tT3FM4G-tfH0ujChCyMo4LAGeG_YW6BuBw7wcKB_FFnOW21J-4hqrO6wgh-fO7rlItJam413PRXp8qMwnXUSzQ6WLaCWTfkvr3RKeeR-PuQpOhh0kID-atDBtcbYhU3zU6rd0uWhj-65vKPtIo4JdC9KUHAznHer4pREOvJ0CK33DoSGyIznMmBzTBhTxqh7q3D75UQaC1xfmigyuNVycqCYoakjfq8V4uvd22239i5zTIareHIJg1sleQUdO_778CtW8B5JKtbB8qcfCEA9r-LCYhBQHb7Go2e0vNComvavr8Pf728tUJpV65vToiESm3u-dlaW_SaXbAuohaVzpglaV
+                            - link "store.steampowered.com" [ref=f138e825] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=IS1o9xdFNN1I6SxO8sVDTmn9QhU3MSw201fG9DUTII3qZZ9FFPXA4erN7ZSWR3jDy0yE0cGvqJP3fWYhP75q6Vv8IIdkgT9TzpXp319D7u9O9bnGLePIoF5ycTVjQ69_eeKzgcHm9m6P-dUVZ6vt2MFXBO1CkFl_suVK0MW3boDxqf8GTLw2t_l-Ot27kDXd6XbuwduiGh_JZsM7-zXQ56sHavpKkdlVSbmo3LEqE0I-HE1dQHlU6L14Lh1Qtk-eqTk4HmC94pp-mAHydwW0Z8oZnc0hBXCUbkaPYwiq3FLuOnBq1l3OPBUmGl0hPnNtXwgwhgU02y7F6BbkkYeoaTylzZnPkPvC1OBOt56OXz3E8atkBtWZtlftz7-L4lqNwykttb5Y4X1k6l0ftKmsZ6GWlClvtlPDjIgMhChX7EcLsmtwZViU6ow3tLh3ipYQMNC66Lp-T1cs8j35pQUnjLEW5QG9uxX41-f6aFw5CoemJojTSiY8SnkwoYDJkVAgVCpepn1Vv-sayfn1qM1fLon_JqJD0EgzLzYQP92QC3BuHCGw9bTY-jXL7pgGvFwyCoJ67BUmA-qcarwf6RmLmpLHY6KTGOE2oVW5IQft0id326p4UJx2e1r0zUKJxhw3tF144b7sGivP01RmNEi9XM_JCYXBDS2L-i-7CO4R6Sgu9kMNa23rL1mFUFImYDTaMHry3q7wkq0o39zfyG9syVbqus0T0UhO3f7kgsrjgxATbd11hn_7CDrv7gaFUOeeIjU&zp=Kc6ODprqS0-kag_jOB5mn1L4jv4IYF8SCG0tT3FM4G-tfH0ujChCyMo4LAGeG_YW6BuBw7wcKB_FFnOW21J-4hqrO6wgh-fO7rlItJam413PRXp8qMwnXUSzQ6WLaCWTfkvr3RKeeR-PuQpOhh0kID-atDBtcbYhU3zU6rd0uWhj-65vKPtIo4JdC9KUHAznHer4pREOvJ0CK33DoSGyIznMmBzTBhTxqh7q3D75UQaC1xfmigyuNVycqCYoakjfq8V4uvd22239i5zTIareHIJg1sleQUdO_778CtW8B5JKtbB8qcfCEA9r-LCYhBQHb7Go2e0vNComvavr8Pf728tUJpV65vToiESm3u-dlaW_SaXbAuohaVzpglaV
+                      - link [ref=f138e828] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=IS1o9xdFNN1I6SxO8sVDTmn9QhU3MSw201fG9DUTII3qZZ9FFPXA4erN7ZSWR3jDy0yE0cGvqJP3fWYhP75q6Vv8IIdkgT9TzpXp319D7u9O9bnGLePIoF5ycTVjQ69_eeKzgcHm9m6P-dUVZ6vt2MFXBO1CkFl_suVK0MW3boDxqf8GTLw2t_l-Ot27kDXd6XbuwduiGh_JZsM7-zXQ56sHavpKkdlVSbmo3LEqE0I-HE1dQHlU6L14Lh1Qtk-eqTk4HmC94pp-mAHydwW0Z8oZnc0hBXCUbkaPYwiq3FLuOnBq1l3OPBUmGl0hPnNtXwgwhgU02y7F6BbkkYeoaTylzZnPkPvC1OBOt56OXz3E8atkBtWZtlftz7-L4lqNwykttb5Y4X1k6l0ftKmsZ6GWlClvtlPDjIgMhChX7EcLsmtwZViU6ow3tLh3ipYQMNC66Lp-T1cs8j35pQUnjLEW5QG9uxX41-f6aFw5CoemJojTSiY8SnkwoYDJkVAgVCpepn1Vv-sayfn1qM1fLon_JqJD0EgzLzYQP92QC3BuHCGw9bTY-jXL7pgGvFwyCoJ67BUmA-qcarwf6RmLmpLHY6KTGOE2oVW5IQft0id326p4UJx2e1r0zUKJxhw3tF144b7sGivP01RmNEi9XM_JCYXBDS2L-i-7CO4R6Sgu9kMNa23rL1mFUFImYDTaMHry3q7wkq0o39zfyG9syVbqus0T0UhO3f7kgsrjgxATbd11hn_7CDrv7gaFUOeeIjU&zp=Kc6ODprqS0-kag_jOB5mn1L4jv4IYF8SCG0tT3FM4G-tfH0ujChCyMo4LAGeG_YW6BuBw7wcKB_FFnOW21J-4hqrO6wgh-fO7rlItJam413PRXp8qMwnXUSzQ6WLaCWTfkvr3RKeeR-PuQpOhh0kID-atDBtcbYhU3zU6rd0uWhj-65vKPtIo4JdC9KUHAznHer4pREOvJ0CK33DoSGyIznMmBzTBhTxqh7q3D75UQaC1xfmigyuNVycqCYoakjfq8V4uvd22239i5zTIareHIJg1sleQUdO_778CtW8B5JKtbB8qcfCEA9r-LCYhBQHb7Go2e0vNComvavr8Pf728tUJpV65vToiESm3u-dlaW_SaXbAuohaVzpglaV
+                        - 'img "Thumbnail image: Brew coffee, fight nightmares." [ref=f138e829]'
+                - article "Comment from daHob 2 years ago" [ref=f138e831]:
+                  - generic [ref=f138e832] [cursor=pointer]:
+                    - link "daHob's profile --- avatar" [ref=f138e838]:
+                      - /url: https://www.reddit.com/user/daHob/
+                      - img "u/daHob avatar" [ref=f138e841]
+                    - generic [ref=f138e845]:
+                      - link "daHob's profile" [ref=f138e849]:
+                        - /url: https://www.reddit.com/user/daHob/
+                        - generic [ref=f138e850]: daHob
+                      - generic [aria-hidden] [ref=f138e852]: •
+                      - link [ref=f138e854]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/ladq6v1/
+                        - time [ref=f138e856]: 2y ago
+                  - generic [ref=f138e858]:
+                    - generic [ref=f138e861]:
+                      - paragraph [ref=f138e862]: I use Roll20. It does what I want and there is good support from first parties when I want to run a module. I do not like the fully automated platforms, personally. I prefer more of a "digital tabletop" where the play still feels like tabletop. I do like the in-engine character sheets thought.
+                      - paragraph [ref=f138e863]: My experience in games with stuff like Foundry (played a 1-20 Pathfinder2 adventure path in it) is that the GM spent a ton of time 'coding' the game to make sure all the bits worked. The fully automated systems make it harder to use ad-hock and custom things unless you are willing to put in the time to code it. To be clear, still totally doable, just more difficult.
+                    - button "11 more replies" [ref=f138e870] [cursor=pointer]:
+                      - generic [ref=f138e875]:
+                        - generic [ref=f138e876]: "11"
+                        - text: more replies
+                - article "Comment from caulkhead808 2 years ago" [ref=f138e878]:
+                  - generic [ref=f138e879] [cursor=pointer]:
+                    - link "caulkhead808's profile --- avatar" [ref=f138e885]:
+                      - /url: https://www.reddit.com/user/caulkhead808/
+                    - generic [ref=f138e895]:
+                      - link "caulkhead808's profile" [ref=f138e899]:
+                        - /url: https://www.reddit.com/user/caulkhead808/
+                        - generic [ref=f138e900]: caulkhead808
+                      - generic [aria-hidden] [ref=f138e902]: •
+                      - link [ref=f138e904]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/lacm92w/
+                        - time [ref=f138e906]: 2y ago
+                  - generic [ref=f138e908]:
+                    - paragraph [ref=f138e912]: I really like TaleSpire, run a lot of run games with it. When they finally introduce scenery mods it will be feature complete imo.
+                    - button "1 more reply" [ref=f138e919] [cursor=pointer]:
+                      - generic [ref=f138e924]:
+                        - generic [ref=f138e925]: "1"
+                        - text: more reply
+                - article "Comment from Neymarvin 2 years ago" [ref=f138e927]:
+                  - generic [ref=f138e928] [cursor=pointer]:
+                    - link "Neymarvin's profile --- avatar" [ref=f138e934]:
+                      - /url: https://www.reddit.com/user/Neymarvin/
+                    - generic [ref=f138e944]:
+                      - link "Neymarvin's profile" [ref=f138e948]:
+                        - /url: https://www.reddit.com/user/Neymarvin/
+                        - generic [ref=f138e949]: Neymarvin
+                      - generic [aria-hidden] [ref=f138e951]: •
+                      - link [ref=f138e953]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/ladcao6/
+                        - time [ref=f138e955]: 2y ago
+                  - generic [ref=f138e957]:
+                    - paragraph [ref=f138e961]: Owlbear and discord. Free as can be and easy to use.
+                    - button "2 more replies" [ref=f138e968] [cursor=pointer]:
+                      - generic [ref=f138e973]:
+                        - generic [ref=f138e974]: "2"
+                        - text: more replies
+                - article "Comment from wimpami 2 years ago" [ref=f138e976]:
+                  - generic [ref=f138e977] [cursor=pointer]:
+                    - link "wimpami's profile --- avatar" [ref=f138e983]:
+                      - /url: https://www.reddit.com/user/wimpami/
+                    - generic [ref=f138e993]:
+                      - link "wimpami's profile" [ref=f138e997]:
+                        - /url: https://www.reddit.com/user/wimpami/
+                        - generic [ref=f138e998]: wimpami
+                      - generic [aria-hidden] [ref=f138e1000]: •
+                      - link [ref=f138e1002]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/lad04a7/
+                        - time [ref=f138e1004]: 2y ago
+                  - paragraph [ref=f138e1010]: If everyone is on DnD Beyond I can recommend the AboveVTT extension. Been using it for a year
+                - article "Comment from Lasket 2 years ago" [ref=f138e1014]:
+                  - generic [ref=f138e1015] [cursor=pointer]:
+                    - link "Lasket's profile --- avatar" [ref=f138e1021]:
+                      - /url: https://www.reddit.com/user/Lasket/
+                      - img "u/Lasket avatar" [ref=f138e1024]
+                    - generic [ref=f138e1028]:
+                      - link "Lasket's profile" [ref=f138e1032]:
+                        - /url: https://www.reddit.com/user/Lasket/
+                        - generic [ref=f138e1033]: Lasket
+                      - generic [aria-hidden] [ref=f138e1035]: •
+                      - link [ref=f138e1037]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/ladn27n/
+                        - time [ref=f138e1039]: 2y ago
+                  - generic [ref=f138e1044]:
+                    - paragraph [ref=f138e1045]: If you're using DnDBeyond I can fully recommend aboveVTT
+                    - paragraph [ref=f138e1046]: It may have some hicc ups but it's easy to set up as the DM (in my opinion), is free and is fully compatible with DnDbeyond.
+                - article "Comment from Wrenchwieldingmonkey 2 years ago" [ref=f138e1050]:
+                  - generic [ref=f138e1051] [cursor=pointer]:
+                    - link "Wrenchwieldingmonkey's profile --- avatar" [ref=f138e1057]:
+                      - /url: https://www.reddit.com/user/Wrenchwieldingmonkey/
+                    - generic [ref=f138e1067]:
+                      - link "Wrenchwieldingmonkey's profile" [ref=f138e1071]:
+                        - /url: https://www.reddit.com/user/Wrenchwieldingmonkey/
+                        - generic [ref=f138e1072]: Wrenchwieldingmonkey
+                      - generic [aria-hidden] [ref=f138e1074]: •
+                      - link [ref=f138e1076]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/ladpr3q/
+                        - time [ref=f138e1078]: 2y ago
+                  - paragraph [ref=f138e1084]: Would recommend AboveVTT for sure! Easy enough to import maps/images and well integrated with DnDBeyond
+                - article "Comment from Avalis1234 2 years ago" [ref=f138e1088]:
+                  - generic [ref=f138e1089] [cursor=pointer]:
+                    - link "Avalis1234's profile --- avatar" [ref=f138e1095]:
+                      - /url: https://www.reddit.com/user/Avalis1234/
+                      - img "u/Avalis1234 avatar" [ref=f138e1098]
+                    - generic [ref=f138e1102]:
+                      - link "Avalis1234's profile" [ref=f138e1106]:
+                        - /url: https://www.reddit.com/user/Avalis1234/
+                        - generic [ref=f138e1107]: Avalis1234
+                      - generic [aria-hidden] [ref=f138e1109]: •
+                      - link [ref=f138e1111]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/lacn6s0/
+                        - time [ref=f138e1113]: 2y ago
+                  - generic [ref=f138e1118]:
+                    - paragraph [ref=f138e1119]: I've been using Roll20 for years. Mostly as it was free to start, straight forward to set up and had the Jukebox. I used the Audio/Video on Roll20 considerably but we ditched that in favour of Discord as it was too unstable (we lost quite a bit of time troubleshooting).
+                    - paragraph [ref=f138e1120]: I've also used both Foundry and Owlbear Rodeo in the past. Foundry is fun, but can have a complex set up. Owlbear Rodeo was good enough but lacked many of the features of Roll20, such as the Jukebox (this was over a year ago, so things might have changed now)
+                    - paragraph [ref=f138e1121]: We've used DnDBeyond for character sheets with the Beyond20 browser extension.
+                    - paragraph [ref=f138e1122]: If you're looking for something quick and easy to start with it's probably Roll20 or Owlbear Rodeo from my experience.
+                - article "Comment from CurmudgeonA 2 years ago" [ref=f138e1126]:
+                  - generic [ref=f138e1127] [cursor=pointer]:
+                    - link "CurmudgeonA's profile --- avatar" [ref=f138e1133]:
+                      - /url: https://www.reddit.com/user/CurmudgeonA/
+                    - generic [ref=f138e1143]:
+                      - link "CurmudgeonA's profile" [ref=f138e1147]:
+                        - /url: https://www.reddit.com/user/CurmudgeonA/
+                        - generic [ref=f138e1148]: CurmudgeonA
+                      - generic [aria-hidden] [ref=f138e1150]: •
+                      - link [ref=f138e1152]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/ladas31/
+                        - time [ref=f138e1154]: 2y ago
+                      - generic [aria-hidden] [ref=f138e1155]: •
+                      - generic [ref=f138e1156]:
+                        - text: Edited
+                        - time [ref=f138e1158]: 2y ago
+                  - paragraph [ref=f138e1164]: Diemancer.com is a fairly unknown gem for 1st edition Pathfinder. Amazing automated character sheets, awesome map building, 3d dice, tons of dm tools, logs and keeps a history of every move of every session, including every change of every sheet, so you can go back and replay an old session or even walk through every change ever made to your character sheet. Really cool.
+                - article "Comment from maxwelldoug 2 years ago" [ref=f138e1168]:
+                  - generic [ref=f138e1169] [cursor=pointer]:
+                    - link "maxwelldoug's profile --- avatar" [ref=f138e1175]:
+                      - /url: https://www.reddit.com/user/maxwelldoug/
+                    - generic [ref=f138e1185]:
+                      - link "maxwelldoug's profile" [ref=f138e1189]:
+                        - /url: https://www.reddit.com/user/maxwelldoug/
+                        - generic [ref=f138e1190]: maxwelldoug
+                      - generic [aria-hidden] [ref=f138e1192]: •
+                      - link [ref=f138e1194]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/ladzvdf/
+                        - time [ref=f138e1196]: 2y ago
+                  - paragraph [ref=f138e1202]: Fantasy grounds unity with discord for commo.
+                - 'generic "Super update! # ✨ StoryChat 5.1 is here!" [ref=f138e1206]':
+                  - generic [ref=f138e1207]:
+                    - 'link "Advertisement: Super update! # ✨ StoryChat 5.1 is here!" [ref=f138e1208] [cursor=pointer]':
+                      - /url: https://alb.reddit.com/cr?za=OyL-IHCcO5H-rsYi3jo4eupYnLLRSf-UsPyUeSOdTnueZWPoKQy-x1hIG24RmOC4FtTpfh_ZnJruFsVEJx-LvM6QMP-ane-MB3EomXFIJxWFyxhqWLqpV66TRV6zkqU1IGvOMbJRyulMVrbyDP6DM0Sh3n669J7AP56Z-c6GH3lZwg5TOpQgn4bkggFIEx4BWnXUYabSAnlLnbksO7tgTIz9Ob1mLXK62d1UFG1wt_NjRn2_4t2rNjU5HH4bO2eJ4qq6XZVG2OZBFP486cDYPVFUaKvbXzLHMTza4RBfPl-U3ePXC102dPrN20OB19h_B0QuPlwUYLRWkpx1eJuWoIXVXCa1aQl-bevFf1sY_6pg3soGDFl3l2pHYABg0rVu3YG6ASN2wEFATgJCEtNTz0MVQTPqykb5Ny7-eGiPKtDEQnId9tT5RseHrLe1sxrQZeYIG0lcNzxZQAKQiVibqso9miaU-WTzrkp-IHGgr937dTJQrs33GwZV1fJAUhaYH_nHxAmI26aWh-r5OIEE5z5LdmlM3BDuDDo4nGsDXkv2BFMBQobFeOcZ4kRuw5Lz0CeF342PWEF8mtCz7BcwNYXEcNMywv6QNl2JYksGJ7V5xjnATZWuLRmbB8DqnwpWGrngN-6VweuCXeMLvRkxedrkU5uNyfwezWDeS9CpKa3IIhlOrhxxem7bpu0ZgXSURlrEASZO2D54H_VpB_YzaHjDd2MqhTd490qCpsmXukMJvyB9MkC8u2RUupntSRo-QlM&zp=0VZ9hCcTPlVAogG6fMYzkCxWbJM7q1I7b5BLxGqxbxZUTK50UTysA9cE45l68wzQFg1mHXXRp4RwRSPa7TvobIxC4UNDsnxVdwdcfBqdbAhH2CIWI_iJbtadhsEXNr-9dRv54UqtUdl7P6PdW4DDQuoCFBh5HN5uMvi0Op5TRfHDmTcqeGb1ng4WkISqXv0UEbTCd4nxK92XXPihhth8T2hT0oj3j2UDecR-xlljEqOJ4CbzfuUeX9vS5g0BSvl5q1wZa2gXPg
+                    - generic [ref=f138e1209]:
+                      - generic [ref=f138e1210]:
+                        - link "u/Feeling-Being-8130" [ref=f138e1213] [cursor=pointer]:
+                          - /url: /user/Feeling-Being-8130/
+                          - img "u/Feeling-Being-8130 avatar" [ref=f138e1216]
+                        - generic [ref=f138e1218]: •
+                        - link "Ad" [ref=f138e1220] [cursor=pointer]:
+                          - /url: /user/Feeling-Being-8130/
+                        - link [ref=f138e1222] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=OyL-IHCcO5H-rsYi3jo4eupYnLLRSf-UsPyUeSOdTnueZWPoKQy-x1hIG24RmOC4FtTpfh_ZnJruFsVEJx-LvM6QMP-ane-MB3EomXFIJxWFyxhqWLqpV66TRV6zkqU1IGvOMbJRyulMVrbyDP6DM0Sh3n669J7AP56Z-c6GH3lZwg5TOpQgn4bkggFIEx4BWnXUYabSAnlLnbksO7tgTIz9Ob1mLXK62d1UFG1wt_NjRn2_4t2rNjU5HH4bO2eJ4qq6XZVG2OZBFP486cDYPVFUaKvbXzLHMTza4RBfPl-U3ePXC102dPrN20OB19h_B0QuPlwUYLRWkpx1eJuWoIXVXCa1aQl-bevFf1sY_6pg3soGDFl3l2pHYABg0rVu3YG6ASN2wEFATgJCEtNTz0MVQTPqykb5Ny7-eGiPKtDEQnId9tT5RseHrLe1sxrQZeYIG0lcNzxZQAKQiVibqso9miaU-WTzrkp-IHGgr937dTJQrs33GwZV1fJAUhaYH_nHxAmI26aWh-r5OIEE5z5LdmlM3BDuDDo4nGsDXkv2BFMBQobFeOcZ4kRuw5Lz0CeF342PWEF8mtCz7BcwNYXEcNMywv6QNl2JYksGJ7V5xjnATZWuLRmbB8DqnwpWGrngN-6VweuCXeMLvRkxedrkU5uNyfwezWDeS9CpKa3IIhlOrhxxem7bpu0ZgXSURlrEASZO2D54H_VpB_YzaHjDd2MqhTd490qCpsmXukMJvyB9MkC8u2RUupntSRo-QlM&zp=0VZ9hCcTPlVAogG6fMYzkCxWbJM7q1I7b5BLxGqxbxZUTK50UTysA9cE45l68wzQFg1mHXXRp4RwRSPa7TvobIxC4UNDsnxVdwdcfBqdbAhH2CIWI_iJbtadhsEXNr-9dRv54UqtUdl7P6PdW4DDQuoCFBh5HN5uMvi0Op5TRfHDmTcqeGb1ng4WkISqXv0UEbTCd4nxK92XXPihhth8T2hT0oj3j2UDecR-xlljEqOJ4CbzfuUeX9vS5g0BSvl5q1wZa2gXPg
+                      - button "Open user actions" [ref=f138e1228] [cursor=pointer]
+                    - generic [ref=f138e1234]:
+                      - generic [ref=f138e1235]:
+                        - 'link "Super update! # ✨ StoryChat 5.1 is here!" [ref=f138e1237] [cursor=pointer]':
+                          - /url: https://alb.reddit.com/cr?za=OyL-IHCcO5H-rsYi3jo4eupYnLLRSf-UsPyUeSOdTnueZWPoKQy-x1hIG24RmOC4FtTpfh_ZnJruFsVEJx-LvM6QMP-ane-MB3EomXFIJxWFyxhqWLqpV66TRV6zkqU1IGvOMbJRyulMVrbyDP6DM0Sh3n669J7AP56Z-c6GH3lZwg5TOpQgn4bkggFIEx4BWnXUYabSAnlLnbksO7tgTIz9Ob1mLXK62d1UFG1wt_NjRn2_4t2rNjU5HH4bO2eJ4qq6XZVG2OZBFP486cDYPVFUaKvbXzLHMTza4RBfPl-U3ePXC102dPrN20OB19h_B0QuPlwUYLRWkpx1eJuWoIXVXCa1aQl-bevFf1sY_6pg3soGDFl3l2pHYABg0rVu3YG6ASN2wEFATgJCEtNTz0MVQTPqykb5Ny7-eGiPKtDEQnId9tT5RseHrLe1sxrQZeYIG0lcNzxZQAKQiVibqso9miaU-WTzrkp-IHGgr937dTJQrs33GwZV1fJAUhaYH_nHxAmI26aWh-r5OIEE5z5LdmlM3BDuDDo4nGsDXkv2BFMBQobFeOcZ4kRuw5Lz0CeF342PWEF8mtCz7BcwNYXEcNMywv6QNl2JYksGJ7V5xjnATZWuLRmbB8DqnwpWGrngN-6VweuCXeMLvRkxedrkU5uNyfwezWDeS9CpKa3IIhlOrhxxem7bpu0ZgXSURlrEASZO2D54H_VpB_YzaHjDd2MqhTd490qCpsmXukMJvyB9MkC8u2RUupntSRo-QlM&zp=0VZ9hCcTPlVAogG6fMYzkCxWbJM7q1I7b5BLxGqxbxZUTK50UTysA9cE45l68wzQFg1mHXXRp4RwRSPa7TvobIxC4UNDsnxVdwdcfBqdbAhH2CIWI_iJbtadhsEXNr-9dRv54UqtUdl7P6PdW4DDQuoCFBh5HN5uMvi0Op5TRfHDmTcqeGb1ng4WkISqXv0UEbTCd4nxK92XXPihhth8T2hT0oj3j2UDecR-xlljEqOJ4CbzfuUeX9vS5g0BSvl5q1wZa2gXPg
+                        - generic [ref=f138e1238]:
+                          - link [ref=f138e1239] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=OyL-IHCcO5H-rsYi3jo4eupYnLLRSf-UsPyUeSOdTnueZWPoKQy-x1hIG24RmOC4FtTpfh_ZnJruFsVEJx-LvM6QMP-ane-MB3EomXFIJxWFyxhqWLqpV66TRV6zkqU1IGvOMbJRyulMVrbyDP6DM0Sh3n669J7AP56Z-c6GH3lZwg5TOpQgn4bkggFIEx4BWnXUYabSAnlLnbksO7tgTIz9Ob1mLXK62d1UFG1wt_NjRn2_4t2rNjU5HH4bO2eJ4qq6XZVG2OZBFP486cDYPVFUaKvbXzLHMTza4RBfPl-U3ePXC102dPrN20OB19h_B0QuPlwUYLRWkpx1eJuWoIXVXCa1aQl-bevFf1sY_6pg3soGDFl3l2pHYABg0rVu3YG6ASN2wEFATgJCEtNTz0MVQTPqykb5Ny7-eGiPKtDEQnId9tT5RseHrLe1sxrQZeYIG0lcNzxZQAKQiVibqso9miaU-WTzrkp-IHGgr937dTJQrs33GwZV1fJAUhaYH_nHxAmI26aWh-r5OIEE5z5LdmlM3BDuDDo4nGsDXkv2BFMBQobFeOcZ4kRuw5Lz0CeF342PWEF8mtCz7BcwNYXEcNMywv6QNl2JYksGJ7V5xjnATZWuLRmbB8DqnwpWGrngN-6VweuCXeMLvRkxedrkU5uNyfwezWDeS9CpKa3IIhlOrhxxem7bpu0ZgXSURlrEASZO2D54H_VpB_YzaHjDd2MqhTd490qCpsmXukMJvyB9MkC8u2RUupntSRo-QlM&zp=0VZ9hCcTPlVAogG6fMYzkCxWbJM7q1I7b5BLxGqxbxZUTK50UTysA9cE45l68wzQFg1mHXXRp4RwRSPa7TvobIxC4UNDsnxVdwdcfBqdbAhH2CIWI_iJbtadhsEXNr-9dRv54UqtUdl7P6PdW4DDQuoCFBh5HN5uMvi0Op5TRfHDmTcqeGb1ng4WkISqXv0UEbTCd4nxK92XXPihhth8T2hT0oj3j2UDecR-xlljEqOJ4CbzfuUeX9vS5g0BSvl5q1wZa2gXPg
+                          - generic [ref=f138e1240]:
+                            - link "View More" [ref=f138e1241] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=OyL-IHCcO5H-rsYi3jo4eupYnLLRSf-UsPyUeSOdTnueZWPoKQy-x1hIG24RmOC4FtTpfh_ZnJruFsVEJx-LvM6QMP-ane-MB3EomXFIJxWFyxhqWLqpV66TRV6zkqU1IGvOMbJRyulMVrbyDP6DM0Sh3n669J7AP56Z-c6GH3lZwg5TOpQgn4bkggFIEx4BWnXUYabSAnlLnbksO7tgTIz9Ob1mLXK62d1UFG1wt_NjRn2_4t2rNjU5HH4bO2eJ4qq6XZVG2OZBFP486cDYPVFUaKvbXzLHMTza4RBfPl-U3ePXC102dPrN20OB19h_B0QuPlwUYLRWkpx1eJuWoIXVXCa1aQl-bevFf1sY_6pg3soGDFl3l2pHYABg0rVu3YG6ASN2wEFATgJCEtNTz0MVQTPqykb5Ny7-eGiPKtDEQnId9tT5RseHrLe1sxrQZeYIG0lcNzxZQAKQiVibqso9miaU-WTzrkp-IHGgr937dTJQrs33GwZV1fJAUhaYH_nHxAmI26aWh-r5OIEE5z5LdmlM3BDuDDo4nGsDXkv2BFMBQobFeOcZ4kRuw5Lz0CeF342PWEF8mtCz7BcwNYXEcNMywv6QNl2JYksGJ7V5xjnATZWuLRmbB8DqnwpWGrngN-6VweuCXeMLvRkxedrkU5uNyfwezWDeS9CpKa3IIhlOrhxxem7bpu0ZgXSURlrEASZO2D54H_VpB_YzaHjDd2MqhTd490qCpsmXukMJvyB9MkC8u2RUupntSRo-QlM&zp=0VZ9hCcTPlVAogG6fMYzkCxWbJM7q1I7b5BLxGqxbxZUTK50UTysA9cE45l68wzQFg1mHXXRp4RwRSPa7TvobIxC4UNDsnxVdwdcfBqdbAhH2CIWI_iJbtadhsEXNr-9dRv54UqtUdl7P6PdW4DDQuoCFBh5HN5uMvi0Op5TRfHDmTcqeGb1ng4WkISqXv0UEbTCd4nxK92XXPihhth8T2hT0oj3j2UDecR-xlljEqOJ4CbzfuUeX9vS5g0BSvl5q1wZa2gXPg
+                            - link "storychat.app" [ref=f138e1245] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=OyL-IHCcO5H-rsYi3jo4eupYnLLRSf-UsPyUeSOdTnueZWPoKQy-x1hIG24RmOC4FtTpfh_ZnJruFsVEJx-LvM6QMP-ane-MB3EomXFIJxWFyxhqWLqpV66TRV6zkqU1IGvOMbJRyulMVrbyDP6DM0Sh3n669J7AP56Z-c6GH3lZwg5TOpQgn4bkggFIEx4BWnXUYabSAnlLnbksO7tgTIz9Ob1mLXK62d1UFG1wt_NjRn2_4t2rNjU5HH4bO2eJ4qq6XZVG2OZBFP486cDYPVFUaKvbXzLHMTza4RBfPl-U3ePXC102dPrN20OB19h_B0QuPlwUYLRWkpx1eJuWoIXVXCa1aQl-bevFf1sY_6pg3soGDFl3l2pHYABg0rVu3YG6ASN2wEFATgJCEtNTz0MVQTPqykb5Ny7-eGiPKtDEQnId9tT5RseHrLe1sxrQZeYIG0lcNzxZQAKQiVibqso9miaU-WTzrkp-IHGgr937dTJQrs33GwZV1fJAUhaYH_nHxAmI26aWh-r5OIEE5z5LdmlM3BDuDDo4nGsDXkv2BFMBQobFeOcZ4kRuw5Lz0CeF342PWEF8mtCz7BcwNYXEcNMywv6QNl2JYksGJ7V5xjnATZWuLRmbB8DqnwpWGrngN-6VweuCXeMLvRkxedrkU5uNyfwezWDeS9CpKa3IIhlOrhxxem7bpu0ZgXSURlrEASZO2D54H_VpB_YzaHjDd2MqhTd490qCpsmXukMJvyB9MkC8u2RUupntSRo-QlM&zp=0VZ9hCcTPlVAogG6fMYzkCxWbJM7q1I7b5BLxGqxbxZUTK50UTysA9cE45l68wzQFg1mHXXRp4RwRSPa7TvobIxC4UNDsnxVdwdcfBqdbAhH2CIWI_iJbtadhsEXNr-9dRv54UqtUdl7P6PdW4DDQuoCFBh5HN5uMvi0Op5TRfHDmTcqeGb1ng4WkISqXv0UEbTCd4nxK92XXPihhth8T2hT0oj3j2UDecR-xlljEqOJ4CbzfuUeX9vS5g0BSvl5q1wZa2gXPg
+                      - link [ref=f138e1248] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=OyL-IHCcO5H-rsYi3jo4eupYnLLRSf-UsPyUeSOdTnueZWPoKQy-x1hIG24RmOC4FtTpfh_ZnJruFsVEJx-LvM6QMP-ane-MB3EomXFIJxWFyxhqWLqpV66TRV6zkqU1IGvOMbJRyulMVrbyDP6DM0Sh3n669J7AP56Z-c6GH3lZwg5TOpQgn4bkggFIEx4BWnXUYabSAnlLnbksO7tgTIz9Ob1mLXK62d1UFG1wt_NjRn2_4t2rNjU5HH4bO2eJ4qq6XZVG2OZBFP486cDYPVFUaKvbXzLHMTza4RBfPl-U3ePXC102dPrN20OB19h_B0QuPlwUYLRWkpx1eJuWoIXVXCa1aQl-bevFf1sY_6pg3soGDFl3l2pHYABg0rVu3YG6ASN2wEFATgJCEtNTz0MVQTPqykb5Ny7-eGiPKtDEQnId9tT5RseHrLe1sxrQZeYIG0lcNzxZQAKQiVibqso9miaU-WTzrkp-IHGgr937dTJQrs33GwZV1fJAUhaYH_nHxAmI26aWh-r5OIEE5z5LdmlM3BDuDDo4nGsDXkv2BFMBQobFeOcZ4kRuw5Lz0CeF342PWEF8mtCz7BcwNYXEcNMywv6QNl2JYksGJ7V5xjnATZWuLRmbB8DqnwpWGrngN-6VweuCXeMLvRkxedrkU5uNyfwezWDeS9CpKa3IIhlOrhxxem7bpu0ZgXSURlrEASZO2D54H_VpB_YzaHjDd2MqhTd490qCpsmXukMJvyB9MkC8u2RUupntSRo-QlM&zp=0VZ9hCcTPlVAogG6fMYzkCxWbJM7q1I7b5BLxGqxbxZUTK50UTysA9cE45l68wzQFg1mHXXRp4RwRSPa7TvobIxC4UNDsnxVdwdcfBqdbAhH2CIWI_iJbtadhsEXNr-9dRv54UqtUdl7P6PdW4DDQuoCFBh5HN5uMvi0Op5TRfHDmTcqeGb1ng4WkISqXv0UEbTCd4nxK92XXPihhth8T2hT0oj3j2UDecR-xlljEqOJ4CbzfuUeX9vS5g0BSvl5q1wZa2gXPg
+                        - 'img "Thumbnail image: Super update! # ✨ StoryChat 5.1 is here!" [ref=f138e1249]'
+                - article "Comment from Simba7 2 years ago" [ref=f138e1251]:
+                  - generic [ref=f138e1252] [cursor=pointer]:
+                    - link "Simba7's profile --- avatar" [ref=f138e1258]:
+                      - /url: https://www.reddit.com/user/Simba7/
+                    - generic [ref=f138e1268]:
+                      - link "Simba7's profile" [ref=f138e1272]:
+                        - /url: https://www.reddit.com/user/Simba7/
+                        - generic [ref=f138e1273]: Simba7
+                      - generic [aria-hidden] [ref=f138e1275]: •
+                      - link [ref=f138e1277]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/ladjseo/
+                        - time [ref=f138e1279]: 2y ago
+                      - generic [aria-hidden] [ref=f138e1280]: •
+                      - generic [ref=f138e1281]:
+                        - text: Edited
+                        - time [ref=f138e1283]: 2y ago
+                  - generic [ref=f138e1285]:
+                    - generic [ref=f138e1288]:
+                      - paragraph [ref=f138e1289]: I used One More Multiverse for a while (RIP in piece you beautiful prince), and tried Playrole. Currently using Tableplop.
+                      - paragraph [ref=f138e1290]:
+                        - strong [ref=f138e1291]: Playrole
+                        - text: is great if you want a very pared down and simple VTT. Quick and easy to set up, and has a plugin for DnDBeyond which is nice if you use it.But me
+                        - emphasis [ref=f138e1292]: and
+                        - text: my players both felt the limitations and recently moved to Tableplop.
+                      - paragraph [ref=f138e1293]:
+                        - strong [ref=f138e1294]: Tableplop
+                        - text: ", so far, has been"
+                        - emphasis [ref=f138e1295]:
+                          - strong [ref=f138e1296]: fantastic
+                        - text: ", though we've only ran 3 sessions on it so far.It's very much geared towards DnD 5e, but could easily be reconfigured to accomodate other systems. It will just require a bit of setup work from you/your players in customizing sheets, doing some light formulae. Fairly simple to figure out.Totally free too, though I imagine they'll have to monetize it somehow at some point?"
+                    - 'article "Comment thread level 1: Reply from Aranthar 2 years ago" [ref=f138e1301]':
+                      - generic [ref=f138e1302] [cursor=pointer]:
+                        - link "Aranthar's profile --- avatar" [ref=f138e1308]:
+                          - /url: https://www.reddit.com/user/Aranthar/
+                        - generic [ref=f138e1318]:
+                          - link "Aranthar's profile" [ref=f138e1322]:
+                            - /url: https://www.reddit.com/user/Aranthar/
+                            - generic [ref=f138e1323]: Aranthar
+                          - generic "Comment distinguished as the original poster" [ref=f138e1327]: OP
+                          - generic [aria-hidden] [ref=f138e1328]: •
+                          - link [ref=f138e1330]:
+                            - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/ladm4n1/
+                            - time [ref=f138e1332]: 2y ago
+                      - paragraph [ref=f138e1338]: I'd never heard of Tableplop. Some of my players are very casual, to the point where I print out their character sheets (from DNDBeyond) and bring a bag of dice for them.
+                - article "Comment from oncemoreforscience 2 years ago" [ref=f138e1342]:
+                  - generic [ref=f138e1343] [cursor=pointer]:
+                    - link "oncemoreforscience's profile --- avatar" [ref=f138e1349]:
+                      - /url: https://www.reddit.com/user/oncemoreforscience/
+                      - img "u/oncemoreforscience avatar" [ref=f138e1352]
+                    - generic [ref=f138e1356]:
+                      - link "oncemoreforscience's profile" [ref=f138e1360]:
+                        - /url: https://www.reddit.com/user/oncemoreforscience/
+                        - generic [ref=f138e1361]: oncemoreforscience
+                      - generic [aria-hidden] [ref=f138e1363]: •
+                      - link [ref=f138e1365]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/lahmlc0/
+                        - time [ref=f138e1367]: 2y ago
+                  - generic [ref=f138e1369]:
+                    - paragraph [ref=f138e1373]: We’ve been using AboveVTT with discord for a while now. Love the integration with DnD beyond
+                    - button "5 more replies" [ref=f138e1380] [cursor=pointer]:
+                      - generic [ref=f138e1385]:
+                        - generic [ref=f138e1386]: "5"
+                        - text: more replies
+                - article "Comment from Oiyouinthebushes 2 years ago" [ref=f138e1388]:
+                  - generic [ref=f138e1389] [cursor=pointer]:
+                    - link "Oiyouinthebushes's profile --- avatar" [ref=f138e1395]:
+                      - /url: https://www.reddit.com/user/Oiyouinthebushes/
+                    - generic [ref=f138e1411]:
+                      - link "Oiyouinthebushes's profile" [ref=f138e1415]:
+                        - /url: https://www.reddit.com/user/Oiyouinthebushes/
+                        - generic [ref=f138e1416]: Oiyouinthebushes
+                      - generic [aria-hidden] [ref=f138e1418]: •
+                      - link [ref=f138e1420]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/lajykrz/
+                        - time [ref=f138e1422]: 2y ago
+                  - generic [ref=f138e1424]:
+                    - paragraph [ref=f138e1428]: Roll20 because I have a ton of books and don’t want to buy them all again. It’s not that great.
+                    - button "2 more replies" [ref=f138e1435] [cursor=pointer]:
+                      - generic [ref=f138e1440]:
+                        - generic [ref=f138e1441]: "2"
+                        - text: more replies
+                - article "Comment from [deleted] 2 years ago" [ref=f138e1443]:
+                  - generic "[deleted] 2y ago" [ref=f138e1444] [cursor=pointer]:
+                    - generic [ref=f138e1458]:
+                      - generic [ref=f138e1459]: "[deleted]"
+                      - generic [aria-hidden] [ref=f138e1462]: •
+                      - link [ref=f138e1464]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/ladjjfr/
+                        - time [ref=f138e1466]: 2y ago
+                  - generic [ref=f138e1471]:
+                    - paragraph [ref=f138e1472]: I always see people talk about DnD Beyond and Foundry. Of course Roll20 is a standard.
+                    - paragraph [ref=f138e1473]: I got a lifetime license for Fantasy Grounds Unity. Really cool features if you're not afraid to do a little learning
+                - article "Comment from GaidinBDJ 2 years ago" [ref=f138e1477]:
+                  - generic [ref=f138e1478] [cursor=pointer]:
+                    - link "GaidinBDJ's profile --- avatar" [ref=f138e1484]:
+                      - /url: https://www.reddit.com/user/GaidinBDJ/
+                    - generic [ref=f138e1494]:
+                      - link "GaidinBDJ's profile" [ref=f138e1498]:
+                        - /url: https://www.reddit.com/user/GaidinBDJ/
+                        - generic [ref=f138e1499]: GaidinBDJ
+                      - generic [aria-hidden] [ref=f138e1501]: •
+                      - link [ref=f138e1503]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/ladtns3/
+                        - time [ref=f138e1505]: 2y ago
+                  - generic [ref=f138e1510]:
+                    - paragraph [ref=f138e1511]: I tend to go for Roll 20.
+                    - paragraph [ref=f138e1512]: The big feature I like is being able to write custom stuff. So if someone wants something from "Thaco's Compendium of Weird Situational Spells," you don't have to buy it anything and can just write up a quick button for it.
+                - article "Comment from EchoLocation8 2 years ago" [ref=f138e1516]:
+                  - generic [ref=f138e1517] [cursor=pointer]:
+                    - link "EchoLocation8's profile --- avatar" [ref=f138e1523]:
+                      - /url: https://www.reddit.com/user/EchoLocation8/
+                    - generic [ref=f138e1533]:
+                      - link "EchoLocation8's profile" [ref=f138e1537]:
+                        - /url: https://www.reddit.com/user/EchoLocation8/
+                        - generic [ref=f138e1538]: EchoLocation8
+                      - generic [aria-hidden] [ref=f138e1540]: •
+                      - link [ref=f138e1542]:
+                        - /url: https://www.reddit.com/r/DMAcademy/comments/1dowmi3/comment/ladvpbj/
+                        - time [ref=f138e1544]: 2y ago
+                  - generic [ref=f138e1549]:
+                    - paragraph [ref=f138e1550]: I use Owlbear Rodeo, I love and hate the new version. It's nice because I can easily setup multiple scenes and swap between my prepared battles quickly, but they've made several simple common usages much more annoying than it used to be.
+                    - paragraph [ref=f138e1551]: Particularly, the old version had a trash-hover to quickly remove things by just grabbing them and moving them. And naming tokens used to be as simple as clicking it and typing and then setting a font size. Now you have to click it, select the rename option, type, then change the font size--god forbid you change the font size to desired size first, can't have that, because then your typing goes into the font-size box instead of the token and you have to redo it all.
+            - generic [ref=f138e1556]:
+              - generic [ref=f138e1557]:
+                - complementary "People also ask about section" [ref=f138e1558]:
+                  - heading "People also ask about section" [level=1] [ref=f138e1559]
+                  - generic [ref=f138e1560]: People also ask about
+                  - generic [ref=f138e1565]:
+                    - link "Best Virtual TableTop for Casual Play" [ref=f138e1567] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/aaa36e92-a5e4-496e-928f-58fb52dfb651/?q=Best+Virtual+TableTop+for+Casual+Play&source=PDP&ep=pdp_unit&relatedPostId=t3_1dowmi3
+                    - link "Top Features in Virtual TableTop Software" [ref=f138e1576] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/e09da93f-e62f-47cc-98c6-d87b8916b763/?q=Top+Features+in+Virtual+TableTop+Software&source=PDP&ep=pdp_unit&relatedPostId=t3_1dowmi3
+                    - link "Community Recommended Virtual TableTop" [ref=f138e1585] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/11fae41e-562a-4420-8887-fb32be71c588/?q=Community+Recommended+Virtual+TableTop&source=PDP&ep=pdp_unit&relatedPostId=t3_1dowmi3
+                    - link "Virtual TableTop Setup Tips" [ref=f138e1594] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/fcfba104-3afa-4d11-abf8-80ad68fda165/?q=Virtual+TableTop+Setup+Tips&source=PDP&ep=pdp_unit&relatedPostId=t3_1dowmi3
+                    - link "Virtual TableTop for New DMs" [ref=f138e1603] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/3c3a7187-b65e-4d84-8025-1da67a4f01a9/?q=Virtual+TableTop+for+New+DMs&source=PDP&ep=pdp_unit&relatedPostId=t3_1dowmi3
+                - generic [ref=f138e1611]:
+                  - complementary "Related Posts Section" [ref=f138e1612]:
+                    - heading "Related Posts Section" [level=1] [ref=f138e1613]: More posts you may like
+                    - generic [ref=f138e1614]: Related posts
+                    - list [ref=f138e1620]:
+                      - listitem [ref=f138e1621]:
+                        - generic [ref=f138e1622]:
+                          - generic [ref=f138e1623]:
+                            - link "What Virtual TableTop Do You Use?" [ref=f138e1624] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DnD/comments/1dowpvz/what_virtual_tabletop_do_you_use/
+                            - generic [ref=f138e1627]:
+                              - generic [ref=f138e1630]:
+                                - link "r/DnD" [ref=f138e1631] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/DnD/
+                                - generic [aria-hidden] [ref=f138e1636]: •
+                                - time [ref=f138e1638]: 2y ago
+                              - link [ref=f138e1640] [cursor=pointer]:
+                                - /url: /r/DnD/comments/1dowpvz/what_virtual_tabletop_do_you_use/
+                                - heading "List item post - What Virtual TableTop Do You Use?" [level=3] [ref=f138e1643]: What Virtual TableTop Do You Use?
+                            - generic [ref=f138e1645]:
+                              - generic [ref=f138e1646]: "23"
+                              - text: upvotes ·
+                              - generic [ref=f138e1647]: "51"
+                              - text: comments
+                          - separator [ref=f138e1648]
+                      - listitem
+                      - listitem [ref=f138e1649]:
+                        - generic [ref=f138e1650]:
+                          - generic [ref=f138e1651]:
+                            - link "Best Virtual Tabletop" [ref=f138e1652] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/rpg/comments/ndzzix/best_virtual_tabletop/
+                            - generic [ref=f138e1655]:
+                              - generic [ref=f138e1658]:
+                                - link "r/rpg" [ref=f138e1659] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/rpg/
+                                - generic [aria-hidden] [ref=f138e1664]: •
+                                - time [ref=f138e1666]: 5y ago
+                              - link [ref=f138e1668] [cursor=pointer]:
+                                - /url: /r/rpg/comments/ndzzix/best_virtual_tabletop/
+                                - heading "List item post - Best Virtual Tabletop" [level=3] [ref=f138e1671]: Best Virtual Tabletop
+                            - generic [ref=f138e1673]:
+                              - generic [ref=f138e1674]: "4"
+                              - text: upvotes ·
+                              - generic [ref=f138e1675]: "18"
+                              - text: comments
+                          - separator [ref=f138e1676]
+                      - listitem [ref=f138e1677]:
+                        - generic [ref=f138e1678]:
+                          - generic [ref=f138e1679]:
+                            - link "What Virtual TableTop Do You Use?" [ref=f138e1680] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/dndnext/comments/1dowqkr/what_virtual_tabletop_do_you_use/
+                            - generic [ref=f138e1683]:
+                              - generic [ref=f138e1686]:
+                                - link "r/dndnext" [ref=f138e1687] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/dndnext/
+                                - generic [aria-hidden] [ref=f138e1692]: •
+                                - time [ref=f138e1694]: 2y ago
+                              - link [ref=f138e1696] [cursor=pointer]:
+                                - /url: /r/dndnext/comments/1dowqkr/what_virtual_tabletop_do_you_use/
+                                - heading "List item post - What Virtual TableTop Do You Use?" [level=3] [ref=f138e1699]: What Virtual TableTop Do You Use?
+                            - generic [ref=f138e1701]:
+                              - generic [ref=f138e1702]: "42"
+                              - text: upvotes ·
+                              - generic [ref=f138e1703]: "84"
+                              - text: comments
+                          - separator [ref=f138e1704]
+                      - listitem
+                      - listitem [ref=f138e1705]:
+                        - generic [ref=f138e1706]:
+                          - generic [ref=f138e1707]:
+                            - link "Which Virtual Tabletop would you recommend for a solo experience?" [ref=f138e1708] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Solo_Roleplaying/comments/12z6c39/which_virtual_tabletop_would_you_recommend_for_a/
+                            - generic [ref=f138e1711]:
+                              - generic [ref=f138e1714]:
+                                - link "r/Solo_Roleplaying" [ref=f138e1715] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/Solo_Roleplaying/
+                                - generic [aria-hidden] [ref=f138e1720]: •
+                                - time [ref=f138e1722]: 4y ago
+                              - link [ref=f138e1724] [cursor=pointer]:
+                                - /url: /r/Solo_Roleplaying/comments/12z6c39/which_virtual_tabletop_would_you_recommend_for_a/
+                                - heading "List item post - Which Virtual Tabletop would you recommend for a solo exper..." [level=3] [ref=f138e1727]: Which Virtual Tabletop would you recommend for a solo experience?
+                            - generic [ref=f138e1729]:
+                              - generic [ref=f138e1730]: "8"
+                              - text: upvotes ·
+                              - generic [ref=f138e1731]: "11"
+                              - text: comments
+                          - separator [ref=f138e1732]
+                      - listitem [ref=f138e1733]:
+                        - generic [ref=f138e1734]:
+                          - generic [ref=f138e1735]:
+                            - 'link "Update: Table Riser" [ref=f138e1736] [cursor=pointer]':
+                              - /url: https://www.reddit.com/r/DnDIY/comments/1sccqn0/update_table_riser/
+                            - generic [ref=f138e1738]:
+                              - generic [ref=f138e1739]:
+                                - generic [ref=f138e1742]:
+                                  - link "r/DnDIY" [ref=f138e1743] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/DnDIY/
+                                  - generic [aria-hidden] [ref=f138e1748]: •
+                                  - time [ref=f138e1750]: 6mo ago
+                                - link [ref=f138e1752] [cursor=pointer]:
+                                  - /url: /r/DnDIY/comments/1sccqn0/update_table_riser/
+                                  - 'heading "List item post - Update: Table Riser" [level=3] [ref=f138e1755]': "Update: Table Riser"
+                              - 'link "r/DnDIY - Update: Table Riser" [ref=f138e1758] [cursor=pointer]':
+                                - /url: https://www.reddit.com/r/DnDIY/comments/1sccqn0/update_table_riser/
+                                - 'img "r/DnDIY - Update: Table Riser" [ref=f138e1759]'
+                            - generic [ref=f138e1761]:
+                              - generic [ref=f138e1762]: "134"
+                              - text: upvotes ·
+                              - generic [ref=f138e1763]: "16"
+                              - text: comments
+                          - separator [ref=f138e1764]
+                      - listitem [ref=f138e1765]:
+                        - generic [ref=f138e1766]:
+                          - generic [ref=f138e1767]:
+                            - link "Made a portable Table Top screen" [ref=f138e1768] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DnDIY/comments/1rxmak4/made_a_portable_table_top_screen/
+                            - generic [ref=f138e1770]:
+                              - generic [ref=f138e1771]:
+                                - generic [ref=f138e1774]:
+                                  - link "r/DnDIY" [ref=f138e1775] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/DnDIY/
+                                  - generic [aria-hidden] [ref=f138e1780]: •
+                                  - time [ref=f138e1782]: 7mo ago
+                                - link [ref=f138e1784] [cursor=pointer]:
+                                  - /url: /r/DnDIY/comments/1rxmak4/made_a_portable_table_top_screen/
+                                  - heading "List item post - Made a portable Table Top screen" [level=3] [ref=f138e1787]: Made a portable Table Top screen
+                              - link "r/DnDIY - Made a portable Table Top screen" [ref=f138e1790] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/DnDIY/comments/1rxmak4/made_a_portable_table_top_screen/
+                                - img "r/DnDIY - Made a portable Table Top screen" [ref=f138e1791]
+                            - generic [ref=f138e1793]:
+                              - generic [ref=f138e1794]: "312"
+                              - text: upvotes ·
+                              - generic [ref=f138e1795]: "23"
+                              - text: comments
+                          - separator [ref=f138e1796]
+                      - listitem [ref=f138e1797]:
+                        - generic [ref=f138e1798]:
+                          - generic [ref=f138e1799]:
+                            - link "Virtual Tabletop Options for 5e?" [ref=f138e1800] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/dndnext/comments/109alpx/virtual_tabletop_options_for_5e/
+                            - generic [ref=f138e1803]:
+                              - generic [ref=f138e1806]:
+                                - link "r/dndnext" [ref=f138e1807] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/dndnext/
+                                - generic [aria-hidden] [ref=f138e1812]: •
+                                - time [ref=f138e1814]: 4y ago
+                              - link [ref=f138e1816] [cursor=pointer]:
+                                - /url: /r/dndnext/comments/109alpx/virtual_tabletop_options_for_5e/
+                                - heading "List item post - Virtual Tabletop Options for 5e?" [level=3] [ref=f138e1819]: Virtual Tabletop Options for 5e?
+                            - generic [ref=f138e1821]:
+                              - generic [ref=f138e1822]: "25"
+                              - text: upvotes ·
+                              - generic [ref=f138e1823]: "71"
+                              - text: comments
+                          - separator [ref=f138e1824]
+                      - listitem [ref=f138e1825]:
+                        - generic [ref=f138e1826]:
+                          - generic [ref=f138e1827]:
+                            - link "Best Virtual Tabletop?" [ref=f138e1828] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DMAcademy/comments/zsdegk/best_virtual_tabletop/
+                            - generic [ref=f138e1831]:
+                              - generic [ref=f138e1834]:
+                                - link "r/DMAcademy" [ref=f138e1835] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/DMAcademy/
+                                - generic [aria-hidden] [ref=f138e1840]: •
+                                - time [ref=f138e1842]: 4y ago
+                              - link [ref=f138e1844] [cursor=pointer]:
+                                - /url: /r/DMAcademy/comments/zsdegk/best_virtual_tabletop/
+                                - heading "List item post - Best Virtual Tabletop?" [level=3] [ref=f138e1847]: Best Virtual Tabletop?
+                            - generic [ref=f138e1849]:
+                              - generic [ref=f138e1850]: "2"
+                              - text: upvotes ·
+                              - generic [ref=f138e1851]: "11"
+                              - text: comments
+                          - separator [ref=f138e1852]
+                      - listitem
+                      - listitem [ref=f138e1853]:
+                        - generic [ref=f138e1854]:
+                          - generic [ref=f138e1855]:
+                            - link "How to add content to Shard Tabletop for 5th Edition Dungeons and Dragons?" [ref=f138e1856] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DnD/comments/klwxbj/how_to_add_content_to_shard_tabletop_for_5th/
+                            - generic [ref=f138e1858]:
+                              - generic [ref=f138e1859]:
+                                - generic [ref=f138e1862]:
+                                  - link "r/DnD" [ref=f138e1863] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/DnD/
+                                  - generic [aria-hidden] [ref=f138e1868]: •
+                                  - time [ref=f138e1870]: 6y ago
+                                - link [ref=f138e1872] [cursor=pointer]:
+                                  - /url: /r/DnD/comments/klwxbj/how_to_add_content_to_shard_tabletop_for_5th/
+                                  - heading "List item post - How to add content to Shard Tabletop for 5th Edition Dungeo..." [level=3] [ref=f138e1875]: How to add content to Shard Tabletop for 5th Edition Dungeons and Dragons?
+                              - link "r/DnD - How to add content to Shard Tabletop for 5th Edition Dungeons and Dragons?" [ref=f138e1878] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/DnD/comments/klwxbj/how_to_add_content_to_shard_tabletop_for_5th/
+                                - img "r/DnD - How to add content to Shard Tabletop for 5th Edition Dungeons and Dragons?" [ref=f138e1879]
+                            - generic [ref=f138e1881]:
+                              - generic [ref=f138e1882]: "1"
+                              - text: upvote
+                          - separator [ref=f138e1883]
+                      - listitem [ref=f138e1884]:
+                        - generic [ref=f138e1885]:
+                          - generic [ref=f138e1886]:
+                            - link "When you create a Tableau dashboard for stakeholders..._" [ref=f138e1887] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/tableau/comments/1txt42x/when_you_create_a_tableau_dashboard_for/
+                            - generic [ref=f138e1889]:
+                              - generic [ref=f138e1890]:
+                                - generic [ref=f138e1893]:
+                                  - link "r/tableau" [ref=f138e1894] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/tableau/
+                                  - generic [aria-hidden] [ref=f138e1899]: •
+                                  - time [ref=f138e1901]: 4mo ago
+                                - link [ref=f138e1903] [cursor=pointer]:
+                                  - /url: /r/tableau/comments/1txt42x/when_you_create_a_tableau_dashboard_for/
+                                  - heading "List item post - When you create a Tableau dashboard for stakeholders..._" [level=3] [ref=f138e1906]: When you create a Tableau dashboard for stakeholders..._
+                              - link "r/tableau - When you create a Tableau dashboard for stakeholders..._" [ref=f138e1909] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/tableau/comments/1txt42x/when_you_create_a_tableau_dashboard_for/
+                                - img "r/tableau - When you create a Tableau dashboard for stakeholders..._" [ref=f138e1910]
+                            - generic [ref=f138e1912]:
+                              - generic [ref=f138e1913]: "134"
+                              - text: upvotes ·
+                              - generic [ref=f138e1914]: "29"
+                              - text: comments
+                          - separator [ref=f138e1915]
+                      - listitem [ref=f138e1916]:
+                        - generic [ref=f138e1917]:
+                          - generic [ref=f138e1918]:
+                            - link "My beginners table that has now become my go to." [ref=f138e1919] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Beginner_Turntables/comments/1rq7e24/my_beginners_table_that_has_now_become_my_go_to/
+                            - generic [ref=f138e1921]:
+                              - generic [ref=f138e1922]:
+                                - generic [ref=f138e1925]:
+                                  - link "r/Beginner_Turntables" [ref=f138e1926] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/Beginner_Turntables/
+                                  - generic [aria-hidden] [ref=f138e1931]: •
+                                  - time [ref=f138e1933]: 7mo ago
+                                - link [ref=f138e1935] [cursor=pointer]:
+                                  - /url: /r/Beginner_Turntables/comments/1rq7e24/my_beginners_table_that_has_now_become_my_go_to/
+                                  - heading "List item post - My beginners table that has now become my go to." [level=3] [ref=f138e1938]: My beginners table that has now become my go to.
+                              - link "r/Beginner_Turntables - My beginners table that has now become my go to." [ref=f138e1941] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/Beginner_Turntables/comments/1rq7e24/my_beginners_table_that_has_now_become_my_go_to/
+                                - img "r/Beginner_Turntables - My beginners table that has now become my go to." [ref=f138e1942]
+                            - generic [ref=f138e1944]:
+                              - generic [ref=f138e1945]: "128"
+                              - text: upvotes ·
+                              - generic [ref=f138e1946]: "62"
+                              - text: comments
+                          - separator [ref=f138e1947]
+                      - listitem [ref=f138e1948]:
+                        - generic [ref=f138e1949]:
+                          - generic [ref=f138e1950]:
+                            - link "🛋️ Over a decade of WFH led me to design this laptop side table which is an alternative to my standing desk. Curious for your thoughts!" [ref=f138e1951] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/StandingDesk/comments/1ojkvih/over_a_decade_of_wfh_led_me_to_design_this_laptop/
+                            - generic [ref=f138e1953]:
+                              - generic [ref=f138e1954]:
+                                - generic [ref=f138e1957]:
+                                  - link "r/StandingDesk" [ref=f138e1958] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/StandingDesk/
+                                  - generic [aria-hidden] [ref=f138e1963]: •
+                                  - time [ref=f138e1965]: 1y ago
+                                - link [ref=f138e1967] [cursor=pointer]:
+                                  - /url: /r/StandingDesk/comments/1ojkvih/over_a_decade_of_wfh_led_me_to_design_this_laptop/
+                                  - heading "List item post - 🛋️ Over a decade of WFH led me to design this laptop side ..." [level=3] [ref=f138e1970]: 🛋️ Over a decade of WFH led me to design this laptop side table which is an alternative to my standing desk. Curious for your thoughts!
+                              - link "r/StandingDesk - 🛋️ Over a decade of WFH led me to design this laptop side table which is an alternative to my standing desk. Curious for your thoughts!" [ref=f138e1973] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/StandingDesk/comments/1ojkvih/over_a_decade_of_wfh_led_me_to_design_this_laptop/
+                                - img "r/StandingDesk - 🛋️ Over a decade of WFH led me to design this laptop side table which is an alternative to my standing desk. Curious for your thoughts!" [ref=f138e1974]
+                            - generic [ref=f138e1976]:
+                              - generic [ref=f138e1977]: "12"
+                              - text: upvotes ·
+                              - generic [ref=f138e1978]: "4"
+                              - text: comments
+                          - separator [ref=f138e1979]
+                      - listitem [ref=f138e1980]:
+                        - generic [ref=f138e1981]:
+                          - generic [ref=f138e1982]:
+                            - link "Preciso de uma boa mesa para o meu pc" [ref=f138e1983] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/computadores/comments/1vlifw2/preciso_de_uma_boa_mesa_para_o_meu_pc/
+                            - generic [ref=f138e1985]:
+                              - generic [ref=f138e1986]:
+                                - generic [ref=f138e1989]:
+                                  - link "r/computadores" [ref=f138e1990] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/computadores/
+                                  - generic [aria-hidden] [ref=f138e1995]: •
+                                  - time [ref=f138e1997]: 2mo ago
+                                - link [ref=f138e1999] [cursor=pointer]:
+                                  - /url: /r/computadores/comments/1vlifw2/preciso_de_uma_boa_mesa_para_o_meu_pc/
+                                  - heading "List item post - Preciso de uma boa mesa para o meu pc" [level=3] [ref=f138e2002]: Preciso de uma boa mesa para o meu pc
+                              - link "r/computadores - Preciso de uma boa mesa para o meu pc" [ref=f138e2005] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/computadores/comments/1vlifw2/preciso_de_uma_boa_mesa_para_o_meu_pc/
+                                - img "r/computadores - Preciso de uma boa mesa para o meu pc" [ref=f138e2006]
+                            - generic [ref=f138e2008]:
+                              - generic [ref=f138e2009]: "5"
+                              - text: upvotes ·
+                              - generic [ref=f138e2010]: "13"
+                              - text: comments
+                          - separator [ref=f138e2011]
+                      - listitem [ref=f138e2012]:
+                        - generic [ref=f138e2013]:
+                          - generic [ref=f138e2014]:
+                            - link "“TABLETOP” This was one of the most fun artworks I’ve done so far" [ref=f138e2015] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/40k/comments/1wtb3qt/tabletop_this_was_one_of_the_most_fun_artworks/
+                            - generic [ref=f138e2017]:
+                              - generic [ref=f138e2018]:
+                                - generic [ref=f138e2021]:
+                                  - link "r/40k" [ref=f138e2022] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/40k/
+                                  - generic [aria-hidden] [ref=f138e2027]: •
+                                  - time [ref=f138e2029]: 16d ago
+                                - link [ref=f138e2031] [cursor=pointer]:
+                                  - /url: /r/40k/comments/1wtb3qt/tabletop_this_was_one_of_the_most_fun_artworks/
+                                  - heading "List item post - “TABLETOP” This was one of the most fun artworks I’ve done ..." [level=3] [ref=f138e2034]: “TABLETOP” This was one of the most fun artworks I’ve done so far
+                              - link "r/40k - “TABLETOP” This was one of the most fun artworks I’ve done so far" [ref=f138e2037] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/40k/comments/1wtb3qt/tabletop_this_was_one_of_the_most_fun_artworks/
+                                - img "r/40k - “TABLETOP” This was one of the most fun artworks I’ve done so far" [ref=f138e2038]
+                            - generic [ref=f138e2040]:
+                              - generic [ref=f138e2041]: "740"
+                              - text: upvotes ·
+                              - generic [ref=f138e2042]: "14"
+                              - text: comments
+                          - separator [ref=f138e2043]
+                      - listitem [ref=f138e2044]:
+                        - generic [ref=f138e2045]:
+                          - generic [ref=f138e2046]:
+                            - link "What is Shard Tabletop for 5th Edition Dungeons and Dragons?" [ref=f138e2047] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DnD/comments/k46xai/what_is_shard_tabletop_for_5th_edition_dungeons/
+                            - generic [ref=f138e2049]:
+                              - generic [ref=f138e2050]:
+                                - generic [ref=f138e2053]:
+                                  - link "r/DnD" [ref=f138e2054] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/DnD/
+                                  - generic [aria-hidden] [ref=f138e2059]: •
+                                  - time [ref=f138e2061]: 6y ago
+                                - link [ref=f138e2063] [cursor=pointer]:
+                                  - /url: /r/DnD/comments/k46xai/what_is_shard_tabletop_for_5th_edition_dungeons/
+                                  - heading "List item post - What is Shard Tabletop for 5th Edition Dungeons and Dragons?" [level=3] [ref=f138e2066]: What is Shard Tabletop for 5th Edition Dungeons and Dragons?
+                              - link "r/DnD - What is Shard Tabletop for 5th Edition Dungeons and Dragons?" [ref=f138e2069] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/DnD/comments/k46xai/what_is_shard_tabletop_for_5th_edition_dungeons/
+                                - img "r/DnD - What is Shard Tabletop for 5th Edition Dungeons and Dragons?" [ref=f138e2070]
+                            - generic [ref=f138e2072]:
+                              - generic [ref=f138e2073]: "4"
+                              - text: upvotes ·
+                              - generic [ref=f138e2074]: "1"
+                              - text: comment
+                          - separator [ref=f138e2075]
+                      - listitem [ref=f138e2076]:
+                        - generic [ref=f138e2077]:
+                          - generic [ref=f138e2078]:
+                            - link "Table Riser Help!" [ref=f138e2079] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DnDIY/comments/1s6wlq6/table_riser_help/
+                            - generic [ref=f138e2081]:
+                              - generic [ref=f138e2082]:
+                                - generic [ref=f138e2085]:
+                                  - link "r/DnDIY" [ref=f138e2086] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/DnDIY/
+                                  - generic [aria-hidden] [ref=f138e2091]: •
+                                  - time [ref=f138e2093]: 7mo ago
+                                - link [ref=f138e2095] [cursor=pointer]:
+                                  - /url: /r/DnDIY/comments/1s6wlq6/table_riser_help/
+                                  - heading "List item post - Table Riser Help!" [level=3] [ref=f138e2098]: Table Riser Help!
+                              - link "r/DnDIY - Table Riser Help!" [ref=f138e2101] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/DnDIY/comments/1s6wlq6/table_riser_help/
+                                - img "r/DnDIY - Table Riser Help!" [ref=f138e2102]
+                            - generic [ref=f138e2104]:
+                              - generic [ref=f138e2105]: "56"
+                              - text: upvotes ·
+                              - generic [ref=f138e2106]: "18"
+                              - text: comments
+                          - separator [ref=f138e2107]
+                      - listitem [ref=f138e2108]:
+                        - generic [ref=f138e2109]:
+                          - generic [ref=f138e2110]:
+                            - link "Side Table" [ref=f138e2111] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/woodworking/comments/1tazgah/side_table/
+                            - generic [ref=f138e2113]:
+                              - generic [ref=f138e2114]:
+                                - generic [ref=f138e2117]:
+                                  - link "r/woodworking" [ref=f138e2118] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/woodworking/
+                                  - generic [aria-hidden] [ref=f138e2123]: •
+                                  - time [ref=f138e2125]: 5mo ago
+                                - link [ref=f138e2127] [cursor=pointer]:
+                                  - /url: /r/woodworking/comments/1tazgah/side_table/
+                                  - heading "List item post - Side Table" [level=3] [ref=f138e2130]: Side Table
+                              - link "r/woodworking - Side Table" [ref=f138e2133] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/woodworking/comments/1tazgah/side_table/
+                                - img "r/woodworking - Side Table" [ref=f138e2134]
+                            - generic [ref=f138e2136]:
+                              - generic [ref=f138e2137]: "257"
+                              - text: upvotes ·
+                              - generic [ref=f138e2138]: "16"
+                              - text: comments
+                          - separator [ref=f138e2139]
+                      - listitem [ref=f138e2140]:
+                        - generic [ref=f138e2141]:
+                          - generic [ref=f138e2142]:
+                            - link "Table for pc set upssssssss" [ref=f138e2143] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/PHbuildapc/comments/1sluyyg/table_for_pc_set_upssssssss/
+                            - generic [ref=f138e2145]:
+                              - generic [ref=f138e2146]:
+                                - generic [ref=f138e2149]:
+                                  - link "r/PHbuildapc" [ref=f138e2150] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/PHbuildapc/
+                                  - generic [aria-hidden] [ref=f138e2155]: •
+                                  - time [ref=f138e2157]: 6mo ago
+                                - link [ref=f138e2159] [cursor=pointer]:
+                                  - /url: /r/PHbuildapc/comments/1sluyyg/table_for_pc_set_upssssssss/
+                                  - heading "List item post - Table for pc set upssssssss" [level=3] [ref=f138e2162]: Table for pc set upssssssss
+                              - link "r/PHbuildapc - Table for pc set upssssssss" [ref=f138e2165] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/PHbuildapc/comments/1sluyyg/table_for_pc_set_upssssssss/
+                                - img "r/PHbuildapc - Table for pc set upssssssss" [ref=f138e2166]
+                            - generic [ref=f138e2168]:
+                              - generic [ref=f138e2169]: "6"
+                              - text: upvotes ·
+                              - generic [ref=f138e2170]: "23"
+                              - text: comments
+                          - separator [ref=f138e2171]
+                      - listitem [ref=f138e2172]:
+                        - generic [ref=f138e2173]:
+                          - generic [ref=f138e2174]:
+                            - link "Kickstarter for 'Shard Tabletop - A 5E Virtual Tabletop and Character Sheet' is live!" [ref=f138e2175] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DnD/comments/l5lwyr/kickstarter_for_shard_tabletop_a_5e_virtual/
+                            - generic [ref=f138e2178]:
+                              - generic [ref=f138e2181]:
+                                - link "r/DnD" [ref=f138e2182] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/DnD/
+                                - generic [aria-hidden] [ref=f138e2187]: •
+                                - time [ref=f138e2189]: 6y ago
+                              - link [ref=f138e2191] [cursor=pointer]:
+                                - /url: /r/DnD/comments/l5lwyr/kickstarter_for_shard_tabletop_a_5e_virtual/
+                                - heading "List item post - Kickstarter for 'Shard Tabletop - A 5E Virtual Tabletop and..." [level=3] [ref=f138e2194]: Kickstarter for 'Shard Tabletop - A 5E Virtual Tabletop and Character Sheet' is live!
+                            - generic [ref=f138e2196]:
+                              - generic [ref=f138e2197]: "10"
+                              - text: upvotes ·
+                              - generic [ref=f138e2198]: "5"
+                              - text: comments
+                          - separator [ref=f138e2199]
+                      - listitem [ref=f138e2200]:
+                        - generic [ref=f138e2201]:
+                          - generic [ref=f138e2202]:
+                            - link "Side Table" [ref=f138e2203] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/woodworking/comments/1uz1q45/side_table/
+                            - generic [ref=f138e2205]:
+                              - generic [ref=f138e2206]:
+                                - generic [ref=f138e2209]:
+                                  - link "r/woodworking" [ref=f138e2210] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/woodworking/
+                                  - generic [aria-hidden] [ref=f138e2215]: •
+                                  - time [ref=f138e2217]: 3mo ago
+                                - link [ref=f138e2219] [cursor=pointer]:
+                                  - /url: /r/woodworking/comments/1uz1q45/side_table/
+                                  - heading "List item post - Side Table" [level=3] [ref=f138e2222]: Side Table
+                              - link "r/woodworking - Side Table" [ref=f138e2225] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/woodworking/comments/1uz1q45/side_table/
+                                - img "r/woodworking - Side Table" [ref=f138e2226]
+                            - generic [ref=f138e2228]:
+                              - generic [ref=f138e2229]: "94"
+                              - text: upvotes ·
+                              - generic [ref=f138e2230]: "15"
+                              - text: comments
+                          - separator [ref=f138e2231]
+                      - listitem [ref=f138e2232]:
+                        - generic [ref=f138e2233]:
+                          - generic [ref=f138e2234]:
+                            - link "How the Turn Tables" [ref=f138e2235] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/pcmasterrace/comments/1wkg1cg/how_the_turn_tables/
+                            - generic [ref=f138e2237]:
+                              - generic [ref=f138e2238]:
+                                - generic [ref=f138e2241]:
+                                  - link "r/pcmasterrace" [ref=f138e2242] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/pcmasterrace/
+                                  - generic [aria-hidden] [ref=f138e2247]: •
+                                  - time [ref=f138e2249]: 26d ago
+                                - link [ref=f138e2251] [cursor=pointer]:
+                                  - /url: /r/pcmasterrace/comments/1wkg1cg/how_the_turn_tables/
+                                  - heading "List item post - How the Turn Tables" [level=3] [ref=f138e2254]: How the Turn Tables
+                              - link "r/pcmasterrace - How the Turn Tables" [ref=f138e2257] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/pcmasterrace/comments/1wkg1cg/how_the_turn_tables/
+                                - img "r/pcmasterrace - How the Turn Tables" [ref=f138e2258]
+                            - generic [ref=f138e2260]:
+                              - generic [ref=f138e2261]: 19K
+                              - text: upvotes ·
+                              - generic [ref=f138e2262]: 1.1K
+                              - text: comments
+                          - separator [ref=f138e2263]
+                      - listitem [ref=f138e2264]:
+                        - generic [ref=f138e2265]:
+                          - generic [ref=f138e2266]:
+                            - link "TV Fingerboard Table" [ref=f138e2267] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Fingerboards/comments/1sbn2zb/tv_fingerboard_table/
+                            - generic [ref=f138e2269]:
+                              - generic [ref=f138e2270]:
+                                - generic [ref=f138e2273]:
+                                  - link "r/Fingerboards" [ref=f138e2274] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/Fingerboards/
+                                  - generic [aria-hidden] [ref=f138e2279]: •
+                                  - time [ref=f138e2281]: 6mo ago
+                                - link [ref=f138e2283] [cursor=pointer]:
+                                  - /url: /r/Fingerboards/comments/1sbn2zb/tv_fingerboard_table/
+                                  - heading "List item post - TV Fingerboard Table" [level=3] [ref=f138e2286]: TV Fingerboard Table
+                              - link "r/Fingerboards - TV Fingerboard Table" [ref=f138e2289] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/Fingerboards/comments/1sbn2zb/tv_fingerboard_table/
+                                - img "r/Fingerboards - TV Fingerboard Table" [ref=f138e2290]
+                            - generic [ref=f138e2292]:
+                              - generic [ref=f138e2293]: "71"
+                              - text: upvotes ·
+                              - generic [ref=f138e2294]: "26"
+                              - text: comments
+                          - separator [ref=f138e2295]
+                      - listitem [ref=f138e2296]:
+                        - generic [ref=f138e2297]:
+                          - generic [ref=f138e2298]:
+                            - link "Starting the new year with a new table top and PC!" [ref=f138e2299] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/desksetup/comments/1qnfsw4/starting_the_new_year_with_a_new_table_top_and_pc/
+                            - generic [ref=f138e2301]:
+                              - generic [ref=f138e2302]:
+                                - generic [ref=f138e2305]:
+                                  - link "r/desksetup" [ref=f138e2306] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/desksetup/
+                                  - generic [aria-hidden] [ref=f138e2311]: •
+                                  - time [ref=f138e2313]: 9mo ago
+                                - link [ref=f138e2315] [cursor=pointer]:
+                                  - /url: /r/desksetup/comments/1qnfsw4/starting_the_new_year_with_a_new_table_top_and_pc/
+                                  - heading "List item post - Starting the new year with a new table top and PC!" [level=3] [ref=f138e2318]: Starting the new year with a new table top and PC!
+                              - link "r/desksetup - Starting the new year with a new table top and PC!" [ref=f138e2321] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/desksetup/comments/1qnfsw4/starting_the_new_year_with_a_new_table_top_and_pc/
+                                - img "r/desksetup - Starting the new year with a new table top and PC!" [ref=f138e2322]
+                            - generic [ref=f138e2324]:
+                              - generic [ref=f138e2325]: "273"
+                              - text: upvotes ·
+                              - generic [ref=f138e2326]: "17"
+                              - text: comments
+                          - separator [ref=f138e2327]
+                      - listitem [ref=f138e2328]:
+                        - generic [ref=f138e2329]:
+                          - generic [ref=f138e2330]:
+                            - link "Top-down 2D platformer ; any takers for this genre?" [ref=f138e2331] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/SoloDevelopment/comments/1vjttty/topdown_2d_platformer_any_takers_for_this_genre/
+                            - generic [ref=f138e2333]:
+                              - generic [ref=f138e2334]:
+                                - generic [ref=f138e2337]:
+                                  - link "r/SoloDevelopment" [ref=f138e2338] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/SoloDevelopment/
+                                  - generic [aria-hidden] [ref=f138e2343]: •
+                                  - time [ref=f138e2345]: 2mo ago
+                                - link [ref=f138e2347] [cursor=pointer]:
+                                  - /url: /r/SoloDevelopment/comments/1vjttty/topdown_2d_platformer_any_takers_for_this_genre/
+                                  - heading "List item post - Top-down 2D platformer ; any takers for this genre?" [level=3] [ref=f138e2350]: Top-down 2D platformer ; any takers for this genre?
+                              - link "r/SoloDevelopment - Top-down 2D platformer ; any takers for this genre?" [ref=f138e2353] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/SoloDevelopment/comments/1vjttty/topdown_2d_platformer_any_takers_for_this_genre/
+                                - img "r/SoloDevelopment - Top-down 2D platformer ; any takers for this genre?" [ref=f138e2354]
+                            - generic [ref=f138e2356]:
+                              - generic [ref=f138e2357]: "23"
+                              - text: upvotes ·
+                              - generic [ref=f138e2358]: "7"
+                              - text: comments
+                          - separator [ref=f138e2359]
+                      - listitem [ref=f138e2360]:
+                        - generic [ref=f138e2362]:
+                          - link "Designed and built a custom computer table" [ref=f138e2363] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/pcmasterrace/comments/1vpo6fq/designed_and_built_a_custom_computer_table/
+                          - generic [ref=f138e2365]:
+                            - generic [ref=f138e2366]:
+                              - generic [ref=f138e2369]:
+                                - link "r/pcmasterrace" [ref=f138e2370] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/pcmasterrace/
+                                - generic [aria-hidden] [ref=f138e2375]: •
+                                - time [ref=f138e2377]: 2mo ago
+                              - link [ref=f138e2379] [cursor=pointer]:
+                                - /url: /r/pcmasterrace/comments/1vpo6fq/designed_and_built_a_custom_computer_table/
+                                - heading "List item post - Designed and built a custom computer table" [level=3] [ref=f138e2382]: Designed and built a custom computer table
+                            - link "r/pcmasterrace - Designed and built a custom computer table" [ref=f138e2385] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/pcmasterrace/comments/1vpo6fq/designed_and_built_a_custom_computer_table/
+                              - img "r/pcmasterrace - Designed and built a custom computer table" [ref=f138e2386]
+                          - generic [ref=f138e2388]:
+                            - generic [ref=f138e2389]: "512"
+                            - text: upvotes ·
+                            - generic [ref=f138e2390]: "64"
+                            - text: comments
+                  - complementary "Community information" [ref=f138e2391]:
+                    - generic [ref=f138e2393]:
+                      - heading "Community Info Section" [level=1] [ref=f138e2394]
+                      - generic [ref=f138e2395]:
+                        - link "r/DMAcademy" [ref=f138e2397] [cursor=pointer]:
+                          - /url: /r/DMAcademy/
+                        - button "Join" [ref=f138e2402] [cursor=pointer]
+                      - generic [ref=f138e2403]:
+                        - generic [ref=f138e2404]: DMAcademy
+                        - generic [ref=f138e2406]: /r/DMAcademy is a subreddit for Dungeons & Dragons Dungeon Masters to ask questions - new and experienced, all are welcome!
+                        - button "Show more" [ref=f138e2407] [cursor=pointer]
+                        - generic: Public
+                  - generic [ref=f138e2415]:
+                    - heading "Top Posts" [level=2] [ref=f138e2416]
+                    - list [ref=f138e2417]:
+                      - listitem [ref=f138e2418]:
+                        - 'link "Reddit reReddit: Top posts of June 26, 2024" [ref=f138e2419] [cursor=pointer]':
+                          - /url: https://www.reddit.com/posts/2024/june-26-1/global/
+                          - generic [ref=f138e2420]: Reddit
+                          - generic [ref=f138e2435]: "reReddit: Top posts of June 26, 2024"
+                          - separator [ref=f138e2436]
+                      - listitem [ref=f138e2437]:
+                        - 'link "Reddit reReddit: Top posts of June 2024" [ref=f138e2438] [cursor=pointer]':
+                          - /url: https://www.reddit.com/posts/2024/june/global/
+                          - generic [ref=f138e2439]: Reddit
+                          - generic [ref=f138e2454]: "reReddit: Top posts of June 2024"
+                          - separator [ref=f138e2455]
+                      - listitem [ref=f138e2456]:
+                        - 'link "Reddit reReddit: Top posts of 2024" [ref=f138e2457] [cursor=pointer]':
+                          - /url: https://www.reddit.com/posts/2024/global/
+                          - generic [ref=f138e2458]: Reddit
+                          - generic [ref=f138e2473]: "reReddit: Top posts of 2024"
+                          - separator [ref=f138e2474]
+              - list [ref=f138e2476]:
+                - listitem [ref=f138e2477]:
+                  - link "Home" [ref=f138e2479] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f138e2480]:
+                  - link "Popular" [ref=f138e2482] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f138e2483]:
+                  - link "News" [ref=f138e2485] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f138e2486]:
+                  - link "Explore" [ref=f138e2488] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f138e2489]:
+                  - link "Best of Reddit" [ref=f138e2491] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f138e2492]:
+                  - link "Best of Reddit in Portuguese" [ref=f138e2494] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f138e2495]:
+                  - link "Best of Reddit in German" [ref=f138e2497] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f138e2498]:
+                  - link "Reddit Rules" [ref=f138e2500] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f138e2501]:
+                  - link "Privacy Policy" [ref=f138e2503] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f138e2504]:
+                  - link "User Agreement" [ref=f138e2506] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f138e2507]:
+                  - link "Accessibility" [ref=f138e2509] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f138e2510]:
+                  - link "Reddit, Inc. © 2026. All rights reserved." [ref=f138e2511] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f138e2514]:
+          - paragraph [ref=f138e2515]: Join the most real place on the internet
+          - generic [ref=f138e2517]:
+            - generic [ref=f138e2520]:
+              - iframe [ref=f138e2525]:
+                - button "Continue with Google. Opens in new tab" [ref=f139e3] [cursor=pointer]:
+                  - generic [ref=f139e5]: Continue with Google
+              - generic [ref=f138e2527] [cursor=pointer]:
+                - generic [ref=f138e2528]: Continue with Apple
+                - button "Sign in with Apple" [ref=f138e2534]:
+                  - generic [ref=f138e2535]:
+                    - img:
+                      - generic:
+                        - img:
+                          - generic:  Sign in with Apple
+            - link "Continue with Phone Number" [ref=f138e2540] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - link "Continue with Email" [ref=f138e2549] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+          - paragraph [ref=f138e2556]:
+            - text: By continuing, you agree to our
+            - link "User Agreement" [ref=f138e2557] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: and acknowledge that you understand the
+            - link "Privacy Policy" [ref=f138e2558] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: .

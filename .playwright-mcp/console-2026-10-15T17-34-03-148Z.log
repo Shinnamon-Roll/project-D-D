@@ -1,0 +1,10 @@
+[    2946ms] [ERROR] jquery.magnific-popup.js is not included. Include this code:
+<link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/magnific-popup.css" />
+<script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script> @ https://help.roll20.net/hc/theming_assets/01HZPMFNSWZKGB2HHBBT3NN650:0
+[    7975ms] [LOG] %cApiData fetched data from server:
+articles:   295
+sections:   56
+categories: 13
+requests:   3
+iterations: 2
+time:       4075ms color: #2f8432 @ https://help.roll20.net/hc/theming_assets/01HZPMFMYQC20GH889RMV1G3R6:0

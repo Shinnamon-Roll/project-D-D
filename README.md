@@ -10,6 +10,8 @@ Planning. Requirements not confirmed yet; no app code.
 CLAUDE.md             rules + pipeline (instructions for Claude Code)
 README.md             this file (for humans)
 WORKLOG.md            work log by date
+docs/README.md        index of all docs (conversations, design, campaigns, decisions, questions, ideas)
+docs/research/        background knowledge: D&D rules basics, VTTs + player needs
 docs/features/        one spec per feature (from /new-feature)
 .claude/agents/       researcher (cited research)
 .claude/commands/     /new-feature

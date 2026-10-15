@@ -1,0 +1,461 @@
+- generic [active] [ref=f177e1]:
+  - banner [ref=f177e2]:
+    - generic [ref=f177e3]:
+      - link "home" [ref=f177e4] [cursor=pointer]:
+        - /url: /
+        - img "Fantasy Grounds VTT Logo" [ref=f177e5]
+      - navigation [ref=f177e6]:
+        - button "My Library" [ref=f177e8] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f177e9]: 
+        - button "Store" [ref=f177e12] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f177e13]: 
+        - link "Forums" [ref=f177e15] [cursor=pointer]:
+          - /url: /forums/
+        - button "Support" [ref=f177e17] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f177e18]: 
+        - button "Find a Game" [ref=f177e21] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f177e22]: 
+        - button "Download" [ref=f177e25] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f177e26]: 
+        - link [ref=f177e28] [cursor=pointer]:
+          - /url: /store/ViewCart.php
+          - img "Shopping cart" [ref=f177e29]
+        - generic [ref=f177e31]:
+          - img "Account" [ref=f177e33]
+          - button "Login" [ref=f177e35] [cursor=pointer]:
+            - generic [aria-hidden] [ref=f177e36]: 
+  - text:       
+  - heading "Fantasy Grounds VTT - Virtual Tabletop Software for Dungeons & Dragons, Pathfinder, and Online RPGs" [level=1] [ref=f177e38]
+  - region "carousel" [ref=f177e40]:
+    - group "1 of 3" [ref=f177e42]:
+      - generic [ref=f177e43]:
+        - img "Clockwork Dice Pack" [ref=f177e44]
+        - link "Clockwork Dice Pack" [ref=f177e45] [cursor=pointer]:
+          - /url: https://www.fantasygrounds.com/store/product.php?id=SWKCLOCKWORKDICE
+          - text: Spin the Gears
+    - button "previous slide" [ref=f177e47] [cursor=pointer]:
+      - generic [ref=f177e48]: 
+    - button "next slide" [ref=f177e49] [cursor=pointer]:
+      - generic [ref=f177e50]: 
+    - generic [ref=f177e51]:
+      - button "Show slide 1 of 3" [pressed] [ref=f177e52] [cursor=pointer]
+      - button "Show slide 2 of 3" [ref=f177e53] [cursor=pointer]
+      - button "Show slide 3 of 3" [ref=f177e54] [cursor=pointer]
+  - generic [ref=f177e55]:
+    - paragraph [ref=f177e57]: "Jump right into action with FANTASY GROUNDS VTT to play tabletop roleplaying games online by completing three easy steps:"
+    - generic [ref=f177e58]:
+      - generic [ref=f177e59]:
+        - generic [ref=f177e60]:
+          - text: "1"
+          - generic [ref=f177e61]: Login or Register
+        - generic [ref=f177e63]:
+          - generic [ref=f177e64]: Log into your account or create one to get started with your Fantasy Grounds adventure.
+          - generic [ref=f177e65]:
+            - link "Login" [ref=f177e66] [cursor=pointer]:
+              - /url: /dologin.php
+            - link "Create an Account" [ref=f177e67] [cursor=pointer]:
+              - /url: /forums/register.php
+        - img "Fantasy Grounds free application" [ref=f177e68]
+      - generic [ref=f177e69]:
+        - generic [ref=f177e70]:
+          - text: "2"
+          - generic [ref=f177e71]: Download & Install
+        - generic [ref=f177e73]:
+          - generic [ref=f177e74]:
+            - generic [ref=f177e75]: Choose your operating system to get Fantasy Grounds installed - the full app is completely FREE.
+            - generic [ref=f177e76]:
+              - link "Windows" [ref=f177e77] [cursor=pointer]:
+                - /url: /filelibrary/FGUWebInstall.exe
+              - link "Mac" [ref=f177e78] [cursor=pointer]:
+                - /url: /filelibrary/FGUWebInstall.pkg
+              - link "Linux" [ref=f177e79] [cursor=pointer]:
+                - /url: /filelibrary/FGUWebInstall.bin
+          - img "Fantasy Grounds Core license" [ref=f177e80]
+      - generic [ref=f177e81]:
+        - generic [ref=f177e82]:
+          - text: "3"
+          - generic [ref=f177e83]: Play Your Way
+        - generic [ref=f177e85]:
+          - generic [ref=f177e86]: Host or play in games with the free built-in rulesets, or unlock thousands of titles in our store!
+          - generic [ref=f177e87]:
+            - link "Browse Store" [ref=f177e88] [cursor=pointer]:
+              - /url: /store
+            - link "Shop On Sale" [ref=f177e89] [cursor=pointer]:
+              - /url: /store/?minDiscount=0.1&pagesize=40&hidecore=1
+        - img "Fantasy Grounds Store" [ref=f177e90]
+    - paragraph [ref=f177e92]:
+      - text: OWN A LICENSE? - If you already had a Fantasy Grounds license prior to the Free to Play transition, you can
+      - strong [ref=f177e93]:
+        - link "claim epic rewards" [ref=f177e94] [cursor=pointer]:
+          - /url: https://fantasygrounds.com/claimrewards
+      - text: from us and our partners!
+  - generic [ref=f177e95]:
+    - heading "Supported RPG Systems and Official Content" [level=2] [ref=f177e96]
+    - generic [ref=f177e97]: FANTASY GROUNDS VTT partners with all the top TTRPG publishers in the world to provide a unique experience for each game we support, with Fantasy Ground's powerful automation, your games are easier to prep, more immersive for your players, and more convenient than ever to run.
+    - region "carousel" [ref=f177e98]:
+      - generic [ref=f177e99]:
+        - group "1 of 2" [ref=f177e100]:
+          - generic [ref=f177e101]:
+            - link "Dungeons and Dragons Fifth Edition content for Fantasy Grounds VTT. Dungeons and Dragons Fifth Edition for Fantasy Grounds VTT 5e / 5th Edition Browse Modules" [ref=f177e102] [cursor=pointer]:
+              - /url: store/?sys=16&hidecore=1&sort=1#TopSellers
+              - generic [ref=f177e103]: Dungeons and Dragons Fifth Edition content for Fantasy Grounds VTT.
+              - img "Dungeons and Dragons Fifth Edition for Fantasy Grounds VTT" [ref=f177e104]
+              - generic [ref=f177e105]: 5e / 5th Edition
+              - generic [ref=f177e106]: Browse Modules
+            - link "Advanced Dungeons and Dragons First and Second Edition content for Fantasy Grounds VTT. Advanced Dungeons and Dragons First and Second Edition for Fantasy Grounds VTT Browse Modules AD&D 1E/2E" [ref=f177e107] [cursor=pointer]:
+              - /url: store/?sys=27&sort=1#TopSellers
+              - generic [ref=f177e108]: Advanced Dungeons and Dragons First and Second Edition content for Fantasy Grounds VTT.
+              - img "Advanced Dungeons and Dragons First and Second Edition for Fantasy Grounds VTT" [ref=f177e109]
+              - generic [ref=f177e110]: Browse Modules
+              - generic [ref=f177e111]: AD&D 1E/2E
+            - link "Pathfinder Second Edition Remastered content for Fantasy Grounds VTT. Pathfinder Second Edition Remastered for Fantasy Grounds VTT Browse Modules 2E / Remastered" [ref=f177e112] [cursor=pointer]:
+              - /url: store/?sys=24
+              - generic [ref=f177e113]: Pathfinder Second Edition Remastered content for Fantasy Grounds VTT.
+              - img "Pathfinder Second Edition Remastered for Fantasy Grounds VTT" [ref=f177e114]
+              - generic [ref=f177e115]: Browse Modules
+              - generic [ref=f177e116]: 2E / Remastered
+            - link "Pathfinder First Edition content for Fantasy Grounds VTT. Pathfinder First Edition for Fantasy Grounds VTT Browse Modules 1st edition" [ref=f177e117] [cursor=pointer]:
+              - /url: store/?sys=9#TopSellers
+              - generic [ref=f177e118]: Pathfinder First Edition content for Fantasy Grounds VTT.
+              - img "Pathfinder First Edition for Fantasy Grounds VTT" [ref=f177e119]
+              - generic [ref=f177e120]: Browse Modules
+              - generic [ref=f177e121]: 1st edition
+            - link "Starfinder First Edition content for Fantasy Grounds VTT. Starfinder First Edition for Fantasy Grounds VTT Browse Modules 1st edition" [ref=f177e122] [cursor=pointer]:
+              - /url: store/?sys=22&sort=1#TopSellers
+              - generic [ref=f177e123]: Starfinder First Edition content for Fantasy Grounds VTT.
+              - img "Starfinder First Edition for Fantasy Grounds VTT" [ref=f177e124]
+              - generic [ref=f177e125]: Browse Modules
+              - generic [ref=f177e126]: 1st edition
+            - link "Starfinder Second Edition content for Fantasy Grounds VTT. Starfinder Second Edition for Fantasy Grounds VTT Browse Modules 2nd edition" [ref=f177e127] [cursor=pointer]:
+              - /url: store/?sys=58&pub=-1&typ=-1&search=&sort=1&pagesize=20&minDiscount=&hidecore=1
+              - generic [ref=f177e128]: Starfinder Second Edition content for Fantasy Grounds VTT.
+              - img "Starfinder Second Edition for Fantasy Grounds VTT" [ref=f177e129]
+              - generic [ref=f177e130]: Browse Modules
+              - generic [ref=f177e131]: 2nd edition
+            - link "Call of Cthulhu Seventh Edition content for Fantasy Grounds VTT. Call of Cthulhu Seventh Edition for Fantasy Grounds VTT Browse Modules 7e" [ref=f177e132] [cursor=pointer]:
+              - /url: store/?search=Cthulhu#TopSellers
+              - generic [ref=f177e133]: Call of Cthulhu Seventh Edition content for Fantasy Grounds VTT.
+              - img "Call of Cthulhu Seventh Edition for Fantasy Grounds VTT" [ref=f177e134]
+              - generic [ref=f177e135]: Browse Modules
+              - generic [ref=f177e136]: 7e
+            - link "Savage Worlds Adventure Edition content for Fantasy Grounds VTT. Savage Worlds Adventure Edition for Fantasy Grounds VTT Browse Modules Adventure Edition" [ref=f177e137] [cursor=pointer]:
+              - /url: store/?sys=3&sort=1#TopSellers
+              - generic [ref=f177e138]: Savage Worlds Adventure Edition content for Fantasy Grounds VTT.
+              - img "Savage Worlds Adventure Edition for Fantasy Grounds VTT" [ref=f177e139]
+              - generic [ref=f177e140]: Browse Modules
+              - generic [ref=f177e141]: Adventure Edition
+            - link "Cyberpunk RED content for Fantasy Grounds VTT. Cyberpunk RED for Fantasy Grounds VTT Browse Modules" [ref=f177e142] [cursor=pointer]:
+              - /url: store/?sys=49#TopSellers
+              - generic [ref=f177e143]: Cyberpunk RED content for Fantasy Grounds VTT.
+              - img "Cyberpunk RED for Fantasy Grounds VTT" [ref=f177e144]
+              - generic [ref=f177e145]: Browse Modules
+            - link "Traveller Second Edition content for Fantasy Grounds VTT. Traveller Second Edition for Fantasy Grounds VTT Browse Modules Second Edition" [ref=f177e146] [cursor=pointer]:
+              - /url: store/?sys=30&sort=1#TopSellers
+              - generic [ref=f177e147]: Traveller Second Edition content for Fantasy Grounds VTT.
+              - img "Traveller Second Edition for Fantasy Grounds VTT" [ref=f177e148]
+              - generic [ref=f177e149]: Browse Modules
+              - generic [ref=f177e150]: Second Edition
+            - link "Fallout The Roleplaying Game content for Fantasy Grounds VTT. Fallout The Roleplaying Game for Fantasy Grounds VTT Browse Modules" [ref=f177e151] [cursor=pointer]:
+              - /url: store/?sys=46&sort=1#TopSellers
+              - generic [ref=f177e152]: Fallout The Roleplaying Game content for Fantasy Grounds VTT.
+              - img "Fallout The Roleplaying Game for Fantasy Grounds VTT" [ref=f177e153]
+              - generic [ref=f177e154]: Browse Modules
+            - link "Cosmere Roleplaying Game content for Fantasy Grounds VTT. Cosmere Roleplaying Game for Fantasy Grounds VTT Browse Modules" [ref=f177e155] [cursor=pointer]:
+              - /url: /store/?sys=60&pub=77&typ=-1&search=&sort=1&pagesize=20&minDiscount=&hidecore=1
+              - generic [ref=f177e156]: Cosmere Roleplaying Game content for Fantasy Grounds VTT.
+              - img "Cosmere Roleplaying Game for Fantasy Grounds VTT" [ref=f177e157]
+              - generic [ref=f177e158]: Browse Modules
+            - link "World of Darkness Fifth Edition content for Fantasy Grounds VTT. World of Darkness Fifth Edition for Fantasy Grounds VTT Browse Modules Fifth edition" [ref=f177e159] [cursor=pointer]:
+              - /url: store/?sys=56#TopSellers
+              - generic [ref=f177e160]: World of Darkness Fifth Edition content for Fantasy Grounds VTT.
+              - img "World of Darkness Fifth Edition for Fantasy Grounds VTT" [ref=f177e161]
+              - generic [ref=f177e162]: Browse Modules
+              - generic [ref=f177e163]: Fifth edition
+            - link "Vampire The Masquerade Fifth Edition content for Fantasy Grounds VTT. Vampire The Masquerade Fifth Edition for Fantasy Grounds VTT Browse Modules" [ref=f177e164] [cursor=pointer]:
+              - /url: store/?sys=56&pub=-1&typ=-1&search=Vampire&sort=1#TopSellers
+              - generic [ref=f177e165]: Vampire The Masquerade Fifth Edition content for Fantasy Grounds VTT.
+              - img "Vampire The Masquerade Fifth Edition for Fantasy Grounds VTT" [ref=f177e166]
+              - generic [ref=f177e167]: Browse Modules
+            - link "Hunter The Reckoning Fifth Edition content for Fantasy Grounds VTT. Hunter The Reckoning Fifth Edition for Fantasy Grounds VTT Browse Modules" [ref=f177e168] [cursor=pointer]:
+              - /url: store/product.php?id=WOD5ERGS09624
+              - generic [ref=f177e169]: Hunter The Reckoning Fifth Edition content for Fantasy Grounds VTT.
+              - img "Hunter The Reckoning Fifth Edition for Fantasy Grounds VTT" [ref=f177e170]
+              - generic [ref=f177e171]: Browse Modules
+            - link "Werewolf The Apocalypse Fifth Edition content for Fantasy Grounds VTT. Werewolf The Apocalypse Fifth Edition for Fantasy Grounds VTT Browse Modules" [ref=f177e172] [cursor=pointer]:
+              - /url: store/product.php?id=WOD5ERGS01136#TopSellers
+              - generic [ref=f177e173]: Werewolf The Apocalypse Fifth Edition content for Fantasy Grounds VTT.
+              - img "Werewolf The Apocalypse Fifth Edition for Fantasy Grounds VTT" [ref=f177e174]
+              - generic [ref=f177e175]: Browse Modules
+            - link "Daggerheart content for Fantasy Grounds VTT. Daggerheart for Fantasy Grounds VTT Browse Modules" [ref=f177e176] [cursor=pointer]:
+              - /url: store/?sys=61
+              - generic [ref=f177e177]: Daggerheart content for Fantasy Grounds VTT.
+              - img "Daggerheart for Fantasy Grounds VTT" [ref=f177e178]
+              - generic [ref=f177e179]: Browse Modules
+            - link "Shadow of the Demon Lord content for Fantasy Grounds VTT. Shadow of the Demon Lord for Fantasy Grounds VTT Browse Modules" [ref=f177e180] [cursor=pointer]:
+              - /url: store/?sys=48&pub=-1&typ=-1&search=&sort=1#TopSellers
+              - generic [ref=f177e181]: Shadow of the Demon Lord content for Fantasy Grounds VTT.
+              - img "Shadow of the Demon Lord for Fantasy Grounds VTT" [ref=f177e182]
+              - generic [ref=f177e183]: Browse Modules
+            - link "Transformers Roleplaying Game content for Fantasy Grounds VTT. Transformers Roleplaying Game for Fantasy Grounds VTT Browse Modules" [ref=f177e184] [cursor=pointer]:
+              - /url: store/index.php?sys=50#TopSellers
+              - generic [ref=f177e185]: Transformers Roleplaying Game content for Fantasy Grounds VTT.
+              - img "Transformers Roleplaying Game for Fantasy Grounds VTT" [ref=f177e186]
+              - generic [ref=f177e187]: Browse Modules
+            - link "Star Trek Adventures content for Fantasy Grounds VTT. Star Trek Adventures for Fantasy Grounds VTT Browse Modules" [ref=f177e188] [cursor=pointer]:
+              - /url: store/?sys=43&sort=1#TopSellers
+              - generic [ref=f177e189]: Star Trek Adventures content for Fantasy Grounds VTT.
+              - img "Star Trek Adventures for Fantasy Grounds VTT" [ref=f177e190]
+              - generic [ref=f177e191]: Browse Modules
+        - group [aria-hidden] [ref=f177e192]:
+          - generic [aria-hidden] [ref=f177e193]:
+            - link [aria-hidden] [ref=f177e194] [cursor=pointer]:
+              - /url: store/?sys=34&sort=1#TopSellers
+              - generic [aria-hidden] [ref=f177e196]: Browse Modules
+            - link [aria-hidden] [ref=f177e197] [cursor=pointer]:
+              - /url: store/?sys=35&pub=-1&typ=-1&search=&sort=1#TopSellers
+              - generic [aria-hidden] [ref=f177e199]: Browse Modules
+            - link [aria-hidden] [ref=f177e200] [cursor=pointer]:
+              - /url: store/?sys=26&pub=-1&typ=-1&search=&sort=1
+              - generic [aria-hidden] [ref=f177e202]: Browse Modules
+            - link [aria-hidden] [ref=f177e203] [cursor=pointer]:
+              - /url: store/?sys=15&pub=-1&typ=-1&search=&sort=1
+              - generic [aria-hidden] [ref=f177e205]: Browse Modules
+            - link [aria-hidden] [ref=f177e206] [cursor=pointer]:
+              - /url: store/?sys=55&pub=-1&typ=-1&search=&sort=1#TopSellers
+              - generic [aria-hidden] [ref=f177e208]: Browse Modules
+            - link [aria-hidden] [ref=f177e209] [cursor=pointer]:
+              - /url: store/?sys=5&pub=-1&typ=-1&search=&sort=1#TopSellers
+              - generic [aria-hidden] [ref=f177e211]: Browse Modules
+            - link [aria-hidden] [ref=f177e212] [cursor=pointer]:
+              - /url: store/?sys=28&pub=-1&typ=-1&search=&sort=1#TopSellers
+              - generic [aria-hidden] [ref=f177e214]: Browse Modules
+            - link [aria-hidden] [ref=f177e215] [cursor=pointer]:
+              - /url: store/?sys=39&pub=-1&typ=-1&search=&sort=1
+              - generic [aria-hidden] [ref=f177e217]: Browse Modules
+            - link [aria-hidden] [ref=f177e218] [cursor=pointer]:
+              - /url: store/?sys=13#TopSellers
+              - generic [aria-hidden] [ref=f177e220]: Browse Modules
+            - link [aria-hidden] [ref=f177e221] [cursor=pointer]:
+              - /url: store/?sys=17&pub=-1&typ=-1&search=&sort=1
+              - generic [aria-hidden] [ref=f177e223]: Browse Modules
+              - generic [aria-hidden] [ref=f177e224]: Fifth edition
+            - link [aria-hidden] [ref=f177e225] [cursor=pointer]:
+              - /url: store/?sys=21&pub=-1&typ=-1&search=&sort=1#TopSellers
+              - generic [aria-hidden] [ref=f177e227]: Browse Modules
+            - link [aria-hidden] [ref=f177e228] [cursor=pointer]:
+              - /url: store/?sys=59&pub=-1&typ=-1&search=&sort=1&pagesize=20&minDiscount=&hidecore=1
+              - generic [aria-hidden] [ref=f177e230]: Browse Modules
+            - link [aria-hidden] [ref=f177e231] [cursor=pointer]:
+              - /url: store/?sys=11&pub=-1&typ=-1&search=&sort=1
+              - generic [aria-hidden] [ref=f177e233]: Browse Modules
+            - link [aria-hidden] [ref=f177e234] [cursor=pointer]:
+              - /url: store/index.php?search=Fifth+Edition+Fantasy
+              - generic [aria-hidden] [ref=f177e236]: Browse Modules
+              - generic [aria-hidden] [ref=f177e237]: Fifth edition
+            - link [aria-hidden] [ref=f177e238] [cursor=pointer]:
+              - /url: store/?search=Deadlands
+              - generic [aria-hidden] [ref=f177e240]: Browse Modules
+            - link [aria-hidden] [ref=f177e241] [cursor=pointer]:
+              - /url: store/?sys=14&pub=-1&typ=-1&search=&sort=1
+              - generic [aria-hidden] [ref=f177e243]: Browse Modules
+            - link [aria-hidden] [ref=f177e244] [cursor=pointer]:
+              - /url: store/?sys=45&pub=-1&typ=-1&search=&sort=1
+              - generic [aria-hidden] [ref=f177e246]: Browse Modules
+            - link [aria-hidden] [ref=f177e247] [cursor=pointer]:
+              - /url: store/?sys=47&pub=-1&typ=-1&search=&sort=2#TopSellers
+              - generic [aria-hidden] [ref=f177e249]: Browse Modules
+            - link [aria-hidden] [ref=f177e250] [cursor=pointer]:
+              - /url: store/?sys=20&sort=2#TopSellers
+              - generic [aria-hidden] [ref=f177e252]: Browse Modules
+            - link [aria-hidden] [ref=f177e253] [cursor=pointer]:
+              - /url: store/?sys=-1&pub=-1&typ=-1&search=Tales+of+the+Valiant&sort=1
+              - generic [aria-hidden] [ref=f177e255]: Browse Modules
+      - button "previous slide" [ref=f177e257] [cursor=pointer]:
+        - generic [ref=f177e258]: 
+        - generic [ref=f177e259]: 
+      - button "next slide" [ref=f177e260] [cursor=pointer]:
+        - generic [ref=f177e261]: 
+        - generic [ref=f177e262]: 
+      - generic [ref=f177e263]:
+        - button "Show slide 1 of 2" [pressed] [ref=f177e264] [cursor=pointer]
+        - button "Show slide 2 of 2" [ref=f177e265] [cursor=pointer]
+    - generic [ref=f177e266]:
+      - link "Browse Modules" [ref=f177e267] [cursor=pointer]:
+        - /url: /store/
+      - link "Browse Bundles" [ref=f177e268] [cursor=pointer]:
+        - /url: /store/productbundles.php
+  - generic [ref=f177e271]:
+    - heading "Art Subscription" [level=2] [ref=f177e272]
+    - generic [ref=f177e273]: The FANTASY GROUNDS art subscription is a great way to access loads of custom SmiteWorks art for a low monthly cost. You gain access to anything that has previously been released for the subscription as well as all new assets as they are released.
+    - link "Subscribe Now" [ref=f177e274] [cursor=pointer]:
+      - /url: /home/FGUArtSub.php
+  - generic [ref=f177e276]:
+    - generic [ref=f177e277]:
+      - generic [ref=f177e278]:
+        - heading "Discover the Wiki" [level=2] [ref=f177e279]
+        - generic [ref=f177e280]: The wiki is home to the Fantasy Grounds User Manual and thousands of articles that range from quick start guides to feature deep dives. Get all the help you need to get started or expand your Fantasy Grounds mastery!
+        - link "Go to the Wiki" [ref=f177e281] [cursor=pointer]:
+          - /url: https://fantasygroundsunity.atlassian.net/wiki/spaces/FGCP/overview
+      - generic [ref=f177e282]:
+        - img "Fantasy Grounds Wiki"
+    - generic [ref=f177e283]:
+      - generic [ref=f177e284]:
+        - heading "Fantasy Grounds Forge" [level=2] [ref=f177e285]
+        - generic [ref=f177e286]: The Fantasy Grounds Forge (the FG Forge or FGF) is a community developer portal where creators can share content for free or sell it. Forge users can then purchase or subscribe to content and use the creations in their games!
+        - link "Go to the Forge" [ref=f177e287] [cursor=pointer]:
+          - /url: https://forge.fantasygrounds.com/
+      - generic [ref=f177e288]:
+        - img "Fantasy Grounds Forge"
+  - generic [ref=f177e291]:
+    - generic [ref=f177e292]: Features - Free to Play
+    - generic [ref=f177e296]:
+      - generic [ref=f177e297]:
+        - generic [ref=f177e298]: Core Platform Features
+        - list [ref=f177e299]:
+          - listitem [ref=f177e300]: Host games for and play with anyone - no licenses needed
+          - listitem [ref=f177e301]: Full Game Master and Player functionality included
+          - listitem [ref=f177e302]: Cross-platform play (Windows, MacOS, Linux)
+          - listitem [ref=f177e303]: Cloud connectivity with no networking hassles - automatic NAT traversal
+          - listitem [ref=f177e304]: Powerful automation for combat, initiative, attacks, saves, damage, conditions, and effects
+          - listitem [ref=f177e305]: Dynamic Line of Sight, Lighting, and Vision (including Darkvision support)
+          - listitem [ref=f177e306]: Built-in dice roller with 3D dice and advanced modifiers
+          - listitem [ref=f177e307]: Toggle between 2D top-down view and 2.5D Camera or Token View for increased immersion
+      - generic [ref=f177e308]:
+        - generic [ref=f177e309]: Creation & Customization
+        - list [ref=f177e310]:
+          - listitem [ref=f177e311]: Build and manage unlimited campaigns
+          - listitem [ref=f177e312]: Customize notes, story entries, NPCs, encounters, items, and quests
+          - listitem [ref=f177e313]: Create and export your own custom adventure modules
+          - listitem [ref=f177e314]: Ability to create your own custom extensions or rulesets with XML and LUA
+          - listitem [ref=f177e315]: Create layered art and maps with advanced image tools
+          - listitem [ref=f177e316]: Export images or tokens as webp
+      - generic [ref=f177e317]:
+        - generic [ref=f177e318]: Free Content & Community
+        - list [ref=f177e319]:
+          - listitem [ref=f177e320]: More than 100 Free Tokens and camera view images for male and female fantasy heroes *
+          - listitem [ref=f177e321]: Nearly 500 Fantasy tokens and camera view images for SRD monsters *
+          - listitem [ref=f177e322]: More than 200 Generic Top-down Tokens (Animals, Characters, Monsters)
+          - listitem [ref=f177e323]: Over 20 Free battlemaps for streets, caves, dungeons and tunnels
+          - listitem [ref=f177e324]: Dozens of Free full color commissioned portraits by Mates Laurentiu
+          - listitem [ref=f177e325]: Shockbolt GMW Kit Asset Pack with over 600 pieces of art for tiles, effects, floors and more
+          - listitem [ref=f177e326]: Saz Asset Pack with around 100 pieces of art for tiles, brushes, floors and more
+          - listitem [ref=f177e327]: Torsten's Asset Pack with over 260 pieces of art for tiles, terrain, markers and more
+          - listitem [ref=f177e328]:
+            - text: Access to the
+            - link "FG Forge" [ref=f177e329] [cursor=pointer]:
+              - /url: https://forge.fantasygrounds.com/
+            - text: where community creators share free and paid modules
+          - listitem [ref=f177e330]:
+            - text: Access to the
+            - link "My Library" [ref=f177e331] [cursor=pointer]:
+              - /url: /library/
+            - text: Online Reader
+        - text: "* These were created with Dall-E."
+      - generic [ref=f177e332]:
+        - generic [ref=f177e333]: Free Rulesets & Data
+        - list [ref=f177e334]:
+          - listitem [ref=f177e335]:
+            - strong [ref=f177e336]: D&D 5E & 2024+
+            - text: – Ruleset plus
+            - link "SRD 5.1 & 5.2" [ref=f177e337] [cursor=pointer]:
+              - /url: /library/dnd5e/dd-srd-5-2-1/
+            - text: ", Basic & Free Rules libraries"
+          - listitem [ref=f177e338]:
+            - strong [ref=f177e339]: D&D 2E, 3.5E, 4E
+            - text: – Free rulesets
+          - listitem [ref=f177e340]:
+            - strong [ref=f177e341]: Cosmere RPG
+            - text: – Ruleset plus
+            - link "Cosmere QuickStart Rules" [ref=f177e342] [cursor=pointer]:
+              - /url: /library/cosmererpg/stormlight-starter-rules/
+          - listitem [ref=f177e343]:
+            - strong [ref=f177e344]: Daggerheart
+            - text: – Ruleset plus
+            - link "Daggerheart SRD" [ref=f177e345] [cursor=pointer]:
+              - /url: /library/daggerheart/daggerheart-srd/
+            - text: data libraries
+          - listitem [ref=f177e346]:
+            - strong [ref=f177e347]: Fallout 2d20
+            - text: – Ruleset plus
+            - link "Fallout Quickstart Rules" [ref=f177e348] [cursor=pointer]:
+              - /url: /library/falloutrpg/fallout-2d20-quickstart/
+          - listitem [ref=f177e349]:
+            - strong [ref=f177e350]: FATECore
+            - text: – Ruleset
+          - listitem [ref=f177e351]:
+            - strong [ref=f177e352]: Pathfinder RPG 1E & 2E
+            - text: – Rulesets plus Pathfinder SRD data libraries
+          - listitem [ref=f177e353]:
+            - strong [ref=f177e354]: Numenera, Cypher System, and The Strange
+            - text: – Rulesets
+          - listitem [ref=f177e355]:
+            - strong [ref=f177e356]: Starfinder RPG 1E & 2E
+            - text: – Rulesets with quickstart reference
+          - listitem [ref=f177e357]:
+            - strong [ref=f177e358]: Star Trek Adventures
+            - text: – Ruleset plus
+            - link "Star Trek Adventures Quickstart Guide" [ref=f177e359] [cursor=pointer]:
+              - /url: /library/sta/star-trek-adventures-second-edition-quickstart-guide/
+  - generic [ref=f177e362]:
+    - generic [ref=f177e363]: Fantasy Grounds Free to Play FAQ
+    - generic [ref=f177e365]:
+      - group [ref=f177e366]:
+        - generic "Is Fantasy Grounds VTT free to use? +" [ref=f177e367] [cursor=pointer]
+      - group [ref=f177e368]:
+        - generic "What free rulesets are included with Fantasy Grounds? +" [ref=f177e369] [cursor=pointer]
+      - group [ref=f177e370]:
+        - generic "Does Fantasy Grounds include free content? +" [ref=f177e371] [cursor=pointer]
+      - group [ref=f177e372]:
+        - generic "Can I create my own campaigns and content for free? +" [ref=f177e373] [cursor=pointer]
+      - group [ref=f177e374]:
+        - generic "Do players need to buy a license to join a game? +" [ref=f177e375] [cursor=pointer]
+      - group [ref=f177e376]:
+        - generic "Are there any monthly fees to access features or to host a game? +" [ref=f177e377] [cursor=pointer]
+    - generic [ref=f177e378]:
+      - paragraph [ref=f177e379]: Explore Fantasy Grounds guides for supported RPG systems, features, official content, and transparent catalog research.
+      - paragraph [ref=f177e380]:
+        - link "Play D&D Online" [ref=f177e381] [cursor=pointer]:
+          - /url: /vtt/dungeons-dragons/
+        - link "Explore VTT Guides" [ref=f177e382] [cursor=pointer]:
+          - /url: /vtt/
+        - link "Compare VTTs" [ref=f177e383] [cursor=pointer]:
+          - /url: /compare/
+  - generic [ref=f177e385]:
+    - link [ref=f177e387] [cursor=pointer]:
+      - /url: /
+      - img "Fantasy Grounds VTT Logo" [ref=f177e388]
+    - generic [ref=f177e389]: FANTASY GROUNDS is copyright © SmiteWorks USA LLC, 2004-2026. All Rights Reserved.
+    - generic [ref=f177e390]:
+      - link "Subscribe to the Fantasy Grounds newsletter" [ref=f177e391] [cursor=pointer]:
+        - /url: https://lp.constantcontactpages.com/sl/vPft2cm/newsletter
+        - img "Subscribe to the Fantasy Grounds newsletter"
+      - link "Follow Fantasy Grounds on Facebook" [ref=f177e392] [cursor=pointer]:
+        - /url: https://www.facebook.com/fantasygrounds
+        - img "Follow Fantasy Grounds on Facebook"
+      - link "Follow Fantasy Grounds on X" [ref=f177e393] [cursor=pointer]:
+        - /url: https://www.x.com/fantasygrounds2
+        - img "Follow Fantasy Grounds on X"
+      - link "Follow Fantasy Grounds on Bluesky" [ref=f177e394] [cursor=pointer]:
+        - /url: https://bsky.app/profile/fantasygrounds.com
+        - img "Follow Fantasy Grounds on Bluesky"
+      - link "Subscribe to Fantasy Grounds on YouTube" [ref=f177e395] [cursor=pointer]:
+        - /url: https://www.youtube.com/c/Fantasygrounds
+        - img "Subscribe to Fantasy Grounds on YouTube"
+      - link "Follow Fantasy Grounds on Twitch" [ref=f177e396] [cursor=pointer]:
+        - /url: https://www.twitch.tv/fantasygrounds
+        - img "Follow Fantasy Grounds on Twitch"
+      - link "Join the Fantasy Grounds Discord server" [ref=f177e397] [cursor=pointer]:
+        - /url: /home/Discord.php
+        - img "Join the Fantasy Grounds Discord server"
+      - link "Follow Fantasy Grounds on Instagram" [ref=f177e398] [cursor=pointer]:
+        - /url: https://www.instagram.com/fantasygrounds/
+        - img "Follow Fantasy Grounds on Instagram"
+      - link "Explore the Fantasy Grounds subreddit" [ref=f177e399] [cursor=pointer]:
+        - /url: https://www.reddit.com/r/FantasyGrounds/
+        - img "Explore the Fantasy Grounds subreddit"
+      - generic [ref=f177e400]:
+        - link "End User License Agreement" [ref=f177e401] [cursor=pointer]:
+          - /url: https://fantasygroundsunity.atlassian.net/wiki/spaces/FGCP/pages/996638889/END+USER+LICENSE+AGREEMENT+%28EULA%29+FOR+FANTASY+GROUNDS+AND+FANTASY+GROUNDS+UNITY
+        - text: "|"
+        - link "Privacy Policy" [ref=f177e402] [cursor=pointer]:
+          - /url: https://fantasygroundsunity.atlassian.net/wiki/spaces/FGCP/pages/996638902/Privacy+Policy

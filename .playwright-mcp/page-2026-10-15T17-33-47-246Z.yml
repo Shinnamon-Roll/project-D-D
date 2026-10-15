@@ -1,0 +1,94 @@
+- generic [active] [ref=f3e1]:
+  - banner [ref=f3e2]:
+    - navigation [ref=f3e3]:
+      - generic [ref=f3e4] [cursor=pointer]:
+        - generic [ref=f3e5]: 
+        - text: 
+      - text: 
+    - generic [ref=f3e6]:
+      - generic "Download Software - Login Required!" [ref=f3e7]: 
+      - link " Register" [ref=f3e9] [cursor=pointer]:
+        - /url: /auth/register/
+        - generic: 
+        - text: Register
+      - generic [ref=f3e10] [cursor=pointer]:
+        - generic [ref=f3e11]: 
+        - text: 
+      - text: 
+  - main [ref=f3e13]:
+    - generic [ref=f3e15]:
+      - text: 
+      - paragraph [ref=f3e16]: This website collects anonymous data about how users interact with our website. This data provides us with valuable insights that help us to improve our products. Some of these analytics features are non-essential and use browser cookies.
+      - paragraph [ref=f3e17]:
+        - text: What data we collect and information on how it is used is described in our
+        - link "Privacy Policy" [ref=f3e18] [cursor=pointer]:
+          - /url: /article/privacy-policy/
+        - text: .
+      - generic [ref=f3e19]:
+        - button " Accept All Cookies" [ref=f3e20] [cursor=pointer]:
+          - generic: 
+          - text: Accept All Cookies
+        - button " Required Only" [ref=f3e21] [cursor=pointer]:
+          - generic: 
+          - text: Required Only
+    - heading "Purchase" [level=1] [ref=f3e22]
+    - heading "Foundry Virtual Tabletop Software License" [level=2] [ref=f3e23]
+    - complementary [ref=f3e24]:
+      - paragraph [ref=f3e25]:
+        - text: Your purchase of Foundry Virtual Tabletop provides a perpetual license to use the software and have access to all future updates. After purchasing, your license key will be available in your
+        - link "User Profile" [ref=f3e26] [cursor=pointer]:
+          - /url: /me/licenses
+        - text: where you can also download the software to begin hosting a Foundry Virtual Tabletop server.
+      - paragraph [ref=f3e27]:
+        - text: You can learn more about purchasing Foundry Virtual Tabletop in our
+        - link "Purchasing FAQ" [ref=f3e28] [cursor=pointer]:
+          - /url: /article/faq/#purchasing
+        - text: ", or you can"
+        - link "Contact Us" [ref=f3e29] [cursor=pointer]:
+          - /url: /contact-us/
+        - text: with any questions.
+      - paragraph [ref=f3e30]:
+        - text: If you are a current or former
+        - link " Patreon" [ref=f3e31] [cursor=pointer]:
+          - /url: https://patreon.com/foundryvtt
+          - generic [ref=f3e32]: 
+          - text: Patreon
+        - text: supporter, you may be eligible for a
+        - link "Supporter Discount" [ref=f3e33] [cursor=pointer]:
+          - /url: /article/faq/#patreon-discount
+        - text: towards a purchase of a single license.
+    - table [ref=f3e34]:
+      - rowgroup [ref=f3e35]:
+        - row [ref=f3e36]:
+          - columnheader "Description" [ref=f3e37]
+          - columnheader "Amount" [ref=f3e38]
+      - rowgroup [ref=f3e39]:
+        - row [ref=f3e40]:
+          - cell "Software License Key" [ref=f3e41]
+          - cell "$50.00 USD" [ref=f3e42]
+      - rowgroup [ref=f3e43]:
+        - row [ref=f3e44]:
+          - cell "Estimated Total (THB)" [ref=f3e45]
+          - cell "THB1,744.47" [ref=f3e46]
+    - paragraph [ref=f3e47]: Your total is estimated in your local currency (THB). Stripe confirms the exact price and any tax at checkout.
+    - paragraph [ref=f3e48]: Log in to your user account in order to proceed with checkout.
+  - contentinfo [ref=f3e49]:
+    - heading "Foundry Virtual Tabletop" [level=4] [ref=f3e50]
+    - navigation [ref=f3e51]:
+      - link "Software License" [ref=f3e52] [cursor=pointer]:
+        - /url: /article/license
+      - link "Privacy Policy" [ref=f3e53] [cursor=pointer]:
+        - /url: /article/privacy-policy
+      - link "Terms of Service" [ref=f3e54] [cursor=pointer]:
+        - /url: /article/terms-of-service
+      - link "AI Content Policy" [ref=f3e55] [cursor=pointer]:
+        - /url: /article/ai-policy
+      - link "Partnerships" [ref=f3e56] [cursor=pointer]:
+        - /url: /article/partnerships
+      - link "Branding Guide" [ref=f3e57] [cursor=pointer]:
+        - /url: /article/branding
+      - link "Employment Opportunities" [ref=f3e58] [cursor=pointer]:
+        - /url: /article/employment
+      - link "Contact Us" [ref=f3e59] [cursor=pointer]:
+        - /url: /contact-us/
+    - paragraph [ref=f3e60]: Foundry Virtual Tabletop © Copyright 2026, Foundry Gaming, LLC. All rights reserved.

@@ -1,0 +1,412 @@
+- generic [active] [ref=f178e1]:
+  - link "Skip to Main Content" [ref=f178e2] [cursor=pointer]:
+    - /url: mainContent
+  - generic [ref=f178e3]:
+    - generic [ref=f178e4]:
+      - text: Roll20 uses cookies to improve your experience on our site. Cookies enable you to enjoy certain features, social sharing functionality, and tailor message and display ads to your interests on our site and others. They also help us understand how our site is being used. By continuing to use our site, you consent to our use of cookies. Update your cookie preferences
+      - link "here" [ref=f178e5] [cursor=pointer]:
+        - /url: "#"
+      - text: .
+    - button "Close Cookie Toast" [ref=f178e6] [cursor=pointer]: ×
+  - text: "On"
+  - navigation [ref=f178e17]:
+    - list [ref=f178e19]:
+      - listitem [ref=f178e20]:
+        - link "Open Play Now menu" [ref=f178e21] [cursor=pointer]:
+          - /url: https://app.roll20.net/
+          - generic [ref=f178e22]: Play Now
+      - listitem [ref=f178e23]:
+        - link "Open Join a Game menu" [ref=f178e24] [cursor=pointer]:
+          - /url: https://app.roll20.net/lfg
+          - generic [ref=f178e25]: Join a Game
+      - listitem [ref=f178e26]:
+        - link "Open Characters menu" [ref=f178e27] [cursor=pointer]:
+          - /url: https://app.roll20.net/characters
+          - generic [ref=f178e28]: Characters
+      - listitem [ref=f178e31]:
+        - link "Open Shop menu" [ref=f178e32] [cursor=pointer]:
+          - /url: https://marketplace.roll20.net
+          - generic [ref=f178e33]: Shop
+      - listitem [ref=f178e36]:
+        - link "Open Tools menu" [ref=f178e37] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=f178e38]: Tools
+      - listitem [ref=f178e41]:
+        - link "Open Compendium menu" [ref=f178e42] [cursor=pointer]:
+          - /url: https://app.roll20.net/compendium
+          - generic [ref=f178e43]: Compendium
+      - listitem [ref=f178e46]:
+        - link "Open Community menu" [ref=f178e47] [cursor=pointer]:
+          - /url: https://app.roll20.net/forum
+          - generic [ref=f178e48]: Community
+    - generic [ref=f178e51]:
+      - button "Open site notifications menu" [ref=f178e52] [cursor=pointer]
+      - listitem [ref=f178e58]:
+        - link "Open Sign In menu" [ref=f178e59] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=f178e60]: Sign In
+  - banner "#1 Choice for D&D Online Section" [ref=f178e64]:
+    - generic [ref=f178e65]:
+      - generic [ref=f178e66]:
+        - 'heading "The #1 Choice" [level=2] [ref=f178e67]'
+        - heading "For D&D Online." [level=2] [ref=f178e68]
+        - button "Create Free Account" [ref=f178e69] [cursor=pointer]
+        - generic [ref=f178e70]:
+          - paragraph [ref=f178e71]: Join 15+ million players
+          - list [ref=f178e72]:
+            - listitem [ref=f178e73]: Play D&D and 1,200+ other game systems — free
+            - listitem [ref=f178e74]: Biggest library of licensed adventures
+            - listitem [ref=f178e75]: No downloads. No hosting. Just open your browser and play
+      - img "Hero Image" [ref=f178e77]
+    - generic [ref=f178e78]:
+      - generic [ref=f178e79]:
+        - img "D&D Logo" [ref=f178e80]
+        - img "Pathfinder 2 Logo" [ref=f178e81]
+        - img "Call of Cthulhu Logo" [ref=f178e82]
+        - img "Marvel Multiverse Logo" [ref=f178e83]
+        - img "Daggerheart Logo" [ref=f178e84]
+        - img "Cyberpunk Logo" [ref=f178e85]
+        - img "Fallout Logo" [ref=f178e86]
+      - generic [ref=f178e87]:
+        - generic [ref=f178e88]: The most flexible tabletop platform on the web.
+        - generic [ref=f178e89]: Supporting D&D, Pathfinder, and 1,200+ game systems. 15+ million players worldwide.
+  - generic [ref=f178e93]:
+    - img "Party Around Fire Image" [ref=f178e94]
+    - region [ref=f178e95]:
+      - generic [ref=f178e96]:
+        - heading "Start with Ready-to-Play Adventures" [level=2] [ref=f178e97]
+        - paragraph [ref=f178e98]: Roll20® is the most complete solution for digital play. Access character sheets, tokens, rulebooks, dice, and more - with powerful tools to automate the tedious stuff.
+        - button "Create Free Account" [ref=f178e99] [cursor=pointer]
+    - region "VTT Playground Interface with various tools and features" [ref=f178e100]:
+      - generic [ref=f178e101]:
+        - generic [ref=f178e102]:
+          - generic [ref=f178e103]:
+            - generic [ref=f178e104]: Roll Dice & Track Characters
+            - generic [ref=f178e105]: Integrated dice, character sheets, and automation
+          - generic [ref=f178e106]:
+            - generic [ref=f178e107]: Organize Your Campaign
+            - generic [ref=f178e108]: Pages, folders, and asset management built in
+        - generic [ref=f178e109]:
+          - generic [ref=f178e110] [cursor=pointer]
+          - generic [ref=f178e111] [cursor=pointer]
+          - generic [ref=f178e112] [cursor=pointer]
+          - generic [ref=f178e113] [cursor=pointer]
+          - generic [ref=f178e114] [cursor=pointer]
+          - img "VTT Playground Image" [ref=f178e116]
+        - generic [ref=f178e117]:
+          - generic [ref=f178e118]:
+            - generic [ref=f178e119]: Dynamic Lighting & Fog of War
+            - generic [ref=f178e120]: Reveal maps as players explore (immersion advantage)
+          - generic [ref=f178e121]:
+            - generic [ref=f178e122]: Free Mapmaking with Dungeon Scrawl
+            - generic [ref=f178e123]: Create maps in seconds with integrated tools
+    - region "Steps to Get Started" [ref=f178e124]:
+      - generic [ref=f178e125]:
+        - generic [ref=f178e126]:
+          - img "Roll20 Logo" [ref=f178e128]
+          - heading "Sign Up Free" [level=3] [ref=f178e129]
+          - paragraph [ref=f178e130]: Start today, no credit card. Free tier available forever, whether you're a GM or player.
+        - generic [ref=f178e131]:
+          - img "Choose Game Icon" [ref=f178e132]
+          - heading "Pick your Game" [level=3] [ref=f178e133]
+          - paragraph [ref=f178e134]: D&D, Pathfinder, Call of Cthulhu, or 1,200+ others. Hundreds of free adventures available.
+        - generic [ref=f178e135]:
+          - img "Invites Friends Icon" [ref=f178e136]
+          - heading "Find your Party" [level=3] [ref=f178e137]
+          - paragraph [ref=f178e138]: Invite friends with a link, or find a group on our LFG tool and Discord. Solo? We've got options for you too.
+        - generic [ref=f178e139]:
+          - img "Play Icon" [ref=f178e140]
+          - heading "Play" [level=3] [ref=f178e141]
+          - paragraph [ref=f178e142]: That's it. No downloads, no hosting, no setup. Just click and play. New to TTRPGs? Check out our tutorials.
+      - button "Create Free Account" [ref=f178e144] [cursor=pointer]
+    - region [ref=f178e145]:
+      - generic [ref=f178e146]:
+        - heading "User Testimonials" [level=2] [ref=f178e147]
+        - generic [ref=f178e148]:
+          - generic [ref=f178e150]:
+            - generic [ref=f178e152]:
+              - img "User Testimonial 3" [ref=f178e154]
+              - img "User Testimonial Avatar 3" [ref=f178e155]
+              - paragraph [ref=f178e156]: "\"Roll20 helps break down all the stuff that seems complicated about TTRPGs.\""
+              - paragraph [ref=f178e157]: Mário R.
+            - generic [ref=f178e159]:
+              - img "User Testimonial 4" [ref=f178e161]
+              - img "User Testimonial Avatar 4" [ref=f178e162]
+              - paragraph [ref=f178e163]: "\"I love the ability to create stories and memories and laughs with my friends from all around the world!\""
+              - paragraph [ref=f178e164]: Allison M.
+            - generic [ref=f178e166]:
+              - img "User Testimonial 5" [ref=f178e168]
+              - img "User Testimonial Avatar 5" [ref=f178e169]
+              - paragraph [ref=f178e170]: "\"I love the freedom to create and play however and whatever I want while turning it into a great time with my party.\""
+              - paragraph [ref=f178e171]: Maya O.
+            - generic [ref=f178e173]:
+              - img "User Testimonial 1" [ref=f178e175]
+              - img "User Testimonial Avatar 1" [ref=f178e176]
+              - paragraph [ref=f178e177]: "\"I met most of my friends online. Roll20 keeps our friendships going and keeps us connected in good times and bad.\""
+              - paragraph [ref=f178e178]: James R.
+            - generic [ref=f178e180]:
+              - img "User Testimonial 2" [ref=f178e182]
+              - img "User Testimonial Avatar 2" [ref=f178e183]
+              - paragraph [ref=f178e184]: "\"Roll20 is the easiest and most accessible way to get started in the VTT space, and you won't regret it.\""
+              - paragraph [ref=f178e185]: Calbeb P.
+            - generic [ref=f178e187]:
+              - img "User Testimonial 3" [ref=f178e189]
+              - img "User Testimonial Avatar 3" [ref=f178e190]
+              - paragraph [ref=f178e191]: "\"Roll20 helps break down all the stuff that seems complicated about TTRPGs.\""
+              - paragraph [ref=f178e192]: Mário R.
+            - generic [ref=f178e194]:
+              - img "User Testimonial 4" [ref=f178e196]
+              - img "User Testimonial Avatar 4" [ref=f178e197]
+              - paragraph [ref=f178e198]: "\"I love the ability to create stories and memories and laughs with my friends from all around the world!\""
+              - paragraph [ref=f178e199]: Allison M.
+            - generic [ref=f178e201]:
+              - img "User Testimonial 5" [ref=f178e203]
+              - img "User Testimonial Avatar 5" [ref=f178e204]
+              - paragraph [ref=f178e205]: "\"I love the freedom to create and play however and whatever I want while turning it into a great time with my party.\""
+              - paragraph [ref=f178e206]: Maya O.
+            - generic [ref=f178e208]:
+              - img "User Testimonial 1" [ref=f178e210]
+              - img "User Testimonial Avatar 1" [ref=f178e211]
+              - paragraph [ref=f178e212]: "\"I met most of my friends online. Roll20 keeps our friendships going and keeps us connected in good times and bad.\""
+              - paragraph [ref=f178e213]: James R.
+            - generic [ref=f178e215]:
+              - img "User Testimonial 2" [ref=f178e217]
+              - img "User Testimonial Avatar 2" [ref=f178e218]
+              - paragraph [ref=f178e219]: "\"Roll20 is the easiest and most accessible way to get started in the VTT space, and you won't regret it.\""
+              - paragraph [ref=f178e220]: Calbeb P.
+            - generic [ref=f178e222]:
+              - img "User Testimonial 3" [ref=f178e224]
+              - img "User Testimonial Avatar 3" [ref=f178e225]
+              - paragraph [ref=f178e226]: "\"Roll20 helps break down all the stuff that seems complicated about TTRPGs.\""
+              - paragraph [ref=f178e227]: Mário R.
+          - generic:
+            - button [ref=f178e228] [cursor=pointer]:
+              - img "Previous" [ref=f178e230]
+            - button [ref=f178e231] [cursor=pointer]:
+              - img "Next" [ref=f178e233]
+  - region [ref=f178e234]:
+    - generic [ref=f178e236]:
+      - heading "Customize Your Game" [level=3] [ref=f178e237]
+      - generic [ref=f178e241]:
+        - generic [ref=f178e242]:
+          - heading "Automate Rolls & Actions" [level=4] [ref=f178e245]
+          - paragraph [ref=f178e246]: Save time with macros. One click for complex rolls, spell effects, and character actions. Works for any game system.
+        - generic [ref=f178e247]:
+          - heading "Character Sheets for Every System" [level=4] [ref=f178e250]
+          - paragraph [ref=f178e251]: Built-in sheets for 250+ game systems including D&D, Pathfinder, and more. Or design your own.
+        - generic [ref=f178e252]:
+          - heading "Advanced Customization (Optional)" [level=4] [ref=f178e255]
+          - paragraph [ref=f178e256]: "For power users: Full API to extend Roll20. Add new features, automate campaigns, and more. Pro subscription required."
+        - generic [ref=f178e257]:
+          - heading "Dungeon Scrawl Free Map Creation with Dungeon Scrawl" [level=4] [ref=f178e260]
+          - paragraph [ref=f178e261]: Create gorgeous maps in minutes with our integrated Dungeon Scrawl tool. No art skills needed.
+      - button "Create Free Account" [ref=f178e262] [cursor=pointer]
+  - region [ref=f178e263]:
+    - generic [ref=f178e267]:
+      - generic [ref=f178e268]:
+        - heading "Join the Community" [level=2] [ref=f178e269]
+        - paragraph [ref=f178e270]: Connect with 15+ million players worldwide.
+        - paragraph [ref=f178e271]: Find groups on our LFG tool, join the official Discord with 100K+ members, or explore forums and subreddits. New players welcome.
+      - generic [ref=f178e272]:
+        - button "Visit Roll20 Discord" [ref=f178e273] [cursor=pointer]: Join Roll20 Discord
+        - button "Visit Roll20 Looking For Group" [ref=f178e276] [cursor=pointer]: Find a Group
+        - button "Visit Roll20 Forums" [ref=f178e279] [cursor=pointer]: Browse Forums
+        - button "Visit Roll20 Reddit" [ref=f178e282] [cursor=pointer]: Visit r/Roll20
+  - region "start-here-articles" [ref=f178e285]:
+    - heading "New to Tabletop Roleplaying Games? Start Here" [level=2] [ref=f178e286]
+    - generic [ref=f178e287]:
+      - generic [ref=f178e288]:
+        - heading "Is D&D For Me?" [level=3] [ref=f178e289]
+        - img "Article 1 Image" [ref=f178e290]
+        - generic [ref=f178e291]:
+          - paragraph [ref=f178e292]: This article demonstrates that D&D is for everyone, dispels myths about time commitment myths, and offers guidance on how to start.
+          - link "Read more" [ref=f178e293] [cursor=pointer]:
+            - /url: https://pages.roll20.net/-dnd-starter-sets-complete-guide
+      - generic [ref=f178e294]:
+        - heading "How to Find Your First Group" [level=3] [ref=f178e295]
+        - img "Article 2 Image" [ref=f178e296]
+        - generic [ref=f178e297]:
+          - paragraph [ref=f178e298]: Explore the guide to using LFG tool, Discord, forums, what to look for in beginner-friendly groups.
+          - link "Read more" [ref=f178e299] [cursor=pointer]:
+            - /url: https://help.roll20.net/hc/en-us/articles/360037774473-Using-Our-Looking-for-Group-Tool
+      - generic [ref=f178e300]:
+        - heading "Roll20 Masterclass Series" [level=3] [ref=f178e301]
+        - img "Article 3 Image" [ref=f178e302]
+        - generic [ref=f178e303]:
+          - paragraph [ref=f178e304]: Discover GM tips, player tips and feature tutorials.
+          - link "View Series" [ref=f178e305] [cursor=pointer]:
+            - /url: https://pages.roll20.net/roll20-101
+  - region [ref=f178e306]:
+    - heading "Latest News" [level=2] [ref=f178e307]
+    - generic [ref=f178e308]:
+      - generic [ref=f178e309]:
+        - img "Blog Article 1 Image" [ref=f178e310]
+        - generic [ref=f178e311]:
+          - 'heading "Roll20 Reserve: October 2026" [level=3] [ref=f178e312]'
+          - paragraph [ref=f178e313]: Oct 2026
+      - generic [ref=f178e314]:
+        - img "Blog Article 2 Image" [ref=f178e315]
+        - generic [ref=f178e316]:
+          - heading "Manage Your Characters Without Opening the VTT" [level=3] [ref=f178e317]
+          - paragraph [ref=f178e318]: Oct 2026
+      - generic [ref=f178e319]:
+        - img "Blog Article 3 Image" [ref=f178e320]
+        - generic [ref=f178e321]:
+          - heading "Introducing the Roll20 Token Maker!" [level=3] [ref=f178e322]
+          - paragraph [ref=f178e323]: Sep 2026
+    - generic [ref=f178e324]:
+      - button "Roll20 Blog" [ref=f178e325] [cursor=pointer]
+      - heading "Ready to start your adventure?" [level=3] [ref=f178e326]
+      - button "Sign Up Free" [ref=f178e327] [cursor=pointer]
+      - paragraph [ref=f178e328]: No Credit Card Required
+      - paragraph [ref=f178e329]:
+        - text: "Special thanks to our featured Partner:"
+        - link "Ori the Cartographer" [ref=f178e330] [cursor=pointer]:
+          - /url: https://marketplace.roll20.net/browse/publisher/1634
+  - contentinfo [ref=f178e331]:
+    - generic [ref=f178e332]:
+      - link [ref=f178e333] [cursor=pointer]:
+        - /url: https://roll20.net/
+        - img "Go to Roll20 Homepage" [ref=f178e334]
+      - generic [ref=f178e335]:
+        - text: © Roll20, LLC |
+        - link "Terms of Service & Privacy Policy" [ref=f178e336] [cursor=pointer]:
+          - /url: https://help.roll20.net/hc/articles/360037770793-Terms-of-Service-and-Privacy-Policy#Notification_of_Copyright_Infringement_.28DMCA_Policy.29
+        - text: "|"
+        - link "DMCA" [ref=f178e337] [cursor=pointer]:
+          - /url: https://help.roll20.net/hc/articles/360037770833-DMCA
+        - text: "|"
+        - link "Contact Us" [ref=f178e338] [cursor=pointer]:
+          - /url: "https://roll20.zendesk.com/hc/requests/new "
+        - text: "|"
+        - link "Help Center" [ref=f178e339] [cursor=pointer]:
+          - /url: https://roll20.net/help
+        - text: "| All rights reserved. All product and company names are trademarks"
+        - superscript [ref=f178e340]: ™
+        - text: or registered
+        - superscript [ref=f178e341]: ®
+        - text: trademarks of their respective holders.
+      - generic [ref=f178e342]:
+        - link [ref=f178e343] [cursor=pointer]:
+          - /url: http://discord.gg/roll20
+          - img "Join the Roll20 Discord Server" [ref=f178e344]
+        - link [ref=f178e345] [cursor=pointer]:
+          - /url: https://www.facebook.com/roll20app/
+          - img "Go to Roll20 on Facebook" [ref=f178e346]
+        - link [ref=f178e347] [cursor=pointer]:
+          - /url: https://x.com/roll20app
+          - img "Go to Roll20 on Twitter" [ref=f178e348]
+        - link [ref=f178e349] [cursor=pointer]:
+          - /url: https://bsky.app/profile/roll20.net
+          - img "Go to Roll20 on Bluesky" [ref=f178e350]
+        - link [ref=f178e351] [cursor=pointer]:
+          - /url: https://www.instagram.com/roll20app/
+          - img "Go to Roll20 on Instagram" [ref=f178e352]
+        - link [ref=f178e353] [cursor=pointer]:
+          - /url: " https://www.tiktok.com/@roll20app?lang=en"
+          - img "Go to Roll20 on TikTok" [ref=f178e354]
+        - link [ref=f178e355] [cursor=pointer]:
+          - /url: https://www.youtube.com/roll20app
+          - img "Go to Roll20 on YouTube" [ref=f178e356]
+        - link [ref=f178e357] [cursor=pointer]:
+          - /url: "https://www.twitch.tv/roll20app "
+          - img "Go to Roll20 on Twitch" [ref=f178e358]
+        - link [ref=f178e359] [cursor=pointer]:
+          - /url: https://www.linkedin.com/company/roll20/
+          - img "Go to Roll20 on LinkedIn" [ref=f178e360]
+    - generic [ref=f178e361]:
+      - generic [ref=f178e362]: Powered by Roll20
+      - generic [ref=f178e363]:
+        - generic [ref=f178e364]:
+          - generic [ref=f178e365]:
+            - 'link "Roll20 The #1 Tabletop for Playing RPGs Online" [ref=f178e366] [cursor=pointer]':
+              - /url: https://roll20.net
+            - generic [ref=f178e367]:
+              - link "Roll20 Tabletop" [ref=f178e368] [cursor=pointer]:
+                - /url: https://roll20.net
+              - link "Roll20 Characters" [ref=f178e369] [cursor=pointer]:
+                - /url: https://app.roll20.net/characters
+              - link "Roll20 Marketplace" [ref=f178e370] [cursor=pointer]:
+                - /url: https://marketplace.roll20.net
+              - link "Roll20 Compendium" [ref=f178e371] [cursor=pointer]:
+                - /url: https://roll20.net/compendium
+          - generic [ref=f178e372]:
+            - link "Go to DriveThru Homepage" [ref=f178e373] [cursor=pointer]:
+              - /url: https://drivethrurpg.com/
+              - text: DriveThru The Largest RPG Marketplace
+            - generic [ref=f178e374]:
+              - link "DriveThruComics" [ref=f178e375] [cursor=pointer]:
+                - /url: https://www.drivethrucomics.com/
+              - link "DriveThruFiction" [ref=f178e376] [cursor=pointer]:
+                - /url: https://www.drivethrufiction.com/index.php
+              - link "DriveThruCards" [ref=f178e377] [cursor=pointer]:
+                - /url: https://www.drivethrucards.com/
+              - link "Wargame Vault" [ref=f178e378] [cursor=pointer]:
+                - /url: https://www.wargamevault.com/
+        - generic [ref=f178e380]:
+          - link "Go to Demiplane Homepage" [ref=f178e381] [cursor=pointer]:
+            - /url: https://app.demiplane.com/home
+            - text: Demiplane Official Character Creation and Game Companion
+          - generic [ref=f178e382]:
+            - link "Pathfinder Nexus" [ref=f178e383] [cursor=pointer]:
+              - /url: https://app.demiplane.com/nexus/pathfinder2e
+            - link "Daggerheart Nexus" [ref=f178e384] [cursor=pointer]:
+              - /url: https://app.demiplane.com/nexus/daggerheart
+            - 'link "Vampire: The Masquerade Nexus" [ref=f178e385] [cursor=pointer]':
+              - /url: https://app.demiplane.com/nexus/vampire
+            - link "Marvel Multiverse RPG Nexus" [ref=f178e386] [cursor=pointer]:
+              - /url: https://app.demiplane.com/nexus/marvelrpg
+            - link "Cosmere RPG Nexus" [ref=f178e387] [cursor=pointer]:
+              - /url: https://app.demiplane.com/nexus/cosmererpg
+            - link "Cyberpunk RED Nexus" [ref=f178e388] [cursor=pointer]:
+              - /url: https://cyberpunkrednexus.com
+            - link "Starfinder 2e Nexus" [ref=f178e389] [cursor=pointer]:
+              - /url: https://app.demiplane.com/nexus/starfinder2e
+            - link "Traveller Nexus" [ref=f178e390] [cursor=pointer]:
+              - /url: https://app.demiplane.com/nexus/traveller
+            - link "ALIEN RPG Nexus" [ref=f178e391] [cursor=pointer]:
+              - /url: https://app.demiplane.com/nexus/alienrpg
+            - link "DC20 Nexus" [ref=f178e392] [cursor=pointer]:
+              - /url: https://app.demiplane.com/nexus/dc20
+            - link "Fallout RPG Nexus" [ref=f178e393] [cursor=pointer]:
+              - /url: https://app.demiplane.com/nexus/falloutrpg
+            - link "Candela Obscura Nexus" [ref=f178e394] [cursor=pointer]:
+              - /url: https://app.demiplane.com/nexus/candelaobscura
+            - 'link "Hunter: The Reckoning Nexus" [ref=f178e395] [cursor=pointer]':
+              - /url: https://app.demiplane.com/nexus/hunter
+            - 'link "Mutant: Year Zero Nexus" [ref=f178e396] [cursor=pointer]':
+              - /url: https://app.demiplane.com/nexus/mutantyearzero
+            - link "Scion Nexus" [ref=f178e397] [cursor=pointer]:
+              - /url: https://app.demiplane.com/nexus/scion
+        - generic [ref=f178e398]:
+          - generic [ref=f178e399]:
+            - link "Go to Dungeon Scrawl Homepage" [ref=f178e400] [cursor=pointer]:
+              - /url: https://www.dungeonscrawl.com/
+              - text: Dungeon Scrawl Create RPG Maps in Minutes
+            - link "Create a Map" [ref=f178e402] [cursor=pointer]:
+              - /url: https://www.dungeonscrawl.com/
+          - generic [ref=f178e403]:
+            - text: Community Content
+            - generic [ref=f178e404]:
+              - link "Dungeon Masters Guild (D&D)" [ref=f178e405] [cursor=pointer]:
+                - /url: https://www.dmsguild.com/
+              - link "Pathfinder Infinite" [ref=f178e406] [cursor=pointer]:
+                - /url: https://www.pathfinderinfinite.com/
+              - link "Starfinder Infinite" [ref=f178e407] [cursor=pointer]:
+                - /url: https://www.starfinderinfinite.com/
+              - link "Miskatonic Repository" [ref=f178e408] [cursor=pointer]:
+                - /url: "https://www.drivethrurpg.com/cc/16/Miskatonic "
+              - link "Storytellers Vault" [ref=f178e409] [cursor=pointer]:
+                - /url: https://www.storytellersvault.com/
+    - generic [ref=f178e410]:
+      - img "Dice Icon" [ref=f178e412]
+      - generic [ref=f178e413]:
+        - generic [ref=f178e414]:
+          - img "Pink Roll20 Logo" [ref=f178e415]
+          - paragraph [ref=f178e416]: Everything for your adventures
+        - generic [ref=f178e417]:
+          - img "Pink Roll20 Logo" [ref=f178e418]
+          - img "DriveThru RPG Logo" [ref=f178e419]
+          - img "Demiplane Logo" [ref=f178e420]
+          - img "Dungeon Masters Guild Logo" [ref=f178e421]
+          - img "Dungeown Scrawl" [ref=f178e422]

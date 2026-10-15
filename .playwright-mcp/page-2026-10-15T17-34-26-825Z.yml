@@ -1,0 +1,137 @@
+- generic [ref=f10e3]:
+  - banner [ref=f10e4]:
+    - navigation [ref=f10e5]:
+      - list [ref=f10e6]:
+        - listitem [ref=f10e7]:
+          - link "T" [ref=f10e8] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f10e10]:
+          - link "Resources" [ref=f10e11] [cursor=pointer]:
+            - /url: /resources
+        - listitem [ref=f10e13]:
+          - link "Register" [ref=f10e14] [cursor=pointer]:
+            - /url: /authentication/register
+        - listitem [ref=f10e16]:
+          - link "Sign In" [ref=f10e17] [cursor=pointer]:
+            - /url: /authentication/login
+  - generic: 18.1.4
+  - main [ref=f10e19]:
+    - generic [ref=f10e20]:
+      - generic [ref=f10e21]:
+        - heading "Tableplop" [level=1] [ref=f10e22]
+        - generic [ref=f10e23]:
+          - generic [ref=f10e24]:
+            - heading "Digital tools for legendary games." [level=2] [ref=f10e25]:
+              - text: Digital tools for
+              - generic [ref=f10e26]: legendary games.
+            - paragraph [ref=f10e29]: Free, easy-to-use virtual tabletop and toolset for pen-and-paper roleplaying games.
+            - paragraph [ref=f10e30]:
+              - text: Looking for more info? Checkout
+              - link "this introduction video on Youtube" [ref=f10e31] [cursor=pointer]:
+                - /url: https://www.youtube.com/watch?v=W2YgYqYl14E
+              - text: and
+              - link "Tableplop's documentation pages" [ref=f10e32] [cursor=pointer]:
+                - /url: https://tableplop.notion.site/Tableplop-Docs-a441ac6f11f342b4b0f76e30a309a5b1
+              - text: .
+            - paragraph [ref=f10e33]:
+              - text: Join our
+              - link "discord server" [ref=f10e34] [cursor=pointer]:
+                - /url: https://discord.gg/2mTQupa
+              - text: to chat, get help and find character templates and
+              - link "the subreddit" [ref=f10e35] [cursor=pointer]:
+                - /url: https://reddit.com/r/tableplop
+              - text: to see news and share your thoughts.
+          - generic [ref=f10e36]:
+            - generic [ref=f10e41]:
+              - generic [ref=f10e44]:
+                - generic [ref=f10e45]: Elethia 3 minutes ago
+                - generic [ref=f10e46]:
+                  - text: "Warlock spell attack:"
+                  - generic [ref=f10e47]: "8"
+                  - text: to hit
+              - generic [ref=f10e51]:
+                - generic [ref=f10e52]: Brøl 1 minute ago
+                - generic [ref=f10e53]:
+                  - text: "Brøl swings his battleaxe:"
+                  - generic [ref=f10e54]: "21"
+                  - text: to hit,
+                  - generic [ref=f10e56]: "7"
+                  - text: slashing dmg
+              - generic [ref=f10e60]:
+                - generic [ref=f10e61]: Kierra just now
+                - generic [ref=f10e62]:
+                  - text: Kierra darts forward and attacks with her longsword for
+                  - generic [ref=f10e63]: "15"
+                  - text: to hit.
+              - generic [ref=f10e68]:
+                - text: The longsword hits dealing
+                - generic [ref=f10e69]: "10"
+                - text: slashing damage.
+            - list [ref=f10e71]:
+              - listitem [ref=f10e72]:
+                - generic [ref=f10e74]:
+                  - generic [ref=f10e75]: Elethia
+                  - generic [ref=f10e76]: 14AC 16/16HP Fighter
+                - generic:
+                  - spinbutton: "17"
+              - listitem [ref=f10e77]:
+                - generic [ref=f10e79]:
+                  - generic [ref=f10e80]: Brøl
+                  - generic [ref=f10e81]: 15AC 24/30HP Barbarian
+                - generic:
+                  - spinbutton: "14"
+              - listitem [ref=f10e82]:
+                - generic [ref=f10e85]:
+                  - generic [ref=f10e86]: Kierra
+                  - generic [ref=f10e87]: 16AC 14/24HP Fighter
+                - generic:
+                  - spinbutton: "13"
+              - listitem [ref=f10e88]:
+                - generic [ref=f10e90]:
+                  - generic [ref=f10e91]: Ogre
+                  - generic [ref=f10e92]: 11AC 35/59HP 2CR
+                - generic:
+                  - spinbutton: "7"
+        - button "Create Example Campaign" [ref=f10e94] [cursor=pointer]
+      - generic [ref=f10e103]:
+        - heading "New and Noteworthy" [level=2] [ref=f10e104]
+        - list
+      - generic [ref=f10e105]:
+        - generic [ref=f10e108]:
+          - generic [ref=f10e109]: Development is Ongoing
+          - generic [ref=f10e112]:
+            - paragraph [ref=f10e113]:
+              - text: Tableplop is created by
+              - link "SummonToast" [ref=f10e114] [cursor=pointer]:
+                - /url: https://twitter.com/SummonToast
+              - text: and more features are underway.
+            - paragraph [ref=f10e115]:
+              - text: Information is available on
+              - link "Tableplop's documentation pages" [ref=f10e116] [cursor=pointer]:
+                - /url: https://tableplop.notion.site/Tableplop-Docs-a441ac6f11f342b4b0f76e30a309a5b1
+              - text: .
+            - paragraph [ref=f10e117]:
+              - text: Take a look at suggested and upcoming features on
+              - link "the roadmap" [ref=f10e118] [cursor=pointer]:
+                - /url: https://tableplop.notion.site/1844c0678a9b4072b1a208535bc65e45?v=52c12befc4004480a651d8e66abfa1eb&pvs=74
+              - text: . If you have feedback or suggestions share them on the
+              - link "Tableplop Discord server" [ref=f10e119] [cursor=pointer]:
+                - /url: https://discord.gg/2mTQupa
+              - text: .
+        - generic [ref=f10e120]:
+          - heading "Tableplop is Supported by the Community" [level=2] [ref=f10e121]
+          - paragraph [ref=f10e122]: Tableplop is free and always will be. It has no ads, arbitrary loading times, or scene count limits thanks to the support of the wonderful people who fund hosting and development.
+          - paragraph [ref=f10e123]: Thank you so much to everyone who supports Tableplop on Patreon, helps spread the word about Tableplop and brings feedback and suggestions and bug reports to Discord. Tableplop is only possible with your help.
+          - link "Support Tableplop on Patreon" [ref=f10e125] [cursor=pointer]:
+            - /url: https://www.patreon.com/tableplop/
+        - generic [ref=f10e128]:
+          - heading "A Massive Thank You" [level=2] [ref=f10e129]
+          - paragraph [ref=f10e130]: "Tableplop would not be here without the support of:"
+          - list
+      - generic [ref=f10e131]:
+        - link "Terms and Conditions" [ref=f10e132] [cursor=pointer]:
+          - /url: /about/terms
+        - link "Privacy Policy" [ref=f10e133] [cursor=pointer]:
+          - /url: /about/privacy
+        - link "Presskit" [ref=f10e134] [cursor=pointer]:
+          - /url: /about/presskit

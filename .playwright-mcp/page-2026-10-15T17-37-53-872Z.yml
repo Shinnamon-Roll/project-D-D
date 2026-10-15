@@ -1,0 +1,485 @@
+- generic [active] [ref=f105e1]:
+  - link "Skip to main content" [ref=f105e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f105e6]:
+    - generic:
+      - generic: overwhelmed new GM modules - Reddit Search!
+      - banner [ref=f105e10]:
+        - navigation [ref=f105e11]:
+          - link "Home" [ref=f105e15] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - search [ref=f105e34]:
+            - generic [ref=f105e36]:
+              - generic "Remove r/FoundryVTT filter and expand search to all of Reddit" [ref=f105e42] [cursor=pointer]:
+                - button [pressed] [ref=f105e43]:
+                  - generic [aria-hidden] [ref=f105e47]: r/FoundryVTT
+              - textbox "Remove r/FoundryVTT filter and expand search to all of Reddit Clear search" [ref=f105e53]:
+                - /placeholder: Search in ⁨r/FoundryVTT⁩
+                - text: overwhelmed new GM modules
+              - button "Clear search" [ref=f105e55] [cursor=pointer]
+          - generic [ref=f105e61]:
+            - link "Sign Up" [ref=f105e67] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Log In" [ref=f105e73] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Expand user menu" [ref=f105e80] [cursor=pointer]
+      - generic "overwhelmed new GM modules - Reddit Search!"
+      - generic [ref=f105e89]:
+        - generic [ref=f105e90]:
+          - generic [ref=f105e93]:
+            - generic [ref=f105e94]:
+              - generic [ref=f105e97]:
+                - tablist [ref=f105e98]:
+                  - tab [selected] [ref=f105e99]:
+                    - link "Posts" [ref=f105e100] [cursor=pointer]:
+                      - /url: /r/FoundryVTT/search/?q=overwhelmed+new+GM+modules&type=posts&iId=7f656abd-d331-41e9-8a02-8612ee71f80e
+                  - tab [ref=f105e106]:
+                    - link "Comments" [ref=f105e107] [cursor=pointer]:
+                      - /url: /r/FoundryVTT/search/?q=overwhelmed+new+GM+modules&type=comments&iId=7f656abd-d331-41e9-8a02-8612ee71f80e
+                  - tab [ref=f105e113]:
+                    - link "Media" [ref=f105e114] [cursor=pointer]:
+                      - /url: /r/FoundryVTT/search/?q=overwhelmed+new+GM+modules&type=media&iId=7f656abd-d331-41e9-8a02-8612ee71f80e
+                - button "forward" [ref=f105e121] [cursor=pointer]
+                - button "back" [ref=f105e128] [cursor=pointer]
+              - generic:
+                - generic:
+                  - tabpanel
+            - generic [ref=f105e135]:
+              - button "Top" [ref=f105e139] [cursor=pointer]
+              - button "All time" [ref=f105e148] [cursor=pointer]
+          - generic [ref=f105e155]:
+            - generic:
+              - generic:
+                - link "Skip to Sign up" [ref=f105e156] [cursor=pointer]:
+                  - /url: "#left-sidebar-container"
+                - link "Skip to Right Sidebar" [ref=f105e157] [cursor=pointer]:
+                  - /url: "#right-sidebar-container"
+          - generic [ref=f105e158]:
+            - main [ref=f105e159]:
+              - generic [ref=f105e160]:
+                - paragraph [ref=f105e163]:
+                  - text: Show results from
+                  - link "all of Reddit" [ref=f105e165] [cursor=pointer]:
+                    - /url: /search/?q=overwhelmed+new+GM+modules
+                - generic [ref=f105e170]:
+                  - generic [ref=f105e171]:
+                    - generic:
+                      - heading "My mobile app for Foundry is now called Diecast!! Here's what's new:" [level=2]:
+                        - link "My mobile app for Foundry is now called Diecast!! Here's what's new:" [ref=f105e172] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/comments/1ohhurq/my_mobile_app_for_foundry_is_now_called_diecast/
+                    - generic [ref=f105e174]:
+                      - generic [ref=f105e177]:
+                        - link "r/FoundryVTT" [ref=f105e180] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/
+                        - generic [ref=f105e185]: ·
+                        - time [ref=f105e187]: 1y ago
+                      - link "My mobile app for Foundry is now called Diecast!! Here's what's new:" [ref=f105e188] [cursor=pointer]:
+                        - /url: /r/FoundryVTT/comments/1ohhurq/my_mobile_app_for_foundry_is_now_called_diecast/
+                      - generic [ref=f105e189]:
+                        - generic [ref=f105e190]:
+                          - generic [ref=f105e191]: 1.4K
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f105e192]:
+                          - generic [ref=f105e193]: "139"
+                          - text: comments
+                  - generic [ref=f105e198] [cursor=pointer]:
+                    - img "My mobile app for Foundry is now called Diecast!! Here's what's new:" [ref=f105e202]
+                    - generic: 1:59
+                - separator [ref=f105e203]
+                - generic [ref=f105e205]:
+                  - generic [ref=f105e206]:
+                    - generic:
+                      - heading "I’m new to Foundry VTT development, what module would you like to see?" [level=2]:
+                        - link "I’m new to Foundry VTT development, what module would you like to see?" [ref=f105e207] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/comments/1v7wj5k/im_new_to_foundry_vtt_development_what_module/
+                    - generic [ref=f105e209]:
+                      - generic [ref=f105e212]:
+                        - link "r/FoundryVTT" [ref=f105e215] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/
+                        - generic [ref=f105e220]: ·
+                        - time [ref=f105e222]: 3mo ago
+                      - link "I’m new to Foundry VTT development, what module would you like to see?" [ref=f105e223] [cursor=pointer]:
+                        - /url: /r/FoundryVTT/comments/1v7wj5k/im_new_to_foundry_vtt_development_what_module/
+                      - generic [ref=f105e224]:
+                        - generic [ref=f105e225]:
+                          - generic [ref=f105e226]: 1.2K
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f105e227]:
+                          - generic [ref=f105e228]: "189"
+                          - text: comments
+                  - img "I’m new to Foundry VTT development, what module would you like to see?" [ref=f105e237] [cursor=pointer]
+                - separator [ref=f105e238]
+                - generic [ref=f105e241]:
+                  - generic:
+                    - heading "Foundry's API changes are strangling its own ecosystem" [level=2]:
+                      - link "Foundry's API changes are strangling its own ecosystem" [ref=f105e242] [cursor=pointer]:
+                        - /url: /r/FoundryVTT/comments/1wk6be3/foundrys_api_changes_are_strangling_its_own/
+                  - generic [ref=f105e244]:
+                    - generic [ref=f105e247]:
+                      - link "r/FoundryVTT" [ref=f105e250] [cursor=pointer]:
+                        - /url: /r/FoundryVTT/
+                      - generic [ref=f105e255]: ·
+                      - time [ref=f105e257]: 27d ago
+                    - link "Foundry's API changes are strangling its own ecosystem" [ref=f105e258] [cursor=pointer]:
+                      - /url: /r/FoundryVTT/comments/1wk6be3/foundrys_api_changes_are_strangling_its_own/
+                    - generic [ref=f105e259]:
+                      - generic [ref=f105e260]:
+                        - generic [ref=f105e261]: "904"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f105e262]:
+                        - generic [ref=f105e263]: "174"
+                        - text: comments
+                - separator [ref=f105e264]
+                - generic [ref=f105e266]:
+                  - generic [ref=f105e267]:
+                    - generic:
+                      - heading "New free module for fullscreen portraits with NPC-dock" [level=2]:
+                        - link "New free module for fullscreen portraits with NPC-dock" [ref=f105e268] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/comments/1p67yno/new_free_module_for_fullscreen_portraits_with/
+                    - generic [ref=f105e270]:
+                      - generic [ref=f105e273]:
+                        - link "r/FoundryVTT" [ref=f105e276] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/
+                        - generic [ref=f105e281]: ·
+                        - time [ref=f105e283]: 1y ago
+                      - link "New free module for fullscreen portraits with NPC-dock" [ref=f105e284] [cursor=pointer]:
+                        - /url: /r/FoundryVTT/comments/1p67yno/new_free_module_for_fullscreen_portraits_with/
+                      - generic [ref=f105e285]:
+                        - generic [ref=f105e286]:
+                          - generic [ref=f105e287]: "825"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f105e288]:
+                          - generic [ref=f105e289]: "161"
+                          - text: comments
+                  - img "New free module for fullscreen portraits with NPC-dock" [ref=f105e298] [cursor=pointer]
+                - separator [ref=f105e299]
+                - generic [ref=f105e301]:
+                  - generic [ref=f105e302]:
+                    - generic:
+                      - heading "Swarms, a new free module for creating animated creepy crawlies and other swarms." [level=2]:
+                        - link "Swarms, a new free module for creating animated creepy crawlies and other swarms." [ref=f105e303] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/comments/wph5hl/swarms_a_new_free_module_for_creating_animated/
+                    - generic [ref=f105e305]:
+                      - generic [ref=f105e308]:
+                        - link "r/FoundryVTT" [ref=f105e311] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/
+                        - generic [ref=f105e316]: ·
+                        - time [ref=f105e318]: 4y ago
+                      - link "Swarms, a new free module for creating animated creepy crawlies and other swarms." [ref=f105e319] [cursor=pointer]:
+                        - /url: /r/FoundryVTT/comments/wph5hl/swarms_a_new_free_module_for_creating_animated/
+                      - generic [ref=f105e320]:
+                        - generic [ref=f105e321]:
+                          - generic [ref=f105e322]: "671"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f105e323]:
+                          - generic [ref=f105e324]: "91"
+                          - text: comments
+                  - generic [ref=f105e329] [cursor=pointer]:
+                    - img "Swarms, a new free module for creating animated creepy crawlies and other swarms." [ref=f105e333]
+                    - generic: 0:36
+                - separator [ref=f105e334]
+                - generic [ref=f105e336]:
+                  - generic [ref=f105e337]:
+                    - generic:
+                      - heading "The Official Foundry VTT Marketplace Has Arrived!" [level=2]:
+                        - link "The Official Foundry VTT Marketplace Has Arrived!" [ref=f105e338] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/comments/1inxc02/the_official_foundry_vtt_marketplace_has_arrived/
+                    - generic [ref=f105e340]:
+                      - generic [ref=f105e343]:
+                        - link "r/FoundryVTT" [ref=f105e346] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/
+                        - generic [ref=f105e351]: ·
+                        - time [ref=f105e353]: 2y ago
+                      - link "The Official Foundry VTT Marketplace Has Arrived!" [ref=f105e354] [cursor=pointer]:
+                        - /url: /r/FoundryVTT/comments/1inxc02/the_official_foundry_vtt_marketplace_has_arrived/
+                      - generic [ref=f105e355]:
+                        - generic [ref=f105e356]:
+                          - generic [ref=f105e357]: "658"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f105e358]:
+                          - generic [ref=f105e359]: "150"
+                          - text: comments
+                  - img "The Official Foundry VTT Marketplace Has Arrived!" [ref=f105e368] [cursor=pointer]
+                - separator [ref=f105e369]
+                - generic [ref=f105e371]:
+                  - generic [ref=f105e372]:
+                    - generic:
+                      - heading "Wojak memes might not be the highest form of art, but this bothered me for so long I had to express it somehow" [level=2]:
+                        - link "Wojak memes might not be the highest form of art, but this bothered me for so long I had to express it somehow" [ref=f105e373] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/comments/1wsb7sr/wojak_memes_might_not_be_the_highest_form_of_art/
+                    - generic [ref=f105e375]:
+                      - generic [ref=f105e378]:
+                        - link "r/FoundryVTT" [ref=f105e381] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/
+                        - generic [ref=f105e386]: ·
+                        - time [ref=f105e388]: 17d ago
+                      - link "Wojak memes might not be the highest form of art, but this bothered me for so long I had to express it somehow" [ref=f105e389] [cursor=pointer]:
+                        - /url: /r/FoundryVTT/comments/1wsb7sr/wojak_memes_might_not_be_the_highest_form_of_art/
+                      - generic [ref=f105e390]:
+                        - generic [ref=f105e391]:
+                          - generic [ref=f105e392]: "617"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f105e393]:
+                          - generic [ref=f105e394]: "136"
+                          - text: comments
+                  - img "Wojak memes might not be the highest form of art, but this bothered me for so long I had to express it somehow" [ref=f105e403] [cursor=pointer]
+                - separator [ref=f105e404]
+                - generic [ref=f105e406]:
+                  - generic [ref=f105e407]:
+                    - generic:
+                      - 'heading "[System Agnostic] Augur: Sci-Fi | Procedural Star System Generator with orbital animation and journal integration" [level=2]':
+                        - 'link "[System Agnostic] Augur: Sci-Fi | Procedural Star System Generator with orbital animation and journal integration" [ref=f105e408] [cursor=pointer]':
+                          - /url: /r/FoundryVTT/comments/1rmd70k/system_agnostic_augur_scifi_procedural_star/
+                    - generic [ref=f105e410]:
+                      - generic [ref=f105e413]:
+                        - link "r/FoundryVTT" [ref=f105e415] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/
+                        - generic [ref=f105e420]: ·
+                        - time [ref=f105e422]: 7mo ago
+                      - 'link "[System Agnostic] Augur: Sci-Fi | Procedural Star System Generator with orbital animation and journal integration" [ref=f105e423] [cursor=pointer]':
+                        - /url: /r/FoundryVTT/comments/1rmd70k/system_agnostic_augur_scifi_procedural_star/
+                      - generic [ref=f105e424]:
+                        - generic [ref=f105e425]:
+                          - generic [ref=f105e426]: "583"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f105e427]:
+                          - generic [ref=f105e428]: "108"
+                          - text: comments
+                  - generic [ref=f105e433] [cursor=pointer]:
+                    - 'img "[System Agnostic] Augur: Sci-Fi | Procedural Star System Generator with orbital animation and journal integration" [ref=f105e437]'
+                    - generic: 1:23
+                - separator [ref=f105e438]
+                - generic [ref=f105e440]:
+                  - generic [ref=f105e441]:
+                    - generic:
+                      - 'heading "A train commute-themed landing page for my Masks: A New Generation game, complete with functioning smartphone menu!" [level=2]':
+                        - 'link "A train commute-themed landing page for my Masks: A New Generation game, complete with functioning smartphone menu!" [ref=f105e442] [cursor=pointer]':
+                          - /url: /r/FoundryVTT/comments/1mqbxqf/a_train_commutethemed_landing_page_for_my_masks_a/
+                    - generic [ref=f105e444]:
+                      - generic [ref=f105e447]:
+                        - link "r/FoundryVTT" [ref=f105e449] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/
+                        - generic [ref=f105e454]: ·
+                        - time [ref=f105e456]: 1y ago
+                      - 'link "A train commute-themed landing page for my Masks: A New Generation game, complete with functioning smartphone menu!" [ref=f105e457] [cursor=pointer]':
+                        - /url: /r/FoundryVTT/comments/1mqbxqf/a_train_commutethemed_landing_page_for_my_masks_a/
+                      - generic [ref=f105e458]:
+                        - generic [ref=f105e459]:
+                          - generic [ref=f105e460]: "577"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f105e461]:
+                          - generic [ref=f105e462]: "47"
+                          - text: comments
+                  - generic [ref=f105e467] [cursor=pointer]:
+                    - 'img "A train commute-themed landing page for my Masks: A New Generation game, complete with functioning smartphone menu!" [ref=f105e471]'
+                    - generic: 1:48
+                - separator [ref=f105e472]
+                - generic [ref=f105e474]:
+                  - generic [ref=f105e475]:
+                    - generic:
+                      - heading "Map Shine - A Map Makers Special Effects Toolkit Module" [level=2]:
+                        - link "Map Shine - A Map Makers Special Effects Toolkit Module" [ref=f105e476] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/comments/1m9gey7/map_shine_a_map_makers_special_effects_toolkit/
+                    - generic [ref=f105e478]:
+                      - generic [ref=f105e481]:
+                        - link "r/FoundryVTT" [ref=f105e483] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/
+                        - generic [ref=f105e488]: ·
+                        - time [ref=f105e490]: 1y ago
+                      - link "Map Shine - A Map Makers Special Effects Toolkit Module" [ref=f105e491] [cursor=pointer]:
+                        - /url: /r/FoundryVTT/comments/1m9gey7/map_shine_a_map_makers_special_effects_toolkit/
+                      - generic [ref=f105e492]:
+                        - generic [ref=f105e493]:
+                          - generic [ref=f105e494]: "546"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f105e495]:
+                          - generic [ref=f105e496]: "55"
+                          - text: comments
+                  - generic [ref=f105e497]: "14"
+                - separator [ref=f105e504]
+                - generic [ref=f105e506]:
+                  - generic [ref=f105e507]:
+                    - generic:
+                      - heading "\"Taste my flames!\" - New Combat Animations For Your Campaign!" [level=2]:
+                        - link "\"Taste my flames!\" - New Combat Animations For Your Campaign!" [ref=f105e508] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/comments/1uib5iv/taste_my_flames_new_combat_animations_for_your/
+                    - generic [ref=f105e510]:
+                      - generic [ref=f105e513]:
+                        - link "r/FoundryVTT" [ref=f105e515] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/
+                        - generic [ref=f105e520]: ·
+                        - time [ref=f105e522]: 4mo ago
+                      - link "\"Taste my flames!\" - New Combat Animations For Your Campaign!" [ref=f105e523] [cursor=pointer]:
+                        - /url: /r/FoundryVTT/comments/1uib5iv/taste_my_flames_new_combat_animations_for_your/
+                      - generic [ref=f105e524]:
+                        - generic [ref=f105e525]:
+                          - generic [ref=f105e526]: "539"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f105e527]:
+                          - generic [ref=f105e528]: "51"
+                          - text: comments
+                  - generic [ref=f105e529]: 0:23
+                - separator [ref=f105e537]
+                - generic [ref=f105e539]:
+                  - generic [ref=f105e540]:
+                    - generic:
+                      - heading "Different Persona 5 cut-in animations on nat 20" [level=2]:
+                        - link "Different Persona 5 cut-in animations on nat 20" [ref=f105e541] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/comments/1k6cb0x/different_persona_5_cutin_animations_on_nat_20/
+                    - generic [ref=f105e543]:
+                      - generic [ref=f105e546]:
+                        - link "r/FoundryVTT" [ref=f105e548] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/
+                        - generic [ref=f105e553]: ·
+                        - time [ref=f105e555]: 1y ago
+                      - link "Different Persona 5 cut-in animations on nat 20" [ref=f105e556] [cursor=pointer]:
+                        - /url: /r/FoundryVTT/comments/1k6cb0x/different_persona_5_cutin_animations_on_nat_20/
+                      - generic [ref=f105e557]:
+                        - generic [ref=f105e558]:
+                          - generic [ref=f105e559]: "538"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f105e560]:
+                          - generic [ref=f105e561]: "33"
+                          - text: comments
+                  - generic [ref=f105e562]: 0:05
+                - separator [ref=f105e570]
+                - generic [ref=f105e573]:
+                  - generic:
+                    - heading "I feel like I need an adblocker to browse this sub now. There's so many paid Patreon posts it's getting a little out of hand." [level=2]:
+                      - link "I feel like I need an adblocker to browse this sub now. There's so many paid Patreon posts it's getting a little out of hand." [ref=f105e574] [cursor=pointer]:
+                        - /url: /r/FoundryVTT/comments/qjvg98/i_feel_like_i_need_an_adblocker_to_browse_this/
+                  - generic [ref=f105e576]:
+                    - generic [ref=f105e579]:
+                      - link "r/FoundryVTT" [ref=f105e581] [cursor=pointer]:
+                        - /url: /r/FoundryVTT/
+                      - generic [ref=f105e586]: ·
+                      - time [ref=f105e588]: 5y ago
+                    - link "I feel like I need an adblocker to browse this sub now. There's so many paid Patreon posts it's getting a little out of hand." [ref=f105e589] [cursor=pointer]:
+                      - /url: /r/FoundryVTT/comments/qjvg98/i_feel_like_i_need_an_adblocker_to_browse_this/
+                    - generic [ref=f105e590]:
+                      - generic [ref=f105e591]:
+                        - generic [ref=f105e592]: "526"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f105e593]:
+                        - generic [ref=f105e594]: "107"
+                        - text: comments
+                - separator [ref=f105e595]
+                - generic [ref=f105e597]:
+                  - generic [ref=f105e598]:
+                    - generic:
+                      - heading "[System Agnostic] Stylish Action HUD - A JRPG-style interface with Reactive Portraits & Custom Resource Tracking" [level=2]:
+                        - link "[System Agnostic] Stylish Action HUD - A JRPG-style interface with Reactive Portraits & Custom Resource Tracking" [ref=f105e599] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/comments/1qhr1v6/system_agnostic_stylish_action_hud_a_jrpgstyle/
+                    - generic [ref=f105e601]:
+                      - generic [ref=f105e604]:
+                        - link "r/FoundryVTT" [ref=f105e606] [cursor=pointer]:
+                          - /url: /r/FoundryVTT/
+                        - generic [ref=f105e611]: ·
+                        - time [ref=f105e613]: 9mo ago
+                      - link "[System Agnostic] Stylish Action HUD - A JRPG-style interface with Reactive Portraits & Custom Resource Tracking" [ref=f105e614] [cursor=pointer]:
+                        - /url: /r/FoundryVTT/comments/1qhr1v6/system_agnostic_stylish_action_hud_a_jrpgstyle/
+                      - generic [ref=f105e615]:
+                        - generic [ref=f105e616]:
+                          - generic [ref=f105e617]: "518"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f105e618]:
+                          - generic [ref=f105e619]: "34"
+                          - text: comments
+                  - generic [ref=f105e620]: 2:21
+                - separator [ref=f105e628]
+            - generic [ref=f105e632]:
+              - generic [ref=f105e637]:
+                - heading "Community Info Section" [level=1] [ref=f105e638]
+                - generic [ref=f105e639]:
+                  - generic [ref=f105e640]: FoundryVTT
+                  - generic [ref=f105e642]: Discussion about the virtual tabletop software FoundryVTT. This is an UNOFFICIAL, authorized, Fan-operated subreddit. For Official Foundry support, join the Discord (link below).
+                  - generic [ref=f105e643]:
+                    - generic [ref=f105e644]: Created Jun 19, 2019
+                    - generic [ref=f105e648]: Public
+                - generic [ref=f105e652]:
+                  - generic [ref=f105e653]:
+                    - strong [ref=f105e655]:
+                      - generic: 41K
+                    - generic [ref=f105e656]: Weekly visitors
+                  - generic [ref=f105e657]:
+                    - strong [ref=f105e659]:
+                      - generic: "655"
+                    - generic [ref=f105e660]: Weekly contributions
+              - list [ref=f105e662]:
+                - listitem [ref=f105e663]:
+                  - link "Home" [ref=f105e665] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f105e666]:
+                  - link "Popular" [ref=f105e668] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f105e669]:
+                  - link "News" [ref=f105e671] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f105e672]:
+                  - link "Explore" [ref=f105e674] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f105e675]:
+                  - link "Best of Reddit" [ref=f105e677] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f105e678]:
+                  - link "Best of Reddit in Portuguese" [ref=f105e680] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f105e681]:
+                  - link "Best of Reddit in German" [ref=f105e683] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f105e684]:
+                  - link "Reddit Rules" [ref=f105e686] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f105e687]:
+                  - link "Privacy Policy" [ref=f105e689] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f105e690]:
+                  - link "User Agreement" [ref=f105e692] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f105e693]:
+                  - link "Accessibility" [ref=f105e695] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f105e696]:
+                  - link "Reddit, Inc. © 2026. All rights reserved." [ref=f105e697] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f105e700]:
+          - paragraph [ref=f105e701]: Join the most real place on the internet
+          - generic [ref=f105e703]:
+            - generic [ref=f105e706]:
+              - iframe [ref=f105e711]:
+                - button "Continue with Google. Opens in new tab" [ref=f107e3] [cursor=pointer]:
+                  - generic [ref=f107e5]: Continue with Google
+              - generic [ref=f105e713] [cursor=pointer]:
+                - generic [ref=f105e714]: Continue with Apple
+                - button "Sign in with Apple" [ref=f105e720]:
+                  - generic [ref=f105e721]:
+                    - img:
+                      - generic:
+                        - img:
+                          - generic:  Sign in with Apple
+            - link "Continue with Phone Number" [ref=f105e726] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - link "Continue with Email" [ref=f105e735] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+          - paragraph [ref=f105e742]:
+            - text: By continuing, you agree to our
+            - link "User Agreement" [ref=f105e743] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: and acknowledge that you understand the
+            - link "Privacy Policy" [ref=f105e744] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: .

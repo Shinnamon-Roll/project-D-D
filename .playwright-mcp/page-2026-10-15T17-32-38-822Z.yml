@@ -1,0 +1,192 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - link [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img "logo" [ref=e8]
+        - link "Overview" [ref=e9] [cursor=pointer]:
+          - /url: /
+        - link "Docs" [ref=e10] [cursor=pointer]:
+          - /url: https://docs.owlbear.rodeo
+        - link "Blog" [ref=e11] [cursor=pointer]:
+          - /url: https://blog.owlbear.rodeo
+        - link "Extensions" [ref=e12] [cursor=pointer]:
+          - /url: https://extensions.owlbear.rodeo
+        - link "Pricing" [ref=e13] [cursor=pointer]:
+          - /url: /pricing
+      - generic [ref=e14]:
+        - link "Sign In" [ref=e15] [cursor=pointer]:
+          - /url: /sign-in
+        - link "Play Free" [ref=e16] [cursor=pointer]:
+          - /url: /sign-up
+  - generic [ref=e17]:
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - paragraph [ref=e20]: Pricing
+        - heading "Choose Your Plan" [level=4] [ref=e21]
+      - generic [ref=e22]:
+        - generic [ref=e23]: Get two months free with a yearly plan
+        - group [ref=e24]:
+          - button "Monthly" [ref=e25] [cursor=pointer]
+          - button "Yearly" [pressed] [ref=e26] [cursor=pointer]
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - paragraph [ref=e30]: Nestling
+          - img "Nestling logo" [ref=e32]
+          - heading [level=4] [ref=e33]
+          - text: Perfect for players or DMs who are just getting started with our tools.
+        - separator [ref=e35]
+        - generic [ref=e36]:
+          - paragraph [ref=e37]: 💾200MB of storage
+          - paragraph [ref=e38]: 🏞️Large Images
+          - paragraph [ref=e39]: 🏠Up to 2 Rooms
+        - button "Play Free" [ref=e41] [cursor=pointer]
+      - generic [ref=e43]:
+        - generic [ref=e44]:
+          - paragraph [ref=e45]: Fledgling
+          - img "Fledgling logo" [ref=e47]
+          - heading "$3.99 $3.33/ month Billed yearly" [level=4] [ref=e48]:
+            - generic: $3.99
+            - text: $3.33
+            - generic [ref=e50]: / month
+            - generic [ref=e51]: Billed yearly
+          - text: Perfect for DMs with a regular game and group of players.
+        - separator [ref=e52]
+        - generic [ref=e53]:
+          - paragraph [ref=e54]: 💾5GB of storage
+          - paragraph [ref=e55]: 🏞️Large Images
+          - paragraph [ref=e56]: 🏠Up to 10 Rooms
+          - paragraph [ref=e57]: 🏡Personalised Rooms
+        - button "Get Started" [ref=e59] [cursor=pointer]
+      - generic [ref=e61]:
+        - generic [ref=e62]:
+          - paragraph [ref=e63]: Bestling
+          - img "Bestling logo" [ref=e65]
+          - heading "$7.99 $6.66/ month Billed yearly" [level=4] [ref=e66]:
+            - generic: $7.99
+            - text: $6.66
+            - generic [ref=e68]: / month
+            - generic [ref=e69]: Billed yearly
+          - text: Perfect for DMs running multiple games at a time.
+        - separator [ref=e70]
+        - generic [ref=e71]:
+          - paragraph [ref=e72]: 💾10GB of storage
+          - paragraph [ref=e73]: 🏞️Gargantuan Images
+          - paragraph [ref=e74]: 🏠Up to 25 Rooms
+          - paragraph [ref=e75]: 🏡Personalised Rooms
+          - paragraph [ref=e76]: ☁️Forecast (beta)
+        - button "Get Started" [ref=e78] [cursor=pointer]
+    - heading "Compare plans & features" [level=4] [ref=e80]
+    - table "features table" [ref=e82]:
+      - rowgroup [ref=e83]:
+        - row [ref=e84]:
+          - columnheader "Usage" [ref=e85]
+          - columnheader "Nestling" [ref=e86]
+          - columnheader "Fledgling" [ref=e87]
+          - columnheader "Bestling" [ref=e88]
+      - rowgroup [ref=e89]:
+        - row [ref=e90]:
+          - rowheader [ref=e91]
+          - cell "200MB" [ref=e95]
+          - cell "5GB" [ref=e96]
+          - cell "10GB" [ref=e97]
+        - row [ref=e98]:
+          - rowheader [ref=e99]
+          - cell "2" [ref=e103]
+          - cell "10" [ref=e104]
+          - cell "25" [ref=e105]
+        - row [ref=e106]:
+          - rowheader [ref=e107]
+          - cell [ref=e111]
+          - cell [ref=e112]
+          - cell [ref=e115]
+        - row [ref=e118]:
+          - rowheader [ref=e119]
+          - cell [ref=e123]
+          - cell [ref=e124]
+          - cell [ref=e125]
+        - row [ref=e128]:
+          - rowheader "Image size limit" [ref=e129]
+          - cell "25MB" [ref=e130]
+          - cell "25MB" [ref=e131]
+          - cell "50MB" [ref=e132]
+        - row [ref=e133]:
+          - rowheader [ref=e134]
+          - cell "67MP" [ref=e138]
+          - cell "67MP" [ref=e139]
+          - cell "144MP" [ref=e140]
+        - row [ref=e141]:
+          - rowheader "Video size limit" [ref=e142]
+          - cell "50MB" [ref=e143]
+          - cell "100MB" [ref=e144]
+          - cell "100MB" [ref=e145]
+        - row [ref=e146]:
+          - rowheader "Export/import" [ref=e147]
+          - cell [ref=e148]
+          - cell [ref=e151]
+          - cell [ref=e154]
+        - row [ref=e157]:
+          - rowheader "Extensions" [ref=e158]
+          - cell [ref=e159]
+          - cell [ref=e162]
+          - cell [ref=e165]
+        - row [ref=e168]:
+          - rowheader "Access to all tools" [ref=e169]
+          - cell [ref=e170]
+          - cell [ref=e173]
+          - cell [ref=e176]
+        - row [ref=e179]:
+          - rowheader "SDK access" [ref=e180]
+          - cell [ref=e181]
+          - cell [ref=e184]
+          - cell [ref=e187]
+        - row [ref=e190]:
+          - rowheader "Ad free" [ref=e191]
+          - cell [ref=e192]
+          - cell [ref=e195]
+          - cell [ref=e198]
+        - row [ref=e201]:
+          - rowheader "Dynamic Lighting" [ref=e202]
+          - cell [ref=e203]
+          - cell [ref=e206]
+          - cell [ref=e209]
+    - heading "Questions & answers" [level=4] [ref=e212]
+    - generic [ref=e213]:
+      - button [ref=e215] [cursor=pointer]:
+        - paragraph [ref=e217]: What happens when I go over my storage limit for my plan?
+      - button [ref=e222] [cursor=pointer]:
+        - paragraph [ref=e224]: What happens when I change plans?
+      - button [ref=e229] [cursor=pointer]:
+        - paragraph [ref=e231]: How do I cancel my paid plan?
+      - button [ref=e236] [cursor=pointer]:
+        - paragraph [ref=e238]: What happens if my payment fails?
+      - button [ref=e243] [cursor=pointer]:
+        - paragraph [ref=e245]: Can I change my payment method?
+  - contentinfo [ref=e249]:
+    - generic [ref=e250]:
+      - separator [ref=e251]
+      - generic [ref=e252]:
+        - link [ref=e253] [cursor=pointer]:
+          - /url: /
+          - img "monotone logo" [ref=e255]
+        - generic [ref=e256]:
+          - link "Home" [ref=e257] [cursor=pointer]:
+            - /url: /
+          - link "Docs" [ref=e258] [cursor=pointer]:
+            - /url: https://docs.owlbear.rodeo
+          - link "Blog" [ref=e259] [cursor=pointer]:
+            - /url: https://blog.owlbear.rodeo
+          - link "Extensions" [ref=e260] [cursor=pointer]:
+            - /url: https://extensions.owlbear.rodeo
+          - link "Pricing" [ref=e261] [cursor=pointer]:
+            - /url: /pricing
+          - link "About" [ref=e262] [cursor=pointer]:
+            - /url: /about
+        - generic [ref=e263]:
+          - link "Terms" [ref=e264] [cursor=pointer]:
+            - /url: /terms
+          - link "Privacy" [ref=e265] [cursor=pointer]:
+            - /url: /privacy
+        - button "toggle color mode" [ref=e266] [cursor=pointer]

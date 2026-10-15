@@ -1,0 +1,184 @@
+- generic [active] [ref=f4e1]:
+  - link "Skip to main content" [ref=f4e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f4e3]:
+    - generic:
+      - banner:
+        - generic [ref=f4e6]:
+          - generic [ref=f4e7]:
+            - link "Home" [ref=f4e10] [cursor=pointer]:
+              - /url: /hc/en-us
+            - paragraph [ref=f4e12]:
+              - link "Help Center" [ref=f4e13] [cursor=pointer]:
+                - /url: /hc/en-us
+            - text: 
+            - generic [ref=f4e14] [cursor=pointer]
+          - navigation [ref=f4e20]:
+            - link "Return to Roll20" [ref=f4e21] [cursor=pointer]:
+              - /url: https://roll20.net/
+              - text:  Return to Roll20
+            - link "Send a request" [ref=f4e22] [cursor=pointer]:
+              - /url: /hc/en-us/requests/new
+              - text:  Send a request
+            - button "English (United States) " [ref=f4e24] [cursor=pointer]
+    - main [ref=f4e26]:
+      - generic [ref=f4e28]:
+        - generic [ref=f4e29]:
+          - list [ref=f4e31]:
+            - listitem "Roll20 Help Center" [ref=f4e32]:
+              - link "Roll20 Help Center" [ref=f4e33] [cursor=pointer]:
+                - /url: /hc/en-us
+            - listitem "Support" [ref=f4e34]:
+              - text: ›
+              - link "Support" [ref=f4e35] [cursor=pointer]:
+                - /url: /hc/en-us/categories/360003756633-Support
+            - listitem "General" [ref=f4e36]:
+              - text: ›
+              - link "General" [ref=f4e37] [cursor=pointer]:
+                - /url: /hc/en-us/sections/360008319694-General
+          - search [ref=f4e39]:
+            - searchbox "general_-_help_center-hero_unit_search" [ref=f4e40]
+        - generic [ref=f4e41]:
+          - generic [ref=f4e42]:
+            - navigation
+          - generic [ref=f4e43]:
+            - article [ref=f4e44]:
+              - generic [ref=f4e45]:
+                - heading "Feature Breakdown" [level=1] [ref=f4e46]
+                - time [ref=f4e52]: November 18, 2025 at 12:32 AM
+                - generic [ref=f4e57]:
+                  - paragraph [ref=f4e58]: We rely on support from our community to operate Roll20. Your support keeps us going and helps us improve Roll20 and develop new features.
+                  - paragraph [ref=f4e59]:
+                    - text: If you enjoy using Roll20 and want to help us continue to grow, please consider supporting us with a
+                    - link "subscription" [ref=f4e60] [cursor=pointer]:
+                      - /url: https://app.roll20.net/why-subscribe-to-roll20
+                    - text: .
+                  - paragraph [ref=f4e61]: Below you will find a list of the different features and perks that are available at different subscription levels on Roll20.
+                  - heading "Free" [level=1] [ref=f4e62]
+                  - paragraph [ref=f4e63]:
+                    - strong [ref=f4e64]: "Price: Free!"
+                  - paragraph [ref=f4e65]: "All users regardless of subscription recieve the following benefits while using Roll20:"
+                  - list [ref=f4e66]:
+                    - listitem [ref=f4e67]: Dedicated Online Hosting with unlimited players and games!
+                    - listitem [ref=f4e68]: Access to over 1,200+ Game Systems
+                    - listitem [ref=f4e69]:
+                      - text: Owned Content Sharing
+                      - list [ref=f4e70]:
+                        - listitem [ref=f4e71]: Free users can share within 1 game at a time and up to 5 players within that game.
+                    - listitem [ref=f4e72]:
+                      - link "100 MB Upload Storage" [ref=f4e73] [cursor=pointer]:
+                        - /url: https://help.roll20.net/hc/articles/360037256634
+                      - list [ref=f4e74]:
+                        - listitem [ref=f4e75]: Maximum upload size of 20 MB
+                    - listitem [ref=f4e76]:
+                      - link "2 active Looking For Group listings" [ref=f4e77] [cursor=pointer]:
+                        - /url: https://help.roll20.net/hc/articles/360037774473
+                    - listitem [ref=f4e78]:
+                      - link "Limited Character Transfers (3 per Game)" [ref=f4e79] [cursor=pointer]:
+                        - /url: https://help.roll20.net/hc/articles/360037258594
+                  - heading "Plus" [level=1] [ref=f4e80]
+                  - paragraph [ref=f4e81]:
+                    - strong [ref=f4e82]: "Price: $5.99/mo or $59.99/yr"
+                  - paragraph [ref=f4e83]: "Plus subscribers continue to benefit from the above features along with a few additions:"
+                  - list [ref=f4e84]:
+                    - listitem [ref=f4e85]:
+                      - text: Owned content sharing is increased
+                      - list [ref=f4e86]:
+                        - listitem [ref=f4e87]: Plus subscribers can share within 3 games at a time and up to 10 players within each of those games.
+                    - listitem [ref=f4e88]:
+                      - link "4 GB Upload Storage" [ref=f4e89] [cursor=pointer]:
+                        - /url: https://help.roll20.net/hc/articles/360037256634
+                      - list [ref=f4e90]:
+                        - listitem [ref=f4e91]: Maximum upload size of 50 MB (Except Audio which remains 20 MB)
+                    - listitem [ref=f4e92]:
+                      - link "Unlimited Looking For Group listings" [ref=f4e93] [cursor=pointer]:
+                        - /url: https://help.roll20.net/hc/articles/360037774473
+                    - listitem [ref=f4e94]:
+                      - link "Dynamic Lighting" [ref=f4e95] [cursor=pointer]:
+                        - /url: https://help.roll20.net/hc/articles/4403801475479-What-Is-Dynamic-Lighting
+                    - listitem [ref=f4e96]:
+                      - text: Shared Table Features
+                      - list [ref=f4e97]:
+                        - listitem [ref=f4e98]: Games created by subscribers will confer many features to players and Co-GMs within that game!
+                    - listitem [ref=f4e99]: External Journal Access
+                    - listitem [ref=f4e100]:
+                      - link "Unlimited Character Transfers" [ref=f4e101] [cursor=pointer]:
+                        - /url: https://help.roll20.net/hc/articles/360037258594
+                    - listitem [ref=f4e102]: No Loadscreen Ads
+                    - listitem [ref=f4e103]: Demiplane Unlimited
+                    - listitem [ref=f4e104]: A "Plus" profile badge added to your account and forum posts.
+                  - heading "Pro" [level=1] [ref=f4e105]
+                  - paragraph [ref=f4e106]:
+                    - strong [ref=f4e107]: "Price: $10.99/mo or $109.99/yr"
+                  - paragraph [ref=f4e108]: "Pro subscribers still retain the same benefits but has even more features unlocked:"
+                  - list [ref=f4e109]:
+                    - listitem [ref=f4e110]:
+                      - text: Owned content sharing is further increased
+                      - list [ref=f4e111]:
+                        - listitem [ref=f4e112]: Pro subscribers can share within 5 games at a time and up to 15 players within each of those games.
+                    - listitem [ref=f4e113]:
+                      - link "10 GB Upload Storage" [ref=f4e114] [cursor=pointer]:
+                        - /url: https://help.roll20.net/hc/articles/360037256634
+                      - list [ref=f4e115]:
+                        - listitem [ref=f4e116]: Maximum upload size of 100 MB (Except Audio which remains 20 MB)
+                    - listitem [ref=f4e117]:
+                      - link "Highlighted Looking For Group listings" [ref=f4e118] [cursor=pointer]:
+                        - /url: https://help.roll20.net/hc/articles/360037774473
+                    - listitem [ref=f4e119]:
+                      - link "Custom Game Backgrounds" [ref=f4e120] [cursor=pointer]:
+                        - /url: https://help.roll20.net/hc/articles/29620477106711-Game-Settings#h_01H989F6YDSTZKC6T4SS74VTAS
+                    - listitem [ref=f4e121]:
+                      - link "Roll20 Reserve Rewards" [ref=f4e122] [cursor=pointer]:
+                        - /url: https://help.roll20.net/hc/articles/360055314134
+                    - listitem [ref=f4e123]:
+                      - link "Free Pro Token Sets" [ref=f4e124] [cursor=pointer]:
+                        - /url: https://marketplace.roll20.net/browse/search/?keywords=subscriberset
+                    - listitem [ref=f4e125]:
+                      - link "Mod (API) Access" [ref=f4e126] [cursor=pointer]:
+                        - /url: https://help.roll20.net/hc/articles/360037256714
+                    - listitem [ref=f4e127]:
+                      - link "Transfer Assets Between Games (Transmogrifier)" [ref=f4e128] [cursor=pointer]:
+                        - /url: https://help.roll20.net/hc/articles/360037774433
+                    - listitem [ref=f4e129]:
+                      - link "Custom Character Sheets" [ref=f4e130] [cursor=pointer]:
+                        - /url: https://help.roll20.net/hc/articles/360037773393
+                    - listitem [ref=f4e131]:
+                      - link "Early Access" [ref=f4e132] [cursor=pointer]:
+                        - /url: https://help.roll20.net/hc/articles/360037256514
+                    - listitem [ref=f4e133]: A "Pro" profile badge added to your account and forum posts.
+                  - heading "Elite" [level=1] [ref=f4e134]
+                  - paragraph [ref=f4e135]:
+                    - strong [ref=f4e136]: "Price: $14.99/mo or $149.99/yr"
+                  - paragraph [ref=f4e137]: "Elite subscribers retain all of the previously mentioned benefits as well as some further increases and unlocks:"
+                  - list [ref=f4e138]:
+                    - listitem [ref=f4e139]:
+                      - text: Owned content sharing is further increased
+                      - list [ref=f4e140]:
+                        - listitem [ref=f4e141]: Elite subscribers can share within 20 games at a time and up to 15 players within each of those games.
+                    - listitem [ref=f4e142]:
+                      - link "50 GB Upload Storage" [ref=f4e143] [cursor=pointer]:
+                        - /url: https://help.roll20.net/hc/articles/360037256634
+                      - list [ref=f4e144]:
+                        - listitem [ref=f4e145]: Maximum upload size of 100 MB (Except Audio which remains 20 MB)
+                    - listitem [ref=f4e146]:
+                      - link "Distinguished Looking For Group listings" [ref=f4e147] [cursor=pointer]:
+                        - /url: https://help.roll20.net/hc/articles/360037774473
+                    - listitem [ref=f4e148]: Dungeon Scrawl Pro access
+                    - listitem [ref=f4e149]: An "Elite" profile badge added to your account and forum posts.
+                  - paragraph [ref=f4e150]
+            - generic [ref=f4e152]:
+              - text: Was this article helpful?
+              - generic [ref=f4e153]:
+                - button "This article was helpful" [ref=f4e154] [cursor=pointer]: Yes
+                - button "This article was not helpful" [ref=f4e155] [cursor=pointer]: No
+              - generic [ref=f4e156]: 316 out of 365 found this helpful
+    - contentinfo [ref=f4e159]:
+      - separator [ref=f4e166]
+  - generic:
+    - generic:
+      - generic [ref=f4e170]:
+        - iframe [ref=f4e171]:
+          - button "Close message from company" [ref=f7e3] [cursor=pointer]
+        - iframe
+      - iframe [ref=f4e172]:
+        - button "Open messaging window" [ref=f9e4] [cursor=pointer]

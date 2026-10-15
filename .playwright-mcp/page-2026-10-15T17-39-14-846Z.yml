@@ -1,0 +1,1093 @@
+- generic [active] [ref=f156e1]:
+  - link "Skip to main content" [ref=f156e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f156e6]:
+    - generic:
+      - generic: "First online session with my group was a success and I felt like a pro with obr :) : r/OwlbearRodeo"
+      - banner [ref=f156e10]:
+        - navigation [ref=f156e11]:
+          - link "Home" [ref=f156e15] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - search [ref=f156e34]:
+            - generic [ref=f156e36]:
+              - generic "Remove r/OwlbearRodeo filter and expand search to all of Reddit" [ref=f156e42] [cursor=pointer]:
+                - button [pressed] [ref=f156e43]:
+                  - generic [aria-hidden] [ref=f156e47]: r/OwlbearRodeo
+              - textbox "Remove r/OwlbearRodeo filter and expand search to all of Reddit" [ref=f156e53]:
+                - /placeholder: Search in ⁨r/OwlbearRodeo⁩
+          - generic [ref=f156e54]:
+            - link "Sign Up" [ref=f156e60] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Log In" [ref=f156e66] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Expand user menu" [ref=f156e73] [cursor=pointer]
+      - generic [ref=f156e79]:
+        - generic [ref=f156e80]:
+          - generic [ref=f156e81]:
+            - generic:
+              - generic:
+                - link "Skip to Sign up" [ref=f156e82] [cursor=pointer]:
+                  - /url: "#left-sidebar-container"
+                - link "Skip to Right Sidebar" [ref=f156e83] [cursor=pointer]:
+                  - /url: "#right-sidebar-container"
+          - generic [ref=f156e84]:
+            - main [ref=f156e85]:
+              - 'generic "First online session with my group was a success and I felt like a pro with obr :) : r/OwlbearRodeo"'
+              - generic [ref=f156e86]:
+                - generic [ref=f156e87]:
+                  - generic [ref=f156e88]:
+                    - button "Back" [ref=f156e90] [cursor=pointer]
+                    - link "Go to OwlbearRodeo" [ref=f156e98] [cursor=pointer]:
+                      - /url: https://www.reddit.com/r/OwlbearRodeo/
+                    - group [ref=f156e103]:
+                      - generic [ref=f156e104]:
+                        - link "r/OwlbearRodeo" [ref=f156e108] [cursor=pointer]:
+                          - /url: https://www.reddit.com/r/OwlbearRodeo/
+                        - generic [aria-hidden] [ref=f156e109]: •
+                        - time [ref=f156e111]: 3mo ago
+                      - 'link "Author: Snuffvieh" [ref=f156e117] [cursor=pointer]':
+                        - /url: https://www.reddit.com/user/Snuffvieh/
+                        - generic [ref=f156e118]: u/Snuffvieh
+                  - button "Open user actions" [ref=f156e123] [cursor=pointer]
+                - generic [ref=f156e129]:
+                  - 'heading "Post Title: First online session with my group was a success and I felt like a pro with obr :)" [level=1] [ref=f156e130]': First online session with my group was a success and I felt like a pro with obr :)
+                  - 'link "Flair: Solved ✔ (OBR 2)" [ref=f156e133] [cursor=pointer]':
+                    - /url: /r/OwlbearRodeo/?f=flair_name%3A%22Solved%20%E2%9C%94%20(OBR%202)%22
+                    - 'generic "Flair: Solved ✔ (OBR 2)" [ref=f156e135]': Solved ✔ (OBR 2)
+                - img "r/OwlbearRodeo - First online session with my group was a success and I felt like a pro with obr :)" [ref=f156e141] [cursor=pointer]
+                - generic "Actions available for this post" [ref=f156e143]:
+                  - generic [ref=f156e146]:
+                    - button "Upvote" [ref=f156e147] [cursor=pointer]
+                    - generic [ref=f156e152]: "208"
+                    - button "Downvote" [ref=f156e154] [cursor=pointer]
+                  - button "12 Go to comments" [ref=f156e159] [cursor=pointer]:
+                    - generic [ref=f156e160]: "12"
+                    - generic [ref=f156e166]: Go to comments
+                  - button "Share" [ref=f156e170] [cursor=pointer]
+              - generic "[FOR SALE] free leads. Need local commercial leads ?" [ref=f156e177]:
+                - generic [ref=f156e178]:
+                  - 'link "Advertisement: [FOR SALE] free leads. Need local commercial leads ?" [ref=f156e179] [cursor=pointer]':
+                    - /url: /r/LeadGenMarketplace/comments/1x66d4e/for_sale_free_leads_need_local_commercial_leads/?pid=t3_1x67y24&impressionid=5705094916888110661
+                  - generic [ref=f156e180]:
+                    - generic [ref=f156e181]:
+                      - link [ref=f156e184] [cursor=pointer]:
+                        - /url: /user/MDFer123/
+                        - img "u/MDFer123 avatar" [ref=f156e187]
+                      - generic [ref=f156e188]:
+                        - generic [ref=f156e189]:
+                          - link "u/MDFer123" [ref=f156e192] [cursor=pointer]:
+                            - /url: /user/MDFer123/
+                          - generic [ref=f156e194]: •
+                          - link "Ad" [ref=f156e196] [cursor=pointer]:
+                            - /url: /user/MDFer123/
+                        - generic [ref=f156e198]:
+                          - generic [ref=f156e199]: Posted in
+                          - link "r/LeadGenMarketplace" [ref=f156e200] [cursor=pointer]:
+                            - /url: /r/LeadGenMarketplace/
+                      - link [ref=f156e202] [cursor=pointer]:
+                        - /url: /r/LeadGenMarketplace/comments/1x66d4e/for_sale_free_leads_need_local_commercial_leads/?pid=t3_1x67y24&impressionid=5705094916888110661
+                    - button "Open user actions" [ref=f156e208] [cursor=pointer]
+                  - generic [ref=f156e214]:
+                    - generic [ref=f156e215]:
+                      - link "[FOR SALE] free leads. Need local commercial leads ?" [ref=f156e217] [cursor=pointer]:
+                        - /url: /r/LeadGenMarketplace/comments/1x66d4e/for_sale_free_leads_need_local_commercial_leads/?pid=t3_1x67y24&impressionid=5705094916888110661
+                      - generic [ref=f156e218]:
+                        - link [ref=f156e219] [cursor=pointer]:
+                          - /url: /r/LeadGenMarketplace/comments/1x66d4e/for_sale_free_leads_need_local_commercial_leads/?pid=t3_1x67y24&impressionid=5705094916888110661
+                        - generic [ref=f156e220]:
+                          - link "View Post" [ref=f156e221] [cursor=pointer]:
+                            - /url: /r/LeadGenMarketplace/comments/1x66d4e/for_sale_free_leads_need_local_commercial_leads/?pid=t3_1x67y24&impressionid=5705094916888110661
+                          - generic [ref=f156e225]:
+                            - generic [ref=f156e226]: "1"
+                            - text: upvote •
+                            - generic [ref=f156e227]: "0"
+                            - text: comments
+                    - link [ref=f156e230] [cursor=pointer]:
+                      - /url: /r/LeadGenMarketplace/comments/1x66d4e/for_sale_free_leads_need_local_commercial_leads/?pid=t3_1x67y24&impressionid=5705094916888110661
+                      - 'img "Thumbnail image: [FOR SALE] free leads. Need local commercial leads ?" [ref=f156e231]'
+              - generic [ref=f156e233]:
+                - generic:
+                  - generic [ref=f156e234]:
+                    - button "Button to add a comment" [disabled]:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - textbox [disabled]:
+                                  - /placeholder: Join the conversation
+                  - generic [ref=f156e239]:
+                    - generic [ref=f156e241]:
+                      - generic [aria-hidden] [ref=f156e242]: "Sort by:"
+                      - button "Sort by Best" [ref=f156e247] [cursor=pointer]:
+                        - generic [ref=f156e248]: Best
+                    - button "Search Comments Expand comment search" [ref=f156e256] [cursor=pointer]:
+                      - generic [ref=f156e257]: Search Comments
+                      - generic [ref=f156e264]: Expand comment search
+              - region "Comments" [ref=f156e267]:
+                - heading "Comments Section" [level=1] [ref=f156e268]
+                - article "Comment from TrueMonado 3 months ago" [ref=f156e270]:
+                  - generic [ref=f156e271] [cursor=pointer]:
+                    - link "TrueMonado's profile --- avatar" [ref=f156e277]:
+                      - /url: https://www.reddit.com/user/TrueMonado/
+                    - generic [ref=f156e287]:
+                      - link "TrueMonado's profile" [ref=f156e291]:
+                        - /url: https://www.reddit.com/user/TrueMonado/
+                        - generic [ref=f156e292]: TrueMonado
+                      - generic [aria-hidden] [ref=f156e294]: •
+                      - link [ref=f156e296]:
+                        - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1uxilcy/comment/oxs65mf/
+                        - time [ref=f156e298]: 3mo ago
+                  - generic [ref=f156e300]:
+                    - paragraph [ref=f156e304]: Totally respect the setup. The addition of random papers just makes it all complete.
+                    - generic [ref=f156e310]:
+                      - generic [ref=f156e312]:
+                        - button "Upvote" [ref=f156e313] [cursor=pointer]
+                        - generic [ref=f156e318]: "6"
+                        - button "Downvote" [ref=f156e320] [cursor=pointer]
+                      - button "Reply" [ref=f156e326] [cursor=pointer]
+                      - button "Give award" [ref=f156e333] [cursor=pointer]:
+                        - generic [aria-hidden] [ref=f156e341]: Award
+                      - button "Share" [ref=f156e344] [cursor=pointer]
+                      - button "Open user actions" [ref=f156e353] [cursor=pointer]
+                    - generic [ref=f156e358]:
+                      - 'article "Comment thread level 1: Reply from Snuffvieh 3 months ago" [ref=f156e360]':
+                        - generic [ref=f156e361] [cursor=pointer]:
+                          - link "Snuffvieh's profile --- avatar" [ref=f156e367]:
+                            - /url: https://www.reddit.com/user/Snuffvieh/
+                          - generic [ref=f156e383]:
+                            - link "Snuffvieh's profile" [ref=f156e387]:
+                              - /url: https://www.reddit.com/user/Snuffvieh/
+                              - generic [ref=f156e388]: Snuffvieh
+                            - generic "Comment distinguished as the original poster" [ref=f156e392]: OP
+                            - generic [aria-hidden] [ref=f156e393]: •
+                            - link [ref=f156e395]:
+                              - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1uxilcy/comment/oxtvwal/
+                              - time [ref=f156e397]: 3mo ago
+                        - generic [ref=f156e399]:
+                          - paragraph [ref=f156e403]: Thanks! Wouldn’t be the same without for sure :)
+                          - generic [ref=f156e409]:
+                            - generic [ref=f156e411]:
+                              - button "Upvote" [ref=f156e412] [cursor=pointer]
+                              - generic [ref=f156e417]: "2"
+                              - button "Downvote" [ref=f156e419] [cursor=pointer]
+                            - button "Reply" [ref=f156e425] [cursor=pointer]
+                            - button "Give award" [ref=f156e432] [cursor=pointer]:
+                              - generic [aria-hidden] [ref=f156e440]: Award
+                            - button "Share" [ref=f156e443] [cursor=pointer]
+                            - button "Open user actions" [ref=f156e452] [cursor=pointer]
+                      - 'article "Comment thread level 1: Reply from Runsten 3 months ago" [ref=f156e458]':
+                        - generic [ref=f156e459] [cursor=pointer]:
+                          - link "Runsten's profile --- avatar" [ref=f156e465]:
+                            - /url: https://www.reddit.com/user/Runsten/
+                          - generic [ref=f156e475]:
+                            - link "Runsten's profile" [ref=f156e479]:
+                              - /url: https://www.reddit.com/user/Runsten/
+                              - generic [ref=f156e480]: Runsten
+                            - generic [aria-hidden] [ref=f156e482]: •
+                            - link [ref=f156e484]:
+                              - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1uxilcy/comment/oxsgmxr/
+                              - time [ref=f156e486]: 3mo ago
+                        - paragraph [ref=f156e492]: Yep. I also love scribbling notes on paper during a session since it's faster for me to get it down and easier to glance at the text while focusing on talking with my players. Mixed setup is great. :D
+                - article "Comment from Several_Record7234 3 months ago" [ref=f156e496]:
+                  - generic [ref=f156e497] [cursor=pointer]:
+                    - link "Several_Record7234's profile --- avatar" [ref=f156e503]:
+                      - /url: https://www.reddit.com/user/Several_Record7234/
+                    - generic [ref=f156e512]:
+                      - generic [ref=f156e513]:
+                        - link "Several_Record7234's profile" [ref=f156e517]:
+                          - /url: https://www.reddit.com/user/Several_Record7234/
+                          - generic [ref=f156e518]: Several_Record7234
+                        - generic [aria-hidden] [ref=f156e520]: •
+                        - link [ref=f156e522]:
+                          - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1uxilcy/comment/oxri25n/
+                          - time [ref=f156e524]: 3mo ago
+                      - generic [ref=f156e527]:
+                        - img "Profile Badge for the Achievement Top 1% Commenter" [ref=f156e528]
+                        - text: Top 1% Commenter
+                  - generic [ref=f156e530]:
+                    - paragraph [ref=f156e534]: Awesome! The first of many such sessions I hope ☺️
+                    - 'article "Comment thread level 1: Reply from Snuffvieh 3 months ago" [ref=f156e539]':
+                      - generic [ref=f156e540] [cursor=pointer]:
+                        - link "Snuffvieh's profile --- avatar" [ref=f156e546]:
+                          - /url: https://www.reddit.com/user/Snuffvieh/
+                        - generic [ref=f156e562]:
+                          - link "Snuffvieh's profile" [ref=f156e566]:
+                            - /url: https://www.reddit.com/user/Snuffvieh/
+                            - generic [ref=f156e567]: Snuffvieh
+                          - generic "Comment distinguished as the original poster" [ref=f156e571]: OP
+                          - generic [aria-hidden] [ref=f156e572]: •
+                          - link [ref=f156e574]:
+                            - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1uxilcy/comment/oxrkkqc/
+                            - time [ref=f156e576]: 3mo ago
+                      - paragraph [ref=f156e582]: For sure! It was our fourth or fifth session with me as the DM and online will make it possible to play even more frequent :)
+                - article "Comment from IrnMon 3 months ago" [ref=f156e586]:
+                  - generic [ref=f156e587] [cursor=pointer]:
+                    - link "IrnMon's profile --- avatar" [ref=f156e593]:
+                      - /url: https://www.reddit.com/user/IrnMon/
+                      - img "u/IrnMon avatar" [ref=f156e596]
+                    - generic [ref=f156e600]:
+                      - link "IrnMon's profile" [ref=f156e604]:
+                        - /url: https://www.reddit.com/user/IrnMon/
+                        - generic [ref=f156e605]: IrnMon
+                      - generic [aria-hidden] [ref=f156e607]: •
+                      - link [ref=f156e609]:
+                        - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1uxilcy/comment/oxs1zpo/
+                        - time [ref=f156e611]: 3mo ago
+                  - generic [ref=f156e613]:
+                    - paragraph [ref=f156e617]: Congratulations! OBR makes it so much easier once you get the hang of it. Have fun on your adventures!
+                    - 'article "Comment thread level 1: Reply from Snuffvieh 3 months ago" [ref=f156e622]':
+                      - generic [ref=f156e623] [cursor=pointer]:
+                        - link "Snuffvieh's profile --- avatar" [ref=f156e629]:
+                          - /url: https://www.reddit.com/user/Snuffvieh/
+                        - generic [ref=f156e645]:
+                          - link "Snuffvieh's profile" [ref=f156e649]:
+                            - /url: https://www.reddit.com/user/Snuffvieh/
+                            - generic [ref=f156e650]: Snuffvieh
+                          - generic "Comment distinguished as the original poster" [ref=f156e654]: OP
+                          - generic [aria-hidden] [ref=f156e655]: •
+                          - link [ref=f156e657]:
+                            - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1uxilcy/comment/oxtvyc6/
+                            - time [ref=f156e659]: 3mo ago
+                      - paragraph [ref=f156e665]: Thank you! I was honestly impressed with how easy it was to learn
+                - article "Comment from leoapplesauce_ 3 months ago" [ref=f156e669]:
+                  - generic [ref=f156e670] [cursor=pointer]:
+                    - link "leoapplesauce_'s profile --- avatar" [ref=f156e676]:
+                      - /url: https://www.reddit.com/user/leoapplesauce_/
+                    - generic [ref=f156e686]:
+                      - link "leoapplesauce_'s profile" [ref=f156e690]:
+                        - /url: https://www.reddit.com/user/leoapplesauce_/
+                        - generic [ref=f156e691]: leoapplesauce_
+                      - generic [aria-hidden] [ref=f156e693]: •
+                      - link [ref=f156e695]:
+                        - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1uxilcy/comment/oxtv2hm/
+                        - time [ref=f156e697]: 3mo ago
+                  - generic [ref=f156e699]:
+                    - paragraph [ref=f156e703]: I love your desk
+                    - 'article "Comment thread level 1: Reply from Snuffvieh 3 months ago" [ref=f156e708]':
+                      - generic [ref=f156e709] [cursor=pointer]:
+                        - link "Snuffvieh's profile --- avatar" [ref=f156e715]:
+                          - /url: https://www.reddit.com/user/Snuffvieh/
+                        - generic [ref=f156e731]:
+                          - link "Snuffvieh's profile" [ref=f156e735]:
+                            - /url: https://www.reddit.com/user/Snuffvieh/
+                            - generic [ref=f156e736]: Snuffvieh
+                          - generic "Comment distinguished as the original poster" [ref=f156e740]: OP
+                          - generic [aria-hidden] [ref=f156e741]: •
+                          - link [ref=f156e743]:
+                            - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1uxilcy/comment/oxtvumj/
+                            - time [ref=f156e745]: 3mo ago
+                      - paragraph [ref=f156e751]: Thanks! It’s a great spot for a crafty person :)
+                - generic "The World’s First Longevity Band, Made to Help You Feel and Live Better Every Day—No Tricks" [ref=f156e755]:
+                  - generic [ref=f156e756]:
+                    - 'link "Advertisement: The World’s First Longevity Band, Made to Help You Feel and Live Better Every Day—No Tricks" [ref=f156e757] [cursor=pointer]':
+                      - /url: https://alb.reddit.com/cr?za=uzFTLa1zOl8srRnDJMKpcKAFFgKLaOkhUjsw0uAyfDhicmbySYLaZ1-FEuqT6aTeIiGSkGEYZCdWJkJALg2Ky0ubHgALSbya92_QW8aShej8Sw_CD93Vfb5VGqmbnKNU5Ii5GV3EeMDX-rE9cF6jnMgsDJcly3uKBqfuW3ffxUZIm4avoC2FHfpmHETZmWGXYPwN4T-nuDvfpt4LARYzItXqlaNjVdOSNCBL1AjBeLRXNb16GuAdkwH9LtWy0v06WgUH_ApzgTiDeFf2f7fAkkmnqkTMI__YuzLm2CWbVcl3BaHzEeXCUcREAlQMAoQ8jvgFQr9wTOe10T68G2J5ULQzcsXLWLjljXTswb-CJNbs1TnxJ2ZlYitU6dD3hJCe22uLlg8RBqqc8zIqOAyRQyGnlYhDLEC6oofANyehGrXdpOa8BWWdfZnzmM39tYyguTVtCvoKBJi7L43AcTh-i4LgtJQQ4gis-8am_NyXUI-hXrYyDVuLGn9MpWKzudxYIXUEwxyPu27pmX4pn0jpr8oVOz8kDTSPl31fnV2x3noFhnX0QLpnBTV_ONg-Ux_WJu7q-8kxtG7kef9_5MQ_lAEq91tLN1JbBh0hMb390rm03nyQbgMwTnpi96QGedmgNSeTh6CKdQDwwjR2R17tR87qDQ95qoVffESMdoTqXJGeHjtUb8OfUmdr6lx81L8wjyiBQV7dOAh871m0KBG-QX7fREN6D0jmikCi-cYDqFsSFEeWVm9EF4XeEmc6FLtAJ2fA&zp=AtJtI__9ovST1MDaK5wQuG5gjvJdsNS98axnr2fV573KYqM--35XRAQBdpzV09xWDIXxohHiOS1zfqWe_CflYP7cooASfBpzHcr7QzvIPUZ0bPTKdoZ2HGggtzzr2a9UK8Ox36GO7XmH2FreUl09rCHOulnS-uMyvuyDw2xGrKsFjT7YzUBWrOjLzbrRh50YkcMrOXbgTcDDq9v-IVpRR522rZW8bOPI-l46VrsA_vwgz4FUOtdwjo8Il40A3nQP5tlysoqV6Dh-1qZohkrzeGT-VrofViBylvAqK6iRSDIihd5GHz0jQUraQ6K3J_BvZ9Pn_TDSjpfq_fXfs2ENuIu2CBvEphDX4YG8TpfcZJg6idsGiK8xGqZo8SVt-ZKbNlVW8AoUmWL9Qc-U
+                    - generic [ref=f156e758]:
+                      - generic [ref=f156e759]:
+                        - link "u/Hume_Health" [ref=f156e762] [cursor=pointer]:
+                          - /url: /user/Hume_Health/
+                          - img "u/Hume_Health avatar" [ref=f156e765]
+                        - generic [ref=f156e767]: •
+                        - link "Ad" [ref=f156e769] [cursor=pointer]:
+                          - /url: /user/Hume_Health/
+                        - link [ref=f156e771] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=uzFTLa1zOl8srRnDJMKpcKAFFgKLaOkhUjsw0uAyfDhicmbySYLaZ1-FEuqT6aTeIiGSkGEYZCdWJkJALg2Ky0ubHgALSbya92_QW8aShej8Sw_CD93Vfb5VGqmbnKNU5Ii5GV3EeMDX-rE9cF6jnMgsDJcly3uKBqfuW3ffxUZIm4avoC2FHfpmHETZmWGXYPwN4T-nuDvfpt4LARYzItXqlaNjVdOSNCBL1AjBeLRXNb16GuAdkwH9LtWy0v06WgUH_ApzgTiDeFf2f7fAkkmnqkTMI__YuzLm2CWbVcl3BaHzEeXCUcREAlQMAoQ8jvgFQr9wTOe10T68G2J5ULQzcsXLWLjljXTswb-CJNbs1TnxJ2ZlYitU6dD3hJCe22uLlg8RBqqc8zIqOAyRQyGnlYhDLEC6oofANyehGrXdpOa8BWWdfZnzmM39tYyguTVtCvoKBJi7L43AcTh-i4LgtJQQ4gis-8am_NyXUI-hXrYyDVuLGn9MpWKzudxYIXUEwxyPu27pmX4pn0jpr8oVOz8kDTSPl31fnV2x3noFhnX0QLpnBTV_ONg-Ux_WJu7q-8kxtG7kef9_5MQ_lAEq91tLN1JbBh0hMb390rm03nyQbgMwTnpi96QGedmgNSeTh6CKdQDwwjR2R17tR87qDQ95qoVffESMdoTqXJGeHjtUb8OfUmdr6lx81L8wjyiBQV7dOAh871m0KBG-QX7fREN6D0jmikCi-cYDqFsSFEeWVm9EF4XeEmc6FLtAJ2fA&zp=AtJtI__9ovST1MDaK5wQuG5gjvJdsNS98axnr2fV573KYqM--35XRAQBdpzV09xWDIXxohHiOS1zfqWe_CflYP7cooASfBpzHcr7QzvIPUZ0bPTKdoZ2HGggtzzr2a9UK8Ox36GO7XmH2FreUl09rCHOulnS-uMyvuyDw2xGrKsFjT7YzUBWrOjLzbrRh50YkcMrOXbgTcDDq9v-IVpRR522rZW8bOPI-l46VrsA_vwgz4FUOtdwjo8Il40A3nQP5tlysoqV6Dh-1qZohkrzeGT-VrofViBylvAqK6iRSDIihd5GHz0jQUraQ6K3J_BvZ9Pn_TDSjpfq_fXfs2ENuIu2CBvEphDX4YG8TpfcZJg6idsGiK8xGqZo8SVt-ZKbNlVW8AoUmWL9Qc-U
+                      - button "Open user actions" [ref=f156e777] [cursor=pointer]
+                    - generic [ref=f156e782]:
+                      - link "The World’s First Longevity Band, Made to Help You Feel and Live Better Every Day—No Tricks" [ref=f156e784] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=uzFTLa1zOl8srRnDJMKpcKAFFgKLaOkhUjsw0uAyfDhicmbySYLaZ1-FEuqT6aTeIiGSkGEYZCdWJkJALg2Ky0ubHgALSbya92_QW8aShej8Sw_CD93Vfb5VGqmbnKNU5Ii5GV3EeMDX-rE9cF6jnMgsDJcly3uKBqfuW3ffxUZIm4avoC2FHfpmHETZmWGXYPwN4T-nuDvfpt4LARYzItXqlaNjVdOSNCBL1AjBeLRXNb16GuAdkwH9LtWy0v06WgUH_ApzgTiDeFf2f7fAkkmnqkTMI__YuzLm2CWbVcl3BaHzEeXCUcREAlQMAoQ8jvgFQr9wTOe10T68G2J5ULQzcsXLWLjljXTswb-CJNbs1TnxJ2ZlYitU6dD3hJCe22uLlg8RBqqc8zIqOAyRQyGnlYhDLEC6oofANyehGrXdpOa8BWWdfZnzmM39tYyguTVtCvoKBJi7L43AcTh-i4LgtJQQ4gis-8am_NyXUI-hXrYyDVuLGn9MpWKzudxYIXUEwxyPu27pmX4pn0jpr8oVOz8kDTSPl31fnV2x3noFhnX0QLpnBTV_ONg-Ux_WJu7q-8kxtG7kef9_5MQ_lAEq91tLN1JbBh0hMb390rm03nyQbgMwTnpi96QGedmgNSeTh6CKdQDwwjR2R17tR87qDQ95qoVffESMdoTqXJGeHjtUb8OfUmdr6lx81L8wjyiBQV7dOAh871m0KBG-QX7fREN6D0jmikCi-cYDqFsSFEeWVm9EF4XeEmc6FLtAJ2fA&zp=AtJtI__9ovST1MDaK5wQuG5gjvJdsNS98axnr2fV573KYqM--35XRAQBdpzV09xWDIXxohHiOS1zfqWe_CflYP7cooASfBpzHcr7QzvIPUZ0bPTKdoZ2HGggtzzr2a9UK8Ox36GO7XmH2FreUl09rCHOulnS-uMyvuyDw2xGrKsFjT7YzUBWrOjLzbrRh50YkcMrOXbgTcDDq9v-IVpRR522rZW8bOPI-l46VrsA_vwgz4FUOtdwjo8Il40A3nQP5tlysoqV6Dh-1qZohkrzeGT-VrofViBylvAqK6iRSDIihd5GHz0jQUraQ6K3J_BvZ9Pn_TDSjpfq_fXfs2ENuIu2CBvEphDX4YG8TpfcZJg6idsGiK8xGqZo8SVt-ZKbNlVW8AoUmWL9Qc-U
+                      - list [ref=f156e788]:
+                        - generic:
+                          - listitem [ref=f156e789]:
+                            - generic [ref=f156e790]:
+                              - link [ref=f156e791] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=uzFTLa1zOl8srRnDJMKpcKAFFgKLaOkhUjsw0uAyfDhicmbySYLaZ1-FEuqT6aTeIiGSkGEYZCdWJkJALg2Ky0ubHgALSbya92_QW8aShej8Sw_CD93Vfb5VGqmbnKNU5Ii5GV3EeMDX-rE9cF6jnMgsDJcly3uKBqfuW3ffxUZIm4avoC2FHfpmHETZmWGXYPwN4T-nuDvfpt4LARYzItXqlaNjVdOSNCBL1AjBeLRXNb16GuAdkwH9LtWy0v06WgUH_ApzgTiDeFf2f7fAkkmnqkTMI__YuzLm2CWbVcl3BaHzEeXCUcREAlQMAoQ8jvgFQr9wTOe10T68G2J5ULQzcsXLWLjljXTswb-CJNbs1TnxJ2ZlYitU6dD3hJCe22uLlg8RBqqc8zIqOAyRQyGnlYhDLEC6oofANyehGrXdpOa8BWWdfZnzmM39tYyguTVtCvoKBJi7L43AcTh-i4LgtJQQ4gis-8am_NyXUI-hXrYyDVuLGn9MpWKzudxYIXUEwxyPu27pmX4pn0jpr8oVOz8kDTSPl31fnV2x3noFhnX0QLpnBTV_ONg-Ux_WJu7q-8kxtG7kef9_5MQ_lAEq91tLN1JbBh0hMb390rm03nyQbgMwTnpi96QGedmgNSeTh6CKdQDwwjR2R17tR87qDQ95qoVffESMdoTqXJGeHjtUb8OfUmdr6lx81L8wjyiBQV7dOAh871m0KBG-QX7fREN6D0jmikCi-cYDqFsSFEeWVm9EF4XeEmc6FLtAJ2fA&zp=AtJtI__9ovST1MDaK5wQuG5gjvJdsNS98axnr2fV573KYqM--35XRAQBdpzV09xWDIXxohHiOS1zfqWe_CflYP7cooASfBpzHcr7QzvIPUZ0bPTKdoZ2HGggtzzr2a9UK8Ox36GO7XmH2FreUl09rCHOulnS-uMyvuyDw2xGrKsFjT7YzUBWrOjLzbrRh50YkcMrOXbgTcDDq9v-IVpRR522rZW8bOPI-l46VrsA_vwgz4FUOtdwjo8Il40A3nQP5tlysoqV6Dh-1qZohkrzeGT-VrofViBylvAqK6iRSDIihd5GHz0jQUraQ6K3J_BvZ9Pn_TDSjpfq_fXfs2ENuIu2CBvEphDX4YG8TpfcZJg6idsGiK8xGqZo8SVt-ZKbNlVW8AoUmWL9Qc-U
+                              - link [ref=f156e794] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=uzFTLa1zOl8srRnDJMKpcKAFFgKLaOkhUjsw0uAyfDhicmbySYLaZ1-FEuqT6aTeIiGSkGEYZCdWJkJALg2Ky0ubHgALSbya92_QW8aShej8Sw_CD93Vfb5VGqmbnKNU5Ii5GV3EeMDX-rE9cF6jnMgsDJcly3uKBqfuW3ffxUZIm4avoC2FHfpmHETZmWGXYPwN4T-nuDvfpt4LARYzItXqlaNjVdOSNCBL1AjBeLRXNb16GuAdkwH9LtWy0v06WgUH_ApzgTiDeFf2f7fAkkmnqkTMI__YuzLm2CWbVcl3BaHzEeXCUcREAlQMAoQ8jvgFQr9wTOe10T68G2J5ULQzcsXLWLjljXTswb-CJNbs1TnxJ2ZlYitU6dD3hJCe22uLlg8RBqqc8zIqOAyRQyGnlYhDLEC6oofANyehGrXdpOa8BWWdfZnzmM39tYyguTVtCvoKBJi7L43AcTh-i4LgtJQQ4gis-8am_NyXUI-hXrYyDVuLGn9MpWKzudxYIXUEwxyPu27pmX4pn0jpr8oVOz8kDTSPl31fnV2x3noFhnX0QLpnBTV_ONg-Ux_WJu7q-8kxtG7kef9_5MQ_lAEq91tLN1JbBh0hMb390rm03nyQbgMwTnpi96QGedmgNSeTh6CKdQDwwjR2R17tR87qDQ95qoVffESMdoTqXJGeHjtUb8OfUmdr6lx81L8wjyiBQV7dOAh871m0KBG-QX7fREN6D0jmikCi-cYDqFsSFEeWVm9EF4XeEmc6FLtAJ2fA&zp=AtJtI__9ovST1MDaK5wQuG5gjvJdsNS98axnr2fV573KYqM--35XRAQBdpzV09xWDIXxohHiOS1zfqWe_CflYP7cooASfBpzHcr7QzvIPUZ0bPTKdoZ2HGggtzzr2a9UK8Ox36GO7XmH2FreUl09rCHOulnS-uMyvuyDw2xGrKsFjT7YzUBWrOjLzbrRh50YkcMrOXbgTcDDq9v-IVpRR522rZW8bOPI-l46VrsA_vwgz4FUOtdwjo8Il40A3nQP5tlysoqV6Dh-1qZohkrzeGT-VrofViBylvAqK6iRSDIihd5GHz0jQUraQ6K3J_BvZ9Pn_TDSjpfq_fXfs2ENuIu2CBvEphDX4YG8TpfcZJg6idsGiK8xGqZo8SVt-ZKbNlVW8AoUmWL9Qc-U
+                                - img "The World’s First Longevity Band, Made to Help You Feel and Live Better Every Day—No Tricks" [ref=f156e795]
+                          - listitem [ref=f156e796]:
+                            - generic [ref=f156e797]:
+                              - link [ref=f156e798] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=uzFTLa1zOl8srRnDJMKpcKAFFgKLaOkhUjsw0uAyfDhicmbySYLaZ1-FEuqT6aTeIiGSkGEYZCdWJkJALg2Ky0ubHgALSbya92_QW8aShej8Sw_CD93Vfb5VGqmbnKNU5Ii5GV3EeMDX-rE9cF6jnMgsDJcly3uKBqfuW3ffxUZIm4avoC2FHfpmHETZmWGXYPwN4T-nuDvfpt4LARYzItXqlaNjVdOSNCBL1AjBeLRXNb16GuAdkwH9LtWy0v06WgUH_ApzgTiDeFf2f7fAkkmnqkTMI__YuzLm2CWbVcl3BaHzEeXCUcREAlQMAoQ8jvgFQr9wTOe10T68G2J5ULQzcsXLWLjljXTswb-CJNbs1TnxJ2ZlYitU6dD3hJCe22uLlg8RBqqc8zIqOAyRQyGnlYhDLEC6oofANyehGrXdpOa8BWWdfZnzmM39tYyguTVtCvoKBJi7L43AcTh-i4LgtJQQ4gis-8am_NyXUI-hXrYyDVuLGn9MpWKzudxYIXUEwxyPu27pmX4pn0jpr8oVOz8kDTSPl31fnV2x3noFhnX0QLpnBTV_ONg-Ux_WJu7q-8kxtG7kef9_5MQ_lAEq91tLN1JbBh0hMb390rm03nyQbgMwTnpi96QGedmgNSeTh6CKdQDwwjR2R17tR87qDQ95qoVffESMdoTqXJGeHjtUb8OfUmdr6lx81L8wjyiBQV7dOAh871m0KBG-QX7fREN6D0jmikCi-cYDqFsSFEeWVm9EF4XeEmc6FLtAJ2fA&zp=gjzF8E9H3jX7tocJTwnJnpv27AGYvlJGFbtEAvvc1rXu9Juncdgf9ZzZhN82aJ5yy_sUjrddbUnweAVLpNv1WNIVvIWNGSraxCeJEEOAPUz-loSbfGs6fGVrl0WFJASjuVrg4JMZofS6JCQMZi93NVg5_-fw5yjvq0ug2zNV1plQDFeukzoxGH9aGB5Iyi5JUPhlX8eqGYR5Ai9ANaEkWWLPwoGpgF0E0ZpLipAnng0ZUa844eNSlcXyk3XR9fQ7kRCM0if8-xIhetygnJPPqLHHp2eqrMk1jor3nE48wmUi4WmP-1lfT-qUiW8EeO-EoKZoAtB-ziRpqmHhY2wii-l1TjbStX2Ox-AY2EV7EJPvicqsT0K1g3kOMqHdPwrBN73hOHjpZxbA6VcA
+                              - link [ref=f156e801] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=uzFTLa1zOl8srRnDJMKpcKAFFgKLaOkhUjsw0uAyfDhicmbySYLaZ1-FEuqT6aTeIiGSkGEYZCdWJkJALg2Ky0ubHgALSbya92_QW8aShej8Sw_CD93Vfb5VGqmbnKNU5Ii5GV3EeMDX-rE9cF6jnMgsDJcly3uKBqfuW3ffxUZIm4avoC2FHfpmHETZmWGXYPwN4T-nuDvfpt4LARYzItXqlaNjVdOSNCBL1AjBeLRXNb16GuAdkwH9LtWy0v06WgUH_ApzgTiDeFf2f7fAkkmnqkTMI__YuzLm2CWbVcl3BaHzEeXCUcREAlQMAoQ8jvgFQr9wTOe10T68G2J5ULQzcsXLWLjljXTswb-CJNbs1TnxJ2ZlYitU6dD3hJCe22uLlg8RBqqc8zIqOAyRQyGnlYhDLEC6oofANyehGrXdpOa8BWWdfZnzmM39tYyguTVtCvoKBJi7L43AcTh-i4LgtJQQ4gis-8am_NyXUI-hXrYyDVuLGn9MpWKzudxYIXUEwxyPu27pmX4pn0jpr8oVOz8kDTSPl31fnV2x3noFhnX0QLpnBTV_ONg-Ux_WJu7q-8kxtG7kef9_5MQ_lAEq91tLN1JbBh0hMb390rm03nyQbgMwTnpi96QGedmgNSeTh6CKdQDwwjR2R17tR87qDQ95qoVffESMdoTqXJGeHjtUb8OfUmdr6lx81L8wjyiBQV7dOAh871m0KBG-QX7fREN6D0jmikCi-cYDqFsSFEeWVm9EF4XeEmc6FLtAJ2fA&zp=gjzF8E9H3jX7tocJTwnJnpv27AGYvlJGFbtEAvvc1rXu9Juncdgf9ZzZhN82aJ5yy_sUjrddbUnweAVLpNv1WNIVvIWNGSraxCeJEEOAPUz-loSbfGs6fGVrl0WFJASjuVrg4JMZofS6JCQMZi93NVg5_-fw5yjvq0ug2zNV1plQDFeukzoxGH9aGB5Iyi5JUPhlX8eqGYR5Ai9ANaEkWWLPwoGpgF0E0ZpLipAnng0ZUa844eNSlcXyk3XR9fQ7kRCM0if8-xIhetygnJPPqLHHp2eqrMk1jor3nE48wmUi4WmP-1lfT-qUiW8EeO-EoKZoAtB-ziRpqmHhY2wii-l1TjbStX2Ox-AY2EV7EJPvicqsT0K1g3kOMqHdPwrBN73hOHjpZxbA6VcA
+                                - img "The World’s First Longevity Band, Made to Help You Feel and Live Better Every Day—No Tricks" [ref=f156e802]
+                      - generic [ref=f156e803]:
+                        - link [ref=f156e804] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=uzFTLa1zOl8srRnDJMKpcKAFFgKLaOkhUjsw0uAyfDhicmbySYLaZ1-FEuqT6aTeIiGSkGEYZCdWJkJALg2Ky0ubHgALSbya92_QW8aShej8Sw_CD93Vfb5VGqmbnKNU5Ii5GV3EeMDX-rE9cF6jnMgsDJcly3uKBqfuW3ffxUZIm4avoC2FHfpmHETZmWGXYPwN4T-nuDvfpt4LARYzItXqlaNjVdOSNCBL1AjBeLRXNb16GuAdkwH9LtWy0v06WgUH_ApzgTiDeFf2f7fAkkmnqkTMI__YuzLm2CWbVcl3BaHzEeXCUcREAlQMAoQ8jvgFQr9wTOe10T68G2J5ULQzcsXLWLjljXTswb-CJNbs1TnxJ2ZlYitU6dD3hJCe22uLlg8RBqqc8zIqOAyRQyGnlYhDLEC6oofANyehGrXdpOa8BWWdfZnzmM39tYyguTVtCvoKBJi7L43AcTh-i4LgtJQQ4gis-8am_NyXUI-hXrYyDVuLGn9MpWKzudxYIXUEwxyPu27pmX4pn0jpr8oVOz8kDTSPl31fnV2x3noFhnX0QLpnBTV_ONg-Ux_WJu7q-8kxtG7kef9_5MQ_lAEq91tLN1JbBh0hMb390rm03nyQbgMwTnpi96QGedmgNSeTh6CKdQDwwjR2R17tR87qDQ95qoVffESMdoTqXJGeHjtUb8OfUmdr6lx81L8wjyiBQV7dOAh871m0KBG-QX7fREN6D0jmikCi-cYDqFsSFEeWVm9EF4XeEmc6FLtAJ2fA&zp=AtJtI__9ovST1MDaK5wQuG5gjvJdsNS98axnr2fV573KYqM--35XRAQBdpzV09xWDIXxohHiOS1zfqWe_CflYP7cooASfBpzHcr7QzvIPUZ0bPTKdoZ2HGggtzzr2a9UK8Ox36GO7XmH2FreUl09rCHOulnS-uMyvuyDw2xGrKsFjT7YzUBWrOjLzbrRh50YkcMrOXbgTcDDq9v-IVpRR522rZW8bOPI-l46VrsA_vwgz4FUOtdwjo8Il40A3nQP5tlysoqV6Dh-1qZohkrzeGT-VrofViBylvAqK6iRSDIihd5GHz0jQUraQ6K3J_BvZ9Pn_TDSjpfq_fXfs2ENuIu2CBvEphDX4YG8TpfcZJg6idsGiK8xGqZo8SVt-ZKbNlVW8AoUmWL9Qc-U
+                        - generic [ref=f156e805]:
+                          - link "humehealth.com" [ref=f156e808] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=uzFTLa1zOl8srRnDJMKpcKAFFgKLaOkhUjsw0uAyfDhicmbySYLaZ1-FEuqT6aTeIiGSkGEYZCdWJkJALg2Ky0ubHgALSbya92_QW8aShej8Sw_CD93Vfb5VGqmbnKNU5Ii5GV3EeMDX-rE9cF6jnMgsDJcly3uKBqfuW3ffxUZIm4avoC2FHfpmHETZmWGXYPwN4T-nuDvfpt4LARYzItXqlaNjVdOSNCBL1AjBeLRXNb16GuAdkwH9LtWy0v06WgUH_ApzgTiDeFf2f7fAkkmnqkTMI__YuzLm2CWbVcl3BaHzEeXCUcREAlQMAoQ8jvgFQr9wTOe10T68G2J5ULQzcsXLWLjljXTswb-CJNbs1TnxJ2ZlYitU6dD3hJCe22uLlg8RBqqc8zIqOAyRQyGnlYhDLEC6oofANyehGrXdpOa8BWWdfZnzmM39tYyguTVtCvoKBJi7L43AcTh-i4LgtJQQ4gis-8am_NyXUI-hXrYyDVuLGn9MpWKzudxYIXUEwxyPu27pmX4pn0jpr8oVOz8kDTSPl31fnV2x3noFhnX0QLpnBTV_ONg-Ux_WJu7q-8kxtG7kef9_5MQ_lAEq91tLN1JbBh0hMb390rm03nyQbgMwTnpi96QGedmgNSeTh6CKdQDwwjR2R17tR87qDQ95qoVffESMdoTqXJGeHjtUb8OfUmdr6lx81L8wjyiBQV7dOAh871m0KBG-QX7fREN6D0jmikCi-cYDqFsSFEeWVm9EF4XeEmc6FLtAJ2fA&zp=AtJtI__9ovST1MDaK5wQuG5gjvJdsNS98axnr2fV573KYqM--35XRAQBdpzV09xWDIXxohHiOS1zfqWe_CflYP7cooASfBpzHcr7QzvIPUZ0bPTKdoZ2HGggtzzr2a9UK8Ox36GO7XmH2FreUl09rCHOulnS-uMyvuyDw2xGrKsFjT7YzUBWrOjLzbrRh50YkcMrOXbgTcDDq9v-IVpRR522rZW8bOPI-l46VrsA_vwgz4FUOtdwjo8Il40A3nQP5tlysoqV6Dh-1qZohkrzeGT-VrofViBylvAqK6iRSDIihd5GHz0jQUraQ6K3J_BvZ9Pn_TDSjpfq_fXfs2ENuIu2CBvEphDX4YG8TpfcZJg6idsGiK8xGqZo8SVt-ZKbNlVW8AoUmWL9Qc-U
+                          - link "Shop Now" [ref=f156e809] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=uzFTLa1zOl8srRnDJMKpcKAFFgKLaOkhUjsw0uAyfDhicmbySYLaZ1-FEuqT6aTeIiGSkGEYZCdWJkJALg2Ky0ubHgALSbya92_QW8aShej8Sw_CD93Vfb5VGqmbnKNU5Ii5GV3EeMDX-rE9cF6jnMgsDJcly3uKBqfuW3ffxUZIm4avoC2FHfpmHETZmWGXYPwN4T-nuDvfpt4LARYzItXqlaNjVdOSNCBL1AjBeLRXNb16GuAdkwH9LtWy0v06WgUH_ApzgTiDeFf2f7fAkkmnqkTMI__YuzLm2CWbVcl3BaHzEeXCUcREAlQMAoQ8jvgFQr9wTOe10T68G2J5ULQzcsXLWLjljXTswb-CJNbs1TnxJ2ZlYitU6dD3hJCe22uLlg8RBqqc8zIqOAyRQyGnlYhDLEC6oofANyehGrXdpOa8BWWdfZnzmM39tYyguTVtCvoKBJi7L43AcTh-i4LgtJQQ4gis-8am_NyXUI-hXrYyDVuLGn9MpWKzudxYIXUEwxyPu27pmX4pn0jpr8oVOz8kDTSPl31fnV2x3noFhnX0QLpnBTV_ONg-Ux_WJu7q-8kxtG7kef9_5MQ_lAEq91tLN1JbBh0hMb390rm03nyQbgMwTnpi96QGedmgNSeTh6CKdQDwwjR2R17tR87qDQ95qoVffESMdoTqXJGeHjtUb8OfUmdr6lx81L8wjyiBQV7dOAh871m0KBG-QX7fREN6D0jmikCi-cYDqFsSFEeWVm9EF4XeEmc6FLtAJ2fA&zp=AtJtI__9ovST1MDaK5wQuG5gjvJdsNS98axnr2fV573KYqM--35XRAQBdpzV09xWDIXxohHiOS1zfqWe_CflYP7cooASfBpzHcr7QzvIPUZ0bPTKdoZ2HGggtzzr2a9UK8Ox36GO7XmH2FreUl09rCHOulnS-uMyvuyDw2xGrKsFjT7YzUBWrOjLzbrRh50YkcMrOXbgTcDDq9v-IVpRR522rZW8bOPI-l46VrsA_vwgz4FUOtdwjo8Il40A3nQP5tlysoqV6Dh-1qZohkrzeGT-VrofViBylvAqK6iRSDIihd5GHz0jQUraQ6K3J_BvZ9Pn_TDSjpfq_fXfs2ENuIu2CBvEphDX4YG8TpfcZJg6idsGiK8xGqZo8SVt-ZKbNlVW8AoUmWL9Qc-U
+                - article "Comment from reddical2050 3 months ago" [ref=f156e813]:
+                  - generic [ref=f156e814] [cursor=pointer]:
+                    - link "reddical2050's profile --- avatar" [ref=f156e820]:
+                      - /url: https://www.reddit.com/user/reddical2050/
+                      - img "u/reddical2050 avatar" [ref=f156e823]
+                    - generic [ref=f156e827]:
+                      - link "reddical2050's profile" [ref=f156e831]:
+                        - /url: https://www.reddit.com/user/reddical2050/
+                        - generic [ref=f156e832]: reddical2050
+                      - generic [aria-hidden] [ref=f156e834]: •
+                      - link [ref=f156e836]:
+                        - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1uxilcy/comment/oxudtnv/
+                        - time [ref=f156e838]: 3mo ago
+                  - generic [ref=f156e840]:
+                    - paragraph [ref=f156e844]: Did you let the players roll dice and report the results, or had them use the builtin virtual OBR dice?
+                    - 'article "Comment thread level 1: Reply from Snuffvieh 3 months ago" [ref=f156e849]':
+                      - generic [ref=f156e850] [cursor=pointer]:
+                        - link "Snuffvieh's profile --- avatar" [ref=f156e856]:
+                          - /url: https://www.reddit.com/user/Snuffvieh/
+                        - generic [ref=f156e872]:
+                          - link "Snuffvieh's profile" [ref=f156e876]:
+                            - /url: https://www.reddit.com/user/Snuffvieh/
+                            - generic [ref=f156e877]: Snuffvieh
+                          - generic "Comment distinguished as the original poster" [ref=f156e881]: OP
+                          - generic [aria-hidden] [ref=f156e882]: •
+                          - link [ref=f156e884]:
+                            - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1uxilcy/comment/oxuivqn/
+                            - time [ref=f156e886]: 3mo ago
+                      - paragraph [ref=f156e892]: We used dice+ which is the most like roll20/foundry imo from the extensions I’ve tried. One player used the built-in dice roller since it seems to use less resources and his laptop is quite out of date. But everyone was free to use actual dice if they wanted to. I chose to use actual dice because I like to roll concealed for my players.
+                - article "Comment from Beew_akaB 3 months ago" [ref=f156e896]:
+                  - generic [ref=f156e897] [cursor=pointer]:
+                    - link "Beew_akaB's profile --- avatar" [ref=f156e903]:
+                      - /url: https://www.reddit.com/user/Beew_akaB/
+                      - img "u/Beew_akaB avatar" [ref=f156e906]
+                    - generic [ref=f156e910]:
+                      - link "Beew_akaB's profile" [ref=f156e914]:
+                        - /url: https://www.reddit.com/user/Beew_akaB/
+                        - generic [ref=f156e915]: Beew_akaB
+                      - generic [aria-hidden] [ref=f156e917]: •
+                      - link [ref=f156e919]:
+                        - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1uxilcy/comment/oxx6d0j/
+                        - time [ref=f156e921]: 3mo ago
+                  - paragraph [ref=f156e927]: I envy your desk space
+            - generic [ref=f156e930]:
+              - generic [ref=f156e931]:
+                - complementary "People also ask about section" [ref=f156e932]:
+                  - heading "People also ask about section" [level=1] [ref=f156e933]
+                  - generic [ref=f156e934]: People also ask about
+                  - generic [ref=f156e939]:
+                    - link "Community recommendations for obr" [ref=f156e941] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/72efd365-4672-49ff-8bd9-335af8c931d9/?q=Community+recommendations+for+obr&source=PDP&ep=pdp_unit&relatedPostId=t3_1uxilcy
+                    - link "Best practices for obr sessions" [ref=f156e950] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/ed9c6a84-c731-472e-8591-1173c24a4a90/?q=Best+practices+for+obr+sessions&source=PDP&ep=pdp_unit&relatedPostId=t3_1uxilcy
+                    - link "Tips for first time obr users" [ref=f156e959] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/02ef2ab3-7025-4665-b22d-78fde9d38c53/?q=Tips+for+first+time+obr+users&source=PDP&ep=pdp_unit&relatedPostId=t3_1uxilcy
+                    - link "Shared game experience ideas" [ref=f156e968] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/832d0d5e-42e6-4470-937b-8643820e798a/?q=Shared+game+experience+ideas&source=PDP&ep=pdp_unit&relatedPostId=t3_1uxilcy
+                    - link "Obr group activity suggestions" [ref=f156e977] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/38bfcbae-1207-4554-bf69-e216b3ad7992/?q=Obr+group+activity+suggestions&source=PDP&ep=pdp_unit&relatedPostId=t3_1uxilcy
+                - generic [ref=f156e985]:
+                  - complementary "Related Posts Section" [ref=f156e986]:
+                    - heading "Related Posts Section" [level=1] [ref=f156e987]: More posts you may like
+                    - generic [ref=f156e988]: Related posts
+                    - list [ref=f156e994]:
+                      - listitem [ref=f156e995]:
+                        - generic [ref=f156e996]:
+                          - generic [ref=f156e997]:
+                            - link "Video for Owl encounter" [ref=f156e998] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Owls/comments/1toj5zd/video_for_owl_encounter/
+                            - generic [ref=f156e1000]:
+                              - generic [ref=f156e1001]:
+                                - generic [ref=f156e1004]:
+                                  - link "r/Owls" [ref=f156e1005] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/Owls/
+                                  - generic [aria-hidden] [ref=f156e1010]: •
+                                  - time [ref=f156e1012]: 5mo ago
+                                - link [ref=f156e1014] [cursor=pointer]:
+                                  - /url: /r/Owls/comments/1toj5zd/video_for_owl_encounter/
+                                  - heading "List item post - Video for Owl encounter" [level=3] [ref=f156e1017]: Video for Owl encounter
+                              - link "r/Owls - Video for Owl encounter" [ref=f156e1020] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/Owls/comments/1toj5zd/video_for_owl_encounter/
+                                - img "r/Owls - Video for Owl encounter" [ref=f156e1021]
+                            - generic [ref=f156e1023]:
+                              - generic [ref=f156e1024]: "223"
+                              - text: upvotes ·
+                              - generic [ref=f156e1025]: "6"
+                              - text: comments
+                          - separator [ref=f156e1026]
+                      - listitem [ref=f156e1027]:
+                        - generic [ref=f156e1029]:
+                          - generic:
+                            - 'link "Advertisement: $500 off airfare. Direct flights from 14 cities. Jackson Hole is closer than you think." [ref=f156e1030] [cursor=pointer]':
+                              - /url: https://alb.reddit.com/cr?za=O6SPJV6jjvhZ1gDLxrsmD2iyxsQxSc9hh_YlUS740Slj_Jxemm_Y4DLKfGfH5dzlZgk9hHde5OOzB61c2nmelOC62V67i1tNQtow0KSwWsfDi2gMzjlmSoW5SnWjnlmbz0mOYYIRv2KTCLtbRVcnrGTplVzAabhPDcgHLCmEmko6gqNwnZdFHUyQ6rxWaLdnbNy6G0zNaTEzrWhOB8DgfVaNHPTJ_hcgrKaViTzy1Kp6sTaoGEG35iwNm-Wq_rUwQrTCX6cg-XFsdd45BieTnmjvXOOuqbw0uPX1ph3wj71E8Rs1TFMfBYM3a2nIfha-O3fI9xWhDMRvZHn6FKO0mNiFjAJ38qn_9DZBh_3Q7a9fqGczlYGkYWKb6KC8QWyTMsVSyBHPJ-cMKp4-dMqlWQWBwBQv-3x0i4wugD-b_namhNQxg0yBS_RkzbplYCOwBKJK05PbMKgbv55gHzxFVZMT2fjou5CYv4fnuDen3yBPyhT4zUwv5W09lGiQYpk460OjuUBricEGvsoTPe0JlCIlljQiSC1ZzbkS-glf76O_bzllABXy-JWov8vgXUa524PXSBXWUx-Nt-Lvxs8ZfvWfUGYW8cLJ1aJHuTZEWIUrftyU6XqrwD4Nio4Ua0NtKGxxUOb1vksu7YayshAK_G6ALqnxeJGkExpqPcMCZr0qn2umS7k2qniDogw1wezMEWIXhIv19l786dfx6ubXn5bklzkoNhxl7R4j611wAzLODpPnhq9BQEzyJk-n7pZ9KGpR&zp=5zvjt-MAXsfOueqDIBVydfGV_E9DFpGLtgL4dWQnd_5G6ftT73alKuxP61PjAVT8X2bNLiccQk4SbQxlyRpGjjvEip02wqaftAaI_g54VlTXrLQWlPxv2NNhociui-UDLZ-YY3-VWFYB619i6W115uB064ScaMFyoyGWSJYtxR0ZF_mF2_cY4kshvRlGh5qyPBfGNywn3aHbHBpLtb--3auOFZkdxV3OVRqFt8X6QDYbxApw6U63LhjEwK1bxqbJvoE3cfMq6E3d9iwLlkhOIiXqfbKstN-P-3_ympTosMC2PFOeXjWxnL-ARhfme48M9NlkL6OSdSJKV0srWdRd_pR4eHO_LrN840GPbA
+                            - generic [ref=f156e1031]:
+                              - generic [ref=f156e1032]:
+                                - generic [ref=f156e1033]:
+                                  - generic [ref=f156e1034]:
+                                    - generic [ref=f156e1035]:
+                                      - link "u/Jackson-Hole-WY avatar Jackson-Hole-WY" [ref=f156e1038] [cursor=pointer]:
+                                        - /url: /user/Jackson-Hole-WY/
+                                        - img "u/Jackson-Hole-WY avatar" [ref=f156e1041]
+                                        - generic [ref=f156e1042]: Jackson-Hole-WY
+                                      - generic [ref=f156e1043]: •
+                                      - link "Ad" [ref=f156e1045] [cursor=pointer]:
+                                        - /url: /user/Jackson-Hole-WY/
+                                      - link [ref=f156e1047] [cursor=pointer]:
+                                        - /url: https://alb.reddit.com/cr?za=O6SPJV6jjvhZ1gDLxrsmD2iyxsQxSc9hh_YlUS740Slj_Jxemm_Y4DLKfGfH5dzlZgk9hHde5OOzB61c2nmelOC62V67i1tNQtow0KSwWsfDi2gMzjlmSoW5SnWjnlmbz0mOYYIRv2KTCLtbRVcnrGTplVzAabhPDcgHLCmEmko6gqNwnZdFHUyQ6rxWaLdnbNy6G0zNaTEzrWhOB8DgfVaNHPTJ_hcgrKaViTzy1Kp6sTaoGEG35iwNm-Wq_rUwQrTCX6cg-XFsdd45BieTnmjvXOOuqbw0uPX1ph3wj71E8Rs1TFMfBYM3a2nIfha-O3fI9xWhDMRvZHn6FKO0mNiFjAJ38qn_9DZBh_3Q7a9fqGczlYGkYWKb6KC8QWyTMsVSyBHPJ-cMKp4-dMqlWQWBwBQv-3x0i4wugD-b_namhNQxg0yBS_RkzbplYCOwBKJK05PbMKgbv55gHzxFVZMT2fjou5CYv4fnuDen3yBPyhT4zUwv5W09lGiQYpk460OjuUBricEGvsoTPe0JlCIlljQiSC1ZzbkS-glf76O_bzllABXy-JWov8vgXUa524PXSBXWUx-Nt-Lvxs8ZfvWfUGYW8cLJ1aJHuTZEWIUrftyU6XqrwD4Nio4Ua0NtKGxxUOb1vksu7YayshAK_G6ALqnxeJGkExpqPcMCZr0qn2umS7k2qniDogw1wezMEWIXhIv19l786dfx6ubXn5bklzkoNhxl7R4j611wAzLODpPnhq9BQEzyJk-n7pZ9KGpR&zp=5zvjt-MAXsfOueqDIBVydfGV_E9DFpGLtgL4dWQnd_5G6ftT73alKuxP61PjAVT8X2bNLiccQk4SbQxlyRpGjjvEip02wqaftAaI_g54VlTXrLQWlPxv2NNhociui-UDLZ-YY3-VWFYB619i6W115uB064ScaMFyoyGWSJYtxR0ZF_mF2_cY4kshvRlGh5qyPBfGNywn3aHbHBpLtb--3auOFZkdxV3OVRqFt8X6QDYbxApw6U63LhjEwK1bxqbJvoE3cfMq6E3d9iwLlkhOIiXqfbKstN-P-3_ympTosMC2PFOeXjWxnL-ARhfme48M9NlkL6OSdSJKV0srWdRd_pR4eHO_LrN840GPbA
+                                    - button "Open user actions" [ref=f156e1053] [cursor=pointer]
+                                  - link "$500 off airfare. Direct flights from 14 cities. Jackson Hole is closer than you think." [ref=f156e1060] [cursor=pointer]:
+                                    - /url: https://alb.reddit.com/cr?za=O6SPJV6jjvhZ1gDLxrsmD2iyxsQxSc9hh_YlUS740Slj_Jxemm_Y4DLKfGfH5dzlZgk9hHde5OOzB61c2nmelOC62V67i1tNQtow0KSwWsfDi2gMzjlmSoW5SnWjnlmbz0mOYYIRv2KTCLtbRVcnrGTplVzAabhPDcgHLCmEmko6gqNwnZdFHUyQ6rxWaLdnbNy6G0zNaTEzrWhOB8DgfVaNHPTJ_hcgrKaViTzy1Kp6sTaoGEG35iwNm-Wq_rUwQrTCX6cg-XFsdd45BieTnmjvXOOuqbw0uPX1ph3wj71E8Rs1TFMfBYM3a2nIfha-O3fI9xWhDMRvZHn6FKO0mNiFjAJ38qn_9DZBh_3Q7a9fqGczlYGkYWKb6KC8QWyTMsVSyBHPJ-cMKp4-dMqlWQWBwBQv-3x0i4wugD-b_namhNQxg0yBS_RkzbplYCOwBKJK05PbMKgbv55gHzxFVZMT2fjou5CYv4fnuDen3yBPyhT4zUwv5W09lGiQYpk460OjuUBricEGvsoTPe0JlCIlljQiSC1ZzbkS-glf76O_bzllABXy-JWov8vgXUa524PXSBXWUx-Nt-Lvxs8ZfvWfUGYW8cLJ1aJHuTZEWIUrftyU6XqrwD4Nio4Ua0NtKGxxUOb1vksu7YayshAK_G6ALqnxeJGkExpqPcMCZr0qn2umS7k2qniDogw1wezMEWIXhIv19l786dfx6ubXn5bklzkoNhxl7R4j611wAzLODpPnhq9BQEzyJk-n7pZ9KGpR&zp=5zvjt-MAXsfOueqDIBVydfGV_E9DFpGLtgL4dWQnd_5G6ftT73alKuxP61PjAVT8X2bNLiccQk4SbQxlyRpGjjvEip02wqaftAaI_g54VlTXrLQWlPxv2NNhociui-UDLZ-YY3-VWFYB619i6W115uB064ScaMFyoyGWSJYtxR0ZF_mF2_cY4kshvRlGh5qyPBfGNywn3aHbHBpLtb--3auOFZkdxV3OVRqFt8X6QDYbxApw6U63LhjEwK1bxqbJvoE3cfMq6E3d9iwLlkhOIiXqfbKstN-P-3_ympTosMC2PFOeXjWxnL-ARhfme48M9NlkL6OSdSJKV0srWdRd_pR4eHO_LrN840GPbA
+                                    - generic "$500 off airfare. Direct flights from 14 cities. Jackson Hole is closer than you think." [ref=f156e1061]
+                                - link [ref=f156e1064] [cursor=pointer]:
+                                  - /url: https://alb.reddit.com/cr?za=O6SPJV6jjvhZ1gDLxrsmD2iyxsQxSc9hh_YlUS740Slj_Jxemm_Y4DLKfGfH5dzlZgk9hHde5OOzB61c2nmelOC62V67i1tNQtow0KSwWsfDi2gMzjlmSoW5SnWjnlmbz0mOYYIRv2KTCLtbRVcnrGTplVzAabhPDcgHLCmEmko6gqNwnZdFHUyQ6rxWaLdnbNy6G0zNaTEzrWhOB8DgfVaNHPTJ_hcgrKaViTzy1Kp6sTaoGEG35iwNm-Wq_rUwQrTCX6cg-XFsdd45BieTnmjvXOOuqbw0uPX1ph3wj71E8Rs1TFMfBYM3a2nIfha-O3fI9xWhDMRvZHn6FKO0mNiFjAJ38qn_9DZBh_3Q7a9fqGczlYGkYWKb6KC8QWyTMsVSyBHPJ-cMKp4-dMqlWQWBwBQv-3x0i4wugD-b_namhNQxg0yBS_RkzbplYCOwBKJK05PbMKgbv55gHzxFVZMT2fjou5CYv4fnuDen3yBPyhT4zUwv5W09lGiQYpk460OjuUBricEGvsoTPe0JlCIlljQiSC1ZzbkS-glf76O_bzllABXy-JWov8vgXUa524PXSBXWUx-Nt-Lvxs8ZfvWfUGYW8cLJ1aJHuTZEWIUrftyU6XqrwD4Nio4Ua0NtKGxxUOb1vksu7YayshAK_G6ALqnxeJGkExpqPcMCZr0qn2umS7k2qniDogw1wezMEWIXhIv19l786dfx6ubXn5bklzkoNhxl7R4j611wAzLODpPnhq9BQEzyJk-n7pZ9KGpR&zp=5zvjt-MAXsfOueqDIBVydfGV_E9DFpGLtgL4dWQnd_5G6ftT73alKuxP61PjAVT8X2bNLiccQk4SbQxlyRpGjjvEip02wqaftAaI_g54VlTXrLQWlPxv2NNhociui-UDLZ-YY3-VWFYB619i6W115uB064ScaMFyoyGWSJYtxR0ZF_mF2_cY4kshvRlGh5qyPBfGNywn3aHbHBpLtb--3auOFZkdxV3OVRqFt8X6QDYbxApw6U63LhjEwK1bxqbJvoE3cfMq6E3d9iwLlkhOIiXqfbKstN-P-3_ympTosMC2PFOeXjWxnL-ARhfme48M9NlkL6OSdSJKV0srWdRd_pR4eHO_LrN840GPbA
+                                  - 'img "Thumbnail image: $500 off airfare. Direct flights from 14 cities. Jackson Hole is closer than you think." [ref=f156e1066]'
+                              - generic [ref=f156e1067]:
+                                - link [ref=f156e1068] [cursor=pointer]:
+                                  - /url: https://alb.reddit.com/cr?za=O6SPJV6jjvhZ1gDLxrsmD2iyxsQxSc9hh_YlUS740Slj_Jxemm_Y4DLKfGfH5dzlZgk9hHde5OOzB61c2nmelOC62V67i1tNQtow0KSwWsfDi2gMzjlmSoW5SnWjnlmbz0mOYYIRv2KTCLtbRVcnrGTplVzAabhPDcgHLCmEmko6gqNwnZdFHUyQ6rxWaLdnbNy6G0zNaTEzrWhOB8DgfVaNHPTJ_hcgrKaViTzy1Kp6sTaoGEG35iwNm-Wq_rUwQrTCX6cg-XFsdd45BieTnmjvXOOuqbw0uPX1ph3wj71E8Rs1TFMfBYM3a2nIfha-O3fI9xWhDMRvZHn6FKO0mNiFjAJ38qn_9DZBh_3Q7a9fqGczlYGkYWKb6KC8QWyTMsVSyBHPJ-cMKp4-dMqlWQWBwBQv-3x0i4wugD-b_namhNQxg0yBS_RkzbplYCOwBKJK05PbMKgbv55gHzxFVZMT2fjou5CYv4fnuDen3yBPyhT4zUwv5W09lGiQYpk460OjuUBricEGvsoTPe0JlCIlljQiSC1ZzbkS-glf76O_bzllABXy-JWov8vgXUa524PXSBXWUx-Nt-Lvxs8ZfvWfUGYW8cLJ1aJHuTZEWIUrftyU6XqrwD4Nio4Ua0NtKGxxUOb1vksu7YayshAK_G6ALqnxeJGkExpqPcMCZr0qn2umS7k2qniDogw1wezMEWIXhIv19l786dfx6ubXn5bklzkoNhxl7R4j611wAzLODpPnhq9BQEzyJk-n7pZ9KGpR&zp=5zvjt-MAXsfOueqDIBVydfGV_E9DFpGLtgL4dWQnd_5G6ftT73alKuxP61PjAVT8X2bNLiccQk4SbQxlyRpGjjvEip02wqaftAaI_g54VlTXrLQWlPxv2NNhociui-UDLZ-YY3-VWFYB619i6W115uB064ScaMFyoyGWSJYtxR0ZF_mF2_cY4kshvRlGh5qyPBfGNywn3aHbHBpLtb--3auOFZkdxV3OVRqFt8X6QDYbxApw6U63LhjEwK1bxqbJvoE3cfMq6E3d9iwLlkhOIiXqfbKstN-P-3_ympTosMC2PFOeXjWxnL-ARhfme48M9NlkL6OSdSJKV0srWdRd_pR4eHO_LrN840GPbA
+                                - generic [ref=f156e1069]:
+                                  - link "jacksonhole.com" [ref=f156e1071] [cursor=pointer]:
+                                    - /url: https://alb.reddit.com/cr?za=O6SPJV6jjvhZ1gDLxrsmD2iyxsQxSc9hh_YlUS740Slj_Jxemm_Y4DLKfGfH5dzlZgk9hHde5OOzB61c2nmelOC62V67i1tNQtow0KSwWsfDi2gMzjlmSoW5SnWjnlmbz0mOYYIRv2KTCLtbRVcnrGTplVzAabhPDcgHLCmEmko6gqNwnZdFHUyQ6rxWaLdnbNy6G0zNaTEzrWhOB8DgfVaNHPTJ_hcgrKaViTzy1Kp6sTaoGEG35iwNm-Wq_rUwQrTCX6cg-XFsdd45BieTnmjvXOOuqbw0uPX1ph3wj71E8Rs1TFMfBYM3a2nIfha-O3fI9xWhDMRvZHn6FKO0mNiFjAJ38qn_9DZBh_3Q7a9fqGczlYGkYWKb6KC8QWyTMsVSyBHPJ-cMKp4-dMqlWQWBwBQv-3x0i4wugD-b_namhNQxg0yBS_RkzbplYCOwBKJK05PbMKgbv55gHzxFVZMT2fjou5CYv4fnuDen3yBPyhT4zUwv5W09lGiQYpk460OjuUBricEGvsoTPe0JlCIlljQiSC1ZzbkS-glf76O_bzllABXy-JWov8vgXUa524PXSBXWUx-Nt-Lvxs8ZfvWfUGYW8cLJ1aJHuTZEWIUrftyU6XqrwD4Nio4Ua0NtKGxxUOb1vksu7YayshAK_G6ALqnxeJGkExpqPcMCZr0qn2umS7k2qniDogw1wezMEWIXhIv19l786dfx6ubXn5bklzkoNhxl7R4j611wAzLODpPnhq9BQEzyJk-n7pZ9KGpR&zp=5zvjt-MAXsfOueqDIBVydfGV_E9DFpGLtgL4dWQnd_5G6ftT73alKuxP61PjAVT8X2bNLiccQk4SbQxlyRpGjjvEip02wqaftAaI_g54VlTXrLQWlPxv2NNhociui-UDLZ-YY3-VWFYB619i6W115uB064ScaMFyoyGWSJYtxR0ZF_mF2_cY4kshvRlGh5qyPBfGNywn3aHbHBpLtb--3auOFZkdxV3OVRqFt8X6QDYbxApw6U63LhjEwK1bxqbJvoE3cfMq6E3d9iwLlkhOIiXqfbKstN-P-3_ympTosMC2PFOeXjWxnL-ARhfme48M9NlkL6OSdSJKV0srWdRd_pR4eHO_LrN840GPbA
+                                  - link "Learn More" [ref=f156e1072] [cursor=pointer]:
+                                    - /url: https://alb.reddit.com/cr?za=O6SPJV6jjvhZ1gDLxrsmD2iyxsQxSc9hh_YlUS740Slj_Jxemm_Y4DLKfGfH5dzlZgk9hHde5OOzB61c2nmelOC62V67i1tNQtow0KSwWsfDi2gMzjlmSoW5SnWjnlmbz0mOYYIRv2KTCLtbRVcnrGTplVzAabhPDcgHLCmEmko6gqNwnZdFHUyQ6rxWaLdnbNy6G0zNaTEzrWhOB8DgfVaNHPTJ_hcgrKaViTzy1Kp6sTaoGEG35iwNm-Wq_rUwQrTCX6cg-XFsdd45BieTnmjvXOOuqbw0uPX1ph3wj71E8Rs1TFMfBYM3a2nIfha-O3fI9xWhDMRvZHn6FKO0mNiFjAJ38qn_9DZBh_3Q7a9fqGczlYGkYWKb6KC8QWyTMsVSyBHPJ-cMKp4-dMqlWQWBwBQv-3x0i4wugD-b_namhNQxg0yBS_RkzbplYCOwBKJK05PbMKgbv55gHzxFVZMT2fjou5CYv4fnuDen3yBPyhT4zUwv5W09lGiQYpk460OjuUBricEGvsoTPe0JlCIlljQiSC1ZzbkS-glf76O_bzllABXy-JWov8vgXUa524PXSBXWUx-Nt-Lvxs8ZfvWfUGYW8cLJ1aJHuTZEWIUrftyU6XqrwD4Nio4Ua0NtKGxxUOb1vksu7YayshAK_G6ALqnxeJGkExpqPcMCZr0qn2umS7k2qniDogw1wezMEWIXhIv19l786dfx6ubXn5bklzkoNhxl7R4j611wAzLODpPnhq9BQEzyJk-n7pZ9KGpR&zp=5zvjt-MAXsfOueqDIBVydfGV_E9DFpGLtgL4dWQnd_5G6ftT73alKuxP61PjAVT8X2bNLiccQk4SbQxlyRpGjjvEip02wqaftAaI_g54VlTXrLQWlPxv2NNhociui-UDLZ-YY3-VWFYB619i6W115uB064ScaMFyoyGWSJYtxR0ZF_mF2_cY4kshvRlGh5qyPBfGNywn3aHbHBpLtb--3auOFZkdxV3OVRqFt8X6QDYbxApw6U63LhjEwK1bxqbJvoE3cfMq6E3d9iwLlkhOIiXqfbKstN-P-3_ympTosMC2PFOeXjWxnL-ARhfme48M9NlkL6OSdSJKV0srWdRd_pR4eHO_LrN840GPbA
+                        - separator [ref=f156e1075]
+                      - listitem [ref=f156e1076]:
+                        - generic [ref=f156e1077]:
+                          - generic [ref=f156e1078]:
+                            - link "Didn’t have to scroll very far in the video games subreddit to see them mention Owlcat games." [ref=f156e1079] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/OwlcatGames/comments/1x3vxcr/didnt_have_to_scroll_very_far_in_the_video_games/
+                            - generic [ref=f156e1081]:
+                              - generic [ref=f156e1082]:
+                                - generic [ref=f156e1085]:
+                                  - link "r/OwlcatGames" [ref=f156e1086] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/OwlcatGames/
+                                  - generic [aria-hidden] [ref=f156e1091]: •
+                                  - time [ref=f156e1093]: 3d ago
+                                - link [ref=f156e1095] [cursor=pointer]:
+                                  - /url: /r/OwlcatGames/comments/1x3vxcr/didnt_have_to_scroll_very_far_in_the_video_games/
+                                  - heading "List item post - Didn’t have to scroll very far in the video games subreddit..." [level=3] [ref=f156e1098]: Didn’t have to scroll very far in the video games subreddit to see them mention Owlcat games.
+                              - link "r/OwlcatGames - Didn’t have to scroll very far in the video games subreddit to see them mention Owlcat games." [ref=f156e1101] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/OwlcatGames/comments/1x3vxcr/didnt_have_to_scroll_very_far_in_the_video_games/
+                                - img "r/OwlcatGames - Didn’t have to scroll very far in the video games subreddit to see them mention Owlcat games." [ref=f156e1102]
+                            - generic [ref=f156e1104]:
+                              - generic [ref=f156e1105]: "391"
+                              - text: upvotes ·
+                              - generic [ref=f156e1106]: "38"
+                              - text: comments
+                          - separator [ref=f156e1107]
+                      - listitem [ref=f156e1108]:
+                        - generic [ref=f156e1109]:
+                          - generic [ref=f156e1110]:
+                            - link "Went to an event with an owl exhibit today, thought y’all might enjoy ☺️" [ref=f156e1111] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Owls/comments/1t8k810/went_to_an_event_with_an_owl_exhibit_today/
+                            - generic [ref=f156e1113]:
+                              - generic [ref=f156e1114]:
+                                - generic [ref=f156e1117]:
+                                  - link "r/Owls" [ref=f156e1118] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/Owls/
+                                  - generic [aria-hidden] [ref=f156e1123]: •
+                                  - time [ref=f156e1125]: 5mo ago
+                                - link [ref=f156e1127] [cursor=pointer]:
+                                  - /url: /r/Owls/comments/1t8k810/went_to_an_event_with_an_owl_exhibit_today/
+                                  - heading "List item post - Went to an event with an owl exhibit today, thought y’all m..." [level=3] [ref=f156e1130]: Went to an event with an owl exhibit today, thought y’all might enjoy ☺️
+                              - link "r/Owls - Went to an event with an owl exhibit today, thought y’all might enjoy ☺️" [ref=f156e1133] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/Owls/comments/1t8k810/went_to_an_event_with_an_owl_exhibit_today/
+                                - img "r/Owls - Went to an event with an owl exhibit today, thought y’all might enjoy ☺️" [ref=f156e1134]
+                            - generic [ref=f156e1136]:
+                              - generic [ref=f156e1137]: 1.7K
+                              - text: upvotes ·
+                              - generic [ref=f156e1138]: "15"
+                              - text: comments
+                          - separator [ref=f156e1139]
+                      - listitem
+                      - listitem [ref=f156e1140]:
+                        - generic [ref=f156e1141]:
+                          - generic [ref=f156e1142]:
+                            - link "Happy owl awareness day! You've officially been made aware. 🤗" [ref=f156e1143] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Owls/comments/1vfhg46/happy_owl_awareness_day_youve_officially_been/
+                            - generic [ref=f156e1145]:
+                              - generic [ref=f156e1146]:
+                                - generic [ref=f156e1149]:
+                                  - link "r/Owls" [ref=f156e1150] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/Owls/
+                                  - generic [aria-hidden] [ref=f156e1155]: •
+                                  - time [ref=f156e1157]: 2mo ago
+                                - link [ref=f156e1159] [cursor=pointer]:
+                                  - /url: /r/Owls/comments/1vfhg46/happy_owl_awareness_day_youve_officially_been/
+                                  - heading "List item post - Happy owl awareness day! You've officially been made aware...." [level=3] [ref=f156e1162]: Happy owl awareness day! You've officially been made aware. 🤗
+                              - link "r/Owls - Happy owl awareness day! You've officially been made aware. 🤗" [ref=f156e1165] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/Owls/comments/1vfhg46/happy_owl_awareness_day_youve_officially_been/
+                                - img "r/Owls - Happy owl awareness day! You've officially been made aware. 🤗" [ref=f156e1166]
+                            - generic [ref=f156e1168]:
+                              - generic [ref=f156e1169]: 1.3K
+                              - text: upvotes ·
+                              - generic [ref=f156e1170]: "17"
+                              - text: comments
+                          - separator [ref=f156e1171]
+                      - listitem [ref=f156e1172]:
+                        - generic [ref=f156e1173]:
+                          - generic [ref=f156e1174]:
+                            - link "OvO" [ref=f156e1175] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Owls/comments/1te80ih/ovo/
+                            - generic [ref=f156e1177]:
+                              - generic [ref=f156e1178]:
+                                - generic [ref=f156e1181]:
+                                  - link "r/Owls" [ref=f156e1182] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/Owls/
+                                  - generic [aria-hidden] [ref=f156e1187]: •
+                                  - time [ref=f156e1189]: 5mo ago
+                                - link [ref=f156e1191] [cursor=pointer]:
+                                  - /url: /r/Owls/comments/1te80ih/ovo/
+                                  - heading "List item post - OvO" [level=3] [ref=f156e1194]: OvO
+                              - link "r/Owls - OvO" [ref=f156e1197] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/Owls/comments/1te80ih/ovo/
+                                - img "r/Owls - OvO" [ref=f156e1198]
+                            - generic [ref=f156e1200]:
+                              - generic [ref=f156e1201]: "811"
+                              - text: upvotes ·
+                              - generic [ref=f156e1202]: "12"
+                              - text: comments
+                          - separator [ref=f156e1203]
+                      - listitem [ref=f156e1204]:
+                        - generic [ref=f156e1205]:
+                          - generic [ref=f156e1206]:
+                            - link "Owlbear" [ref=f156e1207] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/HeroForgeMinis/comments/1qfagkw/owlbear/
+                            - generic [ref=f156e1209]:
+                              - generic [ref=f156e1210]:
+                                - generic [ref=f156e1213]:
+                                  - link "r/HeroForgeMinis" [ref=f156e1214] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/HeroForgeMinis/
+                                  - generic [aria-hidden] [ref=f156e1219]: •
+                                  - time [ref=f156e1221]: 9mo ago
+                                - link [ref=f156e1223] [cursor=pointer]:
+                                  - /url: /r/HeroForgeMinis/comments/1qfagkw/owlbear/
+                                  - heading "List item post - Owlbear" [level=3] [ref=f156e1226]: Owlbear
+                              - link "r/HeroForgeMinis - Owlbear" [ref=f156e1229] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/HeroForgeMinis/comments/1qfagkw/owlbear/
+                                - img "r/HeroForgeMinis - Owlbear" [ref=f156e1230]
+                            - generic [ref=f156e1232]:
+                              - generic [ref=f156e1233]: "450"
+                              - text: upvotes ·
+                              - generic [ref=f156e1234]: "7"
+                              - text: comments
+                          - separator [ref=f156e1235]
+                      - listitem [ref=f156e1236]:
+                        - generic [ref=f156e1237]:
+                          - generic [ref=f156e1238]:
+                            - link "200 days of being bullied by an owl 🥹🦉" [ref=f156e1239] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/duolingo/comments/1wozfpg/200_days_of_being_bullied_by_an_owl/
+                            - generic [ref=f156e1241]:
+                              - generic [ref=f156e1242]:
+                                - generic [ref=f156e1245]:
+                                  - link "r/duolingo" [ref=f156e1246] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/duolingo/
+                                  - generic [aria-hidden] [ref=f156e1251]: •
+                                  - time [ref=f156e1253]: 21d ago
+                                - link [ref=f156e1255] [cursor=pointer]:
+                                  - /url: /r/duolingo/comments/1wozfpg/200_days_of_being_bullied_by_an_owl/
+                                  - heading "List item post - 200 days of being bullied by an owl 🥹🦉" [level=3] [ref=f156e1258]: 200 days of being bullied by an owl 🥹🦉
+                              - link "r/duolingo - 200 days of being bullied by an owl 🥹🦉" [ref=f156e1261] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/duolingo/comments/1wozfpg/200_days_of_being_bullied_by_an_owl/
+                                - img "r/duolingo - 200 days of being bullied by an owl 🥹🦉" [ref=f156e1262]
+                            - generic [ref=f156e1264]:
+                              - generic [ref=f156e1265]: "64"
+                              - text: upvotes ·
+                              - generic [ref=f156e1266]: "9"
+                              - text: comments
+                          - separator [ref=f156e1267]
+                      - listitem [ref=f156e1268]:
+                        - generic [ref=f156e1269]:
+                          - generic [ref=f156e1270]:
+                            - link "Owlbear is free on the blog, but better with pictures. Like, a lot better." [ref=f156e1271] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Amigurumi/comments/1wstvef/owlbear_is_free_on_the_blog_but_better_with/
+                            - generic [ref=f156e1273]:
+                              - generic [ref=f156e1274]:
+                                - generic [ref=f156e1277]:
+                                  - link "r/Amigurumi" [ref=f156e1278] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/Amigurumi/
+                                  - generic [aria-hidden] [ref=f156e1283]: •
+                                  - time [ref=f156e1285]: 17d ago
+                                - link [ref=f156e1287] [cursor=pointer]:
+                                  - /url: /r/Amigurumi/comments/1wstvef/owlbear_is_free_on_the_blog_but_better_with/
+                                  - heading "List item post - Owlbear is free on the blog, but better with pictures. Like..." [level=3] [ref=f156e1290]: Owlbear is free on the blog, but better with pictures. Like, a lot better.
+                              - link "r/Amigurumi - Owlbear is free on the blog, but better with pictures. Like, a lot better." [ref=f156e1293] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/Amigurumi/comments/1wstvef/owlbear_is_free_on_the_blog_but_better_with/
+                                - img "r/Amigurumi - Owlbear is free on the blog, but better with pictures. Like, a lot better." [ref=f156e1294]
+                            - generic [ref=f156e1296]:
+                              - generic [ref=f156e1297]: "264"
+                              - text: upvotes ·
+                              - generic [ref=f156e1298]: "11"
+                              - text: comments
+                          - separator [ref=f156e1299]
+                      - listitem
+                      - listitem [ref=f156e1300]:
+                        - generic [ref=f156e1301]:
+                          - generic [ref=f156e1302]:
+                            - link "I made an owlbear!" [ref=f156e1303] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/GeekyCrochet/comments/1rzq5jg/i_made_an_owlbear/
+                            - generic [ref=f156e1305]:
+                              - generic [ref=f156e1306]:
+                                - generic [ref=f156e1309]:
+                                  - link "r/GeekyCrochet" [ref=f156e1310] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/GeekyCrochet/
+                                  - generic [aria-hidden] [ref=f156e1317]: •
+                                  - time [ref=f156e1319]: 7mo ago
+                                - link [ref=f156e1321] [cursor=pointer]:
+                                  - /url: /r/GeekyCrochet/comments/1rzq5jg/i_made_an_owlbear/
+                                  - heading "List item post - I made an owlbear!" [level=3] [ref=f156e1324]: I made an owlbear!
+                              - link "r/GeekyCrochet - I made an owlbear!" [ref=f156e1327] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/GeekyCrochet/comments/1rzq5jg/i_made_an_owlbear/
+                                - img "r/GeekyCrochet - I made an owlbear!" [ref=f156e1328]
+                            - generic [ref=f156e1330]:
+                              - generic [ref=f156e1331]: "333"
+                              - text: upvotes ·
+                              - generic [ref=f156e1332]: "12"
+                              - text: comments
+                          - separator [ref=f156e1333]
+                      - listitem [ref=f156e1334]:
+                        - generic [ref=f156e1335]:
+                          - generic [ref=f156e1336]:
+                            - link "Owl" [ref=f156e1337] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/floridanature/comments/1x3rlzd/owl/
+                            - generic [ref=f156e1339]:
+                              - generic [ref=f156e1340]:
+                                - generic [ref=f156e1343]:
+                                  - link "r/floridanature" [ref=f156e1344] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/floridanature/
+                                  - generic [aria-hidden] [ref=f156e1349]: •
+                                  - time [ref=f156e1351]: 4d ago
+                                - link [ref=f156e1353] [cursor=pointer]:
+                                  - /url: /r/floridanature/comments/1x3rlzd/owl/
+                                  - heading "List item post - Owl" [level=3] [ref=f156e1356]: Owl
+                              - link "r/floridanature - Owl" [ref=f156e1359] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/floridanature/comments/1x3rlzd/owl/
+                                - img "r/floridanature - Owl" [ref=f156e1360]
+                            - generic [ref=f156e1362]:
+                              - generic [ref=f156e1363]: "144"
+                              - text: upvotes ·
+                              - generic [ref=f156e1364]: "9"
+                              - text: comments
+                          - separator [ref=f156e1365]
+                      - listitem [ref=f156e1366]:
+                        - generic [ref=f156e1367]:
+                          - generic [ref=f156e1368]:
+                            - link "Owlbear" [ref=f156e1369] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DungeonsAndDragons/comments/1w0qesc/owlbear/
+                            - generic [ref=f156e1371]:
+                              - generic [ref=f156e1372]:
+                                - generic [ref=f156e1375]:
+                                  - link "r/DungeonsAndDragons" [ref=f156e1376] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/DungeonsAndDragons/
+                                  - generic [aria-hidden] [ref=f156e1383]: •
+                                  - time [ref=f156e1385]: 2mo ago
+                                - link [ref=f156e1387] [cursor=pointer]:
+                                  - /url: /r/DungeonsAndDragons/comments/1w0qesc/owlbear/
+                                  - heading "List item post - Owlbear" [level=3] [ref=f156e1390]: Owlbear
+                              - link "r/DungeonsAndDragons - Owlbear" [ref=f156e1393] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/DungeonsAndDragons/comments/1w0qesc/owlbear/
+                                - img "r/DungeonsAndDragons - Owlbear" [ref=f156e1394]
+                            - generic [ref=f156e1396]:
+                              - generic [ref=f156e1397]: "451"
+                              - text: upvotes ·
+                              - generic [ref=f156e1398]: "16"
+                              - text: comments
+                          - separator [ref=f156e1399]
+                      - listitem [ref=f156e1400]:
+                        - generic [ref=f156e1401]:
+                          - generic [ref=f156e1402]:
+                            - link "My owl friend" [ref=f156e1403] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Owls/comments/1smcapp/my_owl_friend/
+                            - generic [ref=f156e1405]:
+                              - generic [ref=f156e1406]:
+                                - generic [ref=f156e1409]:
+                                  - link "r/Owls" [ref=f156e1410] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/Owls/
+                                  - generic [aria-hidden] [ref=f156e1415]: •
+                                  - time [ref=f156e1417]: 6mo ago
+                                - link [ref=f156e1419] [cursor=pointer]:
+                                  - /url: /r/Owls/comments/1smcapp/my_owl_friend/
+                                  - heading "List item post - My owl friend" [level=3] [ref=f156e1422]: My owl friend
+                              - link "r/Owls - My owl friend" [ref=f156e1425] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/Owls/comments/1smcapp/my_owl_friend/
+                                - img "r/Owls - My owl friend" [ref=f156e1426]
+                            - generic [ref=f156e1428]:
+                              - generic [ref=f156e1429]: "380"
+                              - text: upvotes ·
+                              - generic [ref=f156e1430]: "8"
+                              - text: comments
+                          - separator [ref=f156e1431]
+                      - listitem [ref=f156e1432]:
+                        - generic [ref=f156e1433]:
+                          - generic [ref=f156e1434]:
+                            - link "Helping the newbie (me) out with Owlbear Rodeo." [ref=f156e1435] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/CatsPlayingDnd/comments/1ql0rnz/helping_the_newbie_me_out_with_owlbear_rodeo/
+                            - generic [ref=f156e1437]:
+                              - generic [ref=f156e1438]:
+                                - generic [ref=f156e1441]:
+                                  - link "r/CatsPlayingDnd" [ref=f156e1442] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/CatsPlayingDnd/
+                                  - generic [aria-hidden] [ref=f156e1447]: •
+                                  - time [ref=f156e1449]: 9mo ago
+                                - link [ref=f156e1451] [cursor=pointer]:
+                                  - /url: /r/CatsPlayingDnd/comments/1ql0rnz/helping_the_newbie_me_out_with_owlbear_rodeo/
+                                  - heading "List item post - Helping the newbie (me) out with Owlbear Rodeo." [level=3] [ref=f156e1454]: Helping the newbie (me) out with Owlbear Rodeo.
+                              - link "r/CatsPlayingDnd - Helping the newbie (me) out with Owlbear Rodeo." [ref=f156e1457] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/CatsPlayingDnd/comments/1ql0rnz/helping_the_newbie_me_out_with_owlbear_rodeo/
+                                - img "r/CatsPlayingDnd - Helping the newbie (me) out with Owlbear Rodeo." [ref=f156e1458]
+                            - generic [ref=f156e1460]:
+                              - generic [ref=f156e1461]: "264"
+                              - text: upvotes ·
+                              - generic [ref=f156e1462]: "6"
+                              - text: comments
+                          - separator [ref=f156e1463]
+                      - listitem [ref=f156e1464]:
+                        - generic [ref=f156e1465]:
+                          - generic [ref=f156e1466]:
+                            - link "Shops in owlbear rodeo" [ref=f156e1467] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1td4yh1/shops_in_owlbear_rodeo/
+                            - generic [ref=f156e1469]:
+                              - generic [ref=f156e1470]:
+                                - generic [ref=f156e1473]:
+                                  - link "r/OwlbearRodeo" [ref=f156e1474] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/OwlbearRodeo/
+                                  - generic [aria-hidden] [ref=f156e1479]: •
+                                  - time [ref=f156e1481]: 5mo ago
+                                - link [ref=f156e1483] [cursor=pointer]:
+                                  - /url: /r/OwlbearRodeo/comments/1td4yh1/shops_in_owlbear_rodeo/
+                                  - heading "List item post - Shops in owlbear rodeo" [level=3] [ref=f156e1486]: Shops in owlbear rodeo
+                              - link "r/OwlbearRodeo - Shops in owlbear rodeo" [ref=f156e1489] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1td4yh1/shops_in_owlbear_rodeo/
+                                - img "r/OwlbearRodeo - Shops in owlbear rodeo" [ref=f156e1490]
+                            - generic [ref=f156e1492]:
+                              - generic [ref=f156e1493]: "64"
+                              - text: upvotes ·
+                              - generic [ref=f156e1494]: "10"
+                              - text: comments
+                          - separator [ref=f156e1495]
+                      - listitem [ref=f156e1496]:
+                        - generic [ref=f156e1497]:
+                          - generic [ref=f156e1498]:
+                            - link "First solo camp on my birthday :)" [ref=f156e1499] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/womensolocamping/comments/1uajqux/first_solo_camp_on_my_birthday/
+                            - generic [ref=f156e1501]:
+                              - generic [ref=f156e1502]:
+                                - generic [ref=f156e1505]:
+                                  - link "r/womensolocamping" [ref=f156e1506] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/womensolocamping/
+                                  - generic [aria-hidden] [ref=f156e1511]: •
+                                  - time [ref=f156e1513]: 4mo ago
+                                - link [ref=f156e1515] [cursor=pointer]:
+                                  - /url: /r/womensolocamping/comments/1uajqux/first_solo_camp_on_my_birthday/
+                                  - heading "List item post - First solo camp on my birthday :)" [level=3] [ref=f156e1518]: First solo camp on my birthday :)
+                              - link "r/womensolocamping - First solo camp on my birthday :)" [ref=f156e1521] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/womensolocamping/comments/1uajqux/first_solo_camp_on_my_birthday/
+                                - img "r/womensolocamping - First solo camp on my birthday :)" [ref=f156e1522]
+                            - generic [ref=f156e1524]:
+                              - generic [ref=f156e1525]: 2.4K
+                              - text: upvotes ·
+                              - generic [ref=f156e1526]: "62"
+                              - text: comments
+                          - separator [ref=f156e1527]
+                      - listitem [ref=f156e1528]:
+                        - generic [ref=f156e1529]:
+                          - generic [ref=f156e1530]:
+                            - link "Owl." [ref=f156e1531] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/gvvg/comments/1pa232f/owl/
+                            - generic [ref=f156e1533]:
+                              - generic [ref=f156e1534]:
+                                - generic [ref=f156e1537]:
+                                  - link "r/gvvg" [ref=f156e1538] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/gvvg/
+                                  - generic [aria-hidden] [ref=f156e1543]: •
+                                  - time [ref=f156e1545]: 1y ago
+                                - link [ref=f156e1547] [cursor=pointer]:
+                                  - /url: /r/gvvg/comments/1pa232f/owl/
+                                  - heading "List item post - Owl." [level=3] [ref=f156e1550]: Owl.
+                              - link "r/gvvg - Owl." [ref=f156e1553] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/gvvg/comments/1pa232f/owl/
+                                - img "r/gvvg - Owl." [ref=f156e1554]
+                            - generic [ref=f156e1556]:
+                              - generic [ref=f156e1557]: "933"
+                              - text: upvotes ·
+                              - generic [ref=f156e1558]: "72"
+                              - text: comments
+                          - separator [ref=f156e1559]
+                      - listitem [ref=f156e1560]:
+                        - generic [ref=f156e1561]:
+                          - generic [ref=f156e1562]:
+                            - link "Made some new friends yesterday! [OC]" [ref=f156e1563] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Owls/comments/1vx1csj/made_some_new_friends_yesterday_oc/
+                            - generic [ref=f156e1565]:
+                              - generic [ref=f156e1566]:
+                                - generic [ref=f156e1569]:
+                                  - link "r/Owls" [ref=f156e1570] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/Owls/
+                                  - generic [aria-hidden] [ref=f156e1575]: •
+                                  - time [ref=f156e1577]: 2mo ago
+                                - link [ref=f156e1579] [cursor=pointer]:
+                                  - /url: /r/Owls/comments/1vx1csj/made_some_new_friends_yesterday_oc/
+                                  - heading "List item post - Made some new friends yesterday! [OC]" [level=3] [ref=f156e1582]: Made some new friends yesterday! [OC]
+                              - link "r/Owls - Made some new friends yesterday! [OC]" [ref=f156e1585] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/Owls/comments/1vx1csj/made_some_new_friends_yesterday_oc/
+                                - img "r/Owls - Made some new friends yesterday! [OC]" [ref=f156e1586]
+                            - generic [ref=f156e1588]:
+                              - generic [ref=f156e1589]: 2K
+                              - text: upvotes ·
+                              - generic [ref=f156e1590]: "21"
+                              - text: comments
+                          - separator [ref=f156e1591]
+                      - listitem [ref=f156e1592]:
+                        - generic [ref=f156e1593]:
+                          - generic [ref=f156e1594]:
+                            - link "praise from a brand new user" [ref=f156e1595] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1tn5vwr/praise_from_a_brand_new_user/
+                            - generic [ref=f156e1598]:
+                              - generic [ref=f156e1601]:
+                                - link "r/OwlbearRodeo" [ref=f156e1602] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/OwlbearRodeo/
+                                - generic [aria-hidden] [ref=f156e1607]: •
+                                - time [ref=f156e1609]: 5mo ago
+                              - link [ref=f156e1611] [cursor=pointer]:
+                                - /url: /r/OwlbearRodeo/comments/1tn5vwr/praise_from_a_brand_new_user/
+                                - heading "List item post - praise from a brand new user" [level=3] [ref=f156e1614]: praise from a brand new user
+                            - generic [ref=f156e1616]:
+                              - generic [ref=f156e1617]: "63"
+                              - text: upvotes ·
+                              - generic [ref=f156e1618]: "14"
+                              - text: comments
+                          - separator [ref=f156e1619]
+                      - listitem [ref=f156e1620]:
+                        - generic [ref=f156e1621]:
+                          - generic [ref=f156e1622]:
+                            - link "So OwlBear Rodeo, do yall love it?" [ref=f156e1623] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1s17cz4/so_owlbear_rodeo_do_yall_love_it/
+                            - generic [ref=f156e1626]:
+                              - generic [ref=f156e1629]:
+                                - link "r/OwlbearRodeo" [ref=f156e1630] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/OwlbearRodeo/
+                                - generic [aria-hidden] [ref=f156e1635]: •
+                                - time [ref=f156e1637]: 7mo ago
+                              - link [ref=f156e1639] [cursor=pointer]:
+                                - /url: /r/OwlbearRodeo/comments/1s17cz4/so_owlbear_rodeo_do_yall_love_it/
+                                - heading "List item post - So OwlBear Rodeo, do yall love it?" [level=3] [ref=f156e1642]: So OwlBear Rodeo, do yall love it?
+                            - generic [ref=f156e1644]:
+                              - generic [ref=f156e1645]: "74"
+                              - text: upvotes ·
+                              - generic [ref=f156e1646]: "49"
+                              - text: comments
+                          - separator [ref=f156e1647]
+                      - listitem [ref=f156e1648]:
+                        - generic [ref=f156e1649]:
+                          - generic [ref=f156e1650]:
+                            - link "Magical owlbear wanderer salesman" [ref=f156e1651] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/ImaginaryAww/comments/1p8v32t/magical_owlbear_wanderer_salesman/
+                            - generic [ref=f156e1653]:
+                              - generic [ref=f156e1654]:
+                                - generic [ref=f156e1657]:
+                                  - link "r/ImaginaryAww" [ref=f156e1658] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/ImaginaryAww/
+                                  - generic [aria-hidden] [ref=f156e1663]: •
+                                  - time [ref=f156e1665]: 1y ago
+                                - link [ref=f156e1667] [cursor=pointer]:
+                                  - /url: /r/ImaginaryAww/comments/1p8v32t/magical_owlbear_wanderer_salesman/
+                                  - heading "List item post - Magical owlbear wanderer salesman" [level=3] [ref=f156e1670]: Magical owlbear wanderer salesman
+                              - link "r/ImaginaryAww - Magical owlbear wanderer salesman" [ref=f156e1673] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/ImaginaryAww/comments/1p8v32t/magical_owlbear_wanderer_salesman/
+                                - img "r/ImaginaryAww - Magical owlbear wanderer salesman" [ref=f156e1674]
+                            - generic [ref=f156e1676]:
+                              - generic [ref=f156e1677]: "199"
+                              - text: upvotes ·
+                              - generic [ref=f156e1678]: "6"
+                              - text: comments
+                          - separator [ref=f156e1679]
+                      - listitem [ref=f156e1680]:
+                        - generic [ref=f156e1681]:
+                          - generic [ref=f156e1682]:
+                            - link "New Owl Friend🦉" [ref=f156e1683] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/aww/comments/1pr3x4x/new_owl_friend/
+                            - generic [ref=f156e1685]:
+                              - generic [ref=f156e1686]:
+                                - generic [ref=f156e1689]:
+                                  - link "r/aww" [ref=f156e1690] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/aww/
+                                  - generic [aria-hidden] [ref=f156e1695]: •
+                                  - time [ref=f156e1697]: 10mo ago
+                                - link [ref=f156e1699] [cursor=pointer]:
+                                  - /url: /r/aww/comments/1pr3x4x/new_owl_friend/
+                                  - heading "List item post - New Owl Friend🦉" [level=3] [ref=f156e1702]: New Owl Friend🦉
+                              - link "r/aww - New Owl Friend🦉" [ref=f156e1705] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/aww/comments/1pr3x4x/new_owl_friend/
+                                - img "r/aww - New Owl Friend🦉" [ref=f156e1706]
+                            - generic [ref=f156e1708]:
+                              - generic [ref=f156e1709]: "210"
+                              - text: upvotes ·
+                              - generic [ref=f156e1710]: "8"
+                              - text: comments
+                          - separator [ref=f156e1711]
+                      - listitem [ref=f156e1712]:
+                        - generic [ref=f156e1713]:
+                          - generic [ref=f156e1714]:
+                            - link "First ROM Hack and I had a blast" [ref=f156e1715] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/PokemonUnbound/comments/1thy6n3/first_rom_hack_and_i_had_a_blast/
+                            - generic [ref=f156e1717]:
+                              - generic [ref=f156e1718]:
+                                - generic [ref=f156e1721]:
+                                  - link "r/PokemonUnbound" [ref=f156e1722] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/PokemonUnbound/
+                                  - generic [aria-hidden] [ref=f156e1727]: •
+                                  - time [ref=f156e1729]: 5mo ago
+                                - link [ref=f156e1731] [cursor=pointer]:
+                                  - /url: /r/PokemonUnbound/comments/1thy6n3/first_rom_hack_and_i_had_a_blast/
+                                  - heading "List item post - First ROM Hack and I had a blast" [level=3] [ref=f156e1734]: First ROM Hack and I had a blast
+                              - link "r/PokemonUnbound - First ROM Hack and I had a blast" [ref=f156e1737] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/PokemonUnbound/comments/1thy6n3/first_rom_hack_and_i_had_a_blast/
+                                - img "r/PokemonUnbound - First ROM Hack and I had a blast" [ref=f156e1738]
+                            - generic [ref=f156e1740]:
+                              - generic [ref=f156e1741]: "49"
+                              - text: upvotes ·
+                              - generic [ref=f156e1742]: "4"
+                              - text: comments
+                          - separator [ref=f156e1743]
+                      - listitem [ref=f156e1744]:
+                        - generic [ref=f156e1745]:
+                          - generic [ref=f156e1746]:
+                            - link "I had my first surfing session and it was a total failure" [ref=f156e1747] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/BeginnerSurfers/comments/1ubx431/i_had_my_first_surfing_session_and_it_was_a_total/
+                            - generic [ref=f156e1750]:
+                              - generic [ref=f156e1753]:
+                                - link "r/BeginnerSurfers" [ref=f156e1754] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/BeginnerSurfers/
+                                - generic [aria-hidden] [ref=f156e1759]: •
+                                - time [ref=f156e1761]: 4mo ago
+                              - link [ref=f156e1763] [cursor=pointer]:
+                                - /url: /r/BeginnerSurfers/comments/1ubx431/i_had_my_first_surfing_session_and_it_was_a_total/
+                                - heading "List item post - I had my first surfing session and it was a total failure" [level=3] [ref=f156e1766]: I had my first surfing session and it was a total failure
+                            - generic [ref=f156e1768]:
+                              - generic [ref=f156e1769]: "22"
+                              - text: upvotes ·
+                              - generic [ref=f156e1770]: "53"
+                              - text: comments
+                          - separator [ref=f156e1771]
+                      - listitem [ref=f156e1772]:
+                        - generic [ref=f156e1773]:
+                          - generic [ref=f156e1774]:
+                            - link "Ol' buddy didn't make me work too hard to find him tonight!" [ref=f156e1775] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Owls/comments/1tz0bix/ol_buddy_didnt_make_me_work_too_hard_to_find_him/
+                            - generic [ref=f156e1777]:
+                              - generic [ref=f156e1778]:
+                                - generic [ref=f156e1781]:
+                                  - link "r/Owls" [ref=f156e1782] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/Owls/
+                                  - generic [aria-hidden] [ref=f156e1787]: •
+                                  - time [ref=f156e1789]: 4mo ago
+                                - link [ref=f156e1791] [cursor=pointer]:
+                                  - /url: /r/Owls/comments/1tz0bix/ol_buddy_didnt_make_me_work_too_hard_to_find_him/
+                                  - heading "List item post - Ol' buddy didn't make me work too hard to find him tonight!" [level=3] [ref=f156e1794]: Ol' buddy didn't make me work too hard to find him tonight!
+                              - link "r/Owls - Ol' buddy didn't make me work too hard to find him tonight!" [ref=f156e1797] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/Owls/comments/1tz0bix/ol_buddy_didnt_make_me_work_too_hard_to_find_him/
+                                - img "r/Owls - Ol' buddy didn't make me work too hard to find him tonight!" [ref=f156e1798]
+                            - generic [ref=f156e1800]:
+                              - generic [ref=f156e1801]: "795"
+                              - text: upvotes ·
+                              - generic [ref=f156e1802]: "7"
+                              - text: comments
+                          - separator [ref=f156e1803]
+                      - listitem [ref=f156e1804]:
+                        - generic [ref=f156e1806]:
+                          - link "I passed A+ Core 1 first try with an 802!" [ref=f156e1807] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/CompTIA/comments/1ufp973/i_passed_a_core_1_first_try_with_an_802/
+                          - generic [ref=f156e1809]:
+                            - generic [ref=f156e1810]:
+                              - generic [ref=f156e1813]:
+                                - link "r/CompTIA" [ref=f156e1814] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/CompTIA/
+                                - generic [aria-hidden] [ref=f156e1819]: •
+                                - time [ref=f156e1821]: 4mo ago
+                              - link [ref=f156e1823] [cursor=pointer]:
+                                - /url: /r/CompTIA/comments/1ufp973/i_passed_a_core_1_first_try_with_an_802/
+                                - heading "List item post - I passed A+ Core 1 first try with an 802!" [level=3] [ref=f156e1826]: I passed A+ Core 1 first try with an 802!
+                            - link "r/CompTIA - I passed A+ Core 1 first try with an 802!" [ref=f156e1829] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/CompTIA/comments/1ufp973/i_passed_a_core_1_first_try_with_an_802/
+                              - img "r/CompTIA - I passed A+ Core 1 first try with an 802!" [ref=f156e1830]
+                          - generic [ref=f156e1832]:
+                            - generic [ref=f156e1833]: "107"
+                            - text: upvotes ·
+                            - generic [ref=f156e1834]: "7"
+                            - text: comments
+                  - generic [ref=f156e1835]:
+                    - heading "View Post in" [level=2] [ref=f156e1837]
+                    - generic [ref=f156e1839]:
+                      - link "Français" [ref=f156e1841] [cursor=pointer]:
+                        - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1uxilcy/first_online_session_with_my_group_was_a_success/?tl=fr
+                      - link "Português (Brasil)" [ref=f156e1843] [cursor=pointer]:
+                        - /url: https://www.reddit.com/r/OwlbearRodeo/comments/1uxilcy/first_online_session_with_my_group_was_a_success/?tl=pt-br
+                      - group [ref=f156e1844]:
+                        - generic "See more" [ref=f156e1845] [cursor=pointer]
+                  - complementary "Community information" [ref=f156e1850]:
+                    - generic [ref=f156e1852]:
+                      - heading "Community Info Section" [level=1] [ref=f156e1853]
+                      - generic [ref=f156e1854]:
+                        - link "r/OwlbearRodeo" [ref=f156e1856] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/
+                        - button "Join" [ref=f156e1861] [cursor=pointer]
+                      - generic [ref=f156e1862]:
+                        - generic [ref=f156e1863]: OwlbearRodeo
+                        - generic [ref=f156e1865]: An online experience for shared tabletop roleplaying games https://owlbear.rodeo
+                        - generic: Public
+              - list [ref=f156e1872]:
+                - listitem [ref=f156e1873]:
+                  - link "Home" [ref=f156e1875] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f156e1876]:
+                  - link "Popular" [ref=f156e1878] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f156e1879]:
+                  - link "News" [ref=f156e1881] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f156e1882]:
+                  - link "Explore" [ref=f156e1884] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f156e1885]:
+                  - link "Best of Reddit" [ref=f156e1887] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f156e1888]:
+                  - link "Best of Reddit in Portuguese" [ref=f156e1890] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f156e1891]:
+                  - link "Best of Reddit in German" [ref=f156e1893] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f156e1894]:
+                  - link "Reddit Rules" [ref=f156e1896] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f156e1897]:
+                  - link "Privacy Policy" [ref=f156e1899] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f156e1900]:
+                  - link "User Agreement" [ref=f156e1902] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f156e1903]:
+                  - link "Accessibility" [ref=f156e1905] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f156e1906]:
+                  - link "Reddit, Inc. © 2026. All rights reserved." [ref=f156e1907] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f156e1910]:
+          - paragraph [ref=f156e1911]: Join the most real place on the internet
+          - generic [ref=f156e1913]:
+            - generic [ref=f156e1916]:
+              - iframe [ref=f156e1921]:
+                - button "Continue with Google. Opens in new tab" [ref=f159e3] [cursor=pointer]:
+                  - generic [ref=f159e5]: Continue with Google
+              - generic [ref=f156e1923] [cursor=pointer]:
+                - generic [ref=f156e1924]: Continue with Apple
+                - button "Sign in with Apple" [ref=f156e1930]:
+                  - generic [ref=f156e1931]:
+                    - img:
+                      - generic:
+                        - img:
+                          - generic:  Sign in with Apple
+            - link "Continue with Phone Number" [ref=f156e1936] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - link "Continue with Email" [ref=f156e1945] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+          - paragraph [ref=f156e1952]:
+            - text: By continuing, you agree to our
+            - link "User Agreement" [ref=f156e1953] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: and acknowledge that you understand the
+            - link "Privacy Policy" [ref=f156e1954] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: .

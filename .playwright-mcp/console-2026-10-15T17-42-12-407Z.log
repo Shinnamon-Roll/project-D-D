@@ -1,0 +1,15 @@
+[    2487ms] [ERROR] Subresource Integrity: The resource 'https://cdn-4.convertexperiments.com/v1/js/10042023-10042444.js' has an integrity attribute, but the resource requires the request to be CORS enabled to check the integrity, and it is not. The resource has been blocked because the integrity cannot be enforced. @ https://roll20.net/:0
+[    2759ms] [LOG] Not logged in - checking cookie GDPR status @ https://roll20.net/:442
+[    2759ms] [LOG] No GPDR Cookie Detected @ https://roll20.net/:445
+[    2836ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "username"): (More info: https://goo.gl/9p2vKq) %o @ https://roll20.net/:0
+[    2836ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "username"): (More info: https://goo.gl/9p2vKq) %o @ https://roll20.net/:0
+[    2836ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "username"): (More info: https://goo.gl/9p2vKq) %o @ https://roll20.net/:0
+[    2836ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "username"): (More info: https://goo.gl/9p2vKq) %o @ https://roll20.net/:0
+[    2836ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "username"): (More info: https://goo.gl/9p2vKq) %o @ https://roll20.net/:0
+[    2836ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "username"): (More info: https://goo.gl/9p2vKq) %o @ https://roll20.net/:0
+[    2836ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "username"): (More info: https://goo.gl/9p2vKq) %o @ https://roll20.net/:0
+[    2836ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "username"): (More info: https://goo.gl/9p2vKq) %o @ https://roll20.net/:0
+[    3260ms] [LOG] UET GTM listening for consent updates @ https://www.googletagmanager.com/gtm.js?id=GTM-MKL9HM6&gtm_auth=RyNPjkDTh-LgK4oo5gJi6A&gtm_preview=env-1&gtm_cookies_win=x:1066
+[    4165ms] [LOG] {id: 14633, date: 2026-10-06T14:52:30, date_gmt: 2026-10-06T19:52:30, guid: Object, modified: 2026-10-06T15:10:27} @ https://roll20.net/:1291
+[    4172ms] [LOG] {id: 14560, date: 2026-10-05T12:52:49, date_gmt: 2026-10-05T17:52:49, guid: Object, modified: 2026-10-05T13:48:50} @ https://roll20.net/:1291
+[    4172ms] [LOG] {id: 14550, date: 2026-09-29T08:57:30, date_gmt: 2026-09-29T13:57:30, guid: Object, modified: 2026-09-29T09:53:25} @ https://roll20.net/:1291

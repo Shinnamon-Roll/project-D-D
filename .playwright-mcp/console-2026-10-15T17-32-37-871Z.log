@@ -1,0 +1,2 @@
+[     676ms] [ERROR] Executing inline script violates the following Content Security Policy directive 'script-src-elem 'self' https://challenges.cloudflare.com'. Either the 'unsafe-inline' keyword, a hash ('sha256-r5cQ7DGKRRp9maAmCDVdXv8iiybqQi19EXfquO56CmU='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked. @ about:srcdoc:0
+[   10676ms] [LOG] jsd outcome timeout @ https://www.owlbear.rodeo/assets/index-BXTDwbIo.js:276

@@ -1,0 +1,70 @@
+- generic [ref=f13e1]:
+  - link "Skip to main content" [ref=f13e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f13e6]:
+    - generic:
+      - banner [ref=f13e7]
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - tabpanel:
+                              - dialog "Log in to use old Reddit" [ref=f13e35]:
+                                - generic [ref=f13e39]:
+                                  - heading "Log in to use old Reddit" [level=1] [ref=f13e40]
+                                  - paragraph [ref=f13e41]:
+                                    - text: To keep Reddit safe, accounts are required to access old Reddit. Log in, or continue without an account on
+                                    - link "reddit.com" [active] [ref=f13e42] [cursor=pointer]:
+                                      - /url: https://www.reddit.com
+                                    - text: .
+                                  - paragraph [ref=f13e43]:
+                                    - text: By continuing, you agree to our
+                                    - link "User Agreement" [ref=f13e44] [cursor=pointer]:
+                                      - /url: https://www.redditinc.com/policies/user-agreement
+                                    - text: and acknowledge that you understand the
+                                    - link "Privacy Policy" [ref=f13e45] [cursor=pointer]:
+                                      - /url: https://www.redditinc.com/policies/privacy-policy
+                                    - text: .
+                                  - generic [ref=f13e46]:
+                                    - link "Continue with Phone Number" [ref=f13e48] [cursor=pointer]:
+                                      - /url: https://www.reddit.com/login/
+                                    - iframe [ref=f13e63]:
+                                      - button "Continue with Google. Opens in new tab" [ref=f16e3] [cursor=pointer]:
+                                        - generic [ref=f16e5]: Continue with Google
+                                    - link "Email me a one-time link" [ref=f13e65] [cursor=pointer]:
+                                      - /url: https://www.reddit.com/login/
+                                    - generic [ref=f13e71]:
+                                      - separator [ref=f13e72]
+                                      - generic [ref=f13e73]: OR
+                                      - separator [ref=f13e74]
+                                  - group [ref=f13e75]:
+                                    - generic [ref=f13e80]:
+                                      - generic:
+                                        - generic: Email or username
+                                        - text: "*"
+                                      - textbox "Email or username" [ref=f13e81]
+                                  - group [ref=f13e86]:
+                                    - generic [ref=f13e90]:
+                                      - generic [ref=f13e91]:
+                                        - generic:
+                                          - generic: Password
+                                          - text: "*"
+                                        - textbox "Password" [ref=f13e92]
+                                      - button "Show password" [ref=f13e96] [cursor=pointer]
+                                  - link "Forgot password?" [ref=f13e110] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/password/
+                                  - generic [ref=f13e112]:
+                                    - text: New to Reddit?
+                                    - link "Sign Up" [ref=f13e114] [cursor=pointer]:
+                                      - /url: https://www.reddit.com/register/
+                                - generic [ref=f13e119]:
+                                  - button "Log In" [disabled]
+                            - generic: back
+                            - generic: back

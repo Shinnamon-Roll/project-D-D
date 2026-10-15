@@ -1,0 +1,468 @@
+- generic [active] [ref=f65e1]:
+  - link "Skip to main content" [ref=f65e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f65e6]:
+    - generic:
+      - generic: owlbear rodeo foundry roll20 - Reddit Search!
+      - banner [ref=f65e10]:
+        - navigation [ref=f65e11]:
+          - link "Home" [ref=f65e15] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - search [ref=f65e34]:
+            - generic [ref=f65e36]:
+              - generic "Remove r/rpg filter and expand search to all of Reddit" [ref=f65e42] [cursor=pointer]:
+                - button [pressed] [ref=f65e43]:
+                  - generic [aria-hidden] [ref=f65e47]: r/rpg
+              - textbox "Remove r/rpg filter and expand search to all of Reddit Clear search" [ref=f65e53]:
+                - /placeholder: Search in ⁨r/rpg⁩
+                - text: owlbear rodeo foundry roll20
+              - button "Clear search" [ref=f65e55] [cursor=pointer]
+          - generic [ref=f65e61]:
+            - link "Sign Up" [ref=f65e67] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Log In" [ref=f65e73] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Expand user menu" [ref=f65e80] [cursor=pointer]
+      - generic "owlbear rodeo foundry roll20 - Reddit Search!"
+      - generic [ref=f65e89]:
+        - generic [ref=f65e90]:
+          - generic [ref=f65e93]:
+            - generic [ref=f65e94]:
+              - generic [ref=f65e97]:
+                - tablist [ref=f65e98]:
+                  - tab [selected] [ref=f65e99]:
+                    - link "Posts" [ref=f65e100] [cursor=pointer]:
+                      - /url: /r/rpg/search/?q=owlbear+rodeo+foundry+roll20&type=posts&iId=5993f521-32be-4cc5-ba97-ea115c5cb8b5
+                  - tab [ref=f65e106]:
+                    - link "Comments" [ref=f65e107] [cursor=pointer]:
+                      - /url: /r/rpg/search/?q=owlbear+rodeo+foundry+roll20&type=comments&iId=5993f521-32be-4cc5-ba97-ea115c5cb8b5
+                  - tab [ref=f65e113]:
+                    - link "Media" [ref=f65e114] [cursor=pointer]:
+                      - /url: /r/rpg/search/?q=owlbear+rodeo+foundry+roll20&type=media&iId=5993f521-32be-4cc5-ba97-ea115c5cb8b5
+                - button "forward" [ref=f65e121] [cursor=pointer]
+                - button "back" [ref=f65e128] [cursor=pointer]
+              - generic:
+                - generic:
+                  - tabpanel
+            - generic [ref=f65e135]:
+              - button "Top" [ref=f65e139] [cursor=pointer]
+              - button "All time" [ref=f65e148] [cursor=pointer]
+          - generic [ref=f65e155]:
+            - generic:
+              - generic:
+                - link "Skip to Sign up" [ref=f65e156] [cursor=pointer]:
+                  - /url: "#left-sidebar-container"
+                - link "Skip to Right Sidebar" [ref=f65e157] [cursor=pointer]:
+                  - /url: "#right-sidebar-container"
+          - generic [ref=f65e158]:
+            - main [ref=f65e159]:
+              - generic [ref=f65e160]:
+                - paragraph [ref=f65e163]:
+                  - text: Show results from
+                  - link "all of Reddit" [ref=f65e165] [cursor=pointer]:
+                    - /url: /search/?q=owlbear+rodeo+foundry+roll20
+                - generic [ref=f65e170]:
+                  - generic [ref=f65e171]:
+                    - generic:
+                      - heading "Complete Delta Green line on Humble Bundle for $25 USD" [level=2]:
+                        - link "Complete Delta Green line on Humble Bundle for $25 USD" [ref=f65e172] [cursor=pointer]:
+                          - /url: /r/rpg/comments/1jfvtxr/complete_delta_green_line_on_humble_bundle_for_25/
+                    - generic [ref=f65e174]:
+                      - generic [ref=f65e177]:
+                        - link "r/rpg" [ref=f65e180] [cursor=pointer]:
+                          - /url: /r/rpg/
+                        - generic [ref=f65e185]: ·
+                        - time [ref=f65e187]: 2y ago
+                      - link "Complete Delta Green line on Humble Bundle for $25 USD" [ref=f65e188] [cursor=pointer]:
+                        - /url: /r/rpg/comments/1jfvtxr/complete_delta_green_line_on_humble_bundle_for_25/
+                      - generic [ref=f65e189]:
+                        - generic [ref=f65e190]:
+                          - generic [ref=f65e191]: "473"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f65e192]:
+                          - generic [ref=f65e193]: "79"
+                          - text: comments
+                  - link "Complete Delta Green line on Humble Bundle for $25 USD thumbnail image" [ref=f65e196] [cursor=pointer]:
+                    - /url: https://www.humblebundle.com/books/delta-green-rpg-vtt-fiction-collection-books
+                    - img "Complete Delta Green line on Humble Bundle for $25 USD" [ref=f65e201]
+                - separator [ref=f65e202]
+                - generic [ref=f65e205]:
+                  - generic:
+                    - heading "The new Paizo Fan Content Policy affects more than just 1e, and a highlight on the Infinite license." [level=2]:
+                      - link "The new Paizo Fan Content Policy affects more than just 1e, and a highlight on the Infinite license." [ref=f65e206] [cursor=pointer]:
+                        - /url: /r/rpg/comments/1ey8bgr/the_new_paizo_fan_content_policy_affects_more/
+                  - generic [ref=f65e208]:
+                    - generic [ref=f65e211]:
+                      - link "r/rpg" [ref=f65e214] [cursor=pointer]:
+                        - /url: /r/rpg/
+                      - generic [ref=f65e219]: ·
+                      - time [ref=f65e221]: 2y ago
+                    - link "The new Paizo Fan Content Policy affects more than just 1e, and a highlight on the Infinite license." [ref=f65e222] [cursor=pointer]:
+                      - /url: /r/rpg/comments/1ey8bgr/the_new_paizo_fan_content_policy_affects_more/
+                    - generic [ref=f65e223]:
+                      - generic [ref=f65e224]:
+                        - generic [ref=f65e225]: "472"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f65e226]:
+                        - generic [ref=f65e227]: "230"
+                        - text: comments
+                - separator [ref=f65e228]
+                - generic [ref=f65e230]:
+                  - generic [ref=f65e231]:
+                    - generic:
+                      - 'heading "An alternative Virtual tabletop: owlbear.rodeo. It has just enough features to be enticing, but not too many that it makes it overwhelming to learn." [level=2]':
+                        - 'link "An alternative Virtual tabletop: owlbear.rodeo. It has just enough features to be enticing, but not too many that it makes it overwhelming to learn." [ref=f65e232] [cursor=pointer]':
+                          - /url: /r/rpg/comments/mk9ypm/an_alternative_virtual_tabletop_owlbearrodeo_it/
+                    - generic [ref=f65e234]:
+                      - generic [ref=f65e237]:
+                        - link "r/rpg" [ref=f65e240] [cursor=pointer]:
+                          - /url: /r/rpg/
+                        - generic [ref=f65e245]: ·
+                        - time [ref=f65e247]: 6y ago
+                      - 'link "An alternative Virtual tabletop: owlbear.rodeo. It has just enough features to be enticing, but not too many that it makes it overwhelming to learn." [ref=f65e248] [cursor=pointer]':
+                        - /url: /r/rpg/comments/mk9ypm/an_alternative_virtual_tabletop_owlbearrodeo_it/
+                      - generic [ref=f65e249]:
+                        - generic [ref=f65e250]:
+                          - generic [ref=f65e251]: "370"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f65e252]:
+                          - generic [ref=f65e253]: "79"
+                          - text: comments
+                  - 'link "An alternative Virtual tabletop: owlbear.rodeo. It has just enough features to be enticing, but not too many that it makes it overwhelming to learn. thumbnail image" [ref=f65e256] [cursor=pointer]':
+                    - /url: https://www.Owlbear.rodeo
+                    - 'img "An alternative Virtual tabletop: owlbear.rodeo. It has just enough features to be enticing, but not too many that it makes it overwhelming to learn." [ref=f65e261]'
+                - separator [ref=f65e262]
+                - generic [ref=f65e265]:
+                  - generic:
+                    - heading "Draw Steel confirm $30USD/person price for VTT, and recommend Owlbear Rodio as the 'default' online alternative to this 'premium'version" [level=2]:
+                      - link "Draw Steel confirm $30USD/person price for VTT, and recommend Owlbear Rodio as the 'default' online alternative to this 'premium'version" [ref=f65e266] [cursor=pointer]:
+                        - /url: /r/rpg/comments/1s233l1/draw_steel_confirm_30usdperson_price_for_vtt_and/
+                  - generic [ref=f65e268]:
+                    - generic [ref=f65e271]:
+                      - link "r/rpg" [ref=f65e274] [cursor=pointer]:
+                        - /url: /r/rpg/
+                      - generic [ref=f65e279]: ·
+                      - time [ref=f65e281]: 7mo ago
+                    - link "Draw Steel confirm $30USD/person price for VTT, and recommend Owlbear Rodio as the 'default' online alternative to this 'premium'version" [ref=f65e282] [cursor=pointer]:
+                      - /url: /r/rpg/comments/1s233l1/draw_steel_confirm_30usdperson_price_for_vtt_and/
+                    - generic [ref=f65e283]:
+                      - generic [ref=f65e284]:
+                        - generic [ref=f65e285]: "334"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f65e286]:
+                        - generic [ref=f65e287]: "368"
+                        - text: comments
+                - separator [ref=f65e288]
+                - generic [ref=f65e291]:
+                  - generic:
+                    - heading "The TTRPG Community in 2025 - Results" [level=2]:
+                      - link "The TTRPG Community in 2025 - Results" [ref=f65e292] [cursor=pointer]:
+                        - /url: /r/rpg/comments/1q2sso6/the_ttrpg_community_in_2025_results/
+                  - generic [ref=f65e294]:
+                    - generic [ref=f65e297]:
+                      - link "r/rpg" [ref=f65e300] [cursor=pointer]:
+                        - /url: /r/rpg/
+                      - generic [ref=f65e305]: ·
+                      - time [ref=f65e307]: 10mo ago
+                    - link "The TTRPG Community in 2025 - Results" [ref=f65e308] [cursor=pointer]:
+                      - /url: /r/rpg/comments/1q2sso6/the_ttrpg_community_in_2025_results/
+                    - generic [ref=f65e309]:
+                      - generic [ref=f65e310]:
+                        - generic [ref=f65e311]: "323"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f65e312]:
+                        - generic [ref=f65e313]: "59"
+                        - text: comments
+                - separator [ref=f65e314]
+                - generic [ref=f65e316]:
+                  - generic [ref=f65e317]:
+                    - generic:
+                      - heading "Owlbear Rodeo VTT 2.0 is coming soon!" [level=2]:
+                        - link "Owlbear Rodeo VTT 2.0 is coming soon!" [ref=f65e318] [cursor=pointer]:
+                          - /url: /r/rpg/comments/tksvd6/owlbear_rodeo_vtt_20_is_coming_soon/
+                    - generic [ref=f65e320]:
+                      - generic [ref=f65e323]:
+                        - link "r/rpg" [ref=f65e326] [cursor=pointer]:
+                          - /url: /r/rpg/
+                        - generic [ref=f65e331]: ·
+                        - time [ref=f65e333]: 5y ago
+                      - link "Owlbear Rodeo VTT 2.0 is coming soon!" [ref=f65e334] [cursor=pointer]:
+                        - /url: /r/rpg/comments/tksvd6/owlbear_rodeo_vtt_20_is_coming_soon/
+                      - generic [ref=f65e335]:
+                        - generic [ref=f65e336]:
+                          - generic [ref=f65e337]: "281"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f65e338]:
+                          - generic [ref=f65e339]: "53"
+                          - text: comments
+                  - link "Owlbear Rodeo VTT 2.0 is coming soon! thumbnail image" [ref=f65e342] [cursor=pointer]:
+                    - /url: https://www.patreon.com/posts/livestream-march-64055165
+                    - img "Owlbear Rodeo VTT 2.0 is coming soon!" [ref=f65e347]
+                - separator [ref=f65e348]
+                - generic [ref=f65e351]:
+                  - generic:
+                    - heading "I have tried Draw Steel and it was unexpectedly awesome!" [level=2]:
+                      - link "I have tried Draw Steel and it was unexpectedly awesome!" [ref=f65e352] [cursor=pointer]:
+                        - /url: /r/rpg/comments/1n5jm7z/i_have_tried_draw_steel_and_it_was_unexpectedly/
+                  - generic [ref=f65e354]:
+                    - generic [ref=f65e357]:
+                      - link "r/rpg" [ref=f65e360] [cursor=pointer]:
+                        - /url: /r/rpg/
+                      - generic [ref=f65e365]: ·
+                      - time [ref=f65e367]: 1y ago
+                    - link "I have tried Draw Steel and it was unexpectedly awesome!" [ref=f65e368] [cursor=pointer]:
+                      - /url: /r/rpg/comments/1n5jm7z/i_have_tried_draw_steel_and_it_was_unexpectedly/
+                    - generic [ref=f65e369]:
+                      - generic [ref=f65e370]:
+                        - generic [ref=f65e371]: "273"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f65e372]:
+                        - generic [ref=f65e373]: "53"
+                        - text: comments
+                - separator [ref=f65e374]
+                - generic [ref=f65e377]:
+                  - generic:
+                    - heading "So, I ran the same adventure in Pathfinder 2 and D&D 4th edition." [level=2]:
+                      - link "So, I ran the same adventure in Pathfinder 2 and D&D 4th edition." [ref=f65e378] [cursor=pointer]:
+                        - /url: /r/rpg/comments/yn8yus/so_i_ran_the_same_adventure_in_pathfinder_2_and/
+                  - generic [ref=f65e380]:
+                    - generic [ref=f65e383]:
+                      - link "r/rpg" [ref=f65e385] [cursor=pointer]:
+                        - /url: /r/rpg/
+                      - generic [ref=f65e390]: ·
+                      - time [ref=f65e392]: 4y ago
+                    - link "So, I ran the same adventure in Pathfinder 2 and D&D 4th edition." [ref=f65e393] [cursor=pointer]:
+                      - /url: /r/rpg/comments/yn8yus/so_i_ran_the_same_adventure_in_pathfinder_2_and/
+                    - generic [ref=f65e394]:
+                      - generic [ref=f65e395]:
+                        - generic [ref=f65e396]: "263"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f65e397]:
+                        - generic [ref=f65e398]: "184"
+                        - text: comments
+                - separator [ref=f65e399]
+                - generic [ref=f65e402]:
+                  - generic:
+                    - heading "Am I alone in wanting a crazy simple VTT over a complex one?" [level=2]:
+                      - link "Am I alone in wanting a crazy simple VTT over a complex one?" [ref=f65e403] [cursor=pointer]:
+                        - /url: /r/rpg/comments/1ems8pn/am_i_alone_in_wanting_a_crazy_simple_vtt_over_a/
+                  - generic [ref=f65e405]:
+                    - generic [ref=f65e408]:
+                      - link "r/rpg" [ref=f65e410] [cursor=pointer]:
+                        - /url: /r/rpg/
+                      - generic [ref=f65e415]: ·
+                      - time [ref=f65e417]: 2y ago
+                    - link "Am I alone in wanting a crazy simple VTT over a complex one?" [ref=f65e418] [cursor=pointer]:
+                      - /url: /r/rpg/comments/1ems8pn/am_i_alone_in_wanting_a_crazy_simple_vtt_over_a/
+                    - generic [ref=f65e419]:
+                      - generic [ref=f65e420]:
+                        - generic [ref=f65e421]: "181"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f65e422]:
+                        - generic [ref=f65e423]: "170"
+                        - text: comments
+                - separator [ref=f65e424]
+                - generic [ref=f65e427]:
+                  - generic:
+                    - heading "Limithron, creator of pirate themed Mork Borg supplement Pirate Borg, apologizes for racist monkey caricature in book." [level=2]:
+                      - link "Limithron, creator of pirate themed Mork Borg supplement Pirate Borg, apologizes for racist monkey caricature in book." [ref=f65e428] [cursor=pointer]:
+                        - /url: /r/rpg/comments/10m623l/limithron_creator_of_pirate_themed_mork_borg/
+                  - generic [ref=f65e430]:
+                    - generic [ref=f65e433]:
+                      - link "r/rpg" [ref=f65e435] [cursor=pointer]:
+                        - /url: /r/rpg/
+                      - generic [ref=f65e440]: ·
+                      - time [ref=f65e442]: 4y ago
+                    - link "Limithron, creator of pirate themed Mork Borg supplement Pirate Borg, apologizes for racist monkey caricature in book." [ref=f65e443] [cursor=pointer]:
+                      - /url: /r/rpg/comments/10m623l/limithron_creator_of_pirate_themed_mork_borg/
+                    - generic [ref=f65e444]:
+                      - generic [ref=f65e445]:
+                        - generic [ref=f65e446]: "153"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f65e447]:
+                        - generic [ref=f65e448]: "163"
+                        - text: comments
+                - separator [ref=f65e449]
+                - generic [ref=f65e452]:
+                  - generic:
+                    - heading "System for XCOM like game?" [level=2]:
+                      - link "System for XCOM like game?" [ref=f65e453] [cursor=pointer]:
+                        - /url: /r/rpg/comments/qf8zn0/system_for_xcom_like_game/
+                  - generic [ref=f65e455]:
+                    - generic [ref=f65e458]:
+                      - link "r/rpg" [ref=f65e460] [cursor=pointer]:
+                        - /url: /r/rpg/
+                      - generic [ref=f65e465]: ·
+                      - time [ref=f65e467]: 5y ago
+                    - link "System for XCOM like game?" [ref=f65e468] [cursor=pointer]:
+                      - /url: /r/rpg/comments/qf8zn0/system_for_xcom_like_game/
+                    - generic [ref=f65e469]:
+                      - generic [ref=f65e470]:
+                        - generic [ref=f65e471]: "141"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f65e472]:
+                        - generic [ref=f65e473]: "109"
+                        - text: comments
+                - separator [ref=f65e474]
+                - generic [ref=f65e476]:
+                  - generic [ref=f65e477]:
+                    - generic:
+                      - heading "Kenku FM. A pwyw discord ttrpg audio bot from the creators of Owlbear Rodeo." [level=2]:
+                        - link "Kenku FM. A pwyw discord ttrpg audio bot from the creators of Owlbear Rodeo." [ref=f65e478] [cursor=pointer]:
+                          - /url: /r/rpg/comments/tsqk6w/kenku_fm_a_pwyw_discord_ttrpg_audio_bot_from_the/
+                    - generic [ref=f65e480]:
+                      - generic [ref=f65e483]:
+                        - link "r/rpg" [ref=f65e485] [cursor=pointer]:
+                          - /url: /r/rpg/
+                        - generic [ref=f65e490]: ·
+                        - time [ref=f65e492]: 5y ago
+                      - link "Kenku FM. A pwyw discord ttrpg audio bot from the creators of Owlbear Rodeo." [ref=f65e493] [cursor=pointer]:
+                        - /url: /r/rpg/comments/tsqk6w/kenku_fm_a_pwyw_discord_ttrpg_audio_bot_from_the/
+                      - generic [ref=f65e494]:
+                        - generic [ref=f65e495]:
+                          - generic [ref=f65e496]: "133"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f65e497]:
+                          - generic [ref=f65e498]: "9"
+                          - text: comments
+                  - link "Kenku FM. A pwyw discord ttrpg audio bot from the creators of Owlbear Rodeo. thumbnail image" [ref=f65e501] [cursor=pointer]:
+                    - /url: https://www.kenku.fm/
+                - separator [ref=f65e506]
+                - generic [ref=f65e509]:
+                  - generic:
+                    - heading "Do yo do things to prevent your GM from being burdened with the cost of running the game?" [level=2]:
+                      - link "Do yo do things to prevent your GM from being burdened with the cost of running the game?" [ref=f65e510] [cursor=pointer]:
+                        - /url: /r/rpg/comments/1tc6b0n/do_yo_do_things_to_prevent_your_gm_from_being/
+                  - generic [ref=f65e512]:
+                    - generic [ref=f65e515]:
+                      - link "r/rpg" [ref=f65e517] [cursor=pointer]:
+                        - /url: /r/rpg/
+                      - generic [ref=f65e522]: ·
+                      - time [ref=f65e524]: 5mo ago
+                    - link "Do yo do things to prevent your GM from being burdened with the cost of running the game?" [ref=f65e525] [cursor=pointer]:
+                      - /url: /r/rpg/comments/1tc6b0n/do_yo_do_things_to_prevent_your_gm_from_being/
+                    - generic [ref=f65e526]:
+                      - generic [ref=f65e527]:
+                        - generic [ref=f65e528]: "122"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f65e529]:
+                        - generic [ref=f65e530]: "163"
+                        - text: comments
+                - separator [ref=f65e531]
+                - generic [ref=f65e534]:
+                  - generic:
+                    - heading "The Fantasy Flight Star Wars games have the weirdest monetization ever." [level=2]:
+                      - link "The Fantasy Flight Star Wars games have the weirdest monetization ever." [ref=f65e535] [cursor=pointer]:
+                        - /url: /r/rpg/comments/11679p6/the_fantasy_flight_star_wars_games_have_the/
+                  - generic [ref=f65e537]:
+                    - generic [ref=f65e540]:
+                      - link "r/rpg" [ref=f65e542] [cursor=pointer]:
+                        - /url: /r/rpg/
+                      - generic [ref=f65e547]: ·
+                      - time [ref=f65e549]: 4y ago
+                    - link "The Fantasy Flight Star Wars games have the weirdest monetization ever." [ref=f65e550] [cursor=pointer]:
+                      - /url: /r/rpg/comments/11679p6/the_fantasy_flight_star_wars_games_have_the/
+                    - generic [ref=f65e551]:
+                      - generic [ref=f65e552]:
+                        - generic [ref=f65e553]: "110"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f65e554]:
+                        - generic [ref=f65e555]: "92"
+                        - text: comments
+                - separator [ref=f65e556]
+            - generic [ref=f65e560]:
+              - generic [ref=f65e565]:
+                - heading "Community Info Section" [level=1] [ref=f65e566]
+                - generic [ref=f65e567]:
+                  - generic [ref=f65e568]: Tabletop RPGs
+                  - generic [ref=f65e570]: A subreddit for all things related to tabletop roleplaying games
+                  - generic [ref=f65e571]:
+                    - generic [ref=f65e572]: Created Jan 25, 2008
+                    - generic [ref=f65e576]: Public
+                - generic [ref=f65e580]:
+                  - generic [ref=f65e581]:
+                    - strong [ref=f65e583]:
+                      - generic: 188K
+                    - generic [ref=f65e584]: Weekly visitors
+                  - generic [ref=f65e585]:
+                    - strong [ref=f65e587]:
+                      - generic: 7K
+                    - generic [ref=f65e588]: Weekly contributions
+              - list [ref=f65e590]:
+                - listitem [ref=f65e591]:
+                  - link "Home" [ref=f65e593] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f65e594]:
+                  - link "Popular" [ref=f65e596] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f65e597]:
+                  - link "News" [ref=f65e599] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f65e600]:
+                  - link "Explore" [ref=f65e602] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f65e603]:
+                  - link "Best of Reddit" [ref=f65e605] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f65e606]:
+                  - link "Best of Reddit in Portuguese" [ref=f65e608] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f65e609]:
+                  - link "Best of Reddit in German" [ref=f65e611] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f65e612]:
+                  - link "Reddit Rules" [ref=f65e614] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f65e615]:
+                  - link "Privacy Policy" [ref=f65e617] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f65e618]:
+                  - link "User Agreement" [ref=f65e620] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f65e621]:
+                  - link "Accessibility" [ref=f65e623] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f65e624]:
+                  - link "Reddit, Inc. © 2026. All rights reserved." [ref=f65e625] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f65e628]:
+          - paragraph [ref=f65e629]: Join the most real place on the internet
+          - generic [ref=f65e631]:
+            - generic [ref=f65e634]:
+              - iframe [ref=f65e639]:
+                - button "Continue with Google. Opens in new tab" [ref=f67e3] [cursor=pointer]:
+                  - generic [ref=f67e5]: Continue with Google
+              - generic [ref=f65e641] [cursor=pointer]:
+                - generic [ref=f65e642]: Continue with Apple
+                - button "Sign in with Apple" [ref=f65e648]:
+                  - generic [ref=f65e649]:
+                    - img:
+                      - generic:
+                        - img:
+                          - generic:  Sign in with Apple
+            - link "Continue with Phone Number" [ref=f65e654] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - link "Continue with Email" [ref=f65e663] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+          - paragraph [ref=f65e670]:
+            - text: By continuing, you agree to our
+            - link "User Agreement" [ref=f65e671] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: and acknowledge that you understand the
+            - link "Privacy Policy" [ref=f65e672] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: .

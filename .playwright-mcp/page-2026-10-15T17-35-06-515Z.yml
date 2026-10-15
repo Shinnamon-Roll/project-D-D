@@ -1,0 +1,453 @@
+- generic [active] [ref=f20e1]:
+  - link "Skip to main content" [ref=f20e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f20e6]:
+    - generic:
+      - generic: owlbear rodeo foundry - Reddit Search!
+      - banner [ref=f20e10]:
+        - navigation [ref=f20e11]:
+          - link "Home" [ref=f20e15] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - search [ref=f20e34]:
+            - generic [ref=f20e36]:
+              - generic "Remove r/DMAcademy filter and expand search to all of Reddit" [ref=f20e42] [cursor=pointer]:
+                - button [pressed] [ref=f20e43]:
+                  - generic [aria-hidden] [ref=f20e47]: r/DMAcademy
+              - textbox "Remove r/DMAcademy filter and expand search to all of Reddit Clear search" [ref=f20e53]:
+                - /placeholder: Search in ⁨r/DMAcademy⁩
+                - text: owlbear rodeo foundry
+              - button "Clear search" [ref=f20e55] [cursor=pointer]
+          - generic [ref=f20e61]:
+            - link "Sign Up" [ref=f20e67] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Log In" [ref=f20e73] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Expand user menu" [ref=f20e80] [cursor=pointer]
+      - generic "owlbear rodeo foundry - Reddit Search!"
+      - generic [ref=f20e89]:
+        - generic [ref=f20e90]:
+          - generic [ref=f20e93]:
+            - generic [ref=f20e94]:
+              - generic [ref=f20e97]:
+                - tablist [ref=f20e98]:
+                  - tab [selected] [ref=f20e99]:
+                    - link "Posts" [ref=f20e100] [cursor=pointer]:
+                      - /url: /r/DMAcademy/search/?q=owlbear+rodeo+foundry&type=posts&iId=dc9b587b-ed83-4cbe-9127-87aa2efd882f
+                  - tab [ref=f20e106]:
+                    - link "Comments" [ref=f20e107] [cursor=pointer]:
+                      - /url: /r/DMAcademy/search/?q=owlbear+rodeo+foundry&type=comments&iId=dc9b587b-ed83-4cbe-9127-87aa2efd882f
+                  - tab [ref=f20e113]:
+                    - link "Media" [ref=f20e114] [cursor=pointer]:
+                      - /url: /r/DMAcademy/search/?q=owlbear+rodeo+foundry&type=media&iId=dc9b587b-ed83-4cbe-9127-87aa2efd882f
+                - button "forward" [ref=f20e121] [cursor=pointer]
+                - button "back" [ref=f20e128] [cursor=pointer]
+              - generic:
+                - generic:
+                  - tabpanel
+            - generic [ref=f20e135]:
+              - button "Top" [ref=f20e139] [cursor=pointer]
+              - button "All time" [ref=f20e148] [cursor=pointer]
+          - generic [ref=f20e155]:
+            - generic:
+              - generic:
+                - link "Skip to Sign up" [ref=f20e156] [cursor=pointer]:
+                  - /url: "#left-sidebar-container"
+                - link "Skip to Right Sidebar" [ref=f20e157] [cursor=pointer]:
+                  - /url: "#right-sidebar-container"
+          - generic [ref=f20e158]:
+            - main [ref=f20e159]:
+              - generic [ref=f20e160]:
+                - paragraph [ref=f20e163]:
+                  - text: Show results from
+                  - link "all of Reddit" [ref=f20e165] [cursor=pointer]:
+                    - /url: /search/?q=owlbear+rodeo+foundry
+                - generic [ref=f20e171]:
+                  - generic:
+                    - heading "I just want a program where I can put in my map and drag stuff around. Why does it have to be so hard" [level=2]:
+                      - link "I just want a program where I can put in my map and drag stuff around. Why does it have to be so hard" [ref=f20e172] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/o5yfe9/i_just_want_a_program_where_i_can_put_in_my_map/
+                  - generic [ref=f20e174]:
+                    - generic [ref=f20e177]:
+                      - link "r/DMAcademy" [ref=f20e180] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f20e185]: ·
+                      - time [ref=f20e187]: 5y ago
+                    - link "I just want a program where I can put in my map and drag stuff around. Why does it have to be so hard" [ref=f20e188] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/o5yfe9/i_just_want_a_program_where_i_can_put_in_my_map/
+                    - generic [ref=f20e189]:
+                      - generic [ref=f20e190]:
+                        - generic [ref=f20e191]: "116"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f20e192]:
+                        - generic [ref=f20e193]: "40"
+                        - text: comments
+                - separator [ref=f20e194]
+                - generic [ref=f20e197]:
+                  - generic:
+                    - heading "What I Learned about DMing When My Virtual Table-Top Broke" [level=2]:
+                      - link "What I Learned about DMing When My Virtual Table-Top Broke" [ref=f20e198] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/1eevpdy/what_i_learned_about_dming_when_my_virtual/
+                  - generic [ref=f20e200]:
+                    - generic [ref=f20e203]:
+                      - link "r/DMAcademy" [ref=f20e206] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f20e211]: ·
+                      - time [ref=f20e213]: 2y ago
+                    - link "What I Learned about DMing When My Virtual Table-Top Broke" [ref=f20e214] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/1eevpdy/what_i_learned_about_dming_when_my_virtual/
+                    - generic [ref=f20e215]:
+                      - generic [ref=f20e216]:
+                        - generic [ref=f20e217]: "79"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f20e218]:
+                        - generic [ref=f20e219]: "61"
+                        - text: comments
+                - separator [ref=f20e220]
+                - generic [ref=f20e223]:
+                  - generic:
+                    - heading "What Virtual TableTop Do You Use?" [level=2]:
+                      - link "What Virtual TableTop Do You Use?" [ref=f20e224] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/1dowmi3/what_virtual_tabletop_do_you_use/
+                  - generic [ref=f20e226]:
+                    - generic [ref=f20e229]:
+                      - link "r/DMAcademy" [ref=f20e232] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f20e237]: ·
+                      - time [ref=f20e239]: 2y ago
+                    - link "What Virtual TableTop Do You Use?" [ref=f20e240] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/1dowmi3/what_virtual_tabletop_do_you_use/
+                    - generic [ref=f20e241]:
+                      - generic [ref=f20e242]:
+                        - generic [ref=f20e243]: "56"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f20e244]:
+                        - generic [ref=f20e245]: "130"
+                        - text: comments
+                - separator [ref=f20e246]
+                - generic [ref=f20e249]:
+                  - generic:
+                    - heading "My Favorite Dungeon Master Tools of 2024" [level=2]:
+                      - link "My Favorite Dungeon Master Tools of 2024" [ref=f20e250] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/1e9hdkw/my_favorite_dungeon_master_tools_of_2024/
+                  - generic [ref=f20e252]:
+                    - generic [ref=f20e255]:
+                      - link "r/DMAcademy" [ref=f20e258] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f20e263]: ·
+                      - time [ref=f20e265]: 2y ago
+                    - link "My Favorite Dungeon Master Tools of 2024" [ref=f20e266] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/1e9hdkw/my_favorite_dungeon_master_tools_of_2024/
+                    - generic [ref=f20e267]:
+                      - generic [ref=f20e268]:
+                        - generic [ref=f20e269]: "52"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f20e270]:
+                        - generic [ref=f20e271]: "15"
+                        - text: comments
+                - separator [ref=f20e272]
+                - generic [ref=f20e275]:
+                  - generic:
+                    - heading "Dming is as easy as you want it to be" [level=2]:
+                      - link "Dming is as easy as you want it to be" [ref=f20e276] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/13zlbsu/dming_is_as_easy_as_you_want_it_to_be/
+                  - generic [ref=f20e278]:
+                    - generic [ref=f20e281]:
+                      - link "r/DMAcademy" [ref=f20e284] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f20e289]: ·
+                      - time [ref=f20e291]: 3y ago
+                    - link "Dming is as easy as you want it to be" [ref=f20e292] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/13zlbsu/dming_is_as_easy_as_you_want_it_to_be/
+                    - generic [ref=f20e293]:
+                      - generic [ref=f20e294]:
+                        - generic [ref=f20e295]: "46"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f20e296]:
+                        - generic [ref=f20e297]: "22"
+                        - text: comments
+                - separator [ref=f20e298]
+                - generic [ref=f20e301]:
+                  - generic:
+                    - heading "Should I scale down my campaign?" [level=2]:
+                      - link "Should I scale down my campaign?" [ref=f20e302] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/1vtw5bt/should_i_scale_down_my_campaign/
+                  - generic [ref=f20e304]:
+                    - generic [ref=f20e307]:
+                      - link "r/DMAcademy" [ref=f20e310] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f20e315]: ·
+                      - time [ref=f20e317]: 2mo ago
+                    - link "Should I scale down my campaign?" [ref=f20e318] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/1vtw5bt/should_i_scale_down_my_campaign/
+                    - generic [ref=f20e319]:
+                      - generic [ref=f20e320]:
+                        - generic [ref=f20e321]: "32"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f20e322]:
+                        - generic [ref=f20e323]: "29"
+                        - text: comments
+                - separator [ref=f20e324]
+                - generic [ref=f20e327]:
+                  - generic:
+                    - heading "All-in-one online D&D management?" [level=2]:
+                      - link "All-in-one online D&D management?" [ref=f20e328] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/1vzx7pj/allinone_online_dd_management/
+                  - generic [ref=f20e330]:
+                    - generic [ref=f20e333]:
+                      - link "r/DMAcademy" [ref=f20e336] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f20e341]: ·
+                      - time [ref=f20e343]: 2mo ago
+                    - link "All-in-one online D&D management?" [ref=f20e344] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/1vzx7pj/allinone_online_dd_management/
+                    - generic [ref=f20e345]:
+                      - generic [ref=f20e346]:
+                        - generic [ref=f20e347]: "28"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f20e348]:
+                        - generic [ref=f20e349]: "43"
+                        - text: comments
+                - separator [ref=f20e350]
+                - generic [ref=f20e353]:
+                  - generic:
+                    - heading "Lazy DM Tools for Online Play" [level=2]:
+                      - link "Lazy DM Tools for Online Play" [ref=f20e354] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/k2evwo/lazy_dm_tools_for_online_play/
+                  - generic [ref=f20e356]:
+                    - generic [ref=f20e359]:
+                      - link "r/DMAcademy" [ref=f20e361] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f20e366]: ·
+                      - time [ref=f20e368]: 6y ago
+                    - link "Lazy DM Tools for Online Play" [ref=f20e369] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/k2evwo/lazy_dm_tools_for_online_play/
+                    - generic [ref=f20e370]:
+                      - generic [ref=f20e371]:
+                        - generic [ref=f20e372]: "28"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f20e373]:
+                        - generic [ref=f20e374]: "4"
+                        - text: comments
+                - separator [ref=f20e375]
+                - generic [ref=f20e378]:
+                  - generic:
+                    - heading "Owlbear Rodeo DMs, Your experience?" [level=2]:
+                      - link "Owlbear Rodeo DMs, Your experience?" [ref=f20e379] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/1vds3a3/owlbear_rodeo_dms_your_experience/
+                  - generic [ref=f20e381]:
+                    - generic [ref=f20e384]:
+                      - link "r/DMAcademy" [ref=f20e386] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f20e391]: ·
+                      - time [ref=f20e393]: 2mo ago
+                    - link "Owlbear Rodeo DMs, Your experience?" [ref=f20e394] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/1vds3a3/owlbear_rodeo_dms_your_experience/
+                    - generic [ref=f20e395]:
+                      - generic [ref=f20e396]:
+                        - generic [ref=f20e397]: "17"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f20e398]:
+                        - generic [ref=f20e399]: "41"
+                        - text: comments
+                - separator [ref=f20e400]
+                - generic [ref=f20e403]:
+                  - generic:
+                    - heading "Spicing Up Virtual Tabletop Games" [level=2]:
+                      - link "Spicing Up Virtual Tabletop Games" [ref=f20e404] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/k8b6r7/spicing_up_virtual_tabletop_games/
+                  - generic [ref=f20e406]:
+                    - generic [ref=f20e409]:
+                      - link "r/DMAcademy" [ref=f20e411] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f20e416]: ·
+                      - time [ref=f20e418]: 6y ago
+                    - link "Spicing Up Virtual Tabletop Games" [ref=f20e419] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/k8b6r7/spicing_up_virtual_tabletop_games/
+                    - generic [ref=f20e420]:
+                      - generic [ref=f20e421]:
+                        - generic [ref=f20e422]: "16"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f20e423]:
+                        - generic [ref=f20e424]: "8"
+                        - text: comments
+                - separator [ref=f20e425]
+                - generic [ref=f20e428]:
+                  - generic:
+                    - heading "Easiest way to run a Fog of War TV Battlemap" [level=2]:
+                      - link "Easiest way to run a Fog of War TV Battlemap" [ref=f20e429] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/1p1zq9i/easiest_way_to_run_a_fog_of_war_tv_battlemap/
+                  - generic [ref=f20e431]:
+                    - generic [ref=f20e434]:
+                      - link "r/DMAcademy" [ref=f20e436] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f20e441]: ·
+                      - time [ref=f20e443]: 1y ago
+                    - link "Easiest way to run a Fog of War TV Battlemap" [ref=f20e444] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/1p1zq9i/easiest_way_to_run_a_fog_of_war_tv_battlemap/
+                    - generic [ref=f20e445]:
+                      - generic [ref=f20e446]:
+                        - generic [ref=f20e447]: "15"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f20e448]:
+                        - generic [ref=f20e449]: "21"
+                        - text: comments
+                - separator [ref=f20e450]
+                - generic [ref=f20e453]:
+                  - generic:
+                    - heading "Running my first proper D&D campaign with the tyranny of dragons." [level=2]:
+                      - link "Running my first proper D&D campaign with the tyranny of dragons." [ref=f20e454] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/1t62k0n/running_my_first_proper_dd_campaign_with_the/
+                  - generic [ref=f20e456]:
+                    - generic [ref=f20e459]:
+                      - link "r/DMAcademy" [ref=f20e461] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f20e466]: ·
+                      - time [ref=f20e468]: 5mo ago
+                    - link "Running my first proper D&D campaign with the tyranny of dragons." [ref=f20e469] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/1t62k0n/running_my_first_proper_dd_campaign_with_the/
+                    - generic [ref=f20e470]:
+                      - generic [ref=f20e471]:
+                        - generic [ref=f20e472]: "15"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f20e473]:
+                        - generic [ref=f20e474]: "11"
+                        - text: comments
+                - separator [ref=f20e475]
+                - generic [ref=f20e478]:
+                  - generic:
+                    - heading "Virtual audio setup for lazy DMs that still want to do everything" [level=2]:
+                      - link "Virtual audio setup for lazy DMs that still want to do everything" [ref=f20e479] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/pgqv1e/virtual_audio_setup_for_lazy_dms_that_still_want/
+                  - generic [ref=f20e481]:
+                    - generic [ref=f20e484]:
+                      - link "r/DMAcademy" [ref=f20e486] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f20e491]: ·
+                      - time [ref=f20e493]: 5y ago
+                    - link "Virtual audio setup for lazy DMs that still want to do everything" [ref=f20e494] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/pgqv1e/virtual_audio_setup_for_lazy_dms_that_still_want/
+                    - generic [ref=f20e495]:
+                      - generic [ref=f20e496]:
+                        - generic [ref=f20e497]: "14"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f20e498]:
+                        - generic [ref=f20e499]: "8"
+                        - text: comments
+                - separator [ref=f20e500]
+                - generic [ref=f20e503]:
+                  - generic:
+                    - heading "Advice on running a one-shot for my Mum" [level=2]:
+                      - link "Advice on running a one-shot for my Mum" [ref=f20e504] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/1awcm89/advice_on_running_a_oneshot_for_my_mum/
+                  - generic [ref=f20e506]:
+                    - generic [ref=f20e509]:
+                      - link "r/DMAcademy" [ref=f20e511] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f20e516]: ·
+                      - time [ref=f20e518]: 3y ago
+                    - link "Advice on running a one-shot for my Mum" [ref=f20e519] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/1awcm89/advice_on_running_a_oneshot_for_my_mum/
+                    - generic [ref=f20e520]:
+                      - generic [ref=f20e521]:
+                        - generic [ref=f20e522]: "13"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f20e523]:
+                        - generic [ref=f20e524]: "13"
+                        - text: comments
+                - separator [ref=f20e525]
+            - generic [ref=f20e529]:
+              - generic [ref=f20e534]:
+                - heading "Community Info Section" [level=1] [ref=f20e535]
+                - generic [ref=f20e536]:
+                  - generic [ref=f20e537]: DMAcademy
+                  - generic [ref=f20e539]: /r/DMAcademy is a subreddit for Dungeons & Dragons Dungeon Masters to ask questions - new and experienced, all are welcome!
+                  - generic [ref=f20e540]:
+                    - generic [ref=f20e541]: Created Jun 23, 2016
+                    - generic [ref=f20e545]: Public
+                - generic [ref=f20e549]:
+                  - generic [ref=f20e550]:
+                    - strong [ref=f20e552]:
+                      - generic: 172K
+                    - generic [ref=f20e553]: Weekly visitors
+                  - generic [ref=f20e554]:
+                    - strong [ref=f20e556]:
+                      - generic: 6K
+                    - generic [ref=f20e557]: Weekly contributions
+              - list [ref=f20e559]:
+                - listitem [ref=f20e560]:
+                  - link "Home" [ref=f20e562] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f20e563]:
+                  - link "Popular" [ref=f20e565] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f20e566]:
+                  - link "News" [ref=f20e568] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f20e569]:
+                  - link "Explore" [ref=f20e571] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f20e572]:
+                  - link "Best of Reddit" [ref=f20e574] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f20e575]:
+                  - link "Best of Reddit in Portuguese" [ref=f20e577] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f20e578]:
+                  - link "Best of Reddit in German" [ref=f20e580] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f20e581]:
+                  - link "Reddit Rules" [ref=f20e583] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f20e584]:
+                  - link "Privacy Policy" [ref=f20e586] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f20e587]:
+                  - link "User Agreement" [ref=f20e589] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f20e590]:
+                  - link "Accessibility" [ref=f20e592] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f20e593]:
+                  - link "Reddit, Inc. © 2026. All rights reserved." [ref=f20e594] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f20e597]:
+          - paragraph [ref=f20e598]: Join the most real place on the internet
+          - generic [ref=f20e600]:
+            - generic [ref=f20e603]:
+              - iframe [ref=f20e608]:
+                - button "Continue with Google. Opens in new tab" [ref=f23e3] [cursor=pointer]:
+                  - generic [ref=f23e5]: Continue with Google
+              - generic [ref=f20e610] [cursor=pointer]:
+                - generic [ref=f20e611]: Continue with Apple
+                - button "Sign in with Apple" [ref=f20e617]:
+                  - generic [ref=f20e618]:
+                    - img:
+                      - generic:
+                        - img:
+                          - generic:  Sign in with Apple
+            - link "Continue with Phone Number" [ref=f20e623] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - link "Continue with Email" [ref=f20e632] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+          - paragraph [ref=f20e639]:
+            - text: By continuing, you agree to our
+            - link "User Agreement" [ref=f20e640] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: and acknowledge that you understand the
+            - link "Privacy Policy" [ref=f20e641] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: .

@@ -1,0 +1,579 @@
+- generic [active] [ref=f58e1]:
+  - link "Skip to main content" [ref=f58e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f58e6]:
+    - generic:
+      - generic: foundry vs owlbear rodeo - Reddit Search!
+      - banner [ref=f58e10]:
+        - navigation [ref=f58e11]:
+          - link "Home" [ref=f58e15] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - search [ref=f58e34]:
+            - generic [ref=f58e36]:
+              - textbox "Clear search" [ref=f58e43]:
+                - /placeholder: Search Reddit
+                - text: foundry vs owlbear rodeo
+              - button "Clear search" [ref=f58e45] [cursor=pointer]
+          - generic [ref=f58e51]:
+            - link "Sign Up" [ref=f58e57] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Log In" [ref=f58e63] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Expand user menu" [ref=f58e70] [cursor=pointer]
+      - generic "foundry vs owlbear rodeo - Reddit Search!"
+      - generic [ref=f58e79]:
+        - generic [ref=f58e80]:
+          - generic [ref=f58e83]:
+            - generic [ref=f58e84]:
+              - generic [ref=f58e87]:
+                - tablist [ref=f58e88]:
+                  - tab [ref=f58e89]:
+                    - link "All" [ref=f58e90] [cursor=pointer]:
+                      - /url: /search/?q=foundry+vs+owlbear+rodeo&type=all&acId=0f518998-536a-40a3-a20a-c5ade7908594&iId=f0174bc0-b785-473c-807b-bafa4b4e74dc
+                  - tab [selected] [ref=f58e96]:
+                    - link "Posts" [ref=f58e97] [cursor=pointer]:
+                      - /url: /search/?q=foundry+vs+owlbear+rodeo&type=posts&acId=0f518998-536a-40a3-a20a-c5ade7908594&iId=f0174bc0-b785-473c-807b-bafa4b4e74dc
+                  - tab [ref=f58e103]:
+                    - link "Communities" [ref=f58e104] [cursor=pointer]:
+                      - /url: /search/?q=foundry+vs+owlbear+rodeo&type=communities&acId=0f518998-536a-40a3-a20a-c5ade7908594&iId=f0174bc0-b785-473c-807b-bafa4b4e74dc
+                  - tab [ref=f58e110]:
+                    - link "Comments" [ref=f58e111] [cursor=pointer]:
+                      - /url: /search/?q=foundry+vs+owlbear+rodeo&type=comments&acId=0f518998-536a-40a3-a20a-c5ade7908594&iId=f0174bc0-b785-473c-807b-bafa4b4e74dc
+                  - tab [ref=f58e117]:
+                    - link "Media" [ref=f58e118] [cursor=pointer]:
+                      - /url: /search/?q=foundry+vs+owlbear+rodeo&type=media&acId=0f518998-536a-40a3-a20a-c5ade7908594&iId=f0174bc0-b785-473c-807b-bafa4b4e74dc
+                  - tab [ref=f58e124]:
+                    - link "Profiles" [ref=f58e125] [cursor=pointer]:
+                      - /url: /search/?q=foundry+vs+owlbear+rodeo&type=people&acId=0f518998-536a-40a3-a20a-c5ade7908594&iId=f0174bc0-b785-473c-807b-bafa4b4e74dc
+                - button "forward" [ref=f58e132] [cursor=pointer]
+                - button "back" [ref=f58e139] [cursor=pointer]
+              - generic:
+                - generic:
+                  - tabpanel
+            - generic [ref=f58e146]:
+              - button "Top" [ref=f58e150] [cursor=pointer]
+              - button "All time" [ref=f58e159] [cursor=pointer]
+          - generic [ref=f58e166]:
+            - generic:
+              - generic:
+                - link "Skip to Sign up" [ref=f58e167] [cursor=pointer]:
+                  - /url: "#left-sidebar-container"
+                - link "Skip to Right Sidebar" [ref=f58e168] [cursor=pointer]:
+                  - /url: "#right-sidebar-container"
+          - generic [ref=f58e169]:
+            - main [ref=f58e170]:
+              - generic [ref=f58e171]:
+                - generic [ref=f58e174]:
+                  - generic:
+                    - 'heading "PSA: Do not watch Digital Foundry''s new \"Red Dead Redemption 2 vs Red Dead 1 Graphics Comparison\" Youtube Video unless you have reached the Epilogue of the game. The video starts right off with a massive Spoiler." [level=2]':
+                      - 'link "PSA: Do not watch Digital Foundry''s new \"Red Dead Redemption 2 vs Red Dead 1 Graphics Comparison\" Youtube Video unless you have reached the Epilogue of the game. The video starts right off with a massive Spoiler." [ref=f58e175] [cursor=pointer]':
+                        - /url: /r/PS4/comments/9tuksw/psa_do_not_watch_digital_foundrys_new_red_dead/
+                  - generic [ref=f58e177]:
+                    - generic [ref=f58e180]:
+                      - link "r/PS4" [ref=f58e183] [cursor=pointer]:
+                        - /url: /r/PS4/
+                      - generic [ref=f58e188]: ·
+                      - time [ref=f58e190]: 8y ago
+                    - 'link "PSA: Do not watch Digital Foundry''s new \"Red Dead Redemption 2 vs Red Dead 1 Graphics Comparison\" Youtube Video unless you have reached the Epilogue of the game. The video starts right off with a massive Spoiler." [ref=f58e191] [cursor=pointer]':
+                      - /url: /r/PS4/comments/9tuksw/psa_do_not_watch_digital_foundrys_new_red_dead/
+                    - generic [ref=f58e192]:
+                      - generic [ref=f58e193]:
+                        - generic [ref=f58e194]: 16K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f58e195]:
+                        - generic [ref=f58e196]: "392"
+                        - text: comments
+                - separator [ref=f58e197]
+                - generic [ref=f58e200]:
+                  - generic:
+                    - 'heading "Update 3: AITA for skipping my friend’s birthday without warning because his girlfriend called me the “Typical girl best friend.”" [level=2]':
+                      - 'link "Update 3: AITA for skipping my friend’s birthday without warning because his girlfriend called me the “Typical girl best friend.”" [ref=f58e201] [cursor=pointer]':
+                        - /url: /r/BORUpdates/comments/1fznzur/update_3_aita_for_skipping_my_friends_birthday/
+                  - generic [ref=f58e203]:
+                    - generic [ref=f58e206]:
+                      - link "r/BORUpdates" [ref=f58e209] [cursor=pointer]:
+                        - /url: /r/BORUpdates/
+                      - generic [ref=f58e214]: ·
+                      - time [ref=f58e216]: 2y ago
+                    - 'link "Update 3: AITA for skipping my friend’s birthday without warning because his girlfriend called me the “Typical girl best friend.”" [ref=f58e217] [cursor=pointer]':
+                      - /url: /r/BORUpdates/comments/1fznzur/update_3_aita_for_skipping_my_friends_birthday/
+                    - generic [ref=f58e218]:
+                      - generic [ref=f58e219]:
+                        - generic [ref=f58e220]: 7.5K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f58e221]:
+                        - generic [ref=f58e222]: "293"
+                        - text: comments
+                - separator [ref=f58e223]
+                - generic [ref=f58e226]:
+                  - generic:
+                    - heading "I have some ideas for Civilization 7" [level=2]:
+                      - link "I have some ideas for Civilization 7" [ref=f58e227] [cursor=pointer]:
+                        - /url: /r/civ/comments/jjmf5s/i_have_some_ideas_for_civilization_7/
+                  - generic [ref=f58e229]:
+                    - generic [ref=f58e232]:
+                      - link "r/civ" [ref=f58e235] [cursor=pointer]:
+                        - /url: /r/civ/
+                      - generic [ref=f58e240]: ·
+                      - time [ref=f58e242]: 6y ago
+                    - link "I have some ideas for Civilization 7" [ref=f58e243] [cursor=pointer]:
+                      - /url: /r/civ/comments/jjmf5s/i_have_some_ideas_for_civilization_7/
+                    - generic [ref=f58e244]:
+                      - generic [ref=f58e245]:
+                        - generic [ref=f58e246]: 6.4K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f58e247]:
+                        - generic [ref=f58e248]: "482"
+                        - text: comments
+                - separator [ref=f58e249]
+                - generic [ref=f58e251]:
+                  - generic [ref=f58e252]:
+                    - generic:
+                      - heading "[OC] Owlbear Encounter Expectations VS Reality" [level=2]:
+                        - link "[OC] Owlbear Encounter Expectations VS Reality" [ref=f58e253] [cursor=pointer]:
+                          - /url: /r/DnD/comments/uv6xbw/oc_owlbear_encounter_expectations_vs_reality/
+                    - generic [ref=f58e255]:
+                      - generic [ref=f58e258]:
+                        - link "r/DnD" [ref=f58e261] [cursor=pointer]:
+                          - /url: /r/DnD/
+                        - generic [ref=f58e266]: ·
+                        - time [ref=f58e268]: 4y ago
+                      - link "[OC] Owlbear Encounter Expectations VS Reality" [ref=f58e269] [cursor=pointer]:
+                        - /url: /r/DnD/comments/uv6xbw/oc_owlbear_encounter_expectations_vs_reality/
+                      - generic [ref=f58e270]:
+                        - generic [ref=f58e271]:
+                          - generic [ref=f58e272]: 5.6K
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f58e273]:
+                          - generic [ref=f58e274]: "63"
+                          - text: comments
+                  - generic [ref=f58e279] [cursor=pointer]:
+                    - img "[OC] Owlbear Encounter Expectations VS Reality" [ref=f58e283]
+                    - generic: 0:44
+                - separator [ref=f58e284]
+                - generic [ref=f58e286]:
+                  - generic [ref=f58e287]:
+                    - generic:
+                      - 'heading "Digital Foundry: Ghost of Tsushima: PS5 vs PS4 Pro - The 60fps Difference!" [level=2]':
+                        - 'link "Digital Foundry: Ghost of Tsushima: PS5 vs PS4 Pro - The 60fps Difference!" [ref=f58e288] [cursor=pointer]':
+                          - /url: /r/PS5/comments/kqb0xr/digital_foundry_ghost_of_tsushima_ps5_vs_ps4_pro/
+                    - generic [ref=f58e290]:
+                      - generic [ref=f58e293]:
+                        - link "r/PS5" [ref=f58e296] [cursor=pointer]:
+                          - /url: /r/PS5/
+                        - generic [ref=f58e301]: ·
+                        - time [ref=f58e303]: 6y ago
+                      - 'link "Digital Foundry: Ghost of Tsushima: PS5 vs PS4 Pro - The 60fps Difference!" [ref=f58e304] [cursor=pointer]':
+                        - /url: /r/PS5/comments/kqb0xr/digital_foundry_ghost_of_tsushima_ps5_vs_ps4_pro/
+                      - generic [ref=f58e305]:
+                        - generic [ref=f58e306]:
+                          - generic [ref=f58e307]: 5.5K
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f58e308]:
+                          - generic [ref=f58e309]: "952"
+                          - text: comments
+                  - 'link "Digital Foundry: Ghost of Tsushima: PS5 vs PS4 Pro - The 60fps Difference! thumbnail image" [ref=f58e312] [cursor=pointer]':
+                    - /url: https://www.youtube.com/watch?v=JAO5kq-rbHQ
+                    - 'img "Digital Foundry: Ghost of Tsushima: PS5 vs PS4 Pro - The 60fps Difference!" [ref=f58e317]'
+                - separator [ref=f58e318]
+                - generic [ref=f58e321]:
+                  - generic:
+                    - heading "OOP's local chess club is run by an extremely obvious cheater [Long]" [level=2]:
+                      - link "OOP's local chess club is run by an extremely obvious cheater [Long]" [ref=f58e322] [cursor=pointer]:
+                        - /url: /r/BestofRedditorUpdates/comments/xigymh/oops_local_chess_club_is_run_by_an_extremely/
+                  - generic [ref=f58e324]:
+                    - generic [ref=f58e327]:
+                      - link "r/BestofRedditorUpdates" [ref=f58e330] [cursor=pointer]:
+                        - /url: /r/BestofRedditorUpdates/
+                      - generic [ref=f58e337]: ·
+                      - time [ref=f58e339]: 4y ago
+                    - link "OOP's local chess club is run by an extremely obvious cheater [Long]" [ref=f58e340] [cursor=pointer]:
+                      - /url: /r/BestofRedditorUpdates/comments/xigymh/oops_local_chess_club_is_run_by_an_extremely/
+                    - generic [ref=f58e341]:
+                      - generic [ref=f58e342]:
+                        - generic [ref=f58e343]: 4.8K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f58e344]:
+                        - generic [ref=f58e345]: "388"
+                        - text: comments
+                - separator [ref=f58e346]
+                - generic [ref=f58e348]:
+                  - generic [ref=f58e349]:
+                    - generic:
+                      - heading "From $200k to $2M in under 2 months 🚀💎🙌" [level=2]:
+                        - link "From $200k to $2M in under 2 months 🚀💎🙌" [ref=f58e350] [cursor=pointer]:
+                          - /url: /r/wallstreetbets/comments/1ntrkvb/from_200k_to_2m_in_under_2_months/
+                    - generic [ref=f58e352]:
+                      - generic [ref=f58e355]:
+                        - link "r/wallstreetbets" [ref=f58e358] [cursor=pointer]:
+                          - /url: /r/wallstreetbets/
+                        - generic [ref=f58e363]: ·
+                        - time [ref=f58e365]: 1y ago
+                      - link "From $200k to $2M in under 2 months 🚀💎🙌" [ref=f58e366] [cursor=pointer]:
+                        - /url: /r/wallstreetbets/comments/1ntrkvb/from_200k_to_2m_in_under_2_months/
+                      - generic [ref=f58e367]:
+                        - generic [ref=f58e368]:
+                          - generic [ref=f58e369]: 4.3K
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f58e370]:
+                          - generic [ref=f58e371]: "552"
+                          - text: comments
+                  - img "From $200k to $2M in under 2 months 🚀💎🙌" [ref=f58e380] [cursor=pointer]
+                - separator [ref=f58e381]
+                - generic [ref=f58e384]:
+                  - generic:
+                    - heading "TF2 update for 3/28/18" [level=2]:
+                      - link "TF2 update for 3/28/18" [ref=f58e385] [cursor=pointer]:
+                        - /url: /r/tf2/comments/87vvj7/tf2_update_for_32818/
+                  - generic [ref=f58e387]:
+                    - generic [ref=f58e390]:
+                      - link "r/tf2" [ref=f58e392] [cursor=pointer]:
+                        - /url: /r/tf2/
+                      - generic [ref=f58e397]: ·
+                      - time [ref=f58e399]: 9y ago
+                    - link "TF2 update for 3/28/18" [ref=f58e400] [cursor=pointer]:
+                      - /url: /r/tf2/comments/87vvj7/tf2_update_for_32818/
+                    - generic [ref=f58e401]:
+                      - generic [ref=f58e402]:
+                        - generic [ref=f58e403]: 4.1K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f58e404]:
+                        - generic [ref=f58e405]: 1.1K
+                        - text: comments
+                - separator [ref=f58e406]
+                - generic [ref=f58e408]:
+                  - generic [ref=f58e409]:
+                    - generic:
+                      - 'heading "Digital Foundry: The Last of Us Part 1 PC vs PS5 - A Disappointing Port With Big Problems To Address" [level=2]':
+                        - 'link "Digital Foundry: The Last of Us Part 1 PC vs PS5 - A Disappointing Port With Big Problems To Address" [ref=f58e410] [cursor=pointer]':
+                          - /url: /r/Games/comments/129rai4/digital_foundry_the_last_of_us_part_1_pc_vs_ps5_a/
+                    - generic [ref=f58e412]:
+                      - generic [ref=f58e415]:
+                        - link "r/Games" [ref=f58e417] [cursor=pointer]:
+                          - /url: /r/Games/
+                        - generic [ref=f58e422]: ·
+                        - time [ref=f58e424]: 4y ago
+                      - 'link "Digital Foundry: The Last of Us Part 1 PC vs PS5 - A Disappointing Port With Big Problems To Address" [ref=f58e425] [cursor=pointer]':
+                        - /url: /r/Games/comments/129rai4/digital_foundry_the_last_of_us_part_1_pc_vs_ps5_a/
+                      - generic [ref=f58e426]:
+                        - generic [ref=f58e427]:
+                          - generic [ref=f58e428]: 3.8K
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f58e429]:
+                          - generic [ref=f58e430]: "713"
+                          - text: comments
+                  - 'link "Digital Foundry: The Last of Us Part 1 PC vs PS5 - A Disappointing Port With Big Problems To Address thumbnail image" [ref=f58e433] [cursor=pointer]':
+                    - /url: https://www.youtube.com/watch?v=xQ2emuUoxrI
+                    - 'img "Digital Foundry: The Last of Us Part 1 PC vs PS5 - A Disappointing Port With Big Problems To Address" [ref=f58e438]'
+                - separator [ref=f58e439]
+                - generic [ref=f58e442]:
+                  - generic:
+                    - heading "I was wrong about Charlotte" [level=2]:
+                      - link "I was wrong about Charlotte" [ref=f58e443] [cursor=pointer]:
+                        - /url: /r/Charlotte/comments/1p4d0qv/i_was_wrong_about_charlotte/
+                  - generic [ref=f58e445]:
+                    - generic [ref=f58e448]:
+                      - link "r/Charlotte" [ref=f58e450] [cursor=pointer]:
+                        - /url: /r/Charlotte/
+                      - generic [ref=f58e455]: ·
+                      - time [ref=f58e457]: 1y ago
+                    - link "I was wrong about Charlotte" [ref=f58e458] [cursor=pointer]:
+                      - /url: /r/Charlotte/comments/1p4d0qv/i_was_wrong_about_charlotte/
+                    - generic [ref=f58e459]:
+                      - generic [ref=f58e460]:
+                        - generic [ref=f58e461]: 3.7K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f58e462]:
+                        - generic [ref=f58e463]: "508"
+                        - text: comments
+                - separator [ref=f58e464]
+                - generic [ref=f58e467]:
+                  - generic:
+                    - heading "DMing homebrew, vegan player demands a 'cruelty free world' - need advice." [level=2]:
+                      - link "DMing homebrew, vegan player demands a 'cruelty free world' - need advice." [ref=f58e468] [cursor=pointer]:
+                        - /url: /r/BestofRedditorUpdates/comments/11axrsn/dming_homebrew_vegan_player_demands_a_cruelty/
+                  - generic [ref=f58e470]:
+                    - generic [ref=f58e473]:
+                      - link "r/BestofRedditorUpdates" [ref=f58e475] [cursor=pointer]:
+                        - /url: /r/BestofRedditorUpdates/
+                      - generic [ref=f58e482]: ·
+                      - time [ref=f58e484]: 4y ago
+                    - link "DMing homebrew, vegan player demands a 'cruelty free world' - need advice." [ref=f58e485] [cursor=pointer]:
+                      - /url: /r/BestofRedditorUpdates/comments/11axrsn/dming_homebrew_vegan_player_demands_a_cruelty/
+                    - generic [ref=f58e486]:
+                      - generic [ref=f58e487]:
+                        - generic [ref=f58e488]: 3.6K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f58e489]:
+                        - generic [ref=f58e490]: "490"
+                        - text: comments
+                - separator [ref=f58e491]
+                - generic [ref=f58e494]:
+                  - generic:
+                    - heading "MAJOR TF2 update for 7/7/16 (7/8/16 UTC, Meet Your Match Update)" [level=2]:
+                      - link "MAJOR TF2 update for 7/7/16 (7/8/16 UTC, Meet Your Match Update)" [ref=f58e495] [cursor=pointer]:
+                        - /url: /r/tf2/comments/4rrrfm/major_tf2_update_for_7716_7816_utc_meet_your/
+                  - generic [ref=f58e497]:
+                    - generic [ref=f58e500]:
+                      - link "r/tf2" [ref=f58e502] [cursor=pointer]:
+                        - /url: /r/tf2/
+                      - generic [ref=f58e507]: ·
+                      - time [ref=f58e509]: 10y ago
+                    - link "MAJOR TF2 update for 7/7/16 (7/8/16 UTC, Meet Your Match Update)" [ref=f58e510] [cursor=pointer]:
+                      - /url: /r/tf2/comments/4rrrfm/major_tf2_update_for_7716_7816_utc_meet_your/
+                    - generic [ref=f58e511]:
+                      - generic [ref=f58e512]:
+                        - generic [ref=f58e513]: 3.6K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f58e514]:
+                        - generic [ref=f58e515]: 1.7K
+                        - text: comments
+                - separator [ref=f58e516]
+                - generic [ref=f58e519]:
+                  - generic:
+                    - heading "Lessons I learned from running a homebrew campaign for 6-8 players for 3 years, starting with zero D&D experience." [level=2]:
+                      - link "Lessons I learned from running a homebrew campaign for 6-8 players for 3 years, starting with zero D&D experience." [ref=f58e520] [cursor=pointer]:
+                        - /url: /r/DMAcademy/comments/nm7nid/lessons_i_learned_from_running_a_homebrew/
+                  - generic [ref=f58e522]:
+                    - generic [ref=f58e525]:
+                      - link "r/DMAcademy" [ref=f58e527] [cursor=pointer]:
+                        - /url: /r/DMAcademy/
+                      - generic [ref=f58e532]: ·
+                      - time [ref=f58e534]: 5y ago
+                    - link "Lessons I learned from running a homebrew campaign for 6-8 players for 3 years, starting with zero D&D experience." [ref=f58e535] [cursor=pointer]:
+                      - /url: /r/DMAcademy/comments/nm7nid/lessons_i_learned_from_running_a_homebrew/
+                    - generic [ref=f58e536]:
+                      - generic [ref=f58e537]:
+                        - generic [ref=f58e538]: 3K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f58e539]:
+                        - generic [ref=f58e540]: "126"
+                        - text: comments
+                - separator [ref=f58e541]
+                - generic [ref=f58e544]:
+                  - generic:
+                    - heading "It's absolutely mind-boggling to me that WOTC is unable to provide maps with proper grid alignment for VTTs" [level=2]:
+                      - link "It's absolutely mind-boggling to me that WOTC is unable to provide maps with proper grid alignment for VTTs" [ref=f58e545] [cursor=pointer]:
+                        - /url: /r/dndnext/comments/tg6v4k/its_absolutely_mindboggling_to_me_that_wotc_is/
+                  - generic [ref=f58e547]:
+                    - generic [ref=f58e550]:
+                      - link "r/dndnext" [ref=f58e552] [cursor=pointer]:
+                        - /url: /r/dndnext/
+                      - generic [ref=f58e557]: ·
+                      - time [ref=f58e559]: 5y ago
+                    - link "It's absolutely mind-boggling to me that WOTC is unable to provide maps with proper grid alignment for VTTs" [ref=f58e560] [cursor=pointer]:
+                      - /url: /r/dndnext/comments/tg6v4k/its_absolutely_mindboggling_to_me_that_wotc_is/
+                    - generic [ref=f58e561]:
+                      - generic [ref=f58e562]:
+                        - generic [ref=f58e563]: 3K
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f58e564]:
+                        - generic [ref=f58e565]: "383"
+                        - text: comments
+                - separator [ref=f58e566]
+            - generic [ref=f58e570]:
+              - generic [ref=f58e573]:
+                - generic [ref=f58e574]:
+                  - heading "Communities" [level=2] [ref=f58e575]
+                  - generic [ref=f58e577]:
+                    - link "Tierzoo" [ref=f58e578] [cursor=pointer]:
+                      - /url: /r/Tierzoo/
+                    - generic [ref=f58e586]:
+                      - heading "r/Tierzoo" [level=3] [ref=f58e587]
+                      - generic [ref=f58e589]:
+                        - paragraph [ref=f58e590]: This is sub is dedicated to the animal players of the game Outside
+                        - generic [ref=f58e591]:
+                          - generic [ref=f58e592]:
+                            - generic [ref=f58e593]: 36K
+                            - text: weekly visitors
+                          - generic [ref=f58e594]: ·
+                          - generic [ref=f58e595]:
+                            - generic [ref=f58e596]: "585"
+                            - text: weekly contributions
+                  - generic [ref=f58e598]:
+                    - link "wolfvsgoat" [ref=f58e599] [cursor=pointer]:
+                      - /url: /r/wolfvsgoat/
+                    - generic [ref=f58e607]:
+                      - heading "r/wolfvsgoat" [level=3] [ref=f58e608]
+                      - generic [ref=f58e610]:
+                        - paragraph [ref=f58e611]: A community for those passionate about high-quality, sustainable, and ethically made clothing—unafraid to question the murky, shadowy side of the fashion industry. www.wolfvsgoat.com
+                        - generic [ref=f58e612]:
+                          - generic [ref=f58e613]:
+                            - generic [ref=f58e614]: 1.3K
+                            - text: weekly visitors
+                          - generic [ref=f58e615]: ·
+                          - generic [ref=f58e616]:
+                            - generic [ref=f58e617]: "16"
+                            - text: weekly contributions
+                  - generic [ref=f58e619]:
+                    - link "OwlbearRodeo" [ref=f58e620] [cursor=pointer]:
+                      - /url: /r/OwlbearRodeo/
+                    - generic [ref=f58e628]:
+                      - heading "r/OwlbearRodeo" [level=3] [ref=f58e629]
+                      - generic [ref=f58e631]:
+                        - paragraph [ref=f58e632]: An online experience for shared tabletop roleplaying games https://owlbear.rodeo
+                        - generic [ref=f58e633]:
+                          - generic [ref=f58e634]:
+                            - generic [ref=f58e635]: 3.8K
+                            - text: weekly visitors
+                          - generic [ref=f58e636]: ·
+                          - generic [ref=f58e637]:
+                            - generic [ref=f58e638]: "40"
+                            - text: weekly contributions
+                  - generic [ref=f58e640]:
+                    - link "buildabear" [ref=f58e641] [cursor=pointer]:
+                      - /url: /r/buildabear/
+                    - generic [ref=f58e649]:
+                      - heading "r/buildabear" [level=3] [ref=f58e650]
+                      - generic [ref=f58e652]:
+                        - paragraph [ref=f58e653]: Welcome to the internet's largest Build-A-Bear Community, Reddit's very own r/buildabear! This subreddit is dedicated to the discussion of anything and everything Build-A-Bear related! Whether you are a newbie or you have a collection of over 300 bears, we welcome all Build-A-Bear fans! *This is an unofficial subreddit and is 100% fan-owned and operated. It is in no way affiliated with the Build-A-Bear Corporation.*
+                        - generic [ref=f58e654]:
+                          - generic [ref=f58e655]:
+                            - generic [ref=f58e656]: 56K
+                            - text: weekly visitors
+                          - generic [ref=f58e657]: ·
+                          - generic [ref=f58e658]:
+                            - generic [ref=f58e659]: 3.1K
+                            - text: weekly contributions
+                  - generic [ref=f58e661]:
+                    - link "Beavers" [ref=f58e662] [cursor=pointer]:
+                      - /url: /r/Beavers/
+                    - generic [ref=f58e670]:
+                      - heading "r/Beavers" [level=3] [ref=f58e671]
+                      - generic [ref=f58e673]:
+                        - paragraph [ref=f58e674]: A place to post pictures, video, and other media of beavers, and otherwise discuss these awesome critters.
+                        - generic [ref=f58e675]:
+                          - generic [ref=f58e676]:
+                            - generic [ref=f58e677]: 2.7K
+                            - text: weekly visitors
+                          - generic [ref=f58e678]: ·
+                          - generic [ref=f58e679]:
+                            - generic [ref=f58e680]: "51"
+                            - text: weekly contributions
+                  - link "See more communities" [ref=f58e682] [cursor=pointer]:
+                    - /url: /search/?q=foundry+vs+owlbear+rodeo&type=communities&acId=0f518998-536a-40a3-a20a-c5ade7908594
+                - separator [ref=f58e683]
+                - generic [ref=f58e684]:
+                  - heading "Profiles" [level=2] [ref=f58e685]
+                  - generic [ref=f58e687]:
+                    - link "OwlbearRodeo-ModTeam" [ref=f58e688] [cursor=pointer]:
+                      - /url: /user/OwlbearRodeo-ModTeam/
+                    - generic [ref=f58e690]:
+                      - img "OwlbearRodeo-ModTeam u/OwlbearRodeo-ModTeam avatar" [ref=f58e696]
+                      - generic [ref=f58e697]:
+                        - heading "u/OwlbearRodeo-ModTeam" [level=3] [ref=f58e699]
+                        - paragraph [ref=f58e704]:
+                          - generic [ref=f58e705]:
+                            - generic [ref=f58e706]: "1"
+                            - text: karma
+                  - generic [ref=f58e708]:
+                    - link "__Owlbear__" [ref=f58e709] [cursor=pointer]:
+                      - /url: /user/__Owlbear__/
+                    - generic [ref=f58e719]:
+                      - heading "u/__Owlbear__" [level=3] [ref=f58e721]
+                      - paragraph [ref=f58e726]:
+                        - generic [ref=f58e727]:
+                          - generic [ref=f58e728]: "757"
+                          - text: karma
+                  - generic [ref=f58e730]:
+                    - link "Owlbear__-" [ref=f58e731] [cursor=pointer]:
+                      - /url: /user/Owlbear__-/
+                    - generic [ref=f58e733]:
+                      - img "Owlbear__- u/Owlbear__- avatar" [ref=f58e739]
+                      - generic [ref=f58e740]:
+                        - heading "u/Owlbear__-" [level=3] [ref=f58e742]
+                        - paragraph [ref=f58e747]:
+                          - generic [ref=f58e748]:
+                            - generic [ref=f58e749]: "1"
+                            - text: karma
+                  - generic [ref=f58e751]:
+                    - link "_-Owlbear-_" [ref=f58e752] [cursor=pointer]:
+                      - /url: /user/_-Owlbear-_/
+                    - generic [ref=f58e754]:
+                      - img "_-Owlbear-_ u/_-Owlbear-_ avatar" [ref=f58e760]
+                      - generic [ref=f58e761]:
+                        - heading "u/_-Owlbear-_" [level=3] [ref=f58e763]
+                        - paragraph [ref=f58e768]:
+                          - generic [ref=f58e769]:
+                            - generic [ref=f58e770]: "1"
+                            - text: karma
+                  - link "See more Profiles" [ref=f58e772] [cursor=pointer]:
+                    - /url: /search/?q=foundry+vs+owlbear+rodeo&type=people&acId=0f518998-536a-40a3-a20a-c5ade7908594
+              - list [ref=f58e774]:
+                - listitem [ref=f58e775]:
+                  - link "Home" [ref=f58e777] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f58e778]:
+                  - link "Popular" [ref=f58e780] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f58e781]:
+                  - link "News" [ref=f58e783] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f58e784]:
+                  - link "Explore" [ref=f58e786] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f58e787]:
+                  - link "Best of Reddit" [ref=f58e789] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f58e790]:
+                  - link "Best of Reddit in Portuguese" [ref=f58e792] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f58e793]:
+                  - link "Best of Reddit in German" [ref=f58e795] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f58e796]:
+                  - link "Reddit Rules" [ref=f58e798] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f58e799]:
+                  - link "Privacy Policy" [ref=f58e801] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f58e802]:
+                  - link "User Agreement" [ref=f58e804] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f58e805]:
+                  - link "Accessibility" [ref=f58e807] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f58e808]:
+                  - link "Reddit, Inc. © 2026. All rights reserved." [ref=f58e809] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f58e812]:
+          - paragraph [ref=f58e813]: Join the most real place on the internet
+          - generic [ref=f58e815]:
+            - generic [ref=f58e818]:
+              - iframe [ref=f58e823]:
+                - button "Continue with Google. Opens in new tab" [ref=f60e3] [cursor=pointer]:
+                  - generic [ref=f60e5]: Continue with Google
+              - generic [ref=f58e825] [cursor=pointer]:
+                - generic [ref=f58e826]: Continue with Apple
+                - button "Sign in with Apple" [ref=f58e832]:
+                  - generic [ref=f58e833]:
+                    - img:
+                      - generic:
+                        - img:
+                          - generic:  Sign in with Apple
+            - link "Continue with Phone Number" [ref=f58e838] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - link "Continue with Email" [ref=f58e847] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+          - paragraph [ref=f58e854]:
+            - text: By continuing, you agree to our
+            - link "User Agreement" [ref=f58e855] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: and acknowledge that you understand the
+            - link "Privacy Policy" [ref=f58e856] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: .

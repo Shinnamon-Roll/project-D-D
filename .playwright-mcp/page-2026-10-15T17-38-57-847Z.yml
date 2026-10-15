@@ -1,0 +1,483 @@
+- generic [active] [ref=f145e1]:
+  - link "Skip to main content" [ref=f145e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f145e6]:
+    - generic:
+      - generic: 1.0 2.0 miss - Reddit Search!
+      - banner [ref=f145e10]:
+        - navigation [ref=f145e11]:
+          - link "Home" [ref=f145e15] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - search [ref=f145e34]:
+            - generic [ref=f145e36]:
+              - generic "Remove r/OwlbearRodeo filter and expand search to all of Reddit" [ref=f145e42] [cursor=pointer]:
+                - button [pressed] [ref=f145e43]:
+                  - generic [aria-hidden] [ref=f145e47]: r/OwlbearRodeo
+              - textbox "Remove r/OwlbearRodeo filter and expand search to all of Reddit Clear search" [ref=f145e53]:
+                - /placeholder: Search in ⁨r/OwlbearRodeo⁩
+                - text: 1.0 2.0 miss
+              - button "Clear search" [ref=f145e55] [cursor=pointer]
+          - generic [ref=f145e61]:
+            - link "Sign Up" [ref=f145e67] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Log In" [ref=f145e73] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Expand user menu" [ref=f145e80] [cursor=pointer]
+      - generic "1.0 2.0 miss - Reddit Search!"
+      - generic [ref=f145e89]:
+        - generic [ref=f145e90]:
+          - generic [ref=f145e93]:
+            - generic [ref=f145e94]:
+              - generic [ref=f145e97]:
+                - tablist [ref=f145e98]:
+                  - tab [selected] [ref=f145e99]:
+                    - link "Posts" [ref=f145e100] [cursor=pointer]:
+                      - /url: /r/OwlbearRodeo/search/?q=1.0+2.0+miss&type=posts&iId=a0e8e3c1-bf83-4a44-b9a3-83621c02863e
+                  - tab [ref=f145e106]:
+                    - link "Comments" [ref=f145e107] [cursor=pointer]:
+                      - /url: /r/OwlbearRodeo/search/?q=1.0+2.0+miss&type=comments&iId=a0e8e3c1-bf83-4a44-b9a3-83621c02863e
+                  - tab [ref=f145e113]:
+                    - link "Media" [ref=f145e114] [cursor=pointer]:
+                      - /url: /r/OwlbearRodeo/search/?q=1.0+2.0+miss&type=media&iId=a0e8e3c1-bf83-4a44-b9a3-83621c02863e
+                - button "forward" [ref=f145e121] [cursor=pointer]
+                - button "back" [ref=f145e128] [cursor=pointer]
+              - generic:
+                - generic:
+                  - tabpanel
+            - generic [ref=f145e135]:
+              - button "Top" [ref=f145e139] [cursor=pointer]
+              - button "All time" [ref=f145e148] [cursor=pointer]
+          - generic [ref=f145e155]:
+            - generic:
+              - generic:
+                - link "Skip to Sign up" [ref=f145e156] [cursor=pointer]:
+                  - /url: "#left-sidebar-container"
+                - link "Skip to Right Sidebar" [ref=f145e157] [cursor=pointer]:
+                  - /url: "#right-sidebar-container"
+          - generic [ref=f145e158]:
+            - main [ref=f145e159]:
+              - generic [ref=f145e160]:
+                - paragraph [ref=f145e163]:
+                  - text: Show results from
+                  - link "all of Reddit" [ref=f145e165] [cursor=pointer]:
+                    - /url: /search/?q=1.0+2.0+miss
+                - generic [ref=f145e170]:
+                  - generic [ref=f145e171]:
+                    - generic:
+                      - heading "First online session with my group was a success and I felt like a pro with obr :)" [level=2]:
+                        - link "First online session with my group was a success and I felt like a pro with obr :)" [ref=f145e172] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/comments/1uxilcy/first_online_session_with_my_group_was_a_success/
+                    - generic [ref=f145e174]:
+                      - generic [ref=f145e177]:
+                        - link "r/OwlbearRodeo" [ref=f145e180] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/
+                        - generic [ref=f145e185]: ·
+                        - time [ref=f145e187]: 3mo ago
+                      - link "First online session with my group was a success and I felt like a pro with obr :)" [ref=f145e188] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/comments/1uxilcy/first_online_session_with_my_group_was_a_success/
+                      - generic [ref=f145e189]:
+                        - generic [ref=f145e190]:
+                          - generic [ref=f145e191]: "208"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f145e192]:
+                          - generic [ref=f145e193]: "12"
+                          - text: comments
+                  - img "First online session with my group was a success and I felt like a pro with obr :)" [ref=f145e202] [cursor=pointer]
+                - separator [ref=f145e203]
+                - generic [ref=f145e205]:
+                  - generic [ref=f145e206]:
+                    - generic:
+                      - heading "*Murmur* now has real-time audio updates as you drag your listener around..." [level=2]:
+                        - link "*Murmur* now has real-time audio updates as you drag your listener around..." [ref=f145e207] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/comments/1shz9rs/murmur_now_has_realtime_audio_updates_as_you_drag/
+                    - generic [ref=f145e209]:
+                      - generic [ref=f145e212]:
+                        - link "r/OwlbearRodeo" [ref=f145e215] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/
+                        - generic [ref=f145e220]: ·
+                        - time [ref=f145e222]: 6mo ago
+                      - link "*Murmur* now has real-time audio updates as you drag your listener around..." [ref=f145e223] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/comments/1shz9rs/murmur_now_has_realtime_audio_updates_as_you_drag/
+                      - generic [ref=f145e224]:
+                        - generic [ref=f145e225]:
+                          - generic [ref=f145e226]: "165"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f145e227]:
+                          - generic [ref=f145e228]: "18"
+                          - text: comments
+                  - generic [ref=f145e233] [cursor=pointer]:
+                    - img "*Murmur* now has real-time audio updates as you drag your listener around..." [ref=f145e237]
+                    - generic: 0:54
+                - separator [ref=f145e238]
+                - generic [ref=f145e240]:
+                  - generic [ref=f145e241]:
+                    - generic:
+                      - heading "Coming Soon - SoundBoard+ A bridge between OBR controls and Kenku FM" [level=2]:
+                        - link "Coming Soon - SoundBoard+ A bridge between OBR controls and Kenku FM" [ref=f145e242] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/comments/1tcfs6y/coming_soon_soundboard_a_bridge_between_obr/
+                    - generic [ref=f145e244]:
+                      - generic [ref=f145e247]:
+                        - link "r/OwlbearRodeo" [ref=f145e250] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/
+                        - generic [ref=f145e255]: ·
+                        - time [ref=f145e257]: 5mo ago
+                      - link "Coming Soon - SoundBoard+ A bridge between OBR controls and Kenku FM" [ref=f145e258] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/comments/1tcfs6y/coming_soon_soundboard_a_bridge_between_obr/
+                      - generic [ref=f145e259]:
+                        - generic [ref=f145e260]:
+                          - generic [ref=f145e261]: "74"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f145e262]:
+                          - generic [ref=f145e263]: "6"
+                          - text: comments
+                  - generic [ref=f145e268] [cursor=pointer]:
+                    - img "Coming Soon - SoundBoard+ A bridge between OBR controls and Kenku FM" [ref=f145e272]
+                    - generic: 0:27
+                - separator [ref=f145e273]
+                - generic [ref=f145e275]:
+                  - generic [ref=f145e276]:
+                    - generic:
+                      - heading "Stat Bubbles Update - Version 1.6 Released!" [level=2]:
+                        - link "Stat Bubbles Update - Version 1.6 Released!" [ref=f145e277] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/comments/1aglr2v/stat_bubbles_update_version_16_released/
+                    - generic [ref=f145e279]:
+                      - generic [ref=f145e282]:
+                        - link "r/OwlbearRodeo" [ref=f145e285] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/
+                        - generic [ref=f145e290]: ·
+                        - time [ref=f145e292]: 3y ago
+                      - link "Stat Bubbles Update - Version 1.6 Released!" [ref=f145e293] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/comments/1aglr2v/stat_bubbles_update_version_16_released/
+                      - generic [ref=f145e294]:
+                        - generic [ref=f145e295]:
+                          - generic [ref=f145e296]: "61"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f145e297]:
+                          - generic [ref=f145e298]: "7"
+                          - text: comments
+                  - img "Stat Bubbles Update - Version 1.6 Released!" [ref=f145e307] [cursor=pointer]
+                - separator [ref=f145e308]
+                - generic [ref=f145e310]:
+                  - generic [ref=f145e311]:
+                    - generic:
+                      - heading "Road to Owlbear Rodeo 2.0 - Timeline Updates and Owlbear Rodeo 1.0" [level=2]:
+                        - link "Road to Owlbear Rodeo 2.0 - Timeline Updates and Owlbear Rodeo 1.0" [ref=f145e312] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/comments/wd9eus/road_to_owlbear_rodeo_20_timeline_updates_and/
+                    - generic [ref=f145e314]:
+                      - generic [ref=f145e317]:
+                        - link "r/OwlbearRodeo" [ref=f145e320] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/
+                        - generic [ref=f145e325]: ·
+                        - time [ref=f145e327]: 4y ago
+                      - link "Road to Owlbear Rodeo 2.0 - Timeline Updates and Owlbear Rodeo 1.0" [ref=f145e328] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/comments/wd9eus/road_to_owlbear_rodeo_20_timeline_updates_and/
+                      - generic [ref=f145e329]:
+                        - generic [ref=f145e330]:
+                          - generic [ref=f145e331]: "55"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f145e332]:
+                          - generic [ref=f145e333]: "15"
+                          - text: comments
+                  - link "Road to Owlbear Rodeo 2.0 - Timeline Updates and Owlbear Rodeo 1.0 thumbnail image" [ref=f145e336] [cursor=pointer]:
+                    - /url: https://blog.owlbear.rodeo/owlbear-rodeo-2-0-timeline-update/
+                    - img "Road to Owlbear Rodeo 2.0 - Timeline Updates and Owlbear Rodeo 1.0" [ref=f145e341]
+                - separator [ref=f145e342]
+                - generic [ref=f145e344]:
+                  - generic [ref=f145e345]:
+                    - generic:
+                      - heading "Owlbear Rodeo 2.0 Beta Patch 1" [level=2]:
+                        - link "Owlbear Rodeo 2.0 Beta Patch 1" [ref=f145e346] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/comments/wawe69/owlbear_rodeo_20_beta_patch_1/
+                    - generic [ref=f145e348]:
+                      - generic [ref=f145e351]:
+                        - link "r/OwlbearRodeo" [ref=f145e354] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/
+                        - generic [ref=f145e359]: ·
+                        - time [ref=f145e361]: 4y ago
+                      - link "Owlbear Rodeo 2.0 Beta Patch 1" [ref=f145e362] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/comments/wawe69/owlbear_rodeo_20_beta_patch_1/
+                      - generic [ref=f145e363]:
+                        - generic [ref=f145e364]:
+                          - generic [ref=f145e365]: "43"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f145e366]:
+                          - generic [ref=f145e367]: "5"
+                          - text: comments
+                  - link "Owlbear Rodeo 2.0 Beta Patch 1 thumbnail image" [ref=f145e370] [cursor=pointer]:
+                    - /url: https://blog.owlbear.rodeo/owlbear-rodeo-2-0-beta-patch-1/
+                    - img "Owlbear Rodeo 2.0 Beta Patch 1" [ref=f145e375]
+                - separator [ref=f145e376]
+                - generic [ref=f145e378]:
+                  - generic [ref=f145e379]:
+                    - generic:
+                      - heading "Battle Board v2.0.1 Released - Advanced Group Management for Initiative Tracking!" [level=2]:
+                        - link "Battle Board v2.0.1 Released - Advanced Group Management for Initiative Tracking!" [ref=f145e380] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/comments/1nga1n3/battle_board_v201_released_advanced_group/
+                    - generic [ref=f145e382]:
+                      - generic [ref=f145e385]:
+                        - link "r/OwlbearRodeo" [ref=f145e388] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/
+                        - generic [ref=f145e393]: ·
+                        - time [ref=f145e395]: 1y ago
+                      - link "Battle Board v2.0.1 Released - Advanced Group Management for Initiative Tracking!" [ref=f145e396] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/comments/1nga1n3/battle_board_v201_released_advanced_group/
+                      - generic [ref=f145e397]:
+                        - generic [ref=f145e398]:
+                          - generic [ref=f145e399]: "36"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f145e400]:
+                          - generic [ref=f145e401]: "25"
+                          - text: comments
+                  - img "Battle Board v2.0.1 Released - Advanced Group Management for Initiative Tracking!" [ref=f145e410] [cursor=pointer]
+                - separator [ref=f145e411]
+                - generic [ref=f145e414]:
+                  - generic:
+                    - heading "Flawless session run in OBR 2 tonight, with extensions 😊" [level=2]:
+                      - link "Flawless session run in OBR 2 tonight, with extensions 😊" [ref=f145e415] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/comments/1548nol/flawless_session_run_in_obr_2_tonight_with/
+                  - generic [ref=f145e417]:
+                    - generic [ref=f145e420]:
+                      - link "r/OwlbearRodeo" [ref=f145e422] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/
+                      - generic [ref=f145e427]: ·
+                      - time [ref=f145e429]: 3y ago
+                    - link "Flawless session run in OBR 2 tonight, with extensions 😊" [ref=f145e430] [cursor=pointer]:
+                      - /url: /r/OwlbearRodeo/comments/1548nol/flawless_session_run_in_obr_2_tonight_with/
+                    - generic [ref=f145e431]:
+                      - generic [ref=f145e432]:
+                        - generic [ref=f145e433]: "27"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f145e434]:
+                        - generic [ref=f145e435]: "4"
+                        - text: comments
+                - separator [ref=f145e436]
+                - generic [ref=f145e438]:
+                  - generic [ref=f145e439]:
+                    - generic:
+                      - heading "1.0-style 'coloured ring' attachments made for OR 2.0 😎" [level=2]:
+                        - link "1.0-style 'coloured ring' attachments made for OR 2.0 😎" [ref=f145e440] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/comments/wcsqj7/10style_coloured_ring_attachments_made_for_or_20/
+                    - generic [ref=f145e442]:
+                      - generic [ref=f145e445]:
+                        - link "r/OwlbearRodeo" [ref=f145e447] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/
+                        - generic [ref=f145e452]: ·
+                        - time [ref=f145e454]: 4y ago
+                      - link "1.0-style 'coloured ring' attachments made for OR 2.0 😎" [ref=f145e455] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/comments/wcsqj7/10style_coloured_ring_attachments_made_for_or_20/
+                      - generic [ref=f145e456]:
+                        - generic [ref=f145e457]:
+                          - generic [ref=f145e458]: "26"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f145e459]:
+                          - generic [ref=f145e460]: "4"
+                          - text: comments
+                  - generic [ref=f145e465] [cursor=pointer]:
+                    - img "1.0-style 'coloured ring' attachments made for OR 2.0 😎" [ref=f145e469]
+                    - generic: 0:25
+                - separator [ref=f145e470]
+                - generic [ref=f145e472]:
+                  - generic [ref=f145e473]:
+                    - generic:
+                      - heading "Performance Update! (Smoke&Spectre Extension)" [level=2]:
+                        - link "Performance Update! (Smoke&Spectre Extension)" [ref=f145e474] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/comments/1coc99c/performance_update_smokespectre_extension/
+                    - generic [ref=f145e476]:
+                      - generic [ref=f145e479]:
+                        - link "r/OwlbearRodeo" [ref=f145e481] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/
+                        - generic [ref=f145e486]: ·
+                        - time [ref=f145e488]: 2y ago
+                      - link "Performance Update! (Smoke&Spectre Extension)" [ref=f145e489] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/comments/1coc99c/performance_update_smokespectre_extension/
+                      - generic [ref=f145e490]:
+                        - generic [ref=f145e491]:
+                          - generic [ref=f145e492]: "26"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f145e493]:
+                          - generic [ref=f145e494]: "4"
+                          - text: comments
+                  - generic [ref=f145e497] [cursor=pointer]
+                - separator [ref=f145e503]
+                - generic [ref=f145e506]:
+                  - generic:
+                    - heading "Put them in the bin!" [level=2]:
+                      - link "Put them in the bin!" [ref=f145e507] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/comments/133mxvh/put_them_in_the_bin/
+                  - generic [ref=f145e509]:
+                    - generic [ref=f145e512]:
+                      - link "r/OwlbearRodeo" [ref=f145e514] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/
+                      - generic [ref=f145e519]: ·
+                      - time [ref=f145e521]: 4y ago
+                    - link "Put them in the bin!" [ref=f145e522] [cursor=pointer]:
+                      - /url: /r/OwlbearRodeo/comments/133mxvh/put_them_in_the_bin/
+                    - generic [ref=f145e523]:
+                      - generic [ref=f145e524]:
+                        - generic [ref=f145e525]: "25"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f145e526]:
+                        - generic [ref=f145e527]: "15"
+                        - text: comments
+                - separator [ref=f145e528]
+                - generic [ref=f145e531]:
+                  - generic:
+                    - heading "HP Tracker 2.0.0 and Tabletop Almanac 1.0.0" [level=2]:
+                      - link "HP Tracker 2.0.0 and Tabletop Almanac 1.0.0" [ref=f145e532] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/comments/1bqwzdt/hp_tracker_200_and_tabletop_almanac_100/
+                  - generic [ref=f145e534]:
+                    - generic [ref=f145e537]:
+                      - link "r/OwlbearRodeo" [ref=f145e539] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/
+                      - generic [ref=f145e544]: ·
+                      - time [ref=f145e546]: 3y ago
+                    - link "HP Tracker 2.0.0 and Tabletop Almanac 1.0.0" [ref=f145e547] [cursor=pointer]:
+                      - /url: /r/OwlbearRodeo/comments/1bqwzdt/hp_tracker_200_and_tabletop_almanac_100/
+                    - generic [ref=f145e548]:
+                      - generic [ref=f145e549]:
+                        - generic [ref=f145e550]: "24"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f145e551]:
+                        - generic [ref=f145e552]: "6"
+                        - text: comments
+                - separator [ref=f145e553]
+                - generic [ref=f145e556]:
+                  - generic:
+                    - heading "Owlbear Rodeo 1.0 open source" [level=2]:
+                      - link "Owlbear Rodeo 1.0 open source" [ref=f145e557] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/comments/134aqn8/owlbear_rodeo_10_open_source/
+                  - generic [ref=f145e559]:
+                    - generic [ref=f145e562]:
+                      - link "r/OwlbearRodeo" [ref=f145e564] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/
+                      - generic [ref=f145e569]: ·
+                      - time [ref=f145e571]: 4y ago
+                    - link "Owlbear Rodeo 1.0 open source" [ref=f145e572] [cursor=pointer]:
+                      - /url: /r/OwlbearRodeo/comments/134aqn8/owlbear_rodeo_10_open_source/
+                    - generic [ref=f145e573]:
+                      - generic [ref=f145e574]:
+                        - generic [ref=f145e575]: "22"
+                        - text: votes
+                      - text: ·
+                      - generic [ref=f145e576]:
+                        - generic [ref=f145e577]: "30"
+                        - text: comments
+                - separator [ref=f145e578]
+                - generic [ref=f145e580]:
+                  - generic [ref=f145e581]:
+                    - generic:
+                      - heading "BattleBoard v2.3.2 Released!" [level=2]:
+                        - link "BattleBoard v2.3.2 Released!" [ref=f145e582] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/comments/1peakbv/battleboard_v232_released/
+                    - generic [ref=f145e584]:
+                      - generic [ref=f145e587]:
+                        - link "r/OwlbearRodeo" [ref=f145e589] [cursor=pointer]:
+                          - /url: /r/OwlbearRodeo/
+                        - generic [ref=f145e594]: ·
+                        - time [ref=f145e596]: 10mo ago
+                      - link "BattleBoard v2.3.2 Released!" [ref=f145e597] [cursor=pointer]:
+                        - /url: /r/OwlbearRodeo/comments/1peakbv/battleboard_v232_released/
+                      - generic [ref=f145e598]:
+                        - generic [ref=f145e599]:
+                          - generic [ref=f145e600]: "20"
+                          - text: votes
+                        - text: ·
+                        - generic [ref=f145e601]:
+                          - generic [ref=f145e602]: "5"
+                          - text: comments
+                  - generic [ref=f145e605] [cursor=pointer]
+                - separator [ref=f145e611]
+            - generic [ref=f145e615]:
+              - generic [ref=f145e620]:
+                - heading "Community Info Section" [level=1] [ref=f145e621]
+                - generic [ref=f145e622]:
+                  - generic [ref=f145e623]: OwlbearRodeo
+                  - generic [ref=f145e625]: An online experience for shared tabletop roleplaying games https://owlbear.rodeo
+                  - generic [ref=f145e626]:
+                    - generic [ref=f145e627]: Created Apr 15, 2020
+                    - generic [ref=f145e631]: Public
+                - generic [ref=f145e635]:
+                  - generic [ref=f145e636]:
+                    - strong [ref=f145e638]:
+                      - generic: 3.7K
+                    - generic [ref=f145e639]: Weekly visitors
+                  - generic [ref=f145e640]:
+                    - strong [ref=f145e642]:
+                      - generic: "40"
+                    - generic [ref=f145e643]: Weekly contributions
+              - list [ref=f145e645]:
+                - listitem [ref=f145e646]:
+                  - link "Home" [ref=f145e648] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f145e649]:
+                  - link "Popular" [ref=f145e651] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f145e652]:
+                  - link "News" [ref=f145e654] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f145e655]:
+                  - link "Explore" [ref=f145e657] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f145e658]:
+                  - link "Best of Reddit" [ref=f145e660] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f145e661]:
+                  - link "Best of Reddit in Portuguese" [ref=f145e663] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f145e664]:
+                  - link "Best of Reddit in German" [ref=f145e666] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f145e667]:
+                  - link "Reddit Rules" [ref=f145e669] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f145e670]:
+                  - link "Privacy Policy" [ref=f145e672] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f145e673]:
+                  - link "User Agreement" [ref=f145e675] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f145e676]:
+                  - link "Accessibility" [ref=f145e678] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f145e679]:
+                  - link "Reddit, Inc. © 2026. All rights reserved." [ref=f145e680] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f145e683]:
+          - paragraph [ref=f145e684]: Join the most real place on the internet
+          - generic [ref=f145e686]:
+            - generic [ref=f145e689]:
+              - iframe [ref=f145e694]:
+                - button "Continue with Google. Opens in new tab" [ref=f147e3] [cursor=pointer]:
+                  - generic [ref=f147e5]: Continue with Google
+              - generic [ref=f145e696] [cursor=pointer]:
+                - generic [ref=f145e697]: Continue with Apple
+                - button "Sign in with Apple" [ref=f145e703]:
+                  - generic [ref=f145e704]:
+                    - img:
+                      - generic:
+                        - img:
+                          - generic:  Sign in with Apple
+            - link "Continue with Phone Number" [ref=f145e709] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - link "Continue with Email" [ref=f145e718] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+          - paragraph [ref=f145e725]:
+            - text: By continuing, you agree to our
+            - link "User Agreement" [ref=f145e726] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: and acknowledge that you understand the
+            - link "Privacy Policy" [ref=f145e727] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: .

@@ -1,0 +1,1376 @@
+- generic [active] [ref=f98e1]:
+  - link "Skip to main content" [ref=f98e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f98e6]:
+    - generic:
+      - generic: "Opinion: Roll20's UI could be a lot better : r/DnD"
+      - banner [ref=f98e10]:
+        - navigation [ref=f98e11]:
+          - link "Home" [ref=f98e15] [cursor=pointer]:
+            - /url: https://www.reddit.com/
+          - search [ref=f98e34]:
+            - generic [ref=f98e36]:
+              - generic "Remove r/DnD filter and expand search to all of Reddit" [ref=f98e42] [cursor=pointer]:
+                - button [pressed] [ref=f98e43]:
+                  - generic [aria-hidden] [ref=f98e47]: r/DnD
+              - textbox "Remove r/DnD filter and expand search to all of Reddit" [ref=f98e53]:
+                - /placeholder: Search in ⁨r/DnD⁩
+          - generic [ref=f98e54]:
+            - link "Sign Up" [ref=f98e60] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+            - link "Log In" [ref=f98e66] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - button "Expand user menu" [ref=f98e73] [cursor=pointer]
+      - generic [ref=f98e79]:
+        - generic [ref=f98e80]:
+          - generic [ref=f98e81]:
+            - generic:
+              - generic:
+                - link "Skip to Sign up" [ref=f98e82] [cursor=pointer]:
+                  - /url: "#left-sidebar-container"
+                - link "Skip to Right Sidebar" [ref=f98e83] [cursor=pointer]:
+                  - /url: "#right-sidebar-container"
+          - generic [ref=f98e84]:
+            - main [ref=f98e85]:
+              - 'generic "Opinion: Roll20''s UI could be a lot better : r/DnD"'
+              - generic [ref=f98e86]:
+                - generic [ref=f98e87]:
+                  - generic [ref=f98e88]:
+                    - button "Back" [ref=f98e90] [cursor=pointer]
+                    - link "Go to DnD" [ref=f98e98] [cursor=pointer]:
+                      - /url: https://www.reddit.com/r/DnD/
+                    - group [ref=f98e103]:
+                      - generic [ref=f98e104]:
+                        - link "r/DnD" [ref=f98e108] [cursor=pointer]:
+                          - /url: https://www.reddit.com/r/DnD/
+                        - generic [aria-hidden] [ref=f98e109]: •
+                        - time [ref=f98e111]: 4y ago
+                      - 'link "Author: hopelessnecromantic7" [ref=f98e117] [cursor=pointer]':
+                        - /url: https://www.reddit.com/user/hopelessnecromantic7/
+                        - generic [ref=f98e118]: u/hopelessnecromantic7
+                  - generic [ref=f98e120]:
+                    - img "Archived post" [ref=f98e124]
+                    - button "Open user actions" [ref=f98e128] [cursor=pointer]
+                - generic [ref=f98e134]:
+                  - 'heading "Post Title: Opinion: Roll20''s UI could be a lot better" [level=1] [ref=f98e135]': "Opinion: Roll20's UI could be a lot better"
+                  - 'link "Flair: Out of Game" [ref=f98e138] [cursor=pointer]':
+                    - /url: /r/DnD/?f=flair_name%3A%22Out%20of%20Game%22
+                    - 'generic "Flair: Out of Game" [ref=f98e140]': Out of Game
+                - generic [ref=f98e144]:
+                  - paragraph [ref=f98e145]: Considering Roll20 is currently the largest and most used VTTT and they presumably have a healthy amount of paying subscribers (like myself), you would think that the GUIs and UI would be a lot more polished than they are. Overall I get frustrated using Roll20 because of how cluttered and clunky it can be to navigate maps, tools, layers, etc. Finding certain settings shouldn't be difficult because all the settings fonts and switches are completely neutral to each other.
+                  - paragraph [ref=f98e146]: Does anyone else feel this way or is it just me?
+                - generic: Archived post. New comments cannot be posted and votes cannot be cast.
+                - generic "Actions available for this post" [ref=f98e154]:
+                  - generic [ref=f98e157]:
+                    - button "Upvote" [disabled]
+                    - generic [ref=f98e158]: 2.1K
+                    - button "Downvote" [disabled]
+                  - button "451 Go to comments" [ref=f98e160] [cursor=pointer]:
+                    - generic [ref=f98e161]: "451"
+                    - generic [ref=f98e167]: Go to comments
+                  - button "Share" [ref=f98e171] [cursor=pointer]
+              - 'generic "FictionLab: Where “What If?” Becomes Your Next Great Story." [ref=f98e178]':
+                - generic [ref=f98e179]:
+                  - 'link "Advertisement: FictionLab: Where “What If?” Becomes Your Next Great Story." [ref=f98e180] [cursor=pointer]':
+                    - /url: https://alb.reddit.com/cr?za=HOfLT6AplIXC9_0JzssyXBYyh4byxnQr4YX-tZCpFfD1XTe28WQ1T8aBhCLVGMhP_fPDE-r2pByBiHp-LRPrwMW3BxaB1IgCNA4o3mxLrYB7NfzSfvQHoorBcQ8ebfRPu2vLQeuGlOmZP5rw08EnPGJJr3FZIn9lEnaIrA3rLExNTr0mAXkWw7zqRuE9CbzRklrs-pIeddQpU8UsjUkKMRMj9j4PKdjPraEYGGaiJzDYaMmf2ELchd5bxqwtXeoD-n7LIqNEN_q68ZTVWo4AmaQ8Nilf8XiZfKBUrgZxZrEweC-A3skIbCvChwbhMHNBeZof1hPFOnWBTWy6n7Ug7hHszoQXhQAa-m_SW3wiBNwe_WKkbrW8Fcl8L0iYEJt4-IUIrLyO4ytpkvTfxg13kA5faQVpZ0d7UiIiRVL8davsThP8hWOBmIPGcpnxrMzQob_Q7VBP_hBXu9rE5rbB09c5k-rJDw1XLBQ613FQD6K06cezRxod7Lwiq128dSPLCGuEr6LR9USJl_jViD4AKYJBmxNqHd8SdQTdLiBVSjTET-EERO-mAne1vlh1uvobXpHUnu5Mj11OeHEq-NJpp-f0NocDf_4ezDUJkZTdOcTMO5_OeMwYTQR0kvT-Cgn4ets7G8wGXo5XgEdXErGYJZKERUOk3Owk7Ym39cDA_1CYDLeDscx1Y7SDsCGO8VF7W3l7xJn7hJvcosUy3zq0xNSSqexNIGhPUF-DJeLxAQVlB2GhQ0YxsriVCJk&zp=gp1ncQLq1RLLSfhXGMbRZwbSucC2y9YGBRY6Y10fK-Z0C8oasTQkQb0FRV98dehWCwHhguqNcycXxjm92ISCFyMVs4NVC7xsIKDmBRl8TDbbolbkDgX08fslem0WvfdL7DP7HBrLFjf7yucKhPEmRO2fv6i-GrLzHbl31Zi34u7sB_lUkOFL-H2kztaObj6NYDhh9StVxh-f561QFf9vXgQlDrdYeWLdQdA_SErrmFjkezaLbbssEJtpJ9vgCQw_QEdF
+                  - generic [ref=f98e181]:
+                    - generic [ref=f98e182]:
+                      - link "Automatic_Ear_9299" [ref=f98e185] [cursor=pointer]:
+                        - /url: /user/Automatic_Ear_9299/
+                        - img "u/Automatic_Ear_9299 avatar" [ref=f98e188]
+                      - generic [ref=f98e190]: •
+                      - link "Ad" [ref=f98e192] [cursor=pointer]:
+                        - /url: /user/Automatic_Ear_9299/
+                      - link [ref=f98e194] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=HOfLT6AplIXC9_0JzssyXBYyh4byxnQr4YX-tZCpFfD1XTe28WQ1T8aBhCLVGMhP_fPDE-r2pByBiHp-LRPrwMW3BxaB1IgCNA4o3mxLrYB7NfzSfvQHoorBcQ8ebfRPu2vLQeuGlOmZP5rw08EnPGJJr3FZIn9lEnaIrA3rLExNTr0mAXkWw7zqRuE9CbzRklrs-pIeddQpU8UsjUkKMRMj9j4PKdjPraEYGGaiJzDYaMmf2ELchd5bxqwtXeoD-n7LIqNEN_q68ZTVWo4AmaQ8Nilf8XiZfKBUrgZxZrEweC-A3skIbCvChwbhMHNBeZof1hPFOnWBTWy6n7Ug7hHszoQXhQAa-m_SW3wiBNwe_WKkbrW8Fcl8L0iYEJt4-IUIrLyO4ytpkvTfxg13kA5faQVpZ0d7UiIiRVL8davsThP8hWOBmIPGcpnxrMzQob_Q7VBP_hBXu9rE5rbB09c5k-rJDw1XLBQ613FQD6K06cezRxod7Lwiq128dSPLCGuEr6LR9USJl_jViD4AKYJBmxNqHd8SdQTdLiBVSjTET-EERO-mAne1vlh1uvobXpHUnu5Mj11OeHEq-NJpp-f0NocDf_4ezDUJkZTdOcTMO5_OeMwYTQR0kvT-Cgn4ets7G8wGXo5XgEdXErGYJZKERUOk3Owk7Ym39cDA_1CYDLeDscx1Y7SDsCGO8VF7W3l7xJn7hJvcosUy3zq0xNSSqexNIGhPUF-DJeLxAQVlB2GhQ0YxsriVCJk&zp=gp1ncQLq1RLLSfhXGMbRZwbSucC2y9YGBRY6Y10fK-Z0C8oasTQkQb0FRV98dehWCwHhguqNcycXxjm92ISCFyMVs4NVC7xsIKDmBRl8TDbbolbkDgX08fslem0WvfdL7DP7HBrLFjf7yucKhPEmRO2fv6i-GrLzHbl31Zi34u7sB_lUkOFL-H2kztaObj6NYDhh9StVxh-f561QFf9vXgQlDrdYeWLdQdA_SErrmFjkezaLbbssEJtpJ9vgCQw_QEdF
+                    - button "Open user actions" [ref=f98e200] [cursor=pointer]
+                  - generic [ref=f98e206]:
+                    - generic [ref=f98e207]:
+                      - 'link "FictionLab: Where “What If?” Becomes Your Next Great Story." [ref=f98e209] [cursor=pointer]':
+                        - /url: https://alb.reddit.com/cr?za=HOfLT6AplIXC9_0JzssyXBYyh4byxnQr4YX-tZCpFfD1XTe28WQ1T8aBhCLVGMhP_fPDE-r2pByBiHp-LRPrwMW3BxaB1IgCNA4o3mxLrYB7NfzSfvQHoorBcQ8ebfRPu2vLQeuGlOmZP5rw08EnPGJJr3FZIn9lEnaIrA3rLExNTr0mAXkWw7zqRuE9CbzRklrs-pIeddQpU8UsjUkKMRMj9j4PKdjPraEYGGaiJzDYaMmf2ELchd5bxqwtXeoD-n7LIqNEN_q68ZTVWo4AmaQ8Nilf8XiZfKBUrgZxZrEweC-A3skIbCvChwbhMHNBeZof1hPFOnWBTWy6n7Ug7hHszoQXhQAa-m_SW3wiBNwe_WKkbrW8Fcl8L0iYEJt4-IUIrLyO4ytpkvTfxg13kA5faQVpZ0d7UiIiRVL8davsThP8hWOBmIPGcpnxrMzQob_Q7VBP_hBXu9rE5rbB09c5k-rJDw1XLBQ613FQD6K06cezRxod7Lwiq128dSPLCGuEr6LR9USJl_jViD4AKYJBmxNqHd8SdQTdLiBVSjTET-EERO-mAne1vlh1uvobXpHUnu5Mj11OeHEq-NJpp-f0NocDf_4ezDUJkZTdOcTMO5_OeMwYTQR0kvT-Cgn4ets7G8wGXo5XgEdXErGYJZKERUOk3Owk7Ym39cDA_1CYDLeDscx1Y7SDsCGO8VF7W3l7xJn7hJvcosUy3zq0xNSSqexNIGhPUF-DJeLxAQVlB2GhQ0YxsriVCJk&zp=gp1ncQLq1RLLSfhXGMbRZwbSucC2y9YGBRY6Y10fK-Z0C8oasTQkQb0FRV98dehWCwHhguqNcycXxjm92ISCFyMVs4NVC7xsIKDmBRl8TDbbolbkDgX08fslem0WvfdL7DP7HBrLFjf7yucKhPEmRO2fv6i-GrLzHbl31Zi34u7sB_lUkOFL-H2kztaObj6NYDhh9StVxh-f561QFf9vXgQlDrdYeWLdQdA_SErrmFjkezaLbbssEJtpJ9vgCQw_QEdF
+                      - generic [ref=f98e210]:
+                        - link [ref=f98e211] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=HOfLT6AplIXC9_0JzssyXBYyh4byxnQr4YX-tZCpFfD1XTe28WQ1T8aBhCLVGMhP_fPDE-r2pByBiHp-LRPrwMW3BxaB1IgCNA4o3mxLrYB7NfzSfvQHoorBcQ8ebfRPu2vLQeuGlOmZP5rw08EnPGJJr3FZIn9lEnaIrA3rLExNTr0mAXkWw7zqRuE9CbzRklrs-pIeddQpU8UsjUkKMRMj9j4PKdjPraEYGGaiJzDYaMmf2ELchd5bxqwtXeoD-n7LIqNEN_q68ZTVWo4AmaQ8Nilf8XiZfKBUrgZxZrEweC-A3skIbCvChwbhMHNBeZof1hPFOnWBTWy6n7Ug7hHszoQXhQAa-m_SW3wiBNwe_WKkbrW8Fcl8L0iYEJt4-IUIrLyO4ytpkvTfxg13kA5faQVpZ0d7UiIiRVL8davsThP8hWOBmIPGcpnxrMzQob_Q7VBP_hBXu9rE5rbB09c5k-rJDw1XLBQ613FQD6K06cezRxod7Lwiq128dSPLCGuEr6LR9USJl_jViD4AKYJBmxNqHd8SdQTdLiBVSjTET-EERO-mAne1vlh1uvobXpHUnu5Mj11OeHEq-NJpp-f0NocDf_4ezDUJkZTdOcTMO5_OeMwYTQR0kvT-Cgn4ets7G8wGXo5XgEdXErGYJZKERUOk3Owk7Ym39cDA_1CYDLeDscx1Y7SDsCGO8VF7W3l7xJn7hJvcosUy3zq0xNSSqexNIGhPUF-DJeLxAQVlB2GhQ0YxsriVCJk&zp=gp1ncQLq1RLLSfhXGMbRZwbSucC2y9YGBRY6Y10fK-Z0C8oasTQkQb0FRV98dehWCwHhguqNcycXxjm92ISCFyMVs4NVC7xsIKDmBRl8TDbbolbkDgX08fslem0WvfdL7DP7HBrLFjf7yucKhPEmRO2fv6i-GrLzHbl31Zi34u7sB_lUkOFL-H2kztaObj6NYDhh9StVxh-f561QFf9vXgQlDrdYeWLdQdA_SErrmFjkezaLbbssEJtpJ9vgCQw_QEdF
+                        - generic [ref=f98e212]:
+                          - link "View More" [ref=f98e213] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=HOfLT6AplIXC9_0JzssyXBYyh4byxnQr4YX-tZCpFfD1XTe28WQ1T8aBhCLVGMhP_fPDE-r2pByBiHp-LRPrwMW3BxaB1IgCNA4o3mxLrYB7NfzSfvQHoorBcQ8ebfRPu2vLQeuGlOmZP5rw08EnPGJJr3FZIn9lEnaIrA3rLExNTr0mAXkWw7zqRuE9CbzRklrs-pIeddQpU8UsjUkKMRMj9j4PKdjPraEYGGaiJzDYaMmf2ELchd5bxqwtXeoD-n7LIqNEN_q68ZTVWo4AmaQ8Nilf8XiZfKBUrgZxZrEweC-A3skIbCvChwbhMHNBeZof1hPFOnWBTWy6n7Ug7hHszoQXhQAa-m_SW3wiBNwe_WKkbrW8Fcl8L0iYEJt4-IUIrLyO4ytpkvTfxg13kA5faQVpZ0d7UiIiRVL8davsThP8hWOBmIPGcpnxrMzQob_Q7VBP_hBXu9rE5rbB09c5k-rJDw1XLBQ613FQD6K06cezRxod7Lwiq128dSPLCGuEr6LR9USJl_jViD4AKYJBmxNqHd8SdQTdLiBVSjTET-EERO-mAne1vlh1uvobXpHUnu5Mj11OeHEq-NJpp-f0NocDf_4ezDUJkZTdOcTMO5_OeMwYTQR0kvT-Cgn4ets7G8wGXo5XgEdXErGYJZKERUOk3Owk7Ym39cDA_1CYDLeDscx1Y7SDsCGO8VF7W3l7xJn7hJvcosUy3zq0xNSSqexNIGhPUF-DJeLxAQVlB2GhQ0YxsriVCJk&zp=gp1ncQLq1RLLSfhXGMbRZwbSucC2y9YGBRY6Y10fK-Z0C8oasTQkQb0FRV98dehWCwHhguqNcycXxjm92ISCFyMVs4NVC7xsIKDmBRl8TDbbolbkDgX08fslem0WvfdL7DP7HBrLFjf7yucKhPEmRO2fv6i-GrLzHbl31Zi34u7sB_lUkOFL-H2kztaObj6NYDhh9StVxh-f561QFf9vXgQlDrdYeWLdQdA_SErrmFjkezaLbbssEJtpJ9vgCQw_QEdF
+                          - link "fictionlab.ai" [ref=f98e217] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=HOfLT6AplIXC9_0JzssyXBYyh4byxnQr4YX-tZCpFfD1XTe28WQ1T8aBhCLVGMhP_fPDE-r2pByBiHp-LRPrwMW3BxaB1IgCNA4o3mxLrYB7NfzSfvQHoorBcQ8ebfRPu2vLQeuGlOmZP5rw08EnPGJJr3FZIn9lEnaIrA3rLExNTr0mAXkWw7zqRuE9CbzRklrs-pIeddQpU8UsjUkKMRMj9j4PKdjPraEYGGaiJzDYaMmf2ELchd5bxqwtXeoD-n7LIqNEN_q68ZTVWo4AmaQ8Nilf8XiZfKBUrgZxZrEweC-A3skIbCvChwbhMHNBeZof1hPFOnWBTWy6n7Ug7hHszoQXhQAa-m_SW3wiBNwe_WKkbrW8Fcl8L0iYEJt4-IUIrLyO4ytpkvTfxg13kA5faQVpZ0d7UiIiRVL8davsThP8hWOBmIPGcpnxrMzQob_Q7VBP_hBXu9rE5rbB09c5k-rJDw1XLBQ613FQD6K06cezRxod7Lwiq128dSPLCGuEr6LR9USJl_jViD4AKYJBmxNqHd8SdQTdLiBVSjTET-EERO-mAne1vlh1uvobXpHUnu5Mj11OeHEq-NJpp-f0NocDf_4ezDUJkZTdOcTMO5_OeMwYTQR0kvT-Cgn4ets7G8wGXo5XgEdXErGYJZKERUOk3Owk7Ym39cDA_1CYDLeDscx1Y7SDsCGO8VF7W3l7xJn7hJvcosUy3zq0xNSSqexNIGhPUF-DJeLxAQVlB2GhQ0YxsriVCJk&zp=gp1ncQLq1RLLSfhXGMbRZwbSucC2y9YGBRY6Y10fK-Z0C8oasTQkQb0FRV98dehWCwHhguqNcycXxjm92ISCFyMVs4NVC7xsIKDmBRl8TDbbolbkDgX08fslem0WvfdL7DP7HBrLFjf7yucKhPEmRO2fv6i-GrLzHbl31Zi34u7sB_lUkOFL-H2kztaObj6NYDhh9StVxh-f561QFf9vXgQlDrdYeWLdQdA_SErrmFjkezaLbbssEJtpJ9vgCQw_QEdF
+                    - link [ref=f98e220] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=HOfLT6AplIXC9_0JzssyXBYyh4byxnQr4YX-tZCpFfD1XTe28WQ1T8aBhCLVGMhP_fPDE-r2pByBiHp-LRPrwMW3BxaB1IgCNA4o3mxLrYB7NfzSfvQHoorBcQ8ebfRPu2vLQeuGlOmZP5rw08EnPGJJr3FZIn9lEnaIrA3rLExNTr0mAXkWw7zqRuE9CbzRklrs-pIeddQpU8UsjUkKMRMj9j4PKdjPraEYGGaiJzDYaMmf2ELchd5bxqwtXeoD-n7LIqNEN_q68ZTVWo4AmaQ8Nilf8XiZfKBUrgZxZrEweC-A3skIbCvChwbhMHNBeZof1hPFOnWBTWy6n7Ug7hHszoQXhQAa-m_SW3wiBNwe_WKkbrW8Fcl8L0iYEJt4-IUIrLyO4ytpkvTfxg13kA5faQVpZ0d7UiIiRVL8davsThP8hWOBmIPGcpnxrMzQob_Q7VBP_hBXu9rE5rbB09c5k-rJDw1XLBQ613FQD6K06cezRxod7Lwiq128dSPLCGuEr6LR9USJl_jViD4AKYJBmxNqHd8SdQTdLiBVSjTET-EERO-mAne1vlh1uvobXpHUnu5Mj11OeHEq-NJpp-f0NocDf_4ezDUJkZTdOcTMO5_OeMwYTQR0kvT-Cgn4ets7G8wGXo5XgEdXErGYJZKERUOk3Owk7Ym39cDA_1CYDLeDscx1Y7SDsCGO8VF7W3l7xJn7hJvcosUy3zq0xNSSqexNIGhPUF-DJeLxAQVlB2GhQ0YxsriVCJk&zp=gp1ncQLq1RLLSfhXGMbRZwbSucC2y9YGBRY6Y10fK-Z0C8oasTQkQb0FRV98dehWCwHhguqNcycXxjm92ISCFyMVs4NVC7xsIKDmBRl8TDbbolbkDgX08fslem0WvfdL7DP7HBrLFjf7yucKhPEmRO2fv6i-GrLzHbl31Zi34u7sB_lUkOFL-H2kztaObj6NYDhh9StVxh-f561QFf9vXgQlDrdYeWLdQdA_SErrmFjkezaLbbssEJtpJ9vgCQw_QEdF
+                      - 'img "Thumbnail image: FictionLab: Where “What If?” Becomes Your Next Great Story." [ref=f98e221]'
+              - generic [ref=f98e228]:
+                - generic [ref=f98e230]:
+                  - generic [aria-hidden] [ref=f98e231]: "Sort by:"
+                  - button "Sort by Best" [ref=f98e236] [cursor=pointer]:
+                    - generic [ref=f98e237]: Best
+                - button "Search Comments Expand comment search" [ref=f98e245] [cursor=pointer]:
+                  - generic [ref=f98e246]: Search Comments
+                  - generic [ref=f98e253]: Expand comment search
+              - region "Comments" [ref=f98e256]:
+                - heading "Comments Section" [level=1] [ref=f98e257]
+                - article "Comment from Thisisnowmyname 4 years ago" [ref=f98e259]:
+                  - generic [ref=f98e260] [cursor=pointer]:
+                    - link "Thisisnowmyname's profile --- avatar" [ref=f98e266]:
+                      - /url: https://www.reddit.com/user/Thisisnowmyname/
+                    - generic [ref=f98e276]:
+                      - link "Thisisnowmyname's profile" [ref=f98e280]:
+                        - /url: https://www.reddit.com/user/Thisisnowmyname/
+                        - generic [ref=f98e281]: Thisisnowmyname
+                      - generic [aria-hidden] [ref=f98e283]: •
+                      - link [ref=f98e285]:
+                        - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifuhqt2/
+                        - time [ref=f98e287]: 4y ago
+                  - generic [ref=f98e289]:
+                    - paragraph [ref=f98e293]: One thing that amazes me is how little the UI has changed since Roll20's inception. It was remarkable when it first released, but with so many competitors out there now (many of which have more intuitive UI) I feel like most people who still use it do so primarily just because it's the VTT they're used to.
+                    - generic [ref=f98e299]:
+                      - generic [ref=f98e301]:
+                        - button "Upvote" [disabled]
+                        - generic [ref=f98e302]: "176"
+                        - button "Downvote" [disabled]
+                      - button "Give award" [ref=f98e305] [cursor=pointer]:
+                        - generic [aria-hidden] [ref=f98e313]: Award
+                      - button "Share" [ref=f98e316] [cursor=pointer]
+                      - button "Open user actions" [ref=f98e325] [cursor=pointer]
+                    - generic [ref=f98e330]:
+                      - 'article "Comment thread level 1: Reply from hopelessnecromantic7 4 years ago" [ref=f98e332]':
+                        - generic [ref=f98e333] [cursor=pointer]:
+                          - link "hopelessnecromantic7's profile --- avatar" [ref=f98e339]:
+                            - /url: https://www.reddit.com/user/hopelessnecromantic7/
+                          - generic [ref=f98e349]:
+                            - link "hopelessnecromantic7's profile" [ref=f98e353]:
+                              - /url: https://www.reddit.com/user/hopelessnecromantic7/
+                              - generic [ref=f98e354]: hopelessnecromantic7
+                            - generic "Comment distinguished as the original poster" [ref=f98e358]: OP
+                            - generic [aria-hidden] [ref=f98e359]: •
+                            - link [ref=f98e361]:
+                              - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifuhtdb/
+                              - time [ref=f98e363]: 4y ago
+                        - generic [ref=f98e365]:
+                          - paragraph [ref=f98e369]: exactly!
+                          - generic [ref=f98e375]:
+                            - generic [ref=f98e377]:
+                              - button "Upvote" [disabled]
+                              - generic [ref=f98e378]: "25"
+                              - button "Downvote" [disabled]
+                            - button "Give award" [ref=f98e381] [cursor=pointer]:
+                              - generic [aria-hidden] [ref=f98e389]: Award
+                            - button "Share" [ref=f98e392] [cursor=pointer]
+                            - button "Open user actions" [ref=f98e401] [cursor=pointer]
+                      - 'article "Comment thread level 1: Reply from yesat 4 years ago" [ref=f98e407]':
+                        - generic [ref=f98e408] [cursor=pointer]:
+                          - link "yesat's profile --- avatar" [ref=f98e414]:
+                            - /url: https://www.reddit.com/user/yesat/
+                          - generic [ref=f98e424]:
+                            - link "yesat's profile" [ref=f98e428]:
+                              - /url: https://www.reddit.com/user/yesat/
+                              - generic [ref=f98e429]: yesat
+                            - generic [aria-hidden] [ref=f98e431]: •
+                            - link [ref=f98e433]:
+                              - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifunjjh/
+                              - time [ref=f98e435]: 4y ago
+                        - generic [ref=f98e437]:
+                          - paragraph [ref=f98e441]: I have played my first game on R20 for a while and the only really visual stuff that changed was that you could make chat dark.
+                          - generic [ref=f98e447]:
+                            - generic [ref=f98e449]:
+                              - button "Upvote" [disabled]
+                              - generic [ref=f98e450]: "29"
+                              - button "Downvote" [disabled]
+                            - button "Give award" [ref=f98e453] [cursor=pointer]:
+                              - generic [aria-hidden] [ref=f98e461]: Award
+                            - button "Share" [ref=f98e464] [cursor=pointer]
+                            - button "Open user actions" [ref=f98e473] [cursor=pointer]
+                          - button "1 more reply" [ref=f98e482] [cursor=pointer]:
+                            - generic [ref=f98e487]:
+                              - generic [ref=f98e488]: "1"
+                              - text: more reply
+                      - button "29 more replies" [ref=f98e492] [cursor=pointer]:
+                        - generic [ref=f98e497]:
+                          - generic [ref=f98e498]: "29"
+                          - text: more replies
+                - article "Comment from TrivialitySpecialty 4 years ago" [ref=f98e500]:
+                  - generic [ref=f98e501] [cursor=pointer]:
+                    - link "TrivialitySpecialty's profile --- avatar" [ref=f98e507]:
+                      - /url: https://www.reddit.com/user/TrivialitySpecialty/
+                    - generic [ref=f98e517]:
+                      - link "TrivialitySpecialty's profile" [ref=f98e521]:
+                        - /url: https://www.reddit.com/user/TrivialitySpecialty/
+                        - generic [ref=f98e522]: TrivialitySpecialty
+                      - generic [aria-hidden] [ref=f98e524]: •
+                      - link [ref=f98e526]:
+                        - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifuqjcd/
+                        - time [ref=f98e528]: 4y ago
+                      - generic [aria-hidden] [ref=f98e529]: •
+                      - generic [ref=f98e530]:
+                        - text: Edited
+                        - time [ref=f98e532]: 4y ago
+                  - generic [ref=f98e534]:
+                    - generic [ref=f98e537]:
+                      - paragraph [ref=f98e538]: Roll20 is the epitome of "a software developer designer this"
+                      - paragraph [ref=f98e539]: So many hidden menus and extra clicks and settings panels inside settings panels that are just a text field for mutilated JavaScript snippets...
+                      - paragraph [ref=f98e540]: No UI designer did that. Guaranteed.
+                      - paragraph [ref=f98e541]: "EDIT: lol at all the engineers with hurt feelings in this thread. I'm a software engineer, I've seen what we're capable of when left unsupervised. I stand by what I said"
+                    - generic [ref=f98e544]:
+                      - 'article "Comment thread level 1: Reply from [deleted] 4 years ago" [ref=f98e546]':
+                        - generic "[deleted] 4y ago" [ref=f98e547] [cursor=pointer]:
+                          - generic [ref=f98e561]:
+                            - generic [ref=f98e562]: "[deleted]"
+                            - generic [aria-hidden] [ref=f98e565]: •
+                            - link [ref=f98e567]:
+                              - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifuyrw2/
+                              - time [ref=f98e569]: 4y ago
+                        - generic [ref=f98e571]:
+                          - paragraph [ref=f98e575]: Somehow they achieved the performance of an app developed exclusively by UI designers, and the UI of an app designed exclusively by software developers
+                          - button "28 more replies" [ref=f98e582] [cursor=pointer]:
+                            - generic [ref=f98e587]:
+                              - generic [ref=f98e588]: "28"
+                              - text: more replies
+                      - 'article "Comment thread level 1: Reply from IAmMoonie 4 years ago" [ref=f98e590]':
+                        - generic [ref=f98e591] [cursor=pointer]:
+                          - link "IAmMoonie's profile --- avatar" [ref=f98e597]:
+                            - /url: https://www.reddit.com/user/IAmMoonie/
+                          - generic [ref=f98e607]:
+                            - link "IAmMoonie's profile" [ref=f98e611]:
+                              - /url: https://www.reddit.com/user/IAmMoonie/
+                              - generic [ref=f98e612]: IAmMoonie
+                            - generic [aria-hidden] [ref=f98e614]: •
+                            - link [ref=f98e616]:
+                              - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifvmbp0/
+                              - time [ref=f98e618]: 4y ago
+                        - generic [ref=f98e620]:
+                          - paragraph [ref=f98e624]: As a software engineer, we’re not accepting responsibility for this. Generally speaking we’re given a brief and a design to follow… most of us would do things differently 😂
+                          - button "5 more replies" [ref=f98e631] [cursor=pointer]:
+                            - generic [ref=f98e636]:
+                              - generic [ref=f98e637]: "5"
+                              - text: more replies
+                      - 'article "Comment thread level 1: Reply from SardScroll 4 years ago" [ref=f98e639]':
+                        - generic [ref=f98e640] [cursor=pointer]:
+                          - link "SardScroll's profile --- avatar" [ref=f98e646]:
+                            - /url: https://www.reddit.com/user/SardScroll/
+                            - img "u/SardScroll avatar" [ref=f98e649]
+                          - generic [ref=f98e653]:
+                            - link "SardScroll's profile" [ref=f98e657]:
+                              - /url: https://www.reddit.com/user/SardScroll/
+                              - generic [ref=f98e658]: SardScroll
+                            - generic [aria-hidden] [ref=f98e660]: •
+                            - link [ref=f98e662]:
+                              - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifv0iec/
+                              - time [ref=f98e664]: 4y ago
+                        - generic [ref=f98e666]:
+                          - generic [ref=f98e669]:
+                            - paragraph [ref=f98e670]: I don't see what the problem is. It's just a logical depth first traversal of an options tree, quickly allowing for an O(Log(n)) seek to the feature, once one invests a bit of time in using the layout.
+                            - paragraph [ref=f98e671]: I find it rather intuitive, just unoptimized and slow, especially with voice and video on....yes, I am a professional software developer, how is that relevant......oooooh.
+                          - button "6 more replies" [ref=f98e678] [cursor=pointer]:
+                            - generic [ref=f98e683]:
+                              - generic [ref=f98e684]: "6"
+                              - text: more replies
+                      - button "10 more replies" [ref=f98e688] [cursor=pointer]:
+                        - generic [ref=f98e693]:
+                          - generic [ref=f98e694]: "10"
+                          - text: more replies
+                - article "Comment from InternationalGrass42 4 years ago" [ref=f98e696]:
+                  - generic [ref=f98e697] [cursor=pointer]:
+                    - link "InternationalGrass42's profile --- avatar" [ref=f98e703]:
+                      - /url: https://www.reddit.com/user/InternationalGrass42/
+                    - generic [ref=f98e713]:
+                      - link "InternationalGrass42's profile" [ref=f98e717]:
+                        - /url: https://www.reddit.com/user/InternationalGrass42/
+                        - generic [ref=f98e718]: InternationalGrass42
+                      - generic [aria-hidden] [ref=f98e720]: •
+                      - link [ref=f98e722]:
+                        - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifuixjv/
+                        - time [ref=f98e724]: 4y ago
+                  - generic [ref=f98e726]:
+                    - generic [ref=f98e729]:
+                      - paragraph [ref=f98e730]: I mean, why bother upgrading if it's already the biggest and most used VTT with paying subscribers? Roll20 has no incentive to spend money on changes unless people start leaving in great numbers.
+                      - paragraph [ref=f98e731]: Myself, I switched to foundry ages ago and love it. So much nicer looking and stable.
+                    - generic [ref=f98e734]:
+                      - 'article "Comment thread level 1: Reply from DontEatNitrousOxide 4 years ago" [ref=f98e736]':
+                        - generic [ref=f98e737] [cursor=pointer]:
+                          - link "DontEatNitrousOxide's profile --- avatar" [ref=f98e743]:
+                            - /url: https://www.reddit.com/user/DontEatNitrousOxide/
+                          - generic [ref=f98e753]:
+                            - link "DontEatNitrousOxide's profile" [ref=f98e757]:
+                              - /url: https://www.reddit.com/user/DontEatNitrousOxide/
+                              - generic [ref=f98e758]: DontEatNitrousOxide
+                            - generic [aria-hidden] [ref=f98e760]: •
+                            - link [ref=f98e762]:
+                              - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifuob3k/
+                              - time [ref=f98e764]: 4y ago
+                        - generic [ref=f98e766]:
+                          - paragraph [ref=f98e770]: The incentive is to keep that money and the subscribers, like you said, you left for Foundry. If you do it once people leave in great numbers, that's too late.
+                          - button "27 more replies" [ref=f98e777] [cursor=pointer]:
+                            - generic [ref=f98e782]:
+                              - generic [ref=f98e783]: "27"
+                              - text: more replies
+                      - 'article "Comment thread level 1: Reply from [deleted] 4 years ago" [ref=f98e785]':
+                        - generic "[deleted] 4y ago" [ref=f98e786] [cursor=pointer]:
+                          - generic [ref=f98e800]:
+                            - generic [ref=f98e801]: "[deleted]"
+                            - generic [aria-hidden] [ref=f98e804]: •
+                            - link [ref=f98e806]:
+                              - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifus8z5/
+                              - time [ref=f98e808]: 4y ago
+                        - generic [ref=f98e810]:
+                          - generic [ref=f98e813]:
+                            - paragraph [ref=f98e814]:
+                              - text: I currently use Roll20 and I was going to jump ship to Foundry but with
+                              - link "Menyr" [ref=f98e815] [cursor=pointer]:
+                                - /url: https://menyr.nogstudio.com/
+                              - text: on the horizon I'm thinking of just sticking out my term with Roll20. Current campaign is unlikely to end until the beta for Menyr, so I figure screw it.
+                            - paragraph [ref=f98e816]: Foundry does look a lot nicer though. Roll20 is...workable but some of my macros have a lot of hidden jank and the overall UI for Roll20 is awkward.
+                          - button "27 more replies" [ref=f98e823] [cursor=pointer]:
+                            - generic [ref=f98e828]:
+                              - generic [ref=f98e829]: "27"
+                              - text: more replies
+                      - button "32 more replies" [ref=f98e833] [cursor=pointer]:
+                        - generic [ref=f98e838]:
+                          - generic [ref=f98e839]: "32"
+                          - text: more replies
+                - article "Comment from Immolation_E 4 years ago" [ref=f98e841]:
+                  - generic [ref=f98e842] [cursor=pointer]:
+                    - link "Immolation_E's profile --- avatar" [ref=f98e848]:
+                      - /url: https://www.reddit.com/user/Immolation_E/
+                    - generic [ref=f98e858]:
+                      - link "Immolation_E's profile" [ref=f98e862]:
+                        - /url: https://www.reddit.com/user/Immolation_E/
+                        - generic [ref=f98e863]: Immolation_E
+                      - generic [aria-hidden] [ref=f98e865]: •
+                      - link [ref=f98e867]:
+                        - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifuosty/
+                        - time [ref=f98e869]: 4y ago
+                  - generic [ref=f98e871]:
+                    - paragraph [ref=f98e875]: Better browser compatibility would be nice too. I've noticed weird issues with Roll20 using Firefox and Safari, both of which I prefer over Chrome or Edge.
+                    - button "11 more replies" [ref=f98e882] [cursor=pointer]:
+                      - generic [ref=f98e887]:
+                        - generic [ref=f98e888]: "11"
+                        - text: more replies
+                - generic "Build Game Mechanics to learn Unity Game Development" [ref=f98e890]:
+                  - generic [ref=f98e891]:
+                    - 'link "Advertisement: Build Game Mechanics to learn Unity Game Development" [ref=f98e892] [cursor=pointer]':
+                      - /url: https://alb.reddit.com/cr?za=d2dtGuvrtwBf0eQD62T7KsV1MXNyFeEIrbN2wcAT_JBbNbfw9ZfEjMdyVhqwBB01CuCHtOEmR49Jek_fGzn_-krcYV1xD1CvW5N9cSWvHmdnW4FN5u8CMCD7DfU8tOB_HmL51TmvF2YhHCHHUhr1rpbssnCOuF9zW-BjXbitkbmJ0JrN4WpIw9d8iS4Csdjg8ZBjLexRg782bw_eQIDVQha5m2lD2Hv9HPHxPwIr-OTqRndPRElmwzo0VoKveaJwnMZIGrGAZFr5GXA36dcxMxvcvfKpPQCKhKkGjvYjSAxAiy6WPwwkPQnYnsP6LD11zMVkVtz9gRKFeGFEybW0zWxp0hoRVxQ5aaS2yThGZhWLkTmCUSEjxsFIAhIAuyqLeMG5ZMf40IGoiDBB7MI2f3__0dCNzcLHrjCEX3vboZiWrr5qrYQ4MBO8-MY7BlwMvml9JxZoUULgSdbhdFhtzglwJCfJavbBILVT6q9DK5CeDXcUd8zYmPom3agpdv219Z_y-UsWmkH1WAvx7iCRqJy-GTh3eBu6opcpgvsmWFg3FmLy3x1FMT3P6NWt_yVX92mDK86N1cOz4bjCR08W4uIzAKPe_mmp5-NIcA_u9pD8TE8xE7rNr3Lq-LB-MM4wDh-chrKffUFvUdM4p3wOPA0cjtxojacxFkxRXCMJ1HeuvpumMZwj_G8VjosZzoDbboOtKxX0ctB980eqEpfDqgEMGHAUUAnxn1Vt8x9FqJsCVI_l&zp=79C520dKV4X1ZYqSOp3pbROaI_yG1541uYkmEQZFnAiLz7I2znfyyvXYqZEvGKQwB_3pTPTpj1Q0B-DtAtvFbVFkPhNeseInKpu0nm40ow8_s8-g9LMMKSu0Pew6odbMHrbhyjIvvn24i9GXmXDhxvntFk2CeYx3h9hierlXqsc32RDR5NrKOOK1sJOAKYbWxOf3xr-lPeKFFs88ZRKZFP02E-wQ1FAsY80EdT5kaUQM8eOcO4l1HYb6XNoHmX0m5Iz_ThIdtPdFnHu2EgbGhxNOm8qVOtf4Qbq6Ke66Rk5WgudQQCsVmiq_oaN8GJCmizcMrGfP1yI9hwQ_BCy_-R_e9bXKsssOiZLA
+                    - generic [ref=f98e893]:
+                      - generic [ref=f98e894]:
+                        - link "u/FF56" [ref=f98e897] [cursor=pointer]:
+                          - /url: /user/FF56/
+                          - img "u/FF56 avatar" [ref=f98e900]
+                        - generic [ref=f98e902]: •
+                        - link "Ad" [ref=f98e904] [cursor=pointer]:
+                          - /url: /user/FF56/
+                        - link [ref=f98e906] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=d2dtGuvrtwBf0eQD62T7KsV1MXNyFeEIrbN2wcAT_JBbNbfw9ZfEjMdyVhqwBB01CuCHtOEmR49Jek_fGzn_-krcYV1xD1CvW5N9cSWvHmdnW4FN5u8CMCD7DfU8tOB_HmL51TmvF2YhHCHHUhr1rpbssnCOuF9zW-BjXbitkbmJ0JrN4WpIw9d8iS4Csdjg8ZBjLexRg782bw_eQIDVQha5m2lD2Hv9HPHxPwIr-OTqRndPRElmwzo0VoKveaJwnMZIGrGAZFr5GXA36dcxMxvcvfKpPQCKhKkGjvYjSAxAiy6WPwwkPQnYnsP6LD11zMVkVtz9gRKFeGFEybW0zWxp0hoRVxQ5aaS2yThGZhWLkTmCUSEjxsFIAhIAuyqLeMG5ZMf40IGoiDBB7MI2f3__0dCNzcLHrjCEX3vboZiWrr5qrYQ4MBO8-MY7BlwMvml9JxZoUULgSdbhdFhtzglwJCfJavbBILVT6q9DK5CeDXcUd8zYmPom3agpdv219Z_y-UsWmkH1WAvx7iCRqJy-GTh3eBu6opcpgvsmWFg3FmLy3x1FMT3P6NWt_yVX92mDK86N1cOz4bjCR08W4uIzAKPe_mmp5-NIcA_u9pD8TE8xE7rNr3Lq-LB-MM4wDh-chrKffUFvUdM4p3wOPA0cjtxojacxFkxRXCMJ1HeuvpumMZwj_G8VjosZzoDbboOtKxX0ctB980eqEpfDqgEMGHAUUAnxn1Vt8x9FqJsCVI_l&zp=79C520dKV4X1ZYqSOp3pbROaI_yG1541uYkmEQZFnAiLz7I2znfyyvXYqZEvGKQwB_3pTPTpj1Q0B-DtAtvFbVFkPhNeseInKpu0nm40ow8_s8-g9LMMKSu0Pew6odbMHrbhyjIvvn24i9GXmXDhxvntFk2CeYx3h9hierlXqsc32RDR5NrKOOK1sJOAKYbWxOf3xr-lPeKFFs88ZRKZFP02E-wQ1FAsY80EdT5kaUQM8eOcO4l1HYb6XNoHmX0m5Iz_ThIdtPdFnHu2EgbGhxNOm8qVOtf4Qbq6Ke66Rk5WgudQQCsVmiq_oaN8GJCmizcMrGfP1yI9hwQ_BCy_-R_e9bXKsssOiZLA
+                      - button "Open user actions" [ref=f98e912] [cursor=pointer]
+                    - generic [ref=f98e918]:
+                      - generic [ref=f98e919]:
+                        - link "Build Game Mechanics to learn Unity Game Development" [ref=f98e921] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=d2dtGuvrtwBf0eQD62T7KsV1MXNyFeEIrbN2wcAT_JBbNbfw9ZfEjMdyVhqwBB01CuCHtOEmR49Jek_fGzn_-krcYV1xD1CvW5N9cSWvHmdnW4FN5u8CMCD7DfU8tOB_HmL51TmvF2YhHCHHUhr1rpbssnCOuF9zW-BjXbitkbmJ0JrN4WpIw9d8iS4Csdjg8ZBjLexRg782bw_eQIDVQha5m2lD2Hv9HPHxPwIr-OTqRndPRElmwzo0VoKveaJwnMZIGrGAZFr5GXA36dcxMxvcvfKpPQCKhKkGjvYjSAxAiy6WPwwkPQnYnsP6LD11zMVkVtz9gRKFeGFEybW0zWxp0hoRVxQ5aaS2yThGZhWLkTmCUSEjxsFIAhIAuyqLeMG5ZMf40IGoiDBB7MI2f3__0dCNzcLHrjCEX3vboZiWrr5qrYQ4MBO8-MY7BlwMvml9JxZoUULgSdbhdFhtzglwJCfJavbBILVT6q9DK5CeDXcUd8zYmPom3agpdv219Z_y-UsWmkH1WAvx7iCRqJy-GTh3eBu6opcpgvsmWFg3FmLy3x1FMT3P6NWt_yVX92mDK86N1cOz4bjCR08W4uIzAKPe_mmp5-NIcA_u9pD8TE8xE7rNr3Lq-LB-MM4wDh-chrKffUFvUdM4p3wOPA0cjtxojacxFkxRXCMJ1HeuvpumMZwj_G8VjosZzoDbboOtKxX0ctB980eqEpfDqgEMGHAUUAnxn1Vt8x9FqJsCVI_l&zp=79C520dKV4X1ZYqSOp3pbROaI_yG1541uYkmEQZFnAiLz7I2znfyyvXYqZEvGKQwB_3pTPTpj1Q0B-DtAtvFbVFkPhNeseInKpu0nm40ow8_s8-g9LMMKSu0Pew6odbMHrbhyjIvvn24i9GXmXDhxvntFk2CeYx3h9hierlXqsc32RDR5NrKOOK1sJOAKYbWxOf3xr-lPeKFFs88ZRKZFP02E-wQ1FAsY80EdT5kaUQM8eOcO4l1HYb6XNoHmX0m5Iz_ThIdtPdFnHu2EgbGhxNOm8qVOtf4Qbq6Ke66Rk5WgudQQCsVmiq_oaN8GJCmizcMrGfP1yI9hwQ_BCy_-R_e9bXKsssOiZLA
+                        - generic [ref=f98e922]:
+                          - link [ref=f98e923] [cursor=pointer]:
+                            - /url: https://alb.reddit.com/cr?za=d2dtGuvrtwBf0eQD62T7KsV1MXNyFeEIrbN2wcAT_JBbNbfw9ZfEjMdyVhqwBB01CuCHtOEmR49Jek_fGzn_-krcYV1xD1CvW5N9cSWvHmdnW4FN5u8CMCD7DfU8tOB_HmL51TmvF2YhHCHHUhr1rpbssnCOuF9zW-BjXbitkbmJ0JrN4WpIw9d8iS4Csdjg8ZBjLexRg782bw_eQIDVQha5m2lD2Hv9HPHxPwIr-OTqRndPRElmwzo0VoKveaJwnMZIGrGAZFr5GXA36dcxMxvcvfKpPQCKhKkGjvYjSAxAiy6WPwwkPQnYnsP6LD11zMVkVtz9gRKFeGFEybW0zWxp0hoRVxQ5aaS2yThGZhWLkTmCUSEjxsFIAhIAuyqLeMG5ZMf40IGoiDBB7MI2f3__0dCNzcLHrjCEX3vboZiWrr5qrYQ4MBO8-MY7BlwMvml9JxZoUULgSdbhdFhtzglwJCfJavbBILVT6q9DK5CeDXcUd8zYmPom3agpdv219Z_y-UsWmkH1WAvx7iCRqJy-GTh3eBu6opcpgvsmWFg3FmLy3x1FMT3P6NWt_yVX92mDK86N1cOz4bjCR08W4uIzAKPe_mmp5-NIcA_u9pD8TE8xE7rNr3Lq-LB-MM4wDh-chrKffUFvUdM4p3wOPA0cjtxojacxFkxRXCMJ1HeuvpumMZwj_G8VjosZzoDbboOtKxX0ctB980eqEpfDqgEMGHAUUAnxn1Vt8x9FqJsCVI_l&zp=79C520dKV4X1ZYqSOp3pbROaI_yG1541uYkmEQZFnAiLz7I2znfyyvXYqZEvGKQwB_3pTPTpj1Q0B-DtAtvFbVFkPhNeseInKpu0nm40ow8_s8-g9LMMKSu0Pew6odbMHrbhyjIvvn24i9GXmXDhxvntFk2CeYx3h9hierlXqsc32RDR5NrKOOK1sJOAKYbWxOf3xr-lPeKFFs88ZRKZFP02E-wQ1FAsY80EdT5kaUQM8eOcO4l1HYb6XNoHmX0m5Iz_ThIdtPdFnHu2EgbGhxNOm8qVOtf4Qbq6Ke66Rk5WgudQQCsVmiq_oaN8GJCmizcMrGfP1yI9hwQ_BCy_-R_e9bXKsssOiZLA
+                          - generic [ref=f98e924]:
+                            - link "View More" [ref=f98e925] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=d2dtGuvrtwBf0eQD62T7KsV1MXNyFeEIrbN2wcAT_JBbNbfw9ZfEjMdyVhqwBB01CuCHtOEmR49Jek_fGzn_-krcYV1xD1CvW5N9cSWvHmdnW4FN5u8CMCD7DfU8tOB_HmL51TmvF2YhHCHHUhr1rpbssnCOuF9zW-BjXbitkbmJ0JrN4WpIw9d8iS4Csdjg8ZBjLexRg782bw_eQIDVQha5m2lD2Hv9HPHxPwIr-OTqRndPRElmwzo0VoKveaJwnMZIGrGAZFr5GXA36dcxMxvcvfKpPQCKhKkGjvYjSAxAiy6WPwwkPQnYnsP6LD11zMVkVtz9gRKFeGFEybW0zWxp0hoRVxQ5aaS2yThGZhWLkTmCUSEjxsFIAhIAuyqLeMG5ZMf40IGoiDBB7MI2f3__0dCNzcLHrjCEX3vboZiWrr5qrYQ4MBO8-MY7BlwMvml9JxZoUULgSdbhdFhtzglwJCfJavbBILVT6q9DK5CeDXcUd8zYmPom3agpdv219Z_y-UsWmkH1WAvx7iCRqJy-GTh3eBu6opcpgvsmWFg3FmLy3x1FMT3P6NWt_yVX92mDK86N1cOz4bjCR08W4uIzAKPe_mmp5-NIcA_u9pD8TE8xE7rNr3Lq-LB-MM4wDh-chrKffUFvUdM4p3wOPA0cjtxojacxFkxRXCMJ1HeuvpumMZwj_G8VjosZzoDbboOtKxX0ctB980eqEpfDqgEMGHAUUAnxn1Vt8x9FqJsCVI_l&zp=79C520dKV4X1ZYqSOp3pbROaI_yG1541uYkmEQZFnAiLz7I2znfyyvXYqZEvGKQwB_3pTPTpj1Q0B-DtAtvFbVFkPhNeseInKpu0nm40ow8_s8-g9LMMKSu0Pew6odbMHrbhyjIvvn24i9GXmXDhxvntFk2CeYx3h9hierlXqsc32RDR5NrKOOK1sJOAKYbWxOf3xr-lPeKFFs88ZRKZFP02E-wQ1FAsY80EdT5kaUQM8eOcO4l1HYb6XNoHmX0m5Iz_ThIdtPdFnHu2EgbGhxNOm8qVOtf4Qbq6Ke66Rk5WgudQQCsVmiq_oaN8GJCmizcMrGfP1yI9hwQ_BCy_-R_e9bXKsssOiZLA
+                            - link "unitycodemonkey.teachable.com" [ref=f98e929] [cursor=pointer]:
+                              - /url: https://alb.reddit.com/cr?za=d2dtGuvrtwBf0eQD62T7KsV1MXNyFeEIrbN2wcAT_JBbNbfw9ZfEjMdyVhqwBB01CuCHtOEmR49Jek_fGzn_-krcYV1xD1CvW5N9cSWvHmdnW4FN5u8CMCD7DfU8tOB_HmL51TmvF2YhHCHHUhr1rpbssnCOuF9zW-BjXbitkbmJ0JrN4WpIw9d8iS4Csdjg8ZBjLexRg782bw_eQIDVQha5m2lD2Hv9HPHxPwIr-OTqRndPRElmwzo0VoKveaJwnMZIGrGAZFr5GXA36dcxMxvcvfKpPQCKhKkGjvYjSAxAiy6WPwwkPQnYnsP6LD11zMVkVtz9gRKFeGFEybW0zWxp0hoRVxQ5aaS2yThGZhWLkTmCUSEjxsFIAhIAuyqLeMG5ZMf40IGoiDBB7MI2f3__0dCNzcLHrjCEX3vboZiWrr5qrYQ4MBO8-MY7BlwMvml9JxZoUULgSdbhdFhtzglwJCfJavbBILVT6q9DK5CeDXcUd8zYmPom3agpdv219Z_y-UsWmkH1WAvx7iCRqJy-GTh3eBu6opcpgvsmWFg3FmLy3x1FMT3P6NWt_yVX92mDK86N1cOz4bjCR08W4uIzAKPe_mmp5-NIcA_u9pD8TE8xE7rNr3Lq-LB-MM4wDh-chrKffUFvUdM4p3wOPA0cjtxojacxFkxRXCMJ1HeuvpumMZwj_G8VjosZzoDbboOtKxX0ctB980eqEpfDqgEMGHAUUAnxn1Vt8x9FqJsCVI_l&zp=79C520dKV4X1ZYqSOp3pbROaI_yG1541uYkmEQZFnAiLz7I2znfyyvXYqZEvGKQwB_3pTPTpj1Q0B-DtAtvFbVFkPhNeseInKpu0nm40ow8_s8-g9LMMKSu0Pew6odbMHrbhyjIvvn24i9GXmXDhxvntFk2CeYx3h9hierlXqsc32RDR5NrKOOK1sJOAKYbWxOf3xr-lPeKFFs88ZRKZFP02E-wQ1FAsY80EdT5kaUQM8eOcO4l1HYb6XNoHmX0m5Iz_ThIdtPdFnHu2EgbGhxNOm8qVOtf4Qbq6Ke66Rk5WgudQQCsVmiq_oaN8GJCmizcMrGfP1yI9hwQ_BCy_-R_e9bXKsssOiZLA
+                      - link [ref=f98e932] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=d2dtGuvrtwBf0eQD62T7KsV1MXNyFeEIrbN2wcAT_JBbNbfw9ZfEjMdyVhqwBB01CuCHtOEmR49Jek_fGzn_-krcYV1xD1CvW5N9cSWvHmdnW4FN5u8CMCD7DfU8tOB_HmL51TmvF2YhHCHHUhr1rpbssnCOuF9zW-BjXbitkbmJ0JrN4WpIw9d8iS4Csdjg8ZBjLexRg782bw_eQIDVQha5m2lD2Hv9HPHxPwIr-OTqRndPRElmwzo0VoKveaJwnMZIGrGAZFr5GXA36dcxMxvcvfKpPQCKhKkGjvYjSAxAiy6WPwwkPQnYnsP6LD11zMVkVtz9gRKFeGFEybW0zWxp0hoRVxQ5aaS2yThGZhWLkTmCUSEjxsFIAhIAuyqLeMG5ZMf40IGoiDBB7MI2f3__0dCNzcLHrjCEX3vboZiWrr5qrYQ4MBO8-MY7BlwMvml9JxZoUULgSdbhdFhtzglwJCfJavbBILVT6q9DK5CeDXcUd8zYmPom3agpdv219Z_y-UsWmkH1WAvx7iCRqJy-GTh3eBu6opcpgvsmWFg3FmLy3x1FMT3P6NWt_yVX92mDK86N1cOz4bjCR08W4uIzAKPe_mmp5-NIcA_u9pD8TE8xE7rNr3Lq-LB-MM4wDh-chrKffUFvUdM4p3wOPA0cjtxojacxFkxRXCMJ1HeuvpumMZwj_G8VjosZzoDbboOtKxX0ctB980eqEpfDqgEMGHAUUAnxn1Vt8x9FqJsCVI_l&zp=79C520dKV4X1ZYqSOp3pbROaI_yG1541uYkmEQZFnAiLz7I2znfyyvXYqZEvGKQwB_3pTPTpj1Q0B-DtAtvFbVFkPhNeseInKpu0nm40ow8_s8-g9LMMKSu0Pew6odbMHrbhyjIvvn24i9GXmXDhxvntFk2CeYx3h9hierlXqsc32RDR5NrKOOK1sJOAKYbWxOf3xr-lPeKFFs88ZRKZFP02E-wQ1FAsY80EdT5kaUQM8eOcO4l1HYb6XNoHmX0m5Iz_ThIdtPdFnHu2EgbGhxNOm8qVOtf4Qbq6Ke66Rk5WgudQQCsVmiq_oaN8GJCmizcMrGfP1yI9hwQ_BCy_-R_e9bXKsssOiZLA
+                        - 'img "Thumbnail image: Build Game Mechanics to learn Unity Game Development" [ref=f98e933]'
+                - article "Comment from Zzump 4 years ago" [ref=f98e935]:
+                  - generic [ref=f98e936] [cursor=pointer]:
+                    - link "Zzump's profile --- avatar" [ref=f98e942]:
+                      - /url: https://www.reddit.com/user/Zzump/
+                    - generic [ref=f98e958]:
+                      - link "Zzump's profile" [ref=f98e962]:
+                        - /url: https://www.reddit.com/user/Zzump/
+                        - generic [ref=f98e963]: Zzump
+                      - generic [aria-hidden] [ref=f98e965]: •
+                      - link [ref=f98e967]:
+                        - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifuo5yt/
+                        - time [ref=f98e969]: 4y ago
+                  - generic [ref=f98e971]:
+                    - generic [ref=f98e974]:
+                      - paragraph [ref=f98e975]: I agree with you whole heartedly. It annoys me to no end how little the platform has improved over the years. I do subscribe for plus membership and do get my money's worth but this is a great example of a company that will be dead some day because they didn't see the writing on the wall. Everyone and thier grandmother is coming out with a virtual tabletop now and with no major improvements roll20 will soon be left in the dust.
+                      - paragraph [ref=f98e976]: "The few things it has going for it:"
+                      - paragraph [ref=f98e977]: Free, easy to access, low hardware requirements, and built in character sheets with integrated dice rolls
+                    - button "2 more replies" [ref=f98e984] [cursor=pointer]:
+                      - generic [ref=f98e989]:
+                        - generic [ref=f98e990]: "2"
+                        - text: more replies
+                - article "Comment from Ianoren 4 years ago" [ref=f98e992]:
+                  - generic [ref=f98e993] [cursor=pointer]:
+                    - link "Ianoren's profile --- avatar" [ref=f98e999]:
+                      - /url: https://www.reddit.com/user/Ianoren/
+                    - generic [ref=f98e1009]:
+                      - link "Ianoren's profile" [ref=f98e1013]:
+                        - /url: https://www.reddit.com/user/Ianoren/
+                        - generic [ref=f98e1014]: Ianoren
+                      - generic [aria-hidden] [ref=f98e1016]: •
+                      - link [ref=f98e1018]:
+                        - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifuxenl/
+                        - time [ref=f98e1020]: 4y ago
+                  - generic [ref=f98e1022]:
+                    - paragraph [ref=f98e1026]: You think its bad for D&D, it does shit all to support many other systems. Playing Pathfinder 2e with it was a real test of patience. Foundry VTT takes some real learning but its well worth it and not a subscription, just a one time payment.
+                    - button "7 more replies" [ref=f98e1033] [cursor=pointer]:
+                      - generic [ref=f98e1038]:
+                        - generic [ref=f98e1039]: "7"
+                        - text: more replies
+                - article "Comment from [deleted] 4 years ago" [ref=f98e1041]:
+                  - generic "[deleted] 4y ago" [ref=f98e1042] [cursor=pointer]:
+                    - generic [ref=f98e1056]:
+                      - generic [ref=f98e1057]: "[deleted]"
+                      - generic [aria-hidden] [ref=f98e1060]: •
+                      - link [ref=f98e1062]:
+                        - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifunlcq/
+                        - time [ref=f98e1064]: 4y ago
+                  - generic [ref=f98e1066]:
+                    - paragraph [ref=f98e1070]: I think it's interesting how much Roll20 has updated, announced, or changed since DnDB announced the buyout from WotC. Like they're seeing the writing on the wall and are finally starting to get things done. One of the biggest upgrades I had to my Roll20 experience was finding a script online that makes the map selection UI multi line. Why on earth was that not already a thing?!I don't really use Roll20 anymore and I let my subscription lapse after we started playing in person again. It was cool to see the stuff you could do with it, and I even liked the dynamic sight lines, but you are absolutely right that the interface is a super clunky mess.
+                    - 'article "Comment thread level 1: Reply from [deleted] 4 years ago" [ref=f98e1075]':
+                      - generic "[deleted] 4y ago" [ref=f98e1076] [cursor=pointer]:
+                        - generic [ref=f98e1090]:
+                          - generic [ref=f98e1091]: "[deleted]"
+                          - generic [aria-hidden] [ref=f98e1094]: •
+                          - link [ref=f98e1096]:
+                            - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifvp90q/
+                            - time [ref=f98e1098]: 4y ago
+                      - generic [ref=f98e1100]:
+                        - paragraph [ref=f98e1104]: I think Dndbeyond was always going to eventually become a VTT, but the buyout by Wizards is definitely going to expedite things.
+                        - button "3 more replies" [ref=f98e1111] [cursor=pointer]:
+                          - generic [ref=f98e1116]:
+                            - generic [ref=f98e1117]: "3"
+                            - text: more replies
+                - article "Comment from Minimum_Lion_6683 4 years ago" [ref=f98e1119]:
+                  - generic [ref=f98e1120] [cursor=pointer]:
+                    - link "Minimum_Lion_6683's profile --- avatar" [ref=f98e1126]:
+                      - /url: https://www.reddit.com/user/Minimum_Lion_6683/
+                    - generic [ref=f98e1136]:
+                      - link "Minimum_Lion_6683's profile" [ref=f98e1140]:
+                        - /url: https://www.reddit.com/user/Minimum_Lion_6683/
+                        - generic [ref=f98e1141]: Minimum_Lion_6683
+                      - generic [aria-hidden] [ref=f98e1143]: •
+                      - link [ref=f98e1145]:
+                        - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifuih5q/
+                        - time [ref=f98e1147]: 4y ago
+                  - generic [ref=f98e1149]:
+                    - generic [ref=f98e1152]:
+                      - paragraph [ref=f98e1153]: I never really liked roll20 when I was using it. Always felt hopelessly clunky and unintuitive.
+                      - paragraph [ref=f98e1154]: I ditched it and switched to TaleSpire 6 months ago and haven’t regretted the switch for a second.
+                    - generic [ref=f98e1157]:
+                      - 'article "Comment thread level 1: Reply from UnamazingHero 4 years ago" [ref=f98e1159]':
+                        - generic [ref=f98e1160] [cursor=pointer]:
+                          - link "UnamazingHero's profile --- avatar" [ref=f98e1166]:
+                            - /url: https://www.reddit.com/user/UnamazingHero/
+                            - img "u/UnamazingHero avatar" [ref=f98e1169]
+                          - generic [ref=f98e1173]:
+                            - link "UnamazingHero's profile" [ref=f98e1177]:
+                              - /url: https://www.reddit.com/user/UnamazingHero/
+                              - generic [ref=f98e1178]: UnamazingHero
+                            - generic [aria-hidden] [ref=f98e1180]: •
+                            - link [ref=f98e1182]:
+                              - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifuyqc0/
+                              - time [ref=f98e1184]: 4y ago
+                        - generic [ref=f98e1186]:
+                          - paragraph [ref=f98e1190]: I have TaleSpire and it's awesome in many ways but I've never actually used it for a session because it's so janky. The biggest issue I have is that the camera is terrible for anything multilevel.
+                          - button "9 more replies" [ref=f98e1197] [cursor=pointer]:
+                            - generic [ref=f98e1202]:
+                              - generic [ref=f98e1203]: "9"
+                              - text: more replies
+                      - button "1 more reply" [ref=f98e1207] [cursor=pointer]:
+                        - generic [ref=f98e1212]:
+                          - generic [ref=f98e1213]: "1"
+                          - text: more reply
+                - article "Comment from ElvishLore 4 years ago" [ref=f98e1215]:
+                  - generic [ref=f98e1216] [cursor=pointer]:
+                    - link "ElvishLore's profile --- avatar" [ref=f98e1222]:
+                      - /url: https://www.reddit.com/user/ElvishLore/
+                    - generic [ref=f98e1232]:
+                      - link "ElvishLore's profile" [ref=f98e1236]:
+                        - /url: https://www.reddit.com/user/ElvishLore/
+                        - generic [ref=f98e1237]: ElvishLore
+                      - generic [aria-hidden] [ref=f98e1239]: •
+                      - link [ref=f98e1241]:
+                        - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifuzm6d/
+                        - time [ref=f98e1243]: 4y ago
+                  - paragraph [ref=f98e1249]: This is one of the primary criticisms Roll20. Of course many other people feel the way you do.
+                - article "Comment from Mr_Alexanderp 4 years ago" [ref=f98e1253]:
+                  - generic [ref=f98e1254] [cursor=pointer]:
+                    - link "Mr_Alexanderp's profile --- avatar" [ref=f98e1260]:
+                      - /url: https://www.reddit.com/user/Mr_Alexanderp/
+                      - img "u/Mr_Alexanderp avatar" [ref=f98e1263]
+                    - generic [ref=f98e1267]:
+                      - link "Mr_Alexanderp's profile" [ref=f98e1271]:
+                        - /url: https://www.reddit.com/user/Mr_Alexanderp/
+                        - generic [ref=f98e1272]: Mr_Alexanderp
+                      - generic [aria-hidden] [ref=f98e1274]: •
+                      - link [ref=f98e1276]:
+                        - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifveyhu/
+                        - time [ref=f98e1278]: 4y ago
+                  - generic [ref=f98e1280]:
+                    - paragraph [ref=f98e1284]: Personally I really like Roll20s stripped down UI. Other VTTs are just too cluttered.
+                    - button "1 more reply" [ref=f98e1291] [cursor=pointer]:
+                      - generic [ref=f98e1296]:
+                        - generic [ref=f98e1297]: "1"
+                        - text: more reply
+                - article "Comment from Joosh98 4 years ago" [ref=f98e1299]:
+                  - generic [ref=f98e1300] [cursor=pointer]:
+                    - link "Joosh98's profile --- avatar" [ref=f98e1306]:
+                      - /url: https://www.reddit.com/user/Joosh98/
+                      - img "u/Joosh98 avatar" [ref=f98e1309]
+                    - generic [ref=f98e1313]:
+                      - link "Joosh98's profile" [ref=f98e1317]:
+                        - /url: https://www.reddit.com/user/Joosh98/
+                        - generic [ref=f98e1318]: Joosh98
+                      - generic [aria-hidden] [ref=f98e1320]: •
+                      - link [ref=f98e1322]:
+                        - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifvhsjl/
+                        - time [ref=f98e1324]: 4y ago
+                  - paragraph [ref=f98e1330]: I moved to Foundry and haven't looked back. It's amazing.
+                - generic "There’s always a trend, a fashion, a fad, but gold has always been timeless. Visit invest.gold" [ref=f98e1334]:
+                  - generic [ref=f98e1335]:
+                    - 'link "Advertisement: There’s always a trend, a fashion, a fad, but gold has always been timeless. Visit invest.gold" [ref=f98e1336] [cursor=pointer]':
+                      - /url: https://alb.reddit.com/cr?za=_XoxknkSNd4cnr3EDSeIid97hy80XOq9F2tj4voVztzbbcOe2BOafoyZ_LMs7wDNRQTxwIwJ6EVYqS7vO_JLaOFlfpmmuvk1AHBWOC215Qyy_0S4q0DPTPlDa0wZt_1omc0Zv1fHIHj6T17_h7Y6S7K6FfrOEsVIt6-bwV_jqmomWHg9vPHBkW1HtCXw84L3TS1Wha14D38vmhd--JL-3FiX8LWJu0FtXwjzpl67Lbn_lvw1zpmSFNPkBZ7Rw8PduZwILhTEd9ADWZ3NpKZowARsAhZpGBo5YAnzSLRXby2SKbI3oMX7ZWsCVz7aWFXb-NbGICe8jQzS8Drrvm5K-VwCNgfQXuKEBrSTd4cFG2OVPydQv2q2PQr1YTzhPsmwHXe5Gpeyr7k6bGgfARrY1_kwBQBJcZdlbhaYQFF3dnumwxMBWRWPVFIWnrzyFJq5saTDEezF5lVvJ_5-oI3SrNv_lJyY1R6pEtBlB20qBFFgeukn351KHeL-jty1VKc5vn50mYmPy9Ak1s0ipSyEB5ZvAi4eJJPDBPG0SizlZEIj_u3f_jcPla0FlGkpnO6A8tfRtQS08_sTUC0rxRVFBsPR4oeSwlr9jzK8FvN_XJykVHvRoHcs89KMTU4H6BQh9z7beS737G8EKMJ3IEbVT4S7jdn1fsXtRjHJt_T986VIef91SIECaqYWEai5_U9MU3qYnZPg1VnmZDDSkHpjB2QpIoDEe4E0WkgU8lCQFtAMyzXPig9H4uHWweI&zp=P1oz6VoUlrT-FchUtf6Y_uvaRJTF_pkjrh93D7I-gquZ8_27X1Xn1w7G-MM8wPwYfP84gKe-I3N6rSac2FlwJAjGayjWjL33KODZ9C86-TqPePVYeHq1ZA-6q-lnseJHXajIZjyHK-NGAeA2GEer3d0WCJwArTyiQpJ5sHCddSzNMrh1nRth992u8VuBtQXpzN3R0d4KCT5v2WrCoq50rFkQ_iF8Ueoq7vkr0DPGrZWKnU5eJmcW_VxQWUYiqzokNlG9B4cefNHqaBxyvFAKZxexn-72lMd7yq4oSKKlOC-g1Lwc_eW6IB_Hk1OGyq7wYvfBxc1XVmDMSjr5SG_fbXX1iX2V-DlqkzVVfbnRp7CMg1eiTJn3DD7dbJFNaTSaPAzkmJ_VoYUaOIX_8nIca2RDNw
+                    - generic [ref=f98e1337]:
+                      - generic [ref=f98e1338]:
+                        - link "u/GoldInsights" [ref=f98e1341] [cursor=pointer]:
+                          - /url: /user/GoldInsights/
+                          - img "u/GoldInsights avatar" [ref=f98e1344]
+                        - generic [ref=f98e1346]: •
+                        - link "Ad" [ref=f98e1348] [cursor=pointer]:
+                          - /url: /user/GoldInsights/
+                        - link [ref=f98e1350] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=_XoxknkSNd4cnr3EDSeIid97hy80XOq9F2tj4voVztzbbcOe2BOafoyZ_LMs7wDNRQTxwIwJ6EVYqS7vO_JLaOFlfpmmuvk1AHBWOC215Qyy_0S4q0DPTPlDa0wZt_1omc0Zv1fHIHj6T17_h7Y6S7K6FfrOEsVIt6-bwV_jqmomWHg9vPHBkW1HtCXw84L3TS1Wha14D38vmhd--JL-3FiX8LWJu0FtXwjzpl67Lbn_lvw1zpmSFNPkBZ7Rw8PduZwILhTEd9ADWZ3NpKZowARsAhZpGBo5YAnzSLRXby2SKbI3oMX7ZWsCVz7aWFXb-NbGICe8jQzS8Drrvm5K-VwCNgfQXuKEBrSTd4cFG2OVPydQv2q2PQr1YTzhPsmwHXe5Gpeyr7k6bGgfARrY1_kwBQBJcZdlbhaYQFF3dnumwxMBWRWPVFIWnrzyFJq5saTDEezF5lVvJ_5-oI3SrNv_lJyY1R6pEtBlB20qBFFgeukn351KHeL-jty1VKc5vn50mYmPy9Ak1s0ipSyEB5ZvAi4eJJPDBPG0SizlZEIj_u3f_jcPla0FlGkpnO6A8tfRtQS08_sTUC0rxRVFBsPR4oeSwlr9jzK8FvN_XJykVHvRoHcs89KMTU4H6BQh9z7beS737G8EKMJ3IEbVT4S7jdn1fsXtRjHJt_T986VIef91SIECaqYWEai5_U9MU3qYnZPg1VnmZDDSkHpjB2QpIoDEe4E0WkgU8lCQFtAMyzXPig9H4uHWweI&zp=P1oz6VoUlrT-FchUtf6Y_uvaRJTF_pkjrh93D7I-gquZ8_27X1Xn1w7G-MM8wPwYfP84gKe-I3N6rSac2FlwJAjGayjWjL33KODZ9C86-TqPePVYeHq1ZA-6q-lnseJHXajIZjyHK-NGAeA2GEer3d0WCJwArTyiQpJ5sHCddSzNMrh1nRth992u8VuBtQXpzN3R0d4KCT5v2WrCoq50rFkQ_iF8Ueoq7vkr0DPGrZWKnU5eJmcW_VxQWUYiqzokNlG9B4cefNHqaBxyvFAKZxexn-72lMd7yq4oSKKlOC-g1Lwc_eW6IB_Hk1OGyq7wYvfBxc1XVmDMSjr5SG_fbXX1iX2V-DlqkzVVfbnRp7CMg1eiTJn3DD7dbJFNaTSaPAzkmJ_VoYUaOIX_8nIca2RDNw
+                      - button "Open user actions" [ref=f98e1356] [cursor=pointer]
+                    - generic [ref=f98e1361]:
+                      - link "There’s always a trend, a fashion, a fad, but gold has always been timeless. Visit invest.gold" [ref=f98e1363] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=_XoxknkSNd4cnr3EDSeIid97hy80XOq9F2tj4voVztzbbcOe2BOafoyZ_LMs7wDNRQTxwIwJ6EVYqS7vO_JLaOFlfpmmuvk1AHBWOC215Qyy_0S4q0DPTPlDa0wZt_1omc0Zv1fHIHj6T17_h7Y6S7K6FfrOEsVIt6-bwV_jqmomWHg9vPHBkW1HtCXw84L3TS1Wha14D38vmhd--JL-3FiX8LWJu0FtXwjzpl67Lbn_lvw1zpmSFNPkBZ7Rw8PduZwILhTEd9ADWZ3NpKZowARsAhZpGBo5YAnzSLRXby2SKbI3oMX7ZWsCVz7aWFXb-NbGICe8jQzS8Drrvm5K-VwCNgfQXuKEBrSTd4cFG2OVPydQv2q2PQr1YTzhPsmwHXe5Gpeyr7k6bGgfARrY1_kwBQBJcZdlbhaYQFF3dnumwxMBWRWPVFIWnrzyFJq5saTDEezF5lVvJ_5-oI3SrNv_lJyY1R6pEtBlB20qBFFgeukn351KHeL-jty1VKc5vn50mYmPy9Ak1s0ipSyEB5ZvAi4eJJPDBPG0SizlZEIj_u3f_jcPla0FlGkpnO6A8tfRtQS08_sTUC0rxRVFBsPR4oeSwlr9jzK8FvN_XJykVHvRoHcs89KMTU4H6BQh9z7beS737G8EKMJ3IEbVT4S7jdn1fsXtRjHJt_T986VIef91SIECaqYWEai5_U9MU3qYnZPg1VnmZDDSkHpjB2QpIoDEe4E0WkgU8lCQFtAMyzXPig9H4uHWweI&zp=P1oz6VoUlrT-FchUtf6Y_uvaRJTF_pkjrh93D7I-gquZ8_27X1Xn1w7G-MM8wPwYfP84gKe-I3N6rSac2FlwJAjGayjWjL33KODZ9C86-TqPePVYeHq1ZA-6q-lnseJHXajIZjyHK-NGAeA2GEer3d0WCJwArTyiQpJ5sHCddSzNMrh1nRth992u8VuBtQXpzN3R0d4KCT5v2WrCoq50rFkQ_iF8Ueoq7vkr0DPGrZWKnU5eJmcW_VxQWUYiqzokNlG9B4cefNHqaBxyvFAKZxexn-72lMd7yq4oSKKlOC-g1Lwc_eW6IB_Hk1OGyq7wYvfBxc1XVmDMSjr5SG_fbXX1iX2V-DlqkzVVfbnRp7CMg1eiTJn3DD7dbJFNaTSaPAzkmJ_VoYUaOIX_8nIca2RDNw
+                      - list [ref=f98e1367]:
+                        - generic:
+                          - listitem [ref=f98e1368]:
+                            - generic [ref=f98e1369]:
+                              - link [ref=f98e1370] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=_XoxknkSNd4cnr3EDSeIid97hy80XOq9F2tj4voVztzbbcOe2BOafoyZ_LMs7wDNRQTxwIwJ6EVYqS7vO_JLaOFlfpmmuvk1AHBWOC215Qyy_0S4q0DPTPlDa0wZt_1omc0Zv1fHIHj6T17_h7Y6S7K6FfrOEsVIt6-bwV_jqmomWHg9vPHBkW1HtCXw84L3TS1Wha14D38vmhd--JL-3FiX8LWJu0FtXwjzpl67Lbn_lvw1zpmSFNPkBZ7Rw8PduZwILhTEd9ADWZ3NpKZowARsAhZpGBo5YAnzSLRXby2SKbI3oMX7ZWsCVz7aWFXb-NbGICe8jQzS8Drrvm5K-VwCNgfQXuKEBrSTd4cFG2OVPydQv2q2PQr1YTzhPsmwHXe5Gpeyr7k6bGgfARrY1_kwBQBJcZdlbhaYQFF3dnumwxMBWRWPVFIWnrzyFJq5saTDEezF5lVvJ_5-oI3SrNv_lJyY1R6pEtBlB20qBFFgeukn351KHeL-jty1VKc5vn50mYmPy9Ak1s0ipSyEB5ZvAi4eJJPDBPG0SizlZEIj_u3f_jcPla0FlGkpnO6A8tfRtQS08_sTUC0rxRVFBsPR4oeSwlr9jzK8FvN_XJykVHvRoHcs89KMTU4H6BQh9z7beS737G8EKMJ3IEbVT4S7jdn1fsXtRjHJt_T986VIef91SIECaqYWEai5_U9MU3qYnZPg1VnmZDDSkHpjB2QpIoDEe4E0WkgU8lCQFtAMyzXPig9H4uHWweI&zp=P1oz6VoUlrT-FchUtf6Y_uvaRJTF_pkjrh93D7I-gquZ8_27X1Xn1w7G-MM8wPwYfP84gKe-I3N6rSac2FlwJAjGayjWjL33KODZ9C86-TqPePVYeHq1ZA-6q-lnseJHXajIZjyHK-NGAeA2GEer3d0WCJwArTyiQpJ5sHCddSzNMrh1nRth992u8VuBtQXpzN3R0d4KCT5v2WrCoq50rFkQ_iF8Ueoq7vkr0DPGrZWKnU5eJmcW_VxQWUYiqzokNlG9B4cefNHqaBxyvFAKZxexn-72lMd7yq4oSKKlOC-g1Lwc_eW6IB_Hk1OGyq7wYvfBxc1XVmDMSjr5SG_fbXX1iX2V-DlqkzVVfbnRp7CMg1eiTJn3DD7dbJFNaTSaPAzkmJ_VoYUaOIX_8nIca2RDNw
+                              - link [ref=f98e1373] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=_XoxknkSNd4cnr3EDSeIid97hy80XOq9F2tj4voVztzbbcOe2BOafoyZ_LMs7wDNRQTxwIwJ6EVYqS7vO_JLaOFlfpmmuvk1AHBWOC215Qyy_0S4q0DPTPlDa0wZt_1omc0Zv1fHIHj6T17_h7Y6S7K6FfrOEsVIt6-bwV_jqmomWHg9vPHBkW1HtCXw84L3TS1Wha14D38vmhd--JL-3FiX8LWJu0FtXwjzpl67Lbn_lvw1zpmSFNPkBZ7Rw8PduZwILhTEd9ADWZ3NpKZowARsAhZpGBo5YAnzSLRXby2SKbI3oMX7ZWsCVz7aWFXb-NbGICe8jQzS8Drrvm5K-VwCNgfQXuKEBrSTd4cFG2OVPydQv2q2PQr1YTzhPsmwHXe5Gpeyr7k6bGgfARrY1_kwBQBJcZdlbhaYQFF3dnumwxMBWRWPVFIWnrzyFJq5saTDEezF5lVvJ_5-oI3SrNv_lJyY1R6pEtBlB20qBFFgeukn351KHeL-jty1VKc5vn50mYmPy9Ak1s0ipSyEB5ZvAi4eJJPDBPG0SizlZEIj_u3f_jcPla0FlGkpnO6A8tfRtQS08_sTUC0rxRVFBsPR4oeSwlr9jzK8FvN_XJykVHvRoHcs89KMTU4H6BQh9z7beS737G8EKMJ3IEbVT4S7jdn1fsXtRjHJt_T986VIef91SIECaqYWEai5_U9MU3qYnZPg1VnmZDDSkHpjB2QpIoDEe4E0WkgU8lCQFtAMyzXPig9H4uHWweI&zp=P1oz6VoUlrT-FchUtf6Y_uvaRJTF_pkjrh93D7I-gquZ8_27X1Xn1w7G-MM8wPwYfP84gKe-I3N6rSac2FlwJAjGayjWjL33KODZ9C86-TqPePVYeHq1ZA-6q-lnseJHXajIZjyHK-NGAeA2GEer3d0WCJwArTyiQpJ5sHCddSzNMrh1nRth992u8VuBtQXpzN3R0d4KCT5v2WrCoq50rFkQ_iF8Ueoq7vkr0DPGrZWKnU5eJmcW_VxQWUYiqzokNlG9B4cefNHqaBxyvFAKZxexn-72lMd7yq4oSKKlOC-g1Lwc_eW6IB_Hk1OGyq7wYvfBxc1XVmDMSjr5SG_fbXX1iX2V-DlqkzVVfbnRp7CMg1eiTJn3DD7dbJFNaTSaPAzkmJ_VoYUaOIX_8nIca2RDNw
+                                - img "There’s always a trend, a fashion, a fad, but gold has always been timeless. Visit invest.gold" [ref=f98e1374]
+                          - listitem [ref=f98e1375]:
+                            - generic [ref=f98e1376]:
+                              - link [ref=f98e1377] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=_XoxknkSNd4cnr3EDSeIid97hy80XOq9F2tj4voVztzbbcOe2BOafoyZ_LMs7wDNRQTxwIwJ6EVYqS7vO_JLaOFlfpmmuvk1AHBWOC215Qyy_0S4q0DPTPlDa0wZt_1omc0Zv1fHIHj6T17_h7Y6S7K6FfrOEsVIt6-bwV_jqmomWHg9vPHBkW1HtCXw84L3TS1Wha14D38vmhd--JL-3FiX8LWJu0FtXwjzpl67Lbn_lvw1zpmSFNPkBZ7Rw8PduZwILhTEd9ADWZ3NpKZowARsAhZpGBo5YAnzSLRXby2SKbI3oMX7ZWsCVz7aWFXb-NbGICe8jQzS8Drrvm5K-VwCNgfQXuKEBrSTd4cFG2OVPydQv2q2PQr1YTzhPsmwHXe5Gpeyr7k6bGgfARrY1_kwBQBJcZdlbhaYQFF3dnumwxMBWRWPVFIWnrzyFJq5saTDEezF5lVvJ_5-oI3SrNv_lJyY1R6pEtBlB20qBFFgeukn351KHeL-jty1VKc5vn50mYmPy9Ak1s0ipSyEB5ZvAi4eJJPDBPG0SizlZEIj_u3f_jcPla0FlGkpnO6A8tfRtQS08_sTUC0rxRVFBsPR4oeSwlr9jzK8FvN_XJykVHvRoHcs89KMTU4H6BQh9z7beS737G8EKMJ3IEbVT4S7jdn1fsXtRjHJt_T986VIef91SIECaqYWEai5_U9MU3qYnZPg1VnmZDDSkHpjB2QpIoDEe4E0WkgU8lCQFtAMyzXPig9H4uHWweI&zp=I70ZQJ8a9PMsp_3ExG8vPfCHUa8TGTHlrse_bYvhIBXQWKbbwrBeT545kwOHQS7ERuuHah3utQuPwJepJzEu-KfZXFiqnF4yjatX_1QvmUWGP_3VFyfZOvnDlC-BZznqyVp956VSsWljqrw8wq9AsIOEf7rgY7xPQd9IBX7DzZ-3R7enScv4xTOUw5a-gA21sz7uhK0Uw7xKWkrLlZ0bCU3HE0ouL1NFpDfzik0XLFIKQ-ORX-zxwAOvpdy2syTcyLM9WAlYnGpbPJ4o3ujYhbncgTiOa4SJ9sIZAC21L4EOQl3AK7XnebUibfI0LbhyT6Zo94LUmCN993Tt-Njub64BNmXOEDkcofq7kqM1OeOgR2JgxEwIjNerxo8VQDGgBuL65r7IRRVpoKvUSaNFG1PjoA
+                              - link [ref=f98e1380] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=_XoxknkSNd4cnr3EDSeIid97hy80XOq9F2tj4voVztzbbcOe2BOafoyZ_LMs7wDNRQTxwIwJ6EVYqS7vO_JLaOFlfpmmuvk1AHBWOC215Qyy_0S4q0DPTPlDa0wZt_1omc0Zv1fHIHj6T17_h7Y6S7K6FfrOEsVIt6-bwV_jqmomWHg9vPHBkW1HtCXw84L3TS1Wha14D38vmhd--JL-3FiX8LWJu0FtXwjzpl67Lbn_lvw1zpmSFNPkBZ7Rw8PduZwILhTEd9ADWZ3NpKZowARsAhZpGBo5YAnzSLRXby2SKbI3oMX7ZWsCVz7aWFXb-NbGICe8jQzS8Drrvm5K-VwCNgfQXuKEBrSTd4cFG2OVPydQv2q2PQr1YTzhPsmwHXe5Gpeyr7k6bGgfARrY1_kwBQBJcZdlbhaYQFF3dnumwxMBWRWPVFIWnrzyFJq5saTDEezF5lVvJ_5-oI3SrNv_lJyY1R6pEtBlB20qBFFgeukn351KHeL-jty1VKc5vn50mYmPy9Ak1s0ipSyEB5ZvAi4eJJPDBPG0SizlZEIj_u3f_jcPla0FlGkpnO6A8tfRtQS08_sTUC0rxRVFBsPR4oeSwlr9jzK8FvN_XJykVHvRoHcs89KMTU4H6BQh9z7beS737G8EKMJ3IEbVT4S7jdn1fsXtRjHJt_T986VIef91SIECaqYWEai5_U9MU3qYnZPg1VnmZDDSkHpjB2QpIoDEe4E0WkgU8lCQFtAMyzXPig9H4uHWweI&zp=I70ZQJ8a9PMsp_3ExG8vPfCHUa8TGTHlrse_bYvhIBXQWKbbwrBeT545kwOHQS7ERuuHah3utQuPwJepJzEu-KfZXFiqnF4yjatX_1QvmUWGP_3VFyfZOvnDlC-BZznqyVp956VSsWljqrw8wq9AsIOEf7rgY7xPQd9IBX7DzZ-3R7enScv4xTOUw5a-gA21sz7uhK0Uw7xKWkrLlZ0bCU3HE0ouL1NFpDfzik0XLFIKQ-ORX-zxwAOvpdy2syTcyLM9WAlYnGpbPJ4o3ujYhbncgTiOa4SJ9sIZAC21L4EOQl3AK7XnebUibfI0LbhyT6Zo94LUmCN993Tt-Njub64BNmXOEDkcofq7kqM1OeOgR2JgxEwIjNerxo8VQDGgBuL65r7IRRVpoKvUSaNFG1PjoA
+                                - img "There’s always a trend, a fashion, a fad, but gold has always been timeless. Visit invest.gold" [ref=f98e1381]
+                          - listitem [ref=f98e1382]:
+                            - generic [ref=f98e1383]:
+                              - link [ref=f98e1384] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=_XoxknkSNd4cnr3EDSeIid97hy80XOq9F2tj4voVztzbbcOe2BOafoyZ_LMs7wDNRQTxwIwJ6EVYqS7vO_JLaOFlfpmmuvk1AHBWOC215Qyy_0S4q0DPTPlDa0wZt_1omc0Zv1fHIHj6T17_h7Y6S7K6FfrOEsVIt6-bwV_jqmomWHg9vPHBkW1HtCXw84L3TS1Wha14D38vmhd--JL-3FiX8LWJu0FtXwjzpl67Lbn_lvw1zpmSFNPkBZ7Rw8PduZwILhTEd9ADWZ3NpKZowARsAhZpGBo5YAnzSLRXby2SKbI3oMX7ZWsCVz7aWFXb-NbGICe8jQzS8Drrvm5K-VwCNgfQXuKEBrSTd4cFG2OVPydQv2q2PQr1YTzhPsmwHXe5Gpeyr7k6bGgfARrY1_kwBQBJcZdlbhaYQFF3dnumwxMBWRWPVFIWnrzyFJq5saTDEezF5lVvJ_5-oI3SrNv_lJyY1R6pEtBlB20qBFFgeukn351KHeL-jty1VKc5vn50mYmPy9Ak1s0ipSyEB5ZvAi4eJJPDBPG0SizlZEIj_u3f_jcPla0FlGkpnO6A8tfRtQS08_sTUC0rxRVFBsPR4oeSwlr9jzK8FvN_XJykVHvRoHcs89KMTU4H6BQh9z7beS737G8EKMJ3IEbVT4S7jdn1fsXtRjHJt_T986VIef91SIECaqYWEai5_U9MU3qYnZPg1VnmZDDSkHpjB2QpIoDEe4E0WkgU8lCQFtAMyzXPig9H4uHWweI&zp=hoA38fhopxMZqUEExX3xdXS4gNa4q8FI7v_jZmJ-OP9bxItBrkKcOQ4cKP_esbtC2J-icu1hheyiOQnSmC_38XaFYZbQ5pu9QAXj91Z6ihFHeFJGz53AlzAEJx-owaCho7OT4T8mYxGYR4EC4luAKOcf985qkPXYV6WR7hrcEizLi9wy4GFJfa2rdUnR0ZkAkCDXPKlY_3jwpKQKklyzfD8aIIDMYlLMMMOiHnnUFhad69RnMrdL2WUS5EjSyYt4BufK1W6rmzNfm59yMrvwfxbprZsd9LNkJov1EZkA4F7Jhuoj4KFFEkiwzMAtufK9-BNb9ChOoeKk98Y27r0EmRI-9oO3EfR46eoy8u6GT9QAjJL9dskdL1W3JfzZVa-X2EY0EahaeNgsyFZRnzEX3Xvs_A
+                              - link [ref=f98e1387] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=_XoxknkSNd4cnr3EDSeIid97hy80XOq9F2tj4voVztzbbcOe2BOafoyZ_LMs7wDNRQTxwIwJ6EVYqS7vO_JLaOFlfpmmuvk1AHBWOC215Qyy_0S4q0DPTPlDa0wZt_1omc0Zv1fHIHj6T17_h7Y6S7K6FfrOEsVIt6-bwV_jqmomWHg9vPHBkW1HtCXw84L3TS1Wha14D38vmhd--JL-3FiX8LWJu0FtXwjzpl67Lbn_lvw1zpmSFNPkBZ7Rw8PduZwILhTEd9ADWZ3NpKZowARsAhZpGBo5YAnzSLRXby2SKbI3oMX7ZWsCVz7aWFXb-NbGICe8jQzS8Drrvm5K-VwCNgfQXuKEBrSTd4cFG2OVPydQv2q2PQr1YTzhPsmwHXe5Gpeyr7k6bGgfARrY1_kwBQBJcZdlbhaYQFF3dnumwxMBWRWPVFIWnrzyFJq5saTDEezF5lVvJ_5-oI3SrNv_lJyY1R6pEtBlB20qBFFgeukn351KHeL-jty1VKc5vn50mYmPy9Ak1s0ipSyEB5ZvAi4eJJPDBPG0SizlZEIj_u3f_jcPla0FlGkpnO6A8tfRtQS08_sTUC0rxRVFBsPR4oeSwlr9jzK8FvN_XJykVHvRoHcs89KMTU4H6BQh9z7beS737G8EKMJ3IEbVT4S7jdn1fsXtRjHJt_T986VIef91SIECaqYWEai5_U9MU3qYnZPg1VnmZDDSkHpjB2QpIoDEe4E0WkgU8lCQFtAMyzXPig9H4uHWweI&zp=hoA38fhopxMZqUEExX3xdXS4gNa4q8FI7v_jZmJ-OP9bxItBrkKcOQ4cKP_esbtC2J-icu1hheyiOQnSmC_38XaFYZbQ5pu9QAXj91Z6ihFHeFJGz53AlzAEJx-owaCho7OT4T8mYxGYR4EC4luAKOcf985qkPXYV6WR7hrcEizLi9wy4GFJfa2rdUnR0ZkAkCDXPKlY_3jwpKQKklyzfD8aIIDMYlLMMMOiHnnUFhad69RnMrdL2WUS5EjSyYt4BufK1W6rmzNfm59yMrvwfxbprZsd9LNkJov1EZkA4F7Jhuoj4KFFEkiwzMAtufK9-BNb9ChOoeKk98Y27r0EmRI-9oO3EfR46eoy8u6GT9QAjJL9dskdL1W3JfzZVa-X2EY0EahaeNgsyFZRnzEX3Xvs_A
+                                - img "There’s always a trend, a fashion, a fad, but gold has always been timeless. Visit invest.gold" [ref=f98e1388]
+                          - listitem [ref=f98e1389]:
+                            - generic [ref=f98e1390]:
+                              - link [ref=f98e1391] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=_XoxknkSNd4cnr3EDSeIid97hy80XOq9F2tj4voVztzbbcOe2BOafoyZ_LMs7wDNRQTxwIwJ6EVYqS7vO_JLaOFlfpmmuvk1AHBWOC215Qyy_0S4q0DPTPlDa0wZt_1omc0Zv1fHIHj6T17_h7Y6S7K6FfrOEsVIt6-bwV_jqmomWHg9vPHBkW1HtCXw84L3TS1Wha14D38vmhd--JL-3FiX8LWJu0FtXwjzpl67Lbn_lvw1zpmSFNPkBZ7Rw8PduZwILhTEd9ADWZ3NpKZowARsAhZpGBo5YAnzSLRXby2SKbI3oMX7ZWsCVz7aWFXb-NbGICe8jQzS8Drrvm5K-VwCNgfQXuKEBrSTd4cFG2OVPydQv2q2PQr1YTzhPsmwHXe5Gpeyr7k6bGgfARrY1_kwBQBJcZdlbhaYQFF3dnumwxMBWRWPVFIWnrzyFJq5saTDEezF5lVvJ_5-oI3SrNv_lJyY1R6pEtBlB20qBFFgeukn351KHeL-jty1VKc5vn50mYmPy9Ak1s0ipSyEB5ZvAi4eJJPDBPG0SizlZEIj_u3f_jcPla0FlGkpnO6A8tfRtQS08_sTUC0rxRVFBsPR4oeSwlr9jzK8FvN_XJykVHvRoHcs89KMTU4H6BQh9z7beS737G8EKMJ3IEbVT4S7jdn1fsXtRjHJt_T986VIef91SIECaqYWEai5_U9MU3qYnZPg1VnmZDDSkHpjB2QpIoDEe4E0WkgU8lCQFtAMyzXPig9H4uHWweI&zp=jipLwHd3RwYHYh2DomikmGrYC84ezp1lfM4O-0AxCfQL29U6Ts_cP6rlt-xvdVoPILvaJzsVjfUlNH9wRP3KRuz1tMKRAKyOtQIWKI4RC9GX-Bxdbt6OspRNiheDOS7375fG-OPegkBoI2_YWvjk4WED8OZLQ2I9g9WYKqLQyBFNiGExwQkwVFmbWNHCQi41cG2PUgYNe074MMtGp_s9Fr1qamkj-KTW8QBP3WPZUf6W_eYJlSGdlzSUxdScKEC5IoT8NPcFB24gYCrjcp-Zw_5nyD54iukC3N05k3wCy2ZWTEmYmIONQ9MJId-riaVy9h1yTZexWv6aHn3Js9v9R6H6CoFZfPdvmBObeksvOMucuI-RbSh90AZMi6dEoqsaMfvuT--A70lh87PJjlUmi5ObRQ
+                              - link [ref=f98e1394] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=_XoxknkSNd4cnr3EDSeIid97hy80XOq9F2tj4voVztzbbcOe2BOafoyZ_LMs7wDNRQTxwIwJ6EVYqS7vO_JLaOFlfpmmuvk1AHBWOC215Qyy_0S4q0DPTPlDa0wZt_1omc0Zv1fHIHj6T17_h7Y6S7K6FfrOEsVIt6-bwV_jqmomWHg9vPHBkW1HtCXw84L3TS1Wha14D38vmhd--JL-3FiX8LWJu0FtXwjzpl67Lbn_lvw1zpmSFNPkBZ7Rw8PduZwILhTEd9ADWZ3NpKZowARsAhZpGBo5YAnzSLRXby2SKbI3oMX7ZWsCVz7aWFXb-NbGICe8jQzS8Drrvm5K-VwCNgfQXuKEBrSTd4cFG2OVPydQv2q2PQr1YTzhPsmwHXe5Gpeyr7k6bGgfARrY1_kwBQBJcZdlbhaYQFF3dnumwxMBWRWPVFIWnrzyFJq5saTDEezF5lVvJ_5-oI3SrNv_lJyY1R6pEtBlB20qBFFgeukn351KHeL-jty1VKc5vn50mYmPy9Ak1s0ipSyEB5ZvAi4eJJPDBPG0SizlZEIj_u3f_jcPla0FlGkpnO6A8tfRtQS08_sTUC0rxRVFBsPR4oeSwlr9jzK8FvN_XJykVHvRoHcs89KMTU4H6BQh9z7beS737G8EKMJ3IEbVT4S7jdn1fsXtRjHJt_T986VIef91SIECaqYWEai5_U9MU3qYnZPg1VnmZDDSkHpjB2QpIoDEe4E0WkgU8lCQFtAMyzXPig9H4uHWweI&zp=jipLwHd3RwYHYh2DomikmGrYC84ezp1lfM4O-0AxCfQL29U6Ts_cP6rlt-xvdVoPILvaJzsVjfUlNH9wRP3KRuz1tMKRAKyOtQIWKI4RC9GX-Bxdbt6OspRNiheDOS7375fG-OPegkBoI2_YWvjk4WED8OZLQ2I9g9WYKqLQyBFNiGExwQkwVFmbWNHCQi41cG2PUgYNe074MMtGp_s9Fr1qamkj-KTW8QBP3WPZUf6W_eYJlSGdlzSUxdScKEC5IoT8NPcFB24gYCrjcp-Zw_5nyD54iukC3N05k3wCy2ZWTEmYmIONQ9MJId-riaVy9h1yTZexWv6aHn3Js9v9R6H6CoFZfPdvmBObeksvOMucuI-RbSh90AZMi6dEoqsaMfvuT--A70lh87PJjlUmi5ObRQ
+                                - img "There’s always a trend, a fashion, a fad, but gold has always been timeless. Visit invest.gold" [ref=f98e1395]
+                      - generic [ref=f98e1396]:
+                        - link [ref=f98e1397] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=_XoxknkSNd4cnr3EDSeIid97hy80XOq9F2tj4voVztzbbcOe2BOafoyZ_LMs7wDNRQTxwIwJ6EVYqS7vO_JLaOFlfpmmuvk1AHBWOC215Qyy_0S4q0DPTPlDa0wZt_1omc0Zv1fHIHj6T17_h7Y6S7K6FfrOEsVIt6-bwV_jqmomWHg9vPHBkW1HtCXw84L3TS1Wha14D38vmhd--JL-3FiX8LWJu0FtXwjzpl67Lbn_lvw1zpmSFNPkBZ7Rw8PduZwILhTEd9ADWZ3NpKZowARsAhZpGBo5YAnzSLRXby2SKbI3oMX7ZWsCVz7aWFXb-NbGICe8jQzS8Drrvm5K-VwCNgfQXuKEBrSTd4cFG2OVPydQv2q2PQr1YTzhPsmwHXe5Gpeyr7k6bGgfARrY1_kwBQBJcZdlbhaYQFF3dnumwxMBWRWPVFIWnrzyFJq5saTDEezF5lVvJ_5-oI3SrNv_lJyY1R6pEtBlB20qBFFgeukn351KHeL-jty1VKc5vn50mYmPy9Ak1s0ipSyEB5ZvAi4eJJPDBPG0SizlZEIj_u3f_jcPla0FlGkpnO6A8tfRtQS08_sTUC0rxRVFBsPR4oeSwlr9jzK8FvN_XJykVHvRoHcs89KMTU4H6BQh9z7beS737G8EKMJ3IEbVT4S7jdn1fsXtRjHJt_T986VIef91SIECaqYWEai5_U9MU3qYnZPg1VnmZDDSkHpjB2QpIoDEe4E0WkgU8lCQFtAMyzXPig9H4uHWweI&zp=P1oz6VoUlrT-FchUtf6Y_uvaRJTF_pkjrh93D7I-gquZ8_27X1Xn1w7G-MM8wPwYfP84gKe-I3N6rSac2FlwJAjGayjWjL33KODZ9C86-TqPePVYeHq1ZA-6q-lnseJHXajIZjyHK-NGAeA2GEer3d0WCJwArTyiQpJ5sHCddSzNMrh1nRth992u8VuBtQXpzN3R0d4KCT5v2WrCoq50rFkQ_iF8Ueoq7vkr0DPGrZWKnU5eJmcW_VxQWUYiqzokNlG9B4cefNHqaBxyvFAKZxexn-72lMd7yq4oSKKlOC-g1Lwc_eW6IB_Hk1OGyq7wYvfBxc1XVmDMSjr5SG_fbXX1iX2V-DlqkzVVfbnRp7CMg1eiTJn3DD7dbJFNaTSaPAzkmJ_VoYUaOIX_8nIca2RDNw
+                        - link "invest.gold" [ref=f98e1401] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=_XoxknkSNd4cnr3EDSeIid97hy80XOq9F2tj4voVztzbbcOe2BOafoyZ_LMs7wDNRQTxwIwJ6EVYqS7vO_JLaOFlfpmmuvk1AHBWOC215Qyy_0S4q0DPTPlDa0wZt_1omc0Zv1fHIHj6T17_h7Y6S7K6FfrOEsVIt6-bwV_jqmomWHg9vPHBkW1HtCXw84L3TS1Wha14D38vmhd--JL-3FiX8LWJu0FtXwjzpl67Lbn_lvw1zpmSFNPkBZ7Rw8PduZwILhTEd9ADWZ3NpKZowARsAhZpGBo5YAnzSLRXby2SKbI3oMX7ZWsCVz7aWFXb-NbGICe8jQzS8Drrvm5K-VwCNgfQXuKEBrSTd4cFG2OVPydQv2q2PQr1YTzhPsmwHXe5Gpeyr7k6bGgfARrY1_kwBQBJcZdlbhaYQFF3dnumwxMBWRWPVFIWnrzyFJq5saTDEezF5lVvJ_5-oI3SrNv_lJyY1R6pEtBlB20qBFFgeukn351KHeL-jty1VKc5vn50mYmPy9Ak1s0ipSyEB5ZvAi4eJJPDBPG0SizlZEIj_u3f_jcPla0FlGkpnO6A8tfRtQS08_sTUC0rxRVFBsPR4oeSwlr9jzK8FvN_XJykVHvRoHcs89KMTU4H6BQh9z7beS737G8EKMJ3IEbVT4S7jdn1fsXtRjHJt_T986VIef91SIECaqYWEai5_U9MU3qYnZPg1VnmZDDSkHpjB2QpIoDEe4E0WkgU8lCQFtAMyzXPig9H4uHWweI&zp=P1oz6VoUlrT-FchUtf6Y_uvaRJTF_pkjrh93D7I-gquZ8_27X1Xn1w7G-MM8wPwYfP84gKe-I3N6rSac2FlwJAjGayjWjL33KODZ9C86-TqPePVYeHq1ZA-6q-lnseJHXajIZjyHK-NGAeA2GEer3d0WCJwArTyiQpJ5sHCddSzNMrh1nRth992u8VuBtQXpzN3R0d4KCT5v2WrCoq50rFkQ_iF8Ueoq7vkr0DPGrZWKnU5eJmcW_VxQWUYiqzokNlG9B4cefNHqaBxyvFAKZxexn-72lMd7yq4oSKKlOC-g1Lwc_eW6IB_Hk1OGyq7wYvfBxc1XVmDMSjr5SG_fbXX1iX2V-DlqkzVVfbnRp7CMg1eiTJn3DD7dbJFNaTSaPAzkmJ_VoYUaOIX_8nIca2RDNw
+                - article "Comment from grendelltheskald 4 years ago" [ref=f98e1403]:
+                  - generic [ref=f98e1404] [cursor=pointer]:
+                    - link "grendelltheskald's profile --- avatar" [ref=f98e1410]:
+                      - /url: https://www.reddit.com/user/grendelltheskald/
+                    - generic [ref=f98e1420]:
+                      - link "grendelltheskald's profile" [ref=f98e1424]:
+                        - /url: https://www.reddit.com/user/grendelltheskald/
+                        - generic [ref=f98e1425]: grendelltheskald
+                      - generic [aria-hidden] [ref=f98e1427]: •
+                      - link [ref=f98e1429]:
+                        - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifvif6v/
+                        - time [ref=f98e1431]: 4y ago
+                  - generic [ref=f98e1436]:
+                    - paragraph [ref=f98e1437]:
+                      - text: I used to really struggle with roll20. I'm a pro member and I do actually think the pro account makes it worth it.
+                      - strong [ref=f98e1438]: The API functionality specifically.
+                    - paragraph [ref=f98e1439]: "-APIs make the UI better, customizable buttons, cool features like Aura that provide fun effects and visual health status auras, groupinit, groupcheck and encounter helper make combat super smoothe. Welcome package means never futzing around with getting people sheets."
+                    - paragraph [ref=f98e1440]: "-free assets every month as part of the roll20 reserve. These are good assets that I actually use. Sometimes are whole games or dungeons that run from levels 1 through 5 etc."
+                    - paragraph [ref=f98e1441]: "-dynamic lighting obviously, the broad swath of visual effects etc... Very much enhance the player experience."
+                    - paragraph [ref=f98e1442]:
+                      - strong [ref=f98e1443]: But even without paying, there are steps you can take to make roll20's interface easier.
+                    - paragraph [ref=f98e1444]: "-advanced keystrokes for layer switching makes navigation a breeze"
+                    - paragraph [ref=f98e1445]: "-making use of Beyond20 browser extension to transport rolls and stats from Dndbeyond to roll20"
+                    - paragraph [ref=f98e1446]: "-VTT Enhancement Suite browser extension rectifies a ton of the UI problems with roll20, allowing for custom resizing, automatic layer selection, etc. I cannot recommend VTTES enough."
+                    - paragraph [ref=f98e1447]: "-double clicking the top bar of the pop-in sheets and handouts will minimize them to the tabletop, allowing you to have resources at hand to flip through easily."
+                - article "Comment from MisterB78 4 years ago" [ref=f98e1451]:
+                  - generic [ref=f98e1452] [cursor=pointer]:
+                    - link "MisterB78's profile --- avatar" [ref=f98e1458]:
+                      - /url: https://www.reddit.com/user/MisterB78/
+                    - generic [ref=f98e1468]:
+                      - link "MisterB78's profile" [ref=f98e1472]:
+                        - /url: https://www.reddit.com/user/MisterB78/
+                        - generic [ref=f98e1473]: MisterB78
+                      - generic [aria-hidden] [ref=f98e1475]: •
+                      - link [ref=f98e1477]:
+                        - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifur6iz/
+                        - time [ref=f98e1479]: 4y ago
+                  - generic [ref=f98e1481]:
+                    - generic [ref=f98e1484]:
+                      - paragraph [ref=f98e1485]: Roll20 is an absolute garbage platform. Unintuitive, cumbersome, terrible UI, etc.
+                      - paragraph [ref=f98e1486]: My group switched to Foundry a while back and it’s about 100x better as a player, and a million times better as a DM.
+                    - button "25 more replies" [ref=f98e1493] [cursor=pointer]:
+                      - generic [ref=f98e1498]:
+                        - generic [ref=f98e1499]: "25"
+                        - text: more replies
+                - article "Comment from cerevant 4 years ago" [ref=f98e1501]:
+                  - generic [ref=f98e1502] [cursor=pointer]:
+                    - link "cerevant's profile --- avatar" [ref=f98e1508]:
+                      - /url: https://www.reddit.com/user/cerevant/
+                      - img "u/cerevant avatar" [ref=f98e1511]
+                    - generic [ref=f98e1515]:
+                      - link "cerevant's profile" [ref=f98e1519]:
+                        - /url: https://www.reddit.com/user/cerevant/
+                        - generic [ref=f98e1520]: cerevant
+                      - generic [aria-hidden] [ref=f98e1522]: •
+                      - link [ref=f98e1524]:
+                        - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifunvsi/
+                        - time [ref=f98e1526]: 4y ago
+                  - generic [ref=f98e1528]:
+                    - generic [ref=f98e1531]:
+                      - paragraph [ref=f98e1532]:
+                        - text: Roll20 seems to have turned the corner since the completion of the new dynamic lighting system. There have been incremental improvements in the UI since then after a
+                        - emphasis [ref=f98e1533]: long
+                        - text: period where nothing seemed to be happening. Now they are making good progress on their app.
+                      - paragraph [ref=f98e1534]: Yes, they definitely fell behind their competitors, but they don’t seem to be resting on their laurels anymore.
+                    - button "1 more reply" [ref=f98e1541] [cursor=pointer]:
+                      - generic [ref=f98e1546]:
+                        - generic [ref=f98e1547]: "1"
+                        - text: more reply
+                - article "Comment from [deleted] 4 years ago" [ref=f98e1549]:
+                  - generic "[deleted] 4y ago" [ref=f98e1550] [cursor=pointer]:
+                    - generic [ref=f98e1564]:
+                      - generic [ref=f98e1565]: "[deleted]"
+                      - generic [aria-hidden] [ref=f98e1568]: •
+                      - link [ref=f98e1570]:
+                        - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifvwv94/
+                        - time [ref=f98e1572]: 4y ago
+                  - paragraph [ref=f98e1578]: I switched to owlbear rodeo because of the ease in uploading maps, throwing some tokens on the board and calling it finished. Sometimes I need to tweak two values to fix the grid, but its so much better at handling maps than Roll20. I'll never go back.
+                - article "Comment from erotic-toaster 4 years ago" [ref=f98e1582]:
+                  - generic [ref=f98e1583] [cursor=pointer]:
+                    - link "erotic-toaster's profile --- avatar" [ref=f98e1589]:
+                      - /url: https://www.reddit.com/user/erotic-toaster/
+                    - generic [ref=f98e1599]:
+                      - link "erotic-toaster's profile" [ref=f98e1603]:
+                        - /url: https://www.reddit.com/user/erotic-toaster/
+                        - generic [ref=f98e1604]: erotic-toaster
+                      - generic [aria-hidden] [ref=f98e1606]: •
+                      - link [ref=f98e1608]:
+                        - /url: https://www.reddit.com/r/DnD/comments/vx9j95/comment/ifvc074/
+                        - time [ref=f98e1610]: 4y ago
+                  - paragraph [ref=f98e1616]: There are so many things I would expect to have that we don't. Like, why do I have to go into a game to manage my loaded tokens or maps or music?
+            - generic [ref=f98e1621]:
+              - generic [ref=f98e1622]:
+                - complementary "People also ask about section" [ref=f98e1623]:
+                  - heading "People also ask about section" [level=1] [ref=f98e1624]
+                  - generic [ref=f98e1625]: People also ask about
+                  - generic [ref=f98e1630]:
+                    - link "improving Roll20 UI for DnD players" [ref=f98e1632] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/7d982810-eb7a-4c0a-988c-354a96b50e57/?q=improving+Roll20+UI+for+DnD+players&source=PDP&ep=pdp_unit&relatedPostId=t3_vx9j95
+                    - link "best ways to use maps on Roll20 for DnD" [ref=f98e1641] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/c278df30-119c-47f1-bb80-f838f5c550d4/?q=best+ways+to+use+maps+on+Roll20+for+DnD&source=PDP&ep=pdp_unit&relatedPostId=t3_vx9j95
+                    - link "is Roll20 a good virtual tabletop for DnD" [ref=f98e1650] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/d367952c-d682-4f59-99d5-9181ddf743fe/?q=is+Roll20+a+good+virtual+tabletop+for+DnD&source=PDP&ep=pdp_unit&relatedPostId=t3_vx9j95
+                    - link "Creative character backstories for DnD" [ref=f98e1659] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/f46fc523-e74e-40f5-831b-23dbeabe470d/?q=Creative+character+backstories+for+DnD&source=PDP&ep=pdp_unit&relatedPostId=t3_vx9j95
+                    - link "Unique homebrew spells for wizards" [ref=f98e1668] [cursor=pointer]:
+                      - /url: https://www.reddit.com/answers/ee2e4984-0c7b-4db9-9cc2-ba98ebed1938/?q=Unique+homebrew+spells+for+wizards&source=PDP&ep=pdp_unit&relatedPostId=t3_vx9j95
+                - generic [ref=f98e1676]:
+                  - complementary "Related Posts Section" [ref=f98e1677]:
+                    - heading "Related Posts Section" [level=1] [ref=f98e1678]: More posts you may like
+                    - generic [ref=f98e1679]: Related posts
+                    - list [ref=f98e1685]:
+                      - listitem [ref=f98e1686]:
+                        - generic [ref=f98e1687]:
+                          - generic [ref=f98e1688]:
+                            - link "Found the best D20 Table to roll on 😇" [ref=f98e1689] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/dndmemes/comments/1qu4egg/found_the_best_d20_table_to_roll_on/
+                            - generic [ref=f98e1691]:
+                              - generic [ref=f98e1692]:
+                                - generic [ref=f98e1695]:
+                                  - link "r/dndmemes" [ref=f98e1696] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/dndmemes/
+                                  - generic [aria-hidden] [ref=f98e1701]: •
+                                  - time [ref=f98e1703]: 8mo ago
+                                - link [ref=f98e1705] [cursor=pointer]:
+                                  - /url: /r/dndmemes/comments/1qu4egg/found_the_best_d20_table_to_roll_on/
+                                  - heading "List item post - Found the best D20 Table to roll on 😇" [level=3] [ref=f98e1708]: Found the best D20 Table to roll on 😇
+                              - link "r/dndmemes - Found the best D20 Table to roll on 😇" [ref=f98e1711] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/dndmemes/comments/1qu4egg/found_the_best_d20_table_to_roll_on/
+                                - img "r/dndmemes - Found the best D20 Table to roll on 😇" [ref=f98e1712]
+                            - generic [ref=f98e1714]:
+                              - generic [ref=f98e1715]: "642"
+                              - text: upvotes ·
+                              - generic [ref=f98e1716]: "57"
+                              - text: comments
+                          - separator [ref=f98e1717]
+                      - listitem [ref=f98e1718]:
+                        - generic [ref=f98e1719]:
+                          - generic [ref=f98e1720]:
+                            - link "Critical Role releases a free adventure on Roll20 to play online" [ref=f98e1721] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/dndnext/comments/flh7ln/critical_role_releases_a_free_adventure_on_roll20/
+                            - generic [ref=f98e1723]:
+                              - generic [ref=f98e1724]:
+                                - generic [ref=f98e1727]:
+                                  - link "r/dndnext" [ref=f98e1728] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/dndnext/
+                                  - generic [aria-hidden] [ref=f98e1733]: •
+                                  - time [ref=f98e1735]: 7y ago
+                                - link [ref=f98e1737] [cursor=pointer]:
+                                  - /url: /r/dndnext/comments/flh7ln/critical_role_releases_a_free_adventure_on_roll20/
+                                  - heading "List item post - Critical Role releases a free adventure on Roll20 to play o..." [level=3] [ref=f98e1740]: Critical Role releases a free adventure on Roll20 to play online
+                              - link "r/dndnext - Critical Role releases a free adventure on Roll20 to play online" [ref=f98e1743] [cursor=pointer]:
+                                - /url: https://www.polygon.com/2020/3/17/21184280/critical-role-dungeons-and-dragons-roll20-adventure-free
+                                - img "r/dndnext - Critical Role releases a free adventure on Roll20 to play online" [ref=f98e1744]
+                            - generic [ref=f98e1746]:
+                              - generic [ref=f98e1747]: 3K
+                              - text: upvotes ·
+                              - generic [ref=f98e1748]: "82"
+                              - text: comments
+                          - separator [ref=f98e1749]
+                      - listitem [ref=f98e1750]:
+                        - generic [ref=f98e1752]:
+                          - generic:
+                            - 'link "Advertisement: Book your next language lesson" [ref=f98e1753] [cursor=pointer]':
+                              - /url: https://alb.reddit.com/cr?za=dHDkJUFxDxYnOUfH6XaVM8_tp1aKWeBiu7mg9tDrvi38O3uv3LFUnOcyoxJ-Q2sqaihPpAWkdoLAg5QqZ2kWFAaKEpGrxZchlx77I2PZCooRJmw7Fgc5YwQaP-rVEKYj3drjBjkFmhO9xCgB9SqOuyxQlEP15dO7TEut_V_h9LKPE2N7Ea5FO6JtUJFSgiu8EnmUZNvjXnH4-gO1WLVubEhpnbyKxKY3wKgPEkjJwiCigNhFdclUxu_0p0Eo5Zip9U9dibltG_M_0szQA3BOIF7NacJvf1TOs6wtRJ1Aye2Mjl4MXqiUW8xX8DMKj4Kt1FkxNqE7wsepwnbd9yfhqxM0Ih9XQvySawdPVtyDCGCKlwQ8p-Z_b-YijVEPGXVDqIZ309h8hycpU2CMAPj4E8PBzTaGMO9Sxi4VK4zGkkcTgfp-q1iclViw47d73Y7L1fmZ2JOiYVNyrskIobC5michecn3xOYS7M9aIk1yxbuIBSoloW1r-F4yxez_1Of4DS0yfuA-AkGyrgWiZvgbHA3GJ5O9Z3OrKQJudUyF9up_-9WdgbH0els3d4k0-RjG_aNCeacLVVZSrpnFzbcs3tf2AdugHZqU1oGmN5N4IKqay35gcmsQkrfeh8Oq9RyFhQH0LGjV_YO3_T1MzVV8GJS0GuGY4lOmF5NpOlJQFvK9WRkAnIN-LxzlcrAbAvJ1861eHnM-rgW4zeOsjV4MK7LD0dmd55LtNus8pXqXPWz65GA7eJHqKUYMVnTpt_A7aSVevr5XTe4qkz2MSJoNcdfR9lqrJH6jsVQwv6qUPn3Ob6H0kBq2olBSJMrc-rxQocOro0HMpNDQ7sDQE53kiFFU1j0pwLCYEM9RSdg4QFIALmBnahN-mSrpPOX5xf4RbmSA3NhrlOI07abXj1dllQWl4Eaqkwr7ZdpOJWajIKHxJ2n3V67lhHpOl-_JMtQPPG6GWU9w94kS9VCbDgmRMyBMY7OLnQ8gsZ29MmwkWVB39pzNynbySHnDaDXT87yzM2wd-GRF75isvw9YcwSfm2W2zR0NsGz68vceLY6LxiIDQA1vZmXSLZVSvHAk3iJTX3y05TmOfHkU8y38qmW_XrK6YlxP_QlZlERB5N9qNdYUnFDSlwt2dvKdyRwzvxQVn92vEHSI-WPl8wFBDMrDfQL_TlrmJVqlpBUk30pKU3mS06pry0dcOr0jrC-U-RzfAKYVTLvTEU_J005HaA6UM3-cv28qimDBuU_7lhAZFj-Y4NwZedR5THEMH3gJHhldIYJLnZdDs-QtdyuIf5ReaUgnpW5nrqCtoIZtvO3ZKvJ3n4QEGvBmz-WJFhz0puPZkmduQmaRAaryjpRa_lbaAOhaZr1sEkGPKJAhgrhJ-rcObwA0ylA-SXLYWCRTmoMdu7S0LWcCrL3a1KnikdL-EmF0hoFNVTbWhiX40hyM0QpRhxLxii6KB1YrkKO5vZENo45i9nzeyiDBRfVC60OFC00Bldea_FQ_CbS1uzgWQ32WRF0_4wrnDQ&zp=nRw9-cO9-jdV7tMiK3kom9LQ-YcJpDE6iRf-dtXsGGMv4r3y4JaB80RDtO0cM2EFkS5_fzxTWWlvqI8Radg8fhQ3ku4eStkA4FUQ8KowEkImXQvsCzpx8Z1PUNX7iRahFJU4BWcFCZfyXn45_tivuCeqLsCwL6x0yYtjDJ3psjD-P7FBAUffA5BSo29laJoSyQQ9NmyKvmcvEZwzyCul50FXraQSAc0k353iCO6k6KZJrnTHZjPp8AL6w-qQMjbhlYZ0S8rWh5e6lbcy6_ehTH-TVagFTuVMJmeslbpFg4iC4-b5M8lYp24Q2Ed86o5q_-0OZ-4-iqyWy0pVNHv_OXi3Y7bFd0N1UTh9Ior8XM-zcZDyWG3YzaAngdnL_jrlEy2uvtAQvT6NG18It3uTMSHUQiId3YSTOf5Qr2EuQ7EJwDg2-H0RGU1cta4P8B5p5NSYLWO85UO3C6Au2_qgBz3rNWaeEdZwWqiOUeB7LIBi2GEZN3xXSA82fASGW6o
+                            - generic [ref=f98e1754]:
+                              - generic [ref=f98e1755]:
+                                - generic [ref=f98e1756]:
+                                  - generic [ref=f98e1757]:
+                                    - generic [ref=f98e1758]:
+                                      - link "u/Preply avatar Preply" [ref=f98e1761] [cursor=pointer]:
+                                        - /url: /user/Preply/
+                                        - img "u/Preply avatar" [ref=f98e1764]
+                                        - generic [ref=f98e1765]: Preply
+                                      - generic [ref=f98e1766]: •
+                                      - link "Ad" [ref=f98e1768] [cursor=pointer]:
+                                        - /url: /user/Preply/
+                                      - link [ref=f98e1770] [cursor=pointer]:
+                                        - /url: https://alb.reddit.com/cr?za=dHDkJUFxDxYnOUfH6XaVM8_tp1aKWeBiu7mg9tDrvi38O3uv3LFUnOcyoxJ-Q2sqaihPpAWkdoLAg5QqZ2kWFAaKEpGrxZchlx77I2PZCooRJmw7Fgc5YwQaP-rVEKYj3drjBjkFmhO9xCgB9SqOuyxQlEP15dO7TEut_V_h9LKPE2N7Ea5FO6JtUJFSgiu8EnmUZNvjXnH4-gO1WLVubEhpnbyKxKY3wKgPEkjJwiCigNhFdclUxu_0p0Eo5Zip9U9dibltG_M_0szQA3BOIF7NacJvf1TOs6wtRJ1Aye2Mjl4MXqiUW8xX8DMKj4Kt1FkxNqE7wsepwnbd9yfhqxM0Ih9XQvySawdPVtyDCGCKlwQ8p-Z_b-YijVEPGXVDqIZ309h8hycpU2CMAPj4E8PBzTaGMO9Sxi4VK4zGkkcTgfp-q1iclViw47d73Y7L1fmZ2JOiYVNyrskIobC5michecn3xOYS7M9aIk1yxbuIBSoloW1r-F4yxez_1Of4DS0yfuA-AkGyrgWiZvgbHA3GJ5O9Z3OrKQJudUyF9up_-9WdgbH0els3d4k0-RjG_aNCeacLVVZSrpnFzbcs3tf2AdugHZqU1oGmN5N4IKqay35gcmsQkrfeh8Oq9RyFhQH0LGjV_YO3_T1MzVV8GJS0GuGY4lOmF5NpOlJQFvK9WRkAnIN-LxzlcrAbAvJ1861eHnM-rgW4zeOsjV4MK7LD0dmd55LtNus8pXqXPWz65GA7eJHqKUYMVnTpt_A7aSVevr5XTe4qkz2MSJoNcdfR9lqrJH6jsVQwv6qUPn3Ob6H0kBq2olBSJMrc-rxQocOro0HMpNDQ7sDQE53kiFFU1j0pwLCYEM9RSdg4QFIALmBnahN-mSrpPOX5xf4RbmSA3NhrlOI07abXj1dllQWl4Eaqkwr7ZdpOJWajIKHxJ2n3V67lhHpOl-_JMtQPPG6GWU9w94kS9VCbDgmRMyBMY7OLnQ8gsZ29MmwkWVB39pzNynbySHnDaDXT87yzM2wd-GRF75isvw9YcwSfm2W2zR0NsGz68vceLY6LxiIDQA1vZmXSLZVSvHAk3iJTX3y05TmOfHkU8y38qmW_XrK6YlxP_QlZlERB5N9qNdYUnFDSlwt2dvKdyRwzvxQVn92vEHSI-WPl8wFBDMrDfQL_TlrmJVqlpBUk30pKU3mS06pry0dcOr0jrC-U-RzfAKYVTLvTEU_J005HaA6UM3-cv28qimDBuU_7lhAZFj-Y4NwZedR5THEMH3gJHhldIYJLnZdDs-QtdyuIf5ReaUgnpW5nrqCtoIZtvO3ZKvJ3n4QEGvBmz-WJFhz0puPZkmduQmaRAaryjpRa_lbaAOhaZr1sEkGPKJAhgrhJ-rcObwA0ylA-SXLYWCRTmoMdu7S0LWcCrL3a1KnikdL-EmF0hoFNVTbWhiX40hyM0QpRhxLxii6KB1YrkKO5vZENo45i9nzeyiDBRfVC60OFC00Bldea_FQ_CbS1uzgWQ32WRF0_4wrnDQ&zp=nRw9-cO9-jdV7tMiK3kom9LQ-YcJpDE6iRf-dtXsGGMv4r3y4JaB80RDtO0cM2EFkS5_fzxTWWlvqI8Radg8fhQ3ku4eStkA4FUQ8KowEkImXQvsCzpx8Z1PUNX7iRahFJU4BWcFCZfyXn45_tivuCeqLsCwL6x0yYtjDJ3psjD-P7FBAUffA5BSo29laJoSyQQ9NmyKvmcvEZwzyCul50FXraQSAc0k353iCO6k6KZJrnTHZjPp8AL6w-qQMjbhlYZ0S8rWh5e6lbcy6_ehTH-TVagFTuVMJmeslbpFg4iC4-b5M8lYp24Q2Ed86o5q_-0OZ-4-iqyWy0pVNHv_OXi3Y7bFd0N1UTh9Ior8XM-zcZDyWG3YzaAngdnL_jrlEy2uvtAQvT6NG18It3uTMSHUQiId3YSTOf5Qr2EuQ7EJwDg2-H0RGU1cta4P8B5p5NSYLWO85UO3C6Au2_qgBz3rNWaeEdZwWqiOUeB7LIBi2GEZN3xXSA82fASGW6o
+                                    - button "Open user actions" [ref=f98e1776] [cursor=pointer]
+                                  - link "Book your next language lesson" [ref=f98e1783] [cursor=pointer]:
+                                    - /url: https://alb.reddit.com/cr?za=dHDkJUFxDxYnOUfH6XaVM8_tp1aKWeBiu7mg9tDrvi38O3uv3LFUnOcyoxJ-Q2sqaihPpAWkdoLAg5QqZ2kWFAaKEpGrxZchlx77I2PZCooRJmw7Fgc5YwQaP-rVEKYj3drjBjkFmhO9xCgB9SqOuyxQlEP15dO7TEut_V_h9LKPE2N7Ea5FO6JtUJFSgiu8EnmUZNvjXnH4-gO1WLVubEhpnbyKxKY3wKgPEkjJwiCigNhFdclUxu_0p0Eo5Zip9U9dibltG_M_0szQA3BOIF7NacJvf1TOs6wtRJ1Aye2Mjl4MXqiUW8xX8DMKj4Kt1FkxNqE7wsepwnbd9yfhqxM0Ih9XQvySawdPVtyDCGCKlwQ8p-Z_b-YijVEPGXVDqIZ309h8hycpU2CMAPj4E8PBzTaGMO9Sxi4VK4zGkkcTgfp-q1iclViw47d73Y7L1fmZ2JOiYVNyrskIobC5michecn3xOYS7M9aIk1yxbuIBSoloW1r-F4yxez_1Of4DS0yfuA-AkGyrgWiZvgbHA3GJ5O9Z3OrKQJudUyF9up_-9WdgbH0els3d4k0-RjG_aNCeacLVVZSrpnFzbcs3tf2AdugHZqU1oGmN5N4IKqay35gcmsQkrfeh8Oq9RyFhQH0LGjV_YO3_T1MzVV8GJS0GuGY4lOmF5NpOlJQFvK9WRkAnIN-LxzlcrAbAvJ1861eHnM-rgW4zeOsjV4MK7LD0dmd55LtNus8pXqXPWz65GA7eJHqKUYMVnTpt_A7aSVevr5XTe4qkz2MSJoNcdfR9lqrJH6jsVQwv6qUPn3Ob6H0kBq2olBSJMrc-rxQocOro0HMpNDQ7sDQE53kiFFU1j0pwLCYEM9RSdg4QFIALmBnahN-mSrpPOX5xf4RbmSA3NhrlOI07abXj1dllQWl4Eaqkwr7ZdpOJWajIKHxJ2n3V67lhHpOl-_JMtQPPG6GWU9w94kS9VCbDgmRMyBMY7OLnQ8gsZ29MmwkWVB39pzNynbySHnDaDXT87yzM2wd-GRF75isvw9YcwSfm2W2zR0NsGz68vceLY6LxiIDQA1vZmXSLZVSvHAk3iJTX3y05TmOfHkU8y38qmW_XrK6YlxP_QlZlERB5N9qNdYUnFDSlwt2dvKdyRwzvxQVn92vEHSI-WPl8wFBDMrDfQL_TlrmJVqlpBUk30pKU3mS06pry0dcOr0jrC-U-RzfAKYVTLvTEU_J005HaA6UM3-cv28qimDBuU_7lhAZFj-Y4NwZedR5THEMH3gJHhldIYJLnZdDs-QtdyuIf5ReaUgnpW5nrqCtoIZtvO3ZKvJ3n4QEGvBmz-WJFhz0puPZkmduQmaRAaryjpRa_lbaAOhaZr1sEkGPKJAhgrhJ-rcObwA0ylA-SXLYWCRTmoMdu7S0LWcCrL3a1KnikdL-EmF0hoFNVTbWhiX40hyM0QpRhxLxii6KB1YrkKO5vZENo45i9nzeyiDBRfVC60OFC00Bldea_FQ_CbS1uzgWQ32WRF0_4wrnDQ&zp=nRw9-cO9-jdV7tMiK3kom9LQ-YcJpDE6iRf-dtXsGGMv4r3y4JaB80RDtO0cM2EFkS5_fzxTWWlvqI8Radg8fhQ3ku4eStkA4FUQ8KowEkImXQvsCzpx8Z1PUNX7iRahFJU4BWcFCZfyXn45_tivuCeqLsCwL6x0yYtjDJ3psjD-P7FBAUffA5BSo29laJoSyQQ9NmyKvmcvEZwzyCul50FXraQSAc0k353iCO6k6KZJrnTHZjPp8AL6w-qQMjbhlYZ0S8rWh5e6lbcy6_ehTH-TVagFTuVMJmeslbpFg4iC4-b5M8lYp24Q2Ed86o5q_-0OZ-4-iqyWy0pVNHv_OXi3Y7bFd0N1UTh9Ior8XM-zcZDyWG3YzaAngdnL_jrlEy2uvtAQvT6NG18It3uTMSHUQiId3YSTOf5Qr2EuQ7EJwDg2-H0RGU1cta4P8B5p5NSYLWO85UO3C6Au2_qgBz3rNWaeEdZwWqiOUeB7LIBi2GEZN3xXSA82fASGW6o
+                                    - generic "Book your next language lesson" [ref=f98e1784]
+                                - link [ref=f98e1787] [cursor=pointer]:
+                                  - /url: https://alb.reddit.com/cr?za=dHDkJUFxDxYnOUfH6XaVM8_tp1aKWeBiu7mg9tDrvi38O3uv3LFUnOcyoxJ-Q2sqaihPpAWkdoLAg5QqZ2kWFAaKEpGrxZchlx77I2PZCooRJmw7Fgc5YwQaP-rVEKYj3drjBjkFmhO9xCgB9SqOuyxQlEP15dO7TEut_V_h9LKPE2N7Ea5FO6JtUJFSgiu8EnmUZNvjXnH4-gO1WLVubEhpnbyKxKY3wKgPEkjJwiCigNhFdclUxu_0p0Eo5Zip9U9dibltG_M_0szQA3BOIF7NacJvf1TOs6wtRJ1Aye2Mjl4MXqiUW8xX8DMKj4Kt1FkxNqE7wsepwnbd9yfhqxM0Ih9XQvySawdPVtyDCGCKlwQ8p-Z_b-YijVEPGXVDqIZ309h8hycpU2CMAPj4E8PBzTaGMO9Sxi4VK4zGkkcTgfp-q1iclViw47d73Y7L1fmZ2JOiYVNyrskIobC5michecn3xOYS7M9aIk1yxbuIBSoloW1r-F4yxez_1Of4DS0yfuA-AkGyrgWiZvgbHA3GJ5O9Z3OrKQJudUyF9up_-9WdgbH0els3d4k0-RjG_aNCeacLVVZSrpnFzbcs3tf2AdugHZqU1oGmN5N4IKqay35gcmsQkrfeh8Oq9RyFhQH0LGjV_YO3_T1MzVV8GJS0GuGY4lOmF5NpOlJQFvK9WRkAnIN-LxzlcrAbAvJ1861eHnM-rgW4zeOsjV4MK7LD0dmd55LtNus8pXqXPWz65GA7eJHqKUYMVnTpt_A7aSVevr5XTe4qkz2MSJoNcdfR9lqrJH6jsVQwv6qUPn3Ob6H0kBq2olBSJMrc-rxQocOro0HMpNDQ7sDQE53kiFFU1j0pwLCYEM9RSdg4QFIALmBnahN-mSrpPOX5xf4RbmSA3NhrlOI07abXj1dllQWl4Eaqkwr7ZdpOJWajIKHxJ2n3V67lhHpOl-_JMtQPPG6GWU9w94kS9VCbDgmRMyBMY7OLnQ8gsZ29MmwkWVB39pzNynbySHnDaDXT87yzM2wd-GRF75isvw9YcwSfm2W2zR0NsGz68vceLY6LxiIDQA1vZmXSLZVSvHAk3iJTX3y05TmOfHkU8y38qmW_XrK6YlxP_QlZlERB5N9qNdYUnFDSlwt2dvKdyRwzvxQVn92vEHSI-WPl8wFBDMrDfQL_TlrmJVqlpBUk30pKU3mS06pry0dcOr0jrC-U-RzfAKYVTLvTEU_J005HaA6UM3-cv28qimDBuU_7lhAZFj-Y4NwZedR5THEMH3gJHhldIYJLnZdDs-QtdyuIf5ReaUgnpW5nrqCtoIZtvO3ZKvJ3n4QEGvBmz-WJFhz0puPZkmduQmaRAaryjpRa_lbaAOhaZr1sEkGPKJAhgrhJ-rcObwA0ylA-SXLYWCRTmoMdu7S0LWcCrL3a1KnikdL-EmF0hoFNVTbWhiX40hyM0QpRhxLxii6KB1YrkKO5vZENo45i9nzeyiDBRfVC60OFC00Bldea_FQ_CbS1uzgWQ32WRF0_4wrnDQ&zp=nRw9-cO9-jdV7tMiK3kom9LQ-YcJpDE6iRf-dtXsGGMv4r3y4JaB80RDtO0cM2EFkS5_fzxTWWlvqI8Radg8fhQ3ku4eStkA4FUQ8KowEkImXQvsCzpx8Z1PUNX7iRahFJU4BWcFCZfyXn45_tivuCeqLsCwL6x0yYtjDJ3psjD-P7FBAUffA5BSo29laJoSyQQ9NmyKvmcvEZwzyCul50FXraQSAc0k353iCO6k6KZJrnTHZjPp8AL6w-qQMjbhlYZ0S8rWh5e6lbcy6_ehTH-TVagFTuVMJmeslbpFg4iC4-b5M8lYp24Q2Ed86o5q_-0OZ-4-iqyWy0pVNHv_OXi3Y7bFd0N1UTh9Ior8XM-zcZDyWG3YzaAngdnL_jrlEy2uvtAQvT6NG18It3uTMSHUQiId3YSTOf5Qr2EuQ7EJwDg2-H0RGU1cta4P8B5p5NSYLWO85UO3C6Au2_qgBz3rNWaeEdZwWqiOUeB7LIBi2GEZN3xXSA82fASGW6o
+                                  - 'img "Thumbnail image: Book your next language lesson" [ref=f98e1789]'
+                              - generic [ref=f98e1790]:
+                                - link [ref=f98e1791] [cursor=pointer]:
+                                  - /url: https://alb.reddit.com/cr?za=dHDkJUFxDxYnOUfH6XaVM8_tp1aKWeBiu7mg9tDrvi38O3uv3LFUnOcyoxJ-Q2sqaihPpAWkdoLAg5QqZ2kWFAaKEpGrxZchlx77I2PZCooRJmw7Fgc5YwQaP-rVEKYj3drjBjkFmhO9xCgB9SqOuyxQlEP15dO7TEut_V_h9LKPE2N7Ea5FO6JtUJFSgiu8EnmUZNvjXnH4-gO1WLVubEhpnbyKxKY3wKgPEkjJwiCigNhFdclUxu_0p0Eo5Zip9U9dibltG_M_0szQA3BOIF7NacJvf1TOs6wtRJ1Aye2Mjl4MXqiUW8xX8DMKj4Kt1FkxNqE7wsepwnbd9yfhqxM0Ih9XQvySawdPVtyDCGCKlwQ8p-Z_b-YijVEPGXVDqIZ309h8hycpU2CMAPj4E8PBzTaGMO9Sxi4VK4zGkkcTgfp-q1iclViw47d73Y7L1fmZ2JOiYVNyrskIobC5michecn3xOYS7M9aIk1yxbuIBSoloW1r-F4yxez_1Of4DS0yfuA-AkGyrgWiZvgbHA3GJ5O9Z3OrKQJudUyF9up_-9WdgbH0els3d4k0-RjG_aNCeacLVVZSrpnFzbcs3tf2AdugHZqU1oGmN5N4IKqay35gcmsQkrfeh8Oq9RyFhQH0LGjV_YO3_T1MzVV8GJS0GuGY4lOmF5NpOlJQFvK9WRkAnIN-LxzlcrAbAvJ1861eHnM-rgW4zeOsjV4MK7LD0dmd55LtNus8pXqXPWz65GA7eJHqKUYMVnTpt_A7aSVevr5XTe4qkz2MSJoNcdfR9lqrJH6jsVQwv6qUPn3Ob6H0kBq2olBSJMrc-rxQocOro0HMpNDQ7sDQE53kiFFU1j0pwLCYEM9RSdg4QFIALmBnahN-mSrpPOX5xf4RbmSA3NhrlOI07abXj1dllQWl4Eaqkwr7ZdpOJWajIKHxJ2n3V67lhHpOl-_JMtQPPG6GWU9w94kS9VCbDgmRMyBMY7OLnQ8gsZ29MmwkWVB39pzNynbySHnDaDXT87yzM2wd-GRF75isvw9YcwSfm2W2zR0NsGz68vceLY6LxiIDQA1vZmXSLZVSvHAk3iJTX3y05TmOfHkU8y38qmW_XrK6YlxP_QlZlERB5N9qNdYUnFDSlwt2dvKdyRwzvxQVn92vEHSI-WPl8wFBDMrDfQL_TlrmJVqlpBUk30pKU3mS06pry0dcOr0jrC-U-RzfAKYVTLvTEU_J005HaA6UM3-cv28qimDBuU_7lhAZFj-Y4NwZedR5THEMH3gJHhldIYJLnZdDs-QtdyuIf5ReaUgnpW5nrqCtoIZtvO3ZKvJ3n4QEGvBmz-WJFhz0puPZkmduQmaRAaryjpRa_lbaAOhaZr1sEkGPKJAhgrhJ-rcObwA0ylA-SXLYWCRTmoMdu7S0LWcCrL3a1KnikdL-EmF0hoFNVTbWhiX40hyM0QpRhxLxii6KB1YrkKO5vZENo45i9nzeyiDBRfVC60OFC00Bldea_FQ_CbS1uzgWQ32WRF0_4wrnDQ&zp=nRw9-cO9-jdV7tMiK3kom9LQ-YcJpDE6iRf-dtXsGGMv4r3y4JaB80RDtO0cM2EFkS5_fzxTWWlvqI8Radg8fhQ3ku4eStkA4FUQ8KowEkImXQvsCzpx8Z1PUNX7iRahFJU4BWcFCZfyXn45_tivuCeqLsCwL6x0yYtjDJ3psjD-P7FBAUffA5BSo29laJoSyQQ9NmyKvmcvEZwzyCul50FXraQSAc0k353iCO6k6KZJrnTHZjPp8AL6w-qQMjbhlYZ0S8rWh5e6lbcy6_ehTH-TVagFTuVMJmeslbpFg4iC4-b5M8lYp24Q2Ed86o5q_-0OZ-4-iqyWy0pVNHv_OXi3Y7bFd0N1UTh9Ior8XM-zcZDyWG3YzaAngdnL_jrlEy2uvtAQvT6NG18It3uTMSHUQiId3YSTOf5Qr2EuQ7EJwDg2-H0RGU1cta4P8B5p5NSYLWO85UO3C6Au2_qgBz3rNWaeEdZwWqiOUeB7LIBi2GEZN3xXSA82fASGW6o
+                                - generic [ref=f98e1792]:
+                                  - link "preply.com" [ref=f98e1794] [cursor=pointer]:
+                                    - /url: https://alb.reddit.com/cr?za=dHDkJUFxDxYnOUfH6XaVM8_tp1aKWeBiu7mg9tDrvi38O3uv3LFUnOcyoxJ-Q2sqaihPpAWkdoLAg5QqZ2kWFAaKEpGrxZchlx77I2PZCooRJmw7Fgc5YwQaP-rVEKYj3drjBjkFmhO9xCgB9SqOuyxQlEP15dO7TEut_V_h9LKPE2N7Ea5FO6JtUJFSgiu8EnmUZNvjXnH4-gO1WLVubEhpnbyKxKY3wKgPEkjJwiCigNhFdclUxu_0p0Eo5Zip9U9dibltG_M_0szQA3BOIF7NacJvf1TOs6wtRJ1Aye2Mjl4MXqiUW8xX8DMKj4Kt1FkxNqE7wsepwnbd9yfhqxM0Ih9XQvySawdPVtyDCGCKlwQ8p-Z_b-YijVEPGXVDqIZ309h8hycpU2CMAPj4E8PBzTaGMO9Sxi4VK4zGkkcTgfp-q1iclViw47d73Y7L1fmZ2JOiYVNyrskIobC5michecn3xOYS7M9aIk1yxbuIBSoloW1r-F4yxez_1Of4DS0yfuA-AkGyrgWiZvgbHA3GJ5O9Z3OrKQJudUyF9up_-9WdgbH0els3d4k0-RjG_aNCeacLVVZSrpnFzbcs3tf2AdugHZqU1oGmN5N4IKqay35gcmsQkrfeh8Oq9RyFhQH0LGjV_YO3_T1MzVV8GJS0GuGY4lOmF5NpOlJQFvK9WRkAnIN-LxzlcrAbAvJ1861eHnM-rgW4zeOsjV4MK7LD0dmd55LtNus8pXqXPWz65GA7eJHqKUYMVnTpt_A7aSVevr5XTe4qkz2MSJoNcdfR9lqrJH6jsVQwv6qUPn3Ob6H0kBq2olBSJMrc-rxQocOro0HMpNDQ7sDQE53kiFFU1j0pwLCYEM9RSdg4QFIALmBnahN-mSrpPOX5xf4RbmSA3NhrlOI07abXj1dllQWl4Eaqkwr7ZdpOJWajIKHxJ2n3V67lhHpOl-_JMtQPPG6GWU9w94kS9VCbDgmRMyBMY7OLnQ8gsZ29MmwkWVB39pzNynbySHnDaDXT87yzM2wd-GRF75isvw9YcwSfm2W2zR0NsGz68vceLY6LxiIDQA1vZmXSLZVSvHAk3iJTX3y05TmOfHkU8y38qmW_XrK6YlxP_QlZlERB5N9qNdYUnFDSlwt2dvKdyRwzvxQVn92vEHSI-WPl8wFBDMrDfQL_TlrmJVqlpBUk30pKU3mS06pry0dcOr0jrC-U-RzfAKYVTLvTEU_J005HaA6UM3-cv28qimDBuU_7lhAZFj-Y4NwZedR5THEMH3gJHhldIYJLnZdDs-QtdyuIf5ReaUgnpW5nrqCtoIZtvO3ZKvJ3n4QEGvBmz-WJFhz0puPZkmduQmaRAaryjpRa_lbaAOhaZr1sEkGPKJAhgrhJ-rcObwA0ylA-SXLYWCRTmoMdu7S0LWcCrL3a1KnikdL-EmF0hoFNVTbWhiX40hyM0QpRhxLxii6KB1YrkKO5vZENo45i9nzeyiDBRfVC60OFC00Bldea_FQ_CbS1uzgWQ32WRF0_4wrnDQ&zp=nRw9-cO9-jdV7tMiK3kom9LQ-YcJpDE6iRf-dtXsGGMv4r3y4JaB80RDtO0cM2EFkS5_fzxTWWlvqI8Radg8fhQ3ku4eStkA4FUQ8KowEkImXQvsCzpx8Z1PUNX7iRahFJU4BWcFCZfyXn45_tivuCeqLsCwL6x0yYtjDJ3psjD-P7FBAUffA5BSo29laJoSyQQ9NmyKvmcvEZwzyCul50FXraQSAc0k353iCO6k6KZJrnTHZjPp8AL6w-qQMjbhlYZ0S8rWh5e6lbcy6_ehTH-TVagFTuVMJmeslbpFg4iC4-b5M8lYp24Q2Ed86o5q_-0OZ-4-iqyWy0pVNHv_OXi3Y7bFd0N1UTh9Ior8XM-zcZDyWG3YzaAngdnL_jrlEy2uvtAQvT6NG18It3uTMSHUQiId3YSTOf5Qr2EuQ7EJwDg2-H0RGU1cta4P8B5p5NSYLWO85UO3C6Au2_qgBz3rNWaeEdZwWqiOUeB7LIBi2GEZN3xXSA82fASGW6o
+                                  - link "Install" [ref=f98e1795] [cursor=pointer]:
+                                    - /url: https://alb.reddit.com/cr?za=dHDkJUFxDxYnOUfH6XaVM8_tp1aKWeBiu7mg9tDrvi38O3uv3LFUnOcyoxJ-Q2sqaihPpAWkdoLAg5QqZ2kWFAaKEpGrxZchlx77I2PZCooRJmw7Fgc5YwQaP-rVEKYj3drjBjkFmhO9xCgB9SqOuyxQlEP15dO7TEut_V_h9LKPE2N7Ea5FO6JtUJFSgiu8EnmUZNvjXnH4-gO1WLVubEhpnbyKxKY3wKgPEkjJwiCigNhFdclUxu_0p0Eo5Zip9U9dibltG_M_0szQA3BOIF7NacJvf1TOs6wtRJ1Aye2Mjl4MXqiUW8xX8DMKj4Kt1FkxNqE7wsepwnbd9yfhqxM0Ih9XQvySawdPVtyDCGCKlwQ8p-Z_b-YijVEPGXVDqIZ309h8hycpU2CMAPj4E8PBzTaGMO9Sxi4VK4zGkkcTgfp-q1iclViw47d73Y7L1fmZ2JOiYVNyrskIobC5michecn3xOYS7M9aIk1yxbuIBSoloW1r-F4yxez_1Of4DS0yfuA-AkGyrgWiZvgbHA3GJ5O9Z3OrKQJudUyF9up_-9WdgbH0els3d4k0-RjG_aNCeacLVVZSrpnFzbcs3tf2AdugHZqU1oGmN5N4IKqay35gcmsQkrfeh8Oq9RyFhQH0LGjV_YO3_T1MzVV8GJS0GuGY4lOmF5NpOlJQFvK9WRkAnIN-LxzlcrAbAvJ1861eHnM-rgW4zeOsjV4MK7LD0dmd55LtNus8pXqXPWz65GA7eJHqKUYMVnTpt_A7aSVevr5XTe4qkz2MSJoNcdfR9lqrJH6jsVQwv6qUPn3Ob6H0kBq2olBSJMrc-rxQocOro0HMpNDQ7sDQE53kiFFU1j0pwLCYEM9RSdg4QFIALmBnahN-mSrpPOX5xf4RbmSA3NhrlOI07abXj1dllQWl4Eaqkwr7ZdpOJWajIKHxJ2n3V67lhHpOl-_JMtQPPG6GWU9w94kS9VCbDgmRMyBMY7OLnQ8gsZ29MmwkWVB39pzNynbySHnDaDXT87yzM2wd-GRF75isvw9YcwSfm2W2zR0NsGz68vceLY6LxiIDQA1vZmXSLZVSvHAk3iJTX3y05TmOfHkU8y38qmW_XrK6YlxP_QlZlERB5N9qNdYUnFDSlwt2dvKdyRwzvxQVn92vEHSI-WPl8wFBDMrDfQL_TlrmJVqlpBUk30pKU3mS06pry0dcOr0jrC-U-RzfAKYVTLvTEU_J005HaA6UM3-cv28qimDBuU_7lhAZFj-Y4NwZedR5THEMH3gJHhldIYJLnZdDs-QtdyuIf5ReaUgnpW5nrqCtoIZtvO3ZKvJ3n4QEGvBmz-WJFhz0puPZkmduQmaRAaryjpRa_lbaAOhaZr1sEkGPKJAhgrhJ-rcObwA0ylA-SXLYWCRTmoMdu7S0LWcCrL3a1KnikdL-EmF0hoFNVTbWhiX40hyM0QpRhxLxii6KB1YrkKO5vZENo45i9nzeyiDBRfVC60OFC00Bldea_FQ_CbS1uzgWQ32WRF0_4wrnDQ&zp=nRw9-cO9-jdV7tMiK3kom9LQ-YcJpDE6iRf-dtXsGGMv4r3y4JaB80RDtO0cM2EFkS5_fzxTWWlvqI8Radg8fhQ3ku4eStkA4FUQ8KowEkImXQvsCzpx8Z1PUNX7iRahFJU4BWcFCZfyXn45_tivuCeqLsCwL6x0yYtjDJ3psjD-P7FBAUffA5BSo29laJoSyQQ9NmyKvmcvEZwzyCul50FXraQSAc0k353iCO6k6KZJrnTHZjPp8AL6w-qQMjbhlYZ0S8rWh5e6lbcy6_ehTH-TVagFTuVMJmeslbpFg4iC4-b5M8lYp24Q2Ed86o5q_-0OZ-4-iqyWy0pVNHv_OXi3Y7bFd0N1UTh9Ior8XM-zcZDyWG3YzaAngdnL_jrlEy2uvtAQvT6NG18It3uTMSHUQiId3YSTOf5Qr2EuQ7EJwDg2-H0RGU1cta4P8B5p5NSYLWO85UO3C6Au2_qgBz3rNWaeEdZwWqiOUeB7LIBi2GEZN3xXSA82fASGW6o
+                        - separator [ref=f98e1798]
+                      - listitem [ref=f98e1799]:
+                        - generic [ref=f98e1800]:
+                          - generic [ref=f98e1801]:
+                            - link "[OC] D&D Sheets now work on Phones on Roll20" [ref=f98e1802] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DnD/comments/1rmkigy/oc_dd_sheets_now_work_on_phones_on_roll20/
+                            - generic [ref=f98e1804]:
+                              - generic [ref=f98e1805]:
+                                - generic [ref=f98e1808]:
+                                  - link "r/DnD" [ref=f98e1809] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/DnD/
+                                  - generic [aria-hidden] [ref=f98e1814]: •
+                                  - time [ref=f98e1816]: 7mo ago
+                                - link [ref=f98e1818] [cursor=pointer]:
+                                  - /url: /r/DnD/comments/1rmkigy/oc_dd_sheets_now_work_on_phones_on_roll20/
+                                  - heading "List item post - [OC] D&D Sheets now work on Phones on Roll20" [level=3] [ref=f98e1821]: "[OC] D&D Sheets now work on Phones on Roll20"
+                              - link "r/DnD - [OC] D&D Sheets now work on Phones on Roll20" [ref=f98e1824] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/DnD/comments/1rmkigy/oc_dd_sheets_now_work_on_phones_on_roll20/
+                                - img "r/DnD - [OC] D&D Sheets now work on Phones on Roll20" [ref=f98e1825]
+                            - generic [ref=f98e1827]:
+                              - generic [ref=f98e1828]: "145"
+                              - text: upvotes ·
+                              - generic [ref=f98e1829]: "38"
+                              - text: comments
+                          - separator [ref=f98e1830]
+                      - listitem
+                      - listitem [ref=f98e1831]:
+                        - generic [ref=f98e1832]:
+                          - generic [ref=f98e1833]:
+                            - link "[OC] Curse of Strahd major updates on Roll20" [ref=f98e1834] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DnD/comments/1s3ft1e/oc_curse_of_strahd_major_updates_on_roll20/
+                            - generic [ref=f98e1836]:
+                              - generic [ref=f98e1837]:
+                                - generic [ref=f98e1840]:
+                                  - link "r/DnD" [ref=f98e1841] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/DnD/
+                                  - generic [aria-hidden] [ref=f98e1846]: •
+                                  - time [ref=f98e1848]: 7mo ago
+                                - link [ref=f98e1850] [cursor=pointer]:
+                                  - /url: /r/DnD/comments/1s3ft1e/oc_curse_of_strahd_major_updates_on_roll20/
+                                  - heading "List item post - [OC] Curse of Strahd major updates on Roll20" [level=3] [ref=f98e1853]: "[OC] Curse of Strahd major updates on Roll20"
+                              - link "r/DnD - [OC] Curse of Strahd major updates on Roll20" [ref=f98e1856] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/DnD/comments/1s3ft1e/oc_curse_of_strahd_major_updates_on_roll20/
+                                - img "r/DnD - [OC] Curse of Strahd major updates on Roll20" [ref=f98e1857]
+                            - generic [ref=f98e1859]:
+                              - generic [ref=f98e1860]: "338"
+                              - text: upvotes ·
+                              - generic [ref=f98e1861]: "37"
+                              - text: comments
+                          - separator [ref=f98e1862]
+                      - listitem [ref=f98e1863]:
+                        - generic [ref=f98e1864]:
+                          - generic [ref=f98e1865]:
+                            - link "[OC] D&D Character Builder on Roll20 now works on phones & tablets" [ref=f98e1866] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DnD/comments/1qxkldp/oc_dd_character_builder_on_roll20_now_works_on/
+                            - generic [ref=f98e1868]:
+                              - generic [ref=f98e1869]:
+                                - generic [ref=f98e1872]:
+                                  - link "r/DnD" [ref=f98e1873] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/DnD/
+                                  - generic [aria-hidden] [ref=f98e1878]: •
+                                  - time [ref=f98e1880]: 8mo ago
+                                - link [ref=f98e1882] [cursor=pointer]:
+                                  - /url: /r/DnD/comments/1qxkldp/oc_dd_character_builder_on_roll20_now_works_on/
+                                  - heading "List item post - [OC] D&D Character Builder on Roll20 now works on phones & ..." [level=3] [ref=f98e1885]: "[OC] D&D Character Builder on Roll20 now works on phones & tablets"
+                              - link "r/DnD - [OC] D&D Character Builder on Roll20 now works on phones & tablets" [ref=f98e1888] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/DnD/comments/1qxkldp/oc_dd_character_builder_on_roll20_now_works_on/
+                                - img "r/DnD - [OC] D&D Character Builder on Roll20 now works on phones & tablets" [ref=f98e1889]
+                            - generic [ref=f98e1891]:
+                              - generic [ref=f98e1892]: "141"
+                              - text: upvotes ·
+                              - generic [ref=f98e1893]: "31"
+                              - text: comments
+                          - separator [ref=f98e1894]
+                      - listitem [ref=f98e1895]:
+                        - generic [ref=f98e1896]:
+                          - generic [ref=f98e1897]:
+                            - 'link "⚔️ [D&D 2024 Character Builder] Now Available: Custom Subclasses! ⚔️" [ref=f98e1898] [cursor=pointer]':
+                              - /url: https://www.reddit.com/r/Roll20/comments/1ocekn0/dd_2024_character_builder_now_available_custom/
+                            - generic [ref=f98e1900]:
+                              - generic [ref=f98e1901]:
+                                - generic [ref=f98e1904]:
+                                  - link "r/Roll20" [ref=f98e1905] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/Roll20/
+                                  - generic [aria-hidden] [ref=f98e1910]: •
+                                  - time [ref=f98e1912]: 1y ago
+                                - link [ref=f98e1914] [cursor=pointer]:
+                                  - /url: /r/Roll20/comments/1ocekn0/dd_2024_character_builder_now_available_custom/
+                                  - 'heading "List item post - ⚔️ [D&D 2024 Character Builder] Now Available: Custom Subcl..." [level=3] [ref=f98e1917]': "⚔️ [D&D 2024 Character Builder] Now Available: Custom Subclasses! ⚔️"
+                              - 'link "r/Roll20 - ⚔️ [D&D 2024 Character Builder] Now Available: Custom Subclasses! ⚔️" [ref=f98e1920] [cursor=pointer]':
+                                - /url: https://www.reddit.com/r/Roll20/comments/1ocekn0/dd_2024_character_builder_now_available_custom/
+                                - 'img "r/Roll20 - ⚔️ [D&D 2024 Character Builder] Now Available: Custom Subclasses! ⚔️" [ref=f98e1921]'
+                            - generic [ref=f98e1923]:
+                              - generic [ref=f98e1924]: "58"
+                              - text: upvotes ·
+                              - generic [ref=f98e1925]: "21"
+                              - text: comments
+                          - separator [ref=f98e1926]
+                      - listitem [ref=f98e1927]:
+                        - generic [ref=f98e1928]:
+                          - generic [ref=f98e1929]:
+                            - link "[OC] I make character portraits and tokens for Roll20 using artwork from Fire Emblem, and I made a free program to help you make your own! (More in comments)" [ref=f98e1930] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DnD/comments/8x4lzb/oc_i_make_character_portraits_and_tokens_for/
+                            - generic [ref=f98e1932]:
+                              - generic [ref=f98e1933]:
+                                - generic [ref=f98e1936]:
+                                  - link "r/DnD" [ref=f98e1937] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/DnD/
+                                  - generic [aria-hidden] [ref=f98e1942]: •
+                                  - time [ref=f98e1944]: 8y ago
+                                - link [ref=f98e1946] [cursor=pointer]:
+                                  - /url: /r/DnD/comments/8x4lzb/oc_i_make_character_portraits_and_tokens_for/
+                                  - heading "List item post - [OC] I make character portraits and tokens for Roll20 using..." [level=3] [ref=f98e1949]: "[OC] I make character portraits and tokens for Roll20 using artwork from Fire Emblem, and I made a free program to help you make your own! (More in comments)"
+                              - link "r/DnD - [OC] I make character portraits and tokens for Roll20 using artwork from Fire Emblem, and I made a free program to help you make your own! (More in comments)" [ref=f98e1952] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/DnD/comments/8x4lzb/oc_i_make_character_portraits_and_tokens_for/
+                                - img "r/DnD - [OC] I make character portraits and tokens for Roll20 using artwork from Fire Emblem, and I made a free program to help you make your own! (More in comments)" [ref=f98e1953]
+                            - generic [ref=f98e1955]:
+                              - generic [ref=f98e1956]: 7.9K
+                              - text: upvotes ·
+                              - generic [ref=f98e1957]: "268"
+                              - text: comments
+                          - separator [ref=f98e1958]
+                      - listitem [ref=f98e1959]:
+                        - generic [ref=f98e1960]:
+                          - generic [ref=f98e1961]:
+                            - link "Alternatives to Roll20" [ref=f98e1962] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/rpg/comments/1atr3du/alternatives_to_roll20/
+                            - generic [ref=f98e1965]:
+                              - generic [ref=f98e1968]:
+                                - link "r/rpg" [ref=f98e1969] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/rpg/
+                                - generic [aria-hidden] [ref=f98e1974]: •
+                                - time [ref=f98e1976]: 3y ago
+                              - link [ref=f98e1978] [cursor=pointer]:
+                                - /url: /r/rpg/comments/1atr3du/alternatives_to_roll20/
+                                - heading "List item post - Alternatives to Roll20" [level=3] [ref=f98e1981]: Alternatives to Roll20
+                            - generic [ref=f98e1983]:
+                              - generic [ref=f98e1984]: "7"
+                              - text: upvotes ·
+                              - generic [ref=f98e1985]: "25"
+                              - text: comments
+                          - separator [ref=f98e1986]
+                      - listitem
+                      - listitem [ref=f98e1987]:
+                        - generic [ref=f98e1988]:
+                          - generic [ref=f98e1989]:
+                            - link "New D&D Features Coming Soon!" [ref=f98e1990] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Roll20/comments/1vrrb9n/new_dd_features_coming_soon/
+                            - generic [ref=f98e1992]:
+                              - generic [ref=f98e1993]:
+                                - generic [ref=f98e1996]:
+                                  - link "r/Roll20" [ref=f98e1997] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/Roll20/
+                                  - generic [aria-hidden] [ref=f98e2002]: •
+                                  - time [ref=f98e2004]: 2mo ago
+                                - link [ref=f98e2006] [cursor=pointer]:
+                                  - /url: /r/Roll20/comments/1vrrb9n/new_dd_features_coming_soon/
+                                  - heading "List item post - New D&D Features Coming Soon!" [level=3] [ref=f98e2009]: New D&D Features Coming Soon!
+                              - link "r/Roll20 - New D&D Features Coming Soon!" [ref=f98e2012] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/Roll20/comments/1vrrb9n/new_dd_features_coming_soon/
+                                - img "r/Roll20 - New D&D Features Coming Soon!" [ref=f98e2013]
+                            - generic [ref=f98e2015]:
+                              - generic [ref=f98e2016]: "79"
+                              - text: upvotes ·
+                              - generic [ref=f98e2017]: "36"
+                              - text: comments
+                          - separator [ref=f98e2018]
+                      - listitem [ref=f98e2019]:
+                        - generic [ref=f98e2020]:
+                          - generic [ref=f98e2021]:
+                            - link "Is Roll20 any good?" [ref=f98e2022] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DnD/comments/6z06kw/is_roll20_any_good/
+                            - generic [ref=f98e2025]:
+                              - generic [ref=f98e2028]:
+                                - link "r/DnD" [ref=f98e2029] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/DnD/
+                                - generic [aria-hidden] [ref=f98e2034]: •
+                                - time [ref=f98e2036]: 9y ago
+                              - link [ref=f98e2038] [cursor=pointer]:
+                                - /url: /r/DnD/comments/6z06kw/is_roll20_any_good/
+                                - heading "List item post - Is Roll20 any good?" [level=3] [ref=f98e2041]: Is Roll20 any good?
+                            - generic [ref=f98e2043]:
+                              - generic [ref=f98e2044]: "9"
+                              - text: upvotes ·
+                              - generic [ref=f98e2045]: "13"
+                              - text: comments
+                          - separator [ref=f98e2046]
+                      - listitem [ref=f98e2047]:
+                        - generic [ref=f98e2048]:
+                          - generic [ref=f98e2049]:
+                            - link "I legitimately don’t know how to use Roll20 despite multiple tutorials" [ref=f98e2050] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/dndnext/comments/flu5yq/i_legitimately_dont_know_how_to_use_roll20/
+                            - generic [ref=f98e2053]:
+                              - generic [ref=f98e2056]:
+                                - link "r/dndnext" [ref=f98e2057] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/dndnext/
+                                - generic [aria-hidden] [ref=f98e2062]: •
+                                - time [ref=f98e2064]: 7y ago
+                              - link [ref=f98e2066] [cursor=pointer]:
+                                - /url: /r/dndnext/comments/flu5yq/i_legitimately_dont_know_how_to_use_roll20/
+                                - heading "List item post - I legitimately don’t know how to use Roll20 despite multipl..." [level=3] [ref=f98e2069]: I legitimately don’t know how to use Roll20 despite multiple tutorials
+                            - generic [ref=f98e2071]:
+                              - generic [ref=f98e2072]: "76"
+                              - text: upvotes ·
+                              - generic [ref=f98e2073]: "117"
+                              - text: comments
+                          - separator [ref=f98e2074]
+                      - listitem [ref=f98e2075]:
+                        - generic [ref=f98e2076]:
+                          - generic [ref=f98e2077]:
+                            - link "Is Roll20 still \"problematic\"?" [ref=f98e2078] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DnD/comments/x27b1z/is_roll20_still_problematic/
+                            - generic [ref=f98e2081]:
+                              - generic [ref=f98e2084]:
+                                - link "r/DnD" [ref=f98e2085] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/DnD/
+                                - generic [aria-hidden] [ref=f98e2090]: •
+                                - time [ref=f98e2092]: 4y ago
+                              - link [ref=f98e2094] [cursor=pointer]:
+                                - /url: /r/DnD/comments/x27b1z/is_roll20_still_problematic/
+                                - heading "List item post - Is Roll20 still \"problematic\"?" [level=3] [ref=f98e2097]: Is Roll20 still "problematic"?
+                            - generic [ref=f98e2099]:
+                              - generic [ref=f98e2100]: "6"
+                              - text: comments
+                          - separator [ref=f98e2101]
+                      - listitem [ref=f98e2102]:
+                        - generic [ref=f98e2103]:
+                          - generic [ref=f98e2104]:
+                            - link "Is Roll20 really worth it?" [ref=f98e2105] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DMAcademy/comments/qbvr6m/is_roll20_really_worth_it/
+                            - generic [ref=f98e2108]:
+                              - generic [ref=f98e2111]:
+                                - link "r/DMAcademy" [ref=f98e2112] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/DMAcademy/
+                                - generic [aria-hidden] [ref=f98e2117]: •
+                                - time [ref=f98e2119]: 5y ago
+                              - link [ref=f98e2121] [cursor=pointer]:
+                                - /url: /r/DMAcademy/comments/qbvr6m/is_roll20_really_worth_it/
+                                - heading "List item post - Is Roll20 really worth it?" [level=3] [ref=f98e2124]: Is Roll20 really worth it?
+                            - generic [ref=f98e2126]:
+                              - generic [ref=f98e2127]: "168"
+                              - text: upvotes ·
+                              - generic [ref=f98e2128]: "290"
+                              - text: comments
+                          - separator [ref=f98e2129]
+                      - listitem [ref=f98e2130]:
+                        - generic [ref=f98e2131]:
+                          - generic [ref=f98e2132]:
+                            - link "Roll20 is giving me everything I need." [ref=f98e2133] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/rpg/comments/1idx63w/roll20_is_giving_me_everything_i_need/
+                            - generic [ref=f98e2136]:
+                              - generic [ref=f98e2139]:
+                                - link "r/rpg" [ref=f98e2140] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/rpg/
+                                - generic [aria-hidden] [ref=f98e2145]: •
+                                - time [ref=f98e2147]: 2y ago
+                              - link [ref=f98e2149] [cursor=pointer]:
+                                - /url: /r/rpg/comments/1idx63w/roll20_is_giving_me_everything_i_need/
+                                - heading "List item post - Roll20 is giving me everything I need." [level=3] [ref=f98e2152]: Roll20 is giving me everything I need.
+                            - generic [ref=f98e2154]:
+                              - generic [ref=f98e2155]: "56"
+                              - text: comments
+                          - separator [ref=f98e2156]
+                      - listitem [ref=f98e2157]:
+                        - generic [ref=f98e2158]:
+                          - generic [ref=f98e2159]:
+                            - 'link "[OC]Demonstrating the R20: pinch-stop to roll, chaos guaranteed 🎲" [ref=f98e2160] [cursor=pointer]':
+                              - /url: https://www.reddit.com/r/DnD/comments/1p6cvh6/ocdemonstrating_the_r20_pinchstop_to_roll_chaos/
+                            - generic [ref=f98e2162]:
+                              - generic [ref=f98e2163]:
+                                - generic [ref=f98e2166]:
+                                  - link "r/DnD" [ref=f98e2167] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/DnD/
+                                  - generic [aria-hidden] [ref=f98e2172]: •
+                                  - time [ref=f98e2174]: 1y ago
+                                - link [ref=f98e2176] [cursor=pointer]:
+                                  - /url: /r/DnD/comments/1p6cvh6/ocdemonstrating_the_r20_pinchstop_to_roll_chaos/
+                                  - 'heading "List item post - [OC]Demonstrating the R20: pinch-stop to roll, chaos guaran..." [level=3] [ref=f98e2179]': "[OC]Demonstrating the R20: pinch-stop to roll, chaos guaranteed 🎲"
+                              - 'link "r/DnD - [OC]Demonstrating the R20: pinch-stop to roll, chaos guaranteed 🎲" [ref=f98e2182] [cursor=pointer]':
+                                - /url: https://www.reddit.com/r/DnD/comments/1p6cvh6/ocdemonstrating_the_r20_pinchstop_to_roll_chaos/
+                                - 'img "r/DnD - [OC]Demonstrating the R20: pinch-stop to roll, chaos guaranteed 🎲" [ref=f98e2183]'
+                            - generic [ref=f98e2185]:
+                              - generic [ref=f98e2186]: "19"
+                              - text: upvotes ·
+                              - generic [ref=f98e2187]: "17"
+                              - text: comments
+                          - separator [ref=f98e2188]
+                      - listitem [ref=f98e2189]:
+                        - generic [ref=f98e2190]:
+                          - generic [ref=f98e2191]:
+                            - link "how does roll20 work?" [ref=f98e2192] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DnD/comments/nmo7ke/how_does_roll20_work/
+                            - generic [ref=f98e2195]:
+                              - generic [ref=f98e2198]:
+                                - link "r/DnD" [ref=f98e2199] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/DnD/
+                                - generic [aria-hidden] [ref=f98e2204]: •
+                                - time [ref=f98e2206]: 5y ago
+                              - link [ref=f98e2208] [cursor=pointer]:
+                                - /url: /r/DnD/comments/nmo7ke/how_does_roll20_work/
+                                - heading "List item post - how does roll20 work?" [level=3] [ref=f98e2211]: how does roll20 work?
+                            - generic [ref=f98e2213]:
+                              - generic [ref=f98e2214]: "3"
+                              - text: upvotes ·
+                              - generic [ref=f98e2215]: "6"
+                              - text: comments
+                          - separator [ref=f98e2216]
+                      - listitem [ref=f98e2217]:
+                        - generic [ref=f98e2218]:
+                          - generic [ref=f98e2219]:
+                            - link "Performance Update from the Roll20 Tabletop Team!" [ref=f98e2220] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Roll20/comments/1sun0f0/performance_update_from_the_roll20_tabletop_team/
+                            - generic [ref=f98e2222]:
+                              - generic [ref=f98e2223]:
+                                - generic [ref=f98e2226]:
+                                  - link "r/Roll20" [ref=f98e2227] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/Roll20/
+                                  - generic [aria-hidden] [ref=f98e2232]: •
+                                  - time [ref=f98e2234]: 6mo ago
+                                - link [ref=f98e2236] [cursor=pointer]:
+                                  - /url: /r/Roll20/comments/1sun0f0/performance_update_from_the_roll20_tabletop_team/
+                                  - heading "List item post - Performance Update from the Roll20 Tabletop Team!" [level=3] [ref=f98e2239]: Performance Update from the Roll20 Tabletop Team!
+                              - link "r/Roll20 - Performance Update from the Roll20 Tabletop Team!" [ref=f98e2242] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/Roll20/comments/1sun0f0/performance_update_from_the_roll20_tabletop_team/
+                                - img "r/Roll20 - Performance Update from the Roll20 Tabletop Team!" [ref=f98e2243]
+                            - generic [ref=f98e2245]:
+                              - generic [ref=f98e2246]: "64"
+                              - text: upvotes ·
+                              - generic [ref=f98e2247]: "13"
+                              - text: comments
+                          - separator [ref=f98e2248]
+                      - listitem [ref=f98e2249]:
+                        - generic [ref=f98e2250]:
+                          - generic [ref=f98e2251]:
+                            - link "D&D Character Sheet now on Phones!" [ref=f98e2252] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Roll20/comments/1rmnatv/dd_character_sheet_now_on_phones/
+                            - generic [ref=f98e2254]:
+                              - generic [ref=f98e2255]:
+                                - generic [ref=f98e2258]:
+                                  - link "r/Roll20" [ref=f98e2259] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/Roll20/
+                                  - generic [aria-hidden] [ref=f98e2264]: •
+                                  - time [ref=f98e2266]: 7mo ago
+                                - link [ref=f98e2268] [cursor=pointer]:
+                                  - /url: /r/Roll20/comments/1rmnatv/dd_character_sheet_now_on_phones/
+                                  - heading "List item post - D&D Character Sheet now on Phones!" [level=3] [ref=f98e2271]: D&D Character Sheet now on Phones!
+                              - link "r/Roll20 - D&D Character Sheet now on Phones!" [ref=f98e2274] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/Roll20/comments/1rmnatv/dd_character_sheet_now_on_phones/
+                                - img "r/Roll20 - D&D Character Sheet now on Phones!" [ref=f98e2275]
+                            - generic [ref=f98e2277]:
+                              - generic [ref=f98e2278]: "193"
+                              - text: upvotes ·
+                              - generic [ref=f98e2279]: "50"
+                              - text: comments
+                          - separator [ref=f98e2280]
+                      - listitem [ref=f98e2281]:
+                        - generic [ref=f98e2282]:
+                          - generic [ref=f98e2283]:
+                            - link "Do you Guys Enjoy using Roll20?" [ref=f98e2284] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DnD/comments/wzsjdt/do_you_guys_enjoy_using_roll20/
+                            - generic [ref=f98e2287]:
+                              - generic [ref=f98e2290]:
+                                - link "r/DnD" [ref=f98e2291] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/DnD/
+                                - generic [aria-hidden] [ref=f98e2296]: •
+                                - time [ref=f98e2298]: 4y ago
+                              - link [ref=f98e2300] [cursor=pointer]:
+                                - /url: /r/DnD/comments/wzsjdt/do_you_guys_enjoy_using_roll20/
+                                - heading "List item post - Do you Guys Enjoy using Roll20?" [level=3] [ref=f98e2303]: Do you Guys Enjoy using Roll20?
+                            - generic [ref=f98e2305]:
+                              - generic [ref=f98e2306]: "199"
+                              - text: upvotes ·
+                              - generic [ref=f98e2307]: "188"
+                              - text: comments
+                          - separator [ref=f98e2308]
+                      - listitem [ref=f98e2309]:
+                        - generic [ref=f98e2310]:
+                          - generic [ref=f98e2311]:
+                            - link "S20 plus One UI 8" [ref=f98e2312] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/Galaxy_S20/comments/1wuwqja/s20_plus_one_ui_8/
+                            - generic [ref=f98e2314]:
+                              - generic [ref=f98e2315]:
+                                - generic [ref=f98e2318]:
+                                  - link "r/Galaxy_S20" [ref=f98e2319] [cursor=pointer]:
+                                    - /url: https://www.reddit.com/r/Galaxy_S20/
+                                  - generic [aria-hidden] [ref=f98e2324]: •
+                                  - time [ref=f98e2326]: 14d ago
+                                - link [ref=f98e2328] [cursor=pointer]:
+                                  - /url: /r/Galaxy_S20/comments/1wuwqja/s20_plus_one_ui_8/
+                                  - heading "List item post - S20 plus One UI 8" [level=3] [ref=f98e2331]: S20 plus One UI 8
+                              - link "r/Galaxy_S20 - S20 plus One UI 8" [ref=f98e2334] [cursor=pointer]:
+                                - /url: https://www.reddit.com/r/Galaxy_S20/comments/1wuwqja/s20_plus_one_ui_8/
+                                - img "r/Galaxy_S20 - S20 plus One UI 8" [ref=f98e2335]
+                            - generic [ref=f98e2337]:
+                              - generic [ref=f98e2338]: "17"
+                              - text: upvotes ·
+                              - generic [ref=f98e2339]: "15"
+                              - text: comments
+                          - separator [ref=f98e2340]
+                      - listitem [ref=f98e2341]:
+                        - generic [ref=f98e2342]:
+                          - generic [ref=f98e2343]:
+                            - link "Thoughts on Roll20?" [ref=f98e2344] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/DnD/comments/1ewzhlk/thoughts_on_roll20/
+                            - generic [ref=f98e2347]:
+                              - generic [ref=f98e2350]:
+                                - link "r/DnD" [ref=f98e2351] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/DnD/
+                                - generic [aria-hidden] [ref=f98e2356]: •
+                                - time [ref=f98e2358]: 2y ago
+                              - link [ref=f98e2360] [cursor=pointer]:
+                                - /url: /r/DnD/comments/1ewzhlk/thoughts_on_roll20/
+                                - heading "List item post - Thoughts on Roll20?" [level=3] [ref=f98e2363]: Thoughts on Roll20?
+                            - generic [ref=f98e2365]:
+                              - generic [ref=f98e2366]: "44"
+                              - text: upvotes ·
+                              - generic [ref=f98e2367]: "90"
+                              - text: comments
+                          - separator [ref=f98e2368]
+                      - listitem [ref=f98e2369]:
+                        - generic [ref=f98e2370]:
+                          - generic [ref=f98e2371]:
+                            - link "Roll20 vs Foundry" [ref=f98e2372] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/cyberpunkred/comments/1o5n5mk/roll20_vs_foundry/
+                            - generic [ref=f98e2375]:
+                              - generic [ref=f98e2378]:
+                                - link "r/cyberpunkred" [ref=f98e2379] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/cyberpunkred/
+                                - generic [aria-hidden] [ref=f98e2384]: •
+                                - time [ref=f98e2386]: 1y ago
+                              - link [ref=f98e2388] [cursor=pointer]:
+                                - /url: /r/cyberpunkred/comments/1o5n5mk/roll20_vs_foundry/
+                                - heading "List item post - Roll20 vs Foundry" [level=3] [ref=f98e2391]: Roll20 vs Foundry
+                            - generic [ref=f98e2393]:
+                              - generic [ref=f98e2394]: "20"
+                              - text: upvotes ·
+                              - generic [ref=f98e2395]: "76"
+                              - text: comments
+                          - separator [ref=f98e2396]
+                      - listitem [ref=f98e2397]:
+                        - generic [ref=f98e2398]:
+                          - generic [ref=f98e2399]:
+                            - link "Qual sua opinião das diferentes mesas virtuais (Roll20, FG, Foundry, etc)?" [ref=f98e2400] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/rpg_brasil/comments/wszxkj/qual_sua_opinião_das_diferentes_mesas_virtuais/
+                            - generic [ref=f98e2403]:
+                              - generic [ref=f98e2406]:
+                                - link "r/rpg_brasil" [ref=f98e2407] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/rpg_brasil/
+                                - generic [aria-hidden] [ref=f98e2412]: •
+                                - time [ref=f98e2414]: 4y ago
+                              - link [ref=f98e2416] [cursor=pointer]:
+                                - /url: /r/rpg_brasil/comments/wszxkj/qual_sua_opinião_das_diferentes_mesas_virtuais/
+                                - heading "List item post - Qual sua opinião das diferentes mesas virtuais (Roll20, FG,..." [level=3] [ref=f98e2419]: Qual sua opinião das diferentes mesas virtuais (Roll20, FG, Foundry, etc)?
+                            - generic [ref=f98e2421]:
+                              - generic [ref=f98e2422]: "14"
+                              - text: upvotes ·
+                              - generic [ref=f98e2423]: "17"
+                              - text: comments
+                          - separator [ref=f98e2424]
+                      - listitem [ref=f98e2425]:
+                        - generic [ref=f98e2426]:
+                          - generic [ref=f98e2427]:
+                            - link "The d20 makes a bad play experience" [ref=f98e2428] [cursor=pointer]:
+                              - /url: https://www.reddit.com/r/RPGdesign/comments/1qe8gt7/the_d20_makes_a_bad_play_experience/
+                            - generic [ref=f98e2431]:
+                              - generic [ref=f98e2434]:
+                                - link "r/RPGdesign" [ref=f98e2435] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/RPGdesign/
+                                - generic [aria-hidden] [ref=f98e2440]: •
+                                - time [ref=f98e2442]: 9mo ago
+                              - link [ref=f98e2444] [cursor=pointer]:
+                                - /url: /r/RPGdesign/comments/1qe8gt7/the_d20_makes_a_bad_play_experience/
+                                - heading "List item post - The d20 makes a bad play experience" [level=3] [ref=f98e2447]: The d20 makes a bad play experience
+                            - generic [ref=f98e2449]:
+                              - generic [ref=f98e2450]: "74"
+                              - text: upvotes ·
+                              - generic [ref=f98e2451]: "172"
+                              - text: comments
+                          - separator [ref=f98e2452]
+                      - listitem [ref=f98e2453]:
+                        - generic [ref=f98e2455]:
+                          - link "Roll20, an Online Virtual Tabletop for RPGs" [ref=f98e2456] [cursor=pointer]:
+                            - /url: https://www.reddit.com/r/DnD/comments/202s68/roll20_an_online_virtual_tabletop_for_rpgs/
+                          - generic [ref=f98e2458]:
+                            - generic [ref=f98e2459]:
+                              - generic [ref=f98e2462]:
+                                - link "r/DnD" [ref=f98e2463] [cursor=pointer]:
+                                  - /url: https://www.reddit.com/r/DnD/
+                                - generic [aria-hidden] [ref=f98e2468]: •
+                                - time [ref=f98e2470]: 13y ago
+                              - link [ref=f98e2472] [cursor=pointer]:
+                                - /url: /r/DnD/comments/202s68/roll20_an_online_virtual_tabletop_for_rpgs/
+                                - heading "List item post - Roll20, an Online Virtual Tabletop for RPGs" [level=3] [ref=f98e2475]: Roll20, an Online Virtual Tabletop for RPGs
+                            - link "r/DnD - Roll20, an Online Virtual Tabletop for RPGs" [ref=f98e2478] [cursor=pointer]:
+                              - /url: https://app.roll20.net/home/
+                              - img "r/DnD - Roll20, an Online Virtual Tabletop for RPGs" [ref=f98e2479]
+                          - generic [ref=f98e2481]:
+                            - generic [ref=f98e2482]: "6"
+                            - text: comments
+                  - generic [ref=f98e2483]:
+                    - heading "View Post in" [level=2] [ref=f98e2485]
+                    - generic [ref=f98e2487]:
+                      - link "Русский" [ref=f98e2489] [cursor=pointer]:
+                        - /url: https://www.reddit.com/r/DnD/comments/vx9j95/opinion_roll20s_ui_could_be_a_lot_better/?tl=ru
+                      - group [ref=f98e2490]:
+                        - generic "See more" [ref=f98e2491] [cursor=pointer]
+                  - complementary "Community information" [ref=f98e2496]:
+                    - generic [ref=f98e2498]:
+                      - heading "Community Info Section" [level=1] [ref=f98e2499]
+                      - generic [ref=f98e2500]:
+                        - link "r/DnD" [ref=f98e2502] [cursor=pointer]:
+                          - /url: /r/DnD/
+                        - button "Join" [ref=f98e2507] [cursor=pointer]
+                      - generic [ref=f98e2508]:
+                        - generic [ref=f98e2509]: "DnD: Roll for Initiative!"
+                        - generic [ref=f98e2511]: A subreddit dedicated to the various iterations of Dungeons & Dragons, from its First Edition roots to its Billionth Edition future.
+                        - button "Show more" [ref=f98e2512] [cursor=pointer]
+                        - generic: Public
+                  - generic [ref=f98e2520]:
+                    - heading "Top Posts" [level=2] [ref=f98e2521]
+                    - list [ref=f98e2522]:
+                      - listitem [ref=f98e2523]:
+                        - 'link "Reddit reReddit: Top posts of July 12, 2022" [ref=f98e2524] [cursor=pointer]':
+                          - /url: https://www.reddit.com/posts/2022/july-12-1/global/
+                          - generic [ref=f98e2525]: Reddit
+                          - generic [ref=f98e2540]: "reReddit: Top posts of July 12, 2022"
+                          - separator [ref=f98e2541]
+                      - listitem [ref=f98e2542]:
+                        - 'link "Reddit reReddit: Top posts of July 2022" [ref=f98e2543] [cursor=pointer]':
+                          - /url: https://www.reddit.com/posts/2022/july/global/
+                          - generic [ref=f98e2544]: Reddit
+                          - generic [ref=f98e2559]: "reReddit: Top posts of July 2022"
+                          - separator [ref=f98e2560]
+                      - listitem [ref=f98e2561]:
+                        - 'link "Reddit reReddit: Top posts of 2022" [ref=f98e2562] [cursor=pointer]':
+                          - /url: https://www.reddit.com/posts/2022/global/
+                          - generic [ref=f98e2563]: Reddit
+                          - generic [ref=f98e2578]: "reReddit: Top posts of 2022"
+                          - separator [ref=f98e2579]
+              - list [ref=f98e2581]:
+                - listitem [ref=f98e2582]:
+                  - link "Home" [ref=f98e2584] [cursor=pointer]:
+                    - /url: /?feed=home
+                - listitem [ref=f98e2585]:
+                  - link "Popular" [ref=f98e2587] [cursor=pointer]:
+                    - /url: /r/popular/
+                - listitem [ref=f98e2588]:
+                  - link "News" [ref=f98e2590] [cursor=pointer]:
+                    - /url: /news/
+                - listitem [ref=f98e2591]:
+                  - link "Explore" [ref=f98e2593] [cursor=pointer]:
+                    - /url: /explore/
+                - listitem [ref=f98e2594]:
+                  - link "Best of Reddit" [ref=f98e2596] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/global/
+                - listitem [ref=f98e2597]:
+                  - link "Best of Reddit in Portuguese" [ref=f98e2599] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-pt-BR/
+                - listitem [ref=f98e2600]:
+                  - link "Best of Reddit in German" [ref=f98e2602] [cursor=pointer]:
+                    - /url: https://www.reddit.com/posts/2026/tl-de/
+                - listitem [ref=f98e2603]:
+                  - link "Reddit Rules" [ref=f98e2605] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/content-policy
+                - listitem [ref=f98e2606]:
+                  - link "Privacy Policy" [ref=f98e2608] [cursor=pointer]:
+                    - /url: https://www.reddit.com/policies/privacy-policy
+                - listitem [ref=f98e2609]:
+                  - link "User Agreement" [ref=f98e2611] [cursor=pointer]:
+                    - /url: https://www.redditinc.com/policies/user-agreement
+                - listitem [ref=f98e2612]:
+                  - link "Accessibility" [ref=f98e2614] [cursor=pointer]:
+                    - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+                - listitem [ref=f98e2615]:
+                  - link "Reddit, Inc. © 2026. All rights reserved." [ref=f98e2616] [cursor=pointer]:
+                    - /url: https://redditinc.com
+        - generic [ref=f98e2619]:
+          - paragraph [ref=f98e2620]: Join the most real place on the internet
+          - generic [ref=f98e2622]:
+            - generic [ref=f98e2625]:
+              - iframe [ref=f98e2630]:
+                - button "Continue with Google. Opens in new tab" [ref=f99e3] [cursor=pointer]:
+                  - generic [ref=f99e5]: Continue with Google
+              - generic [ref=f98e2632] [cursor=pointer]:
+                - generic [ref=f98e2633]: Continue with Apple
+                - button "Sign in with Apple" [ref=f98e2639]:
+                  - generic [ref=f98e2640]:
+                    - img:
+                      - generic:
+                        - img:
+                          - generic:  Sign in with Apple
+            - link "Continue with Phone Number" [ref=f98e2645] [cursor=pointer]:
+              - /url: https://www.reddit.com/login/
+            - link "Continue with Email" [ref=f98e2654] [cursor=pointer]:
+              - /url: https://www.reddit.com/register/
+          - paragraph [ref=f98e2661]:
+            - text: By continuing, you agree to our
+            - link "User Agreement" [ref=f98e2662] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/user-agreement
+            - text: and acknowledge that you understand the
+            - link "Privacy Policy" [ref=f98e2663] [cursor=pointer]:
+              - /url: https://www.redditinc.com/policies/privacy-policy
+            - text: .
