@@ -1,17 +1,35 @@
 import { expect, test, type Page } from '@playwright/test'
 
-// 200x150 solid PNG; with the default 50px grid the scene is 4 cols x 3 rows.
+// 200x150 solid PNG; new scenes get 20 cols, so square cells give 15 rows.
 const MAP_PNG = Buffer.from(
   'iVBORw0KGgoAAAANSUhEUgAAAMgAAACWCAIAAAAUvlBOAAABIUlEQVR42u3SMQ0AAAzDsEIrlPFHMQI7d1oygijpFN5FAoyFsTAWGAtjYSwwFsbCWGAsjIWxwFgYC2OBsTAWxgJjYSyMBcbCWBgLjIWxMBYYC2NhLDAWxsJYYCyMhbHAWBgLY4GxMBbGAmNhLIwFxsJYGAuMhbEwFhgLY2EsMBbGwlhgLIyFscBYGAtjgbEwFsYCY2EsjAXGwlgYC4yFsTAWGAtjYSwwFsbCWGAsjIWxwFgYC2NhLBUwFsbCWGAsjIWxwFgYC2OBsTAWxgJjYSyMBcbCWBgLjIWxMBYYC2NhLDAWxsJYYCyMhbHAWBgLY4GxMBbGAmNhLIwFxsJYGAuMhbEwFhgLY2EsMBbGwlhgLIyFscBYGAtjgbEwFsaC2wK9d4/7bDeK+AAAAABJRU5ErkJggg==',
   'base64',
 )
 
 const tid = (page: Page, id: string) => page.getByTestId(id)
+const MAP_W = 200
+const MAP_H = 150
+
+// Page coords of a cell's centre: the taller of map and grid is contain-fit and centred; the grid spans the map width.
+async function cellPoint(page: Page, col: number, row: number) {
+  const [cols, rows] = (await tid(page, 'map-stage').getAttribute('data-grid'))!.split('x').map(Number)
+  const gridH = Math.max(MAP_H, (rows * MAP_W) / cols)
+  const box = (await page.locator('[data-testid="map-stage"] .konvajs-content').boundingBox())!
+  const s = Math.min(box.width / MAP_W, box.height / gridH)
+  const k = (MAP_W * s) / cols
+  return { x: box.x + (box.width - MAP_W * s) / 2 + (col + 0.5) * k, y: box.y + (box.height - gridH * s) / 2 + (row + 0.5) * k }
+}
+const noPageScroll = (page: Page) =>
+  page.evaluate(() => {
+    const d = document.documentElement
+    return d.scrollHeight <= innerHeight && d.scrollWidth <= innerWidth
+  })
 
 // shortcut: the server has one global in-memory room, so this needs a fresh server per run (no --repeat-each, no retries); add a reset hook if more specs appear.
 test('v0: DM + player full flow', async ({ browser }) => {
-  const dmCtx = await browser.newContext()
-  const plCtx = await browser.newContext()
+  const viewport = { width: 1440, height: 900 }
+  const dmCtx = await browser.newContext({ viewport })
+  const plCtx = await browser.newContext({ viewport })
   const dm = await dmCtx.newPage()
   const pl = await plCtx.newPage()
   await dm.goto('/')
@@ -126,15 +144,65 @@ test('v0: DM + player full flow', async ({ browser }) => {
   const sceneId = await tid(dm, 'map-stage').getAttribute('data-scene-id')
   await expect(tid(pl, 'map-stage')).toHaveAttribute('data-scene-id', sceneId!)
 
-  // 6. Player moves their token; DM sees the new cell.
+  // Table fills the viewport: no page scrollbars on desktop, map pane never scrolls.
+  await expect(tid(dm, 'map-stage')).toHaveAttribute('data-grid', '20x15')
+  expect(await noPageScroll(dm)).toBe(true)
+  expect(await noPageScroll(pl)).toBe(true)
+
+  // 6. Player taps a cell on the canvas; DM sees the new cell. The token row form still works too.
   const pos = pl.locator('[data-testid^="token-pos-"]')
   await expect(pos).toHaveCount(1)
   const tokenId = (await pos.getAttribute('data-testid'))!.replace('token-pos-', '')
   await expect(pos).toHaveText('(0, 0)')
-  await pl.getByLabel('Ayla col').fill('2')
-  await pl.getByLabel('Ayla row').fill('1')
-  await tid(pl, `token-move-${tokenId}`).click()
+  let p = await cellPoint(pl, 2, 1)
+  await pl.mouse.click(p.x, p.y)
   await expect(tid(dm, `token-pos-${tokenId}`)).toHaveText('(2, 1)')
+  await pl.getByLabel('Ayla col').fill('3')
+  await pl.getByLabel('Ayla row').fill('2')
+  await tid(pl, `token-move-${tokenId}`).click()
+  await expect(tid(dm, `token-pos-${tokenId}`)).toHaveText('(3, 2)')
+
+  // 6b. DM taps the token, then a cell.
+  await dm.evaluate(() => new Promise(requestAnimationFrame)) // Konva redraws its hit canvas on the next frame
+  p = await cellPoint(dm, 3, 2)
+  await dm.mouse.click(p.x, p.y)
+  await expect(tid(dm, 'map-stage')).toHaveAttribute('data-selected-token', tokenId)
+  p = await cellPoint(dm, 2, 1)
+  await dm.mouse.click(p.x, p.y)
+  await expect(tid(pl, `token-pos-${tokenId}`)).toHaveText('(2, 1)')
+
+  // 6c. DM changes the column count with +/-; rows follow the image aspect; save reaches the player.
+  await expect(tid(dm, 'grid-cols')).toHaveText('20')
+  await expect(tid(dm, 'grid-rows')).toHaveText('15')
+  await tid(dm, 'grid-cols-dec').click()
+  await tid(dm, 'grid-cols-dec').click()
+  await expect(tid(dm, 'grid-cols')).toHaveText('18')
+  await expect(tid(dm, 'grid-rows')).toHaveText('14') // round(150 * 18 / 200) = 13.5 -> 14
+  await expect(tid(dm, 'map-stage')).toHaveAttribute('data-grid', '18x14') // live preview
+  await expect(tid(pl, 'map-stage')).toHaveAttribute('data-grid', '20x15')
+  await tid(dm, 'scene-save').click()
+  await expect(tid(pl, 'map-stage')).toHaveAttribute('data-grid', '18x14')
+  await tid(dm, 'grid-cols-inc').click()
+  await tid(dm, 'grid-cols-inc').click()
+  await expect(tid(dm, 'grid-rows')).toHaveText('15')
+  await expect(tid(dm, 'grid-cols-inc')).toBeEnabled() // 21 cols -> 10px cells, still valid
+  await tid(dm, 'scene-save').click()
+  await expect(tid(pl, 'map-stage')).toHaveAttribute('data-grid', '20x15')
+
+  // 6d. Splitter: drag left widens the map; keyboard steps 2%.
+  const canvas = dm.locator('[data-testid="map-stage"] .konvajs-content')
+  const before = (await canvas.boundingBox())!.width
+  const sp = (await tid(dm, 'splitter').boundingBox())!
+  await dm.mouse.move(sp.x + sp.width / 2, sp.y + sp.height / 2)
+  await dm.mouse.down()
+  await dm.mouse.move(viewport.width * 0.6, sp.y + sp.height / 2, { steps: 5 })
+  await dm.mouse.up()
+  await expect.poll(async () => (await canvas.boundingBox())!.width).toBeLessThan(before - 50)
+  const now = Number(await tid(dm, 'splitter').getAttribute('aria-valuenow'))
+  await tid(dm, 'splitter').focus()
+  await dm.keyboard.press('ArrowRight')
+  await expect(tid(dm, 'splitter')).toHaveAttribute('aria-valuenow', String(now + 2))
+  expect(await noPageScroll(dm)).toBe(true)
 
   // 7. Player rolls 1d20+3; DM's log shows it.
   await tid(pl, 'dice-input').fill('1d20+3')
@@ -149,20 +217,42 @@ test('v0: DM + player full flow', async ({ browser }) => {
   // 8. DM drags a fog rect over column 3 (rows 0-2); player's view gets it.
   await tid(dm, 'fog-toggle').click()
   await expect(tid(dm, 'fog-toggle')).toHaveAttribute('aria-pressed', 'true')
-  const content = dm.locator('[data-testid="map-stage"] .konvajs-content')
-  await content.scrollIntoViewIfNeeded() // mouse events only land inside the viewport
-  const box = (await content.boundingBox())!
-  await dm.mouse.move(box.x + 175, box.y + 25)
+  const from = await cellPoint(dm, 3, 0)
+  const to = await cellPoint(dm, 3, 2)
+  await dm.mouse.move(from.x, from.y)
   await dm.mouse.down()
-  await dm.mouse.move(box.x + 175, box.y + 75, { steps: 3 })
-  await dm.mouse.move(box.x + 175, box.y + 125, { steps: 3 })
+  await dm.mouse.move(to.x, (from.y + to.y) / 2, { steps: 3 })
+  await dm.mouse.move(to.x, to.y, { steps: 3 })
   await dm.mouse.up()
   await expect(tid(dm, 'map-stage')).toHaveAttribute('data-fog-count', '1')
   await expect(tid(dm, 'dm-panel')).toContainText('3,0 1×3')
   await expect(tid(pl, 'map-stage')).toHaveAttribute('data-fog-count', '1')
 
+  // Phone: stacked, the map pane still never scrolls and the page has no sideways scroll.
+  await pl.setViewportSize({ width: 390, height: 844 })
+  await expect
+    .poll(() =>
+      pl.evaluate(() => {
+        const st = document.querySelector('[data-testid="map-stage"]')!
+        return st.scrollHeight <= st.clientHeight && st.scrollWidth <= st.clientWidth && document.documentElement.scrollWidth <= innerWidth
+      }),
+    )
+    .toBe(true)
+
   await expect(tid(dm, 'error-banner')).toHaveCount(0)
   await expect(tid(pl, 'error-banner')).toHaveCount(0)
-  await dmCtx.close()
+
+  // 9. Touch phone: the same player (same clientId) taps a cell with a finger; the token moves.
+  const touchCtx = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, storageState: await plCtx.storageState() })
   await plCtx.close()
+  const ph = await touchCtx.newPage()
+  await ph.goto('/')
+  await expect(tid(ph, 'map-stage')).toHaveAttribute('data-scene-id', sceneId!)
+  await expect(tid(ph, `token-pos-${tokenId}`)).toHaveText('(2, 1)')
+  p = await cellPoint(ph, 5, 4)
+  await ph.touchscreen.tap(p.x, p.y)
+  await expect(tid(dm, `token-pos-${tokenId}`)).toHaveText('(5, 4)')
+  await expect(tid(ph, `token-pos-${tokenId}`)).toHaveText('(5, 4)')
+  await dmCtx.close()
+  await touchCtx.close()
 })

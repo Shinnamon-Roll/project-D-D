@@ -3,10 +3,18 @@ import type { Grid, Scene } from '../protocol'
 import { useStore } from '../store'
 import { send, upload } from '../ws'
 import GrantPanel from './GrantPanel'
+import { useImg } from './MapStage'
 import RulesetEditor from '../screens/RulesetEditor'
 
 const validGrid = (g: Grid) =>
   g.cellSize >= 10 && g.cellSize <= 400 && g.cols >= 1 && g.cols <= 200 && g.rows >= 1 && g.rows <= 200
+
+// Square cells over the whole image: cell = w/cols image px, rows follow the aspect, no offsets.
+// cellSize is an int on the server (10-400 check), so it is the rounded cell; rows use the exact one.
+function gridFor(cols: number, w: number, h: number): Grid {
+  return { cellSize: Math.round(w / cols), offsetX: 0, offsetY: 0, cols, rows: Math.max(1, Math.round((h * cols) / w)) }
+}
+const colsOk = (c: number, w: number, h: number) => c >= 4 && c <= 60 && validGrid(gridFor(c, w, h))
 
 function imageSize(url: string): Promise<{ w: number; h: number }> {
   return new Promise((res) => {
@@ -30,16 +38,23 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
   const [newName, setNewName] = useState('')
   const [npcName, setNpcName] = useState('')
   const [npcUrl, setNpcUrl] = useState('')
+  const [err, setErr] = useState('')
 
   async function addScene(file: File) {
     const url = await upload(file)
     if (!url) return
     const { w, h } = await imageSize(url)
-    const clamp = (n: number) => Math.min(200, Math.max(1, Math.round(n / 50)))
+    // New scenes start at 20 columns; else the nearest valid count below, then above.
+    const cols = [...Array(17)].map((_, i) => 20 - i).concat([...Array(40)].map((_, i) => 21 + i)).find((c) => colsOk(c, w, h))
+    if (cols === undefined) {
+      setErr(`แมพสัดส่วนนี้ตั้งกริดไม่ได้ (${w}×${h}) / Can't fit a grid to this map's shape`)
+      return
+    }
+    setErr('')
     send('scene.add', {
       name: newName.trim() || file.name.replace(/\.[^.]+$/, '').slice(0, 32),
       imageUrl: url,
-      grid: { cellSize: 50, offsetX: 0, offsetY: 0, cols: clamp(w), rows: clamp(h) },
+      grid: gridFor(cols, w, h),
     })
     setNewName('')
   }
@@ -91,6 +106,11 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
           />
         </label>
       </div>
+      {err && (
+        <p className="error" role="alert" data-testid="scene-add-error">
+          {err}
+        </p>
+      )}
       {scene && <SceneEditor key={scene.id + JSON.stringify(scene.grid) + scene.name} scene={scene} onPreview={onPreview} />}
 
       {scene && (
@@ -158,32 +178,35 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
 function SceneEditor({ scene, onPreview }: { scene: Scene; onPreview: (g: Grid | null) => void }) {
   const [name, setName] = useState(scene.name)
   const [g, setG] = useState(scene.grid)
+  const img = useImg(scene.imageUrl)
+  const w = img?.width || g.cols * g.cellSize
+  const h = img?.height || g.rows * g.cellSize
   useEffect(() => () => onPreview(null), [onPreview]) // drop the preview when this editor goes away
-  const change = (k: keyof Grid, v: string) => {
-    const next = { ...g, [k]: Number(v) }
+  const step = (d: number) => {
+    const next = gridFor(g.cols + d, w, h)
     setG(next)
-    if (validGrid(next)) onPreview(next)
+    onPreview(next)
   }
-  const fields: [keyof Grid, string][] = [
-    ['cellSize', 'ขนาดช่อง / Cell px'],
-    ['offsetX', 'Offset X'],
-    ['offsetY', 'Offset Y'],
-    ['cols', 'คอลัมน์ / Cols'],
-    ['rows', 'แถว / Rows'],
-  ]
   return (
     <div className="scene-editor">
       <label>
         ชื่อฉาก / Scene name
         <input data-testid="scene-edit-name" value={name} maxLength={32} onChange={(e) => setName(e.target.value)} />
       </label>
-      <div className="stats-grid">
-        {fields.map(([k, label]) => (
-          <label key={k}>
-            {label}
-            <input type="number" data-testid={`grid-${k}`} value={g[k]} onChange={(e) => change(k, e.target.value)} />
-          </label>
-        ))}
+      <div className="grid-cols" role="group" aria-label="กริด / Grid">
+        <span className="grid-label">กริด / Grid</span>
+        <button aria-label="ลดคอลัมน์ / Fewer columns" data-testid="grid-cols-dec" disabled={!img || !colsOk(g.cols - 1, w, h)} onClick={() => step(-1)}>
+          −
+        </button>
+        <output data-testid="grid-cols" aria-live="polite">
+          {g.cols}
+        </output>
+        <button aria-label="เพิ่มคอลัมน์ / More columns" data-testid="grid-cols-inc" disabled={!img || !colsOk(g.cols + 1, w, h)} onClick={() => step(1)}>
+          +
+        </button>
+        <span className="muted">
+          คอลัมน์ × <output data-testid="grid-rows">{g.rows}</output> แถว / cols × rows
+        </span>
       </div>
       <button
         data-testid="scene-save"

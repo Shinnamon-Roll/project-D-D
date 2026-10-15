@@ -426,3 +426,51 @@ func TestSummary(t *testing.T) {
 		t.Fatalf("rolls %d: count must not stop at the dice log cap", s.Rolls)
 	}
 }
+
+func TestSceneUpdateShrinkClampsAndClips(t *testing.T) {
+	type pos struct{ col, row int }
+	type rect struct{ col, row, w, h int }
+	cases := []struct {
+		name       string
+		cols, rows int
+		token      pos    // start 9,4 on the 10x5 grid
+		fog        []rect // after update; start rects below
+	}{
+		{"no change", 10, 5, pos{9, 4}, []rect{{0, 0, 10, 5}, {8, 3, 2, 2}, {9, 0, 1, 1}}},
+		{"grow", 20, 20, pos{9, 4}, []rect{{0, 0, 10, 5}, {8, 3, 2, 2}, {9, 0, 1, 1}}},
+		{"shrink cols", 9, 5, pos{8, 4}, []rect{{0, 0, 9, 5}, {8, 3, 1, 2}}},
+		{"shrink rows", 10, 4, pos{9, 3}, []rect{{0, 0, 10, 4}, {8, 3, 2, 1}, {9, 0, 1, 1}}},
+		{"shrink both", 3, 2, pos{2, 1}, []rect{{0, 0, 3, 2}}},
+		{"to 1x1", 1, 1, pos{0, 0}, []rect{{0, 0, 1, 1}}},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			r, sc := playing(t)
+			ok(t, r, "dm", "token.move", m{"tokenId": r.State().Tokens[0].ID, "col": 9, "row": 4})
+			ok(t, r, "dm", "token.addNpc", m{"sceneId": sc, "name": "Gob"}) // at 0,0: stays
+			for _, f := range []rect{{0, 0, 10, 5}, {8, 3, 2, 2}, {9, 0, 1, 1}} {
+				ok(t, r, "dm", "fog.add", m{"sceneId": sc, "col": f.col, "row": f.row, "w": f.w, "h": f.h})
+			}
+			ok(t, r, "dm", "scene.update", m{"sceneId": sc, "name": "Beach", "grid": m{"cellSize": 50, "cols": tc.cols, "rows": tc.rows}})
+			st := r.State()
+			if tk := st.Tokens[0]; tk.Col != tc.token.col || tk.Row != tc.token.row {
+				t.Errorf("token %d,%d want %+v", tk.Col, tk.Row, tc.token)
+			}
+			if npc := st.Tokens[1]; npc.Col != 0 || npc.Row != 0 {
+				t.Errorf("npc moved to %d,%d", npc.Col, npc.Row)
+			}
+			var got []rect
+			for _, f := range st.Scenes[0].Fog {
+				got = append(got, rect{f.Col, f.Row, f.W, f.H})
+			}
+			if len(got) != len(tc.fog) {
+				t.Fatalf("fog %v want %v", got, tc.fog)
+			}
+			for i := range got {
+				if got[i] != tc.fog[i] {
+					t.Fatalf("fog %v want %v", got, tc.fog)
+				}
+			}
+		})
+	}
+}

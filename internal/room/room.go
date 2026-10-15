@@ -765,6 +765,15 @@ func (r *Room) sceneUpsert(s *Seat, typ string, payload json.RawMessage) error {
 			t.Col, t.Row = min(t.Col, p.Grid.Cols-1), min(t.Row, p.Grid.Rows-1)
 		}
 	}
+	// Clip fog to the grid; drop rects left fully outside. New slice: State() shares the old one.
+	fog := make([]Fog, 0, len(sc.Fog))
+	for _, f := range sc.Fog {
+		if f.Col < p.Grid.Cols && f.Row < p.Grid.Rows {
+			f.W, f.H = min(f.W, p.Grid.Cols-f.Col), min(f.H, p.Grid.Rows-f.Row)
+			fog = append(fog, f)
+		}
+	}
+	sc.Fog = fog
 	return nil
 }
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { Circle, Group, Image as KImage, Layer, Line, Rect, Stage, Text } from 'react-konva'
 import type Konva from 'konva'
 import type { Grid, Scene, Token } from '../protocol'
@@ -28,6 +28,8 @@ interface Props {
 }
 
 type Cell = { col: number; row: number }
+// Where the grid sits on the stage: top-left (x, y), drawn cell size k, drawn width w and height h of image-or-grid, whichever is taller.
+type Fit = { x: number; y: number; k: number; w: number; h: number }
 
 // Konva can't read CSS vars; mirrors the tokens in docs/design/visual-theme.md.
 const C = {
@@ -46,18 +48,32 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
   const [selected, setSelected] = useState('')
   const [drag, setDrag] = useState<{ a: Cell; b: Cell } | null>(null)
   const dragging = useRef(false)
-  const { cellSize: cs, offsetX: ox, offsetY: oy, cols, rows } = grid
-  const width = Math.max(map?.width ?? 0, ox + cols * cs)
-  const height = Math.max(map?.height ?? 0, oy + rows * cs)
+  const box = useRef<HTMLDivElement>(null)
+  const [size, setSize] = useState({ w: 0, h: 0 })
+  useEffect(() => {
+    const ro = new ResizeObserver(([e]) => setSize({ w: Math.floor(e.contentRect.width), h: Math.floor(e.contentRect.height) }))
+    ro.observe(box.current!)
+    return () => ro.disconnect()
+  }, [])
+
+  const { cols, rows } = grid
+  // Grid spans the image width (cols) at square cells; rounded rows may run past the image bottom,
+  // so contain-fit the taller of image and grid (image drawn at the top) to keep every row on screen.
+  const imgW = map?.width || cols * grid.cellSize
+  const imgH = map?.height || rows * grid.cellSize
+  const gridH = Math.max(imgH, (rows * imgW) / cols)
+  const s = Math.min(size.w / imgW, size.h / gridH) || 0
+  const f: Fit = { w: imgW * s, h: gridH * s, x: (size.w - imgW * s) / 2, y: (size.h - gridH * s) / 2, k: (imgW * s) / cols }
+  const clip = { clipX: f.x, clipY: f.y, clipWidth: f.w, clipHeight: f.h }
 
   const cellAt = (e: Konva.KonvaEventObject<PointerEvent>): Cell | null => {
     const p = e.target.getStage()?.getPointerPosition()
-    if (!p) return null
-    const col = Math.floor((p.x - ox) / cs)
-    const row = Math.floor((p.y - oy) / cs)
+    if (!p || !f.k) return null
+    const col = Math.floor((p.x - f.x) / f.k)
+    const row = Math.floor((p.y - f.y) / f.k)
     return col >= 0 && col < cols && row >= 0 && row < rows ? { col, row } : null
   }
-  const canMove = (t: Token) => isDm || (t.characterId !== '' && t.characterId === myCharacterId)
+  const mine = tokens.find((t) => t.characterId !== '' && t.characterId === myCharacterId)
 
   const onDown = (e: Konva.KonvaEventObject<PointerEvent>) => {
     if (!fogMode) return
@@ -85,35 +101,41 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
     })
     setDrag(null)
   }
-  const onClick = (e: Konva.KonvaEventObject<PointerEvent>) => {
-    if (fogMode || !selected) return
+  // Tap a cell: the DM moves the selected token there; a player moves their own token.
+  const onTap = (e: Konva.KonvaEventObject<PointerEvent>) => {
+    if (fogMode) return
+    const id = isDm ? selected : mine?.id
     const c = cellAt(e)
-    if (c) send('token.move', { tokenId: selected, ...c })
+    const t = tokens.find((t) => t.id === id)
+    if (t && c && (c.col !== t.col || c.row !== t.row)) send('token.move', { tokenId: t.id, ...c })
     setSelected('')
   }
 
   const lines = []
-  for (let c = 0; c <= cols; c++) lines.push([ox + c * cs, oy, ox + c * cs, oy + rows * cs])
-  for (let r = 0; r <= rows; r++) lines.push([ox, oy + r * cs, ox + cols * cs, oy + r * cs])
+  for (let c = 0; c <= cols; c++) lines.push([f.x + c * f.k, f.y, f.x + c * f.k, f.y + rows * f.k])
+  for (let r = 0; r <= rows; r++) lines.push([f.x, f.y + r * f.k, f.x + f.w, f.y + r * f.k])
   const dragRect = drag && {
-    x: ox + Math.min(drag.a.col, drag.b.col) * cs,
-    y: oy + Math.min(drag.a.row, drag.b.row) * cs,
-    width: (Math.abs(drag.a.col - drag.b.col) + 1) * cs,
-    height: (Math.abs(drag.a.row - drag.b.row) + 1) * cs,
+    x: f.x + Math.min(drag.a.col, drag.b.col) * f.k,
+    y: f.y + Math.min(drag.a.row, drag.b.row) * f.k,
+    width: (Math.abs(drag.a.col - drag.b.col) + 1) * f.k,
+    height: (Math.abs(drag.a.row - drag.b.row) + 1) * f.k,
   }
 
   return (
     <div
+      ref={box}
       className={`stage ${fogMode ? 'fog-mode' : ''}`}
       data-testid="map-stage"
       data-scene-id={scene.id}
       data-fog-count={scene.fog.length}
+      data-grid={`${cols}x${rows}`}
       data-selected-token={selected}
+      style={{ '--map-aspect': imgW / gridH } as CSSProperties}
       aria-label={`แมพ / Map: ${scene.name}`}
     >
-      <Stage width={width} height={height} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerClick={onClick}>
-        <Layer listening={false}>
-          {map && <KImage image={map} />}
+      <Stage width={size.w} height={size.h} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerClick={onTap}>
+        <Layer listening={false} {...clip}>
+          {map && <KImage image={map} x={f.x} y={f.y} width={f.w} height={imgH * s} />}
           {lines.map((p, i) => (
             <Line key={i} points={p} stroke={C.grid} strokeWidth={1} />
           ))}
@@ -123,20 +145,21 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
             <TokenNode
               key={t.id}
               t={t}
-              grid={grid}
+              f={f}
               selected={t.id === selected}
-              onSelect={canMove(t) ? () => setSelected(t.id === selected ? '' : t.id) : undefined}
+              // Only the DM selects; a player's tap on any token falls through to the cell under it.
+              onSelect={isDm ? () => setSelected(t.id === selected ? '' : t.id) : undefined}
             />
           ))}
         </Layer>
-        <Layer listening={isDm && fogMode}>
-          {scene.fog.map((f) => (
+        <Layer listening={isDm && fogMode} {...clip}>
+          {scene.fog.map((r) => (
             <Rect
-              key={f.id}
-              x={ox + f.col * cs}
-              y={oy + f.row * cs}
-              width={f.w * cs}
-              height={f.h * cs}
+              key={r.id}
+              x={f.x + r.col * f.k}
+              y={f.y + r.row * f.k}
+              width={r.w * f.k}
+              height={r.h * f.k}
               fill={C.fog}
               opacity={isDm ? 0.5 : 1}
               stroke={isDm ? C.oxblood : undefined}
@@ -144,7 +167,7 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
               onPointerDown={(e) => (e.cancelBubble = true)}
               onPointerClick={(e) => {
                 e.cancelBubble = true
-                send('fog.remove', { sceneId: scene.id, fogId: f.id })
+                send('fog.remove', { sceneId: scene.id, fogId: r.id })
               }}
             />
           ))}
@@ -155,14 +178,20 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
   )
 }
 
-function TokenNode({ t, grid, selected, onSelect }: { t: Token; grid: Grid; selected: boolean; onSelect?: () => void }) {
+function TokenNode({ t, f, selected, onSelect }: { t: Token; f: Fit; selected: boolean; onSelect?: () => void }) {
   const img = useImg(t.imageUrl)
-  const cs = grid.cellSize
-  const r = cs * 0.42
+  const k = f.k
+  const r = k * 0.42
+  const label = Math.min(14, k * 0.3)
+  // Keep the name box inside the image so edge tokens' names are not cut by the canvas edge.
+  const left = -(t.col + 0.5) * k
+  const right = f.w + left - 3 * k
+  const lx = Math.min(Math.max(-1.5 * k, left), right)
+  const align = lx > -1.5 * k ? 'left' : lx < -1.5 * k ? 'right' : 'center'
   return (
     <Group
-      x={grid.offsetX + t.col * cs + cs / 2}
-      y={grid.offsetY + t.row * cs + cs / 2}
+      x={f.x + t.col * k + k / 2}
+      y={f.y + t.row * k + k / 2}
       onPointerClick={
         onSelect &&
         ((e) => {
@@ -175,7 +204,7 @@ function TokenNode({ t, grid, selected, onSelect }: { t: Token; grid: Grid; sele
         radius={r}
         fill={t.characterId ? C.oxblood : C.iron}
         stroke={selected ? C.gold : C.parchment}
-        strokeWidth={selected ? 4 : 2}
+        strokeWidth={selected ? Math.max(2, k * 0.08) : Math.max(1, k * 0.04)}
         shadowColor={selected ? C.gold : '#000'}
         shadowBlur={selected ? 12 : 4}
         shadowOpacity={0.8}
@@ -187,7 +216,10 @@ function TokenNode({ t, grid, selected, onSelect }: { t: Token; grid: Grid; sele
       ) : (
         <Text text={t.name.slice(0, 1).toUpperCase()} x={-r} y={-r} width={r * 2} height={r * 2} align="center" verticalAlign="middle" fontSize={r} fontFamily={C.font} fill={C.parchment} />
       )}
-      <Text text={t.name} x={-cs} y={r + 2} width={cs * 2} align="center" fontSize={12} fontFamily={C.font} fill={C.parchment} shadowColor="#000" shadowBlur={3} shadowOpacity={1} />
+      {/* name hides when cells are too small to read it */}
+      {label >= 8 && (
+        <Text text={t.name} x={lx} y={r + 2} width={k * 3} align={align} fontSize={label} fontFamily={C.font} fill={C.parchment} shadowColor="#000" shadowBlur={3} shadowOpacity={1} listening={false} wrap="none" ellipsis />
+      )}
     </Group>
   )
 }
