@@ -15,4 +15,4 @@
 
 ชื่อไฟล์บทสนทนา: `conversations/YYYY-MM-DD-<หัวข้อ>.md`
 
-ล่าสุด: spec [`features/seat-qr.md`](features/seat-qr.md) · [`conversations/2026-10-16-seat-qr.md`](conversations/2026-10-16-seat-qr.md) · ธีม [`design/visual-theme.md`](design/visual-theme.md)
+ล่าสุด: [`conversations/2026-10-16-tui-dashboard.md`](conversations/2026-10-16-tui-dashboard.md) · [`conversations/2026-10-16-map-fit.md`](conversations/2026-10-16-map-fit.md) · spec [`features/seat-qr.md`](features/seat-qr.md) · [`features/map-fit.md`](features/map-fit.md) · ธีม [`design/visual-theme.md`](design/visual-theme.md)
