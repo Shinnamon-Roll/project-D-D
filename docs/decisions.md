@@ -30,3 +30,4 @@
 | 2026-10-16 | Starter Set: ใช้ตัวละครสำเร็จรูป **ตามชีทเดิม (กฎ 2014)** ไม่แปลง | [conv](conversations/2026-10-16-tech-stack.md) |
 | 2026-10-16 | **Tech stack: backend Go 1.26 (`net/http` + WebSocket), frontend React + Vite + TypeScript + react-konva + Zustand**; server-authoritative, state ใน memory, binary ไฟล์เดียว embed หน้าเว็บ | [conv](conversations/2026-10-16-tech-stack.md#ยืนยัน-คำต่อคำ) · [design](design/tech-stack.md) |
 | 2026-10-16 | Q12: **รันบนคอมตัวเอง (localhost)** ทดสอบคนเดียวก่อน; LAN/tunnel ค่อยตัดสินทีหลัง · Q13 ข้ามไปก่อน (กลับเข้าห้องด้วย clientId ใน browser) | conversation 2026-10-16 |
+| 2026-10-16 | `make run` = TUI launcher (Bubble Tea): หน้ายินดีต้อนรับ + ปุ่มเริ่ม + log สด ([design](design/tui.md)) | [conv](conversations/2026-10-16-tui-launcher.md) |

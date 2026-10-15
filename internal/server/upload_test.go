@@ -1,10 +1,11 @@
-package main
+package server
 
 import (
 	"bytes"
 	"encoding/json"
 	"image"
 	"image/png"
+	"log/slog"
 	"mime/multipart"
 	"net/http"
 	"net/http/httptest"
@@ -33,7 +34,7 @@ func multipartBody(field string, data []byte) (*bytes.Buffer, string) {
 func TestUpload(t *testing.T) {
 	dir := t.TempDir()
 	mux := http.NewServeMux()
-	mux.HandleFunc("POST /api/upload", handleUpload(dir, func(id string) bool { return id == "seated" }))
+	mux.HandleFunc("POST /api/upload", handleUpload(dir, func(id string) bool { return id == "seated" }, slog.New(slog.DiscardHandler)))
 	mux.HandleFunc("GET /uploads/{name}", handleUploads(dir))
 	mux.Handle("/", http.NotFoundHandler())
 

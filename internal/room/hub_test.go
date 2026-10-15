@@ -1,11 +1,14 @@
 package room
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
+	"log/slog"
 	"net/http"
 	"net/http/httptest"
 	"strings"
+	"sync"
 	"testing"
 	"time"
 
@@ -57,8 +60,27 @@ func (c *wsClient) next() (string, map[string]any, string) {
 
 func seatID(p map[string]any) string { return p["you"].(map[string]any)["seatId"].(string) }
 
+// lockedBuf lets the test read logs while connection goroutines still write them.
+type lockedBuf struct {
+	mu sync.Mutex
+	b  bytes.Buffer
+}
+
+func (l *lockedBuf) Write(p []byte) (int, error) {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	return l.b.Write(p)
+}
+
+func (l *lockedBuf) String() string {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	return l.b.String()
+}
+
 func TestHub(t *testing.T) {
-	h := NewHub()
+	var logs lockedBuf
+	h := NewHub(slog.New(slog.NewTextHandler(&logs, nil)))
 	srv := httptest.NewServer(http.HandlerFunc(h.ServeWS))
 	defer srv.Close()
 	const dmID, plID = "dm-secret-0001", "pl-secret-0002"
@@ -78,6 +100,9 @@ func TestHub(t *testing.T) {
 	}
 	pl.send("hello", m{"clientId": plID})
 	pl.next()
+	if n := h.Clients(); n != 2 {
+		t.Fatalf("Clients = %d, want 2", n)
+	}
 
 	dm.send("campaign.select", m{"campaignId": "starter-set", "name": "Dee"})
 	_, p, raw := dm.next()
@@ -120,5 +145,19 @@ func TestHub(t *testing.T) {
 	dm2.send("hello", m{"clientId": dmID})
 	if typ, _, _ := dm2.next(); typ != "error" {
 		t.Fatal("second hello accepted")
+	}
+
+	out := logs.String()
+	for _, want := range []string{
+		"ws connected\" seat=-",
+		"event campaign.select\" by=Dee status=lobby",
+		"event rejected\" type=seat.add by=- err=",
+	} {
+		if !strings.Contains(out, want) {
+			t.Errorf("logs missing %q:\n%s", want, out)
+		}
+	}
+	if strings.Contains(out, dmID) || strings.Contains(out, plID) {
+		t.Fatalf("clientId leaked into logs:\n%s", out)
 	}
 }

@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
 	"bytes"
@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"errors"
 	"io"
+	"log/slog"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -32,7 +33,7 @@ func jsonError(w http.ResponseWriter, code int, msg string) {
 }
 
 // handleUpload serves POST /api/upload: a seated client sends multipart field "file" (image, <= 10 MB).
-func handleUpload(dir string, seated func(clientID string) bool) http.HandlerFunc {
+func handleUpload(dir string, seated func(clientID string) bool, log *slog.Logger) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if id := r.Header.Get("X-Client-ID"); id == "" || !seated(id) {
 			jsonError(w, http.StatusUnauthorized, "not seated")
@@ -96,6 +97,7 @@ func handleUpload(dir string, seated func(clientID string) bool) http.HandlerFun
 			}
 			return
 		}
+		log.Info("upload saved", "size", written, "type", http.DetectContentType(head))
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]string{"url": "/uploads/" + name})
 	}

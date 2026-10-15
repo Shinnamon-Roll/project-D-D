@@ -3,6 +3,7 @@ package room
 import (
 	"context"
 	"encoding/json"
+	"log/slog"
 	"net/http"
 	"sync"
 	"time"
@@ -22,6 +23,7 @@ type Hub struct {
 	mu    sync.Mutex
 	room  *Room
 	conns map[*conn]struct{}
+	log   *slog.Logger
 }
 
 type conn struct {
@@ -34,8 +36,28 @@ type message struct {
 	Payload json.RawMessage `json:"payload"`
 }
 
-func NewHub() *Hub {
-	return &Hub{room: New(), conns: map[*conn]struct{}{}}
+// NewHub logs connections and events to log; it never logs clientIds (bearer secrets).
+func NewHub(log *slog.Logger) *Hub {
+	return &Hub{room: New(), conns: map[*conn]struct{}{}, log: log}
+}
+
+// Clients returns the number of open WebSocket connections.
+func (h *Hub) Clients() int {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+	return len(h.conns)
+}
+
+// seatNameLocked names the sender for logs: seat name, else seat id, else "-".
+func (h *Hub) seatNameLocked(clientID string) string {
+	s := h.room.seatOf(clientID)
+	switch {
+	case s == nil:
+		return "-"
+	case s.Name != "":
+		return s.Name
+	}
+	return s.ID
 }
 
 // Seated reports whether clientID holds a seat (used by the upload endpoint).
@@ -72,7 +94,14 @@ func (h *Hub) ServeWS(w http.ResponseWriter, r *http.Request) {
 	h.mu.Lock()
 	h.conns[c] = struct{}{}
 	h.mu.Unlock()
-	defer h.drop(c)
+	h.log.Info("ws connected", "seat", "-")
+	defer func() {
+		h.drop(c)
+		h.mu.Lock()
+		name := h.seatNameLocked(c.clientID)
+		h.mu.Unlock()
+		h.log.Info("ws disconnected", "seat", name)
+	}()
 
 	go func() {
 		for b := range c.send {
@@ -124,10 +153,21 @@ func (h *Hub) handle(c *conn, m message) {
 		h.errorLocked(c, "send hello first")
 		return
 	}
+	by, status := h.seatNameLocked(c.clientID), h.room.st.Status
 	if err := h.room.Apply(c.clientID, m.Type, m.Payload); err != nil {
+		typ := m.Type
+		if r := []rune(typ); len(r) > 40 { // unknown types are client input; keep log lines short (cut on runes, not bytes)
+			typ = string(r[:40])
+		}
+		h.log.Warn("event rejected", "type", typ, "by", by, "err", err.Error())
 		h.errorLocked(c, err.Error())
 		return
 	}
+	attrs := []any{"by", h.seatNameLocked(c.clientID)}
+	if h.room.st.Status != status {
+		attrs = append(attrs, "status", h.room.st.Status)
+	}
+	h.log.Info("event "+m.Type, attrs...)
 	room := h.roomJSONLocked()
 	for o := range h.conns {
 		if o.clientID != "" {
