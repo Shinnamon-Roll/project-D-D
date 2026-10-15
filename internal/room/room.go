@@ -7,11 +7,16 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"os"
+	"path/filepath"
+	"regexp"
 	"slices"
+	"strconv"
 	"strings"
 	"unicode/utf8"
 
 	"projectdnd/internal/notes"
+	"projectdnd/internal/npcs"
 	"projectdnd/internal/rules"
 )
 
@@ -77,10 +82,14 @@ type Token struct {
 	ID          string `json:"id"`
 	SceneID     string `json:"sceneId"`
 	CharacterID string `json:"characterId"` // "" = NPC
+	NpcID       string `json:"npcId"`       // pool NPC it was placed from; "" for characters
 	Name        string `json:"name"`
 	ImageURL    string `json:"imageUrl"`
 	Col         int    `json:"col"`
 	Row         int    `json:"row"`
+	Hidden      bool   `json:"hidden"`          // NPC only; players never receive hidden tokens
+	HP          *int   `json:"hp,omitempty"`    // NPC only; stripped from the players' view
+	HPMax       *int   `json:"hpMax,omitempty"` // NPC only; stripped from the players' view
 }
 
 // State is the RoomState sent to every client.
@@ -98,9 +107,11 @@ type State struct {
 
 // Room is not safe for concurrent use; the Hub serializes access.
 type Room struct {
-	st    State
-	seq   int
-	notes *notes.Store // DM-only; never part of State (players must not see it)
+	st      State
+	seq     int
+	notes   *notes.Store // DM-only; never part of State (players must not see it)
+	npcs    *npcs.Store  // DM-only pool; never part of State
+	uploads string       // directory of uploaded files; "" = no uploads exist
 }
 
 func New() *Room {
@@ -111,13 +122,27 @@ func New() *Room {
 		Characters: []Character{},
 		Scenes:     []Scene{},
 		Tokens:     []Token{},
-	}, notes: &notes.Store{}}
+	}, notes: &notes.Store{}, npcs: &npcs.Store{}}
 	r.st.Ruleset.Normalize()
 	return r
 }
 
-// State returns the current state for serialization. Callers must not mutate it.
+// State returns the full state (DM/co-DM view) for serialization. Callers must not mutate it.
 func (r *Room) State() State { return r.st }
+
+// PlayerState is the view for players and unseated connections: no hidden tokens, no NPC hp/hpMax/npcId.
+func (r *Room) PlayerState() State {
+	st := r.st
+	st.Tokens = make([]Token, 0, len(r.st.Tokens))
+	for _, t := range r.st.Tokens {
+		if t.Hidden {
+			continue
+		}
+		t.HP, t.HPMax, t.NpcID = nil, nil, ""
+		st.Tokens = append(st.Tokens, t)
+	}
+	return st
+}
 
 // SeatID returns the seat bound to clientID, or "".
 func (r *Room) SeatID(clientID string) string {
@@ -194,6 +219,22 @@ func cleanName(s string) (string, error) {
 func uploadURL(s string) bool {
 	name, ok := strings.CutPrefix(s, "/uploads/")
 	return ok && name != "" && len(name) <= 64 && !strings.ContainsAny(name, `/\?#`) && !strings.Contains(name, "..")
+}
+
+// uploadName matches only names the upload handler generates, so no user input reaches a filesystem path.
+var uploadName = regexp.MustCompile(`^[0-9a-f]{32}\.(png|jpg|gif|webp)$`)
+
+// UploadName reports whether name is one the upload handler could have generated.
+func UploadName(name string) bool { return uploadName.MatchString(name) }
+
+// uploadedFile reports whether s is /uploads/<generated name> and that file exists.
+func (r *Room) uploadedFile(s string) bool {
+	name, ok := strings.CutPrefix(s, "/uploads/")
+	if !ok || !UploadName(name) || r.uploads == "" {
+		return false
+	}
+	fi, err := os.Stat(filepath.Join(r.uploads, name))
+	return err == nil && fi.Mode().IsRegular()
 }
 
 func gridOK(g Grid) error {
@@ -357,30 +398,10 @@ func (r *Room) Apply(clientID, typ string, payload json.RawMessage) error {
 		return r.sceneUpsert(s, typ, payload)
 	case "scene.select":
 		return r.sceneSelect(s, payload)
-	case "token.addNpc":
-		p, err := decode[struct {
-			SceneID  string `json:"sceneId"`
-			Name     string `json:"name"`
-			ImageURL string `json:"imageUrl"`
-		}](payload)
-		if err != nil {
-			return err
-		}
-		if err := r.needDM(s, StatusPlaying); err != nil {
-			return err
-		}
-		if r.scene(p.SceneID) == nil {
-			return errors.New("no such scene")
-		}
-		name, err := cleanName(p.Name)
-		if err != nil {
-			return err
-		}
-		if p.ImageURL != "" && !uploadURL(p.ImageURL) {
-			return errors.New("imageUrl must be empty or start with /uploads/")
-		}
-		r.st.Tokens = append(r.st.Tokens, Token{ID: r.id("t"), SceneID: p.SceneID, Name: name, ImageURL: p.ImageURL})
-		return nil
+	case "npc.place":
+		return r.npcPlace(s, payload)
+	case "token.setHidden", "token.adjustHp":
+		return r.tokenNpcEdit(s, typ, payload)
 	case "token.move":
 		return r.tokenMove(s, payload)
 	case "token.remove":
@@ -426,6 +447,11 @@ func (r *Room) Apply(clientID, typ string, payload json.RawMessage) error {
 			return errNotDM
 		}
 		return r.note(typ, payload)
+	case "npc.add", "npc.update", "npc.remove":
+		if !isDM(s) { // any room status, like notes
+			return errNotDM
+		}
+		return r.npc(typ, payload)
 	}
 	return fmt.Errorf("unknown event type %q", typ)
 }
@@ -777,11 +803,12 @@ func (r *Room) tokenMove(s *Seat, payload json.RawMessage) error {
 		return errNotSeated
 	}
 	t := r.token(p.TokenID)
+	// Same error for a missing and a foreign token: players must not learn that a hidden token id exists.
+	if !isDM(s) && (t == nil || s.Kind != KindPlayer || t.CharacterID == "" || t.CharacterID != s.CharacterID) {
+		return errors.New("you can only move your own token")
+	}
 	if t == nil {
 		return errors.New("no such token")
-	}
-	if !isDM(s) && (s.Kind != KindPlayer || t.CharacterID == "" || t.CharacterID != s.CharacterID) {
-		return errors.New("you can only move your own token")
 	}
 	sc := r.scene(t.SceneID)
 	if sc == nil || p.Col < 0 || p.Row < 0 || p.Col >= sc.Grid.Cols || p.Row >= sc.Grid.Rows {
@@ -835,4 +862,109 @@ func (r *Room) note(typ string, payload json.RawMessage) error {
 		return r.notes.Remove(p.ID)
 	}
 	return r.notes.Move(p.ID, p.Index)
+}
+
+var errNpcImage = errors.New("imageUrl must be empty or an uploaded image")
+
+func (r *Room) npc(typ string, payload json.RawMessage) error {
+	p, err := decode[npcs.NPC](payload)
+	if err != nil {
+		return err
+	}
+	switch typ {
+	case "npc.remove":
+		return r.npcs.Remove(p.ID)
+	case "npc.add", "npc.update":
+		if p.ImageURL != "" && !r.uploadedFile(p.ImageURL) {
+			return errNpcImage
+		}
+		if typ == "npc.add" {
+			return r.npcs.Add(p)
+		}
+		return r.npcs.Update(p)
+	}
+	return nil
+}
+
+// npcPlace puts a copy of a pool NPC on the first free cell (row-major) of a scene.
+func (r *Room) npcPlace(s *Seat, payload json.RawMessage) error {
+	p, err := decode[struct {
+		NpcID   string `json:"npcId"`
+		SceneID string `json:"sceneId"`
+	}](payload)
+	if err != nil {
+		return err
+	}
+	if err := r.needDM(s, StatusPlaying); err != nil {
+		return err
+	}
+	n, ok := r.npcs.Get(p.NpcID)
+	if !ok {
+		return errors.New("no such npc")
+	}
+	sc := r.scene(p.SceneID)
+	if sc == nil {
+		return errors.New("no such scene")
+	}
+	// A visible token ignores hidden ones for its cell and "#n" suffix, so neither hints that hidden tokens exist.
+	// It may stack on a hidden token (the DM can move it); a name may repeat after a reveal.
+	used := map[[2]int]bool{}
+	names := map[string]bool{}
+	for _, t := range r.st.Tokens {
+		if t.SceneID == sc.ID && (n.Hidden || !t.Hidden) {
+			used[[2]int{t.Col, t.Row}] = true
+			names[t.Name] = true
+		}
+	}
+	cell := -1
+	for i := range sc.Grid.Cols * sc.Grid.Rows {
+		if !used[[2]int{i % sc.Grid.Cols, i / sc.Grid.Cols}] {
+			cell = i
+			break
+		}
+	}
+	if cell < 0 {
+		return errors.New("scene has no free cell")
+	}
+	name := n.Name // second copy in the scene: "<name> #2", then #3, ...
+	for k := 2; names[name]; k++ {
+		name = n.Name + " #" + strconv.Itoa(k)
+	}
+	hp, hpMax := n.HPMax, n.HPMax
+	r.st.Tokens = append(r.st.Tokens, Token{
+		ID: r.id("t"), SceneID: sc.ID, NpcID: n.ID, Name: name, ImageURL: n.ImageURL,
+		Col: cell % sc.Grid.Cols, Row: cell / sc.Grid.Cols, Hidden: n.Hidden, HP: &hp, HPMax: &hpMax,
+	})
+	return nil
+}
+
+// tokenNpcEdit handles token.setHidden and token.adjustHp (DM, NPC tokens only).
+func (r *Room) tokenNpcEdit(s *Seat, typ string, payload json.RawMessage) error {
+	p, err := decode[struct {
+		TokenID string `json:"tokenId"`
+		Hidden  bool   `json:"hidden"`
+		Delta   int    `json:"delta"`
+	}](payload)
+	if err != nil {
+		return err
+	}
+	if err := r.needDM(s, StatusPlaying); err != nil {
+		return err
+	}
+	t := r.token(p.TokenID)
+	if t == nil {
+		return errors.New("no such token")
+	}
+	if t.CharacterID != "" || t.HP == nil || t.HPMax == nil {
+		return errors.New("only NPC tokens from the pool")
+	}
+	if typ == "token.setHidden" {
+		t.Hidden = p.Hidden
+		return nil
+	}
+	if p.Delta < -npcs.MaxHP || p.Delta > npcs.MaxHP {
+		return fmt.Errorf("delta must be -%d to %d", npcs.MaxHP, npcs.MaxHP)
+	}
+	*t.HP = min(max(*t.HP+p.Delta, 0), *t.HPMax)
+	return nil
 }

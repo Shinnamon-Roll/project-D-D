@@ -5,6 +5,7 @@ import { send, upload } from '../ws'
 import { useT, type TKey } from '../i18n'
 import GrantPanel from './GrantPanel'
 import NotesPanel from './NotesPanel'
+import NpcPanel from './NpcPanel'
 import { useImg } from './MapStage'
 import RulesetEditor from '../screens/RulesetEditor'
 
@@ -59,8 +60,6 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
   const t = useT()
   const room = useStore((s) => s.room)!
   const [newName, setNewName] = useState('')
-  const [npcName, setNpcName] = useState('')
-  const [npcUrl, setNpcUrl] = useState('')
   const [err, setErr] = useState('')
   const [open, setOpen] = useState<Section | ''>(savedSection)
 
@@ -171,37 +170,7 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
           </>
         )
       case 'npc':
-        if (!scene) return needScene
-        return (
-          <div className="row">
-            <label className="grow">
-              {t('npcName')}
-              <input data-testid="npc-name" value={npcName} maxLength={32} onChange={(e) => setNpcName(e.target.value)} />
-            </label>
-            <label>
-              {t('image')}
-              <input
-                data-testid="npc-upload"
-                type="file"
-                accept="image/png,image/jpeg,image/webp,image/gif"
-                onChange={async (e) => {
-                  const f = e.target.files?.[0]
-                  if (f) setNpcUrl((await upload(f)) ?? '')
-                }}
-              />
-            </label>
-            <button
-              data-testid="npc-add"
-              disabled={!npcName.trim()}
-              onClick={() => {
-                send('token.addNpc', { sceneId: scene.id, name: npcName.trim(), imageUrl: npcUrl })
-                setNpcName('')
-              }}
-            >
-              + NPC
-            </button>
-          </div>
-        )
+        return <NpcPanel scene={scene} />
       case 'grant':
         return <GrantPanel />
       case 'notes':

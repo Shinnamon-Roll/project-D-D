@@ -12,6 +12,8 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
+
+	"projectdnd/internal/room"
 )
 
 func pngBytes(t *testing.T) []byte {
@@ -76,7 +78,7 @@ func TestUpload(t *testing.T) {
 			var res struct{ URL string }
 			json.Unmarshal(rec.Body.Bytes(), &res)
 			name := filepath.Base(res.URL)
-			if !uploadName.MatchString(name) || res.URL != "/uploads/"+name {
+			if !room.UploadName(name) || res.URL != "/uploads/"+name {
 				t.Fatalf("url %q", res.URL)
 			}
 			get := httptest.NewRecorder()

@@ -61,10 +61,15 @@ export function connect() {
     }
     if (msg.type === 'state') {
       checkBuild(msg.payload.build)
-      const { room, you, notes } = msg.payload
-      // No "notes" key = unchanged (sent only on connect and note.* events); losing the DM seat clears them.
+      const { room, you, notes, npcs } = msg.payload
+      // No "notes"/"npcs" key = unchanged (sent only on connect and their own events); losing the DM seat clears them.
       const dm = isDmSeat(room.seats.find((s) => s.id === you.seatId))
-      useStore.setState((s) => ({ room, you, notes: !dm ? [] : notes === undefined ? s.notes : (notes ?? []) }))
+      useStore.setState((s) => ({
+        room,
+        you,
+        notes: !dm ? [] : notes === undefined ? s.notes : (notes ?? []),
+        npcs: !dm ? [] : npcs === undefined ? s.npcs : (npcs ?? []),
+      }))
     }
     else if (msg.type === 'error') showError(msg.payload.message)
   }

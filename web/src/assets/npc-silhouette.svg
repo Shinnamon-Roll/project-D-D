@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- Default NPC portrait: a hooded bust, drawn for this project. -->
+  <path fill="#cdb78c" d="M32 8C24 12 19 18 19 27c0 4 1.5 7 4 9.5C15 39 10 45 8 56h48c-2-11-7-17-15-19.5 2.5-2.5 4-5.5 4-9.5 0-9-5-15-13-19z"/>
+  <ellipse cx="32" cy="27" rx="6.5" ry="8.5" fill="#2b1d12" opacity=".7"/>
+</svg>

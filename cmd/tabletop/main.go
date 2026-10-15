@@ -34,7 +34,7 @@ const (
 
 func main() {
 	addr := flag.String("addr", "0.0.0.0:8080", "listen address (0.0.0.0 = reachable from LAN; 127.0.0.1 = this machine only)")
-	data := flag.String("data", "data", "directory for persistent data (DM notes)")
+	data := flag.String("data", "data", "directory for persistent data (DM notes, NPC pool)")
 	autostart := flag.Bool("autostart", false, "start the server right away, skipping the welcome screen (set by reload)")
 	flag.Parse()
 

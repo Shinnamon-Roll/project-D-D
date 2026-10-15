@@ -6,6 +6,7 @@ import { useT } from '../i18n'
 import MapStage from '../table/MapStage'
 import DmPanel from '../table/DmPanel'
 import SheetPanel from '../table/SheetPanel'
+import { EyeIcon, EyeOffIcon } from '../table/icons'
 
 const PCT_KEY = 'table.mapPct'
 const MAP_MIN = 40
@@ -134,7 +135,7 @@ export default function Table() {
         {scene && (
           <ul className="token-list" data-testid="token-list" aria-label={t('tokens')}>
             {tokens.map((t) => (
-              <TokenRow key={t.id + t.col + ',' + t.row} t={t} movable={canMove(t)} removable={isDm && t.characterId === ''} />
+              <TokenRow key={t.id + t.col + ',' + t.row} t={t} movable={canMove(t)} dmNpc={isDm && t.characterId === ''} />
             ))}
           </ul>
         )}
@@ -144,12 +145,12 @@ export default function Table() {
 }
 
 // Keyboard/screen-reader alternative to clicking on the canvas; also shows each token's cell.
-function TokenRow({ t, movable, removable }: { t: Token; movable: boolean; removable: boolean }) {
+function TokenRow({ t, movable, dmNpc }: { t: Token; movable: boolean; dmNpc: boolean }) {
   const tr = useT()
   const [col, setCol] = useState(t.col)
   const [row, setRow] = useState(t.row)
   return (
-    <li data-testid={`token-${t.id}`}>
+    <li data-testid={`token-${t.id}`} className={t.hidden ? 'is-hidden' : undefined}>
       <span>{t.name}</span>{' '}
       <span data-testid={`token-pos-${t.id}`}>
         ({t.col}, {t.row})
@@ -169,7 +170,31 @@ function TokenRow({ t, movable, removable }: { t: Token; movable: boolean; remov
           </button>
         </form>
       )}
-      {removable && (
+      {dmNpc && (
+        <button
+          className="hide-toggle"
+          data-testid={`token-hide-${t.id}`}
+          aria-pressed={!!t.hidden}
+          aria-label={tr('tokenHiddenNamed', { name: t.name })}
+          onClick={() => send('token.setHidden', { tokenId: t.id, hidden: !t.hidden })}
+        >
+          {t.hidden ? <EyeOffIcon /> : <EyeIcon />} {tr('tokenHidden')}
+        </button>
+      )}
+      {dmNpc && t.hp !== undefined && t.hpMax !== undefined && (
+        <span className="hp-ctl" role="group" aria-label={tr('hpOf', { name: t.name })}>
+          <button aria-label={tr('hpDec', { name: t.name })} data-testid={`token-hp-dec-${t.id}`} disabled={t.hp <= 0} onClick={() => send('token.adjustHp', { tokenId: t.id, delta: -1 })}>
+            −
+          </button>
+          <output data-testid={`token-hp-${t.id}`} className={t.hp === 0 ? 'down' : undefined}>
+            {t.hp}/{t.hpMax}
+          </output>
+          <button aria-label={tr('hpInc', { name: t.name })} data-testid={`token-hp-inc-${t.id}`} disabled={t.hp >= t.hpMax} onClick={() => send('token.adjustHp', { tokenId: t.id, delta: 1 })}>
+            +
+          </button>
+        </span>
+      )}
+      {dmNpc && (
         <button className="danger" data-testid={`token-remove-${t.id}`} onClick={() => send('token.remove', { tokenId: t.id })}>
           {tr('remove')}
         </button>

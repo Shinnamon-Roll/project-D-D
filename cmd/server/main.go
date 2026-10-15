@@ -15,7 +15,7 @@ import (
 func main() {
 	addr := flag.String("addr", "0.0.0.0:8080", "listen address (0.0.0.0 = reachable from LAN; 127.0.0.1 = this machine only)")
 	uploads := flag.String("uploads", "uploads", "directory for uploaded images")
-	data := flag.String("data", "data", "directory for persistent data (DM notes)")
+	data := flag.String("data", "data", "directory for persistent data (DM notes, NPC pool)")
 	flag.Parse()
 
 	log := slog.New(slog.NewTextHandler(os.Stderr, nil))

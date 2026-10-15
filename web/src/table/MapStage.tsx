@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
-import { Circle, Group, Image as KImage, Layer, Line, Rect, Stage, Text } from 'react-konva'
+import { Circle, Group, Image as KImage, Layer, Line, Path, Rect, Stage, Text } from 'react-konva'
 import type Konva from 'konva'
 import type { Grid, Scene, Token } from '../protocol'
 import { send } from '../ws'
 import { useT } from '../i18n'
+import { EYE_OFF_SLASH, EYE_PATH } from './icons'
+import silhouette from '../assets/npc-silhouette.svg'
 
 export function useImg(url: string) {
   const [img, setImg] = useState<HTMLImageElement | null>(null)
@@ -41,6 +43,8 @@ const C = {
   oxbloodHi: '#9b2d2d',
   iron: '#4a4f55',
   fog: '#120d09',
+  ink: '#2b1d12',
+  blood: '#a12a2a',
   font: 'Trirong, Georgia, serif',
 }
 
@@ -149,6 +153,8 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
               t={t}
               f={f}
               selected={t.id === selected}
+              // Name label width in cells: up to 3, but no wider than the gap to the nearest token in the same row.
+              span={Math.max(1, Math.min(3, ...tokens.filter((o) => o.id !== t.id && o.row === t.row).map((o) => Math.abs(o.col - t.col))))}
               // Only the DM selects; a player's tap on any token falls through to the cell under it.
               onSelect={isDm ? () => setSelected(t.id === selected ? '' : t.id) : undefined}
             />
@@ -180,20 +186,25 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
   )
 }
 
-function TokenNode({ t, f, selected, onSelect }: { t: Token; f: Fit; selected: boolean; onSelect?: () => void }) {
-  const img = useImg(t.imageUrl)
+function TokenNode({ t, f, selected, span, onSelect }: { t: Token; f: Fit; selected: boolean; span: number; onSelect?: () => void }) {
+  const npc = t.characterId === ''
+  const img = useImg(t.imageUrl || (npc ? silhouette : ''))
+  const down = t.hp === 0 // NPC at 0 HP (only the DM gets hp)
   const k = f.k
   const r = k * 0.42
   const label = Math.min(14, k * 0.3)
   // Keep the name box inside the image so edge tokens' names are not cut by the canvas edge.
   const left = -(t.col + 0.5) * k
-  const right = f.w + left - 3 * k
-  const lx = Math.min(Math.max(-1.5 * k, left), right)
-  const align = lx > -1.5 * k ? 'left' : lx < -1.5 * k ? 'right' : 'center'
+  const lw = span * k
+  const right = f.w + left - lw
+  const lx = Math.min(Math.max(-lw / 2, left), right)
+  const align = lx > -lw / 2 ? 'left' : lx < -lw / 2 ? 'right' : 'center'
   return (
     <Group
       x={f.x + t.col * k + k / 2}
       y={f.y + t.row * k + k / 2}
+      // Hidden (DM-only) tokens are see-through; downed ones faded.
+      opacity={t.hidden ? 0.45 : down ? 0.55 : 1}
       onPointerClick={
         onSelect &&
         ((e) => {
@@ -218,9 +229,25 @@ function TokenNode({ t, f, selected, onSelect }: { t: Token; f: Fit; selected: b
       ) : (
         <Text text={t.name.slice(0, 1).toUpperCase()} x={-r} y={-r} width={r * 2} height={r * 2} align="center" verticalAlign="middle" fontSize={r} fontFamily={C.font} fill={C.parchment} />
       )}
+      {down && (
+        <Group listening={false}>
+          <Line points={[-r * 0.6, -r * 0.6, r * 0.6, r * 0.6]} stroke={C.blood} strokeWidth={Math.max(2, k * 0.08)} lineCap="round" />
+          <Line points={[r * 0.6, -r * 0.6, -r * 0.6, r * 0.6]} stroke={C.blood} strokeWidth={Math.max(2, k * 0.08)} lineCap="round" />
+        </Group>
+      )}
+      {t.hidden && (
+        // eye-off badge, top right; the 24-unit icon paths scaled to the badge
+        <Group x={r * 0.72} y={-r * 0.72} listening={false}>
+          <Circle radius={Math.max(6, r * 0.42)} fill={C.ink} stroke={C.gold} strokeWidth={1} />
+          <Group scaleX={Math.max(6, r * 0.42) / 16} scaleY={Math.max(6, r * 0.42) / 16} offsetX={12} offsetY={12}>
+            <Path data={EYE_PATH} stroke={C.parchment} strokeWidth={2} />
+            <Path data={EYE_OFF_SLASH} stroke={C.gold} strokeWidth={2.5} lineCap="round" />
+          </Group>
+        </Group>
+      )}
       {/* name hides when cells are too small to read it */}
       {label >= 8 && (
-        <Text text={t.name} x={lx} y={r + 2} width={k * 3} align={align} fontSize={label} fontFamily={C.font} fill={C.parchment} shadowColor="#000" shadowBlur={3} shadowOpacity={1} listening={false} wrap="none" ellipsis />
+        <Text text={t.name} x={lx} y={r + 2} width={lw} align={align} fontSize={label} fontFamily={C.font} fill={C.parchment} shadowColor="#000" shadowBlur={3} shadowOpacity={1} listening={false} wrap="none" ellipsis />
       )}
     </Group>
   )

@@ -11,7 +11,8 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"regexp"
+
+	"projectdnd/internal/room"
 )
 
 const maxUpload = 10 << 20
@@ -22,9 +23,6 @@ var imageExt = map[string]string{
 	"image/gif":  ".gif",
 	"image/webp": ".webp",
 }
-
-// uploadName matches only names this server generates, so no user input reaches the filesystem path.
-var uploadName = regexp.MustCompile(`^[0-9a-f]{32}\.(png|jpg|gif|webp)$`)
 
 func jsonError(w http.ResponseWriter, code int, msg string) {
 	w.Header().Set("Content-Type", "application/json")
@@ -118,7 +116,7 @@ func randomHex() string {
 func handleUploads(dir string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		name := r.PathValue("name")
-		if !uploadName.MatchString(name) {
+		if !room.UploadName(name) { // generated names only: no user input reaches the filesystem path
 			http.NotFound(w, r)
 			return
 		}

@@ -15,6 +15,7 @@ import (
 	"github.com/coder/websocket"
 
 	"projectdnd/internal/notes"
+	"projectdnd/internal/npcs"
 )
 
 type wsClient struct {
@@ -82,7 +83,7 @@ func (l *lockedBuf) String() string {
 
 func TestHub(t *testing.T) {
 	var logs lockedBuf
-	h := NewHub(slog.New(slog.NewTextHandler(&logs, nil)), &notes.Store{})
+	h := NewHub(slog.New(slog.NewTextHandler(&logs, nil)), &notes.Store{}, &npcs.Store{}, "")
 	srv := httptest.NewServer(http.HandlerFunc(h.ServeWS))
 	defer srv.Close()
 	const dmID, plID = "dm-secret-0001", "pl-secret-0002"
@@ -172,7 +173,7 @@ func TestHub(t *testing.T) {
 // TestHubNotes: notes reach the DM and co-DM only; players get no "notes" key and no note-only broadcasts.
 func TestHubNotes(t *testing.T) {
 	var logs lockedBuf
-	h := NewHub(slog.New(slog.NewTextHandler(&logs, nil)), &notes.Store{})
+	h := NewHub(slog.New(slog.NewTextHandler(&logs, nil)), &notes.Store{}, &npcs.Store{}, "")
 	srv := httptest.NewServer(http.HandlerFunc(h.ServeWS))
 	defer srv.Close()
 
@@ -262,7 +263,7 @@ func TestHubNotes(t *testing.T) {
 
 // TestHubNotesConcurrent: DM and co-DM write the same note at once; run under -race.
 func TestHubNotesConcurrent(t *testing.T) {
-	h := NewHub(slog.New(slog.DiscardHandler), &notes.Store{})
+	h := NewHub(slog.New(slog.DiscardHandler), &notes.Store{}, &npcs.Store{}, "")
 	srv := httptest.NewServer(http.HandlerFunc(h.ServeWS))
 	defer srv.Close()
 	dm, co := dial(t, srv), dial(t, srv)
@@ -305,5 +306,107 @@ func TestHubNotesConcurrent(t *testing.T) {
 	defer h.mu.Unlock()
 	if got := h.room.notes.List(); len(got) != 1 || len(got[0].Body) != n-1 {
 		t.Fatalf("last write did not win: %+v", got)
+	}
+}
+
+// TestHubNpcs: the pool and hidden tokens reach the DM only; players never see a hidden NPC's name or any NPC hp.
+func TestHubNpcs(t *testing.T) {
+	var logs lockedBuf
+	h := NewHub(slog.New(slog.NewTextHandler(&logs, nil)), &notes.Store{}, &npcs.Store{}, "")
+	srv := httptest.NewServer(http.HandlerFunc(h.ServeWS))
+	defer srv.Close()
+	dm, pl := dial(t, srv), dial(t, srv)
+	dm.send("hello", m{"clientId": "dm-secret-0001"})
+	pl.send("hello", m{"clientId": "pl-secret-0002"})
+	for _, c := range []*wsClient{dm, pl} {
+		if _, p, _ := c.next(); p["npcs"] != nil {
+			t.Fatal("unseated connection got npcs")
+		}
+	}
+	const secret = "Secret-Hag-Zz"
+	var plFrames []string
+	both := func() map[string]any {
+		t.Helper()
+		_, p, _ := dm.next()
+		_, _, raw := pl.next()
+		plFrames = append(plFrames, raw)
+		return p
+	}
+	dm.send("campaign.select", m{"campaignId": "starter-set", "name": "Dee"})
+	p := both()
+	if n, ok := p["npcs"].([]any); !ok || len(n) != 0 {
+		t.Fatalf("new DM npcs = %#v, want []", p["npcs"])
+	}
+	plSeat := p["room"].(map[string]any)["seats"].([]any)[1].(map[string]any)["id"]
+	for _, e := range []struct {
+		c   *wsClient
+		typ string
+		p   m
+	}{
+		{pl, "seat.sit", m{"seatId": plSeat, "name": "Pat"}},
+		{pl, "seat.ready", m{"ready": true}},
+		{dm, "game.start", m{}},
+		{pl, "character.submit", goodChar("Mira")},
+		{dm, "scene.add", m{"name": "Beach", "imageUrl": "/uploads/a.png", "grid": m{"cellSize": 50, "cols": 10, "rows": 5}}},
+		{dm, "scene.select", m{"sceneId": "sc4"}},
+	} {
+		e.c.send(e.typ, e.p)
+		if p = both(); p["npcs"] != nil {
+			t.Fatalf("%s: dm got npcs on a non-npc broadcast", e.typ)
+		}
+	}
+	// probe: the player's next message must be the error for its own bad event, i.e. nothing else was queued.
+	probe := func(step string) {
+		t.Helper()
+		pl.send("nope", m{})
+		if typ, _, raw := pl.next(); typ != "error" {
+			t.Fatalf("%s: player got %s: %s", step, typ, raw)
+		}
+	}
+
+	dm.send("npc.add", m{"name": secret, "hpMax": 9, "hidden": true})
+	if _, p, raw := dm.next(); !strings.Contains(raw, secret) || len(p["npcs"].([]any)) != 1 {
+		t.Fatalf("dm npc.add: %s", raw)
+	}
+	dm.send("npc.place", m{"npcId": "npc1", "sceneId": "sc4"})
+	_, p, raw := dm.next()
+	toks := p["room"].(map[string]any)["tokens"].([]any)
+	npc := toks[1].(map[string]any)
+	if npc["name"] != secret || npc["hidden"] != true || npc["hp"] != 9.0 || npc["hpMax"] != 9.0 {
+		t.Fatalf("dm token: %s", raw)
+	}
+	dm.send("token.adjustHp", m{"tokenId": npc["id"], "delta": -2})
+	dm.next()
+	probe("hidden npc placed")
+
+	dm.send("token.setHidden", m{"tokenId": npc["id"], "hidden": false})
+	dm.next()
+	_, p, raw = pl.next()
+	plFrames = append(plFrames, raw)
+	toks = p["room"].(map[string]any)["tokens"].([]any)
+	if len(toks) != 2 || toks[1].(map[string]any)["name"] != secret {
+		t.Fatalf("revealed token missing: %s", raw)
+	}
+	if _, has := toks[1].(map[string]any)["hp"]; has || p["npcs"] != nil || strings.Contains(raw, `"hpMax"`) {
+		t.Fatalf("player got hp or the pool: %s", raw)
+	}
+	dm.send("token.adjustHp", m{"tokenId": npc["id"], "delta": -1})
+	if _, p, _ := dm.next(); p["room"].(map[string]any)["tokens"].([]any)[1].(map[string]any)["hp"] != 6.0 {
+		t.Fatal("dm hp not 6")
+	}
+	probe("hp change of a visible npc")
+
+	for _, f := range plFrames[:len(plFrames)-1] {
+		if strings.Contains(f, secret) {
+			t.Fatalf("hidden npc name reached the player: %s", f)
+		}
+	}
+	dm2 := dial(t, srv)
+	dm2.send("hello", m{"clientId": "dm-secret-0001"})
+	if _, p, _ := dm2.next(); len(p["npcs"].([]any)) != 1 {
+		t.Fatalf("dm hello reply npcs = %#v", p["npcs"])
+	}
+	if out := logs.String(); strings.Contains(out, secret) || !strings.Contains(out, "event npc.place\" by=Dee") {
+		t.Fatalf("logs:\n%s", out)
 	}
 }

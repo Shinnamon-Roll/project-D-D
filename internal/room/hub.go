@@ -1,6 +1,7 @@
 package room
 
 import (
+	"bytes"
 	"context"
 	"crypto/rand"
 	"encoding/hex"
@@ -14,6 +15,7 @@ import (
 	"github.com/coder/websocket"
 
 	"projectdnd/internal/notes"
+	"projectdnd/internal/npcs"
 )
 
 const (
@@ -41,7 +43,7 @@ type Hub struct {
 type conn struct {
 	clientID string // "" until hello
 	send     chan []byte
-	dm       bool // DM/co-DM when its last state was sent; a false->true change resends notes
+	dm       bool // DM/co-DM when its last state was sent; a false->true change resends notes and npcs
 }
 
 type message struct {
@@ -49,11 +51,12 @@ type message struct {
 	Payload json.RawMessage `json:"payload"`
 }
 
-// NewHub logs connections and events to log; it never logs clientIds (bearer secrets) or note text.
-// n holds the DM notes (see notes.Load).
-func NewHub(log *slog.Logger, n *notes.Store) *Hub {
+// NewHub logs connections and events to log; it never logs clientIds (bearer secrets), note text or NPC names.
+// n holds the DM notes (see notes.Load), p the NPC pool (see npcs.Load); uploads is the upload directory,
+// used to check that NPC images exist.
+func NewHub(log *slog.Logger, n *notes.Store, p *npcs.Store, uploads string) *Hub {
 	r := New()
-	r.notes = n
+	r.notes, r.npcs, r.uploads = n, p, uploads
 	return &Hub{room: r, conns: map[*conn]struct{}{}, log: log}
 }
 
@@ -169,7 +172,7 @@ func (h *Hub) handle(c *conn, m message) {
 			return
 		}
 		c.clientID = p.ClientID
-		h.sendStateLocked(c, h.roomJSONLocked(), true)
+		h.sendStateLocked(c, h.viewsLocked(), true, true)
 		return
 	}
 	if c.clientID == "" {
@@ -177,6 +180,7 @@ func (h *Hub) handle(c *conn, m message) {
 		return
 	}
 	by, status := h.seatNameLocked(c.clientID), h.room.st.Status
+	before := mustJSON(h.room.PlayerState())
 	if err := h.room.Apply(c.clientID, m.Type, m.Payload); err != nil {
 		typ := m.Type
 		if r := []rune(typ); len(r) > 40 { // unknown types are client input; keep log lines short (cut on runes, not bytes)
@@ -191,11 +195,14 @@ func (h *Hub) handle(c *conn, m message) {
 		attrs = append(attrs, "status", h.room.st.Status)
 	}
 	h.log.Info("event "+m.Type, attrs...)
-	room := h.roomJSONLocked()
-	noteOnly := strings.HasPrefix(m.Type, "note.") // players' view did not change
+	v := h.viewsLocked()
+	// Players get a state only when their view changed (or they sent the event), so note.*, npc.* and edits
+	// of hidden tokens send them nothing.
+	playerChanged := !bytes.Equal(before, v.player)
+	withNotes, withNpcs := strings.HasPrefix(m.Type, "note."), strings.HasPrefix(m.Type, "npc.")
 	for o := range h.conns {
-		if o.clientID != "" && (!noteOnly || isDM(h.room.seatOf(o.clientID))) {
-			h.sendStateLocked(o, room, noteOnly)
+		if o.clientID != "" && (o == c || playerChanged || isDM(h.room.seatOf(o.clientID))) {
+			h.sendStateLocked(o, v, withNotes, withNpcs)
 		}
 	}
 }
@@ -206,32 +213,39 @@ func (h *Hub) reply(c *conn, msg string) {
 	h.errorLocked(c, msg)
 }
 
-func (h *Hub) roomJSONLocked() json.RawMessage {
-	b, err := json.Marshal(h.room.State())
+// views is the room JSON for DM/co-DM connections (full) and for everyone else (player: Room.PlayerState).
+type views struct{ full, player json.RawMessage }
+
+func mustJSON(v any) json.RawMessage {
+	b, err := json.Marshal(v)
 	if err != nil {
-		panic(err) // State holds only plain types
+		panic(err) // state, notes and npcs hold only plain types
 	}
 	return b
 }
 
-func (h *Hub) notesJSONLocked() json.RawMessage {
-	b, err := json.Marshal(h.room.notes.List())
-	if err != nil {
-		panic(err) // notes hold only plain types
-	}
-	return b
+func (h *Hub) viewsLocked() views {
+	return views{mustJSON(h.room.State()), mustJSON(h.room.PlayerState())}
 }
 
-// sendStateLocked sends the "notes" key only to a DM or co-DM, and only when withNotes (hello, note.* events)
-// or the connection has just become DM/co-DM. Without the key the client keeps its previous notes.
-func (h *Hub) sendStateLocked(c *conn, room json.RawMessage, withNotes bool) {
+// sendStateLocked sends the full room to a DM or co-DM and the player view to anyone else. The "notes" and
+// "npcs" keys go only to a DM or co-DM, and only when withNotes/withNpcs (hello, note.*/npc.* events) or the
+// connection has just become DM/co-DM. Without a key the client keeps its previous notes/npcs.
+func (h *Hub) sendStateLocked(c *conn, v views, withNotes, withNpcs bool) {
 	type you struct {
 		SeatID string `json:"seatId"`
 	}
 	dm := isDM(h.room.seatOf(c.clientID))
-	var notes json.RawMessage // nil: omitempty drops the key
-	if dm && (withNotes || !c.dm) {
-		notes = h.notesJSONLocked()
+	room := v.player
+	var notes, npcs json.RawMessage // nil: omitempty drops the key
+	if dm {
+		room = v.full
+		if withNotes || !c.dm {
+			notes = mustJSON(h.room.notes.List())
+		}
+		if withNpcs || !c.dm {
+			npcs = mustJSON(h.room.npcs.List())
+		}
 	}
 	c.dm = dm
 	p, _ := json.Marshal(struct {
@@ -239,7 +253,8 @@ func (h *Hub) sendStateLocked(c *conn, room json.RawMessage, withNotes bool) {
 		You   you             `json:"you"`
 		Build string          `json:"build"`
 		Notes json.RawMessage `json:"notes,omitempty"`
-	}{room, you{h.room.SeatID(c.clientID)}, buildID, notes})
+		Npcs  json.RawMessage `json:"npcs,omitempty"`
+	}{room, you{h.room.SeatID(c.clientID)}, buildID, notes, npcs})
 	h.enqueueLocked(c, "state", p)
 }
 

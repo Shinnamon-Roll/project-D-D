@@ -97,6 +97,19 @@ export interface Token {
   imageUrl: string
   col: number
   row: number
+  npcId?: string // set on tokens placed from the NPC pool
+  hidden?: boolean // players never receive hidden tokens
+  hp?: number // NPC only, DM/co-DM only (players never get hp/hpMax)
+  hpMax?: number
+}
+
+// DM's NPC pool entry (white label). Sent to DM/co-DM only.
+export interface Npc {
+  id: string
+  name: string // 1-40
+  imageUrl: string // "/uploads/<file>" or "" = default silhouette
+  hpMax: number // 1-999
+  hidden: boolean // default for tokens placed from it
 }
 
 export interface Note {
@@ -124,8 +137,8 @@ export interface You {
 
 // Server → client
 export type ServerMessage =
-  // build: random per server process. notes: DM/co-DM only, on connect and note.* events; no key = unchanged. Players never get it.
-  | { type: 'state'; payload: { room: RoomState; you: You; build?: string; notes?: Note[] | null } }
+  // build: random per server process. notes/npcs: DM/co-DM only, sent on connect and on their own events; no key = unchanged. Players never get them.
+  | { type: 'state'; payload: { room: RoomState; you: You; build?: string; notes?: Note[] | null; npcs?: Npc[] | null } }
   | { type: 'error'; payload: { message: string } }
 
 type Empty = Record<string, never>
@@ -155,7 +168,12 @@ export interface ClientEvents {
   'scene.add': { name: string; imageUrl: string; grid: Grid }
   'scene.update': { sceneId: string; name: string; grid: Grid }
   'scene.select': { sceneId: string }
-  'token.addNpc': { sceneId: string; name: string; imageUrl: string }
+  'npc.add': { name: string; imageUrl: string; hpMax: number; hidden: boolean }
+  'npc.update': { id: string; name: string; imageUrl: string; hpMax: number; hidden: boolean }
+  'npc.remove': { id: string }
+  'npc.place': { npcId: string; sceneId: string }
+  'token.setHidden': { tokenId: string; hidden: boolean }
+  'token.adjustHp': { tokenId: string; delta: number }
   'token.move': { tokenId: string; col: number; row: number }
   'token.remove': { tokenId: string }
   'fog.add': { sceneId: string; col: number; row: number; w: number; h: number }

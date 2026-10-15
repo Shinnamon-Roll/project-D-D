@@ -3,7 +3,6 @@
 package notes
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"log/slog"
@@ -14,6 +13,8 @@ import (
 	"strings"
 	"time"
 	"unicode/utf8"
+
+	"projectdnd/internal/jsonfile"
 )
 
 const (
@@ -60,21 +61,14 @@ func Load(dir string, log *slog.Logger) (*Store, error) {
 		return nil, err
 	}
 	s := &Store{path: filepath.Join(dir, fileName), log: log, notes: []Note{}}
-	b, err := os.ReadFile(s.path)
-	if errors.Is(err, os.ErrNotExist) {
-		return s, nil
-	}
-	if err != nil {
-		return nil, err // unreadable: refuse to start rather than overwrite it later
-	}
 	var f file
-	if err := json.Unmarshal(b, &f); err != nil {
-		bad, rerr := quarantine(s.path)
-		if rerr != nil {
-			return nil, fmt.Errorf("notes file is corrupt and could not be moved aside: %w", rerr)
-		}
-		log.Error("notes file is corrupt, starting empty", "err", err.Error(), "moved_to", bad)
+	var bad *jsonfile.CorruptError
+	switch err := jsonfile.Load(s.path, &f); {
+	case errors.As(err, &bad):
+		log.Error("notes file is corrupt, starting empty", "err", bad.Err.Error(), "moved_to", bad.MovedTo)
 		return s, nil
+	case err != nil:
+		return nil, err // unreadable: refuse to start rather than overwrite it later
 	}
 	if f.Notes != nil {
 		s.notes = f.Notes
@@ -88,21 +82,6 @@ func Load(dir string, log *slog.Logger) (*Store, error) {
 		}
 	}
 	return s, nil
-}
-
-// quarantine moves path to a fresh unique path.bad-<random> and returns that name.
-// CreateTemp reserves the name, so two quarantines never collide; the rename then replaces the empty file.
-func quarantine(path string) (string, error) {
-	f, err := os.CreateTemp(filepath.Dir(path), filepath.Base(path)+".bad-*")
-	if err != nil {
-		return "", err
-	}
-	f.Close()
-	if err := os.Rename(path, f.Name()); err != nil {
-		os.Remove(f.Name())
-		return "", err
-	}
-	return f.Name(), nil
 }
 
 // List returns the notes in order. Callers must not mutate it.
@@ -183,44 +162,11 @@ func (s *Store) Move(id string, index int) error {
 // commit saves next to disk first and only then swaps it in, so a failed write changes nothing.
 func (s *Store) commit(seq int, next []Note) error {
 	if s.path != "" {
-		if err := s.save(file{Seq: seq, Notes: next}); err != nil {
+		if err := jsonfile.Save(s.path, file{Seq: seq, Notes: next}); err != nil {
 			s.log.Error("notes save failed", "err", err.Error())
 			return errNotSave
 		}
 	}
 	s.seq, s.notes = seq, next
-	return nil
-}
-
-// save writes atomically: temp file in the same dir (0600) + fsync + rename, then fsync the dir.
-func (s *Store) save(f file) error {
-	b, err := json.Marshal(f)
-	if err != nil {
-		return err
-	}
-	dir := filepath.Dir(s.path)
-	tmp, err := os.CreateTemp(dir, fileName+".tmp-*")
-	if err != nil {
-		return err
-	}
-	defer os.Remove(tmp.Name()) // no-op after a successful rename
-	if _, err := tmp.Write(b); err != nil {
-		tmp.Close()
-		return err
-	}
-	if err := tmp.Sync(); err != nil {
-		tmp.Close()
-		return err
-	}
-	if err := tmp.Close(); err != nil {
-		return err
-	}
-	if err := os.Rename(tmp.Name(), s.path); err != nil {
-		return err
-	}
-	if d, err := os.Open(dir); err == nil {
-		d.Sync() // makes the rename durable; best effort (not supported everywhere)
-		d.Close()
-	}
 	return nil
 }

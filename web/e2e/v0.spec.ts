@@ -266,6 +266,55 @@ test('v0: DM + player full flow', async ({ browser }) => {
   expect(plFrames.length).toBeGreaterThan(0)
   expect(plFrames.filter((f) => f.includes('"notes"'))).toEqual([])
 
+  // 7c. NPC pool: DM makes a hidden NPC (image, name, HP 12) and places it; the player gets nothing of it until revealed.
+  const NPC = 'Shadow Lurker'
+  await tid(dm, 'dm-menu-npc').click()
+  await tid(dm, 'npc-add').click()
+  await expect(tid(dm, 'npc-form-name')).toBeFocused()
+  await tid(dm, 'npc-form-image').setInputFiles({ name: 'npc.png', mimeType: 'image/png', buffer: MAP_PNG })
+  await expect(tid(dm, 'npc-form-preview')).toHaveAttribute('src', /^\/uploads\//)
+  await tid(dm, 'npc-form-name').fill(NPC)
+  await tid(dm, 'npc-form-hp').fill('12')
+  if (!(await tid(dm, 'npc-form-hidden').isChecked())) await tid(dm, 'npc-form-hidden').check()
+  await tid(dm, 'npc-save').click()
+  const npcItem = dm.locator('[data-testid^="npc-item-"]', { hasText: NPC })
+  await expect(npcItem).toContainText('12')
+  await expect(tid(dm, 'npc-add')).toBeFocused()
+  const npcId = (await npcItem.getAttribute('data-testid'))!.replace('npc-item-', '')
+  await tid(dm, `npc-place-${npcId}`).click()
+  const npcRow = tid(dm, 'token-list').locator('li', { hasText: NPC })
+  await expect(npcRow).toHaveCount(1)
+  const npcTok = (await npcRow.getAttribute('data-testid'))!.replace('token-', '')
+  await expect(tid(dm, `token-hide-${npcTok}`)).toHaveAttribute('aria-pressed', 'true')
+  await expect(tid(dm, `token-hp-${npcTok}`)).toHaveText('12/12')
+  // The server sends players a state only when their view changes, so the leak check runs on all frames at the end.
+  await expect(tid(pl, 'token-list')).not.toContainText(NPC)
+
+  // Reveal: the player sees the token but never its HP. DM lowers HP by one.
+  await tid(dm, `token-hide-${npcTok}`).click()
+  await expect(tid(pl, `token-${npcTok}`)).toContainText(NPC)
+  await expect(tid(pl, `token-hp-${npcTok}`)).toHaveCount(0)
+  await expect(tid(pl, `token-hide-${npcTok}`)).toHaveCount(0)
+  await tid(dm, `token-hp-dec-${npcTok}`).click()
+  await expect(tid(dm, `token-hp-${npcTok}`)).toHaveText('11/12')
+
+  // Same NPC again: a second, hidden token the player does not get.
+  await tid(dm, `npc-place-${npcId}`).click()
+  await expect(tid(dm, 'token-list').locator('li', { hasText: NPC })).toHaveCount(2)
+  await expect(tid(pl, 'token-list').locator('li', { hasText: NPC })).toHaveCount(1)
+  if (process.env.SHOTS) {
+    await dm.screenshot({ path: `${process.env.SHOTS}/dm-npcs.png` })
+    await pl.screenshot({ path: `${process.env.SHOTS}/player-npcs.png` })
+  }
+  // Hide the first again: the player loses it. That state is sent after the second place, so every frame is in by now.
+  await tid(dm, `token-hide-${npcTok}`).click()
+  await expect(tid(pl, 'token-list')).not.toContainText(NPC)
+  type Tok = { name: string; hidden?: boolean; hp?: number; hpMax?: number }
+  const plTokens = plFrames.flatMap((f) => (JSON.parse(f).payload?.room?.tokens ?? []) as Tok[]).filter((x) => x.name.startsWith(NPC))
+  expect(plTokens.length).toBeGreaterThan(0)
+  expect(plTokens.filter((x) => x.hidden || x.hp !== undefined || x.hpMax !== undefined || x.name !== NPC)).toEqual([])
+  expect(plFrames.filter((f) => f.includes('"npcs"'))).toEqual([])
+
   // Phone: stacked, the map pane still never scrolls and the page has no sideways scroll.
   await pl.setViewportSize({ width: 390, height: 844 })
   await expect

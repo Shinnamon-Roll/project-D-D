@@ -190,6 +190,7 @@ func TestNeverLeakClientIDs(t *testing.T) {
 
 func TestPermissionsAndUnknown(t *testing.T) {
 	r, sc := playing(t)
+	ok(t, r, "dm", "npc.add", m{"name": "Goblin", "hpMax": 7})
 	dmOnly := []struct {
 		typ     string
 		payload any
@@ -200,7 +201,7 @@ func TestPermissionsAndUnknown(t *testing.T) {
 		{"scene.add", m{"name": "X", "imageUrl": "/uploads/b.png", "grid": m{"cellSize": 50, "cols": 5, "rows": 5}}},
 		{"scene.update", m{"sceneId": sc, "name": "X", "grid": m{"cellSize": 50, "cols": 5, "rows": 5}}},
 		{"scene.select", m{"sceneId": sc}},
-		{"token.addNpc", m{"sceneId": sc, "name": "Goblin", "imageUrl": ""}},
+		{"npc.place", m{"npcId": "npc1", "sceneId": sc}},
 		{"token.remove", m{"tokenId": r.State().Tokens[0].ID}},
 		{"fog.add", m{"sceneId": sc, "col": 0, "row": 0, "w": 1, "h": 1}},
 	}
@@ -209,7 +210,8 @@ func TestPermissionsAndUnknown(t *testing.T) {
 		fail(t, r, "stranger", e.typ, e.payload)
 	}
 	fail(t, r, "dm", "nope", m{})
-	fail(t, r, "dm", "dice.roll", m{"notation": "1d20"}) // removed 2026-10-16: physical dice
+	fail(t, r, "dm", "dice.roll", m{"notation": "1d20"})                 // removed 2026-10-16: physical dice
+	fail(t, r, "dm", "token.addNpc", m{"sceneId": sc, "name": "Goblin"}) // removed v0.11.0: npc.place
 	fail(t, r, "dm", "hello", m{"clientId": "x"})
 	if err := r.Apply("dm", "ruleset.loadPreset", json.RawMessage(`{"presetId":`)); err == nil {
 		t.Fatal("malformed payload accepted")
@@ -312,9 +314,9 @@ func TestScenesTokensFog(t *testing.T) {
 	fail(t, r, "p1", "token.move", m{"tokenId": tok, "col": 0, "row": 5})
 	fail(t, r, "p1", "token.move", m{"tokenId": tok, "col": -1, "row": 0})
 	fail(t, r, "stranger", "token.move", m{"tokenId": tok, "col": 1, "row": 1})
-	ok(t, r, "dm", "token.addNpc", m{"sceneId": sc, "name": "Goblin", "imageUrl": "/uploads/g.png"})
-	fail(t, r, "dm", "token.addNpc", m{"sceneId": sc, "name": "Goblin", "imageUrl": "/etc/passwd"})
-	fail(t, r, "dm", "token.addNpc", m{"sceneId": "nope", "name": "Goblin"})
+	ok(t, r, "dm", "npc.add", m{"name": "Goblin", "hpMax": 7})
+	ok(t, r, "dm", "npc.place", m{"npcId": "npc1", "sceneId": sc})
+	fail(t, r, "dm", "npc.place", m{"npcId": "npc1", "sceneId": "nope"})
 	npc := r.State().Tokens[1].ID
 	fail(t, r, "p1", "token.move", m{"tokenId": npc, "col": 1, "row": 1}) // NPC
 	ok(t, r, "dm", "token.move", m{"tokenId": npc, "col": 1, "row": 1})
@@ -420,7 +422,8 @@ func TestSceneUpdateShrinkClampsAndClips(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			r, sc := playing(t)
 			ok(t, r, "dm", "token.move", m{"tokenId": r.State().Tokens[0].ID, "col": 9, "row": 4})
-			ok(t, r, "dm", "token.addNpc", m{"sceneId": sc, "name": "Gob"}) // at 0,0: stays
+			ok(t, r, "dm", "npc.add", m{"name": "Gob", "hpMax": 1})
+			ok(t, r, "dm", "npc.place", m{"npcId": "npc1", "sceneId": sc}) // first free cell 0,0 (Mira moved away): stays
 			for _, f := range []rect{{0, 0, 10, 5}, {8, 3, 2, 2}, {9, 0, 1, 1}} {
 				ok(t, r, "dm", "fog.add", m{"sceneId": sc, "col": f.col, "row": f.row, "w": f.w, "h": f.h})
 			}

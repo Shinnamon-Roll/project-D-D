@@ -541,3 +541,43 @@ dialog.skill-modal { width: min(520px, calc(100vw - 32px)); text-align: left; }
 .qr-join button { justify-self: start; }
 .notice { padding: 6px 10px; border-left: 3px solid var(--gold-dim); background: rgba(201, 162, 39, 0.12); font-size: 0.9rem; }
 .notice.banner { margin: 12px 20px 0; color: var(--parchment); }
+
+/* ---------- NPC pool ---------- */
+.npc-list { list-style: none; margin: 10px 0 0; padding: 0; }
+.npc-list li {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 2px 10px;
+  padding: 7px 2px; border-bottom: 1px solid var(--line);
+}
+.npc-list .npc-thumb { grid-row: span 2; }
+.npc-name { font-family: var(--font-display); font-weight: 700; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.npc-meta { display: inline-flex; align-items: center; gap: 6px; justify-self: end; font-size: 0.85rem; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+.npc-hidden { display: inline-flex; color: var(--oxblood); }
+.npc-actions { grid-column: 2 / -1; display: flex; flex-wrap: wrap; gap: 6px; }
+.npc-actions button { padding: 2px 10px; font-size: 0.85rem; }
+.npc-thumb {
+  width: 40px; height: 40px; border-radius: 50%; object-fit: cover;
+  background: var(--iron); box-shadow: 0 0 0 2px var(--parchment), 0 0 0 3px var(--gold-dim);
+}
+.npc-thumb.big { width: 72px; height: 72px; flex: none; }
+.npc-form h3 { margin-top: 4px; }
+.npc-portrait { display: flex; align-items: center; gap: 14px; }
+.npc-portrait label { flex: 1; min-width: 0; }
+.npc-form input[aria-invalid='true'] { border-bottom-color: var(--blood); }
+/* checkbox with role=switch drawn as a sliding wax-seal toggle; the real input stays focusable */
+label.switch { flex-direction: row; align-items: center; gap: 10px; color: var(--ink); cursor: pointer; position: relative; }
+label.switch input { position: absolute; z-index: 1; left: 0; top: 50%; opacity: 0; width: 38px; height: 22px; margin: -11px 0 0; cursor: pointer; }
+.switch-track { flex: none; position: relative; width: 38px; height: 22px; border-radius: 11px; background: var(--parchment-2); box-shadow: inset 0 1px 3px rgba(43, 29, 18, 0.45); transition: background 0.15s; }
+.switch-track::after { content: ''; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--ink-muted); transition: transform 0.15s; }
+label.switch input:checked + .switch-track { background: var(--oxblood); }
+label.switch input:checked + .switch-track::after { transform: translateX(16px); background: var(--gold); }
+label.switch input:focus-visible + .switch-track { outline: 2px solid var(--gold); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .switch-track, .switch-track::after { transition: none; } }
+
+/* NPC token rows (DM): hide toggle + HP stepper */
+.token-list li.is-hidden > span:first-child { opacity: 0.6; font-style: italic; }
+button.hide-toggle { display: inline-flex; align-items: center; gap: 5px; padding: 2px 9px; font-size: 0.8rem; }
+button.hide-toggle[aria-pressed='true'] { background: var(--wood-2); color: var(--gold); border-color: var(--gold-dim); }
+.hp-ctl { display: inline-flex; align-items: center; gap: 4px; }
+.hp-ctl button { width: 26px; height: 26px; padding: 0; line-height: 1; }
+.hp-ctl output { min-width: 5ch; text-align: center; color: var(--parchment); font-variant-numeric: tabular-nums; }
+.hp-ctl output.down { color: #e08a7a; text-decoration: line-through; }
