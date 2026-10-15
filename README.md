@@ -3,7 +3,19 @@
 D&D board game simulator for the web — play D&D with friends in the browser, no paper.
 
 ## Status
-Planning. Requirements not confirmed yet; no app code.
+v0.2 playable locally: campaign menu, lobby, ruleset editor, character creation, map with grid/tokens/fog, dice.
+
+## Run
+Requires Go 1.26+ and Node 24+.
+```sh
+cd web && npm install && cd ..
+make dev            # Go :8080 + Vite :5173 → open http://localhost:5173
+make build          # → bin/dnd (single binary, frontend embedded)
+./bin/dnd           # http://127.0.0.1:8080  (LAN: ./bin/dnd -addr 0.0.0.0:8080)
+make test           # Go tests
+cd web && npm run test:e2e   # Playwright (DM + player)
+```
+Game state is in memory: restarting the server clears it. Uploaded images stay in `uploads/`.
 
 ## Structure
 ```

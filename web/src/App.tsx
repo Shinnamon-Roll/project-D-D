@@ -1,21 +1,52 @@
-import { useEffect, useState } from 'react'
+import { useMe, useStore } from './store'
+import CampaignMenu from './screens/CampaignMenu'
+import Lobby from './screens/Lobby'
+import CharacterCreate, { CreatingDmView } from './screens/CharacterCreate'
+import Table from './screens/Table'
 
-// Step 1 smoke screen: proves the browser ↔ Go WebSocket round trip.
 export default function App() {
-  const [status, setStatus] = useState('connecting…')
+  const room = useStore((s) => s.room)
+  const connected = useStore((s) => s.connected)
+  const lastError = useStore((s) => s.lastError)
+  const { seat, character, isDm } = useMe()
 
-  useEffect(() => {
-    const ws = new WebSocket(`${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws`)
-    ws.onopen = () => ws.send(JSON.stringify({ type: 'hello' }))
-    ws.onmessage = (e) => setStatus(`connected · server says ${JSON.parse(e.data).type}`)
-    ws.onclose = () => setStatus('disconnected')
-    return () => ws.close()
-  }, [])
+  let screen
+  if (!room) screen = <p>กำลังเชื่อมต่อ… / Connecting…</p>
+  else if (room.status === 'menu') screen = <CampaignMenu />
+  else if (room.status === 'lobby') screen = <Lobby />
+  else if (room.status === 'creating') {
+    if (isDm) screen = <CreatingDmView />
+    else if (seat && !character) screen = <CharacterCreate key={JSON.stringify(room.ruleset)} />
+    else screen = <p data-testid="waiting">รอผู้เล่นคนอื่นสร้างตัวละคร… / Waiting for other players…</p>
+  } else screen = <Table />
 
   return (
-    <main style={{ fontFamily: 'system-ui', padding: 24 }}>
-      <h1>Tabletop v{__APP_VERSION__}</h1>
-      <p data-testid="ws-status">{status}</p>
-    </main>
+    <div className="app">
+      <header className="topbar">
+        <strong>Tabletop</strong> <small>v{__APP_VERSION__}</small>
+        {seat && (
+          <span className="me" data-testid="my-seat">
+            {seat.name} · {seat.kind === 'player' ? 'ผู้เล่น / Player' : seat.kind === 'dm' ? 'DM' : 'Co-DM'}
+          </span>
+        )}
+        <span className={connected ? 'ok' : 'bad'} data-testid="ws-status">
+          {connected ? 'connected' : 'disconnected'}
+        </span>
+      </header>
+      {lastError && (
+        <div className="error" role="alert" data-testid="error-banner">
+          {lastError}
+          <button aria-label="ปิด / Dismiss" onClick={() => useStore.setState({ lastError: null })}>
+            ×
+          </button>
+        </div>
+      )}
+      <main>{screen}</main>
+      {room?.ruleset.attribution && (
+        <footer className="attribution" data-testid="attribution">
+          {room.ruleset.attribution}
+        </footer>
+      )}
+    </div>
   )
 }

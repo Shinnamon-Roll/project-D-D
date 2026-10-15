@@ -13,3 +13,4 @@ Work log by date (newest at bottom).
 - Tech stack confirmed: Go backend + React/TS frontend (`docs/design/tech-stack.md`). Open: hosting (Q12), room number (Q13).
 - v0 step 1 scaffold: Go server (`cmd/server`, embed `internal/webui`), Vite React TS `web/` v0.1.0, Makefile (dev/build/test). Verified: binary serves page, WS echo, WS upgrade via Vite proxy (101).
 - Agents added: `backend`, `frontend`, `auditor` (`.claude/agents/`).
+- v0 built via workflow (backend + frontend agents in parallel → auditor → fixes → Playwright e2e). Audit: 3 MEDIUM fixed (fog leak in token list, dice notation raw length, scene name >32 chars), 2 LOW open. Verified: 66 Go tests (-race), vet, web build, e2e 1/1. Version 0.2.2. Spec: `docs/features/v0-table.md`.

@@ -1,57 +1,38 @@
 package main
 
 import (
-	"context"
 	"flag"
 	"io/fs"
 	"log"
 	"net/http"
+	"os"
 
-	"github.com/coder/websocket"
-	"github.com/coder/websocket/wsjson"
-
+	"projectdnd/internal/room"
 	"projectdnd/internal/webui"
 )
 
 func main() {
 	addr := flag.String("addr", "127.0.0.1:8080", "listen address")
+	uploads := flag.String("uploads", "uploads", "directory for uploaded images")
 	flag.Parse()
 
 	dist, err := fs.Sub(webui.Dist, "dist")
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	mux := http.NewServeMux()
-	mux.HandleFunc("/ws", handleWS)
-	mux.Handle("/", http.FileServerFS(dist))
+	if err := os.MkdirAll(*uploads, 0o755); err != nil {
+		log.Fatal(err)
+	}
 
 	log.Printf("listening on http://%s", *addr)
-	log.Fatal(http.ListenAndServe(*addr, mux))
+	log.Fatal(http.ListenAndServe(*addr, newMux(room.NewHub(), *uploads, dist)))
 }
 
-type message struct {
-	Type    string `json:"type"`
-	Payload any    `json:"payload,omitempty"`
-}
-
-// handleWS echoes every message back; replaced by the room hub in step 3.
-func handleWS(w http.ResponseWriter, r *http.Request) {
-	c, err := websocket.Accept(w, r, nil)
-	if err != nil {
-		return
-	}
-	defer c.CloseNow()
-	c.SetReadLimit(64 << 10)
-
-	ctx := context.Background()
-	for {
-		var m message
-		if err := wsjson.Read(ctx, c, &m); err != nil {
-			return
-		}
-		if err := wsjson.Write(ctx, c, message{Type: "echo", Payload: m}); err != nil {
-			return
-		}
-	}
+func newMux(hub *room.Hub, uploads string, dist fs.FS) *http.ServeMux {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/ws", hub.ServeWS)
+	mux.HandleFunc("POST /api/upload", handleUpload(uploads, hub.Seated))
+	mux.HandleFunc("GET /uploads/{name}", handleUploads(uploads))
+	mux.Handle("/", http.FileServerFS(dist))
+	return mux
 }

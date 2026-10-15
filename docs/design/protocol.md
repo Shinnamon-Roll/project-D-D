@@ -86,3 +86,15 @@ or an integer constant. Examples: `1d20+3`, `2d20kh1+5`, `4d6kl3`, `d100`, `3d8-
 
 ## Server bind
 Default `-addr 127.0.0.1:8080`.
+
+## Server limits beyond the table (implemented v0.2)
+- Dice: ≤100 dice per whole expression, notation ≤100 chars (raw), constants ≤100000.
+- Ruleset: names/keys/ids 1–64 chars, attribution ≤1000, skill `statKey` "" or an existing stat, `startingSkillPicks` ≤ number of skills, `statPoints` ≤ Σ(max − base), startingItems qty ≥ 1 and unique.
+- Names (DM, seat, character, scene, NPC): 1–32 chars.
+- `hello.clientId`: 8–64 chars `[A-Za-z0-9_-]`; any event before `hello`, or a second `hello` → error.
+- Image URLs: exactly `/uploads/<name>` (no extra `/`, `..`, `?`, `#`; name ≤64).
+- `scene.update` clamps tokens into a shrunken grid; `scene.select` wraps auto-placed tokens to the next row.
+- `character.grant`: `setStats` keys and `removeSkillIds` must exist.
+- A co-DM may remove their own seat; an empty co-DM seat survives `game.start`.
+- Preset HP and AC: min = max = base = 10 (DM sets them via grant).
+- Hub drops a client with >32 queued messages (it reconnects and gets fresh state).

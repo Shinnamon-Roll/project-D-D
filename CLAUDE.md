@@ -26,7 +26,7 @@ Tests: `go test` + Playwright (2 tabs: DM + player).
 ## Working rules
 - Clarify requirements before acting. Never jump into code on your own.
 - Start from the smallest scope that works. No extras yet.
-- Every code/behavior change bumps `version` in `package.json` (SemVer `MAJOR.MINOR.PATCH`). Docs-only changes do not.
+- Every code/behavior change bumps `version` in `web/package.json` (single project version) (SemVer `MAJOR.MINOR.PATCH`). Docs-only changes do not.
 - `README.md` is for humans; `CLAUDE.md` is instructions for Claude.
 - Log work by date in `WORKLOG.md`.
 - Commit every finished feature/step (one commit each, Conventional Commits). Never push — the user pushes.
