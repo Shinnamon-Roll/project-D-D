@@ -3,7 +3,7 @@
 ที่มา: [`../conversations/2026-10-16-character-roster.md`](../conversations/2026-10-16-character-roster.md) · ทำหลัง i18n (ข้อความ 2 ภาษา)
 
 ## ระบบใหม่ (แทนที่ white-label ruleset)
-- **ลบ**: แจกแต้ม stat, เลือกสกิลตอนสร้าง, RulesetEditor, preset 5E (SRD 5.2.1) + attribution, event `ruleset.*`, `character.submit` แบบเดิม, คำอธิบายสกิล SRD (`web/src/content/srdSkills.ts`)
+- **ลบ**: แจกแต้ม stat, เลือกสกิลตอนสร้าง, RulesetEditor แบบเดิม (เปลี่ยนเป็นตัวแก้ roster — ด้านล่าง), preset 5E (SRD 5.2.1) + attribution, event `ruleset.*`, `character.submit` แบบเดิม, คำอธิบายสกิล SRD (`web/src/content/srdSkills.ts`)
 - **Stat** (ทุกตัวมีชุดเดียวกัน ค่าต่างกัน):
   | key | ไทย | EN |
   |---|---|---|
@@ -55,3 +55,15 @@
 
 ## Done
 Go tests: pick (ห้ามซ้ำ, สถานะ, สิทธิ์), custom skill (limit 3, ความยาว, cost 0–10, สิทธิ์เจ้าของ/DM), skill.use (มานาพอ/ไม่พอ/ไม่ใช่เจ้าของ), adjust clamp, rest, item.remove (−1, ทั้งกอง, เกินจำนวน, สิทธิ์) · e2e: ผู้เล่นเลื่อนการ์ด (ปุ่ม + คีย์) เลือกตัว, ผู้เล่นคนที่ 2 เห็นการ์ดนั้นเทา, ใช้สกิลแล้วมานาลด + feed, DM พักผ่อน → มานาเต็ม, DM คลิกรูปปาร์ตี้ → การ์ดมุมขวาล่าง → ลบของ −1 แล้วผู้เล่นเห็นของลด · screenshot carousel 1440 + 390
+
+## หน้า Ruleset = ตัวแก้ Roster (คำขอเพิ่ม 3)
+- เมนู DM หัวข้อ **ชุดกฎ / Ruleset** (และใน lobby) → รายการ 10 ตัวละคร (รูป + ชื่อ + คลาส) → คลิกเปิดตัวแก้:
+  - ชื่อฮีโร่ / ชื่อคลาส / คำโปรย (TH + EN), รูป (เลือกจาก 10 รูปคลาส หรืออัปโหลดเอง)
+  - stat: hpMax 1–999, str/end/agi 0–20, mpMax 0–99
+  - สกิลติดตัว 1–5 อัน (ชื่อ/คำอธิบาย TH+EN, มานา 0–10)
+  - ของเริ่มต้น 0–10 ชิ้น (ชื่อ TH+EN + จำนวน)
+  - ปุ่ม **รีเซ็ตตัวนี้** / **รีเซ็ตทั้งหมด** เป็นค่าเริ่มต้น (`docs/design/roster.md`)
+- Events (DM/co-DM, ทุกสถานะ): `roster.update {classId, entry}` · `roster.reset {classId?}` (ไม่ใส่ = ทั้งหมด)
+- มีผลกับตัวละครที่ **ถูกเลือกหลังจากนั้น** เท่านั้น (ตัวที่เลือกไปแล้ว DM แก้ผ่านการ์ดโปรไฟล์)
+- เก็บถาวร `data/roster.json` (atomic write แบบ notes); ไม่มีไฟล์ = roster เริ่มต้นใน Go; ไฟล์เสีย = quarantine แล้วใช้ค่าเริ่มต้น
+- ผู้เล่นได้ roster ฉบับที่ใช้จริง (ไม่มีอะไรลับ) เพื่อแสดงการ์ด
