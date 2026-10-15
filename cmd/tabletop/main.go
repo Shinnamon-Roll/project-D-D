@@ -1,4 +1,5 @@
-// Command tabletop is the TUI launcher: a welcome screen with a start button, then live server logs.
+// Command tabletop is the TUI launcher: a welcome screen with a start button, then a live dashboard
+// (server, room, logs, connections) with a reload button that rebuilds and restarts.
 // Design: docs/design/tui.md. The headless server is cmd/server.
 package main
 
@@ -20,6 +21,7 @@ import (
 	"charm.land/lipgloss/v2"
 	"github.com/charmbracelet/x/ansi"
 
+	"projectdnd/internal/room"
 	"projectdnd/internal/server"
 )
 
@@ -32,11 +34,16 @@ const (
 
 func main() {
 	addr := flag.String("addr", "0.0.0.0:8080", "listen address (0.0.0.0 = reachable from LAN; 127.0.0.1 = this machine only)")
+	autostart := flag.Bool("autostart", false, "start the server right away, skipping the welcome screen (set by reload)")
 	flag.Parse()
 
 	ch := make(chan logMsg, 1024)
 	log := slog.New(&teaHandler{ch: ch})
 	m := newModel(*addr, version, func() (runner, error) { return server.Start(*addr, "uploads", log) })
+	m.log, m.autostart, m.build = log, *autostart, makeBuild
+	wd, _ := os.Getwd()       // "" on error: findRoot reports it
+	exe, _ := os.Executable() // "" on error: falls back to wd
+	m.root, m.noReload = findRoot(exe, wd)
 	p := tea.NewProgram(m)
 	go func() {
 		for msg := range ch {
@@ -49,10 +56,18 @@ func main() {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
+	if m.reload { // build passed and the server is down: become the new binary
+		err := reexec(m.root, os.Args[1:])
+		fmt.Fprintln(os.Stderr, "reload:", err)
+		os.Exit(1)
+	}
 }
 
 // shutdownIfRunning gracefully stops a server the q path did not already stop.
 func (m *model) shutdownIfRunning() {
+	if m.cancel != nil {
+		m.cancel() // stop a build still running
+	}
 	if m.srv == nil || m.stopped {
 		return
 	}
@@ -66,6 +81,7 @@ func (m *model) shutdownIfRunning() {
 type runner interface {
 	Addr() string
 	Clients() int
+	Summary() room.Summary
 	Shutdown(context.Context) error
 }
 
@@ -82,8 +98,9 @@ type (
 		srv runner
 		err error
 	}
-	stoppedMsg struct{}
-	tickMsg    time.Time
+	stoppedMsg   struct{}
+	tickMsg      time.Time
+	buildDoneMsg struct{ err error }
 )
 
 type model struct {
@@ -102,6 +119,28 @@ type model struct {
 	spin     spinner.Model
 	vp       viewport.Model
 	w, h     int
+
+	// reload
+	log       *slog.Logger // build output goes here, so it reaches the log panel
+	autostart bool
+	root      string // repo root; "" = reload disabled
+	noReload  string // why reload is disabled
+	build     buildFunc
+	confirm   time.Time // reload asked while clients are connected; a second r before this confirms
+	building  bool
+	cancel    context.CancelFunc // cancels the running build
+	reload    bool               // build passed: main re-execs after the program exits
+
+	// dashboard samples, taken on each tick
+	sum             room.Summary
+	clients         int
+	connHist        []int // clients per second
+	evHist          []int // events per 10s
+	evNow, ticks    int
+	events, rejects int // counted from log records
+	warns           int // warn+error lines since the last clear
+	heap            uint64
+	goroutines      int
 }
 
 func newModel(addr, version string, start func() (runner, error)) *model {
@@ -109,12 +148,18 @@ func newModel(addr, version string, start func() (runner, error)) *model {
 		addr: addr, version: version, start: start, follow: true, ips: server.LANIPs(),
 		spin: spinner.New(spinner.WithSpinner(spinner.Dot), spinner.WithStyle(accent)),
 		vp:   viewport.New(),
+		log:  slog.New(slog.DiscardHandler), noReload: "not set up",
 	}
 	m.vp.SoftWrap = true // long errors stay readable
 	return m
 }
 
-func (m *model) Init() tea.Cmd { return nil }
+func (m *model) Init() tea.Cmd {
+	if m.autostart {
+		return m.startCmd()
+	}
+	return nil
+}
 
 // boundAddr is the server's bound address once running, else the configured one.
 func (m *model) boundAddr() string {
@@ -156,6 +201,9 @@ func (m *model) stopCmd() tea.Cmd {
 	if m.stopping {
 		return nil
 	}
+	if m.cancel != nil {
+		m.cancel()
+	}
 	m.stopping = true
 	srv := m.srv
 	return func() tea.Msg {
@@ -166,14 +214,70 @@ func (m *model) stopCmd() tea.Cmd {
 	}
 }
 
+// reloadCmd starts the build, or first asks for confirmation when clients would lose the room.
+func (m *model) reloadCmd() tea.Cmd {
+	switch {
+	case m.building || m.stopping:
+		return nil
+	case m.root == "":
+		m.addLog(logMsg{time.Now(), slog.LevelWarn, "reload disabled: " + m.noReload})
+		return nil
+	case m.srv.Clients() > 0 && !time.Now().Before(m.confirm):
+		m.confirm = time.Now().Add(confirmTimeout)
+		m.addLog(logMsg{time.Now(), slog.LevelWarn, "reload: ห้องจะรีเซ็ต (ทุกคนหลุด) กด r อีกครั้งภายใน 5 วิ เพื่อยืนยัน"})
+		return nil
+	}
+	m.confirm, m.building = time.Time{}, true
+	ctx, cancel := context.WithTimeout(context.Background(), buildTimeout)
+	m.cancel = cancel
+	m.addLog(logMsg{time.Now(), slog.LevelInfo, "reload: building in " + m.root})
+	build, root, log := m.build, m.root, m.log
+	return tea.Batch(m.spin.Tick, func() tea.Msg {
+		return buildDoneMsg{build(ctx, root, func(s string) { log.Info("build │ " + ansi.Strip(s)) })}
+	})
+}
+
+// sample polls the server for the dashboard; runs on each 1s tick.
+func (m *model) sample() {
+	m.clients, m.sum = m.srv.Clients(), m.srv.Summary()
+	m.connHist = push(m.connHist, m.clients)
+	if m.ticks++; m.ticks%10 == 0 {
+		m.evHist, m.evNow = push(m.evHist, m.evNow), 0
+	}
+	var ms runtime.MemStats
+	runtime.ReadMemStats(&ms)
+	m.heap, m.goroutines = ms.HeapAlloc, runtime.NumGoroutine()
+}
+
+// addLog appends a record to the log panel and counts it for the dashboard.
+func (m *model) addLog(l logMsg) {
+	switch {
+	case strings.HasPrefix(l.text, "event rejected"):
+		m.rejects++
+		m.evNow++
+	case strings.HasPrefix(l.text, "event "):
+		m.events++
+		m.evNow++
+	}
+	if l.level >= slog.LevelWarn {
+		m.warns++
+	}
+	m.lines = append(m.lines, l.render())
+	if len(m.lines) > maxLines {
+		m.lines = m.lines[len(m.lines)-maxLines:]
+	}
+	m.refresh()
+}
+
 func tick() tea.Cmd { return tea.Tick(time.Second, func(t time.Time) tea.Msg { return tickMsg(t) }) }
 
 func (m *model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.WindowSizeMsg:
 		m.w, m.h = msg.Width, msg.Height
-		m.vp.SetWidth(msg.Width)
-		m.vp.SetHeight(max(msg.Height-4, 1)) // header, 2 rules, footer
+		w, h := m.logSize()
+		m.vp.SetWidth(max(w-4, 1)) // border + 1 space each side
+		m.vp.SetHeight(max(h-2, 1))
 		m.refresh()
 		return m, nil
 	case startedMsg:
@@ -182,32 +286,57 @@ func (m *model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, nil
 		}
 		m.screen, m.srv, m.since = running, msg.srv, time.Now()
+		m.sample()
 		return m, tick()
 	case stoppedMsg:
 		m.stopped = true
 		return m, tea.Quit
 	case tickMsg:
 		if m.screen == running && !m.stopping {
+			m.sample()
 			return m, tick()
 		}
 		return m, nil
-	case logMsg:
-		m.lines = append(m.lines, msg.render())
-		if len(m.lines) > maxLines {
-			m.lines = m.lines[len(m.lines)-maxLines:]
+	case buildDoneMsg:
+		m.building = false
+		m.cancel()
+		if m.stopping { // q during the build wins: quit, no reload
+			return m, nil
 		}
-		m.refresh()
+		if msg.err != nil {
+			m.addLog(logMsg{time.Now(), slog.LevelError, "reload: build failed, server keeps running err=" + fmt.Sprintf("%q", msg.err.Error())})
+			return m, nil
+		}
+		m.reload = true
+		m.addLog(logMsg{time.Now(), slog.LevelInfo, "reload: build ok, restarting…"})
+		return m, m.stopCmd()
+	case logMsg:
+		m.addLog(msg)
 		return m, nil
 	case spinner.TickMsg:
-		if m.screen != starting {
+		if m.screen != starting && !m.building {
 			return m, nil
 		}
 		var cmd tea.Cmd
 		m.spin, cmd = m.spin.Update(msg)
 		return m, cmd
 	case tea.MouseClickMsg:
-		if m.screen == welcome && msg.Button == tea.MouseLeft && m.onButton(msg.X, msg.Y) {
+		if msg.Button != tea.MouseLeft {
+			return m, nil
+		}
+		switch {
+		case m.screen == welcome && hit(m.welcomeView(), m.buttonLabel(), msg.X, msg.Y, 3, 1):
 			return m, m.startCmd()
+		case m.screen == running && hit(m.runningView(), reloadLabel, msg.X, msg.Y, 1, 0):
+			return m, m.reloadCmd()
+		}
+		return m, nil
+	case tea.MouseWheelMsg:
+		if m.screen == running {
+			var cmd tea.Cmd
+			m.vp, cmd = m.vp.Update(msg)
+			m.follow = m.vp.AtBottom()
+			return m, cmd
 		}
 		return m, nil
 	case tea.KeyPressMsg:
@@ -236,8 +365,10 @@ func (m *model) key(msg tea.KeyPressMsg) tea.Cmd {
 				m.vp.GotoBottom()
 			}
 		case "c":
-			m.lines = nil
+			m.lines, m.warns = nil, 0
 			m.refresh()
+		case "r":
+			return m.reloadCmd()
 		case "up", "down", "pgup", "pgdown":
 			var cmd tea.Cmd
 			m.vp, cmd = m.vp.Update(msg)
@@ -273,14 +404,15 @@ func (m *model) refresh() {
 // ---- view ----
 
 var (
-	accent    = lipgloss.NewStyle().Foreground(lipgloss.Color("208"))
+	mint      = lipgloss.Color("#5EEAD4")
+	accent    = lipgloss.NewStyle().Foreground(mint)
 	dim       = lipgloss.NewStyle().Faint(true)
 	warn      = lipgloss.NewStyle().Foreground(lipgloss.Color("3"))
 	bad       = lipgloss.NewStyle().Foreground(lipgloss.Color("1"))
-	good      = lipgloss.NewStyle().Foreground(lipgloss.Color("2"))
+	good      = lipgloss.NewStyle().Foreground(lipgloss.Color("#34D399"))
 	bold      = lipgloss.NewStyle().Bold(true)
-	card      = lipgloss.NewStyle().Border(lipgloss.RoundedBorder()).BorderForeground(lipgloss.Color("208")).Padding(1, 6)
-	buttonOn  = lipgloss.NewStyle().Border(lipgloss.RoundedBorder()).BorderForeground(lipgloss.Color("208")).Padding(0, 2).Bold(true)
+	card      = lipgloss.NewStyle().Border(lipgloss.RoundedBorder()).BorderForeground(lipgloss.Color("238")).Padding(1, 6)
+	buttonOn  = lipgloss.NewStyle().Border(lipgloss.RoundedBorder()).BorderForeground(mint).Padding(0, 2).Bold(true)
 	buttonOff = buttonOn.BorderForeground(lipgloss.Color("8")).Bold(false)
 )
 
@@ -323,20 +455,6 @@ func (m *model) welcomeView() string {
 	return lipgloss.Place(m.w, m.h, lipgloss.Center, lipgloss.Center, body)
 }
 
-// onButton hit-tests a click against the rendered button (its label row ±1 for the border).
-func (m *model) onButton(x, y int) bool {
-	label := m.buttonLabel()
-	for i, line := range strings.Split(ansi.Strip(m.welcomeView()), "\n") {
-		j := strings.Index(line, label)
-		if j < 0 {
-			continue
-		}
-		col := ansi.StringWidth(line[:j])
-		return y >= i-1 && y <= i+1 && x >= col-3 && x < col+ansi.StringWidth(label)+3
-	}
-	return false
-}
-
 func (m *model) versionTag() string {
 	if m.version == "dev" {
 		return "dev"
@@ -344,35 +462,14 @@ func (m *model) versionTag() string {
 	return "v" + m.version
 }
 
-func (m *model) runningView() string {
-	status := good.Render("● RUNNING")
-	if m.stopping {
-		status = warn.Render("● STOPPING")
-	}
-	up := time.Since(m.since).Truncate(time.Second)
-	header := fmt.Sprintf(" %s  %s   uptime %02d:%02d:%02d   clients %d   %s",
-		status, bold.Render(m.url()), int(up.Hours()), int(up.Minutes())%60, int(up.Seconds())%60,
-		m.srv.Clients(), dim.Render(m.versionTag()))
-	if lan := m.lan(); lan != "" {
-		header += "   LAN " + bold.Render(lan)
-	}
-	follow := "off"
-	if m.follow {
-		follow = "on"
-	}
-	footer := dim.Render(" o เปิดเบราว์เซอร์ · ↑↓ pgup/pgdn เลื่อน · f ตามล่าสุด " + follow + " · c ล้าง · q หยุด+ออก")
-	rule := dim.Render(strings.Repeat("─", max(m.w, 1)))
-	return strings.Join([]string{header, rule, m.vp.View(), rule, footer}, "\n")
-}
-
 func (m *model) View() tea.View {
 	var v tea.View
 	if m.screen == running {
-		v = tea.NewView(m.runningView()) // no mouse mode here, so log text stays selectable
+		v = tea.NewView(m.runningView())
 	} else {
 		v = tea.NewView(m.welcomeView())
-		v.MouseMode = tea.MouseModeCellMotion
 	}
+	v.MouseMode = tea.MouseModeCellMotion // clickable buttons; most terminals still select text with shift+drag
 	v.AltScreen = true
 	v.WindowTitle = "tabletop"
 	return v
@@ -389,5 +486,5 @@ func (l logMsg) render() string {
 	case l.level >= slog.LevelWarn:
 		text = warn.Render(text)
 	}
-	return " " + dim.Render(l.time.Format("15:04:05")) + " " + text
+	return dim.Render(l.time.Format("15:04:05")) + " " + text
 }

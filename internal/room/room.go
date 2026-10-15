@@ -110,8 +110,9 @@ type State struct {
 
 // Room is not safe for concurrent use; the Hub serializes access.
 type Room struct {
-	st  State
-	seq int
+	st    State
+	seq   int
+	rolls int // total dice rolls; st.Dice is capped at MaxDiceLog
 }
 
 func New() *Room {
@@ -454,12 +455,66 @@ func (r *Room) Apply(clientID, typ string, payload json.RawMessage) error {
 			ID: r.id("d"), By: s.Name, Notation: strings.TrimSpace(p.Notation),
 			Rolls: res.Rolls, Total: res.Total, At: time.Now().UTC().Truncate(time.Second),
 		})
+		r.rolls++
 		if over := len(r.st.Dice) - MaxDiceLog; over > 0 {
 			r.st.Dice = slices.Delete(r.st.Dice, 0, over)
 		}
 		return nil
 	}
 	return fmt.Errorf("unknown event type %q", typ)
+}
+
+// Roll is the public part of a dice roll, for status displays.
+type Roll struct {
+	By, Notation string
+	Total        int
+}
+
+// Summary is a status snapshot for the TUI dashboard. It holds names only, never clientIds.
+type Summary struct {
+	Status, Campaign string
+	DM, CoDM         string // "" when the seat is missing or empty
+	Players, Seats   int    // occupied / total player seats
+	Ready            int    // ready players
+	Characters       int
+	Scenes           int
+	Scene            string // current scene name
+	Rolls            int
+	LastRoll         *Roll
+}
+
+// Summary returns a snapshot of the room for status displays.
+func (r *Room) Summary() Summary {
+	s := Summary{Status: r.st.Status, Characters: len(r.st.Characters), Scenes: len(r.st.Scenes), Rolls: r.rolls}
+	for _, c := range r.st.Campaigns {
+		if c.ID == r.st.CampaignID {
+			s.Campaign = c.Name
+		}
+	}
+	for _, x := range r.st.Seats {
+		switch {
+		case x.Kind == KindDM && x.Occupied:
+			s.DM = x.Name
+		case x.Kind == KindCoDM && x.Occupied:
+			s.CoDM = x.Name
+		case x.Kind == KindPlayer:
+			s.Seats++
+			if x.Occupied {
+				s.Players++
+				if x.Ready {
+					s.Ready++
+				}
+			}
+		}
+	}
+	if sc := r.scene(r.st.CurrentSceneID); sc != nil {
+		s.Scene = sc.Name
+	}
+	if n := len(r.st.Dice); n > 0 {
+		d := r.st.Dice[n-1]
+		s.LastRoll = &Roll{d.By, d.Notation, d.Total}
+	}
+	return s
 }
 
 func (r *Room) count(kind string) int {

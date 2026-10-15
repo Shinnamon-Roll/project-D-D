@@ -24,6 +24,24 @@ export const clientId = loadClientId()
 
 let socket: WebSocket | null = null
 let delay = 500
+let firstBuild = '' // server build seen first in this page load
+
+// Server restarted with a new build (TUI reload) → reload once to fetch the new web bundle.
+function checkBuild(build?: string) {
+  if (!build) return // old server without the field
+  if (!firstBuild) {
+    firstBuild = build
+    return
+  }
+  if (build === firstBuild) return
+  try {
+    if (sessionStorage.getItem('reloadedFor') === build) return // already reloaded for this build: no loop
+    sessionStorage.setItem('reloadedFor', build)
+  } catch {
+    // storage blocked: reload anyway; the new page's first build is this one, so it settles
+  }
+  location.reload()
+}
 
 export function connect() {
   const ws = new WebSocket(`${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws`)
@@ -40,7 +58,10 @@ export function connect() {
     } catch {
       return
     }
-    if (msg.type === 'state') useStore.setState({ room: msg.payload.room, you: msg.payload.you })
+    if (msg.type === 'state') {
+      checkBuild(msg.payload.build)
+      useStore.setState({ room: msg.payload.room, you: msg.payload.you })
+    }
     else if (msg.type === 'error') showError(msg.payload.message)
   }
   ws.onclose = () => {

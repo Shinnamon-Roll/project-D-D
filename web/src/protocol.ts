@@ -126,7 +126,7 @@ export interface You {
 
 // Server → client
 export type ServerMessage =
-  | { type: 'state'; payload: { room: RoomState; you: You } }
+  | { type: 'state'; payload: { room: RoomState; you: You; build?: string } } // build: random per server process
   | { type: 'error'; payload: { message: string } }
 
 type Empty = Record<string, never>

@@ -393,3 +393,36 @@ func TestDice(t *testing.T) {
 		t.Fatalf("log len %d, first by %s", len(dl), dl[0].By)
 	}
 }
+
+func TestSummary(t *testing.T) {
+	if s := New().Summary(); s.Status != StatusMenu || s.Campaign != "" || s.Seats != 0 || s.LastRoll != nil {
+		t.Fatalf("empty room %+v", s)
+	}
+	r, _ := lobby(t)
+	ok(t, r, "dm", "seat.add", m{})
+	ok(t, r, "p1", "seat.ready", m{"ready": true})
+	ok(t, r, "dm", "seat.openCoDm", m{})
+	for _, x := range r.State().Seats {
+		if x.Kind == KindCoDM {
+			ok(t, r, "co", "seat.sit", m{"seatId": x.ID, "name": "Cody"})
+		}
+	}
+	s := r.Summary()
+	if s.Status != StatusLobby || s.Campaign == "" || s.DM != "Dee" || s.CoDM != "Cody" || s.Players != 1 || s.Seats != 2 || s.Ready != 1 {
+		t.Fatalf("lobby %+v", s)
+	}
+	r, _ = playing(t)
+	ok(t, r, "p1", "dice.roll", m{"notation": "1d20+3"})
+	ok(t, r, "dm", "dice.roll", m{"notation": "2d6"})
+	s = r.Summary()
+	if s.Status != StatusPlaying || s.Characters != 1 || s.Scenes != 1 || s.Scene != "Beach" || s.Rolls != 2 ||
+		s.LastRoll == nil || s.LastRoll.By != "Dee" || s.LastRoll.Notation != "2d6" {
+		t.Fatalf("playing %+v %+v", s, s.LastRoll)
+	}
+	for range MaxDiceLog {
+		ok(t, r, "dm", "dice.roll", m{"notation": "d4"})
+	}
+	if s := r.Summary(); s.Rolls != MaxDiceLog+2 {
+		t.Fatalf("rolls %d: count must not stop at the dice log cap", s.Rolls)
+	}
+}

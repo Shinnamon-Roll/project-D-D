@@ -13,11 +13,15 @@ import (
 	"charm.land/bubbles/v2/spinner"
 	tea "charm.land/bubbletea/v2"
 	"github.com/charmbracelet/x/ansi"
+
+	"projectdnd/internal/room"
 )
 
 type fakeServer struct {
 	shutdowns int
 	addr      string
+	clients   int
+	sum       room.Summary
 }
 
 func (f *fakeServer) Addr() string {
@@ -26,7 +30,8 @@ func (f *fakeServer) Addr() string {
 	}
 	return "127.0.0.1:9999"
 }
-func (f *fakeServer) Clients() int                   { return 3 }
+func (f *fakeServer) Clients() int                   { return f.clients }
+func (f *fakeServer) Summary() room.Summary          { return f.sum }
 func (f *fakeServer) Shutdown(context.Context) error { f.shutdowns++; return nil }
 
 func key(s string) tea.KeyPressMsg {
@@ -74,7 +79,7 @@ func runCmd(t *testing.T, cmd tea.Cmd) tea.Msg {
 func TestWelcomeStartFlow(t *testing.T) {
 	for _, k := range []string{"enter", "space"} {
 		t.Run(k, func(t *testing.T) {
-			srv := &fakeServer{}
+			srv := &fakeServer{clients: 3}
 			m := newTestModel(func() (runner, error) { return srv, nil })
 			if !strings.Contains(view(m), "เริ่มเซิร์ฟเวอร์") || !strings.Contains(view(m), "v0.3.0") {
 				t.Fatalf("welcome view:\n%s", view(m))
@@ -84,7 +89,7 @@ func TestWelcomeStartFlow(t *testing.T) {
 				t.Fatalf("screen %v after %s", m.screen, k)
 			}
 			m.Update(runCmd(t, cmd))
-			if m.screen != running || !strings.Contains(view(m), "RUNNING") || !strings.Contains(view(m), "clients 3") {
+			if m.screen != running || !strings.Contains(view(m), "RUNNING") || !strings.Contains(view(m), "3 online") {
 				t.Fatalf("running view:\n%s", view(m))
 			}
 		})

@@ -37,3 +37,43 @@
 - Colors by level: DEBUG dim, INFO default, WARN yellow, ERROR red; time dim.
 - `q` / `ctrl+c` → graceful shutdown (`http.Server.Shutdown` with timeout), then exit.
 - Never log clientIds (bearer secrets): log seat names / seat ids only.
+
+## v0.6 dashboard (แทน Screen 2) — ที่มา [`../conversations/2026-10-16-tui-dashboard.md`](../conversations/2026-10-16-tui-dashboard.md)
+แนวภาพ: พื้นดำ, ขอบเส้นบาง (rounded/normal border สีเทาเข้ม), หัวแผงตัวพิมพ์ใหญ่สีเทา + ตัวเลขใหญ่, accent เขียวมิ้นต์ (`#5EEAD4`/`#34D399`), bar `█░` และ sparkline `▁▂▃▄▅▆▇█`
+```
+╭ SERVER ───────────╮╭ LOGS ─────────────────────────── 412 · 3 warn ╮╭ CONNECTIONS ──────╮
+│ ● RUNNING  v0.6.0 ││ 12:00:01 INFO  server started               ││ 3 online          │
+│ local 127.0.0.1:… ││ 12:00:09 INFO  ws connected seat=Mira       ││ ▁▂▂▃▅▅▆▆▅▃ 25s    │
+│ LAN  192.168.1.5:…││ 12:00:12 INFO  event campaign.select …      │╰───────────────────╯
+│ uptime 00:03:12   ││ ...                                          │╭ ACTIVITY ─────────╮
+╰───────────────────╯│                                              ││ events 128 · rej 2│
+╭ ROOM ─────────────╮│                                              ││ ▁▁▃▇▅▂▁ /10s      │
+│ LOBBY             ││                                              ││ dice 14 · last    │
+│ menu▸LOBBY▸create…││                                              ││ Mira 1d20+3 = 17  │
+│ Starter Set …     ││                                              │╰───────────────────╯
+│ DM  Dee Em        ││                                              │╭ SYSTEM ───────────╮
+│ seats ███░░░ 3/6  ││                                              ││ heap 6.1 MB       │
+│ ready ██░░░░ 2/3  ││                                              ││ goroutines 21     │
+│ chars 0 · scenes 1││                                              │╰───────────────────╯
+╰───────────────────╯╰──────────────────────────────────────────────╯
+ o เปิดเว็บ · ↑↓ pgup/pgdn เลื่อน · f ตามล่าสุด · c ล้าง · q หยุด+ออก
+```
+- **ซ้าย SERVER**: สถานะ, version, ลิงก์ local + LAN ทุกอัน, uptime
+- **ซ้าย ROOM** (จาก snapshot ห้อง อ่านแบบ thread-safe ทุก tick): status + ขั้น menu▸lobby▸creating▸playing (ขั้นปัจจุบันเน้นสี), ชื่อแคมเปญ, ชื่อ DM (+ co-DM), เก้าอี้ผู้เล่นที่นั่ง/ทั้งหมด (bar), พร้อม/นั่ง (bar), จำนวนตัวละคร, จำนวนฉาก + ฉากปัจจุบัน
+- **กลาง LOGS**: log เดิม (สีตาม level, scroll, follow) — หัวแผงบอกจำนวนบรรทัด + จำนวน warn/error
+- **ขวา CONNECTIONS**: จำนวนคนต่อ + sparkline (sample ทุก 1s) แสดงเท่าที่พอดีความกว้างแผง (≈25 วินาทีในแผง 32 คอลัมน์)
+- **ขวา ACTIVITY**: นับ event ที่สำเร็จ/ถูกปฏิเสธ (จาก log record), sparkline event ต่อ 10 วินาที, จำนวนทอยเต๋า + ทอยล่าสุด (ชื่อผู้ทอย, notation, total)
+- **ขวา SYSTEM**: heap (runtime.MemStats), goroutines
+- Responsive: กว้าง ≥ 130 → 3 คอลัมน์; 90–129 → ซ่อนคอลัมน์ขวา (ย้ายตัวเลขสำคัญไปหัวแผง log); < 90 → แถบสถานะบรรทัดเดียวด้านบน + log เต็ม
+- ปุ่มเดิมทั้งหมด; ห้ามแสดง clientId
+- mouse on for ⟳ RELOAD; select log text with shift+drag; wheel scrolls log
+- reload ปิดอยู่ (หา repo root ไม่เจอ) → แผง/แถบสถานะแสดงแค่ "⟳ RELOAD off"; เหตุผลเต็มขึ้นใน log เมื่อกด `r`
+
+## v0.6 reload — กด `r` / คลิก **⟳ RELOAD** (ที่แผง SERVER)
+1. ถ้ามี client ต่ออยู่ → ขึ้น "ห้องจะรีเซ็ต กด r อีกครั้งเพื่อยืนยัน" (หมดเวลา 5 วิ)
+2. รัน build ใน repo root (โฟลเดอร์ที่มี `Makefile`): web build + `go build` → `bin/tabletop`; output ไหลเข้าแผง LOGS; แผง SERVER แสดง "BUILDING…"
+3. build fail → แสดง error, server เดิมรันต่อ
+4. build ผ่าน → `Shutdown` server → ออกจาก Bubble Tea (คืน terminal) → `syscall.Exec` binary ใหม่ด้วย args เดิม + `-autostart`
+5. `-autostart` → เริ่ม server ทันทีไม่ผ่านหน้ายินดีต้อนรับ
+6. ไม่เจอ `Makefile`/repo → ปุ่ม reload ปิดใช้งาน พร้อมเหตุผล
+Browser: state มี `build` (random ต่อ process) → client เห็นค่าเปลี่ยนหลังต่อใหม่ → `location.reload()`

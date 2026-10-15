@@ -103,3 +103,6 @@ preferred first: 192.168 → 10 → 172.16 (Docker/VM bridges usually last). Loo
 
 ## `GET /api/lan`
 No auth (same as the page). Returns `200 {"urls": ["http://<ipv4>:<port>"]}` — every non-loopback IPv4 of the host with the listening port; `[]` when the server listens on loopback only. Used by the seat QR (`docs/features/seat-qr.md`).
+
+## `build` in `state`
+The `state` payload has a top-level `"build": "<16 hex>"`, random per server process. The client remembers the first value; when a later `state` carries a different value (server restarted, e.g. TUI reload), it calls `location.reload()` to load the new web build.

@@ -99,7 +99,9 @@ func TestHub(t *testing.T) {
 		t.Fatalf("hello: %s %v", typ, p)
 	}
 	pl.send("hello", m{"clientId": plID})
-	pl.next()
+	if _, p, _ := pl.next(); p["build"] != buildID || len(buildID) != 16 || strings.Trim(buildID, "0123456789abcdef") != "" {
+		t.Fatalf("state build %v, want 16 hex %q", p["build"], buildID)
+	}
 	if n := h.Clients(); n != 2 {
 		t.Fatalf("Clients = %d, want 2", n)
 	}
@@ -108,6 +110,9 @@ func TestHub(t *testing.T) {
 	_, p, raw := dm.next()
 	if seatID(p) == "" {
 		t.Fatal("dm has no seat")
+	}
+	if p["build"] != buildID {
+		t.Fatalf("build changed within one process: %v", p["build"])
 	}
 	_, p2, raw2 := pl.next()
 	if seatID(p2) != "" {

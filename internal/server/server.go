@@ -68,6 +68,9 @@ func (s *Server) Addr() string { return s.ln.Addr().String() }
 // Clients is the number of open WebSocket connections.
 func (s *Server) Clients() int { return s.hub.Clients() }
 
+// Summary is a status snapshot of the room.
+func (s *Server) Summary() room.Summary { return s.hub.Summary() }
+
 // Shutdown stops accepting connections and waits for in-flight requests until ctx ends.
 func (s *Server) Shutdown(ctx context.Context) error {
 	err := s.http.Shutdown(ctx)

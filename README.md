@@ -3,7 +3,7 @@
 เว็บโต๊ะเล่นเกมเล่าเรื่อง (แนว D&D 5e) สำหรับเล่นกับเพื่อนผ่าน browser ไม่ต้องใช้กระดาษ
 แนว white label: DM กำหนด stat / skill / ไอเทมเองได้ มี preset กฎ D&D 5e (SRD 5.2.1) ให้โหลด
 
-**เวอร์ชัน:** 0.5.0 · **สถานะ:** เล่นได้บนเครื่องตัวเอง (localhost) — เมนูแคมเปญ, lobby, ตั้งกฎ, สร้างตัวละคร, แมพ + grid + token + fog, ทอยเต๋า, TUI launcher, หน้าตาโทน medieval, QR เข้านั่ง
+**เวอร์ชัน:** 0.6.0 · **สถานะ:** เล่นได้บนเครื่องตัวเอง + เพื่อนใน Wi-Fi เดียวกัน — เมนูแคมเปญ, lobby, ตั้งกฎ, สร้างตัวละคร, แมพ + grid + token + fog, ทอยเต๋า, TUI launcher, หน้าตาโทน medieval, QR เข้านั่ง, TUI dashboard + reload
 
 ---
 
@@ -33,11 +33,13 @@ cd web && npm install && cd ..
 |---|---|---|
 | ยินดีต้อนรับ | `enter` / `space` / คลิกปุ่ม | เริ่ม server (ถ้า port ไม่ว่าง จะขึ้น error + ปุ่ม "ลองใหม่") |
 | ยินดีต้อนรับ | `q` | ออก |
-| log | `o` | เปิด browser |
-| log | `↑` `↓` `pgup` `pgdn` | เลื่อน log |
-| log | `f` | เปิด/ปิดการเลื่อนตาม log ล่าสุด |
-| log | `c` | ล้าง log |
-| log | `q` / `ctrl+c` | หยุด server อย่างปลอดภัยแล้วออก |
+| dashboard | `o` | เปิด browser |
+| dashboard | `↑` `↓` `pgup` `pgdn` | เลื่อน log |
+| dashboard | `f` | เปิด/ปิดการเลื่อนตาม log ล่าสุด |
+| dashboard | `c` | ล้าง log |
+| dashboard | `r` / คลิก **⟳ RELOAD** | build โค้ดใหม่ (web + Go) แล้ว restart เอง — browser refresh เอง · **ห้องรีเซ็ต** (มีคนต่ออยู่ต้องกด `r` ซ้ำยืนยัน) · build พัง = server เดิมรันต่อ |
+| dashboard | ลาก + `shift` | เลือก/copy ข้อความ log (เมาส์ใช้กับปุ่ม, ล้อเมาส์เลื่อน log) |
+| dashboard | `q` / `ctrl+c` | หยุด server อย่างปลอดภัยแล้วออก |
 
 ## 3. วิธีเล่น
 1. **DM** เปิดเว็บ → ใส่ชื่อ → เลือกแคมเปญ **Starter Set** (Salem = "Coming soon") → คนที่เลือกคือ DM

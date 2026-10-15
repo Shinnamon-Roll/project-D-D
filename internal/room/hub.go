@@ -2,6 +2,8 @@ package room
 
 import (
 	"context"
+	"crypto/rand"
+	"encoding/hex"
 	"encoding/json"
 	"log/slog"
 	"net/http"
@@ -16,6 +18,13 @@ const (
 	sendBuffer   = 32
 	writeTimeout = 10 * time.Second
 )
+
+// buildID is random per server process; clients reload the page when it changes (protocol.md "build in state").
+var buildID = func() string {
+	b := make([]byte, 8)
+	rand.Read(b) // never fails (crypto/rand docs)
+	return hex.EncodeToString(b)
+}()
 
 // Hub owns the room and every WebSocket connection. One mutex serializes Apply and broadcasts.
 // shortcut: full-state broadcast on every change, fine for <=8 clients; switch to patches if it lags.
@@ -58,6 +67,13 @@ func (h *Hub) seatNameLocked(clientID string) string {
 		return s.Name
 	}
 	return s.ID
+}
+
+// Summary returns a status snapshot of the room (names only, no clientIds).
+func (h *Hub) Summary() Summary {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+	return h.room.Summary()
 }
 
 // Seated reports whether clientID holds a seat (used by the upload endpoint).
@@ -195,9 +211,10 @@ func (h *Hub) sendStateLocked(c *conn, room json.RawMessage) {
 		SeatID string `json:"seatId"`
 	}
 	p, _ := json.Marshal(struct {
-		Room json.RawMessage `json:"room"`
-		You  you             `json:"you"`
-	}{room, you{h.room.SeatID(c.clientID)}})
+		Room  json.RawMessage `json:"room"`
+		You   you             `json:"you"`
+		Build string          `json:"build"`
+	}{room, you{h.room.SeatID(c.clientID)}, buildID})
 	h.enqueueLocked(c, "state", p)
 }
 
