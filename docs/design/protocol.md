@@ -85,7 +85,9 @@ or an integer constant. Examples: `1d20+3`, `2d20kh1+5`, `4d6kl3`, `d100`, `3d8-
 - `GET /uploads/<name>` serves files (no directory listing).
 
 ## Server bind
-Default `-addr 127.0.0.1:8080`.
+Default `-addr 0.0.0.0:8080` (reachable from other devices on the LAN; use `-addr 127.0.0.1:8080` for this machine only).
+`GET /api/lan` → `{"urls": [...]}`: private IPv4 only (192.168/16, 10/8, 172.16/12; no link-local, CGNAT/Tailscale or public),
+preferred first: 192.168 → 10 → 172.16 (Docker/VM bridges usually last). Loopback bind → `[]`.
 
 ## Server limits beyond the table (implemented v0.2)
 - Dice: ≤100 dice per whole expression, notation ≤100 chars (raw), constants ≤100000.
@@ -98,3 +100,6 @@ Default `-addr 127.0.0.1:8080`.
 - A co-DM may remove their own seat; an empty co-DM seat survives `game.start`.
 - Preset HP and AC: min = max = base = 10 (DM sets them via grant).
 - Hub drops a client with >32 queued messages (it reconnects and gets fresh state).
+
+## `GET /api/lan`
+No auth (same as the page). Returns `200 {"urls": ["http://<ipv4>:<port>"]}` — every non-loopback IPv4 of the host with the listening port; `[]` when the server listens on loopback only. Used by the seat QR (`docs/features/seat-qr.md`).

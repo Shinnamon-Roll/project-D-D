@@ -45,7 +45,7 @@ func Start(addr, uploads string, log *slog.Logger) (*Server, error) {
 	s := &Server{
 		hub: hub,
 		http: &http.Server{
-			Handler:           newMux(hub, uploads, dist, log),
+			Handler:           newMux(hub, uploads, dist, ln.Addr().String(), log),
 			ReadHeaderTimeout: 10 * time.Second,
 			ErrorLog:          slog.NewLogLogger(log.Handler(), slog.LevelWarn),
 			// WebSocket connections are hijacked, so Shutdown does not wait for them;
@@ -94,11 +94,12 @@ func Run(ctx context.Context, addr, uploads string, log *slog.Logger) error {
 	return s.Shutdown(sctx)
 }
 
-func newMux(hub *room.Hub, uploads string, dist fs.FS, log *slog.Logger) *http.ServeMux {
+func newMux(hub *room.Hub, uploads string, dist fs.FS, listenAddr string, log *slog.Logger) *http.ServeMux {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/ws", hub.ServeWS)
 	mux.HandleFunc("POST /api/upload", handleUpload(uploads, hub.Seated, log))
 	mux.HandleFunc("GET /uploads/{name}", handleUploads(uploads))
+	mux.HandleFunc("/api/lan", handleLAN(listenAddr)) // no method in pattern: "/" would catch POST as 404
 	mux.Handle("/", http.FileServerFS(dist))
 	return mux
 }

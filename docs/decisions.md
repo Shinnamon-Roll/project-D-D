@@ -32,3 +32,4 @@
 | 2026-10-16 | Q12: **รันบนคอมตัวเอง (localhost)** ทดสอบคนเดียวก่อน; LAN/tunnel ค่อยตัดสินทีหลัง · Q13 ข้ามไปก่อน (กลับเข้าห้องด้วย clientId ใน browser) | conversation 2026-10-16 |
 | 2026-10-16 | `make run` = TUI launcher (Bubble Tea): หน้ายินดีต้อนรับ + ปุ่มเริ่ม + log สด ([design](design/tui.md)) | [conv](conversations/2026-10-16-tui-launcher.md) |
 | 2026-10-16 | หน้าตาเว็บ **โทน medieval** ("Candlelit Tavern"): พื้นไม้เข้ม + แผง parchment + แดงเลือดหมู/ทอง, ฟอนต์ Cinzel + Trirong, ภาพประกอบ SVG วาดเอง ([design](design/visual-theme.md)) | [conv](conversations/2026-10-16-medieval-ui.md) |
+| 2026-10-16 | **QR เข้านั่ง**: DM/DM ร่วมกดปุ่ม QR บนเก้าอี้ว่าง → QR กลางจอ + "ที่นั่ง N"; สแกน → ใส่ชื่อ → นั่ง · server ฟัง **`0.0.0.0` เป็นค่าเริ่มต้น** (ยอมรับ: คนใน Wi-Fi เดียวกันเข้าได้ ไม่มีรหัส) — แทนที่ "localhost only" ของ Q12 ([spec](features/seat-qr.md)) | [conv](conversations/2026-10-16-seat-qr.md) |

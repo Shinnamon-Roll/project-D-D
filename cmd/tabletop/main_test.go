@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"log/slog"
+	"net"
 	"strings"
 	"testing"
 	"time"
@@ -14,9 +15,17 @@ import (
 	"github.com/charmbracelet/x/ansi"
 )
 
-type fakeServer struct{ shutdowns int }
+type fakeServer struct {
+	shutdowns int
+	addr      string
+}
 
-func (f *fakeServer) Addr() string                   { return "127.0.0.1:9999" }
+func (f *fakeServer) Addr() string {
+	if f.addr != "" {
+		return f.addr
+	}
+	return "127.0.0.1:9999"
+}
 func (f *fakeServer) Clients() int                   { return 3 }
 func (f *fakeServer) Shutdown(context.Context) error { f.shutdowns++; return nil }
 
@@ -235,6 +244,38 @@ func TestShutdownIfRunning(t *testing.T) {
 			m.shutdownIfRunning() // idempotent
 			if tt.srv != nil && tt.srv.shutdowns != tt.wantShutdowns {
 				t.Fatalf("shutdowns = %d, want %d", tt.srv.shutdowns, tt.wantShutdowns)
+			}
+		})
+	}
+}
+
+func TestLinks(t *testing.T) {
+	ips := []net.IP{net.ParseIP("192.168.1.5")}
+	tests := []struct {
+		name, addr, srvAddr string
+		wantURL, wantLAN    string
+	}{
+		{"loopback welcome", "127.0.0.1:8080", "", "http://127.0.0.1:8080", ""},
+		{"all-interfaces welcome", "0.0.0.0:8080", "", "http://127.0.0.1:8080", "http://192.168.1.5:8080"},
+		{"empty host welcome", ":8080", "", "http://127.0.0.1:8080", "http://192.168.1.5:8080"},
+		{"all-interfaces running", "0.0.0.0:8080", "[::]:8080", "http://127.0.0.1:8080", "http://192.168.1.5:8080"},
+		{"loopback running", "127.0.0.1:0", "127.0.0.1:9999", "http://127.0.0.1:9999", ""},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			m := newModel(tt.addr, "0.5.0", nil)
+			m.Update(tea.WindowSizeMsg{Width: 140, Height: 30})
+			m.ips = ips
+			if tt.srvAddr != "" {
+				m.Update(startedMsg{srv: &fakeServer{addr: tt.srvAddr}})
+			}
+			if m.url() != tt.wantURL || m.lan() != tt.wantLAN {
+				t.Fatalf("url %q lan %q, want %q %q", m.url(), m.lan(), tt.wantURL, tt.wantLAN)
+			}
+			v := view(m)
+			if !strings.Contains(v, tt.wantURL) || strings.Contains(v, "LAN") != (tt.wantLAN != "") ||
+				(tt.wantLAN != "" && !strings.Contains(v, tt.wantLAN)) {
+				t.Fatalf("view:\n%s", v)
 			}
 		})
 	}

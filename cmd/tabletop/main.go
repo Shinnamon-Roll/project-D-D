@@ -7,6 +7,7 @@ import (
 	"flag"
 	"fmt"
 	"log/slog"
+	"net"
 	"os"
 	"os/exec"
 	"runtime"
@@ -30,7 +31,7 @@ const (
 )
 
 func main() {
-	addr := flag.String("addr", "127.0.0.1:8080", "listen address")
+	addr := flag.String("addr", "0.0.0.0:8080", "listen address (0.0.0.0 = reachable from LAN; 127.0.0.1 = this machine only)")
 	flag.Parse()
 
 	ch := make(chan logMsg, 1024)
@@ -91,7 +92,8 @@ type model struct {
 	version  string
 	start    func() (runner, error)
 	srv      runner
-	err      error // last start failure
+	ips      []net.IP // LAN IPv4s, for the links phones can open
+	err      error    // last start failure
 	since    time.Time
 	stopping bool
 	stopped  bool
@@ -104,7 +106,7 @@ type model struct {
 
 func newModel(addr, version string, start func() (runner, error)) *model {
 	m := &model{
-		addr: addr, version: version, start: start, follow: true,
+		addr: addr, version: version, start: start, follow: true, ips: server.LANIPs(),
 		spin: spinner.New(spinner.WithSpinner(spinner.Dot), spinner.WithStyle(accent)),
 		vp:   viewport.New(),
 	}
@@ -114,11 +116,28 @@ func newModel(addr, version string, start func() (runner, error)) *model {
 
 func (m *model) Init() tea.Cmd { return nil }
 
-func (m *model) url() string {
+// boundAddr is the server's bound address once running, else the configured one.
+func (m *model) boundAddr() string {
 	if m.srv != nil {
-		return "http://" + m.srv.Addr()
+		return m.srv.Addr()
 	}
-	return "http://" + m.addr
+	return m.addr
+}
+
+// url is the link for this machine; an all-interfaces bind (0.0.0.0, ::, "") opens via 127.0.0.1.
+func (m *model) url() string {
+	addr := m.boundAddr()
+	if host, port, err := net.SplitHostPort(addr); err == nil {
+		if ip := net.ParseIP(host); host == "" || ip != nil && ip.IsUnspecified() {
+			addr = net.JoinHostPort("127.0.0.1", port)
+		}
+	}
+	return "http://" + addr
+}
+
+// lan is the LAN link(s) other devices can open, or "" when bound to loopback only.
+func (m *model) lan() string {
+	return strings.Join(server.LANURLs(m.boundAddr(), m.ips), " · ")
 }
 
 func (m *model) startCmd() tea.Cmd {
@@ -292,6 +311,9 @@ func (m *model) welcomeView() string {
 		parts = append(parts, bad.Render("เริ่มไม่ได้: "+m.err.Error()))
 	}
 	parts = append(parts, "", dim.Render(m.versionTag()+" · "+m.url()))
+	if lan := m.lan(); lan != "" {
+		parts = append(parts, dim.Render("LAN "+lan))
+	}
 	body := lipgloss.JoinVertical(lipgloss.Center,
 		card.Render(lipgloss.JoinVertical(lipgloss.Center, parts...)),
 		dim.Render("enter/space เริ่ม · q ออก"))
@@ -331,6 +353,9 @@ func (m *model) runningView() string {
 	header := fmt.Sprintf(" %s  %s   uptime %02d:%02d:%02d   clients %d   %s",
 		status, bold.Render(m.url()), int(up.Hours()), int(up.Minutes())%60, int(up.Seconds())%60,
 		m.srv.Clients(), dim.Render(m.versionTag()))
+	if lan := m.lan(); lan != "" {
+		header += "   LAN " + bold.Render(lan)
+	}
 	follow := "off"
 	if m.follow {
 		follow = "on"

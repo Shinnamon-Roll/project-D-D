@@ -37,6 +37,51 @@ test('v0: DM + player full flow', async ({ browser }) => {
   for (const id of ['seat-add', 'seat-open-codm', 'game-start', 'ruleset-editor'])
     await expect(tid(pl, id)).toHaveCount(0)
   await expect(pl.locator('[data-testid^="seat-remove-"]')).toHaveCount(0)
+  await expect(pl.locator('[data-testid^="seat-qr-"]')).toHaveCount(0)
+
+  // 2b. Seat QR: DM opens the QR for an empty player seat; a second player joins via its link.
+  if ((await dm.locator('button[data-testid^="seat-qr-"]').count()) === 0) await tid(dm, 'seat-add').click()
+  const qrBtn = dm.locator('button[data-testid^="seat-qr-"]').first()
+  const qrSeatId = (await qrBtn.getAttribute('data-testid'))!.replace('seat-qr-', '')
+  const seatLabel = (await tid(dm, `seat-num-${qrSeatId}`).textContent())!
+  await qrBtn.click()
+  await expect(dm.getByRole('dialog')).toBeVisible()
+  await expect(tid(dm, 'seat-qr-label')).toHaveText(seatLabel)
+  await expect(tid(dm, 'seat-qr-code')).toBeVisible()
+  await expect(tid(dm, 'seat-qr-url')).toContainText(`/?seat=${qrSeatId}`)
+  await expect(tid(dm, 'seat-qr-warn')).toBeVisible() // test server binds 127.0.0.1: no LAN URL
+  // A click in the dialog's padding (inside its box) must not close it.
+  const qrBox = (await dm.getByRole('dialog').boundingBox())!
+  await dm.mouse.click(qrBox.x + 4, qrBox.y + qrBox.height / 2)
+  await expect(dm.getByRole('dialog')).toBeVisible()
+  await dm.keyboard.press('Escape')
+  await expect(dm.getByRole('dialog')).toHaveCount(0)
+  await expect(qrBtn).toBeFocused()
+  await qrBtn.click() // left open: it must close itself once the QR player sits
+  await expect(dm.getByRole('dialog')).toBeVisible()
+
+  const qrCtx = await browser.newContext()
+  const qr = await qrCtx.newPage()
+  await qr.goto(`/?seat=${qrSeatId}`)
+  await expect(tid(qr, 'qr-join')).toContainText(seatLabel.split(' / ')[0])
+  await expect(tid(qr, 'sit-name')).toBeFocused()
+  await qr.keyboard.type('Bram')
+  await tid(qr, 'qr-sit').click()
+  await expect(tid(qr, 'my-seat')).toContainText('Bram')
+  await expect(tid(dm, `seat-${qrSeatId}`)).toContainText('Bram')
+  await expect(dm.getByRole('dialog')).toHaveCount(0)
+  await expect(tid(dm, 'lobby-heading')).toBeFocused()
+  await expect(qr).toHaveURL(/\/$/) // ?seat= stripped once seated
+  // Same link again now that the seat is taken: notice, normal lobby.
+  const late = await browser.newContext()
+  const latePage = await late.newPage()
+  await latePage.goto(`/?seat=${qrSeatId}`)
+  await expect(tid(latePage, 'qr-seat-gone')).toBeVisible()
+  await expect(tid(latePage, 'qr-join')).toHaveCount(0)
+  await late.close()
+  await tid(qr, 'seat-leave').click()
+  await expect(tid(qr, 'qr-join')).toHaveCount(0)
+  await qrCtx.close()
 
   await tid(pl, 'ready-toggle').click()
   await expect(tid(pl, 'ready-toggle')).toHaveAttribute('aria-pressed', 'true')
@@ -44,6 +89,14 @@ test('v0: DM + player full flow', async ({ browser }) => {
   // 3. DM starts.
   await expect(tid(dm, 'game-start')).toBeEnabled()
   await tid(dm, 'game-start').click()
+
+  // A seat link after start: banner, no join form.
+  const lateCtx = await browser.newContext()
+  const lateStart = await lateCtx.newPage()
+  await lateStart.goto(`/?seat=${qrSeatId}`)
+  await expect(tid(lateStart, 'qr-not-lobby')).toBeVisible()
+  await expect(tid(lateStart, 'qr-join')).toHaveCount(0)
+  await lateCtx.close()
 
   // 4. Player creates a character: spend every point, pick the required skills.
   await expect(tid(pl, 'char-name')).toBeVisible()

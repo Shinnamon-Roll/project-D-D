@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useMe, useStore } from './store'
 import CampaignMenu from './screens/CampaignMenu'
 import Lobby from './screens/Lobby'
@@ -10,6 +11,12 @@ export default function App() {
   const connected = useStore((s) => s.connected)
   const lastError = useStore((s) => s.lastError)
   const { seat, character, isDm } = useMe()
+  const linkedSeat = new URLSearchParams(location.search).get('seat')
+
+  // A seated browser ignores ?seat= from a QR link; drop it so a later leave doesn't re-offer it.
+  useEffect(() => {
+    if (seat && linkedSeat) history.replaceState(null, '', location.pathname + location.hash)
+  }, [seat, linkedSeat])
 
   let screen
   if (!room) screen = <p>กำลังเชื่อมต่อ… / Connecting…</p>
@@ -45,6 +52,11 @@ export default function App() {
             ×
           </button>
         </div>
+      )}
+      {linkedSeat && !seat && room && room.status !== 'lobby' && (
+        <p className="notice banner" role="status" data-testid="qr-not-lobby">
+          ลิงก์ที่นั่งใช้ได้เฉพาะตอนห้องรอ / Seat links only work in the lobby
+        </p>
       )}
       <main>{screen}</main>
       {room?.ruleset.attribution && (
