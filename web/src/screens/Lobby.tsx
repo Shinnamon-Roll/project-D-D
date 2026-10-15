@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { useMe, useStore } from '../store'
 import { send } from '../ws'
+import { useT } from '../i18n'
 import RulesetEditor from './RulesetEditor'
 import SeatQr from './SeatQr'
 
-const kindLabel = { dm: 'DM', codm: 'Co-DM', player: 'ผู้เล่น / Player' }
+const kindLabel = { dm: 'kindDm', codm: 'kindCodm', player: 'kindPlayer' } as const
 
 export default function Lobby() {
   const room = useStore((s) => s.room)!
+  const t = useT()
   const { seat: me, isDm } = useMe()
   const [name, setName] = useState('')
   const [qrFor, setQrFor] = useState('')
@@ -37,7 +39,7 @@ export default function Lobby() {
     <div className="columns">
       <section className="panel">
         <h1 ref={headingRef} tabIndex={-1} data-testid="lobby-heading">
-          ห้องรอ / Lobby
+          {t('lobby')}
         </h1>
         <p className="subtitle">{campaign?.name}</p>
 
@@ -51,14 +53,14 @@ export default function Lobby() {
             }}
           >
             <strong>
-              คุณกำลังจะนั่ง ที่นั่ง {seatNum(target.id)} / You are joining Seat {seatNum(target.id)}
+              {t('joiningSeat', { n: seatNum(target.id) })}
             </strong>
             <label>
-              ชื่อของคุณ / Your name
+              {t('yourName')}
               <input autoFocus data-testid="sit-name" value={name} maxLength={32} onChange={(e) => setName(e.target.value)} />
             </label>
             <button type="submit" className="primary" data-testid="qr-sit" disabled={!trimmed}>
-              นั่ง / Sit
+              {t('sit')}
             </button>
           </form>
         ) : (
@@ -66,11 +68,11 @@ export default function Lobby() {
             <>
               {linked && (
                 <p className="notice" role="status" data-testid="qr-seat-gone">
-                  ที่นั่งในลิงก์ไม่ว่างหรือไม่มีแล้ว เลือกที่นั่งด้านล่าง / The linked seat is taken or gone, pick one below
+                  {t('seatGone')}
                 </p>
               )}
               <label>
-                ชื่อของคุณ / Your name
+                {t('yourName')}
                 <input data-testid="sit-name" value={name} maxLength={32} onChange={(e) => setName(e.target.value)} />
               </label>
             </>
@@ -81,12 +83,12 @@ export default function Lobby() {
           {room.seats.map((s) => (
             <li key={s.id} data-testid={`seat-${s.id}`} className={s.id === me?.id ? 'mine' : ''}>
               <span className="kind" data-testid={s.kind === 'player' ? `seat-num-${s.id}` : undefined}>
-                {s.kind === 'player' ? `ที่นั่ง ${seatNum(s.id)} / Seat ${seatNum(s.id)}` : kindLabel[s.kind]}
+                {s.kind === 'player' ? t('seatN', { n: seatNum(s.id) }) : t(kindLabel[s.kind])}
               </span>
-              <span className="who">{s.occupied ? s.name : <em>ว่าง / empty</em>}</span>
+              <span className="who">{s.occupied ? s.name : <em>{t('empty')}</em>}</span>
               {s.kind === 'player' && s.occupied && (
                 <span className={`seal ${s.ready ? 'ok' : ''}`} data-testid={`seat-ready-${s.id}`}>
-                  {s.ready ? 'พร้อม / Ready' : 'ยังไม่พร้อม / Not ready'}
+                  {t(s.ready ? 'ready' : 'notReady')}
                 </span>
               )}
               {!me && !s.occupied && s.kind !== 'dm' && (
@@ -95,17 +97,17 @@ export default function Lobby() {
                   disabled={!trimmed}
                   onClick={() => send('seat.sit', { seatId: s.id, name: trimmed })}
                 >
-                  นั่ง / Sit
+                  {t('sit')}
                 </button>
               )}
               {isDm && s.kind === 'player' && !s.occupied && (
                 <button data-testid={`seat-qr-${s.id}`} onClick={() => setQrFor(s.id)}>
-                  QR / สแกนเข้านั่ง
+                  {t('seatQr')}
                 </button>
               )}
               {isDm && s.kind !== 'dm' && (
                 <button className="danger" data-testid={`seat-remove-${s.id}`} onClick={() => send('seat.remove', { seatId: s.id })}>
-                  ลบเก้าอี้ / Remove
+                  {t('removeSeat')}
                 </button>
               )}
             </li>
@@ -115,12 +117,12 @@ export default function Lobby() {
         <div className="row">
           {me?.kind === 'player' && (
             <button data-testid="ready-toggle" aria-pressed={me.ready} onClick={() => send('seat.ready', { ready: !me.ready })}>
-              {me.ready ? 'ยังไม่พร้อม / Not ready' : 'พร้อม / Ready'}
+              {t(me.ready ? 'notReady' : 'ready')}
             </button>
           )}
           {me && me.kind !== 'dm' && (
             <button data-testid="seat-leave" onClick={() => send('seat.leave', {})}>
-              ลุก / Leave seat
+              {t('leaveSeat')}
             </button>
           )}
         </div>
@@ -128,17 +130,17 @@ export default function Lobby() {
         {isDm && (
           <div className="row">
             <button data-testid="seat-add" disabled={players.length >= 6} onClick={() => send('seat.add', {})}>
-              + เก้าอี้ผู้เล่น / Add seat
+              {t('addSeat')}
             </button>
             <button
               data-testid="seat-open-codm"
               disabled={room.seats.some((s) => s.kind === 'codm')}
               onClick={() => send('seat.openCoDm', {})}
             >
-              เปิดที่ DM ร่วม / Open co-DM seat
+              {t('openCodm')}
             </button>
             <button className="primary" data-testid="game-start" disabled={!canStart} onClick={() => send('game.start', {})}>
-              เริ่มเกม / Start
+              {t('start')}
             </button>
           </div>
         )}

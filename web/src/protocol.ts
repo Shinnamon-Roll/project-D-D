@@ -31,6 +31,7 @@ export interface SkillDef {
   id: string
   name: string
   statKey: string // may be ""
+  description?: string // DM text, <= 500 chars
 }
 
 export interface ItemDef {

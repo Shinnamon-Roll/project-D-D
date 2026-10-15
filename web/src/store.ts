@@ -1,11 +1,21 @@
 import { create } from 'zustand'
 import type { RoomState, Seat, You } from './protocol'
+import type { Lang } from './i18n'
 
 interface Store {
   room: RoomState | null
   you: You
   connected: boolean
   lastError: string | null
+  lang: Lang
+}
+
+function savedLang(): Lang {
+  try {
+    return localStorage.getItem('lang') === 'en' ? 'en' : 'th'
+  } catch {
+    return 'th'
+  }
 }
 
 export const useStore = create<Store>(() => ({
@@ -13,6 +23,7 @@ export const useStore = create<Store>(() => ({
   you: { seatId: '' },
   connected: false,
   lastError: null,
+  lang: savedLang(),
 }))
 
 let errorTimer: ReturnType<typeof setTimeout> | undefined

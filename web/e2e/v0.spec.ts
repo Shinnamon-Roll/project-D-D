@@ -34,14 +34,27 @@ test('v0: DM + player full flow', async ({ browser }) => {
   const pl = await plCtx.newPage()
   await dm.goto('/')
   await pl.goto('/')
-  await expect(tid(dm, 'ws-status')).toHaveText('connected')
-  await expect(tid(pl, 'ws-status')).toHaveText('connected')
+  await expect(tid(dm, 'ws-status')).toHaveClass(/\bok\b/)
+  await expect(tid(pl, 'ws-status')).toHaveClass(/\bok\b/)
 
   // 1. DM picks the Starter Set.
   await tid(dm, 'dm-name').fill('Dee Em')
   await tid(dm, 'campaign-starter-set').click()
   await expect(tid(dm, 'my-seat')).toContainText('Dee Em')
   await expect(tid(dm, 'attribution')).toContainText('SRD')
+
+  // 1b. Language: default Thai; EN switches labels and survives a reload; back to TH for the rest.
+  await expect(tid(pl, 'lobby-heading')).toHaveText('ห้องรอ')
+  await expect(tid(pl, 'lang-th')).toHaveAttribute('aria-pressed', 'true')
+  await tid(pl, 'lang-en').click()
+  await expect(tid(pl, 'lobby-heading')).toHaveText('Lobby')
+  await expect(pl.locator('html')).toHaveAttribute('lang', 'en')
+  await pl.reload()
+  await expect(tid(pl, 'lobby-heading')).toHaveText('Lobby')
+  await expect(tid(pl, 'lang-en')).toHaveAttribute('aria-pressed', 'true')
+  await tid(pl, 'lang-th').click()
+  await expect(tid(pl, 'lobby-heading')).toHaveText('ห้องรอ')
+  await expect(pl.locator('html')).toHaveAttribute('lang', 'th')
 
   // 2. Player sits in a free player seat (add one if none) and readies.
   await expect(tid(pl, 'sit-name')).toBeVisible()
@@ -125,7 +138,16 @@ test('v0: DM + player full flow', async ({ browser }) => {
     while (await b.isEnabled()) await b.click()
   }
   await expect(tid(pl, 'points-left')).toHaveText('0')
-  const skills = pl.locator('[data-testid^="skill-"]:enabled:not(:checked)')
+  // Skill card: preset skill shows SRD examples and the d20 how-to; Esc closes and returns focus.
+  const info = tid(pl, 'skill-info-stealth')
+  await info.click()
+  await expect(pl.getByRole('dialog')).toBeVisible()
+  await expect(tid(pl, 'skill-info-examples').locator('li').first()).toBeVisible()
+  await expect(tid(pl, 'skill-info-how')).toBeVisible()
+  await pl.keyboard.press('Escape')
+  await expect(pl.getByRole('dialog')).toHaveCount(0)
+  await expect(info).toBeFocused()
+  const skills = pl.locator('input[data-testid^="skill-"]:enabled:not(:checked)')
   while (await tid(pl, 'char-submit').isDisabled()) await skills.first().check()
   await tid(pl, 'char-submit').click()
   await expect(tid(pl, 'sheet')).toContainText('Ayla')
@@ -157,8 +179,8 @@ test('v0: DM + player full flow', async ({ browser }) => {
   let p = await cellPoint(pl, 2, 1)
   await pl.mouse.click(p.x, p.y)
   await expect(tid(dm, `token-pos-${tokenId}`)).toHaveText('(2, 1)')
-  await pl.getByLabel('Ayla col').fill('3')
-  await pl.getByLabel('Ayla row').fill('2')
+  await tid(pl, `token-col-${tokenId}`).fill('3')
+  await tid(pl, `token-row-${tokenId}`).fill('2')
   await tid(pl, `token-move-${tokenId}`).click()
   await expect(tid(dm, `token-pos-${tokenId}`)).toHaveText('(3, 2)')
 

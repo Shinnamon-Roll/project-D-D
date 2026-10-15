@@ -1,7 +1,9 @@
 import type { Character } from '../protocol'
 import { useStore } from '../store'
+import { useT } from '../i18n'
 
 export default function SheetPanel({ character: c }: { character: Character }) {
+  const t = useT()
   const ruleset = useStore((s) => s.room!.ruleset)
   const name = (list: { id: string; name: string }[], id: string) => list.find((x) => x.id === id)?.name ?? id
 
@@ -19,11 +21,11 @@ export default function SheetPanel({ character: c }: { character: Character }) {
           </div>
         ))}
       </dl>
-      <h3>สกิล / Skills</h3>
+      <h3>{t('skills')}</h3>
       <ul className="chips">
         {c.skillIds.map((id) => <li key={id}>{name(ruleset.skills, id)}</li>)}
       </ul>
-      <h3>ไอเทม / Items</h3>
+      <h3>{t('items')}</h3>
       <ul data-testid="sheet-items">
         {c.inventory.map((it) => (
           <li key={it.itemId}>

@@ -1,8 +1,17 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type MouseEvent } from 'react'
 import QRCode from 'qrcode'
+import { useT } from '../i18n'
 
 // Modal with a QR that opens /?seat=<seatId>. Native <dialog> gives focus trap, Esc and focus return.
+// The dialog's own padding is also e.currentTarget; only clicks outside its box hit the backdrop.
+export function closeOnBackdrop(e: MouseEvent<HTMLDialogElement>) {
+  if (e.target !== e.currentTarget) return
+  const r = e.currentTarget.getBoundingClientRect()
+  if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) e.currentTarget.close()
+}
+
 export default function SeatQr({ seatId, num, onClose }: { seatId: string; num: number; onClose: () => void }) {
+  const t = useT()
   const ref = useRef<HTMLDialogElement>(null)
   const [urls, setUrls] = useState<string[] | null>(null)
   const [img, setImg] = useState('')
@@ -41,24 +50,19 @@ export default function SeatQr({ seatId, num, onClose }: { seatId: string; num: 
       aria-labelledby="seat-qr-title"
       data-testid="seat-qr-modal"
       onClose={onClose}
-      onClick={(e) => {
-        // The dialog's own padding is also e.currentTarget; only clicks outside its box hit the backdrop.
-        if (e.target !== e.currentTarget) return
-        const r = e.currentTarget.getBoundingClientRect()
-        if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) ref.current?.close()
-      }}
+      onClick={closeOnBackdrop}
     >
       <h2 id="seat-qr-title" data-testid="seat-qr-label">
-        ที่นั่ง {num} / Seat {num}
+        {t('seatN', { n: num })}
       </h2>
       {img ? (
-        <img className="qr" src={img} alt={`QR ที่นั่ง ${num} / Seat ${num}`} data-testid="seat-qr-code" />
+        <img className="qr" src={img} alt={t('qrAlt', { n: num })} data-testid="seat-qr-code" />
       ) : (
-        <p className="qr qr-wait">กำลังสร้าง… / Generating…</p>
+        <p className="qr qr-wait">{t('generating')}</p>
       )}
-      <p className="qr-hint">สแกนด้วยกล้องมือถือเพื่อนั่งที่นี้ / Scan with a phone camera to take this seat</p>
+      <p className="qr-hint">{t('qrHint')}</p>
       {urls && urls.length > 1 && (
-        <div className="row qr-addrs" role="group" aria-label="ที่อยู่ในวง LAN / LAN address">
+        <div className="row qr-addrs" role="group" aria-label={t('lanAddress')}>
           {urls.map((u, i) => (
             <button key={u} data-testid={`seat-qr-addr-${i}`} aria-pressed={i === pick} onClick={() => setPick(i)}>
               {u.replace(/^https?:\/\//, '')}
@@ -73,12 +77,11 @@ export default function SeatQr({ seatId, num, onClose }: { seatId: string; num: 
       )}
       {urls?.length === 0 && (
         <p className="qr-warn" role="note" data-testid="seat-qr-warn">
-          Server ฟังแค่เครื่องนี้ มือถือจะเข้าไม่ได้ — รันใหม่ด้วย <code>-addr 0.0.0.0:8080</code> / Server listens on this
-          machine only, phones can't connect — restart with <code>-addr 0.0.0.0:8080</code>
+          {t('qrWarn')} <code>-addr 0.0.0.0:8080</code>
         </p>
       )}
       <button className="primary" data-testid="seat-qr-close" onClick={() => ref.current?.close()}>
-        ปิด / Close
+        {t('close')}
       </button>
     </dialog>
   )

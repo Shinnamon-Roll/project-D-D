@@ -1,5 +1,6 @@
 import type { ClientEvents, ServerMessage } from './protocol'
 import { showError, useStore } from './store'
+import { translate } from './i18n'
 
 // crypto.randomUUID only exists in secure contexts (https/localhost); plain-http LAN needs the fallback.
 function newId(): string {
@@ -73,7 +74,7 @@ export function connect() {
 
 export function send<T extends keyof ClientEvents>(type: T, payload: ClientEvents[T]) {
   if (socket?.readyState !== WebSocket.OPEN) {
-    showError('ยังไม่ได้เชื่อมต่อ server / Not connected')
+    showError(translate(useStore.getState().lang, 'notConnected'))
     return
   }
   socket.send(JSON.stringify({ type, payload }))
@@ -89,7 +90,7 @@ export async function upload(file: File): Promise<string | null> {
     if (!r.ok || typeof j.url !== 'string') throw new Error(j.error || `upload failed (${r.status})`)
     return j.url
   } catch (err) {
-    showError(`อัปโหลดไม่สำเร็จ / Upload failed: ${(err as Error).message}`)
+    showError(translate(useStore.getState().lang, 'uploadFailed', { error: (err as Error).message }))
     return null
   }
 }

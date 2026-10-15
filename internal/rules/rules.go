@@ -5,6 +5,8 @@ package rules
 import (
 	"errors"
 	"fmt"
+	"strings"
+	"unicode"
 	"unicode/utf8"
 )
 
@@ -20,6 +22,8 @@ type SkillDef struct {
 	ID      string `json:"id"`
 	Name    string `json:"name"`
 	StatKey string `json:"statKey"` // may be ""
+	// Description is optional DM text; preset skills leave it "" (the frontend shows SRD text).
+	Description string `json:"description"`
 }
 
 type ItemDef struct {
@@ -53,6 +57,7 @@ const (
 	PresetDnD5eID = "dnd5e-srd"
 	maxText       = 64
 	maxAttrib     = 1000
+	maxSkillDesc  = 500
 )
 
 // SRDAttribution is the verbatim notice required by SRD 5.2.1 (docs/research/dnd-basics.md section 6).
@@ -138,8 +143,25 @@ func textOK(s string) bool {
 	return n >= 1 && n <= maxText
 }
 
-// Normalize replaces nil slices with empty ones so JSON never carries null arrays.
+// descOK allows 0-maxSkillDesc runes, newlines included, but no other control characters.
+func descOK(s string) bool {
+	if utf8.RuneCountInString(s) > maxSkillDesc {
+		return false
+	}
+	for _, c := range s {
+		if c != '\n' && unicode.IsControl(c) {
+			return false
+		}
+	}
+	return true
+}
+
+// Normalize replaces nil slices with empty ones so JSON never carries null arrays,
+// and trims skill descriptions.
 func (r *Ruleset) Normalize() {
+	for i := range r.Skills {
+		r.Skills[i].Description = strings.TrimSpace(r.Skills[i].Description)
+	}
 	if r.Stats == nil {
 		r.Stats = []StatDef{}
 	}
@@ -188,6 +210,9 @@ func ValidateRuleset(r Ruleset) error {
 	for _, s := range r.Skills {
 		if !textOK(s.ID) || !textOK(s.Name) {
 			return fmt.Errorf("skill id and name must be 1-%d characters", maxText)
+		}
+		if !descOK(s.Description) {
+			return fmt.Errorf("skill %q description must be at most %d characters with no control characters", s.ID, maxSkillDesc)
 		}
 		if skills[s.ID] {
 			return fmt.Errorf("duplicate skill id %q", s.ID)

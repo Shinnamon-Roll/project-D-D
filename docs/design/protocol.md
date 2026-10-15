@@ -26,7 +26,7 @@ Source of truth for both sides. Go structs in `internal/` and `web/src/protocol.
     "attribution": "This work includes material from the System Reference Document 5.2.1 ...",  // "" for custom
     "stats":  [{ "key": "str", "name": "STR", "min": 8, "max": 15, "base": 8 }],
     "statPoints": 27,                     // points a player adds on top of base at creation
-    "skills": [{ "id": "athletics", "name": "Athletics", "statKey": "str" }],   // statKey may be ""
+    "skills": [{ "id": "athletics", "name": "Athletics", "statKey": "str", "description": "" }],   // statKey may be ""; description optional (preset: "")
     "startingSkillPicks": 2,
     "items":  [{ "id": "rope", "name": "Rope" }],
     "startingItems": [{ "itemId": "rope", "qty": 1 }]
@@ -82,7 +82,7 @@ Default `-addr 0.0.0.0:8080` (reachable from other devices on the LAN; use `-add
 preferred first: 192.168 → 10 → 172.16 (Docker/VM bridges usually last). Loopback bind → `[]`.
 
 ## Server limits beyond the table (implemented v0.2)
-- Ruleset: names/keys/ids 1–64 chars, attribution ≤1000, skill `statKey` "" or an existing stat, `startingSkillPicks` ≤ number of skills, `statPoints` ≤ Σ(max − base), startingItems qty ≥ 1 and unique.
+- Ruleset: names/keys/ids 1–64 chars, attribution ≤1000, skill `statKey` "" or an existing stat, `startingSkillPicks` ≤ number of skills, `statPoints` ≤ Σ(max − base), startingItems qty ≥ 1 and unique. Skill `description` optional: trimmed, ≤500 chars (runes), newlines allowed, other control characters rejected; preset skills send `""` (frontend shows SRD text when the skill id matches the preset and description is empty).
 - Names (DM, seat, character, scene, NPC): 1–32 chars.
 - `hello.clientId`: 8–64 chars `[A-Za-z0-9_-]`; any event before `hello`, or a second `hello` → error.
 - Image URLs: exactly `/uploads/<name>` (no extra `/`, `..`, `?`, `#`; name ≤64).

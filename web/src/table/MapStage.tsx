@@ -3,6 +3,7 @@ import { Circle, Group, Image as KImage, Layer, Line, Rect, Stage, Text } from '
 import type Konva from 'konva'
 import type { Grid, Scene, Token } from '../protocol'
 import { send } from '../ws'
+import { useT } from '../i18n'
 
 export function useImg(url: string) {
   const [img, setImg] = useState<HTMLImageElement | null>(null)
@@ -44,6 +45,7 @@ const C = {
 }
 
 export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fogMode }: Props) {
+  const t = useT()
   const map = useImg(scene.imageUrl)
   const [selected, setSelected] = useState('')
   const [drag, setDrag] = useState<{ a: Cell; b: Cell } | null>(null)
@@ -131,7 +133,7 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
       data-grid={`${cols}x${rows}`}
       data-selected-token={selected}
       style={{ '--map-aspect': imgW / gridH } as CSSProperties}
-      aria-label={`แมพ / Map: ${scene.name}`}
+      aria-label={t('map', { name: scene.name })}
     >
       <Stage width={size.w} height={size.h} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerClick={onTap}>
         <Layer listening={false} {...clip}>

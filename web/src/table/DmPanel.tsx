@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import type { Grid, Scene } from '../protocol'
 import { useStore } from '../store'
 import { send, upload } from '../ws'
+import { useT } from '../i18n'
 import GrantPanel from './GrantPanel'
 import { useImg } from './MapStage'
 import RulesetEditor from '../screens/RulesetEditor'
@@ -34,6 +35,7 @@ interface Props {
 }
 
 export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode }: Props) {
+  const t = useT()
   const room = useStore((s) => s.room)!
   const [newName, setNewName] = useState('')
   const [npcName, setNpcName] = useState('')
@@ -47,7 +49,7 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
     // New scenes start at 20 columns; else the nearest valid count below, then above.
     const cols = [...Array(17)].map((_, i) => 20 - i).concat([...Array(40)].map((_, i) => 21 + i)).find((c) => colsOk(c, w, h))
     if (cols === undefined) {
-      setErr(`แมพสัดส่วนนี้ตั้งกริดไม่ได้ (${w}×${h}) / Can't fit a grid to this map's shape`)
+      setErr(t('gridFitError', { w, h }))
       return
     }
     setErr('')
@@ -63,11 +65,11 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
     <section className="panel" data-testid="dm-panel">
       <h2>DM</h2>
 
-      <h3>ฉาก / Scenes</h3>
+      <h3>{t('scenes')}</h3>
       {room.scenes.length > 0 && (
         <div className="row">
           <label className="grow">
-            ดู/แก้ฉาก / View scene
+            {t('viewScene')}
             <select data-testid="scene-select" value={scene?.id ?? ''} onChange={(e) => onView(e.target.value)}>
               {room.scenes.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -83,17 +85,17 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
             disabled={!scene || scene.id === room.currentSceneId}
             onClick={() => scene && send('scene.select', { sceneId: scene.id })}
           >
-            ให้ทุกคนไปฉากนี้ / Show to all
+            {t('showToAll')}
           </button>
         </div>
       )}
       <div className="row">
         <label className="grow">
-          ชื่อฉากใหม่ / New scene name
+          {t('newSceneName')}
           <input data-testid="scene-name" value={newName} maxLength={32} onChange={(e) => setNewName(e.target.value)} />
         </label>
         <label>
-          อัปแมพ / Upload map
+          {t('uploadMap')}
           <input
             data-testid="map-upload"
             type="file"
@@ -115,16 +117,16 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
 
       {scene && (
         <>
-          <h3>Fog</h3>
+          <h3>{t('fog')}</h3>
           <button data-testid="fog-toggle" aria-pressed={fogMode} onClick={() => setFogMode(!fogMode)}>
-            {fogMode ? 'ปิดโหมด fog / Fog mode: ON' : 'เปิดโหมด fog / Fog mode: OFF'}
+            {t(fogMode ? 'fogOn' : 'fogOff')}
           </button>
-          {fogMode && <p className="muted">ลากบนแมพเพื่อเพิ่ม · คลิกสี่เหลี่ยมเพื่อลบ / Drag to add, click a rect to remove</p>}
+          {fogMode && <p className="muted">{t('fogHint')}</p>}
           <ul className="chips">
             {scene.fog.map((f) => (
               <li key={f.id}>
                 {f.col},{f.row} {f.w}×{f.h}
-                <button aria-label="ลบ fog / Remove fog" data-testid={`fog-remove-${f.id}`} onClick={() => send('fog.remove', { sceneId: scene.id, fogId: f.id })}>
+                <button aria-label={t('removeFog')} data-testid={`fog-remove-${f.id}`} onClick={() => send('fog.remove', { sceneId: scene.id, fogId: f.id })}>
                   ×
                 </button>
               </li>
@@ -134,11 +136,11 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
           <h3>NPC</h3>
           <div className="row">
             <label className="grow">
-              ชื่อ NPC / NPC name
+              {t('npcName')}
               <input data-testid="npc-name" value={npcName} maxLength={32} onChange={(e) => setNpcName(e.target.value)} />
             </label>
             <label>
-              รูป / Image
+              {t('image')}
               <input
                 data-testid="npc-upload"
                 type="file"
@@ -164,11 +166,11 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
       )}
 
       <details>
-        <summary>ให้ของ/สกิล/stat / Grant</summary>
+        <summary>{t('grantSummary')}</summary>
         <GrantPanel />
       </details>
       <details>
-        <summary>ชุดกฎ / Ruleset</summary>
+        <summary>{t('ruleset')}</summary>
         <RulesetEditor key={JSON.stringify(room.ruleset)} />
       </details>
     </section>
@@ -176,6 +178,7 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
 }
 
 function SceneEditor({ scene, onPreview }: { scene: Scene; onPreview: (g: Grid | null) => void }) {
+  const t = useT()
   const [name, setName] = useState(scene.name)
   const [g, setG] = useState(scene.grid)
   const img = useImg(scene.imageUrl)
@@ -190,22 +193,22 @@ function SceneEditor({ scene, onPreview }: { scene: Scene; onPreview: (g: Grid |
   return (
     <div className="scene-editor">
       <label>
-        ชื่อฉาก / Scene name
+        {t('sceneName')}
         <input data-testid="scene-edit-name" value={name} maxLength={32} onChange={(e) => setName(e.target.value)} />
       </label>
-      <div className="grid-cols" role="group" aria-label="กริด / Grid">
-        <span className="grid-label">กริด / Grid</span>
-        <button aria-label="ลดคอลัมน์ / Fewer columns" data-testid="grid-cols-dec" disabled={!img || !colsOk(g.cols - 1, w, h)} onClick={() => step(-1)}>
+      <div className="grid-cols" role="group" aria-label={t('grid')}>
+        <span className="grid-label">{t('grid')}</span>
+        <button aria-label={t('fewerCols')} data-testid="grid-cols-dec" disabled={!img || !colsOk(g.cols - 1, w, h)} onClick={() => step(-1)}>
           −
         </button>
         <output data-testid="grid-cols" aria-live="polite">
           {g.cols}
         </output>
-        <button aria-label="เพิ่มคอลัมน์ / More columns" data-testid="grid-cols-inc" disabled={!img || !colsOk(g.cols + 1, w, h)} onClick={() => step(1)}>
+        <button aria-label={t('moreCols')} data-testid="grid-cols-inc" disabled={!img || !colsOk(g.cols + 1, w, h)} onClick={() => step(1)}>
           +
         </button>
         <span className="muted">
-          คอลัมน์ × <output data-testid="grid-rows">{g.rows}</output> แถว / cols × rows
+          {t('colsX')} <output data-testid="grid-rows">{g.rows}</output> {t('rows')}
         </span>
       </div>
       <button
@@ -213,7 +216,7 @@ function SceneEditor({ scene, onPreview }: { scene: Scene; onPreview: (g: Grid |
         disabled={!validGrid(g) || !name.trim()}
         onClick={() => send('scene.update', { sceneId: scene.id, name: name.trim(), grid: g })}
       >
-        บันทึกฉาก / Save scene
+        {t('saveScene')}
       </button>
     </div>
   )

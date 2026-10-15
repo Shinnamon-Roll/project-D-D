@@ -326,10 +326,10 @@ func (r *Room) Apply(clientID, typ string, payload json.RawMessage) error {
 		if err := r.needDM(s, notMenu...); err != nil {
 			return err
 		}
+		p.Ruleset.Normalize() // trims descriptions, so limits apply to the trimmed text
 		if err := rules.ValidateRuleset(p.Ruleset); err != nil {
 			return err
 		}
-		p.Ruleset.Normalize()
 		r.st.Ruleset = p.Ruleset
 		return nil
 	case "ruleset.loadPreset":

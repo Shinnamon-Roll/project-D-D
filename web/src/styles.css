@@ -119,6 +119,12 @@ small { font-size: 0.8em; }
 }
 @media (prefers-reduced-motion: reduce) { .status .flame::before { animation: none; } }
 
+/* TH | EN switch: two brass tabs on the wood bar */
+.lang { display: inline-flex; border: 1px solid var(--gold-dim); border-radius: 3px; overflow: hidden; }
+.lang button { padding: 2px 10px; border: 0; border-radius: 0; background: rgba(0, 0, 0, 0.25); color: #d8c595; box-shadow: none; font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 0.08em; }
+.lang button:hover:not(:disabled) { background: rgba(201, 162, 39, 0.2); }
+.lang button[aria-pressed='true'] { background: var(--gold); color: var(--ink); }
+
 main { padding: 24px 20px; max-width: 1440px; margin-inline: auto; }
 .ok { color: var(--moss); }
 .bad { color: var(--blood); }
@@ -473,10 +479,11 @@ details > .panel::before { display: none; }
 .scene-editor { margin: 6px 0 4px; padding: 8px 10px 10px; border: 1px dashed var(--line); border-radius: 3px; }
 .attribution { font-size: 0.75rem; color: var(--muted); padding: 8px 20px 20px; text-align: center; }
 .panel .attribution { padding: 8px 0 0; }
+.attribution-note { display: block; margin-top: 2px; font-style: italic; }
 
 /* ---------- seat QR ---------- */
-dialog.qr-modal { position: fixed; width: min(440px, calc(100vw - 32px)); max-height: calc(100vh - 32px); margin: auto; text-align: center; overflow-y: auto; }
-dialog.qr-modal::backdrop { background: rgba(14, 9, 6, 0.78); }
+dialog.qr-modal, dialog.skill-modal { position: fixed; width: min(440px, calc(100vw - 32px)); max-height: calc(100vh - 32px); margin: auto; text-align: center; overflow-y: auto; }
+dialog.qr-modal::backdrop, dialog.skill-modal::backdrop { background: rgba(14, 9, 6, 0.78); }
 .qr-modal h2 { font-size: 1.8rem; margin-top: 0.3em; }
 .qr-modal .qr { display: block; width: min(320px, 100%); aspect-ratio: 1; margin: 8px auto; border: 1px solid var(--gold-dim); border-radius: 3px; box-shadow: 0 0 0 4px #fffdf5, 0 0 0 5px var(--gold-dim); }
 .qr-modal .qr-wait { display: grid; place-items: center; color: var(--muted); }
@@ -487,6 +494,17 @@ dialog.qr-modal::backdrop { background: rgba(14, 9, 6, 0.78); }
 .qr-addrs button { font-size: 0.8rem; padding: 2px 10px; }
 .qr-addrs button[aria-pressed='true'] { background: var(--gold); color: var(--ink); border-color: var(--oxblood); }
 .qr-modal > button.primary { margin-top: 12px; padding: 8px 32px; }
+/* ---------- skill card ---------- */
+.skill-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+button.info-btn { flex: none; width: 1.7em; height: 1.7em; padding: 0; border-radius: 50%; font-size: 0.9rem; line-height: 1; color: var(--oxblood); }
+dialog.skill-modal { width: min(520px, calc(100vw - 32px)); text-align: left; }
+.skill-modal h2 { font-size: 1.6rem; margin: 0.2em 0 0; }
+.skill-modal .skill-stat { margin: 0 0 10px; color: var(--oxblood); font-family: var(--font-display); letter-spacing: 0.06em; }
+.skill-modal ul { margin: 4px 0 10px; padding-left: 1.2em; }
+.skill-how { margin-top: 10px; padding: 8px 12px; border: 1px dashed var(--line); border-radius: 3px; }
+.skill-how p { margin: 4px 0; }
+.skill-how li.current { font-weight: 700; color: var(--oxblood); }
+.skill-modal > button.primary { display: block; margin: 12px auto 0; padding: 8px 32px; }
 .qr-join { display: grid; gap: 6px; margin: 10px 0 14px; padding: 12px 14px; border: 2px solid var(--gold); border-radius: 3px; background: rgba(201, 162, 39, 0.16); box-shadow: 0 0 12px rgba(201, 162, 39, 0.45); }
 .qr-join strong { font-family: var(--font-display); color: var(--oxblood); letter-spacing: 0.04em; }
 .qr-join button { justify-self: start; }

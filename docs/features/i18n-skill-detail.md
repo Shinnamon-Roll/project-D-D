@@ -1,4 +1,4 @@
-# Feature: 2 ภาษา TH/EN + รายละเอียดสกิล (v0.8.0)
+# Feature: 2 ภาษา TH/EN + รายละเอียดสกิล (v0.9.0)
 
 ที่มา: [`../conversations/2026-10-16-i18n-skill-detail.md`](../conversations/2026-10-16-i18n-skill-detail.md)
 ลำดับงาน: ทำหลัง map-fit (แก้ไฟล์หน้าจอชุดเดียวกัน)

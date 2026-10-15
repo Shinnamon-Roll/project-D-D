@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import type { Grid, Token } from '../protocol'
 import { useMe, useStore } from '../store'
 import { send } from '../ws'
+import { useT } from '../i18n'
 import MapStage from '../table/MapStage'
 import DmPanel from '../table/DmPanel'
 import SheetPanel from '../table/SheetPanel'
@@ -22,6 +23,7 @@ const savePct = (n: number) => {
 }
 
 export default function Table() {
+  const t = useT()
   const room = useStore((s) => s.room)!
   const { character, isDm } = useMe()
   const [viewId, setViewId] = useState('') // DM may view/calibrate a scene that is not active yet
@@ -69,7 +71,7 @@ export default function Table() {
           <>
             <h2>
               {scene.name}
-              {isDm && scene.id !== room.currentSceneId && <small className="muted"> (ผู้เล่นยังไม่เห็น / not shown to players)</small>}
+              {isDm && scene.id !== room.currentSceneId && <small className="muted"> {t('notShown')}</small>}
             </h2>
             <MapStage
               scene={scene}
@@ -81,14 +83,14 @@ export default function Table() {
             />
           </>
         ) : (
-          <p data-testid="no-scene">{isDm ? 'อัปแมพเพื่อสร้างฉาก / Upload a map to create a scene' : 'รอ DM เลือกฉาก / Waiting for the DM to pick a scene'}</p>
+          <p data-testid="no-scene">{t(isDm ? 'uploadMapHint' : 'waitingScene')}</p>
         )}
       </div>
       <div
         className="splitter"
         role="separator"
         tabIndex={0}
-        aria-label="ขนาดแมพ / Map width"
+        aria-label={t('mapWidth')}
         aria-orientation="vertical"
         aria-valuenow={mapPct}
         aria-valuemin={MAP_MIN}
@@ -130,7 +132,7 @@ export default function Table() {
           <DmPanel scene={scene} onView={setViewId} onPreview={setPreview} fogMode={fogMode} setFogMode={setFogMode} />
         )}
         {scene && (
-          <ul className="token-list" data-testid="token-list" aria-label="Token">
+          <ul className="token-list" data-testid="token-list" aria-label={t('tokens')}>
             {tokens.map((t) => (
               <TokenRow key={t.id + t.col + ',' + t.row} t={t} movable={canMove(t)} removable={isDm && t.characterId === ''} />
             ))}
@@ -143,6 +145,7 @@ export default function Table() {
 
 // Keyboard/screen-reader alternative to clicking on the canvas; also shows each token's cell.
 function TokenRow({ t, movable, removable }: { t: Token; movable: boolean; removable: boolean }) {
+  const tr = useT()
   const [col, setCol] = useState(t.col)
   const [row, setRow] = useState(t.row)
   return (
@@ -159,16 +162,16 @@ function TokenRow({ t, movable, removable }: { t: Token; movable: boolean; remov
             send('token.move', { tokenId: t.id, col, row })
           }}
         >
-          <input aria-label={`${t.name} col`} type="number" min={0} value={col} onChange={(e) => setCol(Number(e.target.value))} />
-          <input aria-label={`${t.name} row`} type="number" min={0} value={row} onChange={(e) => setRow(Number(e.target.value))} />
+          <input aria-label={tr('tokenCol', { name: t.name })} data-testid={`token-col-${t.id}`} type="number" min={0} value={col} onChange={(e) => setCol(Number(e.target.value))} />
+          <input aria-label={tr('tokenRow', { name: t.name })} data-testid={`token-row-${t.id}`} type="number" min={0} value={row} onChange={(e) => setRow(Number(e.target.value))} />
           <button data-testid={`token-move-${t.id}`} type="submit">
-            ย้าย / Move
+            {tr('move')}
           </button>
         </form>
       )}
       {removable && (
         <button className="danger" data-testid={`token-remove-${t.id}`} onClick={() => send('token.remove', { tokenId: t.id })}>
-          ลบ / Remove
+          {tr('remove')}
         </button>
       )}
     </li>

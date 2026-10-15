@@ -5,11 +5,14 @@ import Lobby from './screens/Lobby'
 import CharacterCreate, { CreatingDmView } from './screens/CharacterCreate'
 import Table from './screens/Table'
 import crest from './assets/crest.svg'
+import { setLang, useT, type Lang } from './i18n'
 
 export default function App() {
   const room = useStore((s) => s.room)
   const connected = useStore((s) => s.connected)
   const lastError = useStore((s) => s.lastError)
+  const lang = useStore((s) => s.lang)
+  const t = useT()
   const { seat, character, isDm } = useMe()
   const linkedSeat = new URLSearchParams(location.search).get('seat')
 
@@ -17,15 +20,18 @@ export default function App() {
   useEffect(() => {
     if (seat && linkedSeat) history.replaceState(null, '', location.pathname + location.hash)
   }, [seat, linkedSeat])
+  useEffect(() => {
+    document.documentElement.lang = lang
+  }, [lang])
 
   let screen
-  if (!room) screen = <p>กำลังเชื่อมต่อ… / Connecting…</p>
+  if (!room) screen = <p>{t('connecting')}</p>
   else if (room.status === 'menu') screen = <CampaignMenu />
   else if (room.status === 'lobby') screen = <Lobby />
   else if (room.status === 'creating') {
     if (isDm) screen = <CreatingDmView />
     else if (seat && !character) screen = <CharacterCreate key={JSON.stringify(room.ruleset)} />
-    else screen = <p data-testid="waiting">รอผู้เล่นคนอื่นสร้างตัวละคร… / Waiting for other players…</p>
+    else screen = <p data-testid="waiting">{t('waitingOthers')}</p>
   } else screen = <Table />
 
   return (
@@ -37,31 +43,39 @@ export default function App() {
         </span>
         {seat && (
           <span className="me" data-testid="my-seat">
-            {seat.name} · {seat.kind === 'player' ? 'ผู้เล่น / Player' : seat.kind === 'dm' ? 'DM' : 'Co-DM'}
+            {seat.name} · {t(seat.kind === 'player' ? 'kindPlayer' : seat.kind === 'dm' ? 'kindDm' : 'kindCodm')}
           </span>
         )}
+        <span className="lang" role="group" aria-label={t('language')}>
+          {(['th', 'en'] as Lang[]).map((l) => (
+            <button key={l} lang={l} aria-label={l === 'th' ? 'ไทย' : 'English'} data-testid={`lang-${l}`} aria-pressed={lang === l} onClick={() => setLang(l)}>
+              {l.toUpperCase()}
+            </button>
+          ))}
+        </span>
         <span className={`status ${connected ? 'ok' : 'bad'}`} data-testid="ws-status">
           <span className="flame" aria-hidden="true" />
-          {connected ? 'connected' : 'disconnected'}
+          {t(connected ? 'connected' : 'disconnected')}
         </span>
       </header>
       {lastError && (
         <div className="error" role="alert" data-testid="error-banner">
           {lastError}
-          <button aria-label="ปิด / Dismiss" onClick={() => useStore.setState({ lastError: null })}>
+          <button aria-label={t('dismiss')} onClick={() => useStore.setState({ lastError: null })}>
             ×
           </button>
         </div>
       )}
       {linkedSeat && !seat && room && room.status !== 'lobby' && (
         <p className="notice banner" role="status" data-testid="qr-not-lobby">
-          ลิงก์ที่นั่งใช้ได้เฉพาะตอนห้องรอ / Seat links only work in the lobby
+          {t('qrNotLobby')}
         </p>
       )}
       <main>{screen}</main>
       {room?.ruleset.attribution && (
         <footer className="attribution" data-testid="attribution">
           {room.ruleset.attribution}
+          {lang === 'th' && <small className="attribution-note">{t('attributionNote')}</small>}
         </footer>
       )}
     </div>

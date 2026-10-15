@@ -66,6 +66,10 @@ func TestValidateRuleset(t *testing.T) {
 		{"starting unknown item", func(r *Ruleset) { r.StartingItems[0].ItemID = "sword" }, false},
 		{"starting zero qty", func(r *Ruleset) { r.StartingItems[0].Qty = 0 }, false},
 		{"long stat name", func(r *Ruleset) { r.Stats[0].Name = strings.Repeat("x", 65) }, false},
+		{"skill desc 500 runes", func(r *Ruleset) { r.Skills[0].Description = strings.Repeat("ก", 500) }, true},
+		{"skill desc 501 runes", func(r *Ruleset) { r.Skills[0].Description = strings.Repeat("ก", 501) }, false},
+		{"skill desc newline ok", func(r *Ruleset) { r.Skills[0].Description = "line 1\nline 2" }, true},
+		{"skill desc control char", func(r *Ruleset) { r.Skills[0].Description = "bad\x00" }, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -75,6 +79,20 @@ func TestValidateRuleset(t *testing.T) {
 				t.Fatalf("ok=%v, err=%v", tt.ok, err)
 			}
 		})
+	}
+}
+
+func TestNormalizeTrimsSkillDescription(t *testing.T) {
+	r := PresetDnD5e()
+	r.Skills[0].Description = "  " + strings.Repeat("x", 500) + " \n "
+	r.Normalize()
+	if err := ValidateRuleset(r); err != nil || len(r.Skills[0].Description) != 500 {
+		t.Fatalf("trimmed len %d, err %v", len(r.Skills[0].Description), err)
+	}
+	for _, s := range PresetDnD5e().Skills {
+		if s.Description != "" {
+			t.Fatalf("preset skill %q has a description", s.ID)
+		}
 	}
 }
 
