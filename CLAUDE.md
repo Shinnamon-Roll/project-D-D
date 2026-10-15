@@ -32,11 +32,14 @@ Core only, smallest thing that plays. No extras until the core works.
 - Game content: only use D&D 5e SRD (CC-BY-4.0) material. Never copy non-SRD book text,
   Basic/Free Rules text, official character sheet layout, or adventure maps/text. Recommended: SRD 5.2.1 (not confirmed yet).
 - Never brand the app "D&D" / "Dungeons & Dragons" (trademark). "5E compatible" is OK.
+- Salem campaign: mechanics ideas only from Salem 1692 (Facade Games). Never copy its card/rule text, art, coined terms
+  ("Tryal", "Town Crier", "frame card") or use "Salem 1692" as a title. NPCs fictional; no real 1692 person as the witch.
 
 ## Knowledge (read before deciding scope or rules)
 | file | covers |
 |---|---|
 | [`docs/research/dnd-basics.md`](docs/research/dnd-basics.md) | what D&D is, play loop, core rules (d20, combat, grid, character), SRD versions + attribution, rules APIs |
+| [`docs/research/salem-1692.md`](docs/research/salem-1692.md) | Salem 1692 board game rules, 1692 history, what can't be copied, free map sources |
 | [`docs/research/vtt-and-player-needs.md`](docs/research/vtt-and-player-needs.md) | existing VTTs compared, player/DM needs, MVP must/nice/skip, Owlbear Rodeo lessons, OSS libs, asset licenses |
 
 ## Pipeline for a new feature (checklist)
