@@ -67,3 +67,48 @@ Go tests: pick (ห้ามซ้ำ, สถานะ, สิทธิ์), cus
 - มีผลกับตัวละครที่ **ถูกเลือกหลังจากนั้น** เท่านั้น (ตัวที่เลือกไปแล้ว DM แก้ผ่านการ์ดโปรไฟล์)
 - เก็บถาวร `data/roster.json` (atomic write แบบ notes); ไม่มีไฟล์ = roster เริ่มต้นใน Go; ไฟล์เสีย = quarantine แล้วใช้ค่าเริ่มต้น
 - ผู้เล่นได้ roster ฉบับที่ใช้จริง (ไม่มีอะไรลับ) เพื่อแสดงการ์ด
+
+## Protocol contract (ตายตัว — backend + frontend ทำคู่ขนานตามนี้)
+```ts
+type L = { th: string; en: string }                       // ข้อความ 2 ภาษา
+type RosterSkill = { id: string; name: L; desc: L; cost: number }          // cost 0–10
+type RosterItem  = { name: L; qty: number }
+type RosterEntry = {
+  id: string                    // classId: knight|wizard|rogue|ranger|cleric|paladin|barbarian|bard|druid|necromancer
+  heroName: L; className: L; blurb: L; role: string
+  art: string                   // "" = รูปคลาสตาม id (web/src/assets/classes/<id>.svg) | "/uploads/<name>"
+  stats: { hpMax: number; str: number; end: number; agi: number; mpMax: number }
+  skills: RosterSkill[]         // 1–5
+  items: RosterItem[]           // 0–10
+}
+type CharSkill = { id: string; kind: 'innate' | 'custom'; name: L; desc: L; cost: number }
+// custom: name/desc ใส่ภาษาเดียวกันทั้ง th/en (ผู้เล่นพิมพ์ครั้งเดียว)
+type Character = {
+  id: string; seatId: string; classId: string
+  name: L                       // heroName ตอนเลือก
+  art: string
+  hp: number; hpMax: number; mp: number; mpMax: number; str: number; end: number; agi: number
+  skills: CharSkill[]           // innate (จาก roster) + custom ≤ 3
+  items: { name: L; qty: number }[]
+}
+type FeedEntry = { at: number; text: L }   // ล่าสุด 50
+// RoomState: เพิ่ม roster: RosterEntry[], feed: FeedEntry[]; characters: Character[] (แบบใหม่)
+// ลบ: ruleset, attribution, characters แบบเดิม (stats map / skillIds / inventory itemId)
+```
+Events (client → server):
+| event | payload | ใคร | สถานะ |
+|---|---|---|---|
+| `character.pick` | `{classId}` | ผู้เล่นที่ยังไม่มีตัว | creating |
+| `skill.addCustom` | `{name, desc, cost}` (name 1–40, desc ≤300, cost 0–10) | เจ้าของ | creating, playing |
+| `skill.editCustom` | `{characterId, skillId, name, desc, cost}` | เจ้าของ / DM | creating, playing |
+| `skill.removeCustom` | `{characterId, skillId}` | เจ้าของ / DM | creating, playing |
+| `skill.use` | `{skillId}` | เจ้าของ | playing |
+| `character.adjust` | `{characterId, hp?, mp?}` (delta −999..999) | DM | creating, playing |
+| `character.setStats` | `{characterId, hpMax, mpMax, str, end, agi}` | DM | creating, playing |
+| `party.rest` | `{}` | DM | playing |
+| `item.give` | `{characterId, name, qty}` (name 1–40 → th=en=name, qty 1–99; ชื่อซ้ำ = บวกจำนวน) | DM | creating, playing |
+| `item.remove` | `{characterId, index, qty}` | DM | creating, playing |
+| `roster.update` | `{classId, entry: RosterEntry}` | DM | ทุกสถานะ |
+| `roster.reset` | `{classId?}` | DM | ทุกสถานะ |
+
+ลบ events: `ruleset.update`, `ruleset.loadPreset`, `character.submit`, `character.grant` · ผู้เล่นทุกคนเลือกครบ → `playing` · DM = DM หรือ co-DM
