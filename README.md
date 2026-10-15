@@ -3,7 +3,7 @@
 เว็บโต๊ะเล่นเกมเล่าเรื่อง (แนว D&D 5e) สำหรับเล่นกับเพื่อนผ่าน browser ไม่ต้องใช้กระดาษ
 แนว white label: DM กำหนด stat / skill / ไอเทมเองได้ มี preset กฎ D&D 5e (SRD 5.2.1) ให้โหลด
 
-**เวอร์ชัน:** 0.7.0 · **สถานะ:** เล่นได้บนเครื่องตัวเอง + เพื่อนใน Wi-Fi เดียวกัน — เมนูแคมเปญ, lobby, ตั้งกฎ, สร้างตัวละคร, แมพ + grid + token + fog, ทอยเต๋า, TUI launcher, หน้าตาโทน medieval, QR เข้านั่ง, TUI dashboard + reload
+**เวอร์ชัน:** 0.8.0 · **สถานะ:** เล่นได้บนเครื่องตัวเอง + เพื่อนใน Wi-Fi เดียวกัน — เมนูแคมเปญ, lobby, ตั้งกฎ, สร้างตัวละคร, แมพ + grid + token + fog, TUI launcher, หน้าตาโทน medieval, QR เข้านั่ง, TUI dashboard + reload
 
 ---
 
@@ -53,13 +53,13 @@ cd web && npm install && cd ..
    - DM อัปรูปแมพ → กด **−/+** ปรับจำนวนคอลัมน์กริด (ช่องจัตุรัส คลุมทั้งรูป) → บันทึก → เลือกฉาก (ทุกคนย้ายไปฉากนั้น)
    - ผู้เล่น: **จิ้ม/คลิกช่องปลายทาง** แล้วตัวละครเดินไปเลย
    - DM: จิ้ม token เพื่อเลือก → จิ้มช่องปลายทาง, เพิ่ม token NPC, โหมด fog (ลากสี่เหลี่ยม = ซ่อน, คลิก = เปิด)
-7. **ทอยเต๋า** — พิมพ์ในช่องเต๋า ทุกคนเห็นผลใน log: `1d20+3`, `2d20kh1+5` (advantage), `2d20kl1` (disadvantage), `4d6kl3`, `d100`
+7. **ทอยเต๋า** — ใช้**ลูกเต๋าจริง** ทอยที่โต๊ะ/หน้ากล้อง แล้วบอกผลใน Discord (แอปไม่มีระบบทอยเต๋า)
 
 เสียงคุยใช้ Discord · แมพ/เนื้อเรื่อง Starter Set ต้องมาจากของที่ DM มีเอง (แอปไม่รวมเนื้อหาลิขสิทธิ์) — ดู `docs/campaigns/starter-set/README.md`
 
 ## 4. ทดสอบ
 ```sh
-make test                    # Go unit tests (dice, rules, ห้อง/สิทธิ์, upload, server, TUI)
+make test                    # Go unit tests (rules, ห้อง/สิทธิ์, upload, server, TUI)
 cd web && npm run test:e2e   # Playwright: DM + ผู้เล่น เล่นครบ flow (build + รัน bin/dnd ที่ port 18080 เอง)
 cd web && npm run build      # ตรวจ type + build หน้าเว็บ
 ```
@@ -81,7 +81,6 @@ cmd/server/           server เปล่า (ไม่มี TUI) → bin/dnd
 internal/server/      HTTP + WebSocket + upload
 internal/room/        state ห้อง + ตรวจสิทธิ์ทุก event + hub
 internal/rules/       ruleset, ตรวจตัวละคร, preset D&D 5e
-internal/dice/        ตัวทอยเต๋า
 internal/webui/       ฝังหน้าเว็บที่ build แล้วเข้า binary
 web/                  React + Vite + TypeScript (+ e2e/ Playwright)
 uploads/              รูปที่อัป (ไม่ commit)

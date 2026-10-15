@@ -16,7 +16,7 @@ Read `CLAUDE.md`, `docs/design/tech-stack.md`, `docs/design/web-flow.md`, `docs/
 ## Check, in this order
 1. **Permissions / trust boundary** — every WebSocket event goes through `Room.Apply` with a role check; a player can
    only touch their own seat, character and token; DM-only events reject players; co-DM cannot remove the main DM.
-2. **Input validation** — WS read limit, JSON enum values, grid bounds, stat points/skill picks, dice limits, upload
+2. **Input validation** — WS read limit, JSON enum values, grid bounds, stat points/skill picks, upload
    size + `DetectContentType` + server-generated file names (path traversal), Origin check.
 3. **Correctness** — state transitions (menu → lobby → creating → playing), races (mutex held for every state
    read/write), reconnect by clientId, Go error handling, React effect cleanup, stale state.

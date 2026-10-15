@@ -9,10 +9,8 @@ import (
 	"fmt"
 	"slices"
 	"strings"
-	"time"
 	"unicode/utf8"
 
-	"projectdnd/internal/dice"
 	"projectdnd/internal/rules"
 )
 
@@ -27,7 +25,6 @@ const (
 	KindPlayer = "player"
 
 	MaxPlayerSeats = 6
-	MaxDiceLog     = 200
 	maxName        = 32
 )
 
@@ -85,15 +82,6 @@ type Token struct {
 	Row         int    `json:"row"`
 }
 
-type DiceRoll struct {
-	ID       string    `json:"id"`
-	By       string    `json:"by"`
-	Notation string    `json:"notation"`
-	Rolls    []int     `json:"rolls"`
-	Total    int       `json:"total"`
-	At       time.Time `json:"at"`
-}
-
 // State is the RoomState sent to every client.
 type State struct {
 	Status         string           `json:"status"`
@@ -105,14 +93,12 @@ type State struct {
 	Scenes         []Scene          `json:"scenes"`
 	CurrentSceneID string           `json:"currentSceneId"`
 	Tokens         []Token          `json:"tokens"`
-	Dice           []DiceRoll       `json:"dice"`
 }
 
 // Room is not safe for concurrent use; the Hub serializes access.
 type Room struct {
-	st    State
-	seq   int
-	rolls int // total dice rolls; st.Dice is capped at MaxDiceLog
+	st  State
+	seq int
 }
 
 func New() *Room {
@@ -123,7 +109,6 @@ func New() *Room {
 		Characters: []Character{},
 		Scenes:     []Scene{},
 		Tokens:     []Token{},
-		Dice:       []DiceRoll{},
 	}}
 	r.st.Ruleset.Normalize()
 	return r
@@ -434,40 +419,8 @@ func (r *Room) Apply(clientID, typ string, payload json.RawMessage) error {
 			return errors.New("no such fog")
 		}
 		return nil
-	case "dice.roll":
-		p, err := decode[struct {
-			Notation string `json:"notation"`
-		}](payload)
-		if err != nil {
-			return err
-		}
-		if err := r.needStatus(notMenu...); err != nil {
-			return err
-		}
-		if s == nil {
-			return errNotSeated
-		}
-		res, err := dice.Roll(p.Notation)
-		if err != nil {
-			return err
-		}
-		r.st.Dice = append(r.st.Dice, DiceRoll{
-			ID: r.id("d"), By: s.Name, Notation: strings.TrimSpace(p.Notation),
-			Rolls: res.Rolls, Total: res.Total, At: time.Now().UTC().Truncate(time.Second),
-		})
-		r.rolls++
-		if over := len(r.st.Dice) - MaxDiceLog; over > 0 {
-			r.st.Dice = slices.Delete(r.st.Dice, 0, over)
-		}
-		return nil
 	}
 	return fmt.Errorf("unknown event type %q", typ)
-}
-
-// Roll is the public part of a dice roll, for status displays.
-type Roll struct {
-	By, Notation string
-	Total        int
 }
 
 // Summary is a status snapshot for the TUI dashboard. It holds names only, never clientIds.
@@ -479,13 +432,11 @@ type Summary struct {
 	Characters       int
 	Scenes           int
 	Scene            string // current scene name
-	Rolls            int
-	LastRoll         *Roll
 }
 
 // Summary returns a snapshot of the room for status displays.
 func (r *Room) Summary() Summary {
-	s := Summary{Status: r.st.Status, Characters: len(r.st.Characters), Scenes: len(r.st.Scenes), Rolls: r.rolls}
+	s := Summary{Status: r.st.Status, Characters: len(r.st.Characters), Scenes: len(r.st.Scenes)}
 	for _, c := range r.st.Campaigns {
 		if c.ID == r.st.CampaignID {
 			s.Campaign = c.Name
@@ -509,10 +460,6 @@ func (r *Room) Summary() Summary {
 	}
 	if sc := r.scene(r.st.CurrentSceneID); sc != nil {
 		s.Scene = sc.Name
-	}
-	if n := len(r.st.Dice); n > 0 {
-		d := r.st.Dice[n-1]
-		s.LastRoll = &Roll{d.By, d.Notation, d.Total}
 	}
 	return s
 }

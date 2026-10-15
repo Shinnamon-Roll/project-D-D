@@ -37,10 +37,8 @@ Source of truth for both sides. Go structs in `internal/` and `web/src/protocol.
                "grid": { "cellSize": 50, "offsetX": 0, "offsetY": 0, "cols": 20, "rows": 15 },
                "fog": [{ "id": "f1", "col": 0, "row": 0, "w": 3, "h": 2 }] }],
   "currentSceneId": "",
-  "tokens": [{ "id": "t1", "sceneId": "sc1", "characterId": "c1", "name": "Mira", "imageUrl": "/uploads/x.png", "col": 0, "row": 0 }],
+  "tokens": [{ "id": "t1", "sceneId": "sc1", "characterId": "c1", "name": "Mira", "imageUrl": "/uploads/x.png", "col": 0, "row": 0 }]
                                           // characterId "" = NPC token
-  "dice": [{ "id": "d1", "by": "Mira", "notation": "1d20+3", "rolls": [14], "total": 17, "at": "2026-10-16T12:00:00Z" }]
-                                          // newest last, max 200
 }
 ```
 
@@ -69,14 +67,8 @@ Roles: **DM** = seat kind `dm` or `codm` (co-DM has every DM right except removi
 | `token.remove` | `{tokenId}` | DM | `playing` | |
 | `fog.add` | `{sceneId, col, row, w, h}` | DM | `playing` | w,h ≥ 1, rect inside grid |
 | `fog.remove` | `{sceneId, fogId}` | DM | `playing` | |
-| `dice.roll` | `{notation}` | seated | not `menu` | grammar below; result appended to `dice` |
 
 Unknown `type`, malformed payload, or failed check → `error` to sender.
-
-## Dice notation
-Terms joined by `+`/`-`: `NdM` (1 ≤ N ≤ 100, 2 ≤ M ≤ 1000; `dM` = `1dM`), optional `khK`/`klK` (keep highest/lowest K, 1 ≤ K ≤ N),
-or an integer constant. Examples: `1d20+3`, `2d20kh1+5`, `4d6kl3`, `d100`, `3d8-1`. Whitespace ignored, case-insensitive.
-`rolls` = every die rolled (in order), `total` = kept dice + constants. `crypto/rand`.
 
 ## Upload
 `POST /api/upload`, header `X-Client-ID: <clientId>` of a **seated** client, multipart field `file`.
@@ -90,7 +82,6 @@ Default `-addr 0.0.0.0:8080` (reachable from other devices on the LAN; use `-add
 preferred first: 192.168 → 10 → 172.16 (Docker/VM bridges usually last). Loopback bind → `[]`.
 
 ## Server limits beyond the table (implemented v0.2)
-- Dice: ≤100 dice per whole expression, notation ≤100 chars (raw), constants ≤100000.
 - Ruleset: names/keys/ids 1–64 chars, attribution ≤1000, skill `statKey` "" or an existing stat, `startingSkillPicks` ≤ number of skills, `statPoints` ≤ Σ(max − base), startingItems qty ≥ 1 and unique.
 - Names (DM, seat, character, scene, NPC): 1–32 chars.
 - `hello.clientId`: 8–64 chars `[A-Za-z0-9_-]`; any event before `hello`, or a second `hello` → error.

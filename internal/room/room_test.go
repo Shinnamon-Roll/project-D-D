@@ -69,7 +69,7 @@ func TestStatusFlow(t *testing.T) {
 	fail(t, r, "dm", "campaign.select", m{"campaignId": "salem", "name": "Dee"})
 	fail(t, r, "dm", "campaign.select", m{"campaignId": "nope", "name": "Dee"})
 	fail(t, r, "dm", "campaign.select", m{"campaignId": "starter-set", "name": ""})
-	fail(t, r, "dm", "dice.roll", m{"notation": "1d20"})
+	fail(t, r, "dm", "ruleset.loadPreset", m{"presetId": "dnd5e-srd"})
 	ok(t, r, "dm", "campaign.select", m{"campaignId": "starter-set", "name": "Dee"})
 	st := r.State()
 	if st.Status != StatusLobby || st.CampaignID != "starter-set" || len(st.Seats) != 2 ||
@@ -161,7 +161,7 @@ func TestSeats(t *testing.T) {
 	if r.SeatID("p2") != "" {
 		t.Fatal("p2 still seated")
 	}
-	fail(t, r, "p2", "dice.roll", m{"notation": "1d6"})
+	fail(t, r, "p2", "seat.ready", m{"ready": true})
 
 	// leave frees the seat and clears ready.
 	ok(t, r, "p1", "seat.ready", m{"ready": true})
@@ -209,11 +209,12 @@ func TestPermissionsAndUnknown(t *testing.T) {
 		fail(t, r, "stranger", e.typ, e.payload)
 	}
 	fail(t, r, "dm", "nope", m{})
+	fail(t, r, "dm", "dice.roll", m{"notation": "1d20"}) // removed 2026-10-16: physical dice
 	fail(t, r, "dm", "hello", m{"clientId": "x"})
-	if err := r.Apply("dm", "dice.roll", json.RawMessage(`{"notation":`)); err == nil {
+	if err := r.Apply("dm", "ruleset.loadPreset", json.RawMessage(`{"presetId":`)); err == nil {
 		t.Fatal("malformed payload accepted")
 	}
-	fail(t, r, "dm", "dice.roll", m{"notation": 5})
+	fail(t, r, "dm", "ruleset.loadPreset", m{"presetId": 5})
 	fail(t, r, "dm", "ruleset.loadPreset", m{"presetId": "other"})
 	fail(t, r, "dm", "ruleset.update", m{"ruleset": m{"name": "Bad", "statPoints": -1}})
 	ok(t, r, "dm", "ruleset.update", m{"ruleset": m{"name": "Custom"}})
@@ -375,27 +376,8 @@ func TestSceneAutoPlaceWraps(t *testing.T) {
 	}
 }
 
-func TestDice(t *testing.T) {
-	r, _ := lobby(t)
-	fail(t, r, "stranger", "dice.roll", m{"notation": "1d20"})
-	fail(t, r, "p1", "dice.roll", m{"notation": "1d"})
-	fail(t, r, "p1", "dice.roll", m{"notation": "1d20" + strings.Repeat(" ", 60000) + "+3"})
-	ok(t, r, "p1", "dice.roll", m{"notation": "1d20+3"})
-	d := r.State().Dice[0]
-	if d.By != "Pat" || d.Notation != "1d20+3" || len(d.Rolls) != 1 || d.Total != d.Rolls[0]+3 || d.At.IsZero() {
-		t.Fatalf("roll %+v", d)
-	}
-	for i := 0; i < MaxDiceLog+5; i++ {
-		ok(t, r, "dm", "dice.roll", m{"notation": "d6"})
-	}
-	dl := r.State().Dice
-	if len(dl) != MaxDiceLog || dl[0].By != "Dee" {
-		t.Fatalf("log len %d, first by %s", len(dl), dl[0].By)
-	}
-}
-
 func TestSummary(t *testing.T) {
-	if s := New().Summary(); s.Status != StatusMenu || s.Campaign != "" || s.Seats != 0 || s.LastRoll != nil {
+	if s := New().Summary(); s.Status != StatusMenu || s.Campaign != "" || s.Seats != 0 {
 		t.Fatalf("empty room %+v", s)
 	}
 	r, _ := lobby(t)
@@ -412,18 +394,9 @@ func TestSummary(t *testing.T) {
 		t.Fatalf("lobby %+v", s)
 	}
 	r, _ = playing(t)
-	ok(t, r, "p1", "dice.roll", m{"notation": "1d20+3"})
-	ok(t, r, "dm", "dice.roll", m{"notation": "2d6"})
 	s = r.Summary()
-	if s.Status != StatusPlaying || s.Characters != 1 || s.Scenes != 1 || s.Scene != "Beach" || s.Rolls != 2 ||
-		s.LastRoll == nil || s.LastRoll.By != "Dee" || s.LastRoll.Notation != "2d6" {
-		t.Fatalf("playing %+v %+v", s, s.LastRoll)
-	}
-	for range MaxDiceLog {
-		ok(t, r, "dm", "dice.roll", m{"notation": "d4"})
-	}
-	if s := r.Summary(); s.Rolls != MaxDiceLog+2 {
-		t.Fatalf("rolls %d: count must not stop at the dice log cap", s.Rolls)
+	if s.Status != StatusPlaying || s.Characters != 1 || s.Scenes != 1 || s.Scene != "Beach" {
+		t.Fatalf("playing %+v", s)
 	}
 }
 

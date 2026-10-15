@@ -31,8 +31,7 @@ func runningModel(t *testing.T, w, h int, srv *fakeServer) *model {
 
 func fakeSummary() room.Summary {
 	return room.Summary{Status: room.StatusLobby, Campaign: "Starter Set", DM: "Dee Em", CoDM: "Cody",
-		Players: 3, Seats: 6, Ready: 2, Characters: 0, Scenes: 1, Scene: "Beach", Rolls: 14,
-		LastRoll: &room.Roll{By: "Mira", Notation: "1d20+3", Total: 17}}
+		Players: 3, Seats: 6, Ready: 2, Characters: 0, Scenes: 1, Scene: "Beach"}
 }
 
 func TestDashboardLayouts(t *testing.T) {
@@ -40,14 +39,14 @@ func TestDashboardLayouts(t *testing.T) {
 		w, h       int
 		want, none []string
 	}{
-		{160, 45, []string{"SERVER", "ROOM", "LOGS", "CONNECTIONS", "ACTIVITY", "SYSTEM", "3 online", "Mira 1d20+3 = 17", "seats", "Dee Em + Cody", reloadLabel}, nil},
+		{160, 45, []string{"SERVER", "ROOM", "LOGS", "CONNECTIONS", "ACTIVITY", "SYSTEM", "3 online", "seats", "Dee Em + Cody", reloadLabel}, nil},
 		{110, 35, []string{"SERVER", "ROOM", "LOGS", "3 online · ev 1 · rej 1", reloadLabel}, []string{"CONNECTIONS", "SYSTEM"}},
 		{80, 24, []string{"RUNNING", "LOGS", "3 online", "LOBBY", reloadLabel}, []string{"SERVER", "ROOM", "CONNECTIONS"}},
 	}
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("%dx%d", tt.w, tt.h), func(t *testing.T) {
 			m := runningModel(t, tt.w, tt.h, &fakeServer{clients: 3, sum: fakeSummary()})
-			m.Update(logMsg{time.Now(), slog.LevelInfo, "event dice.roll by=Mira"})
+			m.Update(logMsg{time.Now(), slog.LevelInfo, "event token.move by=Mira"})
 			m.Update(logMsg{time.Now(), slog.LevelWarn, `event rejected type=token.move by=Bo err="you can only move your own token"`})
 			m.Update(logMsg{time.Now(), slog.LevelInfo, strings.Repeat("long line ", 40)})
 			for range 25 {
@@ -86,7 +85,7 @@ func TestDashboardLayouts(t *testing.T) {
 
 func TestDashboardCountsAndSanitizes(t *testing.T) {
 	sum := fakeSummary()
-	sum.DM, sum.LastRoll.Notation = "Ev\x1b[2Jil", "1d6\u009b31m"
+	sum.DM, sum.Scene = "Ev\x1b[2Jil", "Bea\u009b31mch"
 	m := runningModel(t, 160, 45, &fakeServer{sum: sum})
 	m.Update(logMsg{time.Now(), slog.LevelInfo, "event seat.add by=Dee"})
 	m.Update(logMsg{time.Now(), slog.LevelWarn, "event rejected type=x by=- err=no"})

@@ -93,7 +93,7 @@ DM ระหว่างนี้: เห็นสถานะของทุก
   - **Fog of war** (ยืนยันแล้ว): DM วาดสี่เหลี่ยมซ่อน/เปิดพื้นที่บนแมพ ผู้เล่นเห็นเฉพาะส่วนที่เปิด DM เห็นทั้งหมด (แบบโปร่ง)
   - เปิดตัวละครผู้เล่น → ให้ไอเทม/สกิล/แก้ stat
 - **เดินอิสระ** (ยืนยันแล้ว): ไม่จำกัดระยะ ไม่มีตาเดิน — DM คุมด้วยการพูด
-- **ทอยเต๋า + log** (ยืนยันแล้ว): ทุกคนพิมพ์ notation เช่น `1d20+3`, `2d6`; ผลขึ้น log ที่ทุกคนเห็น (ใคร, ทอยอะไร, ได้เท่าไร)
+- ~~ทอยเต๋า + log~~ → **ตัดออก 2026-10-16: ใช้ลูกเต๋าจริง** ([conv](../conversations/2026-10-16-remove-dice.md))
 
 ## Data model (ร่าง)
 ```
@@ -108,7 +108,6 @@ ItemDef     { id, name, description, image? }
 Character   { id, seatId, name, portraitUrl, stats: {key: value}, skillIds[], inventory: {itemId, qty}[] }
 Scene       { id, name, mapImageUrl, grid: {cellSize, offsetX, offsetY, cols, rows}, fog: {x, y, w, h}[] }
 Token       { id, sceneId, characterId? | npcName, imageUrl, col, row }
-DiceRoll    { id, by, notation, rolls[], total, at }
 ```
 
 ## ไม่อยู่ใน v0

@@ -1,6 +1,6 @@
 # project-D-D — D&D board game simulator (web)
 
-Website to play D&D with friends online, no paper: shared map/board, tokens, dice,
+Website to play D&D with friends online, no paper: shared map/board, tokens (dice are physical — no in-app dice),
 character sheets. Single project at repo root (not a monorepo).
 
 ## Goal
@@ -67,7 +67,7 @@ Two human gates. Do not skip them; this cannot run autonomously.
 | Agent | use when |
 |---|---|
 | `researcher` | need outside facts before deciding: D&D 5e SRD rules, web libs, realtime sync, hosting. Cited report |
-| `backend` | build/change Go code (`cmd/`, `internal/`): room state, WS events, permissions, rules, dice, uploads + Go tests |
+| `backend` | build/change Go code (`cmd/`, `internal/`): room state, WS events, permissions, rules, uploads + Go tests |
 | `frontend` | build/change `web/`: screens, Konva table, Zustand store, WS client, Playwright e2e |
 | `auditor` | read-only audit after each build step / before commit: permissions, validation, tests, copyright + versioning rules |
 

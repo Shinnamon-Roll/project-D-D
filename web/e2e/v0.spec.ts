@@ -204,17 +204,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(tid(dm, 'splitter')).toHaveAttribute('aria-valuenow', String(now + 2))
   expect(await noPageScroll(dm)).toBe(true)
 
-  // 7. Player rolls 1d20+3; DM's log shows it.
-  await tid(pl, 'dice-input').fill('1d20+3')
-  await tid(pl, 'dice-roll').click()
-  const entry = tid(dm, 'dice-log').locator('li').first()
-  await expect(entry).toContainText('Ayla')
-  await expect(entry).toContainText('1d20+3')
-  const total = Number(await entry.getByTestId('dice-total').textContent())
-  expect(total).toBeGreaterThanOrEqual(4)
-  expect(total).toBeLessThanOrEqual(23)
-
-  // 8. DM drags a fog rect over column 3 (rows 0-2); player's view gets it.
+  // 7. DM drags a fog rect over column 3 (rows 0-2); player's view gets it.
   await tid(dm, 'fog-toggle').click()
   await expect(tid(dm, 'fog-toggle')).toHaveAttribute('aria-pressed', 'true')
   const from = await cellPoint(dm, 3, 0)
@@ -242,7 +232,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(tid(dm, 'error-banner')).toHaveCount(0)
   await expect(tid(pl, 'error-banner')).toHaveCount(0)
 
-  // 9. Touch phone: the same player (same clientId) taps a cell with a finger; the token moves.
+  // 8. Touch phone: the same player (same clientId) taps a cell with a finger; the token moves.
   const touchCtx = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, storageState: await plCtx.storageState() })
   await plCtx.close()
   const ph = await touchCtx.newPage()

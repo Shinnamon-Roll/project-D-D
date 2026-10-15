@@ -4,7 +4,7 @@
 
 ## Layout หน้า Table
 - เต็มความสูงจอใต้ topbar (`100dvh - topbar`); **ทั้งหน้าไม่ scroll** บน desktop
-- ซ้าย = **แมพ** (ยืดหยุ่น) · กลาง = **แถบลาก** (`role="separator"`, `aria-orientation="vertical"`, `aria-valuenow` %, ลากด้วย pointer, ปุ่ม ←/→ ทีละ 2%, Home/End) · ขวา = **ข้อมูล** (ชีท, เต๋า, DM panel, รายการ token) scroll ภายในตัวเอง
+- ซ้าย = **แมพ** (ยืดหยุ่น) · กลาง = **แถบลาก** (`role="separator"`, `aria-orientation="vertical"`, `aria-valuenow` %, ลากด้วย pointer, ปุ่ม ←/→ ทีละ 2%, Home/End) · ขวา = **ข้อมูล** (ชีท, DM panel, รายการ token) scroll ภายในตัวเอง
 - ขวากว้าง 22–60% ของจอ (ขั้นต่ำ 280px); จำค่าใน `localStorage` (try/catch)
 - จอ < 900px: ซ้อนแนวตั้ง แมพบน (สูง ~55dvh) ข้อมูลล่าง ไม่มีแถบลาก
 

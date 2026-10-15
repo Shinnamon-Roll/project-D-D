@@ -12,7 +12,7 @@
 | **realtime** | **WebSocket** ด้วย `github.com/coder/websocket` | Socket.IO ไม่มีตัวทางการใน Go → ใช้ WebSocket ตรง ๆ ส่ง JSON; ไม่ใช้ WebRTC (บทเรียน Owlbear) |
 | state ห้อง | struct ใน memory + `sync.Mutex` / goroutine เดียวต่อห้อง | v0 ไม่เซฟข้าม session; อัปเกรดทีหลัง = เขียน JSON ลงไฟล์ |
 | ใครเป็นเจ้าของ state | **server** ตัดสินทุกอย่าง | server ตรวจสิทธิ์ → broadcast; ไม่ต้องใช้ CRDT |
-| ทอยเต๋า | **เขียน parser เองใน Go** (`NdM`, `+/-K`, `kh/kl` สำหรับ advantage) + `crypto/rand` | ~100 บรรทัด + test; ไม่ต้องพึ่ง library; ทอยบน server = โกงไม่ได้ |
+| ลูกเต๋า | **ไม่มีในแอป** — ผู้เล่นทอยลูกเต๋าจริง (ตัดออก 2026-10-16, [conv](../conversations/2026-10-16-remove-dice.md)) | |
 | ตรวจกฎ | Go (`internal/rules`): แต้ม stat, จำนวนสกิล, สิทธิ์ DM/ผู้เล่น | ตรวจที่ server เสมอ หน้าเว็บตรวจซ้ำเพื่อ UX เท่านั้น |
 | เก็บรูป | โฟลเดอร์ `uploads/` + `http.MaxBytesReader` + ตรวจ `http.DetectContentType` | ไม่ต้องมี cloud storage |
 | **หน้าเว็บ** | **React + Vite + TypeScript** | มาตรฐาน, library เยอะ |
@@ -20,7 +20,7 @@
 | state หน้าเว็บ | **Zustand** | เบา |
 | type ระหว่าง Go ↔ TS | เขียน type ข้อความ (message) ไว้ที่เดียวใน Go แล้ว gen เป็น TS ด้วย **tygo** — หรือเขียนมือถ้ายังน้อย | กันสองฝั่งไม่ตรงกัน |
 | **deploy** | `go build` → **binary ไฟล์เดียว** ที่ฝังหน้าเว็บไว้ด้วย `embed` | ก๊อปไฟล์เดียวไปรันที่ไหนก็ได้ |
-| ทดสอบ | `go test` (เต๋า, กฎ, สิทธิ์) + **Playwright** (2 แท็บ DM + ผู้เล่น) | |
+| ทดสอบ | `go test` (กฎ, สิทธิ์) + **Playwright** (2 แท็บ DM + ผู้เล่น) | |
 
 ## โครงโฟลเดอร์
 ```
@@ -28,7 +28,6 @@ go.mod
 cmd/server/main.go     เปิด HTTP + WebSocket, เสิร์ฟหน้าเว็บที่ embed ไว้
 internal/room/         state ห้อง, เก้าอี้, ตัวละคร, ฉาก, token, fog + จัดการ event
 internal/rules/        ruleset, preset D&D 5e (SRD), ตรวจแต้ม stat/สกิล
-internal/dice/         parser + ทอยเต๋า (มี _test.go)
 web/                   React + Vite (package.json มี version SemVer)
 web/dist/              ผล build → ถูก embed เข้า binary (gitignored)
 uploads/               รูปที่อัป (gitignored)
@@ -46,7 +45,6 @@ Version: SemVer อันเดียวของทั้งโปรเจก�
 | `character.grant` (ไอเทม/สกิล/stat) | DM |
 | `scene.add`, `scene.select`, `fog.set` | DM |
 | `token.move` | ผู้เล่น (token ตัวเอง) / DM (ทุกตัว) |
-| `dice.roll` | ทุกคน |
 
 server ส่งกลับ: `state.snapshot` (ตอนเข้า/เชื่อมใหม่) + `state.patch` / event เดิมหลังตรวจผ่าน + `error`
 
@@ -65,10 +63,9 @@ server ส่งกลับ: `state.snapshot` (ตอนเข้า/เชื�
 | deploy | binary ไฟล์เดียว | ต้องมี Node + node_modules |
 | type ร่วมกับหน้าเว็บ | ต้อง gen (tygo) | ใช้ร่วมได้ตรง ๆ |
 | realtime | WebSocket ตรง (เขียน reconnect เองฝั่งหน้าเว็บ ~20 บรรทัด) | Socket.IO มี reconnect ในตัว |
-| เต๋า | เขียนเอง (~100 บรรทัด) | มี library |
 | ภาษาที่ต้องใช้ | 2 (Go + TS) | 1 |
 
-สรุป: Go ได้เปรียบเรื่อง deploy + ผู้ใช้ถนัด; ต้นทุนเพิ่มคือ gen type + reconnect + parser เต๋า — เล็ก
+สรุป: Go ได้เปรียบเรื่อง deploy + ผู้ใช้ถนัด; ต้นทุนเพิ่มคือ gen type + reconnect — เล็ก
 
 ## ที่ไม่เลือก
 Next.js (ไม่ต้องการ SSR) · WebRTC (โดนบล็อก, ต้องมี TURN) · Yjs/CRDT (เกินจำเป็น) · Supabase/Firebase (ยังไม่ต้องเก็บถาวร) · tldraw (ไม่ใช่ open source) · Go→WASM หน้าเว็บ (ไฟล์ใหญ่, ไม่มี library canvas/UI) · framework Go (Gin/Echo/Fiber — `net/http` พอ)

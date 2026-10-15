@@ -1,6 +1,6 @@
 ---
 name: backend
-description: Go backend engineer for this repo. Use to build or change server code — cmd/server, internal/room (room state, WebSocket events, permissions), internal/rules (ruleset, character validation, presets), internal/dice, uploads. Writes code + Go tests; never edits web/.
+description: Go backend engineer for this repo. Use to build or change server code — cmd/server, internal/room (room state, WebSocket events, permissions), internal/rules (ruleset, character validation, presets), uploads. Writes code + Go tests; never edits web/.
 skills:
   - ecc:golang-patterns
   - ecc:golang-testing

@@ -98,15 +98,6 @@ export interface Token {
   row: number
 }
 
-export interface DiceRoll {
-  id: string
-  by: string
-  notation: string
-  rolls: number[]
-  total: number
-  at: string
-}
-
 export interface RoomState {
   status: RoomStatus
   campaigns: Campaign[]
@@ -117,7 +108,6 @@ export interface RoomState {
   scenes: Scene[]
   currentSceneId: string
   tokens: Token[]
-  dice: DiceRoll[] // newest last, max 200
 }
 
 export interface You {
@@ -161,5 +151,4 @@ export interface ClientEvents {
   'token.remove': { tokenId: string }
   'fog.add': { sceneId: string; col: number; row: number; w: number; h: number }
   'fog.remove': { sceneId: string; fogId: string }
-  'dice.roll': { notation: string }
 }

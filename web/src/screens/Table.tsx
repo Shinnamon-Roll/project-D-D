@@ -4,7 +4,6 @@ import { useMe, useStore } from '../store'
 import { send } from '../ws'
 import MapStage from '../table/MapStage'
 import DmPanel from '../table/DmPanel'
-import DicePanel from '../table/DicePanel'
 import SheetPanel from '../table/SheetPanel'
 
 const PCT_KEY = 'table.mapPct'
@@ -127,7 +126,6 @@ export default function Table() {
       />
       <aside className="side">
         {character && <SheetPanel character={character} />}
-        <DicePanel />
         {isDm && (
           <DmPanel scene={scene} onView={setViewId} onPreview={setPreview} fogMode={fogMode} setFogMode={setFogMode} />
         )}

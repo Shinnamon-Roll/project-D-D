@@ -48,12 +48,12 @@
 │ uptime 00:03:12   ││ ...                                          │╭ ACTIVITY ─────────╮
 ╰───────────────────╯│                                              ││ events 128 · rej 2│
 ╭ ROOM ─────────────╮│                                              ││ ▁▁▃▇▅▂▁ /10s      │
-│ LOBBY             ││                                              ││ dice 14 · last    │
-│ menu▸LOBBY▸create…││                                              ││ Mira 1d20+3 = 17  │
-│ Starter Set …     ││                                              │╰───────────────────╯
-│ DM  Dee Em        ││                                              │╭ SYSTEM ───────────╮
-│ seats ███░░░ 3/6  ││                                              ││ heap 6.1 MB       │
-│ ready ██░░░░ 2/3  ││                                              ││ goroutines 21     │
+│ LOBBY             ││                                              │╰───────────────────╯
+│ menu▸LOBBY▸create…││                                              │╭ SYSTEM ───────────╮
+│ Starter Set …     ││                                              ││ heap 6.1 MB       │
+│ DM  Dee Em        ││                                              ││ goroutines 21     │
+│ seats ███░░░ 3/6  ││                                              ││                   │
+│ ready ██░░░░ 2/3  ││                                              ││                   │
 │ chars 0 · scenes 1││                                              │╰───────────────────╯
 ╰───────────────────╯╰──────────────────────────────────────────────╯
  o เปิดเว็บ · ↑↓ pgup/pgdn เลื่อน · f ตามล่าสุด · c ล้าง · q หยุด+ออก
@@ -62,7 +62,7 @@
 - **ซ้าย ROOM** (จาก snapshot ห้อง อ่านแบบ thread-safe ทุก tick): status + ขั้น menu▸lobby▸creating▸playing (ขั้นปัจจุบันเน้นสี), ชื่อแคมเปญ, ชื่อ DM (+ co-DM), เก้าอี้ผู้เล่นที่นั่ง/ทั้งหมด (bar), พร้อม/นั่ง (bar), จำนวนตัวละคร, จำนวนฉาก + ฉากปัจจุบัน
 - **กลาง LOGS**: log เดิม (สีตาม level, scroll, follow) — หัวแผงบอกจำนวนบรรทัด + จำนวน warn/error
 - **ขวา CONNECTIONS**: จำนวนคนต่อ + sparkline (sample ทุก 1s) แสดงเท่าที่พอดีความกว้างแผง (≈25 วินาทีในแผง 32 คอลัมน์)
-- **ขวา ACTIVITY**: นับ event ที่สำเร็จ/ถูกปฏิเสธ (จาก log record), sparkline event ต่อ 10 วินาที, จำนวนทอยเต๋า + ทอยล่าสุด (ชื่อผู้ทอย, notation, total)
+- **ขวา ACTIVITY**: นับ event ที่สำเร็จ/ถูกปฏิเสธ (จาก log record), sparkline event ต่อ 10 วินาที
 - **ขวา SYSTEM**: heap (runtime.MemStats), goroutines
 - Responsive: กว้าง ≥ 130 → 3 คอลัมน์; 90–129 → ซ่อนคอลัมน์ขวา (ย้ายตัวเลขสำคัญไปหัวแผง log); < 90 → แถบสถานะบรรทัดเดียวด้านบน + log เต็ม
 - ปุ่มเดิมทั้งหมด; ห้ามแสดง clientId

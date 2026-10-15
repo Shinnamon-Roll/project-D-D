@@ -124,7 +124,7 @@ func (m *model) leftColumn(h int) string {
 	return panel("SERVER", "", srv, side, len(srv)+2) + "\n" + panel("ROOM", "", m.roomBody(), side, max(h-len(srv)-2, 2))
 }
 
-// clean drops control characters: names and notations are client text and must not reach the terminal raw.
+// clean drops control characters: names are client text and must not reach the terminal raw.
 func clean(s string) string {
 	if s = strings.Map(dropControl, s); s == "" {
 		return dim.Render("—")
@@ -166,10 +166,6 @@ func (m *model) roomBody() []string {
 func (m *model) rightColumn(h int) string {
 	n := side - 4 - 5 // sparkline cells, room for the " NNs" label
 	conns := last(m.connHist, n)
-	roll := dim.Render("—")
-	if r := m.sum.LastRoll; r != nil {
-		roll = clean(r.By) + " " + clean(r.Notation) + " = " + accent.Bold(true).Render(fmt.Sprint(r.Total))
-	}
 	rej := fmt.Sprint(m.rejects)
 	if m.rejects > 0 {
 		rej = warn.Render(rej)
@@ -181,12 +177,10 @@ func (m *model) rightColumn(h int) string {
 	}, side, 5) + "\n" + panel("ACTIVITY", "", []string{
 		fmt.Sprintf("events %d · rej ", m.events) + rej,
 		accent.Render(spark(last(m.evHist, n))) + dim.Render(" /10s"),
-		fmt.Sprintf("dice %d · last", m.sum.Rolls),
-		roll,
-	}, side, 6) + "\n" + panel("SYSTEM", "", []string{
+	}, side, 4) + "\n" + panel("SYSTEM", "", []string{
 		fmt.Sprintf("heap %.1f MB", float64(m.heap)/(1<<20)),
 		fmt.Sprintf("goroutines %d", m.goroutines),
-	}, side, max(h-11, 2))
+	}, side, max(h-9, 2))
 }
 
 // statusLine is the one-line header of the narrow layout.
