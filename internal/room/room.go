@@ -11,6 +11,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
+	"projectdnd/internal/notes"
 	"projectdnd/internal/rules"
 )
 
@@ -97,8 +98,9 @@ type State struct {
 
 // Room is not safe for concurrent use; the Hub serializes access.
 type Room struct {
-	st  State
-	seq int
+	st    State
+	seq   int
+	notes *notes.Store // DM-only; never part of State (players must not see it)
 }
 
 func New() *Room {
@@ -109,7 +111,7 @@ func New() *Room {
 		Characters: []Character{},
 		Scenes:     []Scene{},
 		Tokens:     []Token{},
-	}}
+	}, notes: &notes.Store{}}
 	r.st.Ruleset.Normalize()
 	return r
 }
@@ -419,6 +421,11 @@ func (r *Room) Apply(clientID, typ string, payload json.RawMessage) error {
 			return errors.New("no such fog")
 		}
 		return nil
+	case "note.add", "note.update", "note.remove", "note.move":
+		if !isDM(s) { // any room status: the DM prepares the story before the game starts
+			return errNotDM
+		}
+		return r.note(typ, payload)
 	}
 	return fmt.Errorf("unknown event type %q", typ)
 }
@@ -807,4 +814,25 @@ func (r *Room) fogAdd(s *Seat, payload json.RawMessage) error {
 	}
 	sc.Fog = append(sc.Fog, Fog{ID: r.id("f"), Col: p.Col, Row: p.Row, W: p.W, H: p.H})
 	return nil
+}
+
+func (r *Room) note(typ string, payload json.RawMessage) error {
+	p, err := decode[struct {
+		ID    string `json:"id"`
+		Title string `json:"title"`
+		Body  string `json:"body"`
+		Index int    `json:"index"`
+	}](payload)
+	if err != nil {
+		return err
+	}
+	switch typ {
+	case "note.add":
+		return r.notes.Add(p.Title)
+	case "note.update":
+		return r.notes.Update(p.ID, p.Title, p.Body)
+	case "note.remove":
+		return r.notes.Remove(p.ID)
+	}
+	return r.notes.Move(p.ID, p.Index)
 }

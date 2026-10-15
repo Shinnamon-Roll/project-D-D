@@ -32,6 +32,8 @@ test('v0: DM + player full flow', async ({ browser }) => {
   const plCtx = await browser.newContext({ viewport })
   const dm = await dmCtx.newPage()
   const pl = await plCtx.newPage()
+  const plFrames: string[] = [] // every WS message the player receives: notes must never be in them
+  pl.on('websocket', (ws) => ws.on('framereceived', (f) => plFrames.push(String(f.payload))))
   await dm.goto('/')
   await pl.goto('/')
   await expect(tid(dm, 'ws-status')).toHaveClass(/\bok\b/)
@@ -65,8 +67,9 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(tid(pl, 'my-seat')).toContainText('Ayla')
 
   // Player never sees DM-only lobby controls.
-  for (const id of ['seat-add', 'seat-open-codm', 'game-start', 'ruleset-editor'])
+  for (const id of ['seat-add', 'seat-open-codm', 'game-start', 'ruleset-editor', 'notes-open'])
     await expect(tid(pl, id)).toHaveCount(0)
+  await expect(tid(dm, 'notes-open')).toBeVisible()
   await expect(pl.locator('[data-testid^="seat-remove-"]')).toHaveCount(0)
   await expect(pl.locator('[data-testid^="seat-qr-"]')).toHaveCount(0)
 
@@ -179,6 +182,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   let p = await cellPoint(pl, 2, 1)
   await pl.mouse.click(p.x, p.y)
   await expect(tid(dm, `token-pos-${tokenId}`)).toHaveText('(2, 1)')
+  await expect(tid(pl, `token-pos-${tokenId}`)).toHaveText('(2, 1)') // the row remounts on its own state: fill after that
   await tid(pl, `token-col-${tokenId}`).fill('3')
   await tid(pl, `token-row-${tokenId}`).fill('2')
   await tid(pl, `token-move-${tokenId}`).click()
@@ -227,6 +231,8 @@ test('v0: DM + player full flow', async ({ browser }) => {
   expect(await noPageScroll(dm)).toBe(true)
 
   // 7. DM drags a fog rect over column 3 (rows 0-2); player's view gets it.
+  await tid(dm, 'dm-menu-fog').click()
+  await expect(tid(dm, 'dm-menu-scenes')).toHaveAttribute('aria-expanded', 'false') // one section at a time
   await tid(dm, 'fog-toggle').click()
   await expect(tid(dm, 'fog-toggle')).toHaveAttribute('aria-pressed', 'true')
   const from = await cellPoint(dm, 3, 0)
@@ -239,6 +245,26 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(tid(dm, 'map-stage')).toHaveAttribute('data-fog-count', '1')
   await expect(tid(dm, 'dm-panel')).toContainText('3,0 1×3')
   await expect(tid(pl, 'map-stage')).toHaveAttribute('data-fog-count', '1')
+
+  // 7b. Story notes: DM writes a note, autosave survives a reload; the player gets neither the menu nor the data.
+  await tid(dm, 'dm-menu-notes').click()
+  await expect(tid(dm, 'dm-menu-notes')).toHaveAttribute('aria-expanded', 'true')
+  await tid(dm, 'notes-add').click()
+  await expect(tid(dm, 'note-title')).toBeFocused()
+  await tid(dm, 'note-title').fill('Chapter 1')
+  await tid(dm, 'note-body').fill('The dragon sleeps under the lighthouse.')
+  await expect(tid(dm, 'note-status')).toHaveText('บันทึกแล้ว')
+  await dm.reload()
+  await expect(tid(dm, 'dm-menu-notes')).toHaveAttribute('aria-expanded', 'true') // last section remembered
+  const noteItem = dm.locator('[data-testid^="note-item-"]')
+  await expect(noteItem).toHaveText(['Chapter 1'])
+  await noteItem.click()
+  await expect(tid(dm, 'note-body')).toHaveValue('The dragon sleeps under the lighthouse.')
+  await tid(dm, 'note-back').click()
+  await expect(noteItem).toBeFocused()
+  await expect(tid(pl, 'dm-menu-notes')).toHaveCount(0)
+  expect(plFrames.length).toBeGreaterThan(0)
+  expect(plFrames.filter((f) => f.includes('"notes"'))).toEqual([])
 
   // Phone: stacked, the map pane still never scrolls and the page has no sideways scroll.
   await pl.setViewportSize({ width: 390, height: 844 })

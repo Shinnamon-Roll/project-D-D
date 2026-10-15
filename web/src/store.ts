@@ -1,10 +1,11 @@
 import { create } from 'zustand'
-import type { RoomState, Seat, You } from './protocol'
+import type { Note, RoomState, Seat, You } from './protocol'
 import type { Lang } from './i18n'
 
 interface Store {
   room: RoomState | null
   you: You
+  notes: Note[] // DM story notes; always empty for players
   connected: boolean
   lastError: string | null
   lang: Lang
@@ -21,6 +22,7 @@ function savedLang(): Lang {
 export const useStore = create<Store>(() => ({
   room: null,
   you: { seatId: '' },
+  notes: [],
   connected: false,
   lastError: null,
   lang: savedLang(),

@@ -447,3 +447,31 @@ func TestSceneUpdateShrinkClampsAndClips(t *testing.T) {
 		})
 	}
 }
+
+func TestNotesPermissions(t *testing.T) {
+	r, _ := lobby(t)
+	ok(t, r, "dm", "seat.openCoDm", m{})
+	coSeat := r.State().Seats[len(r.State().Seats)-1].ID
+	ok(t, r, "co", "seat.sit", m{"seatId": coSeat, "name": "Cora"})
+
+	fail(t, r, "p1", "note.add", m{"title": "spoiler"})
+	fail(t, r, "nobody", "note.add", m{"title": "spoiler"})
+	ok(t, r, "dm", "note.add", m{"title": "Lobby prep"}) // before the game starts
+	ok(t, r, "co", "note.update", m{"id": "n1", "title": "Prep", "body": "secret"})
+	for _, typ := range []string{"note.update", "note.remove", "note.move"} {
+		if err := apply(r, "p1", typ, m{"id": "n1", "title": "x", "index": 0}); err != errNotDM {
+			t.Fatalf("player %s: %v", typ, err)
+		}
+	}
+	if err := apply(r, "dm", "note.move", m{"id": "n1", "index": 1}); err == nil {
+		t.Fatal("move past end accepted")
+	}
+	if b, _ := json.Marshal(r.State()); strings.Contains(string(b), "secret") || strings.Contains(string(b), "notes") {
+		t.Fatalf("notes leaked into RoomState: %s", b)
+	}
+
+	p, _ := playing(t)
+	ok(t, p, "dm", "note.add", m{"title": "In game"})
+	ok(t, p, "dm", "note.remove", m{"id": "n1"})
+	fail(t, p, "p1", "note.add", m{"title": "x"})
+}

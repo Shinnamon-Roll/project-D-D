@@ -7,14 +7,17 @@ import (
 	"encoding/json"
 	"log/slog"
 	"net/http"
+	"strings"
 	"sync"
 	"time"
 
 	"github.com/coder/websocket"
+
+	"projectdnd/internal/notes"
 )
 
 const (
-	readLimit    = 64 << 10
+	readLimit    = 128 << 10 // note.update: 20000 runes x 4 UTF-8 bytes + JSON escapes
 	sendBuffer   = 32
 	writeTimeout = 10 * time.Second
 )
@@ -38,6 +41,7 @@ type Hub struct {
 type conn struct {
 	clientID string // "" until hello
 	send     chan []byte
+	dm       bool // DM/co-DM when its last state was sent; a false->true change resends notes
 }
 
 type message struct {
@@ -45,9 +49,12 @@ type message struct {
 	Payload json.RawMessage `json:"payload"`
 }
 
-// NewHub logs connections and events to log; it never logs clientIds (bearer secrets).
-func NewHub(log *slog.Logger) *Hub {
-	return &Hub{room: New(), conns: map[*conn]struct{}{}, log: log}
+// NewHub logs connections and events to log; it never logs clientIds (bearer secrets) or note text.
+// n holds the DM notes (see notes.Load).
+func NewHub(log *slog.Logger, n *notes.Store) *Hub {
+	r := New()
+	r.notes = n
+	return &Hub{room: r, conns: map[*conn]struct{}{}, log: log}
 }
 
 // Clients returns the number of open WebSocket connections.
@@ -162,7 +169,7 @@ func (h *Hub) handle(c *conn, m message) {
 			return
 		}
 		c.clientID = p.ClientID
-		h.sendStateLocked(c, h.roomJSONLocked())
+		h.sendStateLocked(c, h.roomJSONLocked(), true)
 		return
 	}
 	if c.clientID == "" {
@@ -185,9 +192,10 @@ func (h *Hub) handle(c *conn, m message) {
 	}
 	h.log.Info("event "+m.Type, attrs...)
 	room := h.roomJSONLocked()
+	noteOnly := strings.HasPrefix(m.Type, "note.") // players' view did not change
 	for o := range h.conns {
-		if o.clientID != "" {
-			h.sendStateLocked(o, room)
+		if o.clientID != "" && (!noteOnly || isDM(h.room.seatOf(o.clientID))) {
+			h.sendStateLocked(o, room, noteOnly)
 		}
 	}
 }
@@ -206,15 +214,32 @@ func (h *Hub) roomJSONLocked() json.RawMessage {
 	return b
 }
 
-func (h *Hub) sendStateLocked(c *conn, room json.RawMessage) {
+func (h *Hub) notesJSONLocked() json.RawMessage {
+	b, err := json.Marshal(h.room.notes.List())
+	if err != nil {
+		panic(err) // notes hold only plain types
+	}
+	return b
+}
+
+// sendStateLocked sends the "notes" key only to a DM or co-DM, and only when withNotes (hello, note.* events)
+// or the connection has just become DM/co-DM. Without the key the client keeps its previous notes.
+func (h *Hub) sendStateLocked(c *conn, room json.RawMessage, withNotes bool) {
 	type you struct {
 		SeatID string `json:"seatId"`
 	}
+	dm := isDM(h.room.seatOf(c.clientID))
+	var notes json.RawMessage // nil: omitempty drops the key
+	if dm && (withNotes || !c.dm) {
+		notes = h.notesJSONLocked()
+	}
+	c.dm = dm
 	p, _ := json.Marshal(struct {
 		Room  json.RawMessage `json:"room"`
 		You   you             `json:"you"`
 		Build string          `json:"build"`
-	}{room, you{h.room.SeatID(c.clientID)}, buildID})
+		Notes json.RawMessage `json:"notes,omitempty"`
+	}{room, you{h.room.SeatID(c.clientID)}, buildID, notes})
 	h.enqueueLocked(c, "state", p)
 }
 

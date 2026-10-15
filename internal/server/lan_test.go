@@ -76,7 +76,7 @@ func TestPrivateLAN(t *testing.T) {
 }
 
 func TestAPILANLoopbackBind(t *testing.T) {
-	s, err := Start("127.0.0.1:0", t.TempDir(), slog.New(slog.DiscardHandler))
+	s, err := Start("127.0.0.1:0", t.TempDir(), t.TempDir(), slog.New(slog.DiscardHandler))
 	if err != nil {
 		t.Fatal(err)
 	}

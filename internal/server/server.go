@@ -11,6 +11,7 @@ import (
 	"os"
 	"time"
 
+	"projectdnd/internal/notes"
 	"projectdnd/internal/room"
 	"projectdnd/internal/webui"
 )
@@ -27,8 +28,8 @@ type Server struct {
 }
 
 // Start binds addr and serves in the background. Binding happens before Start returns,
-// so a busy port is reported here, not later.
-func Start(addr, uploads string, log *slog.Logger) (*Server, error) {
+// so a busy port is reported here, not later. data holds persistent files (notes.json).
+func Start(addr, uploads, data string, log *slog.Logger) (*Server, error) {
 	dist, err := fs.Sub(webui.Dist, "dist")
 	if err != nil {
 		return nil, err
@@ -36,11 +37,15 @@ func Start(addr, uploads string, log *slog.Logger) (*Server, error) {
 	if err := os.MkdirAll(uploads, 0o755); err != nil {
 		return nil, err
 	}
+	ns, err := notes.Load(data, log)
+	if err != nil {
+		return nil, err
+	}
 	ln, err := net.Listen("tcp", addr)
 	if err != nil {
 		return nil, err
 	}
-	hub := room.NewHub(log)
+	hub := room.NewHub(log, ns)
 	base, cancel := context.WithCancel(context.Background())
 	s := &Server{
 		hub: hub,
@@ -79,8 +84,8 @@ func (s *Server) Shutdown(ctx context.Context) error {
 }
 
 // Run serves addr until ctx is cancelled, then shuts down gracefully.
-func Run(ctx context.Context, addr, uploads string, log *slog.Logger) error {
-	s, err := Start(addr, uploads, log)
+func Run(ctx context.Context, addr, uploads, data string, log *slog.Logger) error {
+	s, err := Start(addr, uploads, data, log)
 	if err != nil {
 		return err
 	}

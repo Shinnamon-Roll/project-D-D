@@ -11,6 +11,9 @@ Source of truth for both sides. Go structs in `internal/` and `web/src/protocol.
   - `state {room: RoomState, you: {seatId: string}}` — sent to each connection after `hello` and after **every** change
     (`you.seatId` = "" when not seated; per-connection, so each client knows its own seat).
   - `error {message: string}` — only to the sender of a rejected event. State is unchanged.
+  - DM/co-DM connections sometimes also get `notes: Note[]` at the top level of `state` (next to `room`, `you`,
+    `build`); player and unseated connections **never** get the `notes` key. A `state` without the `notes` key means
+    "keep the previous notes". See "DM notes" below.
 - Reconnect: same `clientId` → same seat (no room number in v0).
 
 ## RoomState
@@ -67,6 +70,10 @@ Roles: **DM** = seat kind `dm` or `codm` (co-DM has every DM right except removi
 | `token.remove` | `{tokenId}` | DM | `playing` | |
 | `fog.add` | `{sceneId, col, row, w, h}` | DM | `playing` | w,h ≥ 1, rect inside grid |
 | `fog.remove` | `{sceneId, fogId}` | DM | `playing` | |
+| `note.add` | `{title}` | DM | any | appends `{id, title, body: "", updatedAt}`; title trimmed, 1–80 chars; max 200 notes |
+| `note.update` | `{id, title, body}` | DM | any | title 1–80 (trimmed), body ≤ 20000 chars (not trimmed); sets `updatedAt`; last write wins |
+| `note.remove` | `{id}` | DM | any | |
+| `note.move` | `{id, index}` | DM | any | `index` = position in the resulting list, `0 ≤ index < len(notes)` |
 
 Unknown `type`, malformed payload, or failed check → `error` to sender.
 
@@ -97,3 +104,20 @@ No auth (same as the page). Returns `200 {"urls": ["http://<ipv4>:<port>"]}` —
 
 ## `build` in `state`
 The `state` payload has a top-level `"build": "<16 hex>"`, random per server process. The client remembers the first value; when a later `state` carries a different value (server restarted, e.g. TUI reload), it calls `location.reload()` to load the new web build.
+
+## DM notes (v0.10.0, `docs/features/dm-notes.md`)
+- `Note = {"id": "n1", "title": "...", "body": "...", "updatedAt": 1760000000000}` (`updatedAt` = unix **milliseconds**).
+  Ids are `n<seq>`, never reused (seq is persisted; on load it is raised to at least the highest `n<k>` id).
+- Not part of `RoomState`. Sent only in `state.notes` to DM/co-DM connections (`[]` when empty), and only in:
+  (a) the `state` reply to `hello`; (b) the broadcast after a `note.*` event; (c) the first `state` after a connection
+  becomes DM/co-DM (e.g. `campaign.select`, sitting in the co-DM seat). Every other `state` omits the `notes` key:
+  **`state` without `notes` = keep the previous notes**. A note event's broadcast goes to DM/co-DM connections only;
+  players get nothing for it and never get the `notes` key.
+- Errors: `only the DM can do that`, `note title must be 1-80 characters`, `note body must be at most 20000 characters`,
+  `at most 200 notes`, `no such note`, `note index out of range`, `could not save notes` (disk write failed; nothing changed),
+  `malformed payload`.
+- Lengths count characters (runes). WebSocket read limit is 128 KB per message (fits a 20000-char body).
+- Persisted to `<-data>/notes.json` (flag `-data`, default `data`, gitignored) on every change: temp file in the
+  same dir + fsync + rename; dir `0700`, file `0600`. Loaded at server start. A file that is not valid JSON is renamed
+  to a unique `notes.json.bad-<random>` and the server starts with no notes (error logged); an unreadable file stops startup.
+- Logs name the event and sender only (`event note.update by=<name>`), never titles or bodies.

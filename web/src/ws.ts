@@ -1,5 +1,5 @@
 import type { ClientEvents, ServerMessage } from './protocol'
-import { showError, useStore } from './store'
+import { isDmSeat, showError, useStore } from './store'
 import { translate } from './i18n'
 
 // crypto.randomUUID only exists in secure contexts (https/localhost); plain-http LAN needs the fallback.
@@ -61,7 +61,10 @@ export function connect() {
     }
     if (msg.type === 'state') {
       checkBuild(msg.payload.build)
-      useStore.setState({ room: msg.payload.room, you: msg.payload.you })
+      const { room, you, notes } = msg.payload
+      // No "notes" key = unchanged (sent only on connect and note.* events); losing the DM seat clears them.
+      const dm = isDmSeat(room.seats.find((s) => s.id === you.seatId))
+      useStore.setState((s) => ({ room, you, notes: !dm ? [] : notes === undefined ? s.notes : (notes ?? []) }))
     }
     else if (msg.type === 'error') showError(msg.payload.message)
   }
@@ -72,12 +75,14 @@ export function connect() {
   }
 }
 
-export function send<T extends keyof ClientEvents>(type: T, payload: ClientEvents[T]) {
+// Returns false when offline (nothing sent).
+export function send<T extends keyof ClientEvents>(type: T, payload: ClientEvents[T]): boolean {
   if (socket?.readyState !== WebSocket.OPEN) {
     showError(translate(useStore.getState().lang, 'notConnected'))
-    return
+    return false
   }
   socket.send(JSON.stringify({ type, payload }))
+  return true
 }
 
 // POST /api/upload → "/uploads/<name>". Errors surface in the banner and return null.

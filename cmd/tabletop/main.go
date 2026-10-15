@@ -34,12 +34,13 @@ const (
 
 func main() {
 	addr := flag.String("addr", "0.0.0.0:8080", "listen address (0.0.0.0 = reachable from LAN; 127.0.0.1 = this machine only)")
+	data := flag.String("data", "data", "directory for persistent data (DM notes)")
 	autostart := flag.Bool("autostart", false, "start the server right away, skipping the welcome screen (set by reload)")
 	flag.Parse()
 
 	ch := make(chan logMsg, 1024)
 	log := slog.New(&teaHandler{ch: ch})
-	m := newModel(*addr, version, func() (runner, error) { return server.Start(*addr, "uploads", log) })
+	m := newModel(*addr, version, func() (runner, error) { return server.Start(*addr, "uploads", *data, log) })
 	m.log, m.autostart, m.build = log, *autostart, makeBuild
 	wd, _ := os.Getwd()       // "" on error: findRoot reports it
 	exe, _ := os.Executable() // "" on error: falls back to wd

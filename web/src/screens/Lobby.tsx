@@ -4,6 +4,7 @@ import { send } from '../ws'
 import { useT } from '../i18n'
 import RulesetEditor from './RulesetEditor'
 import SeatQr from './SeatQr'
+import { NotesButton } from '../table/NotesPanel'
 
 const kindLabel = { dm: 'kindDm', codm: 'kindCodm', player: 'kindPlayer' } as const
 
@@ -142,6 +143,7 @@ export default function Lobby() {
             <button className="primary" data-testid="game-start" disabled={!canStart} onClick={() => send('game.start', {})}>
               {t('start')}
             </button>
+            <NotesButton />
           </div>
         )}
       </section>

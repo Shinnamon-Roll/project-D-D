@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useStore } from '../store'
 import { send, upload } from '../ws'
+import { NotesButton } from '../table/NotesPanel'
 import GrantPanel from '../table/GrantPanel'
 import RulesetEditor from './RulesetEditor'
 import SkillInfo from './SkillInfo'
@@ -138,6 +139,9 @@ export function CreatingDmView() {
               </li>
             ))}
         </ul>
+        <div className="row">
+          <NotesButton />
+        </div>
         <GrantPanel />
       </section>
       <RulesetEditor key={JSON.stringify(room.ruleset)} />

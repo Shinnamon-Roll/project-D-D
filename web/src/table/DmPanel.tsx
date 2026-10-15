@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import type { Grid, Scene } from '../protocol'
 import { useStore } from '../store'
 import { send, upload } from '../ws'
-import { useT } from '../i18n'
+import { useT, type TKey } from '../i18n'
 import GrantPanel from './GrantPanel'
+import NotesPanel from './NotesPanel'
 import { useImg } from './MapStage'
 import RulesetEditor from '../screens/RulesetEditor'
 
@@ -26,6 +27,26 @@ function imageSize(url: string): Promise<{ w: number; h: number }> {
   })
 }
 
+type Section = 'scenes' | 'fog' | 'npc' | 'grant' | 'notes' | 'ruleset'
+const SECTIONS: [Section, TKey][] = [
+  ['scenes', 'sceneMap'],
+  ['fog', 'fog'],
+  ['npc', 'npc'],
+  ['grant', 'grant'],
+  ['notes', 'story'],
+  ['ruleset', 'ruleset'],
+]
+const SECTION_KEY = 'dm.section'
+function savedSection(): Section | '' {
+  try {
+    const v = localStorage.getItem(SECTION_KEY)
+    if (v === '') return ''
+    return SECTIONS.find(([id]) => id === v)?.[0] ?? 'scenes'
+  } catch {
+    return 'scenes'
+  }
+}
+
 interface Props {
   scene?: Scene // scene the DM is viewing
   onView: (sceneId: string) => void
@@ -41,6 +62,7 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
   const [npcName, setNpcName] = useState('')
   const [npcUrl, setNpcUrl] = useState('')
   const [err, setErr] = useState('')
+  const [open, setOpen] = useState<Section | ''>(savedSection)
 
   async function addScene(file: File) {
     const url = await upload(file)
@@ -61,79 +83,96 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
     setNewName('')
   }
 
-  return (
-    <section className="panel" data-testid="dm-panel">
-      <h2>DM</h2>
+  // One menu section open at a time; leaving the fog section ends fog drawing.
+  const choose = (next: Section | '') => {
+    setOpen(next)
+    if (next !== 'fog') setFogMode(false)
+    try {
+      localStorage.setItem(SECTION_KEY, next)
+    } catch {
+      /* storage blocked: remembered for this page only */
+    }
+  }
+  const needScene = <p className="muted">{t('uploadMapHint')}</p>
 
-      <h3>{t('scenes')}</h3>
-      {room.scenes.length > 0 && (
-        <div className="row">
-          <label className="grow">
-            {t('viewScene')}
-            <select data-testid="scene-select" value={scene?.id ?? ''} onChange={(e) => onView(e.target.value)}>
-              {room.scenes.map((s) => (
-                <option key={s.id} value={s.id}>
-                  {s.name}
-                  {s.id === room.currentSceneId ? ' ★' : ''}
-                </option>
-              ))}
-            </select>
-          </label>
-          <button
-            className="primary"
-            data-testid="scene-activate"
-            disabled={!scene || scene.id === room.currentSceneId}
-            onClick={() => scene && send('scene.select', { sceneId: scene.id })}
-          >
-            {t('showToAll')}
-          </button>
-        </div>
-      )}
-      <div className="row">
-        <label className="grow">
-          {t('newSceneName')}
-          <input data-testid="scene-name" value={newName} maxLength={32} onChange={(e) => setNewName(e.target.value)} />
-        </label>
-        <label>
-          {t('uploadMap')}
-          <input
-            data-testid="map-upload"
-            type="file"
-            accept="image/png,image/jpeg,image/webp,image/gif"
-            onChange={(e) => {
-              const f = e.target.files?.[0]
-              if (f) addScene(f)
-              e.target.value = ''
-            }}
-          />
-        </label>
-      </div>
-      {err && (
-        <p className="error" role="alert" data-testid="scene-add-error">
-          {err}
-        </p>
-      )}
-      {scene && <SceneEditor key={scene.id + JSON.stringify(scene.grid) + scene.name} scene={scene} onPreview={onPreview} />}
-
-      {scene && (
-        <>
-          <h3>{t('fog')}</h3>
-          <button data-testid="fog-toggle" aria-pressed={fogMode} onClick={() => setFogMode(!fogMode)}>
-            {t(fogMode ? 'fogOn' : 'fogOff')}
-          </button>
-          {fogMode && <p className="muted">{t('fogHint')}</p>}
-          <ul className="chips">
-            {scene.fog.map((f) => (
-              <li key={f.id}>
-                {f.col},{f.row} {f.w}×{f.h}
-                <button aria-label={t('removeFog')} data-testid={`fog-remove-${f.id}`} onClick={() => send('fog.remove', { sceneId: scene.id, fogId: f.id })}>
-                  ×
+  const content = (id: Section) => {
+    switch (id) {
+      case 'scenes':
+        return (
+          <>
+            {room.scenes.length > 0 && (
+              <div className="row">
+                <label className="grow">
+                  {t('viewScene')}
+                  <select data-testid="scene-select" value={scene?.id ?? ''} onChange={(e) => onView(e.target.value)}>
+                    {room.scenes.map((s) => (
+                      <option key={s.id} value={s.id}>
+                        {s.name}
+                        {s.id === room.currentSceneId ? ' ★' : ''}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <button
+                  className="primary"
+                  data-testid="scene-activate"
+                  disabled={!scene || scene.id === room.currentSceneId}
+                  onClick={() => scene && send('scene.select', { sceneId: scene.id })}
+                >
+                  {t('showToAll')}
                 </button>
-              </li>
-            ))}
-          </ul>
-
-          <h3>NPC</h3>
+              </div>
+            )}
+            <div className="row">
+              <label className="grow">
+                {t('newSceneName')}
+                <input data-testid="scene-name" value={newName} maxLength={32} onChange={(e) => setNewName(e.target.value)} />
+              </label>
+              <label>
+                {t('uploadMap')}
+                <input
+                  data-testid="map-upload"
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp,image/gif"
+                  onChange={(e) => {
+                    const f = e.target.files?.[0]
+                    if (f) addScene(f)
+                    e.target.value = ''
+                  }}
+                />
+              </label>
+            </div>
+            {err && (
+              <p className="error" role="alert" data-testid="scene-add-error">
+                {err}
+              </p>
+            )}
+            {scene && <SceneEditor key={scene.id + JSON.stringify(scene.grid) + scene.name} scene={scene} onPreview={onPreview} />}
+          </>
+        )
+      case 'fog':
+        if (!scene) return needScene
+        return (
+          <>
+            <button data-testid="fog-toggle" aria-pressed={fogMode} onClick={() => setFogMode(!fogMode)}>
+              {t(fogMode ? 'fogOn' : 'fogOff')}
+            </button>
+            {fogMode && <p className="muted">{t('fogHint')}</p>}
+            <ul className="chips">
+              {scene.fog.map((f) => (
+                <li key={f.id}>
+                  {f.col},{f.row} {f.w}×{f.h}
+                  <button aria-label={t('removeFog')} data-testid={`fog-remove-${f.id}`} onClick={() => send('fog.remove', { sceneId: scene.id, fogId: f.id })}>
+                    ×
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      case 'npc':
+        if (!scene) return needScene
+        return (
           <div className="row">
             <label className="grow">
               {t('npcName')}
@@ -162,17 +201,37 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
               + NPC
             </button>
           </div>
-        </>
-      )}
+        )
+      case 'grant':
+        return <GrantPanel />
+      case 'notes':
+        return <NotesPanel />
+      case 'ruleset':
+        return <RulesetEditor key={JSON.stringify(room.ruleset)} />
+    }
+  }
 
-      <details>
-        <summary>{t('grantSummary')}</summary>
-        <GrantPanel />
-      </details>
-      <details>
-        <summary>{t('ruleset')}</summary>
-        <RulesetEditor key={JSON.stringify(room.ruleset)} />
-      </details>
+  return (
+    <section className="panel dm-panel" data-testid="dm-panel">
+      <h2>DM</h2>
+      <ul className="dm-menu" aria-label={t('dmMenu')}>
+        {SECTIONS.map(([id, label]) => (
+          <li key={id}>
+            <button
+              className="dm-menu-head"
+              data-testid={`dm-menu-${id}`}
+              aria-expanded={open === id}
+              aria-controls={`dm-sec-${id}`}
+              onClick={() => choose(open === id ? '' : id)}
+            >
+              {t(label)}
+            </button>
+            <div id={`dm-sec-${id}`} className="dm-sec" hidden={open !== id}>
+              {open === id && content(id)}
+            </div>
+          </li>
+        ))}
+      </ul>
     </section>
   )
 }

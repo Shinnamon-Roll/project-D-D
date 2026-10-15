@@ -99,6 +99,13 @@ export interface Token {
   row: number
 }
 
+export interface Note {
+  id: string
+  title: string // 1-80
+  body: string // <= 20000
+  updatedAt: number // unix ms
+}
+
 export interface RoomState {
   status: RoomStatus
   campaigns: Campaign[]
@@ -117,7 +124,8 @@ export interface You {
 
 // Server → client
 export type ServerMessage =
-  | { type: 'state'; payload: { room: RoomState; you: You; build?: string } } // build: random per server process
+  // build: random per server process. notes: DM/co-DM only, on connect and note.* events; no key = unchanged. Players never get it.
+  | { type: 'state'; payload: { room: RoomState; you: You; build?: string; notes?: Note[] | null } }
   | { type: 'error'; payload: { message: string } }
 
 type Empty = Record<string, never>
@@ -152,4 +160,8 @@ export interface ClientEvents {
   'token.remove': { tokenId: string }
   'fog.add': { sceneId: string; col: number; row: number; w: number; h: number }
   'fog.remove': { sceneId: string; fogId: string }
+  'note.add': { title: string }
+  'note.update': { id: string; title: string; body: string }
+  'note.remove': { id: string }
+  'note.move': { id: string; index: number }
 }

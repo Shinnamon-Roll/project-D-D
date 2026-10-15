@@ -4,6 +4,7 @@
 # build output + runtime data
 /bin/
 /uploads/
+/data/
 /internal/webui/dist/
 /web/node_modules/
 /web/test-results/

@@ -17,7 +17,7 @@ func TestRunBindError(t *testing.T) {
 	defer ln.Close()
 	done := make(chan error, 1)
 	go func() {
-		done <- Run(context.Background(), ln.Addr().String(), t.TempDir(), slog.New(slog.DiscardHandler))
+		done <- Run(context.Background(), ln.Addr().String(), t.TempDir(), t.TempDir(), slog.New(slog.DiscardHandler))
 	}()
 	select {
 	case err := <-done:
@@ -30,7 +30,7 @@ func TestRunBindError(t *testing.T) {
 }
 
 func TestStartServesAndShutsDown(t *testing.T) {
-	s, err := Start("127.0.0.1:0", t.TempDir(), slog.New(slog.DiscardHandler))
+	s, err := Start("127.0.0.1:0", t.TempDir(), t.TempDir(), slog.New(slog.DiscardHandler))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -56,7 +56,7 @@ func TestStartServesAndShutsDown(t *testing.T) {
 func TestRunStopsOnCancel(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	done := make(chan error, 1)
-	go func() { done <- Run(ctx, "127.0.0.1:0", t.TempDir(), slog.New(slog.DiscardHandler)) }()
+	go func() { done <- Run(ctx, "127.0.0.1:0", t.TempDir(), t.TempDir(), slog.New(slog.DiscardHandler)) }()
 	time.Sleep(50 * time.Millisecond)
 	cancel()
 	select {
