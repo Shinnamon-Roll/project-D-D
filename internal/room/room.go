@@ -45,30 +45,45 @@ type Seat struct {
 	client      string // bearer secret; unexported so it is never serialized
 }
 
-// Character is a player's pick from the roster; character.go holds its events.
+// Character is a player's pick from the roster (rules v2, docs/features/rules-v2.md); character.go holds its events.
 type Character struct {
-	ID      string             `json:"id"`
-	SeatID  string             `json:"seatId"`
-	ClassID string             `json:"classId"`
-	Name    rules.L            `json:"name"` // heroName when picked
-	Art     string             `json:"art"`
-	HP      int                `json:"hp"`
-	HPMax   int                `json:"hpMax"`
-	MP      int                `json:"mp"`
-	MPMax   int                `json:"mpMax"`
-	Str     int                `json:"str"`
-	End     int                `json:"end"`
-	Agi     int                `json:"agi"`
-	Skills  []CharSkill        `json:"skills"`
-	Items   []rules.RosterItem `json:"items"`
+	ID              string             `json:"id"`
+	SeatID          string             `json:"seatId"`
+	ClassID         string             `json:"classId"` // rules.Class id (fighter, wizard, ...)
+	HeroID          string             `json:"heroId"`  // roster entry picked (knight, legend-bard, ...)
+	Name            rules.L            `json:"name"`    // heroName when picked
+	Art             string             `json:"art"`
+	Level           int                `json:"level"` // 1-20
+	HP              int                `json:"hp"`
+	HPMax           int                `json:"hpMax"` // rules.HPMax(class, level, CON); derive keeps it current
+	Abilities       rules.Abilities    `json:"abilities"`
+	AC              int                `json:"ac"`
+	Skills          []string           `json:"skills"`     // proficient skill ids
+	Expertise       []string           `json:"expertise"`  // subset of skills
+	ExtraSaves      []string           `json:"extraSaves"` // save proficiencies from class features (DM sets them)
+	SlotsUsed       [9]int             `json:"slotsUsed"`  // index 0 = 1st-level slots; full/half casters
+	PactUsed        int                `json:"pactUsed"`   // pact casters
+	ResourcesUsed   map[string]int     `json:"resourcesUsed"`
+	HitDiceUsed     int                `json:"hitDiceUsed"`
+	AbilitiesCustom []CustomAbility    `json:"abilitiesCustom"`
+	Items           []rules.RosterItem `json:"items"`
+
+	// Derived by derive() from class, level and abilities, so clients never re-implement the tables.
+	PB           int             `json:"pb"`
+	Saves        []string        `json:"saves"` // class saves ∪ extraSaves, sheet order
+	SlotsMax     [9]int          `json:"slotsMax"`
+	Pact         rules.PactSlots `json:"pact"`         // {0,0} unless the class is a pact caster
+	ResourcesMax map[string]int  `json:"resourcesMax"` // every class resource; 0 = not gained yet
+	HitDiceMax   int             `json:"hitDiceMax"`   // = level
 }
 
-type CharSkill struct {
-	ID   string  `json:"id"`
-	Kind string  `json:"kind"` // "innate" (from the roster) | "custom" (the player's own)
-	Name rules.L `json:"name"`
-	Desc rules.L `json:"desc"`
-	Cost int     `json:"cost"`
+// CustomAbility is a spell or feature the player typed in (no spell library in the app).
+type CustomAbility struct {
+	ID    string `json:"id"`
+	Name  string `json:"name"`
+	Kind  string `json:"kind"`  // "spell" | "feature"
+	Level int    `json:"level"` // spell level 0-9 (0 = cantrip); always 0 for a feature
+	Desc  string `json:"desc"`
 }
 
 // FeedEntry is one line of the action log every client sees. Text holds names only, never clientIds.
@@ -462,16 +477,24 @@ func (r *Room) apply(clientID, typ string, payload json.RawMessage) error {
 		return r.gameStart(s)
 	case "character.pick":
 		return r.characterPick(s, payload)
-	case "skill.addCustom", "skill.editCustom", "skill.removeCustom":
-		return r.customSkill(s, typ, payload)
-	case "skill.use":
-		return r.skillUse(s, payload)
 	case "character.adjust":
 		return r.characterAdjust(s, payload)
-	case "character.setStats":
-		return r.characterSetStats(s, payload)
+	case "character.level":
+		return r.characterLevel(s, payload)
+	case "character.setAbilities":
+		return r.characterSetAbilities(s, payload)
+	case "character.setSkills":
+		return r.characterSetSkills(s, payload)
+	case "slot.set":
+		return r.slotSet(s, payload)
+	case "resource.set":
+		return r.resourceSet(s, payload)
+	case "hitDice.set":
+		return r.hitDiceSet(s, payload)
 	case "party.rest":
-		return r.partyRest(s)
+		return r.partyRest(s, payload)
+	case "ability.add", "ability.update", "ability.remove":
+		return r.customAbility(s, typ, payload)
 	case "item.give":
 		return r.itemGive(s, payload)
 	case "item.remove":

@@ -1,5 +1,7 @@
 # Feature: ตัวละครสำเร็จรูป 10 คลาส + การ์ดเลื่อนเลือก + มานา (v0.12.0)
 
+> **Superseded by [`rules-v2.md`](rules-v2.md) (v0.18.0)** — ระบบ stat HP/STR/END/AGI/มานา, สกิลใช้มานา (`skill.use`), สกิลของฉัน ≤3 (`skill.addCustom`), `character.setStats` และ `party.rest` แบบมานาเต็ม **เลิกใช้แล้ว** · เก็บไฟล์นี้ไว้เป็นประวัติ ส่วนที่ยังใช้อยู่: การ์ดเลื่อนเลือก, ห้ามเลือกซ้ำ, หน้า Ruleset (ตัวแก้ roster) + `data/roster.json`
+
 > v0.15.0: roster แบ่งเป็นเซ็ตแล้ว (core 10 + legend 12, `RosterEntry.set`) และ DM เลือกเซ็ตที่ใช้เล่นใน lobby — ดู [`character-sets.md`](character-sets.md). ส่วนที่เขียนว่า "10 ตัว" ด้านล่างหมายถึงเซ็ต core
 
 ที่มา: [`../conversations/2026-10-16-character-roster.md`](../conversations/2026-10-16-character-roster.md) · ทำหลัง i18n (ข้อความ 2 ภาษา)

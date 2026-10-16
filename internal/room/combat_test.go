@@ -405,7 +405,7 @@ func TestDMLog(t *testing.T) {
 		{"Cora", "took the co-DM seat"},
 		{"Pat", "is ready"},
 		{"Dee", "started the game — character creation"},
-		{"Pat", "Pat picked Aldric Vane (Knight)"},
+		{"Pat", "Pat picked Aldric Vane (" + className("fighter").EN + ")"},
 		{"Dee", "added scene Beach (grid 10×5)"},
 		{"Dee", "switched to scene Beach"},
 		{"Dee", "added NPC Wolf to the pool"},
@@ -426,12 +426,12 @@ func TestDMLog(t *testing.T) {
 		p           m
 		en          string
 	}{
-		{"p1", "skill.addCustom", m{"name": "Kick", "desc": "", "cost": 1}, "added skill Kick to Aldric Vane"},
+		{"p1", "ability.add", m{"name": "Kick", "kind": "feature"}, "added feature Kick to Aldric Vane"},
 		{"dm", "token.setHidden", m{"tokenId": ids["Wolf"], "hidden": true}, "hid Wolf"},
 		{"dm", "token.setHidden", m{"tokenId": ids["Wolf"], "hidden": false}, "revealed Wolf"},
 		{"dm", "fog.add", m{"sceneId": r.State().Scenes[0].ID, "col": 1, "row": 1, "w": 2, "h": 1}, "added fog 2×1 at (1,1) in Beach"},
 		{"dm", "roster.reset", m{"classId": "knight"}, "reset roster class knight"},
-		{"dm", "party.rest", m{}, "DM: rest — mana refilled"},
+		{"dm", "party.rest", m{"kind": "long"}, "DM: long rest — HP, spell slots, uses and hit dice refilled"},
 	} {
 		ok(t, r, e.client, e.typ, e.p)
 		if l := lastLog(r); l.Text.EN != e.en {

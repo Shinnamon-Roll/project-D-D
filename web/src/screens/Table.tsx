@@ -48,7 +48,7 @@ export default function Table() {
     .filter((t) => t.sceneId === scene?.id && (isDm || (t.characterId !== '' && t.characterId === character?.id) || !fogged(t)))
     .map((t) => (heroName(t) ? { ...t, name: tx(heroName(t)) } : t)) // hero names follow the UI language
   // Character tokens show their class art (or upload) unless the token has its own image.
-  const charArt = Object.fromEntries(room.characters.map((c) => [c.id, classArt(c.classId, c.art)]))
+  const charArt = Object.fromEntries(room.characters.map((c) => [c.id, classArt(c.heroId, c.art)]))
   const canMove = (t: Token) => isDm || (t.characterId !== '' && t.characterId === character?.id)
   // Attack targets: what this player can see in the scene, minus their own token. The server re-checks.
   const targets = isDm || !character ? [] : tokens.filter((t) => t.characterId !== character.id)

@@ -15,4 +15,10 @@
 
 ชื่อไฟล์บทสนทนา: `conversations/YYYY-MM-DD-<หัวข้อ>.md`
 
-ล่าสุด: spec [`features/character-sets.md`](features/character-sets.md) · research คลาส PHB 2024 [`research/classes/`](research/classes/) · [`conversations/2026-10-16-tui-dashboard.md`](conversations/2026-10-16-tui-dashboard.md) · [`conversations/2026-10-16-map-fit.md`](conversations/2026-10-16-map-fit.md) · spec [`features/seat-qr.md`](features/seat-qr.md) · [`features/map-fit.md`](features/map-fit.md) · ธีม [`design/visual-theme.md`](design/visual-theme.md)
+ไฟล์หลักของระบบเกม v2 (v0.18.0):
+- spec [`features/rules-v2.md`](features/rules-v2.md) — กติกา 6 ability, เลเวล 1–20, spell slot, counter, rest, events
+- ข้อมูลคลาส 12 คลาส [`design/classes/`](design/classes/) (`<id>.md` + ตารางกลาง `_shared.md`, SRD 5.2.1 CC BY 4.0)
+- ข้อมูลเกมฮีโร่ [`design/heroes-core.md`](design/heroes-core.md) (core 10) · [`design/heroes-legend.md`](design/heroes-legend.md) (legend 12) — ชื่อ/เรื่องอยู่ใน `design/roster*.md`
+- research คลาส [`research/classes/`](research/classes/)
+
+ล่าสุด: spec [`features/rules-v2.md`](features/rules-v2.md) · spec [`features/character-sets.md`](features/character-sets.md) · [`conversations/2026-10-16-tui-dashboard.md`](conversations/2026-10-16-tui-dashboard.md) · [`conversations/2026-10-16-map-fit.md`](conversations/2026-10-16-map-fit.md) · spec [`features/seat-qr.md`](features/seat-qr.md) · [`features/map-fit.md`](features/map-fit.md) · ธีม [`design/visual-theme.md`](design/visual-theme.md)

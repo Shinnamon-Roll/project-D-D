@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { Attack, BannerKind, L, LogEntry, Note, Npc, RoomState, Seat, You } from './protocol'
+import type { Attack, BannerKind, ClassesDoc, L, LogEntry, Note, Npc, RoomState, Seat, You } from './protocol'
 import type { Lang } from './i18n'
 
 interface Store {
@@ -11,6 +11,7 @@ interface Store {
   myAttack: { id: string; targetName: string } | null // a player's own pending attack
   dmLog: LogEntry[] // oldest first, at most LOG_CAP; DM/co-DM only
   banner: { kind: BannerKind; text: L; n: number } | null // big hit/miss/NPC-action banner; n remounts it for a repeat
+  classes: ClassesDoc | null // GET /api/classes, fetched once; null = still loading (or failed, retried on reconnect)
   connected: boolean
   lastError: string | null
   lang: Lang
@@ -33,6 +34,7 @@ export const useStore = create<Store>(() => ({
   myAttack: null,
   dmLog: [],
   banner: null,
+  classes: null,
   connected: false,
   lastError: null,
   lang: savedLang(),

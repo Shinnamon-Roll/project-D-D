@@ -1,4 +1,4 @@
-// Hand-written mirror of docs/design/protocol.md (v0). JSON field names must match exactly.
+// Hand-written mirror of docs/design/protocol.md (rules v2). JSON field names must match exactly.
 
 export type RoomStatus = 'menu' | 'lobby' | 'creating' | 'playing'
 
@@ -25,24 +25,74 @@ export interface L {
   en: string
 }
 
-export interface RosterSkill {
-  id: string
-  name: L
-  desc: L
-  cost: number // mana 0-10
-}
-
 export interface RosterItem {
   name: L
   qty: number
 }
 
-export interface CharStats {
-  hpMax: number
-  str: number
-  end: number
-  agi: number
-  mpMax: number
+export type AbilityId = 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha'
+export type Abilities = Record<AbilityId, number> // scores 1-30
+
+// Class data (internal/rules/classes.go), from GET /api/classes. Static: never in RoomState.
+export interface LevelTable {
+  id: string
+  name: L
+  values: string[] // 20 values, index = level - 1; "—" = none yet
+}
+
+export interface Resource {
+  id: string
+  name: L
+  max: number[] | null // per level; null when maxFormula is used
+  maxFormula: string // "abilityMod:<ab>" | "level*<n>" | ""
+  refill: 'short' | 'long'
+  shortRegain: number
+  shortFromLevel: number
+  fromLevel: number // 0 = from level 1
+}
+
+export interface Feature {
+  level: number
+  name: L
+  desc: L
+}
+
+export interface Class {
+  id: string
+  name: L
+  hitDie: number
+  primary: AbilityId[]
+  saves: AbilityId[]
+  armor: L
+  weapons: L
+  tools: L
+  skillChoices: { count: number; from: string[] }
+  caster: 'none' | 'full' | 'half' | 'pact'
+  castAbility: AbilityId | ''
+  tables: LevelTable[]
+  resources: Resource[]
+  features: Feature[] // sorted by level
+}
+
+export interface SkillDef {
+  id: string
+  ability: AbilityId
+}
+
+export interface PactSlots {
+  count: number
+  level: number
+}
+
+// GET /api/classes body. Tables are indexed by level - 1.
+export interface ClassesDoc {
+  classes: Class[]
+  skills: SkillDef[] // 18, sheet order
+  proficiency: number[]
+  fullSlots: number[][]
+  halfSlots: number[][]
+  pactSlots: PactSlots[]
+  attribution: string // SRD 5.2.1 CC BY 4.0 credit, shown on the pick screen
 }
 
 // A character set: a fixed group of roster entries the DM switches on in the lobby.
@@ -51,44 +101,59 @@ export interface CharSet {
   name: L
 }
 
-// One pre-made character (server-owned, DM-editable).
+// One pre-made hero (server-owned, DM-editable). Class data comes from Class classId.
 export interface RosterEntry {
-  id: string // classId: core keeps its 10 ids (knight, wizard, ...); legend = "legend-<class>"
+  id: string // hero id: core keeps its 10 ids (knight, wizard, ...); legend = "legend-<class>"
   set: string // CharSet id; server-owned, a client-sent value is ignored
+  classId: string // Class id; server-owned, a client-sent value is ignored
   heroName: L
-  className: L
   blurb: L
-  role: string
+  role: string // tank | damage | healer | support | control | hybrid
   art: string // "" = class art by id (src/assets/classes/<id>.svg) | "/uploads/<name>"
-  stats: CharStats
-  skills: RosterSkill[] // 1-5
+  abilities: Abilities
+  ac: number // 1-30
+  skills: string[] // proficient skill ids
+  expertise: string[] // subset of skills
   items: RosterItem[] // 0-10
 }
 
-// innate = from the roster, fixed; custom = player-made (name/desc same text in th and en), at most 3.
-export interface CharSkill {
+// A spell or feature the player typed in (no spell library in the app).
+export interface CustomAbility {
   id: string
-  kind: 'innate' | 'custom'
-  name: L
-  desc: L
-  cost: number
+  name: string // 1-40
+  kind: 'spell' | 'feature'
+  level: number // spell level 0-9; always 0 for a feature
+  desc: string // <= 300
 }
 
 export interface Character {
   id: string
   seatId: string
-  classId: string
+  classId: string // Class id (fighter, wizard, ...)
+  heroId: string // roster entry picked (knight, legend-bard, ...)
   name: L // heroName at pick time
   art: string
+  level: number // 1-20
   hp: number
   hpMax: number
-  mp: number
-  mpMax: number
-  str: number
-  end: number
-  agi: number
-  skills: CharSkill[]
+  abilities: Abilities
+  ac: number
+  skills: string[]
+  expertise: string[]
+  extraSaves: AbilityId[] // save proficiencies beyond the class's, set by character.setSkills
+  slotsUsed: number[] // 9, index 0 = 1st-level slots; full/half casters
+  pactUsed: number
+  resourcesUsed: Record<string, number>
+  hitDiceUsed: number
+  abilitiesCustom: CustomAbility[]
   items: RosterItem[]
+  // computed by the server from class, level and abilities; clients never send these
+  pb: number
+  saves: AbilityId[] // class saves + extraSaves, sheet order
+  slotsMax: number[] // 9
+  pact: PactSlots
+  resourcesMax: Record<string, number> // 0 = not gained yet
+  hitDiceMax: number
 }
 
 export interface FeedEntry {
@@ -230,17 +295,22 @@ export interface ClientEvents {
   'seat.openCoDm': Empty
   'sets.set': { sets: string[] } // DM/co-DM, lobby only, at least one
   'game.start': Empty
-  'character.pick': { classId: string }
-  'skill.addCustom': { name: string; desc: string; cost: number }
-  'skill.editCustom': { characterId: string; skillId: string; name: string; desc: string; cost: number }
-  'skill.removeCustom': { characterId: string; skillId: string }
-  'skill.use': { skillId: string }
-  'character.adjust': { characterId: string; hp?: number; mp?: number } // deltas
-  'character.setStats': { characterId: string } & CharStats
-  'party.rest': Empty
+  'character.pick': { heroId: string }
+  'character.adjust': { characterId: string; hp: number } // delta
+  'character.level': { characterId: string; delta: 1 | -1 } // DM
+  'character.setAbilities': { characterId: string; abilities: Abilities; ac: number } // DM
+  // DM/co-DM, creating/playing: replaces all three lists. saves = extra save proficiencies only (not the class's).
+  'character.setSkills': { characterId: string; skills: string[]; expertise: string[]; saves: AbilityId[] }
+  'slot.set': { characterId: string; level: number | 'pact'; used: number } // owner or DM
+  'resource.set': { characterId: string; resourceId: string; used: number } // owner or DM
+  'hitDice.set': { characterId: string; used: number } // owner or DM
+  'party.rest': { kind: 'short' | 'long' } // DM, playing only
+  'ability.add': { name: string; kind: CustomAbility['kind']; level: number; desc: string } // own character
+  'ability.update': { abilityId: string; name: string; kind: CustomAbility['kind']; level: number; desc: string }
+  'ability.remove': { characterId: string; abilityId: string } // owner or DM
   'item.give': { characterId: string; name: string; qty: number }
   'item.remove': { characterId: string; index: number; qty: number }
-  'roster.update': { classId: string; entry: RosterEntry }
+  'roster.update': { classId: string; entry: RosterEntry } // classId = hero id
   'roster.reset': { classId?: string } | { set: string } // {} = every entry of every set
   'scene.add': { name: string; imageUrl: string; grid: Grid }
   'scene.update': { sceneId: string; name: string; grid: Grid }

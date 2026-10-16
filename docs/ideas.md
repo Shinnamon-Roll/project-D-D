@@ -18,3 +18,12 @@
 | HP มอนสเตอร์ที่ DM เห็นคนเดียว | research Starter Set | หลังลองเล่น |
 | ภาพประกอบ raster เจนด้วย AI (Gemini) แทน SVG วาดเอง: ฉากหน้าเมนู, การ์ดแคมเปญ, กรอบ portrait | เครื่องยังไม่มี `GEMINI_API_KEY` | ตั้ง key แล้วใช้สกิล `ui-ux-pro-max:design` เจน — ห้ามเลียนอาร์ต WotC |
 | ซูม/เลื่อนแมพบนมือถือ (pinch zoom, pan) หรือคอลัมน์เริ่มต้นน้อยลงบนจอแคบ | map-fit audit: จอ 390px + 20 คอลัมน์ = ช่องละ ~16px เล็กกว่าเป้าแตะ 44px | spec map-fit เลื่อนไว้ก่อน |
+| Subclass (feature ของ subclass ตามเลเวล) | rules v2 นอก scope | ตอนนี้ผู้เล่นเพิ่มเองใน "คาถาของฉัน" |
+| Species / background / feats | rules v2 นอก scope | |
+| คลังคาถาในแอป (เลือกคาถาจากรายการ) | rules v2 นอก scope | ตอนนี้พิมพ์เองใน "คาถาของฉัน" ≤ 40 |
+| Death saves | rules v2 นอก scope | HP 0 = หมดสติ, DM ตัดสิน |
+| Conditions (poisoned, prone ฯลฯ) บนตัวละคร/token | rules v2 นอก scope | |
+| Multiclass | rules v2 นอก scope | 1 ตัวละคร = 1 คลาส |
+| XP + ขึ้นเลเวลอัตโนมัติ | rules v2 นอก scope | ตอนนี้ DM กดเลเวล ± เอง |
+| แปลงทรัพยากร เช่น Font of Magic (Sorcery Points ↔ slot), Wild Resurgence (slot ↔ Wild Shape) | rules v2 นอก scope | ตอนนี้ผู้เล่นปรับ slot/counter เอง |
+| คืน counter ตอนทอย initiative (เช่น feature ที่คืนแต้มเมื่อเริ่มต่อสู้) | rules v2 นอก scope | ตอนนี้ผู้เล่น/DM กด + เอง |

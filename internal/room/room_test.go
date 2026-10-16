@@ -100,7 +100,7 @@ func TestStatusFlow(t *testing.T) {
 		t.Fatalf("status %s", st.Status)
 	}
 	c := st.Characters[0]
-	if c.SeatID != p1 || st.Seats[1].CharacterID != c.ID || c.ClassID != "knight" {
+	if c.SeatID != p1 || st.Seats[1].CharacterID != c.ID || c.HeroID != "knight" || c.ClassID != "fighter" {
 		t.Fatalf("character: %+v", c)
 	}
 	fail(t, r, "p1", "character.pick", pick("wizard"))
@@ -197,8 +197,9 @@ func TestPermissionsAndUnknown(t *testing.T) {
 		payload any
 	}{
 		{"character.adjust", m{"characterId": r.State().Characters[0].ID, "hp": -1}},
-		{"character.setStats", m{"characterId": r.State().Characters[0].ID, "hpMax": 9, "mpMax": 9, "str": 1, "end": 1, "agi": 1}},
-		{"party.rest", m{}},
+		{"character.level", m{"characterId": r.State().Characters[0].ID, "delta": 1}},
+		{"character.setAbilities", m{"characterId": r.State().Characters[0].ID, "abilities": r.State().Characters[0].Abilities, "ac": 10}},
+		{"party.rest", m{"kind": "long"}},
 		{"item.give", m{"characterId": r.State().Characters[0].ID, "name": "Rope", "qty": 1}},
 		{"item.remove", m{"characterId": r.State().Characters[0].ID, "index": 0, "qty": 1}},
 		{"roster.reset", m{}},

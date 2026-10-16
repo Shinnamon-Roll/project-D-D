@@ -1,41 +1,34 @@
 import { useRef, useState, type KeyboardEvent } from 'react'
 import { MotionConfig, motion, type PanInfo } from 'motion/react'
-import type { CharStats, RosterEntry } from '../protocol'
+import type { RosterEntry } from '../protocol'
 import { useMe, useStore } from '../store'
 import { send } from '../ws'
-import { useL, useT, type TKey } from '../i18n'
+import { useL, useT } from '../i18n'
 import { NotesButton } from '../table/NotesPanel'
 import { RosterButton } from '../table/RosterEditor'
-import { CustomSkills, Medallion, SkillList } from '../table/Skills'
+import { Medallion } from '../table/Medallion'
+import { AbilityGrid, FeatureList, SkillChips } from '../table/StatBlocks'
 import { ART_CREDIT, ART_LICENSE_URL } from '../classArt'
+import { featuresAt, hpLevel1, profBonus, signed, useClass } from '../rules'
 
 const STEP = 292 // px between card centres; neighbours peek in from the sides
 const SPRING = { type: 'spring', stiffness: 260, damping: 30, mass: 0.9 } as const
-const STATS: [keyof CharStats, TKey][] = [
-  ['hpMax', 'statHp'],
-  ['str', 'statStr'],
-  ['end', 'statEnd'],
-  ['agi', 'statAgi'],
-  ['mpMax', 'statMp'],
-]
 
-// creating: players pick one of the roster cards, then make their own skills; the DM watches who took what.
+// creating: players pick one of the roster cards; the DM watches who took what.
 export default function CharacterPick() {
   const t = useT()
   const tx = useL()
   const room = useStore((s) => s.room)!
   const { seat, character, isDm } = useMe()
-  const [skillsDone, setSkillsDone] = useState(false)
   // DM gets every set (for the Ruleset editor); the pick screen shows only the sets in play.
   const roster = room.roster.filter((r) => room.activeSets.includes(r.set))
 
-  // classId -> player name, from the live snapshot
+  // heroId -> player name, from the live snapshot
   const takenBy = new Map<string, string>()
-  for (const c of room.characters) takenBy.set(c.classId, room.seats.find((s) => s.id === c.seatId)?.name ?? '?')
+  for (const c of room.characters) takenBy.set(c.heroId, room.seats.find((s) => s.id === c.seatId)?.name ?? '?')
 
   // DM: no carousel, one full card per player seat showing the hero they took (or that they're still choosing)
   if (isDm) {
-    const top = statTop(roster)
     const setName = (id: string) => (room.activeSets.length > 1 ? tx(room.sets.find((x) => x.id === id)?.name) : '')
     return (
       <div className="pick">
@@ -49,13 +42,13 @@ export default function CharacterPick() {
             .filter((s) => s.kind === 'player')
             .map((s) => {
               const c = room.characters.find((x) => x.seatId === s.id)
-              const r = c && room.roster.find((x) => x.id === c.classId)
+              const r = c && room.roster.find((x) => x.id === c.heroId)
               return (
                 <li key={s.id} className={`hero-card${r ? '' : ' waiting'}`} data-testid={`creating-status-${s.id}`}>
                   <p className="dm-pick-who">{s.name}</p>
                   <div className="hero-inner">
                     {r ? (
-                      <HeroCard r={r} top={top} setName={setName(r.set)} />
+                      <HeroCard r={r} setName={setName(r.set)} />
                     ) : (
                       <div className="hero-wait">
                         <span className="medallion lg empty" aria-hidden="true" />
@@ -72,25 +65,6 @@ export default function CharacterPick() {
     )
   }
   if (!seat) return <p data-testid="waiting">{t('waitingOthers')}</p>
-  if (character && !skillsDone) {
-    return (
-      <section className="panel narrow my-skills">
-        <div className="my-hero">
-          <Medallion classId={character.classId} art={character.art} size="lg" />
-          <div>
-            <h1>{tx(character.name)}</h1>
-            <p className="muted">{tx(room.roster.find((r) => r.id === character.classId)?.className)}</p>
-          </div>
-        </div>
-        <h2>{t('mySkills')}</h2>
-        <p className="muted">{t('mySkillsLead')}</p>
-        <CustomSkills c={character} />
-        <button className="primary" data-testid="skills-done" onClick={() => setSkillsDone(true)}>
-          {t('skillsDone')}
-        </button>
-      </section>
-    )
-  }
   if (character) return <p data-testid="waiting">{t('waitingOthers')}</p>
   return (
     <div className="pick">
@@ -102,20 +76,24 @@ export default function CharacterPick() {
   )
 }
 
-// Bar scale: each stat against the highest value in the roster, so cards compare at a glance.
-function statTop(roster: RosterEntry[]) {
-  return Object.fromEntries(STATS.map(([k]) => [k, Math.max(1, ...roster.map((r) => r.stats[k]))])) as Record<keyof CharStats, number>
-}
-
+// Art credit, plus the SRD 5.2.1 CC BY 4.0 attribution once the class data (the SRD material) has loaded.
 function ArtCredit() {
   const t = useT()
+  const srd = useStore((s) => s.classes?.attribution)
   return (
-    <p className="art-credit" data-testid="art-credit">
-      {t('artCredit')} {ART_CREDIT}{' '}
-      <a href={ART_LICENSE_URL} target="_blank" rel="noreferrer">
-        {ART_LICENSE_URL.replace('https://', '')}
-      </a>
-    </p>
+    <>
+      <p className="art-credit" data-testid="art-credit">
+        {t('artCredit')} {ART_CREDIT}{' '}
+        <a href={ART_LICENSE_URL} target="_blank" rel="noreferrer">
+          {ART_LICENSE_URL.replace('https://', '')}
+        </a>
+      </p>
+      {srd && (
+        <p className="art-credit srd-credit" data-testid="srd-credit" lang="en">
+          {srd}
+        </p>
+      )}
+    </>
   )
 }
 
@@ -129,7 +107,6 @@ function Carousel({ roster, takenBy, canPick }: { roster: RosterEntry[]; takenBy
   const box = useRef<HTMLElement>(null)
   const n = roster.length
   const go = (i: number) => setIndex(Math.max(0, Math.min(n - 1, i)))
-  const top = statTop(roster)
 
   const onKey = (e: KeyboardEvent) => {
     const next = { ArrowLeft: index - 1, ArrowRight: index + 1, Home: 0, End: n - 1 }[e.key]
@@ -180,7 +157,7 @@ function Carousel({ roster, takenBy, canPick }: { roster: RosterEntry[]; takenBy
               >
                 {/* off-centre cards stay visible but out of the tab order and the a11y tree */}
                 <div className="hero-inner" inert={off !== 0}>
-                  <HeroCard r={r} top={top} owner={owner} canPick={canPick} setName={setName(r.set)} />
+                  <HeroCard r={r} owner={owner} canPick={canPick} setName={setName(r.set)} />
                 </div>
               </motion.article>
             )
@@ -210,36 +187,47 @@ function Carousel({ roster, takenBy, canPick }: { roster: RosterEntry[]; takenBy
   )
 }
 
-function HeroCard(props: { r: RosterEntry; top: Record<keyof CharStats, number>; owner?: string; canPick?: boolean; setName: string }) {
-  const { r, top, owner, canPick, setName } = props
+// One hero at level 1: who they are, the six abilities with saves, vitals, proficient skills, level-1 features, gear.
+function HeroCard(props: { r: RosterEntry; owner?: string; canPick?: boolean; setName: string }) {
+  const { r, owner, canPick, setName } = props
   const t = useT()
   const tx = useL()
+  const cls = useClass(r.classId)
+  const pb = profBonus(1)
+  const vitals: [string, string, string, string][] = [
+    ['hp', t('hpL1'), t('hpL1Hint'), cls ? String(hpLevel1(cls, r.abilities.con)) : '—'],
+    ['ac', t('ac'), t('acHint'), String(r.ac)],
+    ['hd', t('hitDie'), t('hitDieHint'), cls ? `d${cls.hitDie}` : '—'],
+    ['pb', t('profBonus'), t('profBonusHint'), signed(pb)],
+  ]
   return (
     <>
       <header className="hero-head">
-        <Medallion classId={r.id} art={r.art} size="lg" />
+        <Medallion heroId={r.id} art={r.art} size="lg" />
         <div>
           <h2>{tx(r.heroName)}</h2>
-          <p className="hero-class">{tx(r.className)}</p>
+          <p className="hero-class">{tx(cls?.name)}</p>
           {setName && <p className="set-badge">{setName}</p>}
         </div>
       </header>
       <p className="hero-blurb">{tx(r.blurb)}</p>
-      <dl className="hero-stats">
-        {STATS.map(([k, label]) => (
-          <div key={k} className={`stat-${k}`}>
-            <dt>{t(label)}</dt>
-            <dd>
-              <span className="bar" aria-hidden="true">
-                <span style={{ width: `${(r.stats[k] / top[k]) * 100}%` }} />
-              </span>
-              <span className="num">{r.stats[k]}</span>
-            </dd>
+      <dl className="hero-vitals">
+        {vitals.map(([k, label, hint, v]) => (
+          <div key={k} title={hint}>
+            <dt>{label}</dt>
+            <dd data-testid={`hero-${k}`}>{v}</dd>
           </div>
         ))}
       </dl>
-      <h3>{t('innateSkills')}</h3>
-      <SkillList skills={r.skills} />
+      <AbilityGrid abilities={r.abilities} saves={cls?.saves ?? []} pb={pb} />
+      {r.skills.length > 0 && (
+        <>
+          <h3>{t('skillsProf')}</h3>
+          <SkillChips abilities={r.abilities} skills={r.skills} expertise={r.expertise} pb={pb} />
+        </>
+      )}
+      <h3>{t('featuresL1')}</h3>
+      {cls ? <FeatureList features={featuresAt(cls, 1)} /> : <p className="hero-loading muted">{t('classesLoading')}</p>}
       {r.items.length > 0 && (
         <>
           <h3>{t('items')}</h3>
@@ -260,7 +248,7 @@ function HeroCard(props: { r: RosterEntry; top: Record<keyof CharStats, number>;
           </p>
         )}
         {canPick && (
-          <button className="primary" data-testid={`pick-${r.id}`} disabled={!!owner} onClick={() => send('character.pick', { classId: r.id })}>
+          <button className="primary" data-testid={`pick-${r.id}`} disabled={!!owner} onClick={() => send('character.pick', { heroId: r.id })}>
             {t('pickThis')}
           </button>
         )}

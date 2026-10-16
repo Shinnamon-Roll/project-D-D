@@ -492,7 +492,7 @@ func TestHubPickRace(t *testing.T) {
 	}
 	h.mu.Lock()
 	defer h.mu.Unlock()
-	if cs := h.room.st.Characters; len(cs) != 1 || cs[0].ClassID != "knight" {
+	if cs := h.room.st.Characters; len(cs) != 1 || cs[0].HeroID != "knight" {
 		t.Fatalf("characters %+v", cs)
 	}
 }

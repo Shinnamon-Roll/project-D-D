@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"slices"
 	"strings"
 	"testing"
 )
@@ -34,28 +35,21 @@ func TestSets(t *testing.T) {
 	}
 }
 
-// docRoster reads the JSON block at the end of a docs/design roster file.
-func docRoster(t *testing.T, name string) []RosterEntry {
+func docHeroes(t *testing.T, name string) []RosterEntry {
 	t.Helper()
-	b, err := os.ReadFile("../../docs/design/" + name)
-	if err != nil {
-		t.Fatal(err)
-	}
-	_, block, _ := strings.Cut(string(b), "## JSON (machine-readable)\n\n```json\n")
-	block, _, _ = strings.Cut(block, "```")
 	var doc []RosterEntry
-	if err := json.Unmarshal([]byte(block), &doc); err != nil {
-		t.Fatalf("%s: %v", name, err)
-	}
+	docJSON(t, name, &doc)
 	return doc
 }
 
 func TestDefaultRosterMatchesDoc(t *testing.T) {
-	core, legend := docRoster(t, "roster.md"), docRoster(t, "roster-legend.md")
-	got := DefaultRoster()
-	if !reflect.DeepEqual(got, append(core, legend...)) {
-		t.Fatal("internal/rules/roster_default.go + roster_legend.go differ from the JSON blocks in docs/design/roster.md + roster-legend.md")
+	core, legend := docHeroes(t, "heroes-core.md"), docHeroes(t, "heroes-legend.md")
+	syncGo(t, "roster_default.go", "docs/design/heroes-core.md", "coreRoster", coreRoster(), core)
+	syncGo(t, "roster_legend.go", "docs/design/heroes-legend.md", "legendRoster", legendRoster(), legend)
+	if *update {
+		return
 	}
+	got := DefaultRoster()
 	if len(core) != 10 || len(legend) != 12 {
 		t.Fatalf("%d core, %d legend", len(core), len(legend))
 	}
@@ -75,9 +69,27 @@ func TestDefaultRosterMatchesDoc(t *testing.T) {
 		if err != nil || !reflect.DeepEqual(c, e) {
 			t.Fatalf("%s: default not clean: %v", e.ID, err)
 		}
+		// Built-in heroes follow their class's skill choices (DM edits may add any skill).
+		cl, ok := ClassByID(e.ClassID)
+		if !ok {
+			t.Fatalf("%s: unknown class %q", e.ID, e.ClassID)
+		}
+		if len(e.Skills) != cl.SkillChoices.Count {
+			t.Errorf("%s: %d skills, class %s picks %d", e.ID, len(e.Skills), cl.ID, cl.SkillChoices.Count)
+		}
+		for _, k := range e.Skills {
+			if !slices.Contains(cl.SkillChoices.From, k) {
+				t.Errorf("%s: skill %s not in %s choices", e.ID, k, cl.ID)
+			}
+		}
 	}
-	got[0].Skills[0].Cost = 99 // copies are independent
-	if DefaultRoster()[0].Skills[0].Cost == 99 || defaults[0].Skills[0].Cost == 99 {
+	for _, id := range classIDs { // the legend set has one hero per class
+		if !slices.ContainsFunc(legend, func(e RosterEntry) bool { return e.ClassID == id }) {
+			t.Errorf("no legend %s", id)
+		}
+	}
+	got[0].Skills[0] = "x" // copies are independent
+	if DefaultRoster()[0].Skills[0] == "x" || defaults[0].Skills[0] == "x" {
 		t.Fatal("DefaultRoster shares slices")
 	}
 }
@@ -97,7 +109,6 @@ func TestCleanEntry(t *testing.T) {
 		{"hero en too long", func(e *RosterEntry) { e.HeroName.EN = long }, false},
 		{"hero 40 runes", func(e *RosterEntry) { e.HeroName.TH = strings.Repeat("ก", MaxName) }, true},
 		{"hero newline", func(e *RosterEntry) { e.HeroName.EN = "a\nb" }, false},
-		{"class empty", func(e *RosterEntry) { e.ClassName.EN = "" }, false},
 		{"blurb newline ok", func(e *RosterEntry) { e.Blurb.EN = "a\nb" }, true},
 		{"blurb control", func(e *RosterEntry) { e.Blurb.EN = "a\x00" }, false},
 		{"blurb too long", func(e *RosterEntry) { e.Blurb.TH = strings.Repeat("x", MaxDesc+1) }, false},
@@ -105,28 +116,39 @@ func TestCleanEntry(t *testing.T) {
 		{"art upload ok", func(e *RosterEntry) { e.Art = "/uploads/" + strings.Repeat("a", 32) + ".png" }, true},
 		{"art other url", func(e *RosterEntry) { e.Art = "https://x/y.png" }, false},
 		{"art traversal", func(e *RosterEntry) { e.Art = "/uploads/../x.png" }, false},
-		{"hpMax 0", func(e *RosterEntry) { e.Stats.HPMax = 0 }, false},
-		{"hpMax 999", func(e *RosterEntry) { e.Stats.HPMax = 999 }, true},
-		{"hpMax 1000", func(e *RosterEntry) { e.Stats.HPMax = 1000 }, false},
-		{"str 21", func(e *RosterEntry) { e.Stats.Str = 21 }, false},
-		{"agi -1", func(e *RosterEntry) { e.Stats.Agi = -1 }, false},
-		{"end 0", func(e *RosterEntry) { e.Stats.End = 0 }, true},
-		{"mpMax 100", func(e *RosterEntry) { e.Stats.MPMax = 100 }, false},
-		{"mpMax 0", func(e *RosterEntry) { e.Stats.MPMax = 0 }, true},
-		{"no skills", func(e *RosterEntry) { e.Skills = nil }, false},
-		{"6 skills", func(e *RosterEntry) {
-			for i, id := range []string{"a", "b", "c"} {
-				e.Skills = append(e.Skills, e.Skills[i])
-				e.Skills[len(e.Skills)-1].ID = id
+		{"client class ignored", func(e *RosterEntry) { e.ClassID = "wizard" }, true},
+		{"str 0", func(e *RosterEntry) { e.Abilities.Str = 0 }, false},
+		{"str 1", func(e *RosterEntry) { e.Abilities.Str = 1 }, true},
+		{"cha 30", func(e *RosterEntry) { e.Abilities.Cha = 30 }, true},
+		{"cha 31", func(e *RosterEntry) { e.Abilities.Cha = 31 }, false},
+		{"dex -1", func(e *RosterEntry) { e.Abilities.Dex = -1 }, false},
+		{"zero abilities", func(e *RosterEntry) { e.Abilities = Abilities{} }, false},
+		{"ac 0", func(e *RosterEntry) { e.AC = 0 }, false},
+		{"ac 1", func(e *RosterEntry) { e.AC = 1 }, true},
+		{"ac 30", func(e *RosterEntry) { e.AC = 30 }, true},
+		{"ac 31", func(e *RosterEntry) { e.AC = 31 }, false},
+		{"no skills", func(e *RosterEntry) { e.Skills = nil }, true},
+		{"any valid skill (DM)", func(e *RosterEntry) { e.Skills = append(e.Skills, "arcana", "stealth") }, true},
+		{"all 18 skills", func(e *RosterEntry) {
+			e.Skills = nil
+			for _, s := range Skills() {
+				e.Skills = append(e.Skills, s.ID)
 			}
+		}, true},
+		{"unknown skill", func(e *RosterEntry) { e.Skills[0] = "flying" }, false},
+		{"skill wrong case", func(e *RosterEntry) { e.Skills[0] = "Athletics" }, false},
+		{"dup skill", func(e *RosterEntry) { e.Skills[1] = e.Skills[0] }, false},
+		{"19 skills (dup)", func(e *RosterEntry) {
+			e.Skills = nil
+			for _, s := range Skills() {
+				e.Skills = append(e.Skills, s.ID)
+			}
+			e.Skills = append(e.Skills, "athletics")
 		}, false},
-		{"dup skill id", func(e *RosterEntry) { e.Skills[1].ID = e.Skills[0].ID }, false},
-		{"bad skill id", func(e *RosterEntry) { e.Skills[0].ID = "Bad Id" }, false},
-		{"skill name empty", func(e *RosterEntry) { e.Skills[0].Name.TH = "" }, false},
-		{"skill desc empty", func(e *RosterEntry) { e.Skills[0].Desc.EN = "" }, false},
-		{"cost 10", func(e *RosterEntry) { e.Skills[0].Cost = 10 }, true},
-		{"cost 11", func(e *RosterEntry) { e.Skills[0].Cost = 11 }, false},
-		{"cost -1", func(e *RosterEntry) { e.Skills[0].Cost = -1 }, false},
+		{"expertise in a skill", func(e *RosterEntry) { e.Expertise = []string{e.Skills[0]} }, true},
+		{"expertise not proficient", func(e *RosterEntry) { e.Expertise = []string{"arcana"} }, false},
+		{"expertise unknown", func(e *RosterEntry) { e.Expertise = []string{"x"} }, false},
+		{"dup expertise", func(e *RosterEntry) { e.Expertise = []string{e.Skills[0], e.Skills[0]} }, false},
 		{"no items", func(e *RosterEntry) { e.Items = nil }, true},
 		{"11 items", func(e *RosterEntry) {
 			for len(e.Items) < MaxItems+1 {
@@ -147,10 +169,14 @@ func TestCleanEntry(t *testing.T) {
 		})
 	}
 	e := DefaultRoster()[1]
-	e.HeroName.EN, e.Skills[0].Name.TH = "  Soraya  ", " x "
+	e.HeroName.EN, e.Items[0].Name.TH, e.Skills, e.Expertise = "  Soraya  ", " x ", nil, nil
 	c, err := cleanEntry(e)
-	if err != nil || c.HeroName.EN != "Soraya" || c.Skills[0].Name.TH != "x" || c.Items == nil {
+	if err != nil || c.HeroName.EN != "Soraya" || c.Items[0].Name.TH != "x" || c.Items == nil || c.Skills == nil || c.Expertise == nil {
 		t.Fatalf("trim: %+v %v", c, err)
+	}
+	e = DefaultRoster()[1]
+	if c, _ := cleanEntry(e); &c.Skills[0] == &e.Skills[0] {
+		t.Fatal("cleanEntry shares the skills slice")
 	}
 	for _, tt := range []struct{ id, sent, want string }{
 		{"knight", "legend", "core"},
@@ -162,8 +188,8 @@ func TestCleanEntry(t *testing.T) {
 		if !ok {
 			t.Fatalf("no %s", tt.id)
 		}
-		e.Set = tt.sent
-		if c, err := cleanEntry(e); err != nil || c.Set != tt.want {
+		e.Set, e.ClassID = tt.sent, "bard"
+		if c, err := cleanEntry(e); err != nil || c.Set != tt.want || c.ClassID == "bard" {
 			t.Errorf("%s with set %q: got %q %v, want %q", tt.id, tt.sent, c.Set, err, tt.want)
 		}
 	}
@@ -172,7 +198,7 @@ func TestCleanEntry(t *testing.T) {
 func TestRosterResetSet(t *testing.T) {
 	var s RosterStore
 	k, b := DefaultRoster()[0], DefaultRoster()[10] // knight (core), legend-barbarian
-	k.Stats.Str, b.Stats.Str = 20, 20
+	k.Abilities.Str, b.Abilities.Str = 20, 20
 	if b.ID != "legend-barbarian" {
 		t.Fatalf("index 10 is %s", b.ID)
 	}
@@ -190,10 +216,10 @@ func TestRosterResetSet(t *testing.T) {
 	if err := s.ResetSet("legend"); err != nil {
 		t.Fatal(err)
 	}
-	if got, _ := s.Get("legend-barbarian"); got.Stats.Str == 20 {
+	if got, _ := s.Get("legend-barbarian"); got.Abilities.Str == 20 {
 		t.Fatal("legend edit kept")
 	}
-	if got, _ := s.Get("knight"); got.Stats.Str != 20 {
+	if got, _ := s.Get("knight"); got.Abilities.Str != 20 {
 		t.Fatal("core edit lost by resetting legend")
 	}
 	if err := s.ResetSet("core"); err != nil {
@@ -244,7 +270,7 @@ func TestRosterStore(t *testing.T) {
 		t.Fatalf("file mode: %v %v", fi, err)
 	}
 	k := DefaultRoster()[0]
-	k.Stats.Str = 20
+	k.Abilities.Str = 20
 	if err := s.Update(k); err != nil {
 		t.Fatal(err)
 	}
@@ -255,7 +281,7 @@ func TestRosterStore(t *testing.T) {
 	if got, _ := r2.Get("rogue"); got.HeroName.EN != "Zarif Kesh" {
 		t.Fatalf("reset rogue: %q", got.HeroName.EN)
 	}
-	if got, _ := r2.Get("knight"); got.Stats.Str != 20 {
+	if got, _ := r2.Get("knight"); got.Abilities.Str != 20 {
 		t.Fatal("knight edit lost by resetting rogue")
 	}
 	if err := s.Reset(""); err != nil {
@@ -270,7 +296,7 @@ func TestRosterStore(t *testing.T) {
 	if err := s.Update(k); err == nil || err.Error() != "could not save roster" {
 		t.Fatalf("save failure: %v", err)
 	}
-	if got, _ := s.Get("knight"); got.Stats.Str == 20 {
+	if got, _ := s.Get("knight"); got.Abilities.Str == 20 {
 		t.Fatal("failed save changed the roster")
 	}
 }
@@ -291,41 +317,59 @@ func TestLoadRosterBadFiles(t *testing.T) {
 	t.Run("invalid and duplicate entries fall back to defaults", func(t *testing.T) {
 		dir := t.TempDir()
 		good, bad, dup := DefaultRoster()[0], DefaultRoster()[1], DefaultRoster()[0]
-		good.Stats.Str, bad.Stats.HPMax, dup.Stats.Str = 20, 0, 1
+		good.Abilities.Str, bad.AC, dup.Abilities.Str = 20, 0, 1
 		b, _ := json.Marshal(rosterFileData{Edits: []RosterEntry{good, bad, dup, {ID: "pirate"}}})
 		os.WriteFile(filepath.Join(dir, rosterFile), b, 0o600)
 		s, err := LoadRoster(dir, "", log)
 		if err != nil {
 			t.Fatal(err)
 		}
-		if k, _ := s.Get("knight"); k.Stats.Str != 20 {
+		if k, _ := s.Get("knight"); k.Abilities.Str != 20 {
 			t.Fatal("valid edit not loaded")
 		}
-		if w, _ := s.Get("wizard"); w.Stats.HPMax != DefaultRoster()[1].Stats.HPMax {
+		if w, _ := s.Get("wizard"); w.AC != DefaultRoster()[1].AC {
 			t.Fatal("invalid edit loaded")
 		}
 		if len(s.List()) != len(DefaultRoster()) {
 			t.Fatal("roster size")
 		}
 	})
+	t.Run("pre-rules-v2 file is quarantined", func(t *testing.T) {
+		dir := t.TempDir()
+		old := `{"edits":[{"id":"knight","set":"core","heroName":{"th":"ก","en":"A"},"className":{"th":"ก","en":"K"},` +
+			`"blurb":{"th":"ก","en":"b"},"role":"tank","art":"","stats":{"hpMax":36,"str":5,"end":8,"agi":2,"mpMax":4},` +
+			`"skills":[{"id":"stand-guard","name":{"th":"ก","en":"G"},"desc":{"th":"ก","en":"d"},"cost":1}],"items":[]}]}`
+		os.WriteFile(filepath.Join(dir, rosterFile), []byte(old), 0o600)
+		var logs bytes.Buffer
+		s, err := LoadRoster(dir, "", slog.New(slog.NewTextHandler(&logs, nil)))
+		if err != nil || !reflect.DeepEqual(s.List(), DefaultRoster()) {
+			t.Fatalf("err %v", err)
+		}
+		if m, _ := filepath.Glob(filepath.Join(dir, rosterFile+".bad-*")); len(m) != 1 {
+			t.Fatalf("quarantine files %v", m)
+		}
+		if !strings.Contains(logs.String(), "level=WARN") {
+			t.Fatalf("no warning logged: %s", logs.String())
+		}
+	})
 	t.Run("old file without set still loads", func(t *testing.T) {
 		dir := t.TempDir()
 		os.WriteFile(filepath.Join(dir, rosterFile), []byte(`{"edits":[`+strings.Replace(mustMarshal(t, func() RosterEntry {
 			e := DefaultRoster()[0]
-			e.Stats.Str = 20
+			e.Abilities.Str = 20
 			return e
 		}()), `"set":"core",`, "", 1)+`]}`), 0o600)
 		s, err := LoadRoster(dir, "", log)
 		if err != nil {
 			t.Fatal(err)
 		}
-		if k, _ := s.Get("knight"); k.Stats.Str != 20 || k.Set != "core" {
-			t.Fatalf("old edit: str %d set %q", k.Stats.Str, k.Set)
+		if k, _ := s.Get("knight"); k.Abilities.Str != 20 || k.Set != "core" {
+			t.Fatalf("old edit: str %d set %q", k.Abilities.Str, k.Set)
 		}
 		if err := s.ResetSet("core"); err != nil {
 			t.Fatal(err)
 		}
-		if k, _ := s.Get("knight"); k.Stats.Str == 20 {
+		if k, _ := s.Get("knight"); k.Abilities.Str == 20 {
 			t.Fatal("old edit not reset by its set")
 		}
 	})

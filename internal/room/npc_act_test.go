@@ -69,31 +69,31 @@ func TestNpcAct(t *testing.T) {
 		feed         rules.L // public line; the DM log line is the same
 		kind         string
 		bannerEN     string
-		hpAfter      int // knight starts at 36
+		hpAfter      int // knight starts at 12
 		death        bool
 	}{
 		{"talk", "dm", "Wolf", m{"kind": "talk", "text": "  Gold, now!  "},
-			rules.L{TH: "Wolf คุยกับ อัลดริก เวน: “Gold, now!”", EN: "Wolf talks with Aldric Vane: “Gold, now!”"}, "talk", "", 36, false},
+			rules.L{TH: "Wolf คุยกับ อัลดริก เวน: “Gold, now!”", EN: "Wolf talks with Aldric Vane: “Gold, now!”"}, "talk", "", 12, false},
 		{"talk empty", "co", "Wolf", m{"kind": "talk"},
-			rules.L{TH: "Wolf คุยกับ อัลดริก เวน", EN: "Wolf talks with Aldric Vane"}, "talk", "", 36, false},
+			rules.L{TH: "Wolf คุยกับ อัลดริก เวน", EN: "Wolf talks with Aldric Vane"}, "talk", "", 12, false},
 		{"talk with format verbs", "dm", "Wolf", m{"kind": "talk", "text": "100% %s %d"},
-			rules.L{TH: "Wolf คุยกับ อัลดริก เวน: “100% %s %d”", EN: "Wolf talks with Aldric Vane: “100% %s %d”"}, "talk", "", 36, false},
+			rules.L{TH: "Wolf คุยกับ อัลดริก เวน: “100% %s %d”", EN: "Wolf talks with Aldric Vane: “100% %s %d”"}, "talk", "", 12, false},
 		{"hit", "dm", "Wolf", m{"kind": "attack", "hit": true, "damage": 5},
-			rules.L{TH: "Wolf โจมตี อัลดริก เวน — โดน! −5", EN: "Wolf attacks Aldric Vane — hit! −5"}, "hit", "Wolf → " + kn, 31, false},
+			rules.L{TH: "Wolf โจมตี อัลดริก เวน — โดน! −5", EN: "Wolf attacks Aldric Vane — hit! −5"}, "hit", "Wolf → " + kn, 7, false},
 		{"hit no damage", "dm", "Wolf", m{"kind": "attack", "hit": true},
-			rules.L{TH: "Wolf โจมตี อัลดริก เวน — โดน!", EN: "Wolf attacks Aldric Vane — hit!"}, "hit", "Wolf → " + kn, 36, false},
+			rules.L{TH: "Wolf โจมตี อัลดริก เวน — โดน!", EN: "Wolf attacks Aldric Vane — hit!"}, "hit", "Wolf → " + kn, 12, false},
 		{"hit clamps and downs", "dm", "Wolf", m{"kind": "attack", "hit": true, "damage": 999},
 			rules.L{TH: "Wolf โจมตี อัลดริก เวน — โดน! −999", EN: "Wolf attacks Aldric Vane — hit! −999"}, "hit", "Wolf → " + kn, 0, true},
 		{"miss", "dm", "Wolf", m{"kind": "attack", "hit": false, "damage": 0},
-			rules.L{TH: "Wolf โจมตี อัลดริก เวน — ไม่โดน", EN: "Wolf attacks Aldric Vane — miss"}, "miss", "Wolf → " + kn, 36, false},
+			rules.L{TH: "Wolf โจมตี อัลดริก เวน — ไม่โดน", EN: "Wolf attacks Aldric Vane — miss"}, "miss", "Wolf → " + kn, 12, false},
 		{"gift", "dm", "Wolf", m{"kind": "gift", "item": m{"name": " Rusty Key ", "qty": 2}},
-			rules.L{TH: "Wolf มอบ Rusty Key ×2 ให้ อัลดริก เวน", EN: "Wolf gives Aldric Vane Rusty Key ×2"}, "gift", "", 36, false},
+			rules.L{TH: "Wolf มอบ Rusty Key ×2 ให้ อัลดริก เวน", EN: "Wolf gives Aldric Vane Rusty Key ×2"}, "gift", "", 12, false},
 		{"surrender", "co", "Wolf", m{"kind": "surrender", "text": "ignored"},
-			rules.L{TH: "Wolf ยอมแพ้ต่อ อัลดริก เวน", EN: "Wolf surrenders to Aldric Vane"}, "surrender", "", 36, false},
+			rules.L{TH: "Wolf ยอมแพ้ต่อ อัลดริก เวน", EN: "Wolf surrenders to Aldric Vane"}, "surrender", "", 12, false},
 		{"second copy shows #n", "dm", "Wolf #2", m{"kind": "surrender"},
-			rules.L{TH: "Wolf #2 ยอมแพ้ต่อ อัลดริก เวน", EN: "Wolf #2 surrenders to Aldric Vane"}, "surrender", "", 36, false},
+			rules.L{TH: "Wolf #2 ยอมแพ้ต่อ อัลดริก เวน", EN: "Wolf #2 surrenders to Aldric Vane"}, "surrender", "", 12, false},
 		{"second copy hit", "dm", "Wolf #2", m{"kind": "attack", "hit": true, "damage": 2},
-			rules.L{TH: "Wolf #2 โจมตี อัลดริก เวน — โดน! −2", EN: "Wolf #2 attacks Aldric Vane — hit! −2"}, "hit", "Wolf #2 → " + kn, 34, false},
+			rules.L{TH: "Wolf #2 โจมตี อัลดริก เวน — โดน! −2", EN: "Wolf #2 attacks Aldric Vane — hit! −2"}, "hit", "Wolf #2 → " + kn, 10, false},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			r, ids := arena(t)

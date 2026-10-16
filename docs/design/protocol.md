@@ -66,14 +66,18 @@ Roles: **DM** = seat kind `dm` or `codm` (co-DM has every DM right except removi
 | `seat.openCoDm` | `{}` | DM | `lobby` | max 1 `codm` seat |
 | `sets.set` | `{sets: string[]}` | DM | `lobby` | ids from `RoomState.sets`; empty/missing → `pick at least one set`, unknown id → `no such set`; duplicates dropped, stored in `sets` order; DM log `"set the character sets: First Company, Heroes of Legend"` |
 | `game.start` | `{}` | DM | `lobby` | ≥1 occupied player seat, all occupied player seats ready; empty player seats are removed; → `creating` |
-| `character.pick` | `{classId}` | player without character | `creating` | entry in the roster, its `set` in `activeSets` (else `that set is not in play`), and not taken by another character (by entry id: the same class from another set is fine); creates the Character from the current roster entry (`hp = hpMax`, `mp = mpMax`, innate skills, items copied); when every occupied player seat has a character → `playing` |
-| `skill.addCustom` | `{name, desc, cost}` | owner (player with a character) | `creating`/`playing` | name trimmed 1–40, desc trimmed ≤ 300 (newlines ok), cost int 0–10; at most 3 custom skills; `th = en =` the typed text |
-| `skill.editCustom` | `{characterId, skillId, name, desc, cost}` | owner or DM | `creating`/`playing` | same limits; `kind: "custom"` only |
-| `skill.removeCustom` | `{characterId, skillId}` | owner or DM | `creating`/`playing` | `kind: "custom"` only |
-| `skill.use` | `{skillId}` | owner | `playing` | skill of the sender's own character (innate or custom); `mp ≥ cost` → `mp −= cost` |
-| `character.adjust` | `{characterId, hp?, mp?}` | DM | `creating`/`playing` | deltas, int −999..999, at least one; result clamps to `0..max` |
-| `character.setStats` | `{characterId, hpMax, mpMax, str, end, agi}` | DM | `creating`/`playing` | hpMax 1–999, mpMax 0–99, str/end/agi 0–20; `hp`/`mp` clamp down to the new max |
-| `party.rest` | `{}` | DM | `playing` | every character `mp = mpMax` (hp unchanged) |
+| `character.pick` | `{heroId}` (pre-v2 key `classId` still accepted when `heroId` is empty) | player without character | `creating` | entry in the roster, its `set` in `activeSets` (else `that set is not in play`), and not taken by another character (by hero id: the same class from another set is fine); creates the Character at level 1 from the current roster entry (see "Rules v2"); when every occupied player seat has a character → `playing` |
+| `character.adjust` | `{characterId, hp}` | DM | `creating`/`playing` | hp delta int −999..999 (required); clamps to `0..hpMax`; knocked-out / back-up lines |
+| `character.level` | `{characterId, delta}` | DM | `creating`/`playing` | delta `1` or `-1`; level stays 1–20; recomputes hpMax/maxima (see "Rules v2") |
+| `character.setAbilities` | `{characterId, abilities, ac}` | DM | `creating`/`playing` | six scores 1–30, ac 1–30; recomputes hpMax (CON) and `abilityMod` resources |
+| `character.setSkills` | `{characterId, skills, expertise, saves}` | DM | `creating`/`playing` | replaces all three (missing key = `[]`): skills/expertise as `roster.update` (known skill ids, no duplicates, expertise ⊆ skills); saves = **extra** save proficiencies from class features (Expertise, Deft Explorer, Scholar, Disciplined Survivor, Slippery Mind): ability ids `str`…`cha`, duplicates dropped, stored as `extraSaves` in sheet order; recomputes `saves`. DM log only |
+| `slot.set` | `{characterId, level, used}` | owner or DM | `creating`/`playing` | level int 1–9 → `slotsUsed[level-1]`, or `"pact"` → `pactUsed`; `0 ≤ used ≤ max` (max 0 → `no such spell slot`) |
+| `resource.set` | `{characterId, resourceId, used}` | owner or DM | `creating`/`playing` | a resource of the character's class with `resourcesMax[id] > 0` (else `no such resource`); `0 ≤ used ≤ max` |
+| `hitDice.set` | `{characterId, used}` | owner or DM | `creating`/`playing` | `0 ≤ used ≤ hitDiceMax` (= level) |
+| `party.rest` | `{kind}` | DM | `playing` | `"short"` or `"long"`, every character; see "Rules v2" |
+| `ability.add` | `{name, kind, level, desc}` | owner (player with a character; acts on the sender's own character) | `creating`/`playing` | name trimmed 1–40 (one line), desc trimmed ≤ 300 (newlines ok), kind `spell`/`feature`, spell level int 0–9 (feature: level ignored, stored 0); at most 40 |
+| `ability.update` | `{abilityId, name, kind, level, desc}` | owner (own character only; `characterId` ignored) | `creating`/`playing` | same limits; keeps its id |
+| `ability.remove` | `{characterId, abilityId}` | owner or DM | `creating`/`playing` | |
 | `item.give` | `{characterId, name, qty}` | DM | `creating`/`playing` | name trimmed 1–40, qty 1–99; a stack whose `name.th` or `name.en` equals name gets `+qty` (stack ≤ 999); else a new stack `{name: {th: name, en: name}, qty}` (≤ 50 stacks) |
 | `item.remove` | `{characterId, index, qty}` | DM | `creating`/`playing` | index into `items`; qty ≥ 1; qty ≥ stack qty removes the stack |
 | `roster.update` | `{classId, entry: RosterEntry}` | DM | any | classId is the key (`entry.id` is ignored); limits below; affects later picks only; persisted |
@@ -103,7 +107,12 @@ Roles: **DM** = seat kind `dm` or `codm` (co-DM has every DM right except removi
 | `npc.act` | `{tokenId, targetId, kind, text?, hit?, damage?, item?: {name, qty}}` | DM | `playing`, `combat` | see "NPC actions" below |
 
 Unknown `type`, malformed payload, or failed check → `error` to sender. Removed in v0.12.0 (now unknown types):
-`ruleset.update`, `ruleset.loadPreset`, `character.submit`, `character.grant`.
+`ruleset.update`, `ruleset.loadPreset`, `character.submit`, `character.grant`. Removed in v0.17.0 (rules v2, now
+`unknown event type "<type>"`): `skill.addCustom`, `skill.editCustom`, `skill.removeCustom`, `skill.use`,
+`character.setStats`; `character.adjust` has no `mp` and `party.rest` needs `kind`.
+
+"Owner or DM" = a DM/co-DM, or the player seated on that character. A player naming another or a missing
+character gets `you can only change your own character` (never a hint which ids exist).
 
 ## NPC actions (`docs/features/npc-actions.md`)
 - `npc.act`: the DM makes a visible NPC token act on a player character. `kind`: `"talk" | "attack" | "gift" | "surrender"`.
@@ -149,7 +158,8 @@ type LogEntry = { at: number; actor: string; text: L }   // at = unix ms; actor 
   NPC token: DM log only.
 - `combat.set` feed: `"Combat started"` / `"เข้าสู่โหมดต่อสู้"` (no ⚔: fonts render it as ×), `"Combat ended"` / `"จบการต่อสู้"`.
 - DM log: in memory only (lost on restart), newest 300. Every successful event adds its line(s): every feed line, plus
-  seat sit/leave/ready, seat add/remove, co-DM seat, sets.set, game start, custom skills, roster edit/reset, scene add/edit/select,
+  seat sit/leave/ready, seat add/remove, co-DM seat, sets.set, game start, custom abilities, character.setAbilities, character.setSkills,
+  slot/resource/hit-dice changes, roster edit/reset, scene add/edit/select,
   NPC pool add/edit/remove, npc.place, hide/reveal, NPC hp, token move (`"moved Wolf from (0,0) to (4,3)"`, 0-based
   col,row), token remove, fog add/remove, attack declare/cancel/resolve, combat on/off (+ cancelled count). Notes only
   as `"edited note <title>"`, at most once per note per 60 s (never the body). Failed events add nothing.
@@ -246,27 +256,47 @@ The `state` payload has a top-level `"build": "<16 hex>"`, random per server pro
 ## Character roster (v0.12.0, `docs/features/character-roster.md`; sets v0.15.0, `docs/features/character-sets.md`)
 ```ts
 type L = { th: string; en: string }
-type RosterSkill = { id: string; name: L; desc: L; cost: number }
-type RosterItem  = { name: L; qty: number }
-type RosterEntry = {
+type Abilities  = { str: number; dex: number; con: number; int: number; wis: number; cha: number }  // 1-30
+type RosterItem = { name: L; qty: number }
+type RosterEntry = {     // a hero
   id: string            // unique across sets. core: knight|wizard|rogue|ranger|cleric|paladin|barbarian|bard|druid|necromancer
                         // legend: legend-<barbarian|bard|cleric|druid|fighter|monk|paladin|ranger|rogue|sorcerer|warlock|wizard>
   set: 'core' | 'legend' // always the built-in entry's set; a client-sent set is ignored
-  heroName: L; className: L; blurb: L
+  classId: string       // Class id from /api/classes; always the built-in entry's class, a client-sent one is ignored
+  heroName: L; blurb: L
   role: string          // tank|damage|healer|support|control|hybrid
-  art: string           // "" = class art by id (web/src/assets/classes/<id>.svg) | "/uploads/<generated name>"
-  stats: { hpMax: number; str: number; end: number; agi: number; mpMax: number }
-  skills: RosterSkill[] // 1-5
+  art: string           // "" = class art by hero id (web/src/assets/classes/<id>.svg) | "/uploads/<generated name>"
+  abilities: Abilities; ac: number
+  skills: string[]      // proficient skill ids (18 known ids, no duplicates)
+  expertise: string[]   // subset of skills
   items: RosterItem[]   // 0-10
 }
-type CharSkill = { id: string; kind: 'innate' | 'custom'; name: L; desc: L; cost: number }
+type CustomAbility = { id: string; name: string; kind: 'spell' | 'feature'; level: number; desc: string }
+                        // player-typed, one language; id "ab<n>"; level = spell level 0-9, 0 for a feature
 type Character = {
-  id: string; seatId: string; classId: string
+  id: string; seatId: string
+  classId: string       // Class id (fighter, wizard, ...)
+  heroId: string        // RosterEntry id picked (knight, legend-bard, ...)
   name: L               // heroName at pick time
   art: string           // entry art at pick time
-  hp: number; hpMax: number; mp: number; mpMax: number; str: number; end: number; agi: number
-  skills: CharSkill[]   // innate (roster order) then custom (≤ 3, ids "cs_<n>")
-  items: { name: L; qty: number }[]
+  level: number         // 1-20
+  hp: number; hpMax: number
+  abilities: Abilities; ac: number
+  skills: string[]; expertise: string[]
+  extraSaves: string[]  // ability ids the DM added with character.setSkills (sheet order); [] at pick
+  slotsUsed: number[]   // 9 entries, index 0 = 1st-level slots (full/half casters)
+  pactUsed: number      // pact casters (Warlock)
+  resourcesUsed: Record<string, number>   // every class resource id, 0 when unused
+  hitDiceUsed: number
+  abilitiesCustom: CustomAbility[]        // ≤ 40
+  items: RosterItem[]
+  // derived by the server from class + level + abilities (clients never compute these):
+  pb: number            // proficiency bonus
+  saves: string[]       // proficient saves = class.saves ∪ extraSaves, sheet order (str dex con int wis cha)
+  slotsMax: number[]    // 9 entries
+  pact: { count: number; level: number }  // {0,0} unless a pact caster
+  resourcesMax: Record<string, number>    // every class resource id; 0 = not gained at this level
+  hitDiceMax: number    // = level (die size = class hitDie)
 }
 type FeedEntry = { at: number; text: L }   // at = unix ms
 ```
@@ -274,29 +304,80 @@ type FeedEntry = { at: number; text: L }   // at = unix ms
   connections only entries whose `set` is in `activeSets`. Default = the JSON blocks in `docs/design/roster.md` (core)
   then `docs/design/roster-legend.md` (legend) (Go: `internal/rules/roster_default.go` + `roster_legend.go`, kept in
   sync by a test). A roster edit of an inactive set sends players nothing.
-- `roster.update` limits: heroName/className th+en trimmed 1–40, blurb th+en trimmed 1–300 (newlines ok), role in the
-  enum, stats as `character.setStats`, skills 1–5 with unique id `[a-z0-9-]{1,40}`, name th+en 1–40, desc th+en 1–300,
-  cost 0–10; items 0–10 with name th+en 1–40, qty 1–99; `art` "" or an existing `/uploads/<32 hex>.<png|jpg|gif|webp>`.
+- `roster.update` limits: heroName th+en trimmed 1–40, blurb th+en trimmed 1–300 (newlines ok), role in the
+  enum, abilities 1–30 and ac 1–30 (as `character.setAbilities`), skills = known skill ids without duplicates (any
+  skill, not only the class's choices), expertise ⊆ skills without duplicates; items 0–10 with name th+en 1–40, qty
+  1–99; `art` "" or an existing `/uploads/<32 hex>.<png|jpg|gif|webp>`. `set` and `classId` are always the built-in ones.
   Text with control characters (other than newline in blurb/desc) is rejected.
 - Persisted to `<-data>/roster.json` as `{"edits": RosterEntry[]}` (edited classes only; unedited classes follow the
-  built-in defaults; one file for every set, keyed by entry id; old files without `set` load fine), atomic write like notes. Missing file = defaults; invalid JSON → `roster.json.bad-<random>` +
-  defaults; an entry that fails validation on load is dropped (that class uses its default) and logged.
+  built-in defaults; one file for every set, keyed by entry id), atomic write like notes. Missing file = defaults;
+  invalid JSON or a pre-rules-v2 file → `roster.json.bad-<random>` + defaults (logged as a warning); an entry that
+  fails validation on load is dropped (that class uses its default) and logged.
 - `feed` keeps the newest 50 entries. Lines are written by the server, never by clients, and hold seat and hero names only
-  (no clientIds). Events that add a line: `character.pick` ("Pat picked Aldric Vane (Knight)"), `skill.use`
-  ("Aldric Vane used Last Stand (−4 MP)"), `character.adjust` ("DM: Aldric Vane HP −5 (31/36), MP +2 (4/4)" — the
-  change after clamping), `character.setStats`, `party.rest` ("DM: rest — mana refilled"), `item.give`, `item.remove`
-  ("DM: removed Field Bandage Roll ×2 from Aldric Vane" — the qty actually removed). Custom-skill and roster events add none.
+  (no clientIds). Events that add a line: `character.pick` ("Pat picked Aldric Vane (Fighter)" — class name),
+  `character.adjust` ("DM: Aldric Vane HP −5 (7/12)" — the change after clamping; no change = no line),
+  `character.level`, `party.rest` (lines in "Rules v2"), `item.give`, `item.remove`
+  ("DM: removed Field Bandages ×2 from Aldric Vane" — the qty actually removed). setAbilities, setSkills, slot, resource,
+  hit-dice, custom-ability and roster events add a DM log line only.
 - Errors: `only a seated player can pick a character`, `you already have a character`, `no such class`,
   `that set is not in play`, `pick at least one set`, `no such set`, `send classId or set, not both`,
-  `that class is already taken`, `you have no character`, `no such character`, `no such skill`, `no such item`,
-  `only custom skills can be changed`, `you can only change your own character's skills`, `at most 3 custom skills`,
-  `skill name must be 1-40 characters`, `skill desc must be at most 300 characters`, `skill cost must be 0-10`,
-  `not enough mana`, `hp or mp delta is required`, `delta must be -999 to 999`, `hpMax must be 1-999`, `mpMax must be 0-99`,
-  `str, end and agi must be 0-20`, `item name must be 1-40 characters`, `item qty must be 1-99`,
+  `that class is already taken`, `you have no character`, `no such character`, `no such item`,
+  `hp delta is required`, `delta must be -999 to 999`, `item name must be 1-40 characters`, `item qty must be 1-99`,
   `an item stack holds at most 999`, `at most 50 different items`, `qty must be at least 1`,
-  `heroName must be 1-40 characters (th and en)`, `className must be 1-40 characters (th and en)`,
-  `blurb must be 1-300 characters (th and en)`, `role must be one of tank, damage, healer, support, control, hybrid`,
-  `art must be empty or an uploaded image`, `a class needs 1-5 skills`, `skill id must be 1-40 characters a-z, 0-9 or -`,
-  `duplicate skill id`, `skill name must be 1-40 characters (th and en)`, `skill desc must be 1-300 characters (th and en)`,
+  `heroName must be 1-40 characters (th and en)`, `blurb must be 1-300 characters (th and en)`,
+  `role must be one of tank, damage, healer, support, control, hybrid`, `art must be empty or an uploaded image`,
+  `abilities must be 1-30`, `ac must be 1-30`, `unknown skill id`, `duplicate skill`,
+  `expertise must be a proficient skill`, `duplicate expertise`,
   `a class starts with at most 10 items`, `item name must be 1-40 characters (th and en)`, `could not save roster`,
+  the "Rules v2" errors,
   plus the shared `only the DM can do that`, `not allowed while the room is <status>`, `malformed payload`.
+
+## Rules v2 (v0.18.0, `docs/features/rules-v2.md`)
+- Class data (12 classes, SRD 5.2.1 based) is static and **not** in `RoomState`: `GET /api/classes` (no auth, like
+  the page). `Cache-Control: no-cache` + `ETag` (revalidate → `304`); about 140 KB uncompressed. Body:
+  ```ts
+  type Class = {
+    id: string; name: L; hitDie: 6 | 8 | 10 | 12; primary: string[]; saves: string[]   // ability ids
+    armor: L; weapons: L; tools: L                                                    // tools {"",""} = none
+    skillChoices: { count: number; from: string[] }
+    caster: 'none' | 'full' | 'half' | 'pact'; castAbility: string                    // "" when none
+    tables: { id: string; name: L; values: string[] }[]                               // 20 values, "—" = none yet
+    resources: { id: string; name: L; max: number[] | null; maxFormula: string;       // "abilityMod:<ab>" | "level*<n>" | ""
+                 refill: 'short' | 'long'; shortRegain: number; shortFromLevel: number; fromLevel: number }[]
+    features: { level: number; name: L; desc: L }[]                                   // sorted by level
+  }
+  { "classes": Class[],                      // 12
+    "skills": [{ "id": "athletics", "ability": "str" }, ...],   // 18, sheet order
+    "proficiency": number[20],               // index = level - 1
+    "fullSlots": number[20][9], "halfSlots": number[20][9],
+    "pactSlots": [{ "count": 1, "level": 1 }, ...],             // 20
+    "attribution": "This work includes material from the System Reference Document 5.2.1 (\"SRD 5.2.1\") by ..." }
+  ```
+  `attribution` is the exact CC BY 4.0 credit; show it on the pick screen (next to the art credit).
+- Client-side display only (simple, from the class data + the Character): ability mod `floor((score−10)/2)`, save =
+  mod + `pb` if in `character.saves` (not `class.saves`: it misses the extra saves), skill = mod + `pb` if in `skills`, + 2×`pb` if in `expertise`, initiative = DEX mod,
+  passive Perception = 10 + Perception, features with `level ≤ character.level`. Maxima and hpMax come from the server.
+- `character.pick`: `level 1`, `hpMax = hitDie + CON mod` (≥ 1), `hp = hpMax`, abilities/ac/skills/expertise/items
+  copied from the hero, every used counter 0, `abilitiesCustom []`.
+- hpMax at level n = `max(1, hitDie + CON mod) + (n−1) × max(1, hitDie/2 + 1 + CON mod)`. `character.level` and
+  `character.setAbilities` recompute it and keep the damage taken: `hp += newHpMax − oldHpMax`, clamped `0..hpMax`
+  (crossing 0 adds the knocked-out / back-up line). Every used counter clamps down to its new max.
+- `party.rest` short: a resource with `refill: "short"`, or with `shortFromLevel > 0` and `level ≥ shortFromLevel`,
+  resets to 0 used; any other resource gives back `shortRegain` uses (never below 0); `pactUsed = 0`; hp, spell slots
+  and hit dice unchanged (players spend hit dice with `hitDice.set` and the DM adds the healed HP with
+  `character.adjust` — dice stay physical). Long: `hp = hpMax`, all slots, pact, resources and hit dice 0 used.
+- Feed (+ DM log): `"Ayla reaches level 4"` / `"Ayla ขึ้นเลเวล 4"`, `"Ayla drops to level 3"` / `"Ayla ลดเป็นเลเวล 3"`,
+  `"DM: short rest — short-rest uses and pact slots back"` / `"DM: พักสั้น — คืนความสามารถแบบพักสั้นและ pact slot"`,
+  `"DM: long rest — HP, spell slots, uses and hit dice refilled"` / `"DM: พักยาว — เลือด ช่องคาถา ความสามารถ และ hit dice เต็ม"`.
+- DM log only: `"set Ayla: STR 17, DEX 10, CON 8, INT 8, WIS 13, CHA 12, AC 20 (HP 7/9)"`,
+  `"set skills of Ayla: athletics, stealth; expertise: stealth; extra saves: wis, cha"` (empty list = `—`; th
+  `"ตั้ง skill ของ Ayla: …; expertise: …; save เพิ่ม: …"`),
+  `"Ayla: level 1 spell slots used 2/4"`, `"Ayla: pact slots used 1/2"`, `"Ayla: Second Wind used 1/2"` (resource
+  name), `"Ayla: hit dice used 1/4"`, `"added spell Fireball to Ayla"` / `"added feature Tough to Ayla"`,
+  `"edited Fireball of Ayla"`, `"removed Fireball from Ayla"` (th lines alongside).
+- Errors: `delta must be 1 or -1`, `level must be 1-20`, `abilities must be 1-30`, `ac must be 1-30`,
+  `you can only change your own character`, `level must be 1-9 or "pact"`, `no such spell slot`, `no such resource`,
+  `used must be 0-<max>`, `kind must be short or long`, `you have no character`, `no such ability`,
+  `ability name must be 1-40 characters`, `ability desc must be at most 300 characters`, `kind must be spell or feature`,
+  `spell level must be 0-9`, `at most 40 custom abilities`, `unknown skill id`, `duplicate skill`,
+  `expertise must be a proficient skill`, `duplicate expertise`, `unknown ability id`, plus the shared ones.

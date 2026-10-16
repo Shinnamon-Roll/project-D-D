@@ -1,24 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
-import type { CharStats, L, RosterEntry } from '../protocol'
+import type { AbilityId, Class, L, RosterEntry } from '../protocol'
 import { useStore } from '../store'
 import { send, upload } from '../ws'
 import { useL, useT, type TKey } from '../i18n'
 import { classArt } from '../classArt'
 import { closeOnBackdrop } from '../screens/SeatQr'
-import { Medallion } from './Skills'
+import { Medallion } from './Medallion'
+import { abilityKey, skillKey } from './StatBlocks'
+import { ABILITIES, useClass, useSkills } from '../rules'
 
-// Limits mirror internal/rules/roster.go (UX only, the server re-checks everything).
+// Limits mirror internal/rules/roster.go + classes.go (UX only, the server re-checks everything).
 const NAME = 40
 const DESC = 300
-const MAX_SKILLS = 5
 const MAX_ITEMS = 10
-const STATS: [keyof CharStats, TKey, number, number][] = [
-  ['hpMax', 'statHpMax', 1, 999],
-  ['str', 'statStr', 0, 20],
-  ['end', 'statEnd', 0, 20],
-  ['agi', 'statAgi', 0, 20],
-  ['mpMax', 'statMpMax', 0, 99],
-]
+const SCORE = [1, 30] as const // abilities and AC
+const ROLES = ['tank', 'damage', 'healer', 'support', 'control', 'hybrid']
 
 const intIn = (n: number, lo: number, hi: number) => Number.isInteger(n) && n >= lo && n <= hi
 // Mirrors rules.CleanText: 1..max runes after trim, no control chars (\n only when multiline).
@@ -29,25 +25,17 @@ const textOk = (s: string, max: number, multiline = false) => {
 const lOk = (l: L, max: number, multiline = false) => textOk(l.th, max, multiline) && textOk(l.en, max, multiline)
 const blank = (): L => ({ th: '', en: '' })
 
+// Skills and expertise need no check here: the checkboxes only ever make known, unique ids with expertise ⊆ skills.
 function valid(e: RosterEntry) {
   return (
     lOk(e.heroName, NAME) &&
-    lOk(e.className, NAME) &&
     lOk(e.blurb, DESC, true) &&
-    STATS.every(([k, , lo, hi]) => intIn(e.stats[k], lo, hi)) &&
-    e.skills.length >= 1 &&
-    e.skills.length <= MAX_SKILLS &&
-    e.skills.every((s) => lOk(s.name, NAME) && lOk(s.desc, DESC, true) && intIn(s.cost, 0, 10)) &&
+    ROLES.includes(e.role) &&
+    ABILITIES.every((k) => intIn(e.abilities[k], ...SCORE)) &&
+    intIn(e.ac, ...SCORE) &&
     e.items.length <= MAX_ITEMS &&
     e.items.every((it) => lOk(it.name, NAME) && intIn(it.qty, 1, 99))
   )
-}
-
-// Skill ids: ^[a-z0-9-]{1,40}$, unique in the entry.
-function newSkillId(skills: { id: string }[]) {
-  let n = skills.length + 1
-  while (skills.some((s) => s.id === `skill-${n}`)) n++
-  return `skill-${n}`
 }
 
 // art is "" (this class's own icon) or an upload, so another class's icon goes up as a PNG,
@@ -72,6 +60,7 @@ export default function RosterEditor() {
   const tx = useL()
   const roster = useStore((s) => s.room!.roster)
   const sets = useStore((s) => s.room!.sets)
+  const classes = useStore((s) => s.classes?.classes) ?? []
   const [tab, setTab] = useState(sets[0]?.id ?? '')
   const [openId, setOpenId] = useState('')
   const backFrom = useRef('')
@@ -110,9 +99,9 @@ export default function RosterEditor() {
         {roster.filter((r) => r.set === tab).map((r) => (
           <li key={r.id}>
             <button data-testid={`roster-item-${r.id}`} onClick={() => setOpenId(r.id)}>
-              <Medallion classId={r.id} art={r.art} size="sm" />
+              <Medallion heroId={r.id} art={r.art} size="sm" />
               <span className="roster-name">{tx(r.heroName)}</span>
-              <span className="roster-class">{tx(r.className)}</span>
+              <span className="roster-class">{tx(classes.find((c) => c.id === r.classId)?.name)}</span>
             </button>
           </li>
         ))}
@@ -160,6 +149,8 @@ function EntryEditor({ entry, onBack }: { entry: RosterEntry; onBack: () => void
   const t = useT()
   const tx = useL()
   const roster = useStore((s) => s.room!.roster)
+  const cls = useClass(entry.classId)
+  const skillDefs = useSkills()
   const [d, setD] = useState(entry)
   const [busy, setBusy] = useState(false)
   const json = JSON.stringify(entry)
@@ -168,9 +159,12 @@ function EntryEditor({ entry, onBack }: { entry: RosterEntry; onBack: () => void
   const ok = valid(d)
 
   const set = (p: Partial<RosterEntry>) => setD((x) => ({ ...x, ...p }))
-  const setStat = (k: keyof CharStats, n: number) => setD((x) => ({ ...x, stats: { ...x.stats, [k]: n } }))
-  const setSkill = (i: number, p: Partial<RosterEntry['skills'][number]>) =>
-    setD((x) => ({ ...x, skills: x.skills.map((s, j) => (j === i ? { ...s, ...p } : s)) }))
+  const setAbility = (k: AbilityId, n: number) => setD((x) => ({ ...x, abilities: { ...x.abilities, [k]: n } }))
+  // Lists stay in sheet order (re-ticking a skill is not a change); unticking a skill drops its expertise too.
+  const pick = (list: string[], id: string, on: boolean) => skillDefs.map((s) => s.id).filter((k) => (k === id ? on : list.includes(k)))
+  const toggleSkill = (id: string, on: boolean) =>
+    setD((x) => ({ ...x, skills: pick(x.skills, id, on), expertise: on ? x.expertise : x.expertise.filter((k) => k !== id) }))
+  const toggleExpertise = (id: string, on: boolean) => setD((x) => ({ ...x, expertise: pick(x.expertise, id, on) }))
   const setItem = (i: number, p: Partial<RosterEntry['items'][number]>) =>
     setD((x) => ({ ...x, items: x.items.map((s, j) => (j === i ? { ...s, ...p } : s)) }))
 
@@ -210,13 +204,25 @@ function EntryEditor({ entry, onBack }: { entry: RosterEntry; onBack: () => void
         </span>
       </div>
       <header className="roster-head">
-        <Medallion classId={d.id} art={d.art} size="lg" />
-        <h3>{tx(d.heroName) || tx(entry.heroName)}</h3>
+        <Medallion heroId={d.id} art={d.art} size="lg" />
+        <div>
+          <h3>{tx(d.heroName) || tx(entry.heroName)}</h3>
+          <p className="roster-class">{tx(cls?.name)}</p>
+        </div>
       </header>
 
       <LField label={t('heroName')} value={d.heroName} max={NAME} testid="roster-hero" onChange={(heroName) => set({ heroName })} />
-      <LField label={t('className')} value={d.className} max={NAME} testid="roster-class" onChange={(className) => set({ className })} />
       <LField label={t('blurb')} value={d.blurb} max={DESC} multiline testid="roster-blurb" onChange={(blurb) => set({ blurb })} />
+      <label className="roster-role">
+        {t('role')}
+        <select data-testid="roster-role" value={d.role} onChange={(e) => set({ role: e.target.value })}>
+          {ROLES.map((r) => (
+            <option key={r} value={r}>
+              {t(`role_${r}` as TKey)}
+            </option>
+          ))}
+        </select>
+      </label>
 
       <fieldset className="art-pick">
         <legend>{t('image')}</legend>
@@ -228,8 +234,8 @@ function EntryEditor({ entry, onBack }: { entry: RosterEntry; onBack: () => void
               className="art-opt"
               data-testid={`roster-art-${r.id}`}
               aria-pressed={d.art === '' && classArt(r.id).src === ownIcon}
-              aria-label={t('artUse', { name: tx(r.className) })}
-              title={tx(r.className)}
+              aria-label={t('artUse', { name: tx(r.heroName) })}
+              title={tx(r.heroName)}
               disabled={busy}
               onClick={() => pickIcon(r.id)}
             >
@@ -254,69 +260,70 @@ function EntryEditor({ entry, onBack }: { entry: RosterEntry; onBack: () => void
       </fieldset>
 
       <fieldset>
-        <legend>{t('stats')}</legend>
+        <legend>{t('abilityScores')}</legend>
         <div className="stats-inputs">
-          {STATS.map(([k, label, lo, hi]) => (
+          {ABILITIES.map((k) => (
             <label key={k}>
-              {t(label)}
+              {t(abilityKey(k))} ({k.toUpperCase()})
               <input
-                data-testid={`roster-${k.toLowerCase()}`}
+                data-testid={`roster-ab-${k}`}
                 type="number"
-                min={lo}
-                max={hi}
+                min={SCORE[0]}
+                max={SCORE[1]}
                 step={1}
-                value={numOut(d.stats[k])}
-                aria-invalid={!intIn(d.stats[k], lo, hi)}
-                onChange={(e) => setStat(k, numIn(e.target.value))}
+                value={numOut(d.abilities[k])}
+                aria-invalid={!intIn(d.abilities[k], ...SCORE)}
+                onChange={(e) => setAbility(k, numIn(e.target.value))}
               />
             </label>
           ))}
+          <label>
+            {t('rosterAc')}
+            <input
+              data-testid="roster-ac"
+              type="number"
+              min={SCORE[0]}
+              max={SCORE[1]}
+              step={1}
+              value={numOut(d.ac)}
+              aria-invalid={!intIn(d.ac, ...SCORE)}
+              onChange={(e) => set({ ac: numIn(e.target.value) })}
+            />
+          </label>
         </div>
       </fieldset>
 
-      <h3>{t('innateSkills')}</h3>
-      <ol className="roster-rows">
-        {d.skills.map((s, i) => (
-          <li key={s.id} data-testid={`roster-skill-${i}`}>
-            <LField label={t('skillN', { n: i + 1 })} value={s.name} max={NAME} testid={`roster-skill-${i}-name`} onChange={(name) => setSkill(i, { name })} />
-            <LField label={t('skillDesc')} value={s.desc} max={DESC} multiline testid={`roster-skill-${i}-desc`} onChange={(desc) => setSkill(i, { desc })} />
-            <div className="row">
-              <label>
-                {t('customSkillCost')}
-                <input
-                  data-testid={`roster-skill-${i}-cost`}
-                  type="number"
-                  min={0}
-                  max={10}
-                  step={1}
-                  value={numOut(s.cost)}
-                  aria-invalid={!intIn(s.cost, 0, 10)}
-                  onChange={(e) => setSkill(i, { cost: numIn(e.target.value) })}
-                />
-              </label>
-              <span className="grow" />
-              <button
-                type="button"
-                className="danger"
-                data-testid={`roster-skill-${i}-remove`}
-                aria-label={t('removeNamed', { name: tx(s.name) || t('skillN', { n: i + 1 }) })}
-                disabled={d.skills.length <= 1}
-                onClick={() => set({ skills: d.skills.filter((_, j) => j !== i) })}
-              >
-                {t('remove')}
-              </button>
-            </div>
-          </li>
-        ))}
-      </ol>
-      <button
-        type="button"
-        data-testid="roster-skill-add"
-        disabled={d.skills.length >= MAX_SKILLS}
-        onClick={() => set({ skills: [...d.skills, { id: newSkillId(d.skills), name: blank(), desc: blank(), cost: 1 }] })}
-      >
-        {t('customSkillAdd')}
-      </button>
+      <fieldset>
+        <legend>{t('skillsProf')}</legend>
+        <p className="muted roster-hint">{t('rosterSkillsLead')}</p>
+        <ul className="roster-skills">
+          {skillDefs.map((s) => {
+            const name = t(skillKey(s.id))
+            const on = d.skills.includes(s.id)
+            return (
+              <li key={s.id} className={cls?.skillChoices.from.includes(s.id) ? 'class-choice' : undefined}>
+                <label>
+                  <input type="checkbox" data-testid={`roster-skill-${s.id}`} checked={on} onChange={(e) => toggleSkill(s.id, e.target.checked)} />
+                  {name} <small>{s.ability.toUpperCase()}</small>
+                </label>
+                <label className="exp-toggle">
+                  <input
+                    type="checkbox"
+                    data-testid={`roster-exp-${s.id}`}
+                    aria-label={t('expertiseOf', { name })}
+                    checked={d.expertise.includes(s.id)}
+                    disabled={!on}
+                    onChange={(e) => toggleExpertise(s.id, e.target.checked)}
+                  />
+                  <span aria-hidden="true">{t('expertise')}</span>
+                </label>
+              </li>
+            )
+          })}
+        </ul>
+      </fieldset>
+
+      {cls && <ClassSummary cls={cls} />}
 
       <h3>{t('startItems')}</h3>
       <ol className="roster-rows">
@@ -367,6 +374,39 @@ function EntryEditor({ entry, onBack }: { entry: RosterEntry; onBack: () => void
         </button>
       </div>
     </form>
+  )
+}
+
+// Class data is fixed (SRD-based); shown so the DM sees what the hero's class already gives.
+function ClassSummary({ cls }: { cls: Class }) {
+  const t = useT()
+  const tx = useL()
+  const ab = (id: string) => t(abilityKey(id))
+  const rows: [TKey, string][] = [
+    ['hitDie', `d${cls.hitDie}`],
+    ['classSaves', cls.saves.map(ab).join(', ')],
+    ['classArmor', tx(cls.armor)],
+    ['classWeapons', tx(cls.weapons)],
+    ['classTools', tx(cls.tools)],
+    ['classCaster', t(`caster_${cls.caster}` as TKey, { ab: cls.castAbility ? ab(cls.castAbility) : '' })],
+  ]
+  return (
+    <section className="class-summary" data-testid="roster-class-info" aria-labelledby="class-info-title">
+      <h3 id="class-info-title">
+        {t('classInfo')}: {tx(cls.name)}
+      </h3>
+      <dl>
+        {rows.map(([k, v]) => (
+          <div key={k}>
+            <dt>{t(k)}</dt>
+            <dd>{v || '—'}</dd>
+          </div>
+        ))}
+      </dl>
+      <p className="muted">
+        {t('classSkillChoices', { n: cls.skillChoices.count, list: cls.skillChoices.from.map((id) => t(skillKey(id))).join(', ') })}
+      </p>
+    </section>
   )
 }
 

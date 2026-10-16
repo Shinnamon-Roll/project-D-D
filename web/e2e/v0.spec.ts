@@ -7,6 +7,8 @@ const MAP_PNG = Buffer.from(
 )
 
 const tid = (page: Page, id: string) => page.getByTestId(id)
+const SRD =
+  'This work includes material from the System Reference Document 5.2.1 ("SRD 5.2.1") by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd. The SRD 5.2.1 is licensed under the Creative Commons Attribution 4.0 International License, available at https://creativecommons.org/licenses/by/4.0/legalcode.'
 const MAP_W = 200
 const MAP_H = 150
 
@@ -175,32 +177,42 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(tid(lateStart, 'qr-join')).toHaveCount(0)
   await lateCtx.close()
 
-  // 4. Pick screen: Ayla reaches the third card with the next button, then ArrowRight.
+  // 4. Pick screen: Ayla reaches the third card with the next button, then ArrowRight; she picks the first (the knight).
   await expect(tid(pl, 'carousel')).toBeVisible()
   await expect(tid(pl, 'art-credit')).toContainText('game-icons.net')
+  await expect(tid(pl, 'srd-credit')).toHaveText(SRD)
   const cards = pl.locator('[data-testid^="card-"]')
   // core (10) + legend (12); Bram takes the last card, a legend hero
   await expect(cards).toHaveCount(22)
   await expect(pl.locator('.set-badge').first()).toBeAttached()
-  const classId = (await cards.nth(2).getAttribute('data-testid'))!.replace('card-', '')
+  const third = (await cards.nth(2).getAttribute('data-testid'))!.replace('card-', '')
+  const classId = (await cards.nth(0).getAttribute('data-testid'))!.replace('card-', '') // knight: a fighter, for uses and level-ups below
+  expect(classId).toBe('knight')
   const bramClass = (await cards.nth(21).getAttribute('data-testid'))!.replace('card-', '')
   expect(bramClass).toMatch(/^legend-/)
   await tid(pl, 'carousel-next').click()
   await expect(cards.nth(1)).toHaveAttribute('data-current', 'true')
   await pl.keyboard.press('ArrowRight')
-  await expect(tid(pl, `card-${classId}`)).toHaveAttribute('data-current', 'true')
-  // Swipe left to the next card, then right back.
+  await expect(tid(pl, `card-${third}`)).toHaveAttribute('data-current', 'true')
+  // Swipe left to the next card, then right back; Home jumps to the first.
   await swipe(pl, -200)
   await expect(cards.nth(3)).toHaveAttribute('data-current', 'true')
   await swipe(pl, 200)
+  await expect(tid(pl, `card-${third}`)).toHaveAttribute('data-current', 'true')
+  await tid(pl, 'carousel').focus()
+  await pl.keyboard.press('Home')
   await expect(tid(pl, `card-${classId}`)).toHaveAttribute('data-current', 'true')
-  // ⓘ on an innate skill opens its detail; Esc closes and returns focus.
-  const info = tid(pl, `card-${classId}`).locator('[data-testid^="skill-info-"]').first()
+  // The card shows the six abilities with modifiers, AC and level-1 HP; ⓘ on a level-1 feature opens its detail.
+  const ayCard = tid(pl, `card-${classId}`)
+  await expect(ayCard.getByTestId('ab-str-score')).toHaveText(/^\d+$/)
+  await expect(ayCard.getByTestId('hero-hp')).toHaveText(/^\d+$/)
+  await expect(ayCard.getByTestId('hero-hd')).toHaveText(/^d\d+$/)
+  const info = ayCard.locator('[data-testid^="feature-info-"]').first()
   await info.click()
   await expect(pl.getByRole('dialog')).toBeVisible()
-  await expect(tid(pl, 'skill-info-desc')).not.toBeEmpty()
+  await expect(tid(pl, 'info-desc')).not.toBeEmpty()
   await pl.keyboard.press('Escape')
-  await expect(tid(pl, 'skill-info-modal')).toHaveCount(0)
+  await expect(tid(pl, 'info-modal')).toHaveCount(0)
   await expect(info).toBeFocused()
   if (process.env.SHOTS) {
     await pl.screenshot({ path: `${process.env.SHOTS}/pick-1440.png` })
@@ -222,17 +234,9 @@ test('v0: DM + player full flow', async ({ browser }) => {
   if (process.env.SHOTS) await dm.screenshot({ path: `${process.env.SHOTS}/pick-dm.png` })
   await expect(dm.locator('[data-testid^="creating-status-"]', { hasText: 'Ayla' })).toContainText(heroName)
 
-  // Ayla makes a skill of her own (cost 2), then waits for Bram.
-  await tid(pl, 'custom-skill-add').click()
-  await expect(tid(pl, 'custom-skill-name')).toBeFocused()
-  await tid(pl, 'custom-skill-name').fill('Ember Spit')
-  await tid(pl, 'custom-skill-desc').fill('Spit a spark at one foe next to you.')
-  await tid(pl, 'custom-skill-cost').fill('2')
-  await tid(pl, 'custom-skill-save').click()
-  await expect(tid(pl, 'custom-skills')).toContainText('Ember Spit')
-  await tid(pl, 'skills-done').click()
+  // Ayla goes straight on to waiting for Bram.
   await expect(tid(pl, 'waiting')).toBeVisible()
-  // DM raises hpMax of Bram's class in the roster editor before he picks; his hero gets the new value.
+  // DM raises CON of Bram's hero to 30 (+10) in the roster editor before he picks; his level-1 HP follows.
   await tid(dm, 'roster-open').click()
   // Ruleset opens on the core tab; Bram's hero is on the legend tab.
   await expect(tid(dm, 'roster-tab-core')).toHaveAttribute('aria-pressed', 'true')
@@ -241,13 +245,24 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(tid(dm, 'roster-tab-legend')).toHaveAttribute('aria-pressed', 'true')
   await expect(tid(dm, `roster-item-${classId}`)).toHaveCount(0)
   await tid(dm, `roster-item-${bramClass}`).click()
-  const hpDefault = await tid(dm, 'roster-hpmax').inputValue()
-  await tid(dm, 'roster-hpmax').fill('77')
+  await expect(tid(dm, 'roster-class-info')).toBeVisible()
+  const conDefault = await tid(dm, 'roster-ab-con').inputValue()
+  const hitDie = Number((await tid(qr, `card-${bramClass}`).getByTestId('hero-hd').textContent())!.slice(1))
+  const bramHp = String(hitDie + 10)
+  await tid(dm, 'roster-ab-con').fill('30')
   await expect(tid(dm, 'roster-status')).toHaveText('ยังไม่บันทึก')
+  // expertise needs the skill: unticking a proficient skill turns its expertise box off
+  const firstSkill = tid(dm, 'roster-form').locator('[data-testid^="roster-skill-"]:checked').first()
+  const skillId = (await firstSkill.getAttribute('data-testid'))!.replace('roster-skill-', '')
+  await tid(dm, `roster-exp-${skillId}`).check()
+  await tid(dm, `roster-skill-${skillId}`).uncheck()
+  await expect(tid(dm, `roster-exp-${skillId}`)).toBeDisabled()
+  await expect(tid(dm, `roster-exp-${skillId}`)).not.toBeChecked()
+  await tid(dm, `roster-skill-${skillId}`).check()
   if (process.env.SHOTS) await dm.screenshot({ path: `${process.env.SHOTS}/roster-editor.png` })
   await tid(dm, 'roster-save').click()
   await expect(tid(dm, 'roster-status')).toHaveText('บันทึกแล้ว')
-  await expect(tid(qr, `card-${bramClass}`).locator('.stat-hpMax .num')).toHaveText('77')
+  await expect(tid(qr, `card-${bramClass}`).getByTestId('hero-hp')).toHaveText(bramHp)
   await tid(dm, 'roster-back').click()
   await expect(tid(dm, `roster-item-${bramClass}`)).toBeFocused()
   await dm.keyboard.press('Escape')
@@ -258,16 +273,9 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(tid(qr, `card-${bramClass}`)).toHaveAttribute('data-current', 'true')
   await tid(qr, `pick-${bramClass}`).click()
   await expect(tid(pl, 'sheet')).toBeVisible()
-  await expect(tid(qr, 'sheet-hp')).toHaveText('77/77')
+  await expect(tid(qr, 'sheet-hp')).toHaveText(`${bramHp}/${bramHp}`)
 
-  // 4b. Ayla uses her skill: mana drops by its cost and the log says so, for her and the DM.
-  const mpBefore = Number((await tid(pl, 'sheet-mp').textContent())!.split('/')[0])
-  await tid(pl, 'custom-skills').locator('[data-testid^="use-skill-"]').click()
-  await expect(tid(pl, 'sheet-mp')).toHaveText(new RegExp(`^${mpBefore - 2}/`))
-  await expect(tid(pl, 'feed')).toContainText('Ember Spit')
-  await expect(tid(dm, 'feed')).toContainText('Ember Spit')
-
-  // 4c. DM party bar: Ayla's card; give and take items, HP −1 / shift −5, Rest refills mana.
+  // 4c. DM party bar: Ayla's card; give and take items, HP −1 / shift −5, long rest refills HP.
   await expect(tid(pl, 'party-bar')).toHaveCount(0)
   const ayla = tid(dm, 'party-bar').getByRole('button', { name: /Ayla/ })
   const card = tid(dm, 'char-card')
@@ -275,7 +283,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(ayla).toHaveAttribute('aria-expanded', 'true')
   await expect(card).toContainText(heroName)
   await expect(card).toContainText('Ayla')
-  await expect(tid(dm, 'card-mp')).toHaveText((await tid(pl, 'sheet-mp').textContent())!)
+  await tid(dm, 'sheet-tab-items').click()
   await tid(dm, 'give-item-name').fill('Rope')
   await tid(dm, 'give-item-qty').fill('3')
   await tid(dm, 'give-item-submit').click()
@@ -295,49 +303,151 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await tid(dm, 'card-hp-inc').click({ modifiers: ['Shift'] })
   await tid(dm, 'card-hp-inc').click()
   await expect(tid(pl, 'sheet-hp')).toHaveText(`${hp}/${hpMax}`)
-  // DM drains Ayla's mana below the skill's cost (2): her Use button goes disabled.
-  const use = tid(pl, 'custom-skills').locator('[data-testid^="use-skill-"]')
-  await expect(use).toBeEnabled()
-  let mp = Number((await tid(dm, 'card-mp').textContent())!.split('/')[0])
-  while (mp >= 2) {
-    await tid(dm, 'card-mp-dec').click({ modifiers: ['Shift'] })
-    mp = Math.max(0, mp - 5)
-    await expect(tid(dm, 'card-mp')).toHaveText(new RegExp(`^${mp}/`))
-  }
-  await expect(use).toBeDisabled()
-  const mpMax = (await tid(pl, 'sheet-mp').textContent())!.split('/')[1]
-  await expect(tid(pl, 'sheet-mp')).not.toHaveText(`${mpMax}/${mpMax}`) // Ayla used a skill above
-  await tid(dm, 'party-rest').click()
-  await expect(tid(pl, 'sheet-mp')).toHaveText(`${mpMax}/${mpMax}`)
-  await expect(tid(dm, 'card-mp')).toHaveText(`${mpMax}/${mpMax}`)
-  await expect(use).toBeEnabled()
-  await expect(tid(pl, 'feed')).toContainText('พักผ่อน')
+  await tid(dm, 'card-hp-dec').click()
+  await expect(tid(pl, 'sheet-hp')).toHaveText(`${hp - 1}/${hpMax}`)
+  await tid(dm, 'party-rest-long').click()
+  await expect(tid(pl, 'sheet-hp')).toHaveText(`${hpMax}/${hpMax}`)
   await dm.keyboard.press('Escape')
   await expect(card).toHaveCount(0)
   await expect(ayla).toBeFocused()
-  // Bram's card: the roster hpMax he picked with; the DM edits his stats.
+  // Bram's card: the HP from the roster CON he picked with.
   const bram = tid(dm, 'party-bar').getByRole('button', { name: /Bram/ })
   await bram.click()
-  await expect(tid(dm, 'card-hp')).toHaveText('77/77')
-  await tid(dm, 'card-stats-edit').click()
-  await expect(tid(dm, 'card-stat-hpmax')).toBeFocused()
-  await tid(dm, 'card-stat-str').fill('15')
-  await tid(dm, 'card-stats-save').click()
-  await expect(tid(dm, 'card-str')).toHaveText('15')
-  await expect(tid(qr, 'sheet')).toContainText('15')
+  await expect(tid(dm, 'card-hp')).toHaveText(`${bramHp}/${bramHp}`)
   await bram.click() // same avatar closes
   await expect(card).toHaveCount(0)
   // Roster reset puts the default back; Bram's hero keeps what he picked with.
   await tid(dm, 'dm-menu-ruleset').click()
   await tid(dm, 'roster-tab-legend').click()
   await tid(dm, `roster-item-${bramClass}`).click()
-  await expect(tid(dm, 'roster-hpmax')).toHaveValue('77')
+  await expect(tid(dm, 'roster-ab-con')).toHaveValue('30')
   await tid(dm, 'roster-reset').click()
-  await expect(tid(dm, 'roster-hpmax')).toHaveValue(hpDefault)
-  await expect(tid(qr, 'sheet-hp')).toHaveText('77/77')
+  await expect(tid(dm, 'roster-ab-con')).toHaveValue(conDefault)
+  await expect(tid(qr, 'sheet-hp')).toHaveText(`${bramHp}/${bramHp}`)
   await tid(dm, 'roster-back').click()
   await tid(dm, 'dm-menu-ruleset').click() // close it; "scenes" stayed open alongside
   await expect(tid(dm, 'dm-menu-scenes')).toHaveAttribute('aria-expanded', 'true')
+
+  // 4d. Rules v2 sheet. Bram (wizard) spends a 1st-level slot pip and Arcane Recovery; the DM's card shows both.
+  await tid(qr, 'sheet-tab-resources').click()
+  await expect(tid(qr, 'slot-1-left')).toHaveText('2/2')
+  await tid(qr, 'slot-1-0').click()
+  await expect(tid(qr, 'slot-1-left')).toHaveText('1/2')
+  await expect(tid(qr, 'slot-1-0')).toHaveAttribute('aria-pressed', 'true')
+  await tid(qr, 'res-arcane-recovery-use').click()
+  await expect(tid(qr, 'res-arcane-recovery-left')).toHaveText('0/1')
+  await expect(tid(qr, 'res-arcane-recovery-use')).toBeDisabled()
+  await bram.click()
+  await tid(dm, 'sheet-tab-resources').click()
+  await expect(tid(dm, 'slot-1-left')).toHaveText('1/2')
+  await expect(tid(dm, 'res-arcane-recovery-left')).toHaveText('0/1')
+  // Bram writes in a spell of his own; the DM sees it (no add form: only the owner adds) and can remove it.
+  await tid(qr, 'sheet-tab-mine').click()
+  await tid(qr, 'cab-name').fill('Magic Missile')
+  await tid(qr, 'cab-level').selectOption('1')
+  await tid(qr, 'cab-desc').fill('Three darts of force.')
+  await tid(qr, 'cab-submit').click()
+  await expect(tid(qr, 'cab-list')).toContainText('Magic Missile')
+  await expect(tid(qr, 'cab-name')).toHaveValue('')
+  await tid(dm, 'sheet-tab-mine').click()
+  await expect(tid(dm, 'cab-list')).toContainText('Magic Missile')
+  await expect(tid(dm, 'cab-name')).toHaveCount(0)
+  await dm.locator('[data-testid^="cab-remove-"]').click()
+  await expect(tid(qr, 'cab-list')).toHaveCount(0)
+  // A class feature grants Bram History (no expertise) and a CHA save: the DM ticks both; the class's INT/WIS saves stay locked.
+  // INT 17, CHA 10, PB +2: History +3 -> +5, CHA save +0 -> +2 on both screens.
+  await tid(qr, 'sheet-tab-abilities').click()
+  await tid(dm, 'sheet-tab-abilities').click()
+  await expect(tid(qr, 'skill-history-bonus')).toHaveText('+3')
+  await expect(tid(qr, 'ab-cha-save')).toContainText('+0')
+  await tid(dm, 'card-prof-edit').click()
+  await expect(tid(dm, 'card-prof-skill-arcana')).toBeChecked()
+  await expect(tid(dm, 'card-prof-save-wis')).toBeChecked()
+  await expect(tid(dm, 'card-prof-save-wis')).toBeDisabled()
+  await expect(tid(dm, 'card-prof-exp-history')).toBeDisabled()
+  await tid(dm, 'card-prof-skill-history').check()
+  await expect(tid(dm, 'card-prof-exp-history')).toBeEnabled()
+  await tid(dm, 'card-prof-save-cha').check()
+  await tid(dm, 'card-prof-save').click()
+  await expect(tid(dm, 'card-prof-edit')).toBeFocused()
+  await expect(tid(qr, 'skill-history-bonus')).toHaveText('+5')
+  await expect(tid(qr, 'ab-cha-save')).toContainText('+2')
+  await expect(tid(qr, 'ab-wis-save')).toContainText('+4')
+  await expect(tid(dm, 'skill-history-bonus')).toHaveText('+5')
+  await expect(tid(dm, 'ab-cha-save')).toContainText('+2')
+  await tid(dm, 'card-prof-edit').click()
+  await expect(tid(dm, 'card-prof-save-cha')).toBeChecked()
+  await expect(tid(dm, 'card-prof-exp-history')).not.toBeChecked()
+  await tid(dm, 'card-prof-cancel').click()
+  await bram.click()
+  await expect(card).toHaveCount(0)
+  // Ayla (fighter): the DM levels her to 5; level, HP, PB and features follow on both screens. Then one level down.
+  await ayla.click()
+  await tid(pl, 'sheet-tab-features').click()
+  await expect(tid(pl, 'feat-next')).toContainText('Action Surge')
+  const hp1 = Number((await tid(pl, 'sheet-hp').textContent())!.split('/')[1])
+  for (let n = 2; n <= 5; n++) {
+    await tid(dm, 'card-level-inc').click()
+    await expect(tid(dm, 'card-level')).toHaveText(String(n))
+  }
+  await expect(tid(pl, 'sheet-level')).toHaveText('5')
+  await expect(tid(pl, 'sheet-pb')).toHaveText('+3')
+  await expect(tid(dm, 'card-pb')).toHaveText('+3')
+  // d10 fighter, CON 15: 6 + 2 per level, and full HP stays full
+  await expect(tid(pl, 'sheet-hp')).toHaveText(`${hp1 + 32}/${hp1 + 32}`)
+  await expect(tid(dm, 'card-hp')).toHaveText(`${hp1 + 32}/${hp1 + 32}`)
+  await expect(tid(pl, 'feat-now')).toContainText('Extra Attack')
+  await expect(tid(pl, 'feed')).toContainText(`${heroName} ขึ้นเลเวล 5`)
+  await tid(dm, 'card-level-dec').click()
+  await expect(tid(pl, 'sheet-level')).toHaveText('4')
+  await expect(tid(pl, 'sheet-pb')).toHaveText('+2')
+  await expect(tid(pl, 'feat-next')).toContainText('Extra Attack')
+  await expect(tid(pl, 'sheet-hp')).toHaveText(`${hp1 + 24}/${hp1 + 24}`)
+  // The DM raises DEX 10 -> 14: her DEX save, Acrobatics and Initiative go from +0 to +2.
+  await tid(pl, 'sheet-tab-abilities').click()
+  await expect(tid(pl, 'sheet-init')).toHaveText('+0')
+  await expect(tid(pl, 'skill-acrobatics-bonus')).toHaveText('+0')
+  await tid(dm, 'card-ab-edit').click()
+  await expect(tid(dm, 'card-edit-str')).toBeFocused()
+  await tid(dm, 'card-edit-dex').fill('14')
+  await tid(dm, 'card-ab-save').click()
+  await expect(tid(pl, 'ab-dex-score')).toHaveText('14')
+  await expect(tid(pl, 'ab-dex-save')).toContainText('+2')
+  await expect(tid(pl, 'skill-acrobatics-bonus')).toHaveText('+2')
+  await expect(tid(pl, 'sheet-init')).toHaveText('+2')
+  // She spends Second Wind (shift = 5, capped at what is left), Action Surge and a hit die.
+  await tid(pl, 'sheet-tab-resources').click()
+  await expect(tid(pl, 'res-second-wind-left')).toHaveText('3/3')
+  await tid(pl, 'res-second-wind-use').click({ modifiers: ['Shift'] })
+  await expect(tid(pl, 'res-second-wind-left')).toHaveText('0/3')
+  await tid(pl, 'res-action-surge-use').click()
+  await expect(tid(pl, 'res-action-surge-left')).toHaveText('0/1')
+  await tid(pl, 'hd-use').click()
+  await expect(tid(pl, 'hd-left')).toHaveText('3/4')
+  // Short rest: Action Surge back, Second Wind +1; hit dice, Bram's slot and Arcane Recovery wait for a long rest.
+  await tid(qr, 'sheet-tab-resources').click()
+  await tid(dm, 'party-rest-short').click()
+  await expect(tid(pl, 'res-action-surge-left')).toHaveText('1/1')
+  await expect(tid(pl, 'res-second-wind-left')).toHaveText('1/3')
+  await expect(tid(pl, 'hd-left')).toHaveText('3/4')
+  await expect(tid(qr, 'slot-1-left')).toHaveText('1/2')
+  await expect(tid(qr, 'res-arcane-recovery-left')).toHaveText('0/1')
+  await expect(tid(pl, 'feed')).toContainText('DM: พักสั้น')
+  // Long rest: every use, slot and hit die back, and HP full.
+  await tid(dm, 'card-hp-dec').click()
+  await expect(tid(pl, 'sheet-hp')).toHaveText(`${hp1 + 23}/${hp1 + 24}`)
+  await tid(dm, 'party-rest-long').click()
+  await expect(tid(pl, 'sheet-hp')).toHaveText(`${hp1 + 24}/${hp1 + 24}`)
+  await expect(tid(pl, 'res-second-wind-left')).toHaveText('3/3')
+  await expect(tid(pl, 'hd-left')).toHaveText('4/4')
+  await expect(tid(qr, 'slot-1-left')).toHaveText('2/2')
+  await expect(tid(qr, 'res-arcane-recovery-left')).toHaveText('1/1')
+  if (process.env.SHOTS) {
+    await pl.screenshot({ path: `${process.env.SHOTS}/sheet-resources.png` })
+    await dm.screenshot({ path: `${process.env.SHOTS}/dm-card-v2.png`, animations: 'disabled' })
+  }
+  await ayla.click()
+  await expect(card).toHaveCount(0)
 
   // Player never sees the DM panel on the table.
   await expect(tid(pl, 'dm-panel')).toHaveCount(0)
@@ -681,7 +791,6 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(log).toContainText(NPC)
   // token moves: from → to, 0-based col,row; Ayla's quick (0,0)→(2,1)→(3,2) merges into one line
   await expect(log).toContainText(/ย้าย .+ จาก \(0,0\) ไป \(3,2\)/)
-  await expect(log).toContainText('Ember Spit') // skill use
   if (process.env.SHOTS) await dm.screenshot({ path: `${process.env.SHOTS}/dm-log.png`, animations: 'disabled' })
   expect(plFrames.filter((f) => f.includes('"dmLog"') || f.includes('"type":"log"') || f.includes('"attacks"'))).toEqual([])
   expect(plFrames.filter((f) => f.includes('"type":"banner"')).length).toBe(3)

@@ -7,9 +7,12 @@ character sheets. Single project at repo root (not a monorepo).
 Replace the paper table: a DM and friends open one link and play together in the browser.
 
 ## Confirmed requirements
-- Fixed character roster in sets (`docs/features/character-roster.md`, `docs/features/character-sets.md`; data `docs/design/roster.md` = set `core` 10 heroes, `docs/design/roster-legend.md` = set `legend` 12 heroes). DM ticks which sets are in play in the lobby (≥1). Players pick 1 card each
-  (no duplicates); HP/mana/str/end/agi, mana skills + up to 3 custom skills. DM edits the roster in-app (Ruleset page,
-  saved in `data/roster.json`). NPC pool stays white label (DM defines NPCs). The old white-label ruleset + 5E preset is gone.
+- Fixed hero roster in sets (`docs/features/character-sets.md`; set `core` 10 heroes, set `legend` 12). DM ticks which sets are
+  in play in the lobby (≥1). Players pick 1 card each (no duplicates). DM edits the roster in-app (Ruleset page, `data/roster.json`).
+- Rules v2 (`docs/features/rules-v2.md`, replaces mana/str/end/agi): 12 classes, 6 abilities, AC, saves + 18 skills, levels 1–20,
+  spell slots + class counters + hit dice, short/long rest (DM), custom spells/features (≤40), DM level ±, DM edits abilities/AC/
+  proficiencies. Data: `docs/design/classes/<id>.md` + `_shared.md`, heroes `docs/design/heroes-core.md` / `heroes-legend.md`
+  (Go generated, sync test); names/stories `docs/design/roster.md` / `roster-legend.md`. NPC pool stays white label.
 - Private use. One DM (first to click) + optional co-DM; up to 6 player seats added by DM.
 - Flow: lobby + ready → character creation → map with grid, click to move. Full draft: `docs/design/web-flow.md`.
 - Home page = campaign menu, DM picks. First campaign: Starter Set Dragons of Stormwreck Isle (`docs/campaigns/starter-set/`).
@@ -36,8 +39,10 @@ Tests: `go test` + Playwright (2 tabs: DM + player).
   every user request/feedback → `docs/conversations/YYYY-MM-DD-<topic>.md` (verbatim + summary);
   confirmed → `docs/decisions.md`; unclear → `docs/open-questions.md`; out of scope → `docs/ideas.md`.
 - Docs for the user are written in Thai (user's language); keep technical terms in English.
-- Game content is original (the roster: names, stories, skills, items written for this app). SRD text is no longer bundled.
-  Never copy D&D book text, Basic/Free Rules text, official character sheet layout, or adventure maps/text.
+- Game content is original (heroes: names, stories, items written for this app). Class mechanics + feature names from
+  SRD 5.2.1 (CC BY 4.0) are allowed with the exact attribution shown in-app (pick screen, `/api/classes`) and in README;
+  feature descriptions in our own words. Never copy PHB / D&D Beyond / Basic/Free Rules text, official character sheet
+  layout, or adventure maps/text.
   Class art = game-icons.net (CC BY 3.0) with credit shown on the pick screen.
 - Never brand the app "D&D" / "Dungeons & Dragons" (trademark). "5E compatible" is OK.
 - Salem campaign: mechanics ideas only from Salem 1692 (Facade Games). Never copy its card/rule text, art, coined terms

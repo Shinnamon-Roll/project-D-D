@@ -117,6 +117,7 @@ func newMux(hub *room.Hub, uploads string, dist fs.FS, listenAddr string, log *s
 	mux.HandleFunc("/ws", hub.ServeWS)
 	mux.HandleFunc("POST /api/upload", handleUpload(uploads, hub.Seated, log))
 	mux.HandleFunc("GET /uploads/{name}", handleUploads(uploads))
+	mux.HandleFunc("GET /api/classes", handleClasses())
 	mux.HandleFunc("/api/lan", handleLAN(listenAddr)) // no method in pattern: "/" would catch POST as 404
 	mux.Handle("/", http.FileServerFS(dist))
 	return mux

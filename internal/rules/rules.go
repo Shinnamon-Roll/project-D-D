@@ -1,4 +1,4 @@
-// Package rules holds the campaign menu and the character roster (roster.go).
+// Package rules holds the campaign menu, the class data + rules helpers (classes.go) and the hero roster (roster.go).
 // JSON names follow docs/design/protocol.md.
 package rules
 

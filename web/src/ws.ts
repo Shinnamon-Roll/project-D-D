@@ -1,4 +1,4 @@
-import type { ClientEvents, ServerMessage } from './protocol'
+import type { ClassesDoc, ClientEvents, ServerMessage } from './protocol'
 import { LOG_CAP, isDmSeat, showBanner, showError, useStore } from './store'
 import { translate } from './i18n'
 
@@ -51,6 +51,7 @@ export function connect() {
     delay = 500
     ws.send(JSON.stringify({ type: 'hello', payload: { clientId } }))
     useStore.setState({ connected: true })
+    loadClasses()
   }
   ws.onmessage = (e) => {
     let msg: ServerMessage
@@ -82,6 +83,24 @@ export function connect() {
     useStore.setState({ connected: false })
     setTimeout(connect, delay)
     delay = Math.min(delay * 2, 10000)
+  }
+}
+
+// Static class data, once per page load. Called on every (re)connect until it succeeds, so a failed fetch retries.
+let classesLoading = false
+async function loadClasses() {
+  if (classesLoading || useStore.getState().classes) return
+  classesLoading = true
+  try {
+    const r = await fetch('/api/classes')
+    if (!r.ok) throw new Error(`HTTP ${r.status}`)
+    const doc = (await r.json()) as ClassesDoc
+    if (!Array.isArray(doc.classes) || !Array.isArray(doc.skills)) throw new Error('bad response')
+    useStore.setState({ classes: doc })
+  } catch (err) {
+    showError(translate(useStore.getState().lang, 'classesFailed', { error: (err as Error).message }))
+  } finally {
+    classesLoading = false
   }
 }
 

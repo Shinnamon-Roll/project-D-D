@@ -21,54 +21,38 @@ type L struct {
 	EN string `json:"en"`
 }
 
-type Stats struct {
-	HPMax int `json:"hpMax"`
-	Str   int `json:"str"`
-	End   int `json:"end"`
-	Agi   int `json:"agi"`
-	MPMax int `json:"mpMax"`
-}
-
-type RosterSkill struct {
-	ID   string `json:"id"`
-	Name L      `json:"name"`
-	Desc L      `json:"desc"`
-	Cost int    `json:"cost"`
-}
-
 type RosterItem struct {
 	Name L   `json:"name"`
 	Qty  int `json:"qty"`
 }
 
-// RosterEntry is one pickable character. ID is unique across every set (the legend set uses "legend-<class>").
+// RosterEntry is one pickable hero (docs/design/heroes-core.md, heroes-legend.md). ID is unique across every set
+// (the legend set uses "legend-<class>"). Its class data (name, HP, saves, features) comes from Class ClassID.
 type RosterEntry struct {
-	ID        string        `json:"id"`
-	Set       string        `json:"set"` // id from Sets(); always the built-in entry's set, never client-chosen
-	HeroName  L             `json:"heroName"`
-	ClassName L             `json:"className"`
-	Blurb     L             `json:"blurb"`
-	Role      string        `json:"role"`
-	Art       string        `json:"art"` // "" = class art by id (frontend asset) | "/uploads/<generated name>"
-	Stats     Stats         `json:"stats"`
-	Skills    []RosterSkill `json:"skills"`
-	Items     []RosterItem  `json:"items"`
+	ID        string       `json:"id"`
+	Set       string       `json:"set"`     // id from Sets(); always the built-in entry's set, never client-chosen
+	ClassID   string       `json:"classId"` // Class id; always the built-in entry's class, never client-chosen
+	HeroName  L            `json:"heroName"`
+	Blurb     L            `json:"blurb"`
+	Role      string       `json:"role"`
+	Art       string       `json:"art"` // "" = class art by id (frontend asset) | "/uploads/<generated name>"
+	Abilities Abilities    `json:"abilities"`
+	AC        int          `json:"ac"`
+	Skills    []string     `json:"skills"`    // proficient skill ids
+	Expertise []string     `json:"expertise"` // subset of Skills
+	Items     []RosterItem `json:"items"`
 }
 
 const (
-	MaxName      = 40 // hero/class/skill/item names
-	MaxDesc      = 300
-	MaxCost      = 10
-	MaxQty       = 99
-	MaxSkills    = 5
-	MaxItems     = 10
-	rosterFile   = "roster.json"
-	maxStatValue = 20
+	MaxName    = 40 // hero/item names
+	MaxDesc    = 300
+	MaxQty     = 99
+	MaxItems   = 10
+	rosterFile = "roster.json"
 )
 
 var (
 	roles       = []string{"tank", "damage", "healer", "support", "control", "hybrid"}
-	skillID     = regexp.MustCompile(`^[a-z0-9-]{1,40}$`)
 	artName     = regexp.MustCompile(`^/uploads/[0-9a-f]{32}\.(png|jpg|gif|webp)$`) // same names as room.UploadName
 	defaults    = DefaultRoster()                                                   // never mutated
 	ErrNoClass  = errors.New("no such class")
@@ -120,37 +104,52 @@ func cleanL(l L, max int, multiline bool) (L, bool) {
 	return L{th, en}, a && b
 }
 
-// Check validates stat limits (roster entries and the DM's character.setStats).
-func (s Stats) Check() error {
-	switch {
-	case s.HPMax < 1 || s.HPMax > 999:
-		return errors.New("hpMax must be 1-999")
-	case s.MPMax < 0 || s.MPMax > 99:
-		return errors.New("mpMax must be 0-99")
+// CheckAbilities validates the six scores and AC (roster entries and the DM's character.setAbilities).
+func CheckAbilities(a Abilities, ac int) error {
+	if !a.valid() {
+		return fmt.Errorf("abilities must be %d-%d", MinAbility, MaxAbility)
 	}
-	for _, v := range []int{s.Str, s.End, s.Agi} {
-		if v < 0 || v > maxStatValue {
-			return fmt.Errorf("str, end and agi must be 0-%d", maxStatValue)
-		}
+	if ac < MinAC || ac > MaxAC {
+		return fmt.Errorf("ac must be %d-%d", MinAC, MaxAC)
 	}
 	return nil
 }
 
+// CleanSkills checks the proficient skills and expertise: known skill ids, no duplicates, expertise ⊆ skills.
+// The DM may give any skill, not only the class's choices (roster.update, character.setSkills). It returns fresh
+// non-nil slices.
+func CleanSkills(skills, expertise []string) ([]string, []string, error) {
+	for i, k := range skills {
+		if _, ok := SkillAbility(k); !ok {
+			return nil, nil, errors.New("unknown skill id")
+		}
+		if slices.Contains(skills[:i], k) {
+			return nil, nil, errors.New("duplicate skill")
+		}
+	}
+	for i, k := range expertise {
+		if !slices.Contains(skills, k) {
+			return nil, nil, errors.New("expertise must be a proficient skill")
+		}
+		if slices.Contains(expertise[:i], k) {
+			return nil, nil, errors.New("duplicate expertise")
+		}
+	}
+	return append([]string{}, skills...), append([]string{}, expertise...), nil
+}
+
 // cleanEntry trims every text and checks the limits in docs/features/character-roster.md. It returns fresh slices.
-// It checks only the art format; the room also checks that an uploaded file exists. Set is forced to the
-// built-in entry's set, so old roster.json files without "set" still load.
+// It checks only the art format; the room also checks that an uploaded file exists. Set and ClassID are forced to
+// the built-in entry's, so a client can never move a hero to another set or class.
 func cleanEntry(e RosterEntry) (RosterEntry, error) {
 	i := slices.IndexFunc(defaults, func(d RosterEntry) bool { return d.ID == e.ID })
 	if i < 0 {
 		return e, ErrNoClass
 	}
-	e.Set = defaults[i].Set
+	e.Set, e.ClassID = defaults[i].Set, defaults[i].ClassID
 	var ok bool
 	if e.HeroName, ok = cleanL(e.HeroName, MaxName, false); !ok {
 		return e, fmt.Errorf("heroName must be 1-%d characters (th and en)", MaxName)
-	}
-	if e.ClassName, ok = cleanL(e.ClassName, MaxName, false); !ok {
-		return e, fmt.Errorf("className must be 1-%d characters (th and en)", MaxName)
 	}
 	if e.Blurb, ok = cleanL(e.Blurb, MaxDesc, true); !ok {
 		return e, fmt.Errorf("blurb must be 1-%d characters (th and en)", MaxDesc)
@@ -161,30 +160,12 @@ func cleanEntry(e RosterEntry) (RosterEntry, error) {
 	if e.Art != "" && !artName.MatchString(e.Art) {
 		return e, errors.New("art must be empty or an uploaded image")
 	}
-	if err := e.Stats.Check(); err != nil {
+	if err := CheckAbilities(e.Abilities, e.AC); err != nil {
 		return e, err
 	}
-	if len(e.Skills) < 1 || len(e.Skills) > MaxSkills {
-		return e, fmt.Errorf("a class needs 1-%d skills", MaxSkills)
-	}
-	skills := make([]RosterSkill, len(e.Skills))
-	for i, k := range e.Skills {
-		if !skillID.MatchString(k.ID) {
-			return e, errors.New("skill id must be 1-40 characters a-z, 0-9 or -")
-		}
-		if slices.ContainsFunc(skills[:i], func(x RosterSkill) bool { return x.ID == k.ID }) {
-			return e, errors.New("duplicate skill id")
-		}
-		if k.Name, ok = cleanL(k.Name, MaxName, false); !ok {
-			return e, fmt.Errorf("skill name must be 1-%d characters (th and en)", MaxName)
-		}
-		if k.Desc, ok = cleanL(k.Desc, MaxDesc, true); !ok {
-			return e, fmt.Errorf("skill desc must be 1-%d characters (th and en)", MaxDesc)
-		}
-		if k.Cost < 0 || k.Cost > MaxCost {
-			return e, fmt.Errorf("skill cost must be 0-%d", MaxCost)
-		}
-		skills[i] = k
+	sk, ex, err := CleanSkills(e.Skills, e.Expertise)
+	if err != nil {
+		return e, err
 	}
 	if len(e.Items) > MaxItems {
 		return e, fmt.Errorf("a class starts with at most %d items", MaxItems)
@@ -199,7 +180,7 @@ func cleanEntry(e RosterEntry) (RosterEntry, error) {
 		}
 		items[i] = it
 	}
-	e.Skills, e.Items = skills, items
+	e.Skills, e.Expertise, e.Items = sk, ex, items
 	return e, nil
 }
 
@@ -223,7 +204,8 @@ type rosterFileData struct {
 }
 
 // LoadRoster reads <dir>/roster.json. A missing file is the default roster. A file that is not valid JSON is
-// renamed to a unique roster.json.bad-<random> and the defaults are used; an entry that fails validation is
+// renamed to a unique roster.json.bad-<random> and the defaults are used (a pre-rules-v2 file does not decode, so
+// it lands here too); an entry that fails validation is
 // dropped (that class falls back to its default) and logged. An art whose file is gone from the uploads dir
 // becomes "" (the class art); with uploads "" every uploaded art is treated as gone.
 func LoadRoster(dir, uploads string, log *slog.Logger) (*RosterStore, error) {
@@ -235,7 +217,7 @@ func LoadRoster(dir, uploads string, log *slog.Logger) (*RosterStore, error) {
 	var bad *jsonfile.CorruptError
 	switch err := jsonfile.Load(s.path, &f); {
 	case errors.As(err, &bad):
-		log.Error("roster file is corrupt, using the default roster", "err", bad.Err.Error(), "moved_to", bad.MovedTo)
+		log.Warn("roster file is corrupt or an old format, using the default roster", "err", bad.Err.Error(), "moved_to", bad.MovedTo)
 		return s, nil
 	case err != nil:
 		return nil, err // unreadable: refuse to start rather than overwrite it later

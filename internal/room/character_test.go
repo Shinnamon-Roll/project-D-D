@@ -3,7 +3,9 @@ package room
 import (
 	"encoding/json"
 	"log/slog"
+	"maps"
 	"slices"
+	"strconv"
 	"strings"
 	"testing"
 
@@ -37,7 +39,7 @@ func creating(t *testing.T) *Room {
 	return r
 }
 
-// party: creating + p1 knight (HP 36, MP 4) + p2 wizard (HP 16, MP 20); status playing.
+// party: creating + p1 knight (fighter, HP 12) + p2 wizard (HP 7, two 1st-level slots); status playing.
 func party(t *testing.T) (r *Room, knight, wizard string) {
 	t.Helper()
 	r = creating(t)
@@ -52,6 +54,11 @@ func lastFeed(r *Room) rules.L {
 	return f[len(f)-1].Text
 }
 
+func className(id string) rules.L {
+	c, _ := rules.ClassByID(id)
+	return c.Name
+}
+
 func TestCharacterPick(t *testing.T) {
 	r, _ := lobby(t)
 	failWith(t, r, "p1", "character.pick", pick("knight"), "not allowed while the room is lobby")
@@ -62,44 +69,111 @@ func TestCharacterPick(t *testing.T) {
 	failWith(t, r, "stranger", "character.pick", pick("knight"), "only a seated player can pick a character")
 	failWith(t, r, "p1", "character.pick", pick("pirate"), "no such class")
 	failWith(t, r, "p1", "character.pick", pick(""), "no such class")
-	failWith(t, r, "p1", "character.pick", m{"classId": 3}, "malformed payload")
+	failWith(t, r, "p1", "character.pick", m{"heroId": 3}, "malformed payload")
 
 	// A roster edit before the pick is what the player gets.
 	e := rules.DefaultRoster()[0]
 	e.HeroName.EN = "Sir Edit"
 	ok(t, r, "dm", "roster.update", m{"classId": "knight", "entry": e})
-	ok(t, r, "p1", "character.pick", pick("knight"))
+	ok(t, r, "p1", "character.pick", m{"classId": "knight"}) // pre-v2 key still works
 	failWith(t, r, "p1", "character.pick", pick("wizard"), "you already have a character")
 	failWith(t, r, "p2", "character.pick", pick("knight"), "that class is already taken")
 	if r.State().Status != StatusCreating {
 		t.Fatal("playing before p2 picked")
 	}
 	c := r.State().Characters[0]
-	if c.ClassID != "knight" || c.Name.EN != "Sir Edit" || c.Name.TH != "อัลดริก เวน" || c.Art != "" ||
-		c.HP != 36 || c.HPMax != 36 || c.MP != 4 || c.MPMax != 4 || c.Str != 5 || c.End != 8 || c.Agi != 2 ||
-		len(c.Skills) != 3 || c.Skills[0].Kind != "innate" || c.Skills[0].ID != "stand-guard" || len(c.Items) != 4 {
+	want := rules.Abilities{Str: 17, Dex: 10, Con: 15, Int: 8, Wis: 13, Cha: 12}
+	if c.ClassID != "fighter" || c.HeroID != "knight" || c.Name.EN != "Sir Edit" || c.Name.TH != "อัลดริก เวน" || c.Art != "" ||
+		c.Level != 1 || c.HP != 12 || c.HPMax != 12 || c.Abilities != want || c.AC != 18 || c.PB != 2 || c.HitDiceMax != 1 ||
+		!slices.Equal(c.Skills, []string{"athletics", "perception"}) || len(c.Items) != 6 || c.SlotsMax != [9]int{} ||
+		c.Pact != (rules.PactSlots{}) || !maps.Equal(c.ResourcesMax, map[string]int{"second-wind": 2, "action-surge": 0, "indomitable": 0}) ||
+		!maps.Equal(c.ResourcesUsed, map[string]int{"second-wind": 0, "action-surge": 0, "indomitable": 0}) {
 		t.Fatalf("character %+v", c)
 	}
-	if f := lastFeed(r); f.EN != "Pat picked Sir Edit (Knight)" || f.TH != "Pat เลือก อัลดริก เวน (อัศวิน)" {
+	b, _ := json.Marshal(c)
+	for _, k := range []string{`"expertise":[]`, `"abilitiesCustom":[]`, `"slotsUsed":[0,0,0,0,0,0,0,0,0]`, `"pactUsed":0`,
+		`"pact":{"count":0,"level":0}`, `"hitDiceUsed":0`, `"pb":2`} {
+		if !strings.Contains(string(b), k) {
+			t.Fatalf("character JSON has no %s: %s", k, b)
+		}
+	}
+	fighter := className("fighter")
+	if f := lastFeed(r); f.EN != "Pat picked Sir Edit ("+fighter.EN+")" || f.TH != "Pat เลือก อัลดริก เวน ("+fighter.TH+")" {
 		t.Fatalf("feed %+v", f)
 	}
 
 	// A roster edit after the pick leaves the picked character alone.
-	e.Stats.HPMax, e.Items[0].Qty = 99, 9
+	e.Abilities.Con, e.Items[0].Qty = 30, 9
 	ok(t, r, "dm", "roster.update", m{"classId": "knight", "entry": e})
-	ok(t, r, "dm", "item.remove", m{"characterId": c.ID, "index": 3, "qty": 1})
-	if c := r.State().Characters[0]; c.HPMax != 36 || c.Items[0].Qty != 1 || c.Items[3].Qty != 2 {
+	ok(t, r, "dm", "item.remove", m{"characterId": c.ID, "index": 4, "qty": 1})
+	if c := r.State().Characters[0]; c.HPMax != 12 || c.Abilities.Con != 15 || c.Items[0].Qty != 1 || c.Items[4].Qty != 2 {
 		t.Fatalf("picked character changed by roster edit: %+v", c)
 	}
-	if r.State().Roster[0].Items[3].Qty != 3 {
+	if r.State().Roster[0].Items[4].Qty != 3 {
 		t.Fatal("item.remove changed the roster")
 	}
 
-	ok(t, r, "p2", "character.pick", pick("wizard"))
+	ok(t, r, "p2", "character.pick", m{"heroId": "wizard"})
 	if r.State().Status != StatusPlaying {
 		t.Fatal("not playing after every player picked")
 	}
 	failWith(t, r, "p2", "character.pick", pick("rogue"), "not allowed while the room is playing")
+}
+
+// partyOf: both sets active, players p1..pn (n ≤ 6) pick heroes[i] in order; status playing.
+func partyOf(t *testing.T, heroes ...string) (*Room, []string) {
+	t.Helper()
+	r, _ := lobby(t)
+	ok(t, r, "dm", "sets.set", m{"sets": []string{"core", "legend"}})
+	for i := 2; i <= len(heroes); i++ {
+		ok(t, r, "dm", "seat.add", m{})
+		seats := r.State().Seats
+		ok(t, r, "p"+strconv.Itoa(i), "seat.sit", m{"seatId": seats[len(seats)-1].ID, "name": "P" + strconv.Itoa(i)})
+	}
+	for i := range heroes {
+		ok(t, r, "p"+strconv.Itoa(i+1), "seat.ready", m{"ready": true})
+	}
+	ok(t, r, "dm", "game.start", m{})
+	ids := make([]string, len(heroes))
+	for i, h := range heroes {
+		ok(t, r, "p"+strconv.Itoa(i+1), "character.pick", pick(h))
+		ids[i] = r.State().Characters[i].ID
+	}
+	return r, ids
+}
+
+// Level 1 values by hand: HP = hit die + CON mod; resources from the class tables.
+func TestPickLevelOneValues(t *testing.T) {
+	for _, tc := range []struct {
+		hero, class string
+		hp          int
+		slots       [9]int
+		pact        rules.PactSlots
+		res         map[string]int
+	}{
+		{"knight", "fighter", 12, [9]int{}, rules.PactSlots{}, map[string]int{"second-wind": 2, "action-surge": 0, "indomitable": 0}},
+		{"wizard", "wizard", 7, [9]int{2}, rules.PactSlots{}, map[string]int{"arcane-recovery": 1, "signature-spells": 0}},        // d6 + 1
+		{"bard", "bard", 9, [9]int{2}, rules.PactSlots{}, map[string]int{"bardic-inspiration": 3}},                                // CHA 17 → 3
+		{"barbarian", "barbarian", 14, [9]int{}, rules.PactSlots{}, map[string]int{"rage": 2, "persistent-rage": 0}},              // d12 + 2
+		{"legend-warlock", "warlock", 10, [9]int{}, rules.PactSlots{Count: 1, Level: 1}, nil},                                     // d8 + 2
+		{"legend-paladin", "paladin", 13, [9]int{2}, rules.PactSlots{}, map[string]int{"lay-on-hands": 5, "channel-divinity": 0}}, // d10 + 3, level*5
+		{"legend-ranger", "ranger", 12, [9]int{2}, rules.PactSlots{}, map[string]int{"favored-enemy": 2, "tireless": 0, "natures-veil": 0}},
+		{"legend-monk", "monk", 9, [9]int{}, rules.PactSlots{}, map[string]int{"focus-points": 0, "uncanny-metabolism": 0}},
+	} {
+		t.Run(tc.hero, func(t *testing.T) {
+			r, _ := partyOf(t, tc.hero)
+			c := r.State().Characters[0]
+			if c.ClassID != tc.class || c.HP != tc.hp || c.HPMax != tc.hp || c.SlotsMax != tc.slots || c.Pact != tc.pact ||
+				c.PB != 2 || c.Level != 1 || c.HitDiceMax != 1 {
+				t.Fatalf("got class %s hp %d/%d slots %v pact %v pb %d", c.ClassID, c.HP, c.HPMax, c.SlotsMax, c.Pact, c.PB)
+			}
+			for id, v := range tc.res {
+				if got, ok := c.ResourcesMax[id]; !ok || got != v {
+					t.Fatalf("resource %s max %d (%v), want %d", id, got, ok, v)
+				}
+			}
+		})
+	}
 }
 
 func TestCharacterTokenUsesArt(t *testing.T) {
@@ -119,134 +193,37 @@ func TestCharacterTokenUsesArt(t *testing.T) {
 	}
 }
 
-func TestCustomSkills(t *testing.T) {
-	r := creating(t)
-	ok(t, r, "p1", "character.pick", pick("knight"))
-	kn := r.State().Characters[0].ID
-	add := func(name, desc string, cost any) m { return m{"name": name, "desc": desc, "cost": cost} }
-
-	for _, tc := range []struct {
-		name, client string
-		payload      m
-		want         string
-	}{
-		{"no character", "p2", add("x", "", 1), "you have no character"},
-		{"dm has none", "dm", add("x", "", 1), "you have no character"},
-		{"stranger", "stranger", add("x", "", 1), "you have no character"},
-		{"empty name", "p1", add("   ", "", 1), "skill name must be 1-40 characters"},
-		{"long name", "p1", add(strings.Repeat("ก", 41), "", 1), "skill name must be 1-40 characters"},
-		{"name newline", "p1", add("a\nb", "", 1), "skill name must be 1-40 characters"},
-		{"long desc", "p1", add("x", strings.Repeat("d", 301), 1), "skill desc must be at most 300 characters"},
-		{"desc control", "p1", add("x", "a\x07", 1), "skill desc must be at most 300 characters"},
-		{"cost 11", "p1", add("x", "", 11), "skill cost must be 0-10"},
-		{"cost -1", "p1", add("x", "", -1), "skill cost must be 0-10"},
-		{"cost float", "p1", add("x", "", 1.5), "malformed payload"},
-	} {
-		t.Run(tc.name, func(t *testing.T) { failWith(t, r, tc.client, "skill.addCustom", tc.payload, tc.want) })
-	}
-
-	ok(t, r, "p1", "skill.addCustom", add(" Kick ", " a\nb ", 0))
-	ok(t, r, "p1", "skill.addCustom", add(strings.Repeat("ก", 40), strings.Repeat("d", 300), 10))
-	ok(t, r, "p1", "skill.addCustom", add("Third", "", 3))
-	failWith(t, r, "p1", "skill.addCustom", add("Fourth", "", 1), "at most 3 custom skills")
-	sk := slices.Clone(r.State().Characters[0].Skills) // State shares the slice that removeCustom shifts
-	k := sk[3]
-	if len(sk) != 6 || k.Kind != "custom" || k.Name != (rules.L{TH: "Kick", EN: "Kick"}) || k.Desc.EN != "a\nb" || k.Cost != 0 ||
-		!strings.HasPrefix(k.ID, "cs_") {
-		t.Fatalf("skills %+v", sk)
-	}
-
-	edit := func(char, skill, name string, cost int) m {
-		return m{"characterId": char, "skillId": skill, "name": name, "desc": "", "cost": cost}
-	}
-	const notOwn = "you can only change your own character's skills"
-	failWith(t, r, "p2", "skill.editCustom", edit(kn, k.ID, "Hack", 1), notOwn)
-	failWith(t, r, "stranger", "skill.editCustom", edit(kn, k.ID, "Hack", 1), notOwn)
-	failWith(t, r, "p2", "skill.removeCustom", m{"characterId": kn, "skillId": k.ID}, notOwn)
-	failWith(t, r, "p1", "skill.editCustom", edit(kn, "stand-guard", "Hack", 1), "only custom skills can be changed")
-	failWith(t, r, "p1", "skill.removeCustom", m{"characterId": kn, "skillId": "stand-guard"}, "only custom skills can be changed")
-	failWith(t, r, "p1", "skill.editCustom", edit(kn, "nope", "Hack", 1), "no such skill")
-	failWith(t, r, "dm", "skill.editCustom", edit("nope", k.ID, "Hack", 1), "no such character")
-	failWith(t, r, "p1", "skill.editCustom", edit(kn, k.ID, "", 1), "skill name must be 1-40 characters")
-	failWith(t, r, "co", "skill.editCustom", edit(kn, k.ID, "Hack", 11), "skill cost must be 0-10")
-
-	ok(t, r, "p1", "skill.editCustom", edit(kn, k.ID, "Kick 2", 2))
-	ok(t, r, "co", "skill.editCustom", edit(kn, k.ID, "Kick 3", 5)) // DM caps an overpowered skill
-	if got := r.State().Characters[0].Skills[3]; got.ID != k.ID || got.Name.EN != "Kick 3" || got.Cost != 5 {
-		t.Fatalf("edited %+v", got)
-	}
-	ok(t, r, "dm", "skill.removeCustom", m{"characterId": kn, "skillId": k.ID})
-	ok(t, r, "p1", "skill.removeCustom", m{"characterId": kn, "skillId": sk[4].ID})
-	failWith(t, r, "p1", "skill.removeCustom", m{"characterId": kn, "skillId": k.ID}, "no such skill")
-	ok(t, r, "p2", "character.pick", pick("wizard")) // playing: custom skills still allowed
-	ok(t, r, "p1", "skill.addCustom", add("Again", "", 1))
-	ok(t, r, "p1", "skill.addCustom", add("Again 2", "", 1))
-	if sk := r.State().Characters[0].Skills; len(sk) != 6 || sk[3].Name.EN != "Third" {
-		t.Fatalf("after remove/add %+v", sk)
-	}
-}
-
-func TestSkillUse(t *testing.T) {
-	r := creating(t)
-	ok(t, r, "p1", "character.pick", pick("knight"))
-	failWith(t, r, "p1", "skill.use", m{"skillId": "stand-guard"}, "not allowed while the room is creating")
-	ok(t, r, "p1", "skill.addCustom", m{"name": "Free", "desc": "", "cost": 0})
-	free := r.State().Characters[0].Skills[3].ID
-	ok(t, r, "p2", "character.pick", pick("wizard"))
-
-	failWith(t, r, "dm", "skill.use", m{"skillId": "stand-guard"}, "you have no character")
-	failWith(t, r, "stranger", "skill.use", m{"skillId": "stand-guard"}, "you have no character")
-	failWith(t, r, "p1", "skill.use", m{"skillId": "nope"}, "no such skill")
-	failWith(t, r, "p2", "skill.use", m{"skillId": "stand-guard"}, "no such skill") // p1's skill, not p2's
-	ok(t, r, "p1", "skill.use", m{"skillId": "last-stand"})                         // cost 4 of 4
-	if c := r.State().Characters[0]; c.MP != 0 {
-		t.Fatalf("mp %d", c.MP)
-	}
-	if f := lastFeed(r); f.EN != "Aldric Vane used Last Stand (−4 MP)" || f.TH != "อัลดริก เวน ใช้ ยืนหยัดครั้งสุดท้าย (−4 มานา)" {
-		t.Fatalf("feed %+v", f)
-	}
-	failWith(t, r, "p1", "skill.use", m{"skillId": "stand-guard"}, "not enough mana")
-	ok(t, r, "p1", "skill.use", m{"skillId": free}) // custom, cost 0
-	if f := lastFeed(r); f.EN != "Aldric Vane used Free (0 MP)" || !strings.HasSuffix(f.TH, "(0 มานา)") {
-		t.Fatalf("free feed %+v", f)
-	}
-	ok(t, r, "p2", "skill.use", m{"skillId": "starfall"})
-	if c := r.State().Characters[1]; c.MP != 15 {
-		t.Fatalf("wizard mp %d", c.MP)
+func TestRemovedV1Events(t *testing.T) {
+	r, kn, _ := party(t)
+	for _, typ := range []string{"skill.addCustom", "skill.editCustom", "skill.removeCustom", "skill.use", "character.setStats"} {
+		failWith(t, r, "dm", typ, m{"characterId": kn}, `unknown event type "`+typ+`"`)
 	}
 }
 
 func TestCharacterAdjust(t *testing.T) {
-	ip := func(n int) *int { return &n }
 	for _, tc := range []struct {
 		name   string
 		client string
-		hp, mp *int
-		wantHP int // knight starts HP 36/36, MP 4/4
-		wantMP int
+		hp     any
+		wantHP int // knight starts HP 12/12
 		err    string
 		feedEN string
 	}{
-		{"hp down", "dm", ip(-5), nil, 31, 4, "", "DM: Aldric Vane HP −5 (31/36)"},
-		{"hp clamps at max: no change, no feed", "dm", ip(100), nil, 36, 4, "", ""},
-		{"unchanged field omitted", "dm", ip(5), ip(-1), 36, 3, "", "DM: Aldric Vane MP −1 (3/4)"},
-		{"zero deltas: no feed", "dm", ip(0), ip(0), 36, 4, "", ""},
-		{"hp clamps at 0", "co", ip(-999), nil, 0, 4, "", "DM: Aldric Vane HP −36 (0/36)"},
-		{"mp clamps at 0", "dm", nil, ip(-10), 36, 0, "", "DM: Aldric Vane MP −4 (0/4)"},
-		{"both", "dm", ip(-1), ip(-2), 35, 2, "", "DM: Aldric Vane HP −1 (35/36), MP −2 (2/4)"},
-		{"player", "p1", ip(-1), nil, 0, 0, "only the DM can do that", ""},
-		{"nothing", "dm", nil, nil, 0, 0, "hp or mp delta is required", ""},
-		{"hp too big", "dm", ip(1000), nil, 0, 0, "delta must be -999 to 999", ""},
-		{"mp too small", "dm", nil, ip(-1000), 0, 0, "delta must be -999 to 999", ""},
+		{"hp down", "dm", -5, 7, "", "DM: Aldric Vane HP −5 (7/12)"},
+		{"hp clamps at max: no change, no feed", "dm", 100, 12, "", ""},
+		{"zero: no feed", "dm", 0, 12, "", ""},
+		{"hp clamps at 0", "co", -999, 0, "", "DM: Aldric Vane HP −12 (0/12)"},
+		{"player", "p1", -1, 0, "only the DM can do that", ""},
+		{"nothing", "dm", nil, 0, "hp delta is required", ""},
+		{"too big", "dm", 1000, 0, "delta must be -999 to 999", ""},
+		{"too small", "dm", -1000, 0, "delta must be -999 to 999", ""},
+		{"float", "dm", 1.5, 0, "malformed payload", ""},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			r, kn, _ := party(t)
 			p := m{"characterId": kn}
 			if tc.hp != nil {
-				p["hp"] = *tc.hp
-			}
-			if tc.mp != nil {
-				p["mp"] = *tc.mp
+				p["hp"] = tc.hp
 			}
 			if tc.err != "" {
 				failWith(t, r, tc.client, "character.adjust", p, tc.err)
@@ -254,8 +231,8 @@ func TestCharacterAdjust(t *testing.T) {
 			}
 			before := len(r.State().Feed)
 			ok(t, r, tc.client, "character.adjust", p)
-			if c := r.State().Characters[0]; c.HP != tc.wantHP || c.MP != tc.wantMP {
-				t.Fatalf("hp %d mp %d", c.HP, c.MP)
+			if c := r.State().Characters[0]; c.HP != tc.wantHP {
+				t.Fatalf("hp %d", c.HP)
 			}
 			if tc.feedEN == "" {
 				if n := len(r.State().Feed); n != before {
@@ -281,53 +258,6 @@ func TestCharacterAdjust(t *testing.T) {
 	failWith(t, r, "dm", "character.adjust", m{"characterId": "nope", "hp": 1}, "no such character")
 }
 
-func TestCharacterSetStats(t *testing.T) {
-	stats := func(id string, hpMax, mpMax, str, end, agi int) m {
-		return m{"characterId": id, "hpMax": hpMax, "mpMax": mpMax, "str": str, "end": end, "agi": agi}
-	}
-	r, kn, _ := party(t)
-	failWith(t, r, "p1", "character.setStats", stats(kn, 40, 4, 5, 8, 2), "only the DM can do that")
-	failWith(t, r, "dm", "character.setStats", stats("nope", 40, 4, 5, 8, 2), "no such character")
-	failWith(t, r, "dm", "character.setStats", stats(kn, 0, 4, 5, 8, 2), "hpMax must be 1-999")
-	failWith(t, r, "dm", "character.setStats", stats(kn, 1000, 4, 5, 8, 2), "hpMax must be 1-999")
-	failWith(t, r, "dm", "character.setStats", stats(kn, 40, 100, 5, 8, 2), "mpMax must be 0-99")
-	failWith(t, r, "dm", "character.setStats", stats(kn, 40, -1, 5, 8, 2), "mpMax must be 0-99")
-	failWith(t, r, "dm", "character.setStats", stats(kn, 40, 4, 21, 8, 2), "str, end and agi must be 0-20")
-	failWith(t, r, "dm", "character.setStats", stats(kn, 40, 4, 5, 8, -1), "str, end and agi must be 0-20")
-
-	ok(t, r, "co", "character.setStats", stats(kn, 10, 2, 20, 0, 1)) // lowering max clamps hp/mp
-	c := r.State().Characters[0]
-	if c.HP != 10 || c.HPMax != 10 || c.MP != 2 || c.MPMax != 2 || c.Str != 20 || c.End != 0 || c.Agi != 1 {
-		t.Fatalf("stats %+v", c)
-	}
-	if f := lastFeed(r); f.EN != "DM: set Aldric Vane: HP max 10, MP max 2, STR 20, END 0, AGI 1" {
-		t.Fatalf("feed %+v", f)
-	}
-	ok(t, r, "dm", "character.setStats", stats(kn, 50, 9, 5, 8, 2)) // raising max keeps current hp/mp
-	if c := r.State().Characters[0]; c.HP != 10 || c.MP != 2 || c.HPMax != 50 {
-		t.Fatalf("raise %+v", c)
-	}
-}
-
-func TestPartyRest(t *testing.T) {
-	r := creating(t)
-	ok(t, r, "p1", "character.pick", pick("knight"))
-	failWith(t, r, "dm", "party.rest", m{}, "not allowed while the room is creating")
-	ok(t, r, "p2", "character.pick", pick("wizard"))
-	ok(t, r, "p1", "skill.use", m{"skillId": "last-stand"})
-	ok(t, r, "p2", "skill.use", m{"skillId": "starfall"})
-	ok(t, r, "dm", "character.adjust", m{"characterId": r.State().Characters[0].ID, "hp": -10})
-	failWith(t, r, "p1", "party.rest", m{}, "only the DM can do that")
-	ok(t, r, "co", "party.rest", m{})
-	cs := r.State().Characters
-	if cs[0].MP != 4 || cs[1].MP != 20 || cs[0].HP != 26 {
-		t.Fatalf("after rest %+v %+v", cs[0], cs[1])
-	}
-	if f := lastFeed(r); f != (rules.L{TH: "DM: พักผ่อน — มานาเต็ม", EN: "DM: rest — mana refilled"}) {
-		t.Fatalf("feed %+v", f)
-	}
-}
-
 func TestItemGive(t *testing.T) {
 	give := func(id, name string, qty any) m { return m{"characterId": id, "name": name, "qty": qty} }
 	r, kn, wz := party(t)
@@ -340,13 +270,13 @@ func TestItemGive(t *testing.T) {
 
 	ok(t, r, "dm", "item.give", give(kn, " Rope ", 2))
 	ok(t, r, "co", "item.give", give(kn, "Rope", 3))
-	ok(t, r, "dm", "item.give", give(kn, "Field Bandage Roll", 1)) // roster item, matched by en name
-	ok(t, r, "dm", "item.give", give(kn, "ม้วนผ้าพันแผลสนาม", 1))  // and by th name
+	ok(t, r, "dm", "item.give", give(kn, "Field Bandages", 1)) // roster item, matched by en name
+	ok(t, r, "dm", "item.give", give(kn, "ผ้าพันแผลสนาม", 1))  // and by th name
 	items := r.State().Characters[0].Items
-	if len(items) != 5 || items[4] != (rules.RosterItem{Name: rules.L{TH: "Rope", EN: "Rope"}, Qty: 5}) || items[3].Qty != 5 {
+	if len(items) != 7 || items[6] != (rules.RosterItem{Name: rules.L{TH: "Rope", EN: "Rope"}, Qty: 5}) || items[4].Qty != 5 {
 		t.Fatalf("items %+v", items)
 	}
-	if f := lastFeed(r); f.EN != "DM: gave Aldric Vane Field Bandage Roll ×1" || f.TH != "DM: ให้ ม้วนผ้าพันแผลสนาม ×1 แก่ อัลดริก เวน" {
+	if f := lastFeed(r); f.EN != "DM: gave Aldric Vane Field Bandages ×1" || f.TH != "DM: ให้ ผ้าพันแผลสนาม ×1 แก่ อัลดริก เวน" {
 		t.Fatalf("feed %+v", f)
 	}
 	for range 10 {
@@ -357,31 +287,31 @@ func TestItemGive(t *testing.T) {
 		ok(t, r, "dm", "item.give", give(wz, "thing "+string(rune('A'+i)), 1))
 	}
 	failWith(t, r, "dm", "item.give", give(wz, "one too many", 1), "at most 50 different items")
-	ok(t, r, "dm", "item.give", give(wz, "thing E", 1)) // merging is still fine when full
+	ok(t, r, "dm", "item.give", give(wz, "thing Z", 1)) // merging is still fine when full
 }
 
 func TestItemRemove(t *testing.T) {
 	rm := func(id string, index, qty int) m { return m{"characterId": id, "index": index, "qty": qty} }
-	r, kn, _ := party(t) // knight: shield 1, sword 1, whetstone 1, bandage 3
-	failWith(t, r, "p1", "item.remove", rm(kn, 3, 1), "only the DM can do that")
-	failWith(t, r, "dm", "item.remove", rm("nope", 3, 1), "no such character")
-	failWith(t, r, "dm", "item.remove", rm(kn, 4, 1), "no such item")
+	r, kn, _ := party(t) // knight: shield, chain mail, longsword, javelin 8, bandages 3, pack
+	failWith(t, r, "p1", "item.remove", rm(kn, 4, 1), "only the DM can do that")
+	failWith(t, r, "dm", "item.remove", rm("nope", 4, 1), "no such character")
+	failWith(t, r, "dm", "item.remove", rm(kn, 6, 1), "no such item")
 	failWith(t, r, "dm", "item.remove", rm(kn, -1, 1), "no such item")
-	failWith(t, r, "dm", "item.remove", rm(kn, 3, 0), "qty must be at least 1")
+	failWith(t, r, "dm", "item.remove", rm(kn, 4, 0), "qty must be at least 1")
 
-	ok(t, r, "dm", "item.remove", rm(kn, 3, 1))
-	if it := r.State().Characters[0].Items; len(it) != 4 || it[3].Qty != 2 {
+	ok(t, r, "dm", "item.remove", rm(kn, 4, 1))
+	if it := r.State().Characters[0].Items; len(it) != 6 || it[4].Qty != 2 {
 		t.Fatalf("−1: %+v", it)
 	}
-	if f := lastFeed(r); f.EN != "DM: removed Field Bandage Roll ×1 from Aldric Vane" || f.TH != "DM: เอา ม้วนผ้าพันแผลสนาม ×1 ออกจาก อัลดริก เวน" {
+	if f := lastFeed(r); f.EN != "DM: removed Field Bandages ×1 from Aldric Vane" || f.TH != "DM: เอา ผ้าพันแผลสนาม ×1 ออกจาก อัลดริก เวน" {
 		t.Fatalf("feed %+v", f)
 	}
-	ok(t, r, "co", "item.remove", rm(kn, 3, 50)) // more than the stack: whole stack, feed says 2
-	if f := lastFeed(r); f.EN != "DM: removed Field Bandage Roll ×2 from Aldric Vane" {
+	ok(t, r, "co", "item.remove", rm(kn, 4, 50)) // more than the stack: whole stack, feed says 2
+	if f := lastFeed(r); f.EN != "DM: removed Field Bandages ×2 from Aldric Vane" {
 		t.Fatalf("feed %+v", f)
 	}
 	ok(t, r, "dm", "item.remove", rm(kn, 0, 1)) // exactly the stack
-	if it := r.State().Characters[0].Items; len(it) != 2 || it[0].Name.EN != "Knight's Longsword" {
+	if it := r.State().Characters[0].Items; len(it) != 4 || it[0].Name.EN != "Chain Mail" {
 		t.Fatalf("items %+v", it)
 	}
 }
@@ -395,8 +325,8 @@ func TestFeedIsCappedAndHasNoClientIDs(t *testing.T) {
 	if len(f) != maxFeed || f[0].At == 0 {
 		t.Fatalf("feed len %d", len(f))
 	}
-	ok(t, r, "dm", "party.rest", m{})
-	if lastFeed(r).EN != "DM: rest — mana refilled" || len(r.State().Feed) != maxFeed {
+	ok(t, r, "dm", "party.rest", m{"kind": "long"})
+	if lastFeed(r).EN != "DM: long rest — HP, spell slots, uses and hit dice refilled" || len(r.State().Feed) != maxFeed {
 		t.Fatal("newest entry not last")
 	}
 	b, _ := json.Marshal(r.State().Feed)
@@ -421,11 +351,11 @@ func TestRosterEdit(t *testing.T) {
 	failWith(t, r, "stranger", "roster.reset", m{}, "only the DM can do that")
 	failWith(t, r, "dm", "roster.update", upd("pirate", e), "no such class")
 	bad := e
-	bad.Stats.HPMax = 0
-	failWith(t, r, "dm", "roster.update", upd("knight", bad), "hpMax must be 1-999")
+	bad.Abilities.Str = 0
+	failWith(t, r, "dm", "roster.update", upd("knight", bad), "abilities must be 1-30")
 	bad = e
-	bad.Skills = nil
-	failWith(t, r, "dm", "roster.update", upd("knight", bad), "a class needs 1-5 skills")
+	bad.Skills = []string{"flying"}
+	failWith(t, r, "dm", "roster.update", upd("knight", bad), "unknown skill id")
 	bad = e
 	bad.Art = "/uploads/" + strings.Repeat("a", 32) + ".png"
 	failWith(t, r, "dm", "roster.update", upd("knight", bad), "art must be empty or an uploaded image") // no file

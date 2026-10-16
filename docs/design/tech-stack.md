@@ -13,7 +13,7 @@
 | state ห้อง | struct ใน memory + `sync.Mutex` / goroutine เดียวต่อห้อง | v0 ไม่เซฟข้าม session; อัปเกรดทีหลัง = เขียน JSON ลงไฟล์ |
 | ใครเป็นเจ้าของ state | **server** ตัดสินทุกอย่าง | server ตรวจสิทธิ์ → broadcast; ไม่ต้องใช้ CRDT |
 | ลูกเต๋า | **ไม่มีในแอป** — ผู้เล่นทอยลูกเต๋าจริง (ตัดออก 2026-10-16, [conv](../conversations/2026-10-16-remove-dice.md)) | |
-| ตรวจกฎ | Go (`internal/rules`): roster 10 คลาส (`roster.go` + ค่าเริ่มต้น `roster_default.go`), ขอบเขต stat/สกิล/มานา, สิทธิ์ DM/ผู้เล่น | ตรวจที่ server เสมอ หน้าเว็บตรวจซ้ำเพื่อ UX เท่านั้น · ~~แต้ม stat / ruleset white label / preset 5E~~ แทนที่ด้วย roster 2026-10-16 ([conv](../conversations/2026-10-16-character-roster.md)) |
+| ตรวจกฎ | Go (`internal/rules`): ข้อมูล 12 คลาส (`classes.go` + `classes_data.go` gen จาก `docs/design/classes/`), roster 2 เซ็ต (`roster.go` + `roster_default.go`/`roster_legend.go` gen จาก `heroes-core.md`/`heroes-legend.md`), สูตร rules v2 (ability mod, PB, HP, slot, counter), ขอบเขต ability/AC/skill, สิทธิ์ DM/ผู้เล่น | ตรวจที่ server เสมอ หน้าเว็บตรวจซ้ำเพื่อ UX เท่านั้น · ~~แต้ม stat / ruleset white label / preset 5E~~ แทนที่ด้วย roster 2026-10-16 ([conv](../conversations/2026-10-16-character-roster.md)) |
 | เก็บรูป | โฟลเดอร์ `uploads/` + `http.MaxBytesReader` + ตรวจ `http.DetectContentType` | ไม่ต้องมี cloud storage |
 | **หน้าเว็บ** | **React + Vite + TypeScript** | มาตรฐาน, library เยอะ |
 | แมพ / grid / token / fog | **react-konva** (MIT) | canvas 2D ลาก token ง่าย |
@@ -29,7 +29,8 @@
 go.mod
 cmd/server/main.go     เปิด HTTP + WebSocket, เสิร์ฟหน้าเว็บที่ embed ไว้
 internal/room/         state ห้อง, เก้าอี้, ตัวละคร, ฉาก, token, fog + จัดการ event
-internal/rules/        roster 10 คลาส (roster.go, roster_default.go) + ตรวจขอบเขต stat/สกิล
+internal/rules/        12 คลาส (classes*.go) + roster 2 เซ็ต (roster*.go) + สูตร rules v2 + ตรวจขอบเขต
+internal/server/       HTTP + WS + upload + GET /api/classes (ข้อมูลคลาส + attribution SRD)
 web/                   React + Vite (package.json มี version SemVer)
 web/dist/              ผล build → ถูก embed เข้า binary (gitignored)
 uploads/               รูปที่อัป (gitignored)
@@ -42,17 +43,18 @@ Version: SemVer อันเดียวของทั้งโปรเจก�
 | `campaign.select` | DM |
 | `seat.sit`, `seat.ready` | ทุกคน (เก้าอี้ตัวเอง) |
 | `seat.add`, `seat.remove`, `seat.openCoDm`, `game.start` | DM |
-| `character.pick` (เลือก 1 ใน 10 คลาส, ห้ามซ้ำ) | ผู้เล่น (ตัวเอง) |
-| `skill.addCustom` (สูงสุด 3), `skill.use` (หักมานา) | ผู้เล่น (ตัวละครตัวเอง) |
-| `skill.editCustom`, `skill.removeCustom` | เจ้าของ / DM |
-| `character.adjust` (HP/มานา ±), `character.setStats`, `party.rest` | DM |
+| `character.pick {heroId}` (ฮีโร่ของเซ็ตที่เปิด, ห้ามซ้ำ) | ผู้เล่น (ตัวเอง) |
+| `slot.set`, `resource.set`, `hitDice.set` (ค่า used แบบ absolute) | เจ้าของ / DM |
+| `ability.add`, `ability.update` (คาถา/ความสามารถของฉัน ≤40) | ผู้เล่น (ตัวละครตัวเอง) |
+| `ability.remove` | เจ้าของ / DM |
+| `character.adjust` (HP ±), `character.level` (±1), `character.setAbilities`, `character.setSkills`, `party.rest {kind}` | DM |
 | `item.give`, `item.remove` | DM |
 | `roster.update`, `roster.reset` (เก็บ `data/roster.json`) | DM |
 | `note.*`, `npc.*`, `npc.place`, `token.setHidden`, `token.adjustHp` | DM |
 | `scene.add`, `scene.select`, `fog.set` | DM |
 | `token.move` | ผู้เล่น (token ตัวเอง) / DM (ทุกตัว) |
 
-~~`ruleset.update`, `ruleset.loadPreset`, `character.submit`, `character.grant`~~ ลบใน v0.12.0 · รายการเต็ม + เงื่อนไข: [`protocol.md`](protocol.md)
+~~`ruleset.update`, `ruleset.loadPreset`, `character.submit`, `character.grant`~~ ลบใน v0.12.0 · ~~`skill.use`, `skill.addCustom/editCustom/removeCustom`, `character.setStats`~~ ลบใน v0.18.0 ([rules v2](../features/rules-v2.md)) · รายการเต็ม + เงื่อนไข: [`protocol.md`](protocol.md)
 
 server ส่งกลับ: `state.snapshot` (ตอนเข้า/เชื่อมใหม่) + `state.patch` / event เดิมหลังตรวจผ่าน + `error`
 

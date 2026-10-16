@@ -52,8 +52,8 @@
 | Resource | จำนวน | คืนเมื่อ |
 |---|---|---|
 | Favored Enemy (Hunter's Mark ฟรี) | ตามตาราง | Long Rest |
-| Tireless (Temporary HP) | Wisdom mod, อย่างน้อย 1 (เลเวล 10+) | Long Rest — ยังไม่อยู่ใน JSON: schema กำหนดเลเวลเริ่มของสูตรไม่ได้ จดเอง |
-| Nature's Veil | Wisdom mod, อย่างน้อย 1 (เลเวล 14+) | Long Rest — ยังไม่อยู่ใน JSON (เหตุผลเดียวกัน) |
+| Tireless (Temporary HP) | Wisdom mod, อย่างน้อย 1 (เลเวล 10+, `fromLevel: 10`) | Long Rest |
+| Nature's Veil | Wisdom mod, อย่างน้อย 1 (เลเวล 14+, `fromLevel: 14`) | Long Rest |
 
 Spell slots: ตาราง half caster ใน [`_shared.md`](_shared.md)
 
@@ -78,7 +78,9 @@ Spell slots: ตาราง half caster ใน [`_shared.md`](_shared.md)
     {"id": "weapon-mastery", "name": {"th": "Weapon Mastery", "en": "Weapon Mastery"}, "values": ["2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2"]}
   ],
   "resources": [
-    {"id": "favored-enemy", "name": {"th": "Hunter's Mark ฟรี", "en": "Free Hunter's Mark"}, "max": [2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6], "maxFormula": "", "refill": "long", "shortRegain": 0, "shortFromLevel": 0}
+    {"id": "favored-enemy", "name": {"th": "Hunter's Mark ฟรี", "en": "Free Hunter's Mark"}, "max": [2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6], "maxFormula": "", "refill": "long", "shortRegain": 0, "shortFromLevel": 0},
+    {"id": "tireless", "name": {"th": "Tireless (Temporary HP)", "en": "Tireless (Temporary HP)"}, "max": null, "maxFormula": "abilityMod:wis", "refill": "long", "shortRegain": 0, "shortFromLevel": 0, "fromLevel": 10},
+    {"id": "natures-veil", "name": {"th": "Nature's Veil", "en": "Nature's Veil"}, "max": null, "maxFormula": "abilityMod:wis", "refill": "long", "shortRegain": 0, "shortFromLevel": 0, "fromLevel": 14}
   ],
   "features": [
     {"level": 1, "name": {"th": "Spellcasting", "en": "Spellcasting"}, "desc": {"th": "ร่ายเวทของ Ranger ด้วย Wisdom ใช้ Druidic Focus เป็น focus ได้ จำนวนเวทที่เตรียมดูตามตาราง ต้องเป็นเลเวลที่มี slot หลัง Long Rest สลับเวทที่เตรียมได้ 1 บท slot คืนครบตอน Long Rest", "en": "Cast Ranger spells using Wisdom; a Druidic Focus works as your focus. Prepared spell count follows the table and must fit your slot levels. After a Long Rest you may swap one prepared spell. Slots return on a Long Rest."}},
@@ -93,11 +95,11 @@ Spell slots: ตาราง half caster ใน [`_shared.md`](_shared.md)
     {"level": 7, "name": {"th": "ฟีเจอร์ subclass", "en": "Subclass feature"}, "desc": {"th": "ได้ความสามารถใหม่ของ subclass ให้ DM/ผู้เล่นเพิ่มเองเป็น custom ability", "en": "Gain a new subclass ability. The DM or player adds it as a custom ability."}},
     {"level": 8, "name": {"th": "Ability Score Improvement", "en": "Ability Score Improvement"}, "desc": {"th": "เพิ่ม ability 1 ค่า +2 หรือ 2 ค่า +1 (สูงสุด 20) หรือเลือก feat แทน ให้ DM แก้ค่า ability ในการ์ด", "en": "Raise one ability by 2 or two abilities by 1 (max 20), or take a feat instead. The DM edits the abilities on the card."}},
     {"level": 9, "name": {"th": "Expertise", "en": "Expertise"}, "desc": {"th": "ได้ Expertise เพิ่มอีก 2 skill ที่ถนัดแต่ยังไม่มี Expertise ให้ติ๊กในชีทเอง", "en": "Gain Expertise in two more proficient skills that lack it. Mark them on the sheet."}},
-    {"level": 10, "name": {"th": "Tireless", "en": "Tireless"}, "desc": {"th": "Magic action ให้ Temporary HP ตัวเอง 1d8 + Wisdom mod (อย่างน้อย 1) ใช้ได้ Wisdom mod ครั้ง (อย่างน้อย 1) คืนตอน Long Rest (จดจำนวนเอง) และทุกครั้งที่จบ Short Rest ระดับ Exhaustion ลด 1", "en": "Magic action: gain 1d8 + Wisdom modifier (min 1) Temporary HP, usable Wisdom modifier times (min 1) per Long Rest (track by hand). Each Short Rest also lowers your Exhaustion by 1."}},
+    {"level": 10, "name": {"th": "Tireless", "en": "Tireless"}, "desc": {"th": "Magic action ให้ Temporary HP ตัวเอง 1d8 + Wisdom mod (อย่างน้อย 1) ใช้ได้ Wisdom mod ครั้ง (อย่างน้อย 1) คืนตอน Long Rest และทุกครั้งที่จบ Short Rest ระดับ Exhaustion ลด 1", "en": "Magic action: gain 1d8 + Wisdom modifier (min 1) Temporary HP, usable Wisdom modifier times (min 1) per Long Rest. Each Short Rest also lowers your Exhaustion by 1."}},
     {"level": 11, "name": {"th": "ฟีเจอร์ subclass", "en": "Subclass feature"}, "desc": {"th": "ได้ความสามารถใหม่ของ subclass ให้ DM/ผู้เล่นเพิ่มเองเป็น custom ability", "en": "Gain a new subclass ability. The DM or player adds it as a custom ability."}},
     {"level": 12, "name": {"th": "Ability Score Improvement", "en": "Ability Score Improvement"}, "desc": {"th": "เพิ่ม ability 1 ค่า +2 หรือ 2 ค่า +1 (สูงสุด 20) หรือเลือก feat แทน ให้ DM แก้ค่า ability ในการ์ด", "en": "Raise one ability by 2 or two abilities by 1 (max 20), or take a feat instead. The DM edits the abilities on the card."}},
     {"level": 13, "name": {"th": "Relentless Hunter", "en": "Relentless Hunter"}, "desc": {"th": "โดนดาเมจแล้ว Concentration ของ Hunter's Mark ไม่หลุด", "en": "Taking damage can no longer break your Concentration on Hunter's Mark."}},
-    {"level": 14, "name": {"th": "Nature's Veil", "en": "Nature's Veil"}, "desc": {"th": "Bonus Action ทำให้ตัวเองติด Invisible จนจบเทิร์นถัดไป ใช้ได้ Wisdom mod ครั้ง (อย่างน้อย 1) คืนตอน Long Rest (จดจำนวนเอง)", "en": "Bonus Action: become Invisible until the end of your next turn. Usable Wisdom modifier times (min 1), regained on a Long Rest (track by hand)."}},
+    {"level": 14, "name": {"th": "Nature's Veil", "en": "Nature's Veil"}, "desc": {"th": "Bonus Action ทำให้ตัวเองติด Invisible จนจบเทิร์นถัดไป ใช้ได้ Wisdom mod ครั้ง (อย่างน้อย 1) คืนตอน Long Rest", "en": "Bonus Action: become Invisible until the end of your next turn. Usable Wisdom modifier times (min 1), regained on a Long Rest."}},
     {"level": 15, "name": {"th": "ฟีเจอร์ subclass", "en": "Subclass feature"}, "desc": {"th": "ได้ความสามารถใหม่ของ subclass ให้ DM/ผู้เล่นเพิ่มเองเป็น custom ability", "en": "Gain a new subclass ability. The DM or player adds it as a custom ability."}},
     {"level": 16, "name": {"th": "Ability Score Improvement", "en": "Ability Score Improvement"}, "desc": {"th": "เพิ่ม ability 1 ค่า +2 หรือ 2 ค่า +1 (สูงสุด 20) หรือเลือก feat แทน ให้ DM แก้ค่า ability ในการ์ด", "en": "Raise one ability by 2 or two abilities by 1 (max 20), or take a feat instead. The DM edits the abilities on the card."}},
     {"level": 17, "name": {"th": "Precise Hunter", "en": "Precise Hunter"}, "desc": {"th": "โจมตีเป้าที่ติด Hunter's Mark ของเราอยู่ได้ Advantage", "en": "You have Advantage on attack rolls against the creature marked by your Hunter's Mark."}},

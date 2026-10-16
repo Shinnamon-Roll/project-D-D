@@ -134,7 +134,7 @@ func TestCharacterPickBySet(t *testing.T) {
 	failWith(t, r, "p2", "character.pick", pick("legend-barbarian"), "that class is already taken")
 	ok(t, r, "p2", "character.pick", pick("barbarian")) // same class, other set
 	cs := r.State().Characters
-	if len(cs) != 2 || cs[0].ClassID != "legend-barbarian" || cs[1].ClassID != "barbarian" || cs[0].Name.EN == cs[1].Name.EN {
+	if len(cs) != 2 || cs[0].HeroID != "legend-barbarian" || cs[1].HeroID != "barbarian" || cs[1].ClassID != "barbarian" || cs[0].Name.EN == cs[1].Name.EN {
 		t.Fatalf("characters %+v", cs)
 	}
 	ok(t, r, "p3", "character.pick", pick("legend-wizard"))
