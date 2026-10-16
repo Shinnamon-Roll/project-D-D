@@ -50,6 +50,7 @@ Tests: `go test` + Playwright (2 tabs: DM + player).
 | [`docs/research/salem-1692.md`](docs/research/salem-1692.md) | Salem 1692 board game rules, 1692 history, what can't be copied, free map sources |
 | [`docs/research/starter-set.md`](docs/research/starter-set.md) | D&D Starter Sets (Stormwreck Isle = chosen, Borderlands, Phandelver): story, setting, NPCs, monsters vs SRD, pregens, rulebook → SRD map |
 | [`docs/research/vtt-and-player-needs.md`](docs/research/vtt-and-player-needs.md) | existing VTTs compared, player/DM needs, MVP must/nice/skip, Owlbear Rodeo lessons, OSS libs, asset licenses |
+| [`docs/research/classes/`](docs/research/classes/) | 12 PHB 2024 base classes (one file each, by pack): concept, personality, role, core stats, features 1-20 |
 
 ## Pipeline for a new feature (checklist)
 Two human gates. Do not skip them; this cannot run autonomously.
