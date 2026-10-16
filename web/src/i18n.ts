@@ -141,7 +141,9 @@ const th = {
   noteDeleteConfirm: 'ลบโน้ต "{title}" ใช่ไหม? กู้คืนไม่ได้',
   noteUp: 'เลื่อนขึ้น',
   noteDown: 'เลื่อนลง',
-  noteBack: '← รายการโน้ต',
+  noteBack: 'เสร็จ',
+  noteEdit: 'แก้ไข',
+  noteEmpty: 'ยังไม่มีเนื้อหา (รองรับ markdown: # หัวข้อ, **ตัวหนา**, *เอียง*, - รายการ)',
 
 
   // Character pick
@@ -396,7 +398,9 @@ const en: Record<keyof typeof th, string> = {
   noteDeleteConfirm: 'Delete note "{title}"? This cannot be undone.',
   noteUp: 'Move up',
   noteDown: 'Move down',
-  noteBack: '← All notes',
+  noteBack: 'Done',
+  noteEdit: 'Edit',
+  noteEmpty: 'Nothing written yet (markdown works: # heading, **bold**, *italic*, - list)',
 
 
   pickTitle: 'Choose your hero',

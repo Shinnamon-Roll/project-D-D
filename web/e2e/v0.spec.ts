@@ -336,7 +336,8 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(tid(dm, 'roster-hpmax')).toHaveValue(hpDefault)
   await expect(tid(qr, 'sheet-hp')).toHaveText('77/77')
   await tid(dm, 'roster-back').click()
-  await tid(dm, 'dm-menu-scenes').click()
+  await tid(dm, 'dm-menu-ruleset').click() // close it; "scenes" stayed open alongside
+  await expect(tid(dm, 'dm-menu-scenes')).toHaveAttribute('aria-expanded', 'true')
 
   // Player never sees the DM panel on the table.
   await expect(tid(pl, 'dm-panel')).toHaveCount(0)
@@ -416,7 +417,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
 
   // 7. DM drags a fog rect over column 3 (rows 0-2); player's view gets it.
   await tid(dm, 'dm-menu-fog').click()
-  await expect(tid(dm, 'dm-menu-scenes')).toHaveAttribute('aria-expanded', 'false') // one section at a time
+  await expect(tid(dm, 'dm-menu-scenes')).toHaveAttribute('aria-expanded', 'true') // sections stay open together
   await tid(dm, 'fog-toggle').click()
   await expect(tid(dm, 'fog-toggle')).toHaveAttribute('aria-pressed', 'true')
   const from = await cellPoint(dm, 3, 0)
@@ -436,16 +437,27 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await tid(dm, 'notes-add').click()
   await expect(tid(dm, 'note-title')).toBeFocused()
   await tid(dm, 'note-title').fill('Chapter 1')
-  await tid(dm, 'note-body').fill('The dragon sleeps under the lighthouse.')
+  await tid(dm, 'note-body').fill('# Lighthouse\nThe **dragon** sleeps under the lighthouse.\n- bring rope')
   await expect(tid(dm, 'note-status')).toHaveText('บันทึกแล้ว')
   await dm.reload()
   await expect(tid(dm, 'dm-menu-notes')).toHaveAttribute('aria-expanded', 'true') // last section remembered
   const noteItem = dm.locator('[data-testid^="note-item-"]')
   await expect(noteItem).toHaveText(['Chapter 1'])
+  // Clicking a note opens it in place as markdown; the map and the other DM sections stay usable.
   await noteItem.click()
-  await expect(tid(dm, 'note-body')).toHaveValue('The dragon sleeps under the lighthouse.')
+  await expect(noteItem).toHaveAttribute('aria-expanded', 'true')
+  const view = dm.locator('[data-testid^="note-view-"]')
+  await expect(view.locator('h3')).toHaveText('Lighthouse')
+  await expect(view.locator('strong')).toHaveText('dragon')
+  await expect(view.locator('li')).toHaveText('bring rope')
+  await expect(tid(dm, 'map-stage')).toBeVisible()
+  await dm.locator('[data-testid^="note-edit-"]').click()
+  await expect(tid(dm, 'note-body')).toHaveValue('# Lighthouse\nThe **dragon** sleeps under the lighthouse.\n- bring rope')
   await tid(dm, 'note-back').click()
   await expect(noteItem).toBeFocused()
+  await expect(view).toBeVisible() // back to the rendered note, still open
+  await noteItem.click()
+  await expect(view).toHaveCount(0)
   await expect(tid(pl, 'dm-menu-notes')).toHaveCount(0)
   expect(plFrames.length).toBeGreaterThan(0)
   expect(plFrames.filter((f) => f.includes('"notes"'))).toEqual([])

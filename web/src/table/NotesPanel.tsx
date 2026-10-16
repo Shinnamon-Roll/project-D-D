@@ -4,6 +4,7 @@ import { useStore } from '../store'
 import { send } from '../ws'
 import { useT } from '../i18n'
 import { closeOnBackdrop } from '../screens/SeatQr'
+import Markdown from './Markdown'
 
 const MAX_NOTES = 200
 
@@ -11,41 +12,36 @@ const MAX_NOTES = 200
 export default function NotesPanel() {
   const t = useT()
   const notes = useStore((s) => s.notes)
-  const [openId, setOpenId] = useState('')
+  // Notes open in place (several at once) so the DM can keep playing while reading; one note is edited at a time.
+  const [expanded, setExpanded] = useState<Set<string>>(() => new Set())
+  const [editId, setEditId] = useState('')
   // "add" pressed: ids that existed then + the title sent; open the first new note with that title.
   const awaitNew = useRef<{ ids: Set<string>; title: string } | null>(null)
-  const backFrom = useRef('') // note just closed: focus its list button
+  const backFrom = useRef('') // note just left: focus its list button
   const list = useRef<HTMLDivElement>(null)
+
+  const toggle = (id: string) =>
+    setExpanded((cur) => {
+      const next = new Set(cur)
+      if (!next.delete(id)) next.add(id)
+      return next
+    })
 
   useEffect(() => {
     const w = awaitNew.current
     const n = w && notes.find((n) => !w.ids.has(n.id) && n.title === w.title)
     if (n) {
       awaitNew.current = null
-      setOpenId(n.id)
+      setExpanded((cur) => new Set(cur).add(n.id))
+      setEditId(n.id)
     }
   }, [notes])
 
   useEffect(() => {
-    if (openId || !backFrom.current) return
+    if (editId || !backFrom.current) return
     list.current?.querySelector<HTMLElement>(`[data-testid="note-item-${CSS.escape(backFrom.current)}"]`)?.focus()
     backFrom.current = ''
-  }, [openId])
-
-  const i = notes.findIndex((n) => n.id === openId)
-  if (i >= 0)
-    return (
-      <NoteEditor
-        key={openId}
-        note={notes[i]}
-        index={i}
-        count={notes.length}
-        onBack={() => {
-          backFrom.current = openId
-          setOpenId('')
-        }}
-      />
-    )
+  }, [editId])
 
   return (
     <div className="notes" data-testid="notes" ref={list}>
@@ -64,13 +60,39 @@ export default function NotesPanel() {
         <p className="muted">{t('noNotes')}</p>
       ) : (
         <ul className="note-list">
-          {notes.map((n) => (
-            <li key={n.id}>
-              <button data-testid={`note-item-${n.id}`} onClick={() => setOpenId(n.id)}>
-                {n.title}
-              </button>
-            </li>
-          ))}
+          {notes.map((n, i) => {
+            const open = expanded.has(n.id)
+            return (
+              <li key={n.id} className={open ? 'open' : undefined}>
+                <button className="note-head" data-testid={`note-item-${n.id}`} aria-expanded={open} aria-controls={`note-${n.id}`} onClick={() => toggle(n.id)}>
+                  {n.title}
+                </button>
+                {open && (
+                  <div id={`note-${n.id}`} className="note-open">
+                    {editId === n.id ? (
+                      <NoteEditor
+                        key={n.id}
+                        note={n}
+                        index={i}
+                        count={notes.length}
+                        onBack={() => {
+                          backFrom.current = n.id
+                          setEditId('')
+                        }}
+                      />
+                    ) : (
+                      <div className="note-view" data-testid={`note-view-${n.id}`}>
+                        {n.body.trim() ? <Markdown text={n.body} /> : <p className="muted">{t('noteEmpty')}</p>}
+                        <button data-testid={`note-edit-${n.id}`} onClick={() => setEditId(n.id)}>
+                          {t('noteEdit')}
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </li>
+            )
+          })}
         </ul>
       )}
     </div>

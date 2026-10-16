@@ -480,20 +480,26 @@ button.dm-menu-head[aria-expanded='true']::after { transform: rotate(90deg); }
 .dm-sec { padding: 0 4px 10px; }
 /* ---------- story notes ---------- */
 .note-list { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 4px; }
-.note-list button { width: 100%; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.note-list button.note-head { width: 100%; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.note-list button.note-head::before { content: '▸'; display: inline-block; margin-right: 6px; transition: transform 0.15s; }
+.note-list button.note-head[aria-expanded='true']::before { transform: rotate(90deg); }
+.note-open { padding: 6px 4px 10px 14px; border-left: 2px solid var(--gold-dim); margin: 2px 0 6px 8px; }
+.note-view > button { margin-top: 6px; }
 .note-editor { display: flex; flex-direction: column; }
 .note-tools { margin: 4px 0; align-items: center; }
 .note-status { margin-right: auto; font-size: 0.85rem; font-style: italic; color: var(--muted); }
-.note-body textarea { min-height: 40vh; resize: vertical; line-height: 1.5; }
-/* Editing a note in the table: the DM panel takes the whole info pane and the text box the rest of it. */
-.side:has(.note-editor) { display: flex; flex-direction: column; }
-.side:has(.note-editor) > :not(.dm-panel),
-.dm-panel:has(.note-editor) > h2,
-.dm-menu:has(.note-editor) > li:not(:has(.note-editor)) { display: none; }
-.side:has(.note-editor) > .dm-panel { margin: 0; }
-.side:has(.note-editor) > .dm-panel, .dm-menu:has(.note-editor), .dm-menu > li:has(.note-editor), .dm-sec:has(.note-editor),
-.side .note-editor, .side .note-body { display: flex; flex-direction: column; flex: 1; min-height: 0; }
-.side .note-body textarea { flex: 1; }
+.note-body textarea { min-height: 30vh; resize: vertical; line-height: 1.5; }
+/* rendered note markdown */
+.md { line-height: 1.55; overflow-wrap: anywhere; }
+.md > :first-child { margin-top: 0; }
+.md h3, .md h4, .md h5, .md h6 { margin: 0.8em 0 0.3em; }
+.md p, .md ul, .md ol, .md blockquote, .md pre { margin: 0.4em 0; }
+.md ul, .md ol { padding-left: 1.4em; }
+.md blockquote { padding-left: 10px; border-left: 3px solid var(--gold-dim); color: var(--muted); font-style: italic; }
+.md code, .md pre { font-family: ui-monospace, monospace; font-size: 0.88em; background: rgba(0, 0, 0, 0.18); border-radius: 3px; }
+.md code { padding: 0 4px; }
+.md pre { padding: 8px; white-space: pre-wrap; }
+.md hr { border: 0; border-top: 1px solid var(--gold-dim); margin: 0.8em 0; }
 dialog.notes-modal { position: fixed; width: min(720px, calc(100vw - 32px)); max-height: calc(100vh - 32px); margin: auto; overflow-y: auto; }
 dialog.notes-modal::backdrop { background: rgba(14, 9, 6, 0.78); }
 

@@ -35,14 +35,13 @@ const SECTIONS: [Section, TKey][] = [
   ['notes', 'story'],
   ['ruleset', 'ruleset'],
 ]
-const SECTION_KEY = 'dm.section'
-function savedSection(): Section | '' {
+const SECTION_KEY = 'dm.sections' // JSON list of open sections
+function savedSections(): Set<Section> {
   try {
-    const v = localStorage.getItem(SECTION_KEY)
-    if (v === '') return ''
-    return SECTIONS.find(([id]) => id === v)?.[0] ?? 'scenes'
+    const v: unknown = JSON.parse(localStorage.getItem(SECTION_KEY) ?? '["scenes"]')
+    return new Set(SECTIONS.map(([id]) => id).filter((id) => Array.isArray(v) && v.includes(id)))
   } catch {
-    return 'scenes'
+    return new Set(['scenes'])
   }
 }
 
@@ -59,7 +58,7 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
   const room = useStore((s) => s.room)!
   const [newName, setNewName] = useState('')
   const [err, setErr] = useState('')
-  const [open, setOpen] = useState<Section | ''>(savedSection)
+  const [open, setOpen] = useState<Set<Section>>(savedSections)
 
   async function addScene(file: File) {
     const url = await upload(file)
@@ -80,12 +79,14 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
     setNewName('')
   }
 
-  // One menu section open at a time; leaving the fog section ends fog drawing.
-  const choose = (next: Section | '') => {
+  // Any number of sections open at once; closing the fog section ends fog drawing.
+  const toggle = (id: Section) => {
+    const next = new Set(open)
+    if (!next.delete(id)) next.add(id)
     setOpen(next)
-    if (next !== 'fog') setFogMode(false)
+    if (!next.has('fog')) setFogMode(false)
     try {
-      localStorage.setItem(SECTION_KEY, next)
+      localStorage.setItem(SECTION_KEY, JSON.stringify([...next]))
     } catch {
       /* storage blocked: remembered for this page only */
     }
@@ -185,14 +186,14 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
             <button
               className="dm-menu-head"
               data-testid={`dm-menu-${id}`}
-              aria-expanded={open === id}
+              aria-expanded={open.has(id)}
               aria-controls={`dm-sec-${id}`}
-              onClick={() => choose(open === id ? '' : id)}
+              onClick={() => toggle(id)}
             >
               {t(label)}
             </button>
-            <div id={`dm-sec-${id}`} className="dm-sec" hidden={open !== id}>
-              {open === id && content(id)}
+            <div id={`dm-sec-${id}`} className="dm-sec" hidden={!open.has(id)}>
+              {open.has(id) && content(id)}
             </div>
           </li>
         ))}
