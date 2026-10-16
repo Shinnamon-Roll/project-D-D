@@ -2,8 +2,12 @@ package room
 
 import (
 	"encoding/json"
+	"reflect"
+	"slices"
 	"strings"
 	"testing"
+
+	"projectdnd/internal/rules"
 )
 
 func apply(r *Room, client, typ string, payload any) error {
@@ -68,7 +72,8 @@ func TestStatusFlow(t *testing.T) {
 	ok(t, r, "dm", "campaign.select", m{"campaignId": "starter-set", "name": "Dee"})
 	st := r.State()
 	if st.Status != StatusLobby || st.CampaignID != "starter-set" || len(st.Seats) != 2 ||
-		st.Seats[0].Kind != KindDM || st.Seats[1].Kind != KindPlayer || st.Seats[1].Occupied || len(st.Roster) != 10 {
+		st.Seats[0].Kind != KindDM || st.Seats[1].Kind != KindPlayer || st.Seats[1].Occupied || len(st.Roster) != len(rules.DefaultRoster()) ||
+		!slices.Equal(st.ActiveSets, []string{"core"}) || !reflect.DeepEqual(st.Sets, rules.Sets()) {
 		t.Fatalf("after select: %+v", st)
 	}
 	fail(t, r, "x", "campaign.select", m{"campaignId": "starter-set", "name": "X"})
@@ -400,7 +405,7 @@ func TestNotesPermissions(t *testing.T) {
 	fail(t, r, "p1", "note.add", m{"title": "spoiler"})
 	fail(t, r, "nobody", "note.add", m{"title": "spoiler"})
 	ok(t, r, "dm", "note.add", m{"title": "Lobby prep"}) // before the game starts
-	ok(t, r, "co", "note.update", m{"id": "n1", "title": "Prep", "body": "secret"})
+	ok(t, r, "co", "note.update", m{"id": "n1", "title": "Prep", "body": "zq-note-body"})
 	for _, typ := range []string{"note.update", "note.remove", "note.move"} {
 		if err := apply(r, "p1", typ, m{"id": "n1", "title": "x", "index": 0}); err != errNotDM {
 			t.Fatalf("player %s: %v", typ, err)
@@ -409,7 +414,7 @@ func TestNotesPermissions(t *testing.T) {
 	if err := apply(r, "dm", "note.move", m{"id": "n1", "index": 1}); err == nil {
 		t.Fatal("move past end accepted")
 	}
-	if b, _ := json.Marshal(r.State()); strings.Contains(string(b), "secret") || strings.Contains(string(b), "notes") {
+	if b, _ := json.Marshal(r.State()); strings.Contains(string(b), "zq-note-body") || strings.Contains(string(b), `"notes"`) {
 		t.Fatalf("notes leaked into RoomState: %s", b)
 	}
 

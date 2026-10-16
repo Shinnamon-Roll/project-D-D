@@ -435,7 +435,7 @@ func TestRosterEdit(t *testing.T) {
 
 	ok(t, r, "dm", "roster.update", upd("knight", e)) // lobby
 	ro := r.State().Roster
-	if len(ro) != 10 || ro[0].ID != "knight" || ro[0].HeroName.EN != "Sir Test" || ro[1].ID != "wizard" || ro[1].HeroName.EN != "Soraya Quill" {
+	if len(ro) != len(rules.DefaultRoster()) || ro[0].ID != "knight" || ro[0].HeroName.EN != "Sir Test" || ro[1].ID != "wizard" || ro[1].HeroName.EN != "Soraya Quill" {
 		t.Fatalf("roster %+v %+v", ro[0].HeroName, ro[1].HeroName)
 	}
 	e.Art = img
@@ -443,7 +443,7 @@ func TestRosterEdit(t *testing.T) {
 	if ro := r.State().Roster; ro[2].ID != "rogue" || ro[2].Art != img {
 		t.Fatalf("rogue %+v", ro[2])
 	}
-	if ps := r.PlayerState().Roster; len(ps) != 10 || ps[2].Art != img {
+	if ps := r.PlayerState().Roster; len(ps) != 10 || ps[2].Art != img { // only the core set is active
 		t.Fatal("players do not get the roster in use")
 	}
 	failWith(t, r, "dm", "roster.reset", m{"classId": "pirate"}, "no such class")
@@ -454,6 +454,32 @@ func TestRosterEdit(t *testing.T) {
 	ok(t, r, "dm", "roster.reset", m{})
 	if ro := r.State().Roster; ro[2].Art != "" {
 		t.Fatal("reset all")
+	}
+
+	// Reset by set drops only that set's edits.
+	leg := rules.DefaultRoster()[10]
+	leg.HeroName.EN = "Legend Test"
+	ok(t, r, "dm", "roster.update", upd(leg.ID, leg))
+	ok(t, r, "dm", "roster.update", upd("rogue", e))
+	failWith(t, r, "dm", "roster.reset", m{"set": "pirate"}, "no such set")
+	failWith(t, r, "dm", "roster.reset", m{"set": "legend", "classId": "rogue"}, "send classId or set, not both")
+	failWith(t, r, "p1", "roster.reset", m{"set": "legend"}, "only the DM can do that")
+	ok(t, r, "dm", "roster.reset", m{"set": "legend"})
+	if ro := r.State().Roster; ro[10].HeroName.EN == "Legend Test" || ro[2].Art != img {
+		t.Fatalf("reset legend: %q %q", ro[10].HeroName.EN, ro[2].Art)
+	}
+	if l := lastLog(r); l.Text.EN != "reset roster set legend" {
+		t.Fatalf("log %+v", l)
+	}
+	ok(t, r, "dm", "roster.reset", m{"set": "core"})
+	if ro := r.State().Roster; ro[2].Art != "" {
+		t.Fatal("reset core")
+	}
+	// The client cannot move an entry to another set.
+	leg.Set = "core"
+	ok(t, r, "dm", "roster.update", upd(leg.ID, leg))
+	if got := r.State().Roster[10]; got.Set != "legend" {
+		t.Fatalf("set changed to %q", got.Set)
 	}
 
 	// co-DM, while playing, persisted through the store the Hub was given.

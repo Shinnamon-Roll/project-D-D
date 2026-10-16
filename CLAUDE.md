@@ -7,7 +7,7 @@ character sheets. Single project at repo root (not a monorepo).
 Replace the paper table: a DM and friends open one link and play together in the browser.
 
 ## Confirmed requirements
-- Fixed 10-class character roster (`docs/features/character-roster.md`, data `docs/design/roster.md`): players pick 1 card each
+- Fixed character roster in sets (`docs/features/character-roster.md`, `docs/features/character-sets.md`; data `docs/design/roster.md` = set `core` 10 heroes, `docs/design/roster-legend.md` = set `legend` 12 heroes). DM ticks which sets are in play in the lobby (≥1). Players pick 1 card each
   (no duplicates); HP/mana/str/end/agi, mana skills + up to 3 custom skills. DM edits the roster in-app (Ruleset page,
   saved in `data/roster.json`). NPC pool stays white label (DM defines NPCs). The old white-label ruleset + 5E preset is gone.
 - Private use. One DM (first to click) + optional co-DM; up to 6 player seats added by DM.

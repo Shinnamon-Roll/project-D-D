@@ -122,7 +122,9 @@ type State struct {
 	Campaigns      []rules.Campaign    `json:"campaigns"`
 	CampaignID     string              `json:"campaignId"`
 	Seats          []Seat              `json:"seats"`
-	Roster         []rules.RosterEntry `json:"roster"` // filled by State() from the roster store
+	Sets           []rules.Set         `json:"sets"`       // every character set (fixed)
+	ActiveSets     []string            `json:"activeSets"` // sets players pick from, in Sets order; replaced, never mutated
+	Roster         []rules.RosterEntry `json:"roster"`     // filled by State() from the roster store
 	Characters     []Character         `json:"characters"`
 	Scenes         []Scene             `json:"scenes"`
 	CurrentSceneID string              `json:"currentSceneId"`
@@ -152,6 +154,8 @@ func New() *Room {
 	r := &Room{st: State{
 		Status:     StatusMenu,
 		Campaigns:  rules.Campaigns(),
+		Sets:       rules.Sets(),
+		ActiveSets: []string{"core"},
 		Seats:      []Seat{},
 		Characters: []Character{},
 		Scenes:     []Scene{},
@@ -168,9 +172,13 @@ func (r *Room) State() State {
 	return st
 }
 
-// PlayerState is the view for players and unseated connections: no hidden tokens, no NPC hp/hpMax/npcId.
+// PlayerState is the view for players and unseated connections: no hidden tokens, no NPC hp/hpMax/npcId, and
+// only the roster entries of the active sets (the DM view keeps every set for the Ruleset editor).
 func (r *Room) PlayerState() State {
 	st := r.State()
+	st.Roster = slices.DeleteFunc(slices.Clone(st.Roster), func(e rules.RosterEntry) bool {
+		return !slices.Contains(r.st.ActiveSets, e.Set)
+	})
 	st.Tokens = make([]Token, 0, len(r.st.Tokens))
 	for _, t := range r.st.Tokens {
 		if t.Hidden {
@@ -449,6 +457,8 @@ func (r *Room) apply(clientID, typ string, payload json.RawMessage) error {
 		r.st.Seats = append(r.st.Seats, Seat{ID: r.id("s"), Kind: KindCoDM})
 		r.addLog("เปิดที่นั่ง co-DM", "opened a co-DM seat")
 		return nil
+	case "sets.set":
+		return r.setsSet(s, payload)
 	case "game.start":
 		return r.gameStart(s)
 	case "character.pick":
@@ -663,6 +673,39 @@ func (r *Room) seatSit(clientID string, s *Seat, payload json.RawMessage) error 
 	} else {
 		r.addLog("นั่งที่นั่งผู้เล่น", "took a player seat")
 	}
+	return nil
+}
+
+// setsSet is sets.set: the DM/co-DM picks which character sets players choose from, lobby only.
+func (r *Room) setsSet(s *Seat, payload json.RawMessage) error {
+	p, err := decode[struct {
+		Sets []string `json:"sets"`
+	}](payload)
+	if err != nil {
+		return err
+	}
+	if err := r.needDM(s, StatusLobby); err != nil {
+		return err
+	}
+	if len(p.Sets) == 0 {
+		return errors.New("pick at least one set")
+	}
+	for _, id := range p.Sets {
+		if !rules.IsSet(id) {
+			return rules.ErrNoSet
+		}
+	}
+	var active, th, en []string // Sets order, duplicates dropped
+	for _, x := range r.st.Sets {
+		if slices.Contains(p.Sets, x.ID) {
+			active, th, en = append(active, x.ID), append(th, x.Name.TH), append(en, x.Name.EN)
+		}
+	}
+	if slices.Equal(active, r.st.ActiveSets) {
+		return nil // no change: no log line
+	}
+	r.st.ActiveSets = active
+	r.addLog("เลือกเซ็ตตัวละคร: "+strings.Join(th, ", "), "set the character sets: "+strings.Join(en, ", "))
 	return nil
 }
 

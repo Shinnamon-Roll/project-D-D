@@ -42,6 +42,10 @@ const th = {
   addSeat: '+ เก้าอี้ผู้เล่น',
   openCodm: 'เปิดที่ DM ร่วม',
   start: 'เริ่มเกม',
+  sets: 'เซ็ตตัวละคร',
+  setHeroes: '{n} ตัว',
+  setsKeepOne: 'ต้องเปิดไว้อย่างน้อย 1 เซ็ต',
+  activeSets: 'เซ็ตที่ใช้: {names}',
 
   // SeatQr
   qrAlt: 'QR ที่นั่ง {n}',
@@ -202,12 +206,12 @@ const th = {
   give: 'ให้',
 
   // Roster editor (DM)
-  rosterLead: 'ตัวละครสำเร็จรูป 10 ตัว แก้แล้วมีผลกับตัวที่ถูกเลือกหลังบันทึก ตัวที่เลือกไปแล้วแก้ผ่านการ์ดในแถบปาร์ตี้',
+  rosterLead: 'ตัวละครสำเร็จรูปแยกตามเซ็ต แก้แล้วมีผลกับตัวที่ถูกเลือกหลังบันทึก ตัวที่เลือกไปแล้วแก้ผ่านการ์ดในแถบปาร์ตี้',
   rosterBack: '← รายชื่อตัวละคร',
   rosterSave: 'บันทึกตัวละคร',
   rosterReset: 'รีเซ็ตตัวนี้',
-  rosterResetAll: 'รีเซ็ตทั้งหมด',
-  rosterResetAllConfirm: 'คืนค่าเริ่มต้นให้ตัวละครทั้ง 10 ตัวใช่ไหม? ที่แก้ไว้ทั้งหมดจะหายไป',
+  rosterResetSet: 'รีเซ็ตเซ็ตนี้',
+  rosterResetSetConfirm: 'คืนค่าเริ่มต้นให้ตัวละครทุกตัวในเซ็ต {name} ใช่ไหม? ที่แก้ไว้ในเซ็ตนี้จะหายไป',
   rosterUnsaved: 'ยังไม่บันทึก',
   rosterInvalid: 'ช่องที่ขีดเส้นแดงยังไม่ถูกต้อง',
   heroName: 'ชื่อฮีโร่',
@@ -281,6 +285,10 @@ const en: Record<keyof typeof th, string> = {
   addSeat: '+ Add seat',
   openCodm: 'Open co-DM seat',
   start: 'Start',
+  sets: 'Character sets',
+  setHeroes: '{n} heroes',
+  setsKeepOne: 'Keep at least one set on',
+  activeSets: 'Sets in play: {names}',
 
   qrAlt: 'QR for seat {n}',
   generating: 'Generating…',
@@ -432,12 +440,12 @@ const en: Record<keyof typeof th, string> = {
   qty: 'Qty',
   give: 'Give',
 
-  rosterLead: 'The 10 pre-made heroes. Changes apply to heroes picked after you save; edit heroes already picked from their card in the party bar.',
+  rosterLead: 'The pre-made heroes, by set. Changes apply to heroes picked after you save; edit heroes already picked from their card in the party bar.',
   rosterBack: '← All heroes',
   rosterSave: 'Save hero',
   rosterReset: 'Reset this hero',
-  rosterResetAll: 'Reset all heroes',
-  rosterResetAllConfirm: 'Reset all 10 heroes to the defaults? Every edit is lost.',
+  rosterResetSet: 'Reset this set',
+  rosterResetSetConfirm: 'Reset every hero in {name} to the defaults? Every edit in this set is lost.',
   rosterUnsaved: 'Unsaved changes',
   rosterInvalid: 'Fix the fields underlined in red',
   heroName: 'Hero name',

@@ -66,11 +66,13 @@ async function iconPng(id: string): Promise<File | null> {
 const numIn = (v: string) => (v === '' ? NaN : Number(v)) // empty stays invalid instead of turning into 0
 const numOut = (n: number) => (Number.isNaN(n) ? '' : n)
 
-// DM: the 10 pre-made heroes. Edits apply to heroes picked after saving.
+// DM: the pre-made heroes, one tab per set (DM/co-DM get every set). Edits apply to heroes picked after saving.
 export default function RosterEditor() {
   const t = useT()
   const tx = useL()
   const roster = useStore((s) => s.room!.roster)
+  const sets = useStore((s) => s.room!.sets)
+  const [tab, setTab] = useState(sets[0]?.id ?? '')
   const [openId, setOpenId] = useState('')
   const backFrom = useRef('')
   const list = useRef<HTMLDivElement>(null)
@@ -97,8 +99,15 @@ export default function RosterEditor() {
   return (
     <div className="roster" data-testid="roster-editor" ref={list}>
       <p className="muted">{t('rosterLead')}</p>
+      <div className="set-tabs" role="group" aria-label={t('sets')}>
+        {sets.map((x) => (
+          <button key={x.id} data-testid={`roster-tab-${x.id}`} aria-pressed={x.id === tab} onClick={() => setTab(x.id)}>
+            {tx(x.name)}
+          </button>
+        ))}
+      </div>
       <ul className="roster-list">
-        {roster.map((r) => (
+        {roster.filter((r) => r.set === tab).map((r) => (
           <li key={r.id}>
             <button data-testid={`roster-item-${r.id}`} onClick={() => setOpenId(r.id)}>
               <Medallion classId={r.id} art={r.art} size="sm" />
@@ -108,8 +117,12 @@ export default function RosterEditor() {
           </li>
         ))}
       </ul>
-      <button className="danger" data-testid="roster-reset-all" onClick={() => confirm(t('rosterResetAllConfirm')) && send('roster.reset', {})}>
-        {t('rosterResetAll')}
+      <button
+        className="danger"
+        data-testid="roster-reset-set"
+        onClick={() => confirm(t('rosterResetSetConfirm', { name: tx(sets.find((x) => x.id === tab)?.name) })) && send('roster.reset', { set: tab })}
+      >
+        {t('rosterResetSet')}
       </button>
     </div>
   )
@@ -168,8 +181,11 @@ function EntryEditor({ entry, onBack }: { entry: RosterEntry; onBack: () => void
     setBusy(false)
     if (url) set({ art: url })
   }
+  const ownIcon = classArt(d.id).src
+  // one button per distinct icon: "legend-bard" draws the same icon as "bard"
+  const iconOpts = roster.filter((r, i) => roster.findIndex((x) => classArt(x.id).src === classArt(r.id).src) === i)
   const pickIcon = async (id: string) => {
-    if (id === d.id) return set({ art: '' })
+    if (classArt(id).src === ownIcon) return set({ art: '' })
     setBusy(true)
     const f = await iconPng(id).catch(() => null)
     setBusy(false)
@@ -205,13 +221,13 @@ function EntryEditor({ entry, onBack }: { entry: RosterEntry; onBack: () => void
       <fieldset className="art-pick">
         <legend>{t('image')}</legend>
         <div className="art-grid">
-          {roster.map((r) => (
+          {iconOpts.map((r) => (
             <button
               type="button"
               key={r.id}
               className="art-opt"
               data-testid={`roster-art-${r.id}`}
-              aria-pressed={d.art === '' && r.id === d.id}
+              aria-pressed={d.art === '' && classArt(r.id).src === ownIcon}
               aria-label={t('artUse', { name: tx(r.className) })}
               title={tx(r.className)}
               disabled={busy}

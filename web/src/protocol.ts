@@ -45,9 +45,16 @@ export interface CharStats {
   mpMax: number
 }
 
-// One of the 10 pre-made characters (server-owned, DM-editable).
+// A character set: a fixed group of roster entries the DM switches on in the lobby.
+export interface CharSet {
+  id: string // "core" | "legend"
+  name: L
+}
+
+// One pre-made character (server-owned, DM-editable).
 export interface RosterEntry {
-  id: string // classId: knight|wizard|rogue|ranger|cleric|paladin|barbarian|bard|druid|necromancer
+  id: string // classId: core keeps its 10 ids (knight, wizard, ...); legend = "legend-<class>"
+  set: string // CharSet id; server-owned, a client-sent value is ignored
   heroName: L
   className: L
   blurb: L
@@ -148,7 +155,9 @@ export interface RoomState {
   campaigns: Campaign[]
   campaignId: string
   seats: Seat[]
-  roster: RosterEntry[]
+  sets: CharSet[] // every set, fixed
+  activeSets: string[] // sets players pick from, in `sets` order; default ["core"]
+  roster: RosterEntry[] // DM/co-DM: every set; players: active sets only
   characters: Character[]
   feed: FeedEntry[] // latest 50
   scenes: Scene[]
@@ -214,6 +223,7 @@ export interface ClientEvents {
   'seat.add': Empty
   'seat.remove': { seatId: string }
   'seat.openCoDm': Empty
+  'sets.set': { sets: string[] } // DM/co-DM, lobby only, at least one
   'game.start': Empty
   'character.pick': { classId: string }
   'skill.addCustom': { name: string; desc: string; cost: number }
@@ -226,7 +236,7 @@ export interface ClientEvents {
   'item.give': { characterId: string; name: string; qty: number }
   'item.remove': { characterId: string; index: number; qty: number }
   'roster.update': { classId: string; entry: RosterEntry }
-  'roster.reset': { classId?: string }
+  'roster.reset': { classId?: string } | { set: string } // {} = every entry of every set
   'scene.add': { name: string; imageUrl: string; grid: Grid }
   'scene.update': { sceneId: string; name: string; grid: Grid }
   'scene.select': { sceneId: string }

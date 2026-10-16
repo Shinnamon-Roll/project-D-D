@@ -1,7 +1,8 @@
 # Roster — ตัวละครสำเร็จรูป 10 คลาส
 
 ข้อมูลตัวละคร 10 ตัว (1 ตัวต่อ 1 คลาส) สำหรับ feature [`../features/character-roster.md`](../features/character-roster.md).
-Backend แปลง JSON ท้ายไฟล์เป็น Go (`internal/rules/roster.go`); `art` = `id` (รูปใน `web/src/assets/classes/`).
+เซ็ต `core` (ฮีโร่ชุดแรก / First Company) — ทุกตัวมี `"set": "core"`; อีกเซ็ตอยู่ใน [`roster-legend.md`](roster-legend.md).
+Backend แปลง JSON ท้ายไฟล์เป็น Go (`internal/rules/roster_default.go`); `art` = `id` (รูปใน `web/src/assets/classes/`).
 ชื่อ เนื้อเรื่อง สกิล และไอเทมทั้งหมดแต่งขึ้นเอง ไม่ได้คัดลอกจากหนังสือหรือเกมใด
 
 ## กติกาสั้นๆ สำหรับ DM (ใช้ลูกเต๋าจริง)
@@ -272,6 +273,7 @@ Backend แปลง JSON ท้ายไฟล์เป็น Go (`internal/rul
 [
   {
     "id": "knight",
+    "set": "core",
     "heroName": {
       "th": "อัลดริก เวน",
       "en": "Aldric Vane"
@@ -363,6 +365,7 @@ Backend แปลง JSON ท้ายไฟล์เป็น Go (`internal/rul
   },
   {
     "id": "wizard",
+    "set": "core",
     "heroName": {
       "th": "โซรายา ควิลล์",
       "en": "Soraya Quill"
@@ -454,6 +457,7 @@ Backend แปลง JSON ท้ายไฟล์เป็น Go (`internal/rul
   },
   {
     "id": "rogue",
+    "set": "core",
     "heroName": {
       "th": "ซารีฟ เคช",
       "en": "Zarif Kesh"
@@ -552,6 +556,7 @@ Backend แปลง JSON ท้ายไฟล์เป็น Go (`internal/rul
   },
   {
     "id": "ranger",
+    "set": "core",
     "heroName": {
       "th": "ซีกรุน แอชเวล",
       "en": "Sigrun Ashvale"
@@ -643,6 +648,7 @@ Backend แปลง JSON ท้ายไฟล์เป็น Go (`internal/rul
   },
   {
     "id": "cleric",
+    "set": "core",
     "heroName": {
       "th": "อิมารา โซเลนน์",
       "en": "Imara Solenne"
@@ -741,6 +747,7 @@ Backend แปลง JSON ท้ายไฟล์เป็น Go (`internal/rul
   },
   {
     "id": "paladin",
+    "set": "core",
     "heroName": {
       "th": "เบรนนา ดอว์นเมียร์",
       "en": "Brenna Dawnmere"
@@ -832,6 +839,7 @@ Backend แปลง JSON ท้ายไฟล์เป็น Go (`internal/rul
   },
   {
     "id": "barbarian",
+    "set": "core",
     "heroName": {
       "th": "บาตู เรดเมน",
       "en": "Batu Redmane"
@@ -923,6 +931,7 @@ Backend แปลง JSON ท้ายไฟล์เป็น Go (`internal/rul
   },
   {
     "id": "bard",
+    "set": "core",
     "heroName": {
       "th": "โคซิโม ลาร์ก",
       "en": "Cosimo Lark"
@@ -1021,6 +1030,7 @@ Backend แปลง JSON ท้ายไฟล์เป็น Go (`internal/rul
   },
   {
     "id": "druid",
+    "set": "core",
     "heroName": {
       "th": "มาลัย แห่งพงไพร",
       "en": "Malai of the Deepwood"
@@ -1112,6 +1122,7 @@ Backend แปลง JSON ท้ายไฟล์เป็น Go (`internal/rul
   },
   {
     "id": "necromancer",
+    "set": "core",
     "heroName": {
       "th": "อีโว กริมเซล",
       "en": "Ivo Grimsel"

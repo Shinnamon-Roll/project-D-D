@@ -19,8 +19,25 @@ func TestCampaigns(t *testing.T) {
 	}
 }
 
-func TestDefaultRosterMatchesDoc(t *testing.T) {
-	b, err := os.ReadFile("../../docs/design/roster.md")
+func TestSets(t *testing.T) {
+	want := []Set{{"core", L{"ฮีโร่ชุดแรก", "First Company"}}, {"legend", L{"วีรชนในตำนาน", "Heroes of Legend"}}}
+	if got := Sets(); !reflect.DeepEqual(got, want) {
+		t.Fatalf("sets %+v", got)
+	}
+	for _, tt := range []struct {
+		id string
+		ok bool
+	}{{"core", true}, {"legend", true}, {"", false}, {"Core", false}, {"pirate", false}} {
+		if IsSet(tt.id) != tt.ok {
+			t.Errorf("IsSet(%q) != %v", tt.id, tt.ok)
+		}
+	}
+}
+
+// docRoster reads the JSON block at the end of a docs/design roster file.
+func docRoster(t *testing.T, name string) []RosterEntry {
+	t.Helper()
+	b, err := os.ReadFile("../../docs/design/" + name)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -28,16 +45,32 @@ func TestDefaultRosterMatchesDoc(t *testing.T) {
 	block, _, _ = strings.Cut(block, "```")
 	var doc []RosterEntry
 	if err := json.Unmarshal([]byte(block), &doc); err != nil {
-		t.Fatal(err)
+		t.Fatalf("%s: %v", name, err)
 	}
+	return doc
+}
+
+func TestDefaultRosterMatchesDoc(t *testing.T) {
+	core, legend := docRoster(t, "roster.md"), docRoster(t, "roster-legend.md")
 	got := DefaultRoster()
-	if !reflect.DeepEqual(got, doc) {
-		t.Fatal("internal/rules/roster_default.go differs from the JSON block in docs/design/roster.md")
+	if !reflect.DeepEqual(got, append(core, legend...)) {
+		t.Fatal("internal/rules/roster_default.go + roster_legend.go differ from the JSON blocks in docs/design/roster.md + roster-legend.md")
 	}
-	if len(got) != 10 {
-		t.Fatalf("%d classes", len(got))
+	if len(core) != 10 || len(legend) != 12 {
+		t.Fatalf("%d core, %d legend", len(core), len(legend))
 	}
-	for _, e := range got {
+	ids := map[string]bool{}
+	for i, e := range got {
+		if want := map[bool]string{true: "core", false: "legend"}[i < len(core)]; e.Set != want {
+			t.Fatalf("%s: set %q, want %q", e.ID, e.Set, want)
+		}
+		if ids[e.ID] {
+			t.Fatalf("duplicate id %s", e.ID)
+		}
+		ids[e.ID] = true
+		if !IsClass(e.ID) {
+			t.Fatalf("%s: not a class", e.ID)
+		}
 		c, err := cleanEntry(e)
 		if err != nil || !reflect.DeepEqual(c, e) {
 			t.Fatalf("%s: default not clean: %v", e.ID, err)
@@ -58,6 +91,8 @@ func TestCleanEntry(t *testing.T) {
 	}{
 		{"default", func(e *RosterEntry) {}, true},
 		{"unknown class", func(e *RosterEntry) { e.ID = "pirate" }, false},
+		{"client set ignored", func(e *RosterEntry) { e.Set = "legend" }, true},
+		{"legend entry", func(e *RosterEntry) { *e = DefaultRoster()[len(DefaultRoster())-1] }, true},
 		{"hero th empty", func(e *RosterEntry) { e.HeroName.TH = "  " }, false},
 		{"hero en too long", func(e *RosterEntry) { e.HeroName.EN = long }, false},
 		{"hero 40 runes", func(e *RosterEntry) { e.HeroName.TH = strings.Repeat("ก", MaxName) }, true},
@@ -116,6 +151,56 @@ func TestCleanEntry(t *testing.T) {
 	c, err := cleanEntry(e)
 	if err != nil || c.HeroName.EN != "Soraya" || c.Skills[0].Name.TH != "x" || c.Items == nil {
 		t.Fatalf("trim: %+v %v", c, err)
+	}
+	for _, tt := range []struct{ id, sent, want string }{
+		{"knight", "legend", "core"},
+		{"knight", "", "core"},
+		{"legend-barbarian", "core", "legend"},
+		{"legend-barbarian", "pirate", "legend"},
+	} {
+		e, ok := (&RosterStore{}).Get(tt.id)
+		if !ok {
+			t.Fatalf("no %s", tt.id)
+		}
+		e.Set = tt.sent
+		if c, err := cleanEntry(e); err != nil || c.Set != tt.want {
+			t.Errorf("%s with set %q: got %q %v, want %q", tt.id, tt.sent, c.Set, err, tt.want)
+		}
+	}
+}
+
+func TestRosterResetSet(t *testing.T) {
+	var s RosterStore
+	k, b := DefaultRoster()[0], DefaultRoster()[10] // knight (core), legend-barbarian
+	k.Stats.Str, b.Stats.Str = 20, 20
+	if b.ID != "legend-barbarian" {
+		t.Fatalf("index 10 is %s", b.ID)
+	}
+	for _, e := range []RosterEntry{k, b} {
+		if err := s.Update(e); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if err := s.ResetSet("pirate"); !errors.Is(err, ErrNoSet) {
+		t.Fatalf("unknown set: %v", err)
+	}
+	if err := s.ResetSet(""); !errors.Is(err, ErrNoSet) {
+		t.Fatalf("empty set: %v", err)
+	}
+	if err := s.ResetSet("legend"); err != nil {
+		t.Fatal(err)
+	}
+	if got, _ := s.Get("legend-barbarian"); got.Stats.Str == 20 {
+		t.Fatal("legend edit kept")
+	}
+	if got, _ := s.Get("knight"); got.Stats.Str != 20 {
+		t.Fatal("core edit lost by resetting legend")
+	}
+	if err := s.ResetSet("core"); err != nil {
+		t.Fatal(err)
+	}
+	if !reflect.DeepEqual(s.List(), DefaultRoster()) {
+		t.Fatal("reset core")
 	}
 }
 
@@ -219,8 +304,29 @@ func TestLoadRosterBadFiles(t *testing.T) {
 		if w, _ := s.Get("wizard"); w.Stats.HPMax != DefaultRoster()[1].Stats.HPMax {
 			t.Fatal("invalid edit loaded")
 		}
-		if len(s.List()) != 10 {
+		if len(s.List()) != len(DefaultRoster()) {
 			t.Fatal("roster size")
+		}
+	})
+	t.Run("old file without set still loads", func(t *testing.T) {
+		dir := t.TempDir()
+		os.WriteFile(filepath.Join(dir, rosterFile), []byte(`{"edits":[`+strings.Replace(mustMarshal(t, func() RosterEntry {
+			e := DefaultRoster()[0]
+			e.Stats.Str = 20
+			return e
+		}()), `"set":"core",`, "", 1)+`]}`), 0o600)
+		s, err := LoadRoster(dir, "", log)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if k, _ := s.Get("knight"); k.Stats.Str != 20 || k.Set != "core" {
+			t.Fatalf("old edit: str %d set %q", k.Stats.Str, k.Set)
+		}
+		if err := s.ResetSet("core"); err != nil {
+			t.Fatal(err)
+		}
+		if k, _ := s.Get("knight"); k.Stats.Str == 20 {
+			t.Fatal("old edit not reset by its set")
 		}
 	})
 	t.Run("art whose upload is gone falls back to the class art", func(t *testing.T) {
@@ -249,4 +355,16 @@ func TestLoadRosterBadFiles(t *testing.T) {
 			}
 		}
 	})
+}
+
+func mustMarshal(t *testing.T, v any) string {
+	t.Helper()
+	b, err := json.Marshal(v)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(string(b), `"set":"core",`) {
+		t.Fatalf("no set key in %s", b)
+	}
+	return string(b)
 }

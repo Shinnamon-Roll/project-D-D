@@ -30,7 +30,10 @@ Source of truth for both sides. Go structs in `internal/` and `web/src/protocol.
                 { "id": "salem", "name": "Salem", "status": "coming_soon" }],
   "campaignId": "",                       // "" in menu
   "seats": [{ "id": "s1", "kind": "dm" | "codm" | "player", "name": "", "occupied": false, "ready": false, "characterId": "" }],
-  "roster": [ /* RosterEntry x 10, see "Character roster" below; same for every connection */ ],
+  "sets": [{ "id": "core", "name": { "th": "ฮีโร่ชุดแรก", "en": "First Company" } },
+           { "id": "legend", "name": { "th": "วีรชนในตำนาน", "en": "Heroes of Legend" } }], // fixed, every connection
+  "activeSets": ["core"],                 // sets players pick from, in "sets" order; default ["core"]
+  "roster": [ /* RosterEntry, see "Character roster" below; DM/co-DM: every set (22), players: active sets only */ ],
   "characters": [ /* Character, see "Character roster" below */ ],
   "scenes": [{ "id": "sc1", "name": "Beach", "imageUrl": "/uploads/y.png",
                "grid": { "cellSize": 50, "offsetX": 0, "offsetY": 0, "cols": 20, "rows": 15 },
@@ -60,8 +63,9 @@ Roles: **DM** = seat kind `dm` or `codm` (co-DM has every DM right except removi
 | `seat.add` | `{}` | DM | `lobby` | max 6 `player` seats |
 | `seat.remove` | `{seatId}` | DM | `lobby` | not the `dm` seat; kicks occupant |
 | `seat.openCoDm` | `{}` | DM | `lobby` | max 1 `codm` seat |
+| `sets.set` | `{sets: string[]}` | DM | `lobby` | ids from `RoomState.sets`; empty/missing → `pick at least one set`, unknown id → `no such set`; duplicates dropped, stored in `sets` order; DM log `"set the character sets: First Company, Heroes of Legend"` |
 | `game.start` | `{}` | DM | `lobby` | ≥1 occupied player seat, all occupied player seats ready; empty player seats are removed; → `creating` |
-| `character.pick` | `{classId}` | player without character | `creating` | class in the roster and not taken by another character; creates the Character from the current roster entry (`hp = hpMax`, `mp = mpMax`, innate skills, items copied); when every occupied player seat has a character → `playing` |
+| `character.pick` | `{classId}` | player without character | `creating` | entry in the roster, its `set` in `activeSets` (else `that set is not in play`), and not taken by another character (by entry id: the same class from another set is fine); creates the Character from the current roster entry (`hp = hpMax`, `mp = mpMax`, innate skills, items copied); when every occupied player seat has a character → `playing` |
 | `skill.addCustom` | `{name, desc, cost}` | owner (player with a character) | `creating`/`playing` | name trimmed 1–40, desc trimmed ≤ 300 (newlines ok), cost int 0–10; at most 3 custom skills; `th = en =` the typed text |
 | `skill.editCustom` | `{characterId, skillId, name, desc, cost}` | owner or DM | `creating`/`playing` | same limits; `kind: "custom"` only |
 | `skill.removeCustom` | `{characterId, skillId}` | owner or DM | `creating`/`playing` | `kind: "custom"` only |
@@ -72,7 +76,7 @@ Roles: **DM** = seat kind `dm` or `codm` (co-DM has every DM right except removi
 | `item.give` | `{characterId, name, qty}` | DM | `creating`/`playing` | name trimmed 1–40, qty 1–99; a stack whose `name.th` or `name.en` equals name gets `+qty` (stack ≤ 999); else a new stack `{name: {th: name, en: name}, qty}` (≤ 50 stacks) |
 | `item.remove` | `{characterId, index, qty}` | DM | `creating`/`playing` | index into `items`; qty ≥ 1; qty ≥ stack qty removes the stack |
 | `roster.update` | `{classId, entry: RosterEntry}` | DM | any | classId is the key (`entry.id` is ignored); limits below; affects later picks only; persisted |
-| `roster.reset` | `{classId?}` | DM | any | `""`/missing = every class back to its default; persisted |
+| `roster.reset` | `{classId?}` or `{set}` | DM | any | `{classId}` = that entry; `{}`/`""` = every entry of every set; `{set}` = only that set's entries (unknown → `no such set`; both keys → `send classId or set, not both`); persisted |
 | `scene.add` | `{name, imageUrl, grid}` | DM | `creating`/`playing` | imageUrl must start with `/uploads/`; grid: cellSize 10–400, cols/rows 1–200 |
 | `scene.update` | `{sceneId, name, grid}` | DM | `creating`/`playing` | same grid limits (cellSize is an int: send `round(imgW/cols)`; offsetX/offsetY 0). A grid with fewer than ceil(visibleTokensInScene/4) cells (hidden tokens never count) → `grid too small: <n> visible tokens need at least <m> cells`, nothing changes. Grid shrink: that scene's tokens clamp to the nearest edge cell `[0,cols-1]×[0,rows-1]`; a clamped visible token whose cell already holds 4 visible tokens goes to the nearest cell (Chebyshev distance, then row-major) with room; fog rects clip to the grid, rects fully outside are dropped |
 | `scene.select` | `{sceneId}` | DM | `playing` | sets `currentSceneId`; adds a token for every character without one in that scene, one per cell row-major from 0,0, skipping cells with 4 visible tokens and wrapping around; no cell with room → `scene has no free cell` (name = `heroName.en`, imageUrl = character `art`) |
@@ -121,7 +125,7 @@ type LogEntry = { at: number; actor: string; text: L }   // at = unix ms; actor 
   NPC token: DM log only.
 - `combat.set` feed: `"Combat started"` / `"เข้าสู่โหมดต่อสู้"` (no ⚔: fonts render it as ×), `"Combat ended"` / `"จบการต่อสู้"`.
 - DM log: in memory only (lost on restart), newest 300. Every successful event adds its line(s): every feed line, plus
-  seat sit/leave/ready, seat add/remove, co-DM seat, game start, custom skills, roster edit/reset, scene add/edit/select,
+  seat sit/leave/ready, seat add/remove, co-DM seat, sets.set, game start, custom skills, roster edit/reset, scene add/edit/select,
   NPC pool add/edit/remove, npc.place, hide/reveal, NPC hp, token move (`"moved Wolf from (0,0) to (4,3)"`, 0-based
   col,row), token remove, fog add/remove, attack declare/cancel/resolve, combat on/off (+ cancelled count). Notes only
   as `"edited note <title>"`, at most once per note per 60 s (never the body). Failed events add nothing.
@@ -200,13 +204,15 @@ The `state` payload has a top-level `"build": "<16 hex>"`, random per server pro
 - Logs name the event and sender only (`event npc.place by=<name>`), never NPC or token names.
 - Token ids share the room counter (`t<seq>`): accepted: id gaps may hint that hidden tokens exist; names/hp/position never leak.
 
-## Character roster (v0.12.0, `docs/features/character-roster.md`)
+## Character roster (v0.12.0, `docs/features/character-roster.md`; sets v0.15.0, `docs/features/character-sets.md`)
 ```ts
 type L = { th: string; en: string }
 type RosterSkill = { id: string; name: L; desc: L; cost: number }
 type RosterItem  = { name: L; qty: number }
 type RosterEntry = {
-  id: string            // classId: knight|wizard|rogue|ranger|cleric|paladin|barbarian|bard|druid|necromancer
+  id: string            // unique across sets. core: knight|wizard|rogue|ranger|cleric|paladin|barbarian|bard|druid|necromancer
+                        // legend: legend-<barbarian|bard|cleric|druid|fighter|monk|paladin|ranger|rogue|sorcerer|warlock|wizard>
+  set: 'core' | 'legend' // always the built-in entry's set; a client-sent set is ignored
   heroName: L; className: L; blurb: L
   role: string          // tank|damage|healer|support|control|hybrid
   art: string           // "" = class art by id (web/src/assets/classes/<id>.svg) | "/uploads/<generated name>"
@@ -225,14 +231,16 @@ type Character = {
 }
 type FeedEntry = { at: number; text: L }   // at = unix ms
 ```
-- `roster` is in every `RoomState` (DM and players alike; nothing secret). Default = the JSON block in
-  `docs/design/roster.md` (Go: `internal/rules/roster_default.go`, kept in sync by a test).
+- `roster` is in every `RoomState` (nothing secret): DM/co-DM get every set (Ruleset editor), players and unseated
+  connections only entries whose `set` is in `activeSets`. Default = the JSON blocks in `docs/design/roster.md` (core)
+  then `docs/design/roster-legend.md` (legend) (Go: `internal/rules/roster_default.go` + `roster_legend.go`, kept in
+  sync by a test). A roster edit of an inactive set sends players nothing.
 - `roster.update` limits: heroName/className th+en trimmed 1–40, blurb th+en trimmed 1–300 (newlines ok), role in the
   enum, stats as `character.setStats`, skills 1–5 with unique id `[a-z0-9-]{1,40}`, name th+en 1–40, desc th+en 1–300,
   cost 0–10; items 0–10 with name th+en 1–40, qty 1–99; `art` "" or an existing `/uploads/<32 hex>.<png|jpg|gif|webp>`.
   Text with control characters (other than newline in blurb/desc) is rejected.
 - Persisted to `<-data>/roster.json` as `{"edits": RosterEntry[]}` (edited classes only; unedited classes follow the
-  built-in defaults), atomic write like notes. Missing file = defaults; invalid JSON → `roster.json.bad-<random>` +
+  built-in defaults; one file for every set, keyed by entry id; old files without `set` load fine), atomic write like notes. Missing file = defaults; invalid JSON → `roster.json.bad-<random>` +
   defaults; an entry that fails validation on load is dropped (that class uses its default) and logged.
 - `feed` keeps the newest 50 entries. Lines are written by the server, never by clients, and hold seat and hero names only
   (no clientIds). Events that add a line: `character.pick` ("Pat picked Aldric Vane (Knight)"), `skill.use`
@@ -240,6 +248,7 @@ type FeedEntry = { at: number; text: L }   // at = unix ms
   change after clamping), `character.setStats`, `party.rest` ("DM: rest — mana refilled"), `item.give`, `item.remove`
   ("DM: removed Field Bandage Roll ×2 from Aldric Vane" — the qty actually removed). Custom-skill and roster events add none.
 - Errors: `only a seated player can pick a character`, `you already have a character`, `no such class`,
+  `that set is not in play`, `pick at least one set`, `no such set`, `send classId or set, not both`,
   `that class is already taken`, `you have no character`, `no such character`, `no such skill`, `no such item`,
   `only custom skills can be changed`, `you can only change your own character's skills`, `at most 3 custom skills`,
   `skill name must be 1-40 characters`, `skill desc must be at most 300 characters`, `skill cost must be 0-10`,

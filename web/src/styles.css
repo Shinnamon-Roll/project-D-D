@@ -343,6 +343,12 @@ button.card.locked .title { color: #b5a283; }
 .seats .kind { min-width: 7.5em; font-family: var(--font-display); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--oxblood); }
 .seats .who { flex: 1; min-width: 6em; }
 .seats .who em { color: var(--muted); }
+/* character sets: DM ticks, players read */
+.set-pick { margin: 10px 0; padding: 6px 12px 8px; border: 1px solid var(--parchment-edge); border-radius: 3px; }
+.set-pick legend { padding: 0 6px; font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 0.04em; color: var(--ink); }
+.set-pick label.check { min-height: 36px; }
+.set-pick label.check:has(input:disabled) { cursor: default; }
+.active-sets { margin: 10px 0; font-style: italic; color: var(--muted); }
 .seal { display: inline-flex; align-items: center; gap: 7px; font-size: 0.85rem; color: var(--muted); }
 .seal::before {
   content: '';
@@ -602,6 +608,7 @@ button.eye-toggle[aria-pressed='true'] { background: var(--wood-2); color: var(-
 }
 .hero-head h2 { margin: 0; color: #f6e7c1; font-size: 1.15rem; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5); }
 .hero-class { margin: 0; color: var(--gold); font-variant: small-caps; letter-spacing: 0.08em; }
+.set-badge { display: inline-block; margin: 4px 0 0; padding: 0 7px; border: 1px solid var(--gold-dim); border-radius: 2px; color: #f6e7c1; font-size: 0.72rem; letter-spacing: 0.04em; }
 .hero-blurb { margin: 10px 16px 6px; font-size: 0.86rem; font-style: italic; line-height: 1.45; color: var(--ink-muted); }
 .hero-stats { display: grid; gap: 2px; margin: 4px 16px 2px; }
 .hero-stats > div { display: grid; grid-template-columns: 7.4em 1fr; align-items: center; gap: 8px; }
@@ -760,6 +767,9 @@ button.char-card-close:hover:not(:disabled) { background: rgba(0, 0, 0, 0.25); b
 input[aria-invalid='true'], textarea[aria-invalid='true'] { border-bottom-color: var(--blood); }
 
 /* ---------- roster editor (DM) ---------- */
+.set-tabs { display: flex; flex-wrap: wrap; gap: 0; margin: 8px 0 0; border-bottom: 2px solid var(--parchment-edge); }
+.set-tabs button { border-radius: 3px 3px 0 0; border-bottom: 0; box-shadow: none; }
+.set-tabs button[aria-pressed='true'] { background: var(--gold); color: var(--ink); border-color: var(--gold-dim); }
 .roster-list { list-style: none; margin: 8px 0 12px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: 6px; }
 .roster-list button { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; align-items: center; gap: 0 10px; width: 100%; padding: 6px 10px; text-align: left; }
 .roster-list .medallion { grid-row: span 2; }

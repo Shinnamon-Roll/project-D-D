@@ -4,7 +4,7 @@ const url = 'http://127.0.0.1:18080'
 
 export default defineConfig({
   testDir: './e2e',
-  timeout: 60_000,
+  timeout: 120_000, // one test walks the whole game; ~30s idle, ~60s on a loaded machine
   use: { baseURL: url, trace: 'retain-on-failure' },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {

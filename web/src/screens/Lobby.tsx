@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useMe, useStore } from '../store'
 import { send } from '../ws'
-import { useT } from '../i18n'
+import { useL, useT } from '../i18n'
 import SeatQr from './SeatQr'
 import { NotesButton } from '../table/NotesPanel'
 import { RosterButton } from '../table/RosterEditor'
@@ -11,6 +11,7 @@ const kindLabel = { dm: 'kindDm', codm: 'kindCodm', player: 'kindPlayer' } as co
 export default function Lobby() {
   const room = useStore((s) => s.room)!
   const t = useT()
+  const tx = useL()
   const { seat: me, isDm } = useMe()
   const [name, setName] = useState('')
   const [qrFor, setQrFor] = useState('')
@@ -127,6 +128,36 @@ export default function Lobby() {
             </button>
           )}
         </div>
+
+        {isDm ? (
+          <fieldset className="set-pick">
+            <legend>{t('sets')}</legend>
+            {room.sets.map((x) => {
+              const on = room.activeSets.includes(x.id)
+              const last = on && room.activeSets.length === 1
+              return (
+                <label key={x.id} className="check">
+                  <input
+                    type="checkbox"
+                    data-testid={`set-toggle-${x.id}`}
+                    checked={on}
+                    disabled={last}
+                    onChange={() =>
+                      send('sets.set', { sets: on ? room.activeSets.filter((id) => id !== x.id) : [...room.activeSets, x.id] })
+                    }
+                  />
+                  <span className="grow">{tx(x.name)}</span>
+                  <span className="muted">{t('setHeroes', { n: room.roster.filter((r) => r.set === x.id).length })}</span>
+                </label>
+              )
+            })}
+            {room.activeSets.length === 1 && <p className="muted">{t('setsKeepOne')}</p>}
+          </fieldset>
+        ) : (
+          <p className="active-sets" data-testid="active-sets">
+            {t('activeSets', { names: room.sets.filter((x) => room.activeSets.includes(x.id)).map((x) => tx(x.name)).join(', ') })}
+          </p>
+        )}
 
         {isDm && (
           <div className="row">

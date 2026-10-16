@@ -97,6 +97,9 @@ func (r *Room) characterPick(s *Seat, payload json.RawMessage) error {
 	if !ok {
 		return rules.ErrNoClass
 	}
+	if !slices.Contains(r.st.ActiveSets, e.Set) {
+		return errors.New("that set is not in play")
+	}
 	if slices.ContainsFunc(r.st.Characters, func(c Character) bool { return c.ClassID == e.ID }) {
 		return errors.New("that class is already taken")
 	}
@@ -382,10 +385,21 @@ func (r *Room) itemRemove(s *Seat, payload json.RawMessage) error {
 func (r *Room) rosterEdit(typ string, payload json.RawMessage) error {
 	p, err := decode[struct {
 		ClassID string            `json:"classId"`
+		Set     string            `json:"set"`
 		Entry   rules.RosterEntry `json:"entry"`
 	}](payload)
 	if err != nil {
 		return err
+	}
+	if typ == "roster.reset" && p.Set != "" {
+		if p.ClassID != "" {
+			return errors.New("send classId or set, not both")
+		}
+		if err := r.roster.ResetSet(p.Set); err != nil {
+			return err
+		}
+		r.addLog("รีเซ็ตเซ็ต "+p.Set+" ใน roster", "reset roster set "+p.Set)
+		return nil
 	}
 	if typ == "roster.reset" {
 		if err := r.roster.Reset(p.ClassID); err != nil {

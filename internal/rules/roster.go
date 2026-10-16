@@ -41,9 +41,10 @@ type RosterItem struct {
 	Qty  int `json:"qty"`
 }
 
-// RosterEntry is one pickable character; ID is its class id.
+// RosterEntry is one pickable character. ID is unique across every set (the legend set uses "legend-<class>").
 type RosterEntry struct {
 	ID        string        `json:"id"`
+	Set       string        `json:"set"` // id from Sets(); always the built-in entry's set, never client-chosen
 	HeroName  L             `json:"heroName"`
 	ClassName L             `json:"className"`
 	Blurb     L             `json:"blurb"`
@@ -71,8 +72,33 @@ var (
 	artName     = regexp.MustCompile(`^/uploads/[0-9a-f]{32}\.(png|jpg|gif|webp)$`) // same names as room.UploadName
 	defaults    = DefaultRoster()                                                   // never mutated
 	ErrNoClass  = errors.New("no such class")
+	ErrNoSet    = errors.New("no such set")
 	errNotSaved = errors.New("could not save roster")
 )
+
+// Set is one character set; RosterEntry.Set holds its ID.
+type Set struct {
+	ID   string `json:"id"`
+	Name L      `json:"name"`
+}
+
+// Sets returns every character set in display order (fixed; docs/features/character-sets.md).
+func Sets() []Set {
+	return []Set{
+		{ID: "core", Name: L{"ฮีโร่ชุดแรก", "First Company"}},
+		{ID: "legend", Name: L{"วีรชนในตำนาน", "Heroes of Legend"}},
+	}
+}
+
+// IsSet reports whether id is one of Sets().
+func IsSet(id string) bool {
+	return slices.ContainsFunc(Sets(), func(s Set) bool { return s.ID == id })
+}
+
+// DefaultRoster returns a fresh copy of every built-in character: the core set, then the legend set.
+func DefaultRoster() []RosterEntry {
+	return append(coreRoster(), legendRoster()...)
+}
 
 // CleanText trims s and checks it has min..max runes and no control characters (multiline allows '\n').
 func CleanText(s string, min, max int, multiline bool) (string, bool) {
@@ -111,11 +137,14 @@ func (s Stats) Check() error {
 }
 
 // cleanEntry trims every text and checks the limits in docs/features/character-roster.md. It returns fresh slices.
-// It checks only the art format; the room also checks that an uploaded file exists.
+// It checks only the art format; the room also checks that an uploaded file exists. Set is forced to the
+// built-in entry's set, so old roster.json files without "set" still load.
 func cleanEntry(e RosterEntry) (RosterEntry, error) {
-	if !IsClass(e.ID) {
+	i := slices.IndexFunc(defaults, func(d RosterEntry) bool { return d.ID == e.ID })
+	if i < 0 {
 		return e, ErrNoClass
 	}
+	e.Set = defaults[i].Set
 	var ok bool
 	if e.HeroName, ok = cleanL(e.HeroName, MaxName, false); !ok {
 		return e, fmt.Errorf("heroName must be 1-%d characters (th and en)", MaxName)
@@ -174,7 +203,7 @@ func cleanEntry(e RosterEntry) (RosterEntry, error) {
 	return e, nil
 }
 
-// IsClass reports whether id is one of the 10 class ids.
+// IsClass reports whether id is a built-in roster entry id (any set).
 func IsClass(id string) bool {
 	return slices.ContainsFunc(defaults, func(e RosterEntry) bool { return e.ID == id })
 }
@@ -251,7 +280,7 @@ func merge(edits []RosterEntry) []RosterEntry {
 	return list
 }
 
-// List returns the roster in class order. Callers must not mutate it.
+// List returns the roster in DefaultRoster order (core, then legend). Callers must not mutate it.
 func (s *RosterStore) List() []RosterEntry {
 	if s.list == nil {
 		return defaults
@@ -278,7 +307,7 @@ func (s *RosterStore) Update(e RosterEntry) error {
 	return s.commit(append(edits, e))
 }
 
-// Reset restores class id to its default; id "" resets every class.
+// Reset restores class id to its default; id "" resets every class (every set).
 func (s *RosterStore) Reset(id string) error {
 	if id == "" {
 		return s.commit(nil)
@@ -287,6 +316,14 @@ func (s *RosterStore) Reset(id string) error {
 		return ErrNoClass
 	}
 	return s.commit(slices.DeleteFunc(slices.Clone(s.edits), func(x RosterEntry) bool { return x.ID == id }))
+}
+
+// ResetSet restores every entry of set id to its default; edits of other sets stay.
+func (s *RosterStore) ResetSet(id string) error {
+	if !IsSet(id) {
+		return ErrNoSet
+	}
+	return s.commit(slices.DeleteFunc(slices.Clone(s.edits), func(x RosterEntry) bool { return x.Set == id }))
 }
 
 // commit saves edits to disk first and only then swaps them in, so a failed write changes nothing.

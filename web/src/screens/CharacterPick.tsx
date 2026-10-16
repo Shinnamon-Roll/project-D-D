@@ -26,6 +26,8 @@ export default function CharacterPick() {
   const room = useStore((s) => s.room)!
   const { seat, character, isDm } = useMe()
   const [skillsDone, setSkillsDone] = useState(false)
+  // DM gets every set (for the Ruleset editor); the pick screen shows only the sets in play.
+  const roster = room.roster.filter((r) => room.activeSets.includes(r.set))
 
   // classId -> player name, from the live snapshot
   const takenBy = new Map<string, string>()
@@ -53,7 +55,7 @@ export default function CharacterPick() {
             <RosterButton />
           </li>
         </ul>
-        <Carousel roster={room.roster} takenBy={takenBy} />
+        <Carousel roster={roster} takenBy={takenBy} />
         <ArtCredit />
       </div>
     )
@@ -82,8 +84,8 @@ export default function CharacterPick() {
   return (
     <div className="pick">
       <h1 className="pick-title">{t('pickTitle')}</h1>
-      <p className="pick-lead">{t('pickLead', { n: room.roster.length })}</p>
-      <Carousel roster={room.roster} takenBy={takenBy} canPick />
+      <p className="pick-lead">{t('pickLead', { n: roster.length })}</p>
+      <Carousel roster={roster} takenBy={takenBy} canPick />
       <ArtCredit />
     </div>
   )
@@ -104,6 +106,9 @@ function ArtCredit() {
 function Carousel({ roster, takenBy, canPick }: { roster: RosterEntry[]; takenBy: Map<string, string>; canPick?: boolean }) {
   const t = useT()
   const tx = useL()
+  const room = useStore((s) => s.room)!
+  // set badge only when heroes from more than one set share the carousel
+  const setName = (id: string) => (room.activeSets.length > 1 ? tx(room.sets.find((x) => x.id === id)?.name) : '')
   const [index, setIndex] = useState(0)
   const box = useRef<HTMLElement>(null)
   const n = roster.length
@@ -160,7 +165,7 @@ function Carousel({ roster, takenBy, canPick }: { roster: RosterEntry[]; takenBy
               >
                 {/* off-centre cards stay visible but out of the tab order and the a11y tree */}
                 <div className="hero-inner" inert={off !== 0}>
-                  <HeroCard r={r} top={top} owner={owner} canPick={canPick} />
+                  <HeroCard r={r} top={top} owner={owner} canPick={canPick} setName={setName(r.set)} />
                 </div>
               </motion.article>
             )
@@ -190,7 +195,8 @@ function Carousel({ roster, takenBy, canPick }: { roster: RosterEntry[]; takenBy
   )
 }
 
-function HeroCard({ r, top, owner, canPick }: { r: RosterEntry; top: Record<keyof CharStats, number>; owner?: string; canPick?: boolean }) {
+function HeroCard(props: { r: RosterEntry; top: Record<keyof CharStats, number>; owner?: string; canPick?: boolean; setName: string }) {
+  const { r, top, owner, canPick, setName } = props
   const t = useT()
   const tx = useL()
   return (
@@ -200,6 +206,7 @@ function HeroCard({ r, top, owner, canPick }: { r: RosterEntry; top: Record<keyo
         <div>
           <h2>{tx(r.heroName)}</h2>
           <p className="hero-class">{tx(r.className)}</p>
+          {setName && <p className="set-badge">{setName}</p>}
         </div>
       </header>
       <p className="hero-blurb">{tx(r.blurb)}</p>

@@ -31,6 +31,7 @@ func dial(t *testing.T, srv *httptest.Server) *wsClient {
 	if err != nil {
 		t.Fatal(err)
 	}
+	ws.SetReadLimit(1 << 20) // the room state with every roster set is over the 32 KiB default
 	t.Cleanup(func() { ws.CloseNow() })
 	return &wsClient{t, ws}
 }
@@ -781,7 +782,7 @@ func TestHubPresence(t *testing.T) {
 	dm3.send("hello", m{"clientId": "dm-secret-0001"})
 	st := dm3.settle()[0]
 	if n := strings.Count(st.raw, `"actor":"Pat","text":{"th":"ออกจากห้อง","en":"left the room"}`); n != 2 ||
-		!strings.Contains(st.raw, `"en":"joined the room"`) || strings.Contains(st.raw, "secret") {
+		!strings.Contains(st.raw, `"en":"joined the room"`) || strings.Contains(st.raw, "-secret-") {
 		t.Fatalf("dmLog presence lines: %s", st.raw)
 	}
 }

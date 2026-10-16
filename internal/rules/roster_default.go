@@ -1,13 +1,13 @@
-// Default roster: the 10 classes from the JSON block at the end of docs/design/roster.md (original text,
+// First Company set ("core"): the 10 classes from the JSON block at the end of docs/design/roster.md (original text,
 // not from any book or game). Keep both in sync; TestDefaultRosterMatchesDoc compares them.
 
 package rules
 
-// DefaultRoster returns a fresh copy of the 10 built-in characters.
-func DefaultRoster() []RosterEntry {
+// coreRoster returns a fresh copy of the 10 built-in "core" (First Company) characters.
+func coreRoster() []RosterEntry {
 	return []RosterEntry{
 		{
-			ID: "knight", Role: "tank", Art: "",
+			ID: "knight", Set: "core", Role: "tank", Art: "",
 			HeroName:  L{"อัลดริก เวน", "Aldric Vane"},
 			ClassName: L{"อัศวิน", "Knight"},
 			Blurb:     L{"อัศวินที่เคยพลาดจนเสียเพื่อนไป จึงสาบานว่าจะไม่ยอมให้ใครล้มก่อนตัวเองอีก", "A knight who once lost a comrade and swore no friend would ever fall before him again."},
@@ -25,7 +25,7 @@ func DefaultRoster() []RosterEntry {
 			},
 		},
 		{
-			ID: "wizard", Role: "control", Art: "",
+			ID: "wizard", Set: "core", Role: "control", Art: "",
 			HeroName:  L{"โซรายา ควิลล์", "Soraya Quill"},
 			ClassName: L{"จอมเวท", "Wizard"},
 			Blurb:     L{"นักปราชญ์จากหอดูดาวกลางทะเลทราย ผู้อ่านดวงดาวได้คล่องเหมือนอ่านแผนที่สนามรบ", "A scholar from the desert observatories who reads the stars like a battle map."},
@@ -43,7 +43,7 @@ func DefaultRoster() []RosterEntry {
 			},
 		},
 		{
-			ID: "rogue", Role: "damage", Art: "",
+			ID: "rogue", Set: "core", Role: "damage", Art: "",
 			HeroName:  L{"ซารีฟ เคช", "Zarif Kesh"},
 			ClassName: L{"โจร", "Rogue"},
 			Blurb:     L{"หัวขโมยเจ้าเสน่ห์จากเมืองคลอง ที่ติดหนี้คนไว้ครึ่งเมือง", "A charming thief from the canal city who owes money to half the town."},
@@ -62,7 +62,7 @@ func DefaultRoster() []RosterEntry {
 			},
 		},
 		{
-			ID: "ranger", Role: "damage", Art: "",
+			ID: "ranger", Set: "core", Role: "damage", Art: "",
 			HeroName:  L{"ซีกรุน แอชเวล", "Sigrun Ashvale"},
 			ClassName: L{"พรานป่า", "Ranger"},
 			Blurb:     L{"นักล่าเงียบขรึมจากป่าสนทางเหนือ ที่ไว้ใจเหยี่ยวคู่ใจมากกว่าคน", "A quiet huntress from the northern pines who trusts her falcon more than people."},
@@ -80,7 +80,7 @@ func DefaultRoster() []RosterEntry {
 			},
 		},
 		{
-			ID: "cleric", Role: "healer", Art: "",
+			ID: "cleric", Set: "core", Role: "healer", Art: "",
 			HeroName:  L{"อิมารา โซเลนน์", "Imara Solenne"},
 			ClassName: L{"นักบวช", "Cleric"},
 			Blurb:     L{"หมอแห่งวิหารสุริยันที่หัวเราะเสียงดัง สวดเสียงเบา และไม่เคยทิ้งใครไว้ข้างหลัง", "A sun-temple healer who laughs loudly, prays quietly, and never leaves anyone behind."},
@@ -99,7 +99,7 @@ func DefaultRoster() []RosterEntry {
 			},
 		},
 		{
-			ID: "paladin", Role: "hybrid", Art: "",
+			ID: "paladin", Set: "core", Role: "hybrid", Art: "",
 			HeroName:  L{"เบรนนา ดอว์นเมียร์", "Brenna Dawnmere"},
 			ClassName: L{"พาลาดิน", "Paladin"},
 			Blurb:     L{"พาลาดินพูดตรงใจใหญ่ ผู้สาบานจะปกป้องคนอ่อนแอ และถือคำสาบานนั้นแบบตรงตัวทุกคำ", "A blunt, big-hearted paladin sworn to protect the weak, who takes that oath word for word."},
@@ -117,7 +117,7 @@ func DefaultRoster() []RosterEntry {
 			},
 		},
 		{
-			ID: "barbarian", Role: "damage", Art: "",
+			ID: "barbarian", Set: "core", Role: "damage", Art: "",
 			HeroName:  L{"บาตู เรดเมน", "Batu Redmane"},
 			ClassName: L{"นักรบเถื่อน", "Barbarian"},
 			Blurb:     L{"นักรบจากทุ่งหญ้ากว้างที่ออกจากเผ่ามาตามหาศึกที่คู่ควรจะถูกแต่งเป็นเพลง", "A steppe warrior who left his clan to find a fight worthy of a song."},
@@ -135,7 +135,7 @@ func DefaultRoster() []RosterEntry {
 			},
 		},
 		{
-			ID: "bard", Role: "support", Art: "",
+			ID: "bard", Set: "core", Role: "support", Art: "",
 			HeroName:  L{"โคซิโม ลาร์ก", "Cosimo Lark"},
 			ClassName: L{"กวีพเนจร", "Bard"},
 			Blurb:     L{"นักแต่งเพลงพเนจรที่สาบานว่าทุกเรื่องที่เล่าเป็นเรื่องจริง โดยเฉพาะเรื่องของตัวเอง", "A wandering songwriter who swears every tale he tells is true, especially the ones about himself."},
@@ -154,7 +154,7 @@ func DefaultRoster() []RosterEntry {
 			},
 		},
 		{
-			ID: "druid", Role: "hybrid", Art: "",
+			ID: "druid", Set: "core", Role: "hybrid", Art: "",
 			HeroName:  L{"มาลัย แห่งพงไพร", "Malai of the Deepwood"},
 			ClassName: L{"ดรูอิด", "Druid"},
 			Blurb:     L{"ผู้พิทักษ์ป่าลึกที่พูดเสียงนุ่ม แต่กลายร่างเป็นหมีได้เมื่อจำเป็น", "A guardian of the deep jungle who speaks softly and becomes a bear when she must."},
@@ -172,7 +172,7 @@ func DefaultRoster() []RosterEntry {
 			},
 		},
 		{
-			ID: "necromancer", Role: "control", Art: "",
+			ID: "necromancer", Set: "core", Role: "control", Art: "",
 			HeroName:  L{"อีโว กริมเซล", "Ivo Grimsel"},
 			ClassName: L{"เนโครแมนเซอร์", "Necromancer"},
 			Blurb:     L{"ลูกชายคนเฝ้าสุสาน ที่ฟังเสียงคนตายเพราะคนเป็นไม่เคยฟังเขา", "A gravekeeper's son who listens to the dead because the living never listened to him."},

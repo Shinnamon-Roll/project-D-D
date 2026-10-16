@@ -1,5 +1,7 @@
 # Feature: ตัวละครสำเร็จรูป 10 คลาส + การ์ดเลื่อนเลือก + มานา (v0.12.0)
 
+> v0.15.0: roster แบ่งเป็นเซ็ตแล้ว (core 10 + legend 12, `RosterEntry.set`) และ DM เลือกเซ็ตที่ใช้เล่นใน lobby — ดู [`character-sets.md`](character-sets.md). ส่วนที่เขียนว่า "10 ตัว" ด้านล่างหมายถึงเซ็ต core
+
 ที่มา: [`../conversations/2026-10-16-character-roster.md`](../conversations/2026-10-16-character-roster.md) · ทำหลัง i18n (ข้อความ 2 ภาษา)
 
 ## ระบบใหม่ (แทนที่ white-label ruleset)

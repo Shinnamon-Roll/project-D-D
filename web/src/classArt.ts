@@ -13,7 +13,8 @@ for (const [path, svg] of Object.entries(raw)) {
 // art "" = the class icon; else an uploaded image URL. icon=false means a photo-like upload (cover, no inset).
 export function classArt(classId: string, art = ''): { src: string; icon: boolean } {
   if (art) return { src: art, icon: false }
-  return { src: icons[classId] ?? '', icon: true }
+  // set-prefixed ids ("legend-barbarian") reuse the base class icon
+  return { src: icons[classId] ?? icons[classId.split('-').pop()!] ?? '', icon: true }
 }
 
 export const ART_CREDIT =

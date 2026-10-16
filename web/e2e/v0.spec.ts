@@ -96,6 +96,18 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(pl.locator('[data-testid^="seat-remove-"]')).toHaveCount(0)
   await expect(pl.locator('[data-testid^="seat-qr-"]')).toHaveCount(0)
 
+  // 2a. Character sets: core is on by default and can't be the last one unticked; the DM adds legend.
+  await expect(pl.locator('[data-testid^="set-toggle-"]')).toHaveCount(0)
+  await expect(tid(pl, 'active-sets')).toContainText('ฮีโร่ชุดแรก')
+  await expect(tid(pl, 'active-sets')).not.toContainText('วีรชนในตำนาน')
+  await expect(tid(dm, 'set-toggle-core')).toBeChecked()
+  await expect(tid(dm, 'set-toggle-core')).toBeDisabled()
+  await expect(tid(dm, 'set-toggle-legend')).not.toBeChecked()
+  await tid(dm, 'set-toggle-legend').click() // controlled: ticks once the server's state arrives
+  await expect(tid(dm, 'set-toggle-legend')).toBeChecked()
+  await expect(tid(dm, 'set-toggle-core')).toBeEnabled()
+  await expect(tid(pl, 'active-sets')).toContainText('วีรชนในตำนาน')
+
   // 2b. Seat QR: DM opens the QR for an empty player seat; a second player joins via its link.
   if ((await dm.locator('button[data-testid^="seat-qr-"]').count()) === 0) await tid(dm, 'seat-add').click()
   const qrBtn = dm.locator('button[data-testid^="seat-qr-"]').first()
@@ -164,9 +176,12 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(tid(pl, 'carousel')).toBeVisible()
   await expect(tid(pl, 'art-credit')).toContainText('game-icons.net')
   const cards = pl.locator('[data-testid^="card-"]')
-  await expect(cards).toHaveCount(10)
+  // core (10) + legend (12); Bram takes the last card, a legend hero
+  await expect(cards).toHaveCount(22)
+  await expect(pl.locator('.set-badge').first()).toBeAttached()
   const classId = (await cards.nth(2).getAttribute('data-testid'))!.replace('card-', '')
-  const bramClass = (await cards.nth(0).getAttribute('data-testid'))!.replace('card-', '')
+  const bramClass = (await cards.nth(21).getAttribute('data-testid'))!.replace('card-', '')
+  expect(bramClass).toMatch(/^legend-/)
   await tid(pl, 'carousel-next').click()
   await expect(cards.nth(1)).toHaveAttribute('data-current', 'true')
   await pl.keyboard.press('ArrowRight')
@@ -215,6 +230,12 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(tid(pl, 'waiting')).toBeVisible()
   // DM raises hpMax of Bram's class in the roster editor before he picks; his hero gets the new value.
   await tid(dm, 'roster-open').click()
+  // Ruleset opens on the core tab; Bram's hero is on the legend tab.
+  await expect(tid(dm, 'roster-tab-core')).toHaveAttribute('aria-pressed', 'true')
+  await expect(tid(dm, `roster-item-${bramClass}`)).toHaveCount(0)
+  await tid(dm, 'roster-tab-legend').click()
+  await expect(tid(dm, 'roster-tab-legend')).toHaveAttribute('aria-pressed', 'true')
+  await expect(tid(dm, `roster-item-${classId}`)).toHaveCount(0)
   await tid(dm, `roster-item-${bramClass}`).click()
   const hpDefault = await tid(dm, 'roster-hpmax').inputValue()
   await tid(dm, 'roster-hpmax').fill('77')
@@ -228,6 +249,9 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await dm.keyboard.press('Escape')
   await expect(tid(dm, 'roster-modal')).toHaveCount(0)
   await expect(tid(dm, 'roster-open')).toBeFocused()
+  await tid(qr, 'carousel').focus()
+  await qr.keyboard.press('End')
+  await expect(tid(qr, `card-${bramClass}`)).toHaveAttribute('data-current', 'true')
   await tid(qr, `pick-${bramClass}`).click()
   await expect(tid(pl, 'sheet')).toBeVisible()
   await expect(tid(qr, 'sheet-hp')).toHaveText('77/77')
@@ -301,6 +325,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(card).toHaveCount(0)
   // Roster reset puts the default back; Bram's hero keeps what he picked with.
   await tid(dm, 'dm-menu-ruleset').click()
+  await tid(dm, 'roster-tab-legend').click()
   await tid(dm, `roster-item-${bramClass}`).click()
   await expect(tid(dm, 'roster-hpmax')).toHaveValue('77')
   await tid(dm, 'roster-reset').click()

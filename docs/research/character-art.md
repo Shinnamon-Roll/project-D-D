@@ -35,6 +35,18 @@
 | 9 | Druid | `cathelineau/holy-oak` | `caro-asercion/deer-head` |
 | 10 | Necromancer | `skoll/raise-skeleton` | `delapouite/warlock-hood` |
 
+### เพิ่มสำหรับชุด วีรชนในตำนาน / Heroes of Legend (2026-10-16)
+ไฟล์ดิบจาก `raw.githubusercontent.com/game-icons/icons/master/<author>/<name>.svg`; ตัด path พื้นดำ (`M0 0h512v512H0z`) และ `fill="#fff"` ออกให้เหมือนไฟล์เดิม (`web/src/classArt.ts` ลงสีทองเอง)
+
+| # | คลาส | ไฟล์ (author/name) | ผู้วาด | URL |
+|---|---|---|---|---|
+| 11 | Fighter | `lorc/crossed-swords` → `fighter.svg` | Lorc | https://game-icons.net/1x1/lorc/crossed-swords.html |
+| 12 | Monk | `lorc/meditation` → `monk.svg` | Lorc | https://game-icons.net/1x1/lorc/meditation.html |
+| 13 | Sorcerer | `lorc/magic-palm` → `sorcerer.svg` | Lorc | https://game-icons.net/1x1/lorc/magic-palm.html |
+| 14 | Warlock | `lorc/tentacles-skull` → `warlock.svg` | Lorc | https://game-icons.net/1x1/lorc/tentacles-skull.html |
+
+ทั้ง 4 ตัวเป็นของ Lorc (มีในเครดิตอยู่แล้ว) จึงไม่ต้องเพิ่มชื่อผู้วาดในเครดิต. ไม่ใช้ `delapouite/monk-face` (เป็นหน้านักบวชห้อยไม้กางเขน ไม่ใช่สายยุทธ์)
+
 URL: `https://game-icons.net/1x1/<author>/<name>.html` · ชุดเต็ม: `https://game-icons.net/archives/svg/zip/ffffff/transparent/game-icons.net.svg.zip` (มี `icons/license.txt`)
 
 ข้อสังเกต: ชุดแนะนำปน 3 แบบ — หน้าคน (wizard, barbarian, cleric), ทั้งตัว (rogue, ranger), สัญลักษณ์ (shield, lyre, oak, มือโครงกระดูก); ที่ 40px hooded-assassin / sun-priest / barbarian เส้นละเอียด ควรเช็กบนมือถือจริง
