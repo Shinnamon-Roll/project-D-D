@@ -164,7 +164,6 @@ export default function Table() {
             {room.combat && <AttackControl targets={targets} aim={aim} setAim={setAim} />}
           </SheetPanel>
         )}
-        <FeedPanel />
         {isDm && (
           <DmPanel scene={scene} onView={setViewId} onPreview={setPreview} fogMode={fogMode} setFogMode={setFogMode} />
         )}
@@ -175,6 +174,7 @@ export default function Table() {
             ))}
           </ul>
         )}
+        <FeedPanel />
       </aside>
     </div>
   )

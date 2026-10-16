@@ -698,8 +698,7 @@ button.use-btn { min-width: 4em; }
 /* deaths (server lines with a skull) and revives stand out in the feed and the DM log */
 .feed li.revive { margin: 2px 0; padding: 4px 6px; border-left: 3px solid var(--oxblood); font-weight: 700; }
 .feed li.death { margin: 2px 0; padding: 4px 6px; border-left: 3px solid var(--oxblood); background: rgba(122, 31, 31, 0.1); color: var(--oxblood); font-weight: 700; }
-.dm-log { max-height: 320px; }
-.dm-log .log-actor { margin-right: 6px; font-family: var(--font-display); font-weight: 700; color: var(--oxblood); }
+.feed .log-actor { margin-right: 6px; font-family: var(--font-display); font-weight: 700; color: var(--oxblood); }
 
 /* ---------- DM party bar (top of the map pane, on wood) ---------- */
 .party-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin: 0 5px 8px; }

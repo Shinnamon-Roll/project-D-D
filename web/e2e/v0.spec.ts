@@ -657,9 +657,8 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await tid(dm, `attack-hit-${atk}`).click()
   await expect(tid(dm, `token-hp-${npcTok}`)).toHaveText('0/12')
   await expect(tid(pl, 'feed').locator('li.death')).toContainText('💀')
-  // DM log: every kind of action, newest first; the player never gets the log, the waiting attacks or log lines.
-  await tid(dm, 'dm-menu-log').click()
-  const log = tid(dm, 'dm-log')
+  // The DM's feed is the full DM log: every kind of action, newest first; the player never gets the log, the waiting attacks or log lines.
+  const log = tid(dm, 'feed')
   await expect(log.locator('li.death').first()).toContainText('💀')
   await expect(log.locator('li').first()).toContainText('💀')
   await expect(log).toContainText(NPC)

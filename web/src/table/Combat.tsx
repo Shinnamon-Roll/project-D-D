@@ -182,25 +182,3 @@ export function CombatBanner() {
     </div>
   )
 }
-
-// DM menu "Log": every successful action, newest first.
-export function LogPanel() {
-  const t = useT()
-  const tx = useL()
-  const log = useStore((s) => s.dmLog)
-  return (
-    <ol className="feed dm-log" data-testid="dm-log">
-      {log.length === 0 && <li className="muted">{t('logEmpty')}</li>}
-      {log
-        .slice()
-        .reverse()
-        .map((e, i) => (
-          // position from the oldest end stays put as new lines arrive on top
-          <li key={log.length - 1 - i} className={vitalClass(e.text)}>
-            <time dateTime={new Date(e.at).toISOString()}>{hhmm(e.at)}</time>
-            {e.actor && e.actor !== '-' && <span className="log-actor">{e.actor}</span>} {tx(e.text)}
-          </li>
-        ))}
-    </ol>
-  )
-}

@@ -246,7 +246,6 @@ const th = {
   attackDmgHint: 'ไม่บังคับ',
   bannerHit: 'โดน!',
   bannerMiss: 'ไม่โดน!',
-  dmLog: 'Log',
   logEmpty: 'ยังไม่มีรายการ',
 }
 
@@ -479,7 +478,6 @@ const en: Record<keyof typeof th, string> = {
   attackDmgHint: 'optional',
   bannerHit: 'Hit!',
   bannerMiss: 'Miss!',
-  dmLog: 'Log',
   logEmpty: 'Nothing logged yet',
 }
 
