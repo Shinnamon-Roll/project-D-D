@@ -205,8 +205,9 @@ test('v0: DM + player full flow', async ({ browser }) => {
     await pl.screenshot({ path: `${process.env.SHOTS}/pick-390.png`, fullPage: true })
     await pl.setViewportSize(viewport)
   }
-  // DM watches the same carousel without pick buttons.
-  await expect(tid(dm, 'carousel')).toBeVisible()
+  // DM gets no carousel: one card per player seat, still waiting, no pick buttons.
+  await expect(tid(dm, 'carousel')).toHaveCount(0)
+  await expect(dm.locator('[data-testid^="creating-status-"].waiting')).not.toHaveCount(0)
   await expect(dm.locator('[data-testid^="pick-"]')).toHaveCount(0)
   const heroName = (await tid(pl, `card-${classId}`).locator('.hero-head h2').textContent())!
   const bramHero = (await tid(pl, `card-${bramClass}`).locator('.hero-head h2').textContent())!

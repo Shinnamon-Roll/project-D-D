@@ -33,29 +33,40 @@ export default function CharacterPick() {
   const takenBy = new Map<string, string>()
   for (const c of room.characters) takenBy.set(c.classId, room.seats.find((s) => s.id === c.seatId)?.name ?? '?')
 
+  // DM: no carousel, one full card per player seat showing the hero they took (or that they're still choosing)
   if (isDm) {
+    const top = statTop(roster)
+    const setName = (id: string) => (room.activeSets.length > 1 ? tx(room.sets.find((x) => x.id === id)?.name) : '')
     return (
       <div className="pick">
         <h1 className="pick-title">{t('dmPickTitle')}</h1>
-        <ul className="seats pick-status panel">
+        <div className="pick-status-tools">
+          <NotesButton />
+          <RosterButton />
+        </div>
+        <ul className="dm-pick-grid">
           {room.seats
             .filter((s) => s.kind === 'player')
             .map((s) => {
               const c = room.characters.find((x) => x.seatId === s.id)
+              const r = c && room.roster.find((x) => x.id === c.classId)
               return (
-                <li key={s.id} data-testid={`creating-status-${s.id}`}>
-                  {c ? <Medallion classId={c.classId} art={c.art} size="sm" /> : <span className="medallion sm empty" aria-hidden="true" />}
-                  <span className="who">{s.name}</span>
-                  <span className={c ? 'ok' : 'muted'}>{c ? tx(c.name) : t('charCreating')}</span>
+                <li key={s.id} className={`hero-card${r ? '' : ' waiting'}`} data-testid={`creating-status-${s.id}`}>
+                  <p className="dm-pick-who">{s.name}</p>
+                  <div className="hero-inner">
+                    {r ? (
+                      <HeroCard r={r} top={top} setName={setName(r.set)} />
+                    ) : (
+                      <div className="hero-wait">
+                        <span className="medallion lg empty" aria-hidden="true" />
+                        <p className="muted">{t('charCreating')}</p>
+                      </div>
+                    )}
+                  </div>
                 </li>
               )
             })}
-          <li className="pick-status-tools">
-            <NotesButton />
-            <RosterButton />
-          </li>
         </ul>
-        <Carousel roster={roster} takenBy={takenBy} />
         <ArtCredit />
       </div>
     )
@@ -91,6 +102,11 @@ export default function CharacterPick() {
   )
 }
 
+// Bar scale: each stat against the highest value in the roster, so cards compare at a glance.
+function statTop(roster: RosterEntry[]) {
+  return Object.fromEntries(STATS.map(([k]) => [k, Math.max(1, ...roster.map((r) => r.stats[k]))])) as Record<keyof CharStats, number>
+}
+
 function ArtCredit() {
   const t = useT()
   return (
@@ -113,8 +129,7 @@ function Carousel({ roster, takenBy, canPick }: { roster: RosterEntry[]; takenBy
   const box = useRef<HTMLElement>(null)
   const n = roster.length
   const go = (i: number) => setIndex(Math.max(0, Math.min(n - 1, i)))
-  // Bar scale: each stat against the highest value in the roster, so cards compare at a glance.
-  const top = Object.fromEntries(STATS.map(([k]) => [k, Math.max(1, ...roster.map((r) => r.stats[k]))])) as Record<keyof CharStats, number>
+  const top = statTop(roster)
 
   const onKey = (e: KeyboardEvent) => {
     const next = { ArrowLeft: index - 1, ArrowRight: index + 1, Home: 0, End: n - 1 }[e.key]
