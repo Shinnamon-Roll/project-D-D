@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import type { Attack, L, Token } from '../protocol'
+import type { Attack, BannerKind, L, Token } from '../protocol'
 import { useStore } from '../store'
 import { send } from '../ws'
-import { useL, useT } from '../i18n'
+import { useL, useT, type TKey } from '../i18n'
 import { SwordsIcon } from './icons'
 
 export const hhmm = (at: number) => new Date(at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
@@ -166,7 +166,9 @@ function AttackAlert({ a, onSent }: { a: Attack; onSent: () => void }) {
   )
 }
 
-// Everyone: big Hit!/Miss! in the middle of the screen for ~2s. Never blocks clicks.
+const BANNER: Record<BannerKind, TKey> = { hit: 'bannerHit', miss: 'bannerMiss', talk: 'bannerTalk', gift: 'bannerGift', surrender: 'bannerSurrender' }
+
+// Everyone: big Hit!/Miss! (or an NPC's talk / gift / surrender) in the middle of the screen for ~2s. Never blocks clicks.
 export function CombatBanner() {
   const t = useT()
   const tx = useL()
@@ -175,7 +177,7 @@ export function CombatBanner() {
     <div className="combat-banner-host" aria-live="assertive">
       {banner && (
         <div key={banner.n} className={`combat-banner ${banner.kind}`} data-testid="combat-banner" data-kind={banner.kind}>
-          <strong>{t(banner.kind === 'hit' ? 'bannerHit' : 'bannerMiss')}</strong>
+          <strong>{t(BANNER[banner.kind] ?? 'bannerHit')}</strong>
           <span>{tx(banner.text)}</span>
         </div>
       )}

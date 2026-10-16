@@ -323,30 +323,39 @@ func (r *Room) itemGive(s *Seat, payload json.RawMessage) error {
 	if err != nil {
 		return err
 	}
-	name, ok := rules.CleanText(p.Name, 1, rules.MaxName, false)
-	if !ok {
-		return fmt.Errorf("item name must be 1-%d characters", rules.MaxName)
+	it, err := giveItem(c, p.Name, p.Qty)
+	if err != nil {
+		return err
 	}
-	if p.Qty < 1 || p.Qty > rules.MaxQty {
-		return fmt.Errorf("item qty must be 1-%d", rules.MaxQty)
+	r.addFeed(fmt.Sprintf("DM: ให้ %s ×%d แก่ %s", it.TH, p.Qty, c.Name.TH),
+		fmt.Sprintf("DM: gave %s %s ×%d", c.Name.EN, it.EN, p.Qty))
+	return nil
+}
+
+// giveItem validates name and qty, then adds them to c's bag (item.give, npc.act gift) and returns the stack's name.
+// On error c is unchanged.
+func giveItem(c *Character, rawName string, qty int) (rules.L, error) {
+	name, ok := rules.CleanText(rawName, 1, rules.MaxName, false)
+	if !ok {
+		return rules.L{}, fmt.Errorf("item name must be 1-%d characters", rules.MaxName)
+	}
+	if qty < 1 || qty > rules.MaxQty {
+		return rules.L{}, fmt.Errorf("item qty must be 1-%d", rules.MaxQty)
 	}
 	// Same name in either language = same stack.
 	i := slices.IndexFunc(c.Items, func(it rules.RosterItem) bool { return it.Name.TH == name || it.Name.EN == name })
 	switch {
-	case i >= 0 && c.Items[i].Qty+p.Qty > maxStack:
-		return fmt.Errorf("an item stack holds at most %d", maxStack)
+	case i >= 0 && c.Items[i].Qty+qty > maxStack:
+		return rules.L{}, fmt.Errorf("an item stack holds at most %d", maxStack)
 	case i >= 0:
-		c.Items[i].Qty += p.Qty
+		c.Items[i].Qty += qty
 	case len(c.Items) >= maxItemStacks:
-		return fmt.Errorf("at most %d different items", maxItemStacks)
+		return rules.L{}, fmt.Errorf("at most %d different items", maxItemStacks)
 	default:
 		i = len(c.Items)
-		c.Items = append(c.Items, rules.RosterItem{Name: rules.L{TH: name, EN: name}, Qty: p.Qty})
+		c.Items = append(c.Items, rules.RosterItem{Name: rules.L{TH: name, EN: name}, Qty: qty})
 	}
-	it := c.Items[i].Name
-	r.addFeed(fmt.Sprintf("DM: ให้ %s ×%d แก่ %s", it.TH, p.Qty, c.Name.TH),
-		fmt.Sprintf("DM: gave %s %s ×%d", c.Name.EN, it.EN, p.Qty))
-	return nil
+	return c.Items[i].Name, nil
 }
 
 // itemRemove takes qty from the stack at index; qty at or above the stack size removes the whole stack.

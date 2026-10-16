@@ -183,6 +183,11 @@ export interface LogEntry {
   text: L
 }
 
+// hit/miss: text "<attacker> → <target>"; talk/gift/surrender: text is the whole feed line.
+export type BannerKind = 'hit' | 'miss' | 'talk' | 'gift' | 'surrender'
+
+export type NpcActKind = 'talk' | 'attack' | 'gift' | 'surrender'
+
 export interface You {
   seatId: string // "" when not seated
 }
@@ -206,8 +211,8 @@ export type ServerMessage =
       }
     }
   | { type: 'error'; payload: { message: string } }
-  // Not in state: shown once, to every connection, after attack.resolve.
-  | { type: 'banner'; payload: { kind: 'hit' | 'miss'; text: L } }
+  // Not in state: shown once, to every connection, after attack.resolve or npc.act.
+  | { type: 'banner'; payload: { kind: BannerKind; text: L } }
   // Appended to the DM log; DM/co-DM connections only.
   | { type: 'log'; payload: LogEntry }
 
@@ -258,4 +263,6 @@ export interface ClientEvents {
   'attack.declare': { targetTokenId: string }
   'attack.cancel': Empty
   'attack.resolve': { attackId: string; hit: boolean; damage?: number }
+  // DM/co-DM, combat on: a visible NPC token acts on a player-character token in the same scene. Fields of other kinds are ignored.
+  'npc.act': { tokenId: string; targetId: string; kind: NpcActKind; text?: string; hit?: boolean; damage?: number; item?: { name: string; qty: number } }
 }

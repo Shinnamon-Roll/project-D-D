@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { Attack, L, LogEntry, Note, Npc, RoomState, Seat, You } from './protocol'
+import type { Attack, BannerKind, L, LogEntry, Note, Npc, RoomState, Seat, You } from './protocol'
 import type { Lang } from './i18n'
 
 interface Store {
@@ -10,7 +10,7 @@ interface Store {
   attacks: Attack[] // pending attacks; DM/co-DM only
   myAttack: { id: string; targetName: string } | null // a player's own pending attack
   dmLog: LogEntry[] // oldest first, at most LOG_CAP; DM/co-DM only
-  banner: { kind: 'hit' | 'miss'; text: L; n: number } | null // big hit/miss banner; n remounts it for a repeat
+  banner: { kind: BannerKind; text: L; n: number } | null // big hit/miss/NPC-action banner; n remounts it for a repeat
   connected: boolean
   lastError: string | null
   lang: Lang
@@ -49,7 +49,7 @@ export const LOG_CAP = 300
 
 let bannerN = 0
 let bannerTimer: ReturnType<typeof setTimeout> | undefined
-export function showBanner(kind: 'hit' | 'miss', text: L) {
+export function showBanner(kind: BannerKind, text: L) {
   useStore.setState({ banner: { kind, text, n: ++bannerN } })
   clearTimeout(bannerTimer)
   bannerTimer = setTimeout(() => useStore.setState({ banner: null }), 2200) // CSS animation runs 2s

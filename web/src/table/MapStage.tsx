@@ -30,6 +30,7 @@ interface Props {
   charArt: Record<string, { src: string; icon: boolean }> // characterId -> class art
   aim: string | null // player picking an attack target: null = off, '' = none picked, else the token id
   onAim: (tokenId: string) => void
+  onNpcAct?: (npcTokenId: string, targetTokenId: string) => void // DM in combat: selected NPC + tap on a player token
 }
 
 type Cell = { col: number; row: number }
@@ -82,7 +83,7 @@ const C = {
   font: 'Trirong, Georgia, serif',
 }
 
-export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fogMode, charArt, aim, onAim }: Props) {
+export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fogMode, charArt, aim, onAim, onNpcAct }: Props) {
   const t = useT()
   const map = useImg(scene.imageUrl)
   const [selected, setSelected] = useState('')
@@ -197,9 +198,13 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
               span={Math.max(1, Math.min(3, ...tokens.filter((o) => o.row === t.row && o.col !== t.col).map((o) => Math.abs(o.col - t.col))))}
               // Only the DM selects; a player's tap on any token falls through to the cell under it,
               // except while aiming, when a tap on another token picks it as the target.
+              // In combat, a DM tap on a player token while an NPC is selected opens the NPC action dialog instead (the NPC stays selected).
               onSelect={
                 isDm
-                  ? () => setSelected(t.id === selected ? '' : t.id)
+                  ? () =>
+                      onNpcAct && t.characterId !== '' && tokens.some((o) => o.id === selected && o.characterId === '')
+                        ? onNpcAct(selected, t.id)
+                        : setSelected(t.id === selected ? '' : t.id)
                   : aim !== null && t.id !== mine?.id
                     ? () => onAim(t.id)
                     : undefined

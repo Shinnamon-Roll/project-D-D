@@ -552,6 +552,8 @@ func (r *Room) apply(clientID, typ string, payload json.RawMessage) error {
 		return r.attackCancel(s)
 	case "attack.resolve":
 		return r.attackResolve(s, payload)
+	case "npc.act":
+		return r.npcAct(s, payload)
 	}
 	return fmt.Errorf("unknown event type %q", typ)
 }

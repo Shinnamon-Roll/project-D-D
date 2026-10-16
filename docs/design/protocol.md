@@ -18,7 +18,8 @@ Source of truth for both sides. Go structs in `internal/` and `web/src/protocol.
     get every token; players and unseated connections get no `hidden: true` tokens and no `hp`/`hpMax`/`npcId` on any token.
   - Combat (v0.14.0, see "Combat mode, attacks and DM log" below): DM/co-DM `state` also has `attacks: Attack[]` (every
     state) and sometimes `dmLog: LogEntry[]`; every other connection's `state` has `myAttack: {id, targetName} | null`.
-  - `banner {kind: "hit" | "miss", text: L}` — ephemeral, to **every** connection once after `attack.resolve`; not in state.
+  - `banner {kind: "hit" | "miss" | "talk" | "gift" | "surrender", text: L}` — ephemeral, to **every** connection once
+    after `attack.resolve` or `npc.act`; not in state.
   - `log LogEntry` — one new DM log line, DM/co-DM connections only, sent after the `state` of the event that made it.
 - Reconnect: same `clientId` → same seat (no room number in v0).
 
@@ -98,9 +99,31 @@ Roles: **DM** = seat kind `dm` or `codm` (co-DM has every DM right except removi
 | `attack.declare` | `{targetTokenId}` | player with a character | `playing`, `combat` | at most 1 pending attack per character; attacker needs a token in `currentSceneId`; target exists and is not hidden (a hidden token gets the same `no such target` as a missing one), is not the attacker's own token, and is in the attacker's scene |
 | `attack.cancel` | `{}` | player with a pending attack | `playing` | removes it |
 | `attack.resolve` | `{attackId, hit, damage?}` | DM | `playing` | damage int 0–999, only with `hit: true` (miss + damage > 0 → error); hit + damage: NPC token `hp` or the target character's `hp` −= damage, clamp 0; the attack is removed (second resolve → `no such attack`); banner to everyone |
+| `npc.act` | `{tokenId, targetId, kind, text?, hit?, damage?, item?: {name, qty}}` | DM | `playing`, `combat` | see "NPC actions" below |
 
 Unknown `type`, malformed payload, or failed check → `error` to sender. Removed in v0.12.0 (now unknown types):
 `ruleset.update`, `ruleset.loadPreset`, `character.submit`, `character.grant`.
+
+## NPC actions (`docs/features/npc-actions.md`)
+- `npc.act`: the DM makes a visible NPC token act on a player character. `kind`: `"talk" | "attack" | "gift" | "surrender"`.
+  - `tokenId`: an NPC token (`characterId` ""), in `currentSceneId`; hidden → `reveal the NPC first`.
+  - `targetId`: a player-character token in the NPC's scene (missing, NPC or hidden token → `no such target`).
+  - talk: `text` optional, trimmed, one line, ≤ 200 chars. attack: `hit` bool, `damage` int 0–999 (miss + damage > 0
+    → error); hit + damage: target character `hp` −= damage, clamp 0 (+ knocked-out line). gift: `item.name` 1–40,
+    `item.qty` 1–99, added to the target's items exactly like `item.give` (same stack merge, limits and errors).
+    surrender: no fields. Fields of other kinds are ignored.
+- Lines (feed + DM log; the feed and banner drop npc.place's `" #n"` suffix, the DM log keeps the token name):
+  talk `"Wolf talks with Mira: “Gold, now!”"` / `"Wolf คุยกับ Mira: “Gold, now!”"` (no text: `"Wolf talks with Mira"`);
+  hit `"Wolf attacks Mira — hit! −5"` / `"Wolf โจมตี Mira — โดน! −5"` (damage 0: no number); miss
+  `"Wolf attacks Mira — miss"` / `"Wolf โจมตี Mira — ไม่โดน"`; gift `"Wolf gives Mira Rusty Key ×1"` /
+  `"Wolf มอบ Rusty Key ×1 ให้ Mira"`; surrender `"Wolf surrenders to Mira"` / `"Wolf ยอมแพ้ต่อ Mira"`.
+- `banner`: every successful `npc.act`, to every connection. `kind` = `hit` / `miss` (attack) or the action kind.
+  `text`: hit/miss `"Wolf → Mira"` (as `attack.resolve`); talk/gift/surrender = the feed line.
+- Errors: `combat mode is off`, `no such NPC token`, `reveal the NPC first`, `the NPC is not in this scene`,
+  `no such target`, `target is not in this scene`, `kind must be talk, attack, gift or surrender`,
+  `talk text must be one line of at most 200 characters`, `damage must be 0-999`, `a miss deals no damage`,
+  `item name must be 1-40 characters`, `item qty must be 1-99`, `an item stack holds at most 999`,
+  `at most 50 different items`, plus the shared ones.
 
 ## Combat mode, attacks and DM log (v0.14.0, `docs/features/combat-log.md`)
 ```ts

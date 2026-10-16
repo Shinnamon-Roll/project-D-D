@@ -47,6 +47,9 @@ const noPageScroll = (page: Page) =>
     return d.scrollHeight <= innerHeight && d.scrollWidth <= innerWidth
   })
 
+// Konva redraws its hit canvas on the frame after React re-renders (e.g. a resize when the error banner shows up): wait two frames before clicking a token.
+const settle = (page: Page) => page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))))
+
 // shortcut: the server has one global in-memory room, so this needs a fresh server per run (no --repeat-each, no retries); add a reset hook if more specs appear.
 test('v0: DM + player full flow', async ({ browser }) => {
   const viewport = { width: 1440, height: 900 }
@@ -370,7 +373,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(tid(dm, `token-pos-${tokenId}`)).toHaveText('(3, 2)')
 
   // 6b. DM taps the token, then a cell.
-  await dm.evaluate(() => new Promise(requestAnimationFrame)) // Konva redraws its hit canvas on the next frame
+  await settle(dm)
   p = await cellPoint(dm, 3, 2)
   await dm.mouse.click(p.x, p.y)
   await expect(tid(dm, 'map-stage')).toHaveAttribute('data-selected-token', tokenId)
@@ -508,7 +511,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   const radius = async (page: Page, id: string) => Number(await mapTok(page, id).getAttribute('data-r'))
   // DM taps exactly the token's drawn circle (it may share a cell), then the target cell.
   const dmMove = async (id: string, col: number, row: number) => {
-    await dm.evaluate(() => new Promise(requestAnimationFrame)) // Konva redraws its hit canvas on the next frame
+    await settle(dm)
     const box = (await dm.locator('[data-testid="map-stage"] .konvajs-content').boundingBox())!
     await dm.mouse.click(box.x + Number(await mapTok(dm, id).getAttribute('data-x')), box.y + Number(await mapTok(dm, id).getAttribute('data-y')))
     await expect(tid(dm, 'map-stage')).toHaveAttribute('data-selected-token', id)
@@ -565,7 +568,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(tid(dm, `token-pos-${npc3}`)).toHaveText(npc3Pos!)
   await expect(mapTok(pl, tokenId)).toHaveAttribute('data-cell-count', '4')
   // DM clicks Bram's small circle (not the cell centre): exactly that token is selected, then moves it out.
-  await dm.evaluate(() => new Promise(requestAnimationFrame)) // Konva redraws its hit canvas on the next frame
+  await settle(dm)
   const dmBox = (await dm.locator('[data-testid="map-stage"] .konvajs-content').boundingBox())!
   const bx = Number(await mapTok(dm, bramTok).getAttribute('data-x'))
   const by = Number(await mapTok(dm, bramTok).getAttribute('data-y'))
@@ -593,7 +596,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await pl.keyboard.press('Escape')
   await expect(tid(pl, 'attack-btn')).toBeFocused()
   await tid(pl, 'attack-btn').click()
-  await pl.evaluate(() => new Promise(requestAnimationFrame))
+  await settle(pl)
   const plBox = (await pl.locator('[data-testid="map-stage"] .konvajs-content').boundingBox())!
   await pl.mouse.click(plBox.x + Number(await mapTok(pl, npc2).getAttribute('data-x')), plBox.y + Number(await mapTok(pl, npc2).getAttribute('data-y')))
   await expect(tid(pl, 'attack-target-select')).toHaveValue(npc2)
@@ -668,6 +671,73 @@ test('v0: DM + player full flow', async ({ browser }) => {
   if (process.env.SHOTS) await dm.screenshot({ path: `${process.env.SHOTS}/dm-log.png`, animations: 'disabled' })
   expect(plFrames.filter((f) => f.includes('"dmLog"') || f.includes('"type":"log"') || f.includes('"attacks"'))).toEqual([])
   expect(plFrames.filter((f) => f.includes('"type":"banner"')).length).toBe(3)
+
+  // 7f. NPC actions: the DM selects an NPC on the map, then taps Ayla's token → the action dialog (not a re-select).
+  const tapTok = async (page: Page, id: string) => {
+    await settle(page)
+    const b = (await page.locator('[data-testid="map-stage"] .konvajs-content').boundingBox())!
+    await page.mouse.click(b.x + Number(await mapTok(page, id).getAttribute('data-x')), b.y + Number(await mapTok(page, id).getAttribute('data-y')))
+  }
+  const dlg = tid(dm, 'npc-act-dialog')
+  const banner = async (kind: string, text: string) => {
+    for (const page of [pl, qr]) {
+      await expect(tid(page, 'combat-banner')).toHaveAttribute('data-kind', kind)
+      await expect(tid(page, 'combat-banner')).toContainText(text)
+    }
+  }
+  await tapTok(dm, npc2) // npc2 shares cell (6, 6): tap its own slot
+  await expect(tid(dm, 'map-stage')).toHaveAttribute('data-selected-token', npc2)
+  await tapTok(dm, tokenId)
+  await expect(dlg).toBeVisible()
+  await expect(dlg.locator('h2')).toContainText(NPC) // the DM sees the token's own name, maybe with "#2"
+  await expect(dlg.locator('h2')).toContainText(`→ ${heroName}`)
+  await expect(tid(dm, 'map-stage')).toHaveAttribute('data-selected-token', npc2) // the NPC stays selected
+  await expect(tid(dm, 'npc-act-talk')).toBeFocused()
+  await dm.keyboard.press('Escape') // closes, sends nothing
+  await expect(dlg).toHaveCount(0)
+  // Talk with a line: everyone gets the talk banner and the feed line.
+  await tapTok(dm, tokenId)
+  await tid(dm, 'npc-act-talk').click()
+  await expect(tid(dm, 'npc-act-send')).toBeEnabled()
+  await tid(dm, 'npc-act-text').fill('ส่งทองมา!')
+  await tid(dm, 'npc-act-send').click()
+  await expect(dlg).toHaveCount(0)
+  await banner('talk', 'ส่งทองมา!')
+  await expect(tid(pl, 'feed')).toContainText(`${NPC} คุยกับ ${heroName}: “ส่งทองมา!”`)
+  // Attack, hit for 4: Ayla's HP drops.
+  const [h0, hm] = (await tid(pl, 'sheet-hp').textContent())!.split('/').map(Number)
+  await tapTok(dm, tokenId)
+  await tid(dm, 'npc-act-attack').click()
+  await expect(tid(dm, 'npc-act-send')).toBeDisabled() // hit or miss first
+  await tid(dm, 'npc-act-hit').click()
+  await tid(dm, 'npc-act-damage').fill('4')
+  if (process.env.SHOTS) await dm.screenshot({ path: `${process.env.SHOTS}/dm-npc-act.png`, animations: 'disabled' })
+  await tid(dm, 'npc-act-send').click()
+  await banner('hit', NPC)
+  await expect(tid(pl, 'sheet-hp')).toHaveText(`${Math.max(0, h0 - 4)}/${hm}`)
+  await expect(tid(pl, 'feed')).toContainText(`${NPC} โจมตี ${heroName} — โดน! −4`)
+  // Gift from the token list's Action button (pick the target in the dialog): it lands in Ayla's bag.
+  await tid(dm, `npc-act-open-${npc2}`).click()
+  await expect(dlg).toBeVisible()
+  await tid(dm, 'npc-act-target').selectOption(tokenId)
+  await tid(dm, 'npc-act-gift').click()
+  await tid(dm, 'npc-act-item-name').fill('Rusty Key')
+  await tid(dm, 'npc-act-item-qty').fill('2')
+  await tid(dm, 'npc-act-send').click()
+  await expect(dlg).toHaveCount(0)
+  await banner('gift', 'Rusty Key')
+  await expect(tid(pl, 'sheet-items')).toContainText('Rusty Key ×2')
+  // Surrender, from the map again.
+  await expect(tid(dm, 'map-stage')).toHaveAttribute('data-selected-token', npc2)
+  await tapTok(dm, tokenId)
+  await tid(dm, 'npc-act-surrender').click()
+  await tid(dm, 'npc-act-send').click()
+  await banner('surrender', `${NPC} ยอมแพ้ต่อ ${heroName}`)
+  if (process.env.SHOTS) {
+    await pl.waitForTimeout(400) // past the scale-in
+    await pl.screenshot({ path: `${process.env.SHOTS}/player-banner-surrender.png` })
+  }
+  await expect(tid(dm, 'error-banner')).toHaveCount(0)
   // Combat off: the indicator and Attack go away.
   await tid(dm, 'combat-toggle').click()
   await expect(tid(pl, 'combat-indicator')).toHaveCount(0)

@@ -7,13 +7,15 @@ import (
 	"errors"
 	"fmt"
 	"slices"
+	"strings"
 
 	"projectdnd/internal/rules"
 )
 
 const (
 	maxLog    = 300   // DM log entries kept in memory
-	maxDamage = 999   // attack.resolve
+	maxDamage = 999   // attack.resolve, npc.act
+	maxTalk   = 200   // npc.act talk text (runes)
 	noteQuiet = 60000 // ms: at most one "edited note" log line per note in this window
 	moveQuiet = 3000  // ms: moves of one token by one seat in this window share one log line
 )
@@ -45,9 +47,9 @@ type LogEntry struct {
 	first int64  // token.move lines: unix ms of the line's first move
 }
 
-// Banner is the big hit/miss message every connection gets once after attack.resolve.
+// Banner is the big message every connection gets once after attack.resolve or npc.act.
 type Banner struct {
-	Kind string  `json:"kind"` // "hit" | "miss"
+	Kind string  `json:"kind"` // "hit" | "miss" | "talk" | "gift" | "surrender"
 	Text rules.L `json:"text"`
 }
 
@@ -221,15 +223,9 @@ func (r *Room) attackResolve(s *Seat, payload json.RawMessage) error {
 	if i < 0 {
 		return errNoAttack
 	}
-	dmg := 0
-	if p.Damage != nil {
-		dmg = *p.Damage
-		if dmg < 0 || dmg > maxDamage {
-			return fmt.Errorf("damage must be 0-%d", maxDamage)
-		}
-		if !p.Hit && dmg > 0 {
-			return errors.New("a miss deals no damage")
-		}
+	dmg, err := checkDamage(p.Hit, p.Damage)
+	if err != nil {
+		return err
 	}
 	a := r.attacks[i]
 	r.attacks = slices.Delete(slices.Clone(r.attacks), i, i+1)
@@ -287,6 +283,129 @@ func (r *Room) attackResolve(s *Seat, payload json.RawMessage) error {
 		say(th+": โดน!", en+": hit!")
 	}
 	return nil
+}
+
+// checkDamage validates the optional damage of a hit/miss (attack.resolve, npc.act attack).
+func checkDamage(hit bool, d *int) (int, error) {
+	if d == nil {
+		return 0, nil
+	}
+	if *d < 0 || *d > maxDamage {
+		return 0, fmt.Errorf("damage must be 0-%d", maxDamage)
+	}
+	if !hit && *d > 0 {
+		return 0, errors.New("a miss deals no damage")
+	}
+	return *d, nil
+}
+
+// npcAct is the DM making a visible NPC token talk to, attack, gift or surrender to a player character in combat
+// (docs/features/npc-actions.md). Feed and banner name the NPC without npc.place's "#n"; the DM log keeps it.
+func (r *Room) npcAct(s *Seat, payload json.RawMessage) error {
+	p, err := decode[struct {
+		TokenID  string `json:"tokenId"`
+		TargetID string `json:"targetId"`
+		Kind     string `json:"kind"`
+		Text     string `json:"text"`
+		Hit      bool   `json:"hit"`
+		Damage   *int   `json:"damage"`
+		Item     struct {
+			Name string `json:"name"`
+			Qty  int    `json:"qty"`
+		} `json:"item"`
+	}](payload)
+	if err != nil {
+		return err
+	}
+	if err := r.needDM(s, StatusPlaying); err != nil {
+		return err
+	}
+	if !r.st.Combat {
+		return errCombatOff
+	}
+	t := r.token(p.TokenID)
+	if t == nil || t.CharacterID != "" {
+		return errors.New("no such NPC token")
+	}
+	if t.Hidden {
+		return errors.New("reveal the NPC first")
+	}
+	if t.SceneID != r.st.CurrentSceneID {
+		return errors.New("the NPC is not in this scene")
+	}
+	tg := r.token(p.TargetID)
+	var c *Character
+	if tg != nil && tg.CharacterID != "" && !tg.Hidden {
+		c = r.character(tg.CharacterID)
+	}
+	if c == nil {
+		return errNoTarget
+	}
+	if tg.SceneID != t.SceneID {
+		return errors.New("target is not in this scene")
+	}
+	// Every line is "<NPC name>" + tail; the tails never go through a format string (talk text is user input).
+	who, kind := c.Name, p.Kind
+	var th, en string
+	var downed func()
+	switch p.Kind {
+	case "talk":
+		text, ok := rules.CleanText(p.Text, 0, maxTalk, false)
+		if !ok {
+			return fmt.Errorf("talk text must be one line of at most %d characters", maxTalk)
+		}
+		th, en = " คุยกับ "+who.TH, " talks with "+who.EN
+		if text != "" {
+			th, en = th+": “"+text+"”", en+": “"+text+"”"
+		}
+	case "attack":
+		dmg, err := checkDamage(p.Hit, p.Damage)
+		if err != nil {
+			return err
+		}
+		th, en = " โจมตี "+who.TH+" — ไม่โดน", " attacks "+who.EN+" — miss"
+		kind = "miss"
+		if p.Hit {
+			kind = "hit"
+			th, en = " โจมตี "+who.TH+" — โดน!", " attacks "+who.EN+" — hit!"
+			if dmg > 0 {
+				th, en = th+" "+signed(-dmg), en+" "+signed(-dmg)
+			}
+			old := c.HP
+			c.HP = max(c.HP-dmg, 0)
+			downed = func() { r.downed(c.Name, old, c.HP, true, false) }
+		}
+	case "gift":
+		it, err := giveItem(c, p.Item.Name, p.Item.Qty)
+		if err != nil {
+			return err
+		}
+		th = fmt.Sprintf(" มอบ %s ×%d ให้ %s", it.TH, p.Item.Qty, who.TH)
+		en = fmt.Sprintf(" gives %s %s ×%d", who.EN, it.EN, p.Item.Qty)
+	case "surrender":
+		th, en = " ยอมแพ้ต่อ "+who.TH, " surrenders to "+who.EN
+	default:
+		return errors.New("kind must be talk, attack, gift or surrender")
+	}
+	name := r.npcPublicName(t)
+	r.pushFeed(name+th, name+en)
+	r.addLog(t.Name+th, t.Name+en)
+	r.banner = &Banner{Kind: kind, Text: rules.L{TH: name + th, EN: name + en}}
+	if kind == "hit" || kind == "miss" { // same banner text as attack.resolve: the big word says hit/miss
+		r.banner.Text = rules.L{TH: name + " → " + who.TH, EN: name + " → " + who.EN}
+	}
+	if downed != nil {
+		downed()
+	}
+	return nil
+}
+
+// npcPublicName is t's pool NPC name when t.Name is that name plus npc.place's " #n" suffix, else t.Name.
+func (r *Room) npcPublicName(t *Token) string {
+	if n, ok := r.npcs.Get(t.NpcID); ok && strings.HasPrefix(t.Name, n.Name+" #") {
+		return n.Name
+	}
+	return t.Name
 }
 
 // moveLog adds "moved <name> from <from> to <to>". A move of the same token by the same seat within moveQuiet

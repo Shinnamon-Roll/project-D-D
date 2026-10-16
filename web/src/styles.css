@@ -499,7 +499,7 @@ dialog.notes-modal::backdrop { background: rgba(14, 9, 6, 0.78); }
 
 /* ---------- seat QR ---------- */
 dialog.qr-modal, dialog.skill-modal { position: fixed; width: min(440px, calc(100vw - 32px)); max-height: calc(100vh - 32px); margin: auto; text-align: center; overflow-y: auto; }
-dialog.qr-modal::backdrop, dialog.skill-modal::backdrop { background: rgba(14, 9, 6, 0.78); }
+dialog.qr-modal::backdrop, dialog.skill-modal::backdrop, dialog.npc-act-modal::backdrop { background: rgba(14, 9, 6, 0.78); }
 .qr-modal h2 { font-size: 1.8rem; margin-top: 0.3em; }
 .qr-modal .qr { display: block; width: min(320px, 100%); aspect-ratio: 1; margin: 8px auto; border: 1px solid var(--gold-dim); border-radius: 3px; box-shadow: 0 0 0 4px #fffdf5, 0 0 0 5px var(--gold-dim); }
 .qr-modal .qr-wait { display: grid; place-items: center; color: var(--muted); }
@@ -893,6 +893,28 @@ button.miss:hover:not(:disabled) { background: linear-gradient(180deg, #7a8188, 
   color: #e3e6e9;
 }
 .combat-banner.miss strong { color: #d9dde0; text-shadow: 0 2px 0 #1d2023; }
+/* NPC actions: same seal, own colours. talk = ink on parchment, gift = gold, surrender = white flag */
+.combat-banner.talk {
+  background: radial-gradient(ellipse at 50% 35%, #fbf3dc, var(--parchment) 60%, #d9c79c);
+  border: 2px solid var(--ink);
+  box-shadow: inset 0 0 0 4px #d9c79c, inset 0 0 0 5px var(--ink), 0 0 0 100vmax rgba(20, 14, 8, 0.3), 0 18px 50px rgba(0, 0, 0, 0.8);
+  color: var(--ink);
+}
+.combat-banner.talk strong { color: var(--ink); text-shadow: 0 2px 0 #fffdf5; }
+.combat-banner.gift {
+  background: radial-gradient(ellipse at 50% 35%, #f3d77a, var(--gold) 60%, #8a6d12);
+  border: 2px solid #fff1bf;
+  box-shadow: inset 0 0 0 4px #8a6d12, inset 0 0 0 5px #fff1bf, 0 0 0 100vmax rgba(24, 18, 4, 0.3), 0 18px 50px rgba(0, 0, 0, 0.8);
+  color: #2b1d12;
+}
+.combat-banner.gift strong { color: #3a2a06; text-shadow: 0 2px 0 #fbe9a6; }
+.combat-banner.surrender {
+  background: radial-gradient(ellipse at 50% 35%, #ffffff, #e6e8ea 60%, #b9bec3);
+  border: 2px solid #8d949b;
+  box-shadow: inset 0 0 0 4px #b9bec3, inset 0 0 0 5px #6a7077, 0 0 0 100vmax rgba(8, 10, 12, 0.3), 0 18px 50px rgba(0, 0, 0, 0.8);
+  color: #2c3034;
+}
+.combat-banner.surrender strong { color: #2c3034; text-shadow: 0 2px 0 #ffffff; }
 @keyframes banner {
   0% { opacity: 0; transform: scale(0.55); }
   12% { opacity: 1; transform: scale(1.07); }
@@ -902,3 +924,22 @@ button.miss:hover:not(:disabled) { background: linear-gradient(180deg, #7a8188, 
 }
 @keyframes banner-fade { 0% { opacity: 0; } 12%, 78% { opacity: 1; } 100% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .combat-banner { animation-name: banner-fade; } }
+
+/* ---------- DM: NPC action dialog ---------- */
+dialog.npc-act-modal { position: fixed; width: min(480px, calc(100vw - 32px)); max-height: calc(100vh - 32px); margin: auto; overflow-y: auto; }
+.npc-act-modal h2 { font-size: 1.5rem; margin: 0.2em 0 10px; overflow-wrap: anywhere; }
+.npc-act-kinds { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 12px; }
+.npc-act-kinds button { display: inline-flex; justify-content: center; align-items: center; gap: 6px; padding: 10px 8px; font-family: var(--font-display); font-size: 1.05rem; }
+.npc-act-kinds button[aria-pressed='true'] { background: var(--oxblood); color: var(--parchment); border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold-dim); }
+.npc-act-field { display: flex; flex-direction: column; gap: 3px; margin: 0 0 10px; }
+.npc-act-field small { color: var(--muted); }
+.npc-act-field input, .npc-act-field select { width: 100%; }
+.npc-act-attack .row { margin-bottom: 10px; }
+.npc-act-attack .row button { flex: 1; padding: 8px; }
+.npc-act-attack .row button[aria-pressed='true'] { outline: 3px solid var(--gold); outline-offset: 1px; }
+.npc-act-attack .row button[aria-pressed='false'] { opacity: 0.7; }
+.npc-act-attack input { max-width: 8em; }
+.npc-act-modal .row > .npc-act-field:not(.grow) input { width: 6em; }
+.npc-act-note { font-style: italic; color: var(--muted); }
+.npc-act-foot { justify-content: flex-end; margin-top: 6px; }
+.token-list button.npc-act-open { display: inline-flex; align-items: center; gap: 4px; }

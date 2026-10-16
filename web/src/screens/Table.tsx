@@ -11,6 +11,7 @@ import PartyBar from '../table/PartyBar'
 import { classArt } from '../classArt'
 import { EyeIcon, EyeOffIcon, SwordsIcon } from '../table/icons'
 import { AttackAlerts, AttackControl } from '../table/Combat'
+import NpcAction from '../table/NpcAction'
 
 const PCT_KEY = 'table.mapPct'
 const MAP_MIN = 40
@@ -53,6 +54,15 @@ export default function Table() {
   const targets = isDm || !character ? [] : tokens.filter((t) => t.characterId !== character.id)
   const aiming = room.combat && !myAttack && character ? aimWant : null
   const aim = aiming && !targets.some((t) => t.id === aiming) ? '' : aiming
+  // DM NPC action dialog: target '' = pick in the dialog. Shown only while combat is on and the NPC token is still here.
+  const [act, setAct] = useState<{ npc: string; target: string } | null>(null)
+  // only in the scene being played: the server refuses NPC actions anywhere else, and hidden tokens can't take part
+  const canAct = isDm && room.combat && scene?.id === room.currentSceneId
+  const actNpc = canAct ? tokens.find((t) => t.id === act?.npc && t.characterId === '' && !t.hidden) : undefined
+  const players = tokens.filter((t) => t.characterId !== '' && !t.hidden)
+  useEffect(() => {
+    if (!room.combat) setAct(null) // combat ended: a reopened combat starts with no dialog
+  }, [room.combat])
 
   // Splitter: map pane share of the table width (info pane = rest, 22–60%, never under 280px).
   const tableRef = useRef<HTMLDivElement>(null)
@@ -112,6 +122,7 @@ export default function Table() {
               charArt={charArt}
               aim={aim}
               onAim={setAim}
+              onNpcAct={canAct ? (npc, target) => setAct({ npc, target }) : undefined}
             />
           </>
         ) : (
@@ -170,18 +181,19 @@ export default function Table() {
         {scene && (
           <ul className="token-list" data-testid="token-list" aria-label={t('tokens')}>
             {tokens.map((t) => (
-              <TokenRow key={t.id} t={t} dmNpc={isDm && t.characterId === ''} />
+              <TokenRow key={t.id} t={t} dmNpc={isDm && t.characterId === ''} onAct={canAct && !t.hidden ? () => setAct({ npc: t.id, target: '' }) : undefined} />
             ))}
           </ul>
         )}
         <FeedPanel />
       </aside>
+      {actNpc && <NpcAction key={`${act!.npc}:${act!.target}`} npc={actNpc} targets={players} target={act!.target} onClose={() => setAct(null)} />}
     </div>
   )
 }
 
 // Each token's cell, plus the DM's NPC controls. Moving is by tapping the map only.
-function TokenRow({ t, dmNpc }: { t: Token; dmNpc: boolean }) {
+function TokenRow({ t, dmNpc, onAct }: { t: Token; dmNpc: boolean; onAct?: () => void }) {
   const tr = useT()
   return (
     <li data-testid={`token-${t.id}`} className={t.hidden ? 'is-hidden' : undefined}>
@@ -213,6 +225,12 @@ function TokenRow({ t, dmNpc }: { t: Token; dmNpc: boolean }) {
             +
           </button>
         </span>
+      )}
+      {dmNpc && onAct && (
+        <button className="npc-act-open" data-testid={`npc-act-open-${t.id}`} aria-label={tr('npcActOf', { name: t.name })} onClick={onAct}>
+          <SwordsIcon />
+          {tr('npcAct')}
+        </button>
       )}
       {dmNpc && (
         <button className="danger" data-testid={`token-remove-${t.id}`} onClick={() => send('token.remove', { tokenId: t.id })}>
