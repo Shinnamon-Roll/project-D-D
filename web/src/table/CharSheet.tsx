@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent, type ReactNode } from 'react'
 import type { Abilities, AbilityId, Character, Class, CustomAbility, Feature, Resource } from '../protocol'
 import { send } from '../ws'
+import { askConfirm } from '../store'
 import { useL, useT, type TKey } from '../i18n'
 import { ABILITIES, abilityMod, featuresAt, signed, skillBonus, useClass, useSkills } from '../rules'
 import { AbilityGrid, SkillList, abilityKey, skillKey } from './StatBlocks'
@@ -563,7 +564,11 @@ function MyAbilities({ c, own, dm }: { c: Character; own: boolean; dm: boolean }
                       className="danger"
                       data-testid={`cab-remove-${a.id}`}
                       aria-label={t('removeNamed', { name: a.name })}
-                      onClick={() => send('ability.remove', { characterId: c.id, abilityId: a.id })}
+                      onClick={() =>
+                        askConfirm({ title: t('removeNamed', { name: a.name }), body: t('abilityRemoveConfirm', { name: a.name }), okLabel: t('remove'), danger: true }, () =>
+                          send('ability.remove', { characterId: c.id, abilityId: a.id }),
+                        )
+                      }
                     >
                       {t('remove')}
                     </button>

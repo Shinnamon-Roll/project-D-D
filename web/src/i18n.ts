@@ -353,6 +353,20 @@ const th = {
   profEditLead: 'ใส่ตามที่ความสามารถของอาชีพให้มา ทอยป้องกันของอาชีพเอาออกไม่ได้',
   saveOf: 'ทอยป้องกัน {name}',
   classSaveLocked: 'ของอาชีพ',
+  // Confirm popup (target name in each message)
+  seatRemoveConfirm: 'ลบ {name} ออกจากห้องใช่ไหม?',
+  tokenRemoveConfirm: 'เอา token "{name}" ออกจากแมพใช่ไหม?',
+  abilityRemoveConfirm: 'ลบ "{name}" ออกจากชีตใช่ไหม? กู้คืนไม่ได้',
+  itemDelConfirm: 'เอา {name} ×{qty} ออกจากกระเป๋าของ {hero} ใช่ไหม?',
+  itemsChanged: 'ของในกระเป๋าเปลี่ยนไปแล้ว ลองอีกครั้ง',
+  rosterResetConfirm: 'คืนค่าเริ่มต้นให้ {name} ใช่ไหม? ที่แก้ไว้กับตัวนี้จะหายไป',
+  restShortConfirm: 'ให้ทั้งปาร์ตี้พักสั้นใช่ไหม? ความสามารถแบบพักสั้นและ pact slot จะคืนมา',
+  restLongConfirm: 'ให้ทั้งปาร์ตี้พักยาวใช่ไหม? เลือด ช่องคาถา ความสามารถ และ hit dice จะเต็ม',
+  combatEnd: 'จบการต่อสู้',
+  combatEndConfirm: 'จบการต่อสู้ใช่ไหม? การโจมตีที่ยังค้างอยู่จะถูกยกเลิก',
+  startConfirm: 'เริ่มเกมใช่ไหม? ทุกคนจะไปหน้าเลือกตัวละคร และที่นั่งว่างจะถูกลบ',
+  tokenReveal: 'ให้ผู้เล่นเห็น',
+  tokenRevealConfirm: 'ให้ผู้เล่นทุกคนเห็น "{name}" บนแมพใช่ไหม?',
 }
 
 const en: Record<keyof typeof th, string> = {
@@ -689,6 +703,19 @@ const en: Record<keyof typeof th, string> = {
   profEditLead: 'Add what class features grant. Class saving throws cannot be removed.',
   saveOf: '{name} saving throw',
   classSaveLocked: 'from class',
+  seatRemoveConfirm: 'Remove {name} from the room?',
+  tokenRemoveConfirm: 'Remove token "{name}" from the map?',
+  abilityRemoveConfirm: 'Remove "{name}" from the sheet? This cannot be undone.',
+  itemDelConfirm: "Remove {name} ×{qty} from {hero}'s bag?",
+  itemsChanged: 'The bag changed. Try again.',
+  rosterResetConfirm: 'Reset {name} to the defaults? Every edit to this hero is lost.',
+  restShortConfirm: 'Give the whole party a short rest? Short-rest uses and pact slots come back.',
+  restLongConfirm: 'Give the whole party a long rest? HP, spell slots, uses and hit dice are refilled.',
+  combatEnd: 'End combat',
+  combatEndConfirm: 'End combat? Pending attacks are cancelled.',
+  startConfirm: 'Start the game? Everyone goes to character pick, and empty seats are removed.',
+  tokenReveal: 'Show to players',
+  tokenRevealConfirm: 'Show "{name}" on the map to every player?',
 }
 
 export type TKey = keyof typeof th

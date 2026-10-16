@@ -516,6 +516,10 @@ dialog.skill-modal { width: min(520px, calc(100vw - 32px)); text-align: left; }
 .skill-modal h2 { font-size: 1.6rem; margin: 0.2em 0 0; }
 .skill-modal .skill-stat { margin: 0 0 10px; color: var(--oxblood); font-family: var(--font-display); letter-spacing: 0.06em; }
 .skill-modal > button.primary { display: block; margin: 12px auto 0; padding: 8px 32px; }
+/* ---------- confirm popup ---------- */
+dialog.confirm-modal { width: min(420px, calc(100vw - 32px)); }
+.confirm-modal h2 { font-size: 1.4rem; }
+.confirm-modal .confirm-actions { justify-content: flex-end; margin-top: 14px; }
 .qr-join { display: grid; gap: 6px; margin: 10px 0 14px; padding: 12px 14px; border: 2px solid var(--gold); border-radius: 3px; background: rgba(201, 162, 39, 0.16); box-shadow: 0 0 12px rgba(201, 162, 39, 0.45); }
 .qr-join strong { font-family: var(--font-display); color: var(--oxblood); letter-spacing: 0.04em; }
 .qr-join button { justify-self: start; }

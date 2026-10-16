@@ -15,6 +15,15 @@ interface Store {
   connected: boolean
   lastError: string | null
   lang: Lang
+  confirm: (ConfirmAsk & { onOk: () => void; n: number }) | null // the one open confirm popup
+}
+
+// Text is already translated by the caller, so it can name the target.
+export interface ConfirmAsk {
+  title: string
+  body: string
+  okLabel: string
+  danger?: boolean // red OK for deletes/resets; primary otherwise
 }
 
 function savedLang(): Lang {
@@ -38,7 +47,14 @@ export const useStore = create<Store>(() => ({
   connected: false,
   lastError: null,
   lang: savedLang(),
+  confirm: null,
 }))
+
+// Opens the shared confirm popup (ConfirmHost); onOk runs only after OK. A new ask replaces an open one.
+let confirmN = 0
+export function askConfirm(ask: ConfirmAsk, onOk: () => void) {
+  useStore.setState({ confirm: { ...ask, onOk, n: ++confirmN } })
+}
 
 let errorTimer: ReturnType<typeof setTimeout> | undefined
 export function showError(message: string) {

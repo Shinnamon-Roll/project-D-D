@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { AbilityId, Class, L, RosterEntry } from '../protocol'
-import { useStore } from '../store'
+import { askConfirm, useStore } from '../store'
 import { send, upload } from '../ws'
 import { useL, useT, type TKey } from '../i18n'
 import { classArt } from '../classArt'
@@ -109,7 +109,11 @@ export default function RosterEditor() {
       <button
         className="danger"
         data-testid="roster-reset-set"
-        onClick={() => confirm(t('rosterResetSetConfirm', { name: tx(sets.find((x) => x.id === tab)?.name) })) && send('roster.reset', { set: tab })}
+        onClick={() =>
+          askConfirm({ title: t('rosterResetSet'), body: t('rosterResetSetConfirm', { name: tx(sets.find((x) => x.id === tab)?.name) }), okLabel: t('rosterResetSet'), danger: true }, () =>
+            send('roster.reset', { set: tab }),
+          )
+        }
       >
         {t('rosterResetSet')}
       </button>
@@ -365,7 +369,12 @@ function EntryEditor({ entry, onBack }: { entry: RosterEntry; onBack: () => void
       </button>
 
       <div className="row roster-actions">
-        <button type="button" className="danger" data-testid="roster-reset" onClick={() => send('roster.reset', { classId: entry.id })}>
+        <button type="button" className="danger" data-testid="roster-reset" onClick={() =>
+            askConfirm({ title: t('rosterReset'), body: t('rosterResetConfirm', { name: tx(entry.heroName) }), okLabel: t('rosterReset'), danger: true }, () =>
+              send('roster.reset', { classId: entry.id }),
+            )
+          }
+        >
           {t('rosterReset')}
         </button>
         <span className="grow" />

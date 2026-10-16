@@ -167,7 +167,19 @@ test('v0: DM + player full flow', async ({ browser }) => {
 
   // 3. DM starts.
   await expect(tid(dm, 'game-start')).toBeEnabled()
+  // Start asks first: focus on Cancel; Cancel and Esc keep the lobby.
   await tid(dm, 'game-start').click()
+  await expect(dm.getByRole('alertdialog')).toBeVisible()
+  await expect(tid(dm, 'confirm-cancel')).toBeFocused()
+  await tid(dm, 'confirm-cancel').click()
+  await expect(tid(dm, 'confirm-modal')).toHaveCount(0)
+  await expect(tid(dm, 'game-start')).toBeFocused()
+  await tid(dm, 'game-start').click()
+  await dm.keyboard.press('Escape')
+  await expect(tid(dm, 'confirm-modal')).toHaveCount(0)
+  await expect(tid(dm, 'game-start')).toBeVisible()
+  await tid(dm, 'game-start').click()
+  await tid(dm, 'confirm-ok').click()
 
   // A seat link after start: banner, no join form.
   const lateCtx = await browser.newContext()
@@ -294,6 +306,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(tid(pl, 'sheet-items')).toContainText('Rope ×2')
   await expect(tid(dm, `item-qty-${rope}`)).toHaveText('×2')
   await tid(dm, `item-del-${rope}`).click()
+  await tid(dm, 'confirm-ok').click()
   await expect(tid(pl, 'sheet-items')).not.toContainText('Rope')
   const [hp, hpMax] = (await tid(pl, 'sheet-hp').textContent())!.split('/').map(Number)
   await tid(dm, 'card-hp-dec').click()
@@ -306,6 +319,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await tid(dm, 'card-hp-dec').click()
   await expect(tid(pl, 'sheet-hp')).toHaveText(`${hp - 1}/${hpMax}`)
   await tid(dm, 'party-rest-long').click()
+  await tid(dm, 'confirm-ok').click()
   await expect(tid(pl, 'sheet-hp')).toHaveText(`${hpMax}/${hpMax}`)
   await dm.keyboard.press('Escape')
   await expect(card).toHaveCount(0)
@@ -322,6 +336,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await tid(dm, `roster-item-${bramClass}`).click()
   await expect(tid(dm, 'roster-ab-con')).toHaveValue('30')
   await tid(dm, 'roster-reset').click()
+  await tid(dm, 'confirm-ok').click()
   await expect(tid(dm, 'roster-ab-con')).toHaveValue(conDefault)
   await expect(tid(qr, 'sheet-hp')).toHaveText(`${bramHp}/${bramHp}`)
   await tid(dm, 'roster-back').click()
@@ -352,7 +367,13 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await tid(dm, 'sheet-tab-mine').click()
   await expect(tid(dm, 'cab-list')).toContainText('Magic Missile')
   await expect(tid(dm, 'cab-name')).toHaveCount(0)
+  // Delete asks first: Cancel keeps the spell, OK removes it.
   await dm.locator('[data-testid^="cab-remove-"]').click()
+  await expect(tid(dm, 'confirm-body')).toContainText('Magic Missile')
+  await tid(dm, 'confirm-cancel').click()
+  await expect(tid(qr, 'cab-list')).toContainText('Magic Missile')
+  await dm.locator('[data-testid^="cab-remove-"]').click()
+  await tid(dm, 'confirm-ok').click()
   await expect(tid(qr, 'cab-list')).toHaveCount(0)
   // A class feature grants Bram History (no expertise) and a CHA save: the DM ticks both; the class's INT/WIS saves stay locked.
   // INT 17, CHA 10, PB +2: History +3 -> +5, CHA save +0 -> +2 on both screens.
@@ -427,6 +448,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   // Short rest: Action Surge back, Second Wind +1; hit dice, Bram's slot and Arcane Recovery wait for a long rest.
   await tid(qr, 'sheet-tab-resources').click()
   await tid(dm, 'party-rest-short').click()
+  await tid(dm, 'confirm-ok').click()
   await expect(tid(pl, 'res-action-surge-left')).toHaveText('1/1')
   await expect(tid(pl, 'res-second-wind-left')).toHaveText('1/3')
   await expect(tid(pl, 'hd-left')).toHaveText('3/4')
@@ -437,6 +459,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await tid(dm, 'card-hp-dec').click()
   await expect(tid(pl, 'sheet-hp')).toHaveText(`${hp1 + 23}/${hp1 + 24}`)
   await tid(dm, 'party-rest-long').click()
+  await tid(dm, 'confirm-ok').click()
   await expect(tid(pl, 'sheet-hp')).toHaveText(`${hp1 + 24}/${hp1 + 24}`)
   await expect(tid(pl, 'res-second-wind-left')).toHaveText('3/3')
   await expect(tid(pl, 'hd-left')).toHaveText('4/4')
@@ -598,6 +621,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
 
   // Reveal with the eye toggle: the player sees the token but never its HP. DM lowers HP by one.
   await tid(dm, `token-hide-${npcTok}`).click()
+  await tid(dm, 'confirm-ok').click() // reveal asks; hiding does not
   await expect(tid(dm, `token-hide-${npcTok}`)).toHaveAttribute('aria-pressed', 'false')
   await expect(tid(pl, `token-${npcTok}`)).toContainText(NPC)
   await expect(tid(pl, `token-hp-${npcTok}`)).toHaveCount(0)
@@ -669,6 +693,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(tid(dm, `token-${npc2}`).locator('> span').first()).toHaveText(NPC2)
   for (const [id, n] of [[npcTok, '3'], [npc2, '4']]) {
     await tid(dm, `token-hide-${id}`).click()
+    await tid(dm, 'confirm-ok').click()
     await expect(tid(dm, `token-hide-${id}`)).toHaveAttribute('aria-pressed', 'false')
     await dmMove(id, 6, 6)
     await expect(mapTok(pl, tokenId)).toHaveAttribute('data-cell-count', n)
@@ -861,8 +886,9 @@ test('v0: DM + player full flow', async ({ browser }) => {
     await pl.screenshot({ path: `${process.env.SHOTS}/player-banner-surrender.png` })
   }
   await expect(tid(dm, 'error-banner')).toHaveCount(0)
-  // Combat off: the indicator and Attack go away.
+  // Combat off (asks first; on does not): the indicator and Attack go away.
   await tid(dm, 'combat-toggle').click()
+  await tid(dm, 'confirm-ok').click()
   await expect(tid(pl, 'combat-indicator')).toHaveCount(0)
   await expect(tid(pl, 'attack-btn')).toHaveCount(0)
 

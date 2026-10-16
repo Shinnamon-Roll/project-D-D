@@ -7,6 +7,7 @@ import Table from './screens/Table'
 import crest from './assets/crest.svg'
 import { setLang, useT, type Lang } from './i18n'
 import { CombatBanner } from './table/Combat'
+import ConfirmHost from './screens/ConfirmDialog'
 
 export default function App() {
   const room = useStore((s) => s.room)
@@ -71,6 +72,7 @@ export default function App() {
       )}
       <main>{screen}</main>
       <CombatBanner />
+      <ConfirmHost />
     </div>
   )
 }

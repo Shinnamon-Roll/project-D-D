@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useMe, useStore } from '../store'
+import { askConfirm, useMe, useStore } from '../store'
 import { send } from '../ws'
 import { useL, useT } from '../i18n'
 import SeatQr from './SeatQr'
@@ -27,6 +27,11 @@ export default function Lobby() {
   const canStart = occupiedPlayers.length > 0 && occupiedPlayers.every((s) => s.ready)
   const campaign = room.campaigns.find((c) => c.id === room.campaignId)
   // The QR stays open only while its seat exists and is empty.
+  const removeSeat = (s: (typeof room.seats)[number]) => {
+    const label = s.kind === 'player' ? t('seatN', { n: seatNum(s.id) }) : t(kindLabel[s.kind])
+    const name = s.occupied ? `${label} (${s.name})` : label
+    askConfirm({ title: t('removeSeat'), body: t('seatRemoveConfirm', { name }), okLabel: t('removeSeat'), danger: true }, () => send('seat.remove', { seatId: s.id }))
+  }
   const qrOpen = isDm && players.some((s) => s.id === qrFor && !s.occupied)
 
   // Seat taken or removed under the open QR: the unmounted dialog can't return focus, so land on the heading.
@@ -108,7 +113,7 @@ export default function Lobby() {
                 </button>
               )}
               {isDm && s.kind !== 'dm' && (
-                <button className="danger" data-testid={`seat-remove-${s.id}`} onClick={() => send('seat.remove', { seatId: s.id })}>
+                <button className="danger" data-testid={`seat-remove-${s.id}`} onClick={() => removeSeat(s)}>
                   {t('removeSeat')}
                 </button>
               )}
@@ -171,7 +176,7 @@ export default function Lobby() {
             >
               {t('openCodm')}
             </button>
-            <button className="primary" data-testid="game-start" disabled={!canStart} onClick={() => send('game.start', {})}>
+            <button className="primary" data-testid="game-start" disabled={!canStart} onClick={() => askConfirm({ title: t('start'), body: t('startConfirm'), okLabel: t('start') }, () => send('game.start', {}))}>
               {t('start')}
             </button>
             <NotesButton />

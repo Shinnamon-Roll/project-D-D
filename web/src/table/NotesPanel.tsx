@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { Note } from '../protocol'
-import { useStore } from '../store'
+import { askConfirm, useStore } from '../store'
 import { send } from '../ws'
 import { useT } from '../i18n'
 import { closeOnBackdrop } from '../screens/SeatQr'
@@ -194,12 +194,13 @@ function NoteEditor({ note, index, count, onBack }: { note: Note; index: number;
         <button
           className="danger"
           data-testid="note-delete"
-          onClick={() => {
-            if (!confirm(t('noteDeleteConfirm', { title: note.title }))) return
-            clearTimeout(timer.current)
-            pending.current = null // never save into a removed note
-            send('note.remove', { id: note.id })
-          }}
+          onClick={() =>
+            askConfirm({ title: t('noteDelete'), body: t('noteDeleteConfirm', { title: note.title }), okLabel: t('noteDelete'), danger: true }, () => {
+              clearTimeout(timer.current)
+              pending.current = null // never save into a removed note
+              send('note.remove', { id: note.id })
+            })
+          }
         >
           {t('noteDelete')}
         </button>

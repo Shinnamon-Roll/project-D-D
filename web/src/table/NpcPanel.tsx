@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { Npc, Scene } from '../protocol'
-import { useStore } from '../store'
+import { askConfirm, useStore } from '../store'
 import { send, upload } from '../ws'
 import { useT } from '../i18n'
 import { EyeIcon, EyeOffIcon } from './icons'
@@ -79,7 +79,11 @@ export default function NpcPanel({ scene }: { scene?: Scene }) {
                   className="danger"
                   data-testid={`npc-delete-${n.id}`}
                   aria-label={t('removeNamed', { name: n.name })}
-                  onClick={() => confirm(t('npcDeleteConfirm', { name: n.name })) && send('npc.remove', { id: n.id })}
+                  onClick={() =>
+                    askConfirm({ title: t('removeNamed', { name: n.name }), body: t('npcDeleteConfirm', { name: n.name }), okLabel: t('remove'), danger: true }, () =>
+                      send('npc.remove', { id: n.id }),
+                    )
+                  }
                 >
                   {t('remove')}
                 </button>

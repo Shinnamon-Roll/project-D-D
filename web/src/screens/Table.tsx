@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import type { Grid, Token } from '../protocol'
-import { useMe, useStore } from '../store'
+import { askConfirm, useMe, useStore } from '../store'
 import { send } from '../ws'
 import { useL, useT } from '../i18n'
 import MapStage from '../table/MapStage'
@@ -208,7 +208,11 @@ function TokenRow({ t, dmNpc, onAct }: { t: Token; dmNpc: boolean; onAct?: () =>
           aria-pressed={!!t.hidden}
           aria-label={tr(t.hidden ? 'tokenIsHidden' : 'tokenIsShown', { name: t.name })}
           title={tr(t.hidden ? 'tokenIsHidden' : 'tokenIsShown', { name: t.name })}
-          onClick={() => send('token.setHidden', { tokenId: t.id, hidden: !t.hidden })}
+          onClick={() =>
+            t.hidden
+              ? askConfirm({ title: tr('tokenReveal'), body: tr('tokenRevealConfirm', { name: t.name }), okLabel: tr('tokenReveal') }, () => send('token.setHidden', { tokenId: t.id, hidden: false }))
+              : send('token.setHidden', { tokenId: t.id, hidden: true })
+          }
         >
           {t.hidden ? <EyeOffIcon /> : <EyeIcon />}
         </button>
@@ -238,7 +242,7 @@ function TokenRow({ t, dmNpc, onAct }: { t: Token; dmNpc: boolean; onAct?: () =>
         </button>
       )}
       {dmNpc && (
-        <button className="danger" data-testid={`token-remove-${t.id}`} onClick={() => send('token.remove', { tokenId: t.id })}>
+        <button className="danger" data-testid={`token-remove-${t.id}`} onClick={() => askConfirm({ title: tr('removeNamed', { name: t.name }), body: tr('tokenRemoveConfirm', { name: t.name }), okLabel: tr('remove'), danger: true }, () => send('token.remove', { tokenId: t.id }))}>
           {tr('remove')}
         </button>
       )}

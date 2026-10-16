@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type MouseEvent } from 'react'
 import type { Character } from '../protocol'
-import { useStore } from '../store'
+import { askConfirm, showError, useStore } from '../store'
 import { send } from '../ws'
 import { useL, useT } from '../i18n'
 import { useClass } from '../rules'
@@ -72,13 +72,21 @@ export default function PartyBar() {
           data-testid="combat-toggle"
           aria-pressed={room.combat}
           disabled={room.status !== 'playing'}
-          onClick={() => send('combat.set', { on: !room.combat })}
+          onClick={() =>
+            room.combat
+              ? askConfirm({ title: t('combatEnd'), body: t('combatEndConfirm'), okLabel: t('combatEnd') }, () => send('combat.set', { on: false }))
+              : send('combat.set', { on: true })
+          }
         >
           <SwordsIcon />
           {t('combat')}
         </button>
         {(['short', 'long'] as const).map((kind) => (
-          <button key={kind} className="party-rest" data-testid={`party-rest-${kind}`} disabled={room.status !== 'playing'} onClick={() => send('party.rest', { kind })}>
+          <button key={kind} className="party-rest" data-testid={`party-rest-${kind}`} disabled={room.status !== 'playing'} onClick={() => {
+              const label = t(kind === 'short' ? 'restShort' : 'restLong')
+              askConfirm({ title: label, body: t(kind === 'short' ? 'restShortConfirm' : 'restLongConfirm'), okLabel: label }, () => send('party.rest', { kind }))
+            }}
+          >
             {t(kind === 'short' ? 'restShort' : 'restLong')}
           </button>
         ))}
@@ -157,7 +165,14 @@ function CharCard({ c, player, onClose }: { c: Character; player: string; onClos
                           data-testid={`item-del-${i}`}
                           aria-label={t('itemDel', { name })}
                           disabled={busy}
-                          onClick={() => itemSend(() => send('item.remove', { characterId: c.id, index: i, qty: MAX_STACK }))}
+                          onClick={() =>
+                            askConfirm({ title: t('itemDel', { name }), body: t('itemDelConfirm', { name, qty: it.qty, hero }), okLabel: t('removeAll'), danger: true }, () => {
+                              // The index is from this snapshot: if the bag changed while the popup was open, don't delete a shifted item.
+                              const now = useStore.getState().room?.characters.find((x) => x.id === c.id)
+                              if (JSON.stringify(now?.items) !== itemsKey) return showError(t('itemsChanged'))
+                              itemSend(() => send('item.remove', { characterId: c.id, index: i, qty: MAX_STACK }))
+                            })
+                          }
                         >
                           {t('removeAll')}
                         </button>

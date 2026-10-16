@@ -33,7 +33,7 @@ export function AttackControl({ targets, aim, setAim }: { targets: Token[]; aim:
   useEffect(() => () => setAim(null), [setAim]) // combat ended mid-aim: start fresh next time
   useEffect(() => {
     if (aim === null) return
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setAim(null)
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && !(e.target as HTMLElement).closest?.('dialog') && setAim(null) // Esc in a dialog closes only the dialog
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
   }, [aim, setAim])
