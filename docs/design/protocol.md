@@ -81,9 +81,10 @@ Roles: **DM** = seat kind `dm` or `codm` (co-DM has every DM right except removi
 | `scene.add` | `{name, imageUrl, grid}` | DM | `creating`/`playing` | imageUrl must start with `/uploads/`; grid: cellSize 10–400, cols/rows 1–200 |
 | `scene.update` | `{sceneId, name, grid}` | DM | `creating`/`playing` | same grid limits (cellSize is an int: send `round(imgW/cols)`; offsetX/offsetY 0). A grid with fewer than ceil(visibleTokensInScene/4) cells (hidden tokens never count) → `grid too small: <n> visible tokens need at least <m> cells`, nothing changes. Grid shrink: that scene's tokens clamp to the nearest edge cell `[0,cols-1]×[0,rows-1]`; a clamped visible token whose cell already holds 4 visible tokens goes to the nearest cell (Chebyshev distance, then row-major) with room; fog rects clip to the grid, rects fully outside are dropped |
 | `scene.select` | `{sceneId}` | DM | `playing` | sets `currentSceneId`; adds a token for every character without one in that scene, one per cell row-major from 0,0, skipping cells with 4 visible tokens and wrapping around; no cell with room → `scene has no free cell` (name = `heroName.en`, imageUrl = character `art`) |
-| `npc.place` | `{npcId, sceneId}` | DM | `playing` | copies the pool NPC into a new token on the first least-crowded cell (row-major) of the scene; `hp = hpMax`, `hidden`, `imageUrl` from the pool; name `<name>`, then `<name> #2`, `#3`… (first name not used by a token in that scene); a visible NPC ignores hidden tokens for both the cell and the name (may stack on one; a name may repeat after a reveal); a hidden NPC counts every token for its cell and always fits; visible NPC with every cell holding 4 visible → `scene has no free cell`. Replaces `token.addNpc` (removed v0.11.0) |
+| `npc.place` | `{npcId, sceneId}` | DM | `playing` | copies the pool NPC into a new token on the first least-crowded cell (row-major) of the scene; `hp = hpMax`, `hidden`, `imageUrl` from the pool; name by "Token names" below; a visible NPC ignores hidden tokens for its cell (may stack on one); a hidden NPC counts every token for its cell and always fits; visible NPC with every cell holding 4 visible → `scene has no free cell`. Replaces `token.addNpc` (removed v0.11.0) |
 | `token.move` | `{tokenId, col, row}` | DM any token; player only own character's token | `playing` | 0 ≤ col < cols, 0 ≤ row < rows of the token's scene. A player gets `you can only move your own token` for a missing token too (no hidden-token oracle). Target cell already holding 4 visible tokens (the mover not counted; hidden tokens never count) → `that cell is full (max 4)`; a hidden token may move anywhere |
-| `token.setHidden` | `{tokenId, hidden}` | DM | `playing` | NPC tokens placed from the pool only. Reveal (`hidden: false`) on a cell already holding 4 visible tokens → `that cell is full (max 4)` (move it first); hiding is always allowed |
+| `token.setHidden` | `{tokenId, hidden}` | DM | `playing` | NPC tokens placed from the pool only. Reveal (`hidden: false`) on a cell already holding 4 visible tokens → `that cell is full (max 4)` (move it first); hiding is always allowed and keeps the name; a reveal may rename (see "Token names") |
+| `token.duplicate` | `{tokenId}` | DM | `playing` | NPC tokens placed from the pool only (character → `only NPC tokens from the pool`, missing → `no such token`). New token: same `imageUrl`, `hpMax`, `hidden`, `npcId`; `hp = hpMax`; name by "Token names"; cell = nearest to the original (Chebyshev distance, then row-major; the original's own cell first) holding < 4 tokens — visible copy counts visible tokens only, hidden copy counts all and falls back to the original's cell; visible copy with no such cell → `scene has no free cell`. Line `"added Goblin #6"` / `"เพิ่ม Goblin #6"`: visible = feed + DM log; hidden = DM log only, `"added Goblin #6 (hidden)"` / `"เพิ่ม Goblin #6 (ซ่อน)"`. No combat mode needed |
 | `token.adjustHp` | `{tokenId, delta}` | DM | `playing` | NPC tokens placed from the pool only; `-999 ≤ delta ≤ 999` (int); `hp` clamps to `0..hpMax` |
 | `token.remove` | `{tokenId}` | DM | `playing` | |
 | `fog.add` | `{sceneId, col, row, w, h}` | DM | `playing` | w,h ≥ 1, rect inside grid |
@@ -92,8 +93,8 @@ Roles: **DM** = seat kind `dm` or `codm` (co-DM has every DM right except removi
 | `note.update` | `{id, title, body}` | DM | any | title 1–80 (trimmed), body ≤ 20000 chars (not trimmed); sets `updatedAt`; last write wins |
 | `note.remove` | `{id}` | DM | any | |
 | `note.move` | `{id, index}` | DM | any | `index` = position in the resulting list, `0 ≤ index < len(notes)` |
-| `npc.add` | `{name, imageUrl, hpMax, hidden}` | DM | any | name trimmed 1–40 chars; `hpMax` 1–999; `imageUrl` "" or an existing `/uploads/<generated name>`; max 100 NPCs |
-| `npc.update` | `{id, name, imageUrl, hpMax, hidden}` | DM | any | same checks; tokens already placed keep their copy |
+| `npc.add` | `{name, imageUrl, hpMax, hidden}` | DM | any | name trimmed 1–40 chars and not already in the pool (trimmed, case-insensitive) → else `that name is already in the pool`; `hpMax` 1–999; `imageUrl` "" or an existing `/uploads/<generated name>`; max 100 NPCs |
+| `npc.update` | `{id, name, imageUrl, hpMax, hidden}` | DM | any | same checks (its own current name is allowed); tokens already placed keep their copy. An old `npcs.json` with duplicate names loads unchanged |
 | `npc.remove` | `{id}` | DM | any | tokens already placed stay |
 | `combat.set` | `{on}` | DM | `playing` | sets `combat`; same value again = no change, no line; `on: false` cancels every pending attack |
 | `attack.declare` | `{targetTokenId}` | player with a character | `playing`, `combat` | at most 1 pending attack per character; attacker needs a token in `currentSceneId`; target exists and is not hidden (a hidden token gets the same `no such target` as a missing one), is not the attacker's own token, and is in the attacker's scene |
@@ -112,7 +113,7 @@ Unknown `type`, malformed payload, or failed check → `error` to sender. Remove
     → error); hit + damage: target character `hp` −= damage, clamp 0 (+ knocked-out line). gift: `item.name` 1–40,
     `item.qty` 1–99, added to the target's items exactly like `item.give` (same stack merge, limits and errors).
     surrender: no fields. Fields of other kinds are ignored.
-- Lines (feed + DM log; the feed and banner drop npc.place's `" #n"` suffix, the DM log keeps the token name):
+- Lines (feed + DM log + banner all use the full token name, `" #n"` included, e.g. `"Wolf #2 attacks Mira — hit! −5"`):
   talk `"Wolf talks with Mira: “Gold, now!”"` / `"Wolf คุยกับ Mira: “Gold, now!”"` (no text: `"Wolf talks with Mira"`);
   hit `"Wolf attacks Mira — hit! −5"` / `"Wolf โจมตี Mira — โดน! −5"` (damage 0: no number); miss
   `"Wolf attacks Mira — miss"` / `"Wolf โจมตี Mira — ไม่โดน"`; gift `"Wolf gives Mira Rusty Key ×1"` /
@@ -210,6 +211,21 @@ The `state` payload has a top-level `"build": "<16 hex>"`, random per server pro
   to a unique `notes.json.bad-<random>` and the server starts with no notes (error logged); an unreadable file stops startup.
 - Logs name the event and sender only (`event note.update by=<name>`), never titles or bodies.
 
+## Token names (`docs/features/npc-names.md`)
+- Token names are unique per scene (case-insensitive); other scenes are independent. Character tokens are never
+  renamed but count as taken.
+- Base = name minus a trailing `" #<n>"` (`n` 1–999999999, no leading zero); a name without one is number 1.
+  Name from source `src` (pool name for `npc.place`, the original token's name for `token.duplicate`):
+  `n = max(src's number, highest number of that base among the counted tokens + 1)`; `n = 1` → the bare base, else
+  `"<base> #<n>"`. E.g. `Goblin` → `Goblin #2`, `#3`; highest `Goblin #5` → `Goblin #6`; 5 goblins, duplicate `#2` →
+  `Goblin #6`; pool `Goblin #5` in an empty scene → `Goblin #5`, then `#6`.
+- Visible new token: counts visible tokens only. Hidden new token: counts every token (scene-wide next).
+- A visible name that a hidden token already holds: the hidden token is renamed to its base's scene-wide next.
+- Reveal (`token.setHidden false`): the token takes the visible next of its base (starting at its pool NPC's own number
+  when that NPC still has the same base) if its name differs, then any clashing hidden token is renamed; pending
+  attacks on it take the new `targetName`. Players never see a hidden rename (their view is unchanged, `myAttack` too).
+- Every automatic rename adds a DM-log-only line `"renamed Goblin #2 to Goblin #3"` / `"เปลี่ยนชื่อ Goblin #2 เป็น Goblin #3"`.
+
 ## NPC pool (v0.11.0, `docs/features/npc-pool.md`)
 - `Npc = {"id": "npc1", "name": "Goblin", "imageUrl": "", "hpMax": 7, "hidden": true}` — `hidden` is the default for
   new tokens placed from it; `imageUrl` "" = default silhouette. Ids are `npc<seq>`, never reused (same rule as notes).
@@ -220,7 +236,7 @@ The `state` payload has a top-level `"build": "<16 hex>"`, random per server pro
   `note.*`, `npc.add/update/remove`, placing a hidden NPC, and hp changes send them nothing.
 - `imageUrl` check: exactly `/uploads/<32 hex>.<png|jpg|gif|webp>` (a name the upload endpoint generates) and the
   file exists in the uploads dir.
-- Errors: `only the DM can do that`, `npc name must be 1-40 characters`, `npc hpMax must be 1-999`, `at most 100 npcs`,
+- Errors: `only the DM can do that`, `npc name must be 1-40 characters`, `that name is already in the pool`, `npc hpMax must be 1-999`, `at most 100 npcs`,
   `no such npc`, `imageUrl must be empty or an uploaded image`, `could not save npcs`, `scene has no free cell`,
   `only NPC tokens from the pool`, `delta must be -999 to 999`, `no such token`, `malformed payload`.
 - Persisted to `<-data>/npcs.json` exactly like notes (atomic write, dir `0700`, file `0600`, corrupt file → `npcs.json.bad-<random>`).

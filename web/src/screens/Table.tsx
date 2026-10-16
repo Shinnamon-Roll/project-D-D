@@ -233,6 +233,11 @@ function TokenRow({ t, dmNpc, onAct }: { t: Token; dmNpc: boolean; onAct?: () =>
         </button>
       )}
       {dmNpc && (
+        <button data-testid={`token-dup-${t.id}`} aria-label={tr('tokenDupOf', { name: t.name })} onClick={() => send('token.duplicate', { tokenId: t.id })}>
+          {tr('tokenDup')}
+        </button>
+      )}
+      {dmNpc && (
         <button className="danger" data-testid={`token-remove-${t.id}`} onClick={() => send('token.remove', { tokenId: t.id })}>
           {tr('remove')}
         </button>

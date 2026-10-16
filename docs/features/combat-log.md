@@ -18,7 +18,7 @@
 - ปุ่ม **โดน** (`attack-hit-<id>`) / **ไม่โดน** (`attack-miss-<id>`) + ช่องดาเมจไม่บังคับ (`attack-dmg-<id>`, 0–999) → `attack.resolve {attackId, hit, damage?}`
   - โดน + ดาเมจ → หัก HP ของเป้า (NPC token `hp` หรือ character `hp`), clamp 0
 - state ส่งการโจมตีค้าง `attacks: [{id, byCharacterId, byName: L, targetTokenId, targetName, at}]` **ให้ DM เท่านั้น**; ผู้เล่นได้แค่ `myAttack?: {id, targetName}` ของตัวเอง
-- ผลไปที่ **feed** สาธารณะ: "อายลา → Goblin #2: โดน!" (เป้าเป็น NPC: ไม่บอกตัวเลขดาเมจ/HP; เป้าเป็นตัวละคร: บอก −ดาเมจ และ HP ใหม่)
+- ผลไปที่ **feed** สาธารณะ: "อายลา → Goblin #2: โดน!" (เป้าเป็น NPC: ไม่บอกตัวเลขดาเมจ/HP; เป้าเป็นตัวละคร: บอก −ดาเมจ และ HP ใหม่) · ชื่อ NPC ใน feed และป้ายเป็นชื่อ token เต็ม รวม `#n` เสมอ ([`npc-names.md`](npc-names.md))
 
 ## ป้ายใหญ่กลางจอ (ทุกคน)
 - หลัง resolve server ส่งข้อความชั่วคราว `{type: "banner", payload: {kind: "hit"|"miss", text: L}}` ให้ทุก connection (ไม่อยู่ใน state)

@@ -66,7 +66,7 @@ func TestNpcAct(t *testing.T) {
 		name, client string
 		npc          string // arena token name
 		extra        m
-		feed         rules.L // public line; the DM log line has the token's full name
+		feed         rules.L // public line; the DM log line is the same
 		kind         string
 		bannerEN     string
 		hpAfter      int // knight starts at 36
@@ -90,8 +90,10 @@ func TestNpcAct(t *testing.T) {
 			rules.L{TH: "Wolf มอบ Rusty Key ×2 ให้ อัลดริก เวน", EN: "Wolf gives Aldric Vane Rusty Key ×2"}, "gift", "", 36, false},
 		{"surrender", "co", "Wolf", m{"kind": "surrender", "text": "ignored"},
 			rules.L{TH: "Wolf ยอมแพ้ต่อ อัลดริก เวน", EN: "Wolf surrenders to Aldric Vane"}, "surrender", "", 36, false},
-		{"second copy hides #n", "dm", "Wolf #2", m{"kind": "surrender"},
-			rules.L{TH: "Wolf ยอมแพ้ต่อ อัลดริก เวน", EN: "Wolf surrenders to Aldric Vane"}, "surrender", "", 36, false},
+		{"second copy shows #n", "dm", "Wolf #2", m{"kind": "surrender"},
+			rules.L{TH: "Wolf #2 ยอมแพ้ต่อ อัลดริก เวน", EN: "Wolf #2 surrenders to Aldric Vane"}, "surrender", "", 36, false},
+		{"second copy hit", "dm", "Wolf #2", m{"kind": "attack", "hit": true, "damage": 2},
+			rules.L{TH: "Wolf #2 โจมตี อัลดริก เวน — โดน! −2", EN: "Wolf #2 attacks Aldric Vane — hit! −2"}, "hit", "Wolf #2 → " + kn, 34, false},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			r, ids := arena(t)
@@ -116,16 +118,15 @@ func TestNpcAct(t *testing.T) {
 			if line != tc.feed {
 				t.Fatalf("feed %+v, want %+v", line, tc.feed)
 			}
-			full := rules.L{TH: strings.Replace(tc.feed.TH, "Wolf", tc.npc, 1), EN: strings.Replace(tc.feed.EN, "Wolf", tc.npc, 1)}
-			if fr := r.Fresh(); len(fr) == 0 || fr[0].Text != full || fr[0].Actor == "" {
-				t.Fatalf("dm log %+v, want %+v", fr, full)
+			if fr := r.Fresh(); len(fr) == 0 || fr[0].Text != tc.feed || fr[0].Actor == "" {
+				t.Fatalf("dm log %+v, want %+v", fr, tc.feed)
 			}
 			b := r.Banner()
 			wantText := tc.feed.EN
 			if tc.bannerEN != "" {
 				wantText = tc.bannerEN
 			}
-			if b == nil || b.Kind != tc.kind || b.Text.EN != wantText || b.Text.TH == "" || strings.Contains(b.Text.EN, "#") {
+			if b == nil || b.Kind != tc.kind || b.Text.EN != wantText || !strings.HasPrefix(b.Text.TH, tc.npc+" ") {
 				t.Fatalf("banner %+v, want %s %q", b, tc.kind, wantText)
 			}
 			if hp := r.st.Characters[0].HP; hp != tc.hpAfter {

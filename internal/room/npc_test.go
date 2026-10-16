@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"testing"
 )
@@ -59,7 +60,7 @@ func TestNpcPoolPermissions(t *testing.T) {
 func TestNpcImageURL(t *testing.T) {
 	r, _ := lobby(t)
 	good := withUpload(t, r)
-	for _, tc := range []struct {
+	for i, tc := range []struct {
 		url string
 		ok  bool
 	}{
@@ -74,7 +75,11 @@ func TestNpcImageURL(t *testing.T) {
 		{strings.Repeat("a", 32) + ".png", false},
 	} {
 		for _, typ := range []string{"npc.add", "npc.update"} {
-			err := apply(r, "dm", typ, m{"id": "npc1", "name": "Gob", "hpMax": 3, "imageUrl": tc.url})
+			name := "Gob" // npc.update of npc1 keeps its own name; every npc.add needs a new one
+			if typ == "npc.add" {
+				name = "Gob " + strconv.Itoa(i)
+			}
+			err := apply(r, "dm", typ, m{"id": "npc1", "name": name, "hpMax": 3, "imageUrl": tc.url})
 			if (err == nil) != tc.ok {
 				t.Errorf("%s %q: err %v, want ok=%v", typ, tc.url, err, tc.ok)
 			}
@@ -141,28 +146,33 @@ func TestNpcPlace(t *testing.T) {
 	fail(t, r, "dm", "npc.place", m{"npcId": "npc2", "sceneId": tiny})
 }
 
-// A visible NPC ignores hidden tokens for its cell and "#n" suffix; a hidden one counts every token.
+// A visible NPC ignores hidden tokens for its cell and number (the clashing hidden one is renamed); a hidden one
+// counts every token.
 func TestNpcPlaceIgnoresHidden(t *testing.T) {
 	for _, tc := range []struct {
 		name          string
 		first, second bool // hidden flag of the first and second placed Goblin
 		wantName      string
 		wantCol       int
+		firstName     string // the first Goblin's name afterwards
 	}{
-		{"hidden then visible", true, false, "Goblin", 1},
-		{"hidden then hidden", true, true, "Goblin #2", 2},
-		{"visible then hidden", false, true, "Goblin #2", 2},
-		{"visible then visible", false, false, "Goblin #2", 2},
+		{"hidden then visible", true, false, "Goblin", 1, "Goblin #2"},
+		{"hidden then hidden", true, true, "Goblin #2", 2, "Goblin"},
+		{"visible then hidden", false, true, "Goblin #2", 2, "Goblin"},
+		{"visible then visible", false, false, "Goblin #2", 2, "Goblin"},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			r, sc := playing(t)
 			ok(t, r, "dm", "npc.add", m{"name": "Goblin", "hpMax": 7, "hidden": tc.first})
-			ok(t, r, "dm", "npc.add", m{"name": "Goblin", "hpMax": 7, "hidden": tc.second})
 			ok(t, r, "dm", "npc.place", m{"npcId": "npc1", "sceneId": sc})
-			ok(t, r, "dm", "npc.place", m{"npcId": "npc2", "sceneId": sc})
+			ok(t, r, "dm", "npc.update", m{"id": "npc1", "name": "Goblin", "hpMax": 7, "hidden": tc.second})
+			ok(t, r, "dm", "npc.place", m{"npcId": "npc1", "sceneId": sc})
 			tk := r.State().Tokens[2]
 			if tk.Name != tc.wantName || tk.Col != tc.wantCol || tk.Row != 0 {
 				t.Fatalf("second token = %+v, want %s at col %d", tk, tc.wantName, tc.wantCol)
+			}
+			if n := r.State().Tokens[1].Name; n != tc.firstName {
+				t.Fatalf("first token %q, want %q", n, tc.firstName)
 			}
 		})
 	}

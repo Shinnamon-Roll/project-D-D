@@ -5,6 +5,7 @@ import (
 	"log/slog"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"testing"
 )
@@ -44,12 +45,64 @@ func TestLimits(t *testing.T) {
 		t.Fatalf("update not applied: %+v", n)
 	}
 	for len(s.List()) < MaxNPCs {
-		if err := s.Add(NPC{Name: "x", HPMax: 1}); err != nil {
+		if err := s.Add(NPC{Name: "x" + strconv.Itoa(len(s.List())), HPMax: 1}); err != nil {
 			t.Fatal(err)
 		}
 	}
 	if err := s.Add(NPC{Name: "one too many", HPMax: 1}); err != errFull {
 		t.Fatalf("101st npc: %v", err)
+	}
+}
+
+func TestUniqueName(t *testing.T) {
+	s := &Store{}
+	for _, n := range []string{"Goblin", "Wolf"} {
+		if err := s.Add(NPC{Name: n, HPMax: 1}); err != nil {
+			t.Fatal(err)
+		}
+	}
+	for _, tc := range []struct {
+		name string
+		err  error
+		do   func() error
+	}{
+		{"add same", errDupName, func() error { return s.Add(NPC{Name: "Goblin", HPMax: 1}) }},
+		{"add other case + spaces", errDupName, func() error { return s.Add(NPC{Name: "  gOBLIN ", HPMax: 1}) }},
+		{"add numbered is another name", nil, func() error { return s.Add(NPC{Name: "Goblin #5", HPMax: 1}) }},
+		{"update to another's name", errDupName, func() error { return s.Update(NPC{ID: "npc2", Name: "goblin", HPMax: 1}) }},
+		{"update keeps own name", nil, func() error { return s.Update(NPC{ID: "npc1", Name: "Goblin", HPMax: 3}) }},
+		{"update own name other case", nil, func() error { return s.Update(NPC{ID: "npc1", Name: "GOBLIN", HPMax: 3}) }},
+		{"update to a free name", nil, func() error { return s.Update(NPC{ID: "npc2", Name: "Wolf Alpha", HPMax: 1}) }},
+		{"add the freed name", nil, func() error { return s.Add(NPC{Name: "Wolf", HPMax: 1}) }},
+	} {
+		if err := tc.do(); err != tc.err {
+			t.Errorf("%s: err %v, want %v", tc.name, err, tc.err)
+		}
+	}
+	if len(s.List()) != 4 {
+		t.Fatalf("pool %+v", s.List())
+	}
+}
+
+// An old npcs.json may hold duplicate names: it loads unchanged; only new adds and edits must be unique.
+func TestLoadKeepsOldDuplicates(t *testing.T) {
+	dir := t.TempDir()
+	old := `{"seq":2,"npcs":[{"id":"npc1","name":"Goblin","hpMax":1},{"id":"npc2","name":"goblin","hpMax":2}]}`
+	if err := os.WriteFile(filepath.Join(dir, fileName), []byte(old), 0o600); err != nil {
+		t.Fatal(err)
+	}
+	s, err := Load(dir, slog.New(slog.DiscardHandler))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if l := s.List(); len(l) != 2 || l[0].Name != "Goblin" || l[1].Name != "goblin" {
+		t.Fatalf("loaded %+v", l)
+	}
+	if err := s.Add(NPC{Name: "GOBLIN", HPMax: 1}); err != errDupName {
+		t.Fatalf("add: %v", err)
+	}
+	if err := s.Update(NPC{ID: "npc2", Name: "Goblin Boss", HPMax: 2}); err != nil {
+		t.Fatalf("rename a duplicate: %v", err)
 	}
 }
 

@@ -11,7 +11,6 @@ import (
 	"path/filepath"
 	"regexp"
 	"slices"
-	"strconv"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -490,6 +489,8 @@ func (r *Room) apply(clientID, typ string, payload json.RawMessage) error {
 		return r.npcPlace(s, payload)
 	case "token.setHidden", "token.adjustHp":
 		return r.tokenNpcEdit(s, typ, payload)
+	case "token.duplicate":
+		return r.tokenDuplicate(s, payload)
 	case "token.move":
 		return r.tokenMove(s, payload)
 	case "token.remove":
@@ -823,7 +824,7 @@ func (r *Room) sceneSelect(s *Seat, payload json.RawMessage) error {
 		return errors.New("no such scene")
 	}
 	// One token per cell, row-major from 0,0, skipping full cells; wrap around when the grid runs out.
-	n, cells, next := len(r.st.Tokens), sc.Grid.Cols*sc.Grid.Rows, 0
+	undo, n, cells, next := r.undo(), len(r.st.Tokens), sc.Grid.Cols*sc.Grid.Rows, 0
 	for _, c := range r.st.Characters {
 		if slices.ContainsFunc(r.st.Tokens, func(t Token) bool { return t.SceneID == sc.ID && t.CharacterID == c.ID }) {
 			continue
@@ -836,7 +837,7 @@ func (r *Room) sceneSelect(s *Seat, payload json.RawMessage) error {
 			}
 		}
 		if cell < 0 {
-			r.st.Tokens = r.st.Tokens[:n] // state unchanged on error
+			undo() // state unchanged on error
 			return errors.New("scene has no free cell")
 		}
 		r.st.Tokens = append(r.st.Tokens, Token{
@@ -845,12 +846,30 @@ func (r *Room) sceneSelect(s *Seat, payload json.RawMessage) error {
 		})
 		next = cell + 1
 	}
+	for _, t := range r.st.Tokens[n:] { // the new character tokens; claim renames NPC tokens only
+		if err := r.claim(sc.ID, t.Name, t.ID); err != nil {
+			undo()
+			return err
+		}
+	}
 	r.st.CurrentSceneID = sc.ID
 	r.addLog("เปลี่ยนไปฉาก "+sc.Name, "switched to scene "+sc.Name)
 	return nil
 }
 
 func abs(x int) int { return max(x, -x) }
+
+// nearestCell returns the cell of g closest to (c0, r0) (Chebyshev distance, then row-major) for which fits holds.
+func nearestCell(g Grid, c0, r0 int, fits func(col, row int) bool) (col, row int, ok bool) {
+	best := -1
+	for c := range g.Cols * g.Rows {
+		x, y := c%g.Cols, c/g.Cols
+		if d := max(abs(x-c0), abs(y-r0)); (best < 0 || d < best) && fits(x, y) {
+			best, col, row = d, x, y
+		}
+	}
+	return col, row, best >= 0
+}
 
 // cellText formats a grid cell for log lines: "(col,row)", 0-based like the protocol.
 func cellText(col, row int) string { return fmt.Sprintf("(%d,%d)", col, row) }
@@ -1009,15 +1028,12 @@ func (r *Room) npcPlace(s *Seat, payload json.RawMessage) error {
 	if sc == nil {
 		return errors.New("no such scene")
 	}
-	// A visible token ignores hidden ones for its cell and "#n" suffix, so neither hints that hidden tokens exist.
-	// It may stack on a hidden token (the DM can move it); a name may repeat after a reveal.
-	// A hidden one counts every token for its cell but never fills a cell, so it always fits.
+	// A visible token ignores hidden ones for its cell, so a full cell never hints that hidden tokens exist; it may
+	// stack on a hidden token (the DM can move it). A hidden one counts every token but never fills a cell.
 	used := map[[2]int]int{}
-	names := map[string]bool{}
 	for _, t := range r.st.Tokens {
 		if t.SceneID == sc.ID && (n.Hidden || !t.Hidden) {
 			used[[2]int{t.Col, t.Row}]++
-			names[t.Name] = true
 		}
 	}
 	cell := 0
@@ -1029,20 +1045,80 @@ func (r *Room) npcPlace(s *Seat, payload json.RawMessage) error {
 	if !n.Hidden && used[[2]int{cell % sc.Grid.Cols, cell / sc.Grid.Cols}] >= MaxPerCell {
 		return errors.New("scene has no free cell")
 	}
-	name := n.Name // second copy in the scene: "<name> #2", then #3, ...
-	for k := 2; names[name]; k++ {
-		name = n.Name + " #" + strconv.Itoa(k)
-	}
 	hp, hpMax := n.HPMax, n.HPMax
-	r.st.Tokens = append(r.st.Tokens, Token{
-		ID: r.id("t"), SceneID: sc.ID, NpcID: n.ID, Name: name, ImageURL: n.ImageURL,
+	undo := r.undo()
+	i, err := r.addNpcToken(Token{
+		SceneID: sc.ID, NpcID: n.ID, ImageURL: n.ImageURL,
 		Col: cell % sc.Grid.Cols, Row: cell / sc.Grid.Cols, Hidden: n.Hidden, HP: &hp, HPMax: &hpMax,
-	})
+	}, n.Name)
+	if err != nil {
+		undo()
+		return err
+	}
+	name := r.st.Tokens[i].Name
 	th, en := fmt.Sprintf("วาง %s ในฉาก %s", name, sc.Name), fmt.Sprintf("placed %s in %s", name, sc.Name)
 	if n.Hidden {
 		th, en = th+" (ซ่อน)", en+" (hidden)"
 	}
 	r.addLog(th, en)
+	return nil
+}
+
+// tokenDuplicate adds a copy of an NPC token (image, hpMax, full hp, hidden, npcId) on the free cell nearest to it,
+// named by the npc.place rules. Visible: feed + DM log; hidden: DM log only.
+func (r *Room) tokenDuplicate(s *Seat, payload json.RawMessage) error {
+	p, err := decode[struct {
+		TokenID string `json:"tokenId"`
+	}](payload)
+	if err != nil {
+		return err
+	}
+	if err := r.needDM(s, StatusPlaying); err != nil {
+		return err
+	}
+	t := r.token(p.TokenID)
+	if t == nil {
+		return errors.New("no such token")
+	}
+	if t.CharacterID != "" || t.HP == nil || t.HPMax == nil {
+		return errors.New("only NPC tokens from the pool")
+	}
+	sc := r.scene(t.SceneID)
+	if sc == nil {
+		return errors.New("no such scene")
+	}
+	// Same cell rule as npc.place: a visible copy counts visible tokens only; a hidden one prefers a cell with
+	// fewer than MaxPerCell tokens of any kind but always fits (on the original's cell when every cell is full).
+	col, row, found := nearestCell(sc.Grid, t.Col, t.Row, func(col, row int) bool {
+		n := 0
+		for _, o := range r.st.Tokens {
+			if o.SceneID == sc.ID && o.Col == col && o.Row == row && (t.Hidden || !o.Hidden) {
+				n++
+			}
+		}
+		return n < MaxPerCell
+	})
+	if !found {
+		if !t.Hidden {
+			return errors.New("scene has no free cell")
+		}
+		col, row = t.Col, t.Row
+	}
+	hp, hpMax := *t.HPMax, *t.HPMax
+	undo := r.undo()
+	i, err := r.addNpcToken(Token{
+		SceneID: sc.ID, NpcID: t.NpcID, ImageURL: t.ImageURL, Col: col, Row: row, Hidden: t.Hidden, HP: &hp, HPMax: &hpMax,
+	}, t.Name) // t is invalid from here: the append may have moved the tokens
+	if err != nil {
+		undo()
+		return err
+	}
+	c := r.st.Tokens[i]
+	if c.Hidden {
+		r.addLog("เพิ่ม "+c.Name+" (ซ่อน)", "added "+c.Name+" (hidden)")
+	} else {
+		r.addFeed("เพิ่ม "+c.Name, "added "+c.Name)
+	}
 	return nil
 }
 
@@ -1069,6 +1145,14 @@ func (r *Room) tokenNpcEdit(s *Seat, typ string, payload json.RawMessage) error 
 	if typ == "token.setHidden" {
 		if t.Hidden && !p.Hidden && r.visibleAt(t.SceneID, t.Col, t.Row, t.ID) >= MaxPerCell {
 			return errCellFull // the DM moves it first
+		}
+		if t.Hidden && !p.Hidden {
+			undo := r.undo()
+			t.Hidden = false
+			if err := r.reveal(t); err != nil {
+				undo()
+				return err
+			}
 		}
 		t.Hidden = p.Hidden
 		if p.Hidden {

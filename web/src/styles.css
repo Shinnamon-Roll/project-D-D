@@ -542,6 +542,7 @@ dialog.skill-modal { width: min(520px, calc(100vw - 32px)); text-align: left; }
 .npc-portrait { display: flex; align-items: center; gap: 14px; }
 .npc-portrait label { flex: 1; min-width: 0; }
 .npc-form input[aria-invalid='true'] { border-bottom-color: var(--blood); }
+.npc-form .name-taken { color: var(--blood); font-weight: 600; margin-top: -6px; }
 /* checkbox with role=switch drawn as a sliding wax-seal toggle; the real input stays focusable */
 label.switch { flex-direction: row; align-items: center; gap: 10px; color: var(--ink); cursor: pointer; position: relative; }
 label.switch input { position: absolute; z-index: 1; left: 0; top: 50%; opacity: 0; width: 38px; height: 22px; margin: -11px 0 0; cursor: pointer; }

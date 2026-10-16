@@ -51,6 +51,7 @@ var (
 	errHP      = fmt.Errorf("npc hpMax must be 1-%d", MaxHP)
 	errFull    = fmt.Errorf("at most %d npcs", MaxNPCs)
 	errNoNPC   = errors.New("no such npc")
+	errDupName = errors.New("that name is already in the pool")
 	errNotSave = errors.New("could not save npcs")
 )
 
@@ -116,6 +117,12 @@ func clean(n NPC) (NPC, error) {
 	return n, nil
 }
 
+// nameTaken reports whether an NPC other than self already has name (trimmed, case-insensitive).
+// Duplicates in an old npcs.json load as they are; only adds and edits are checked.
+func (s *Store) nameTaken(name, self string) bool {
+	return slices.ContainsFunc(s.npcs, func(n NPC) bool { return n.ID != self && strings.EqualFold(strings.TrimSpace(n.Name), name) })
+}
+
 // Add appends n with a new id (n.ID is ignored).
 func (s *Store) Add(n NPC) error {
 	n, err := clean(n)
@@ -124,6 +131,9 @@ func (s *Store) Add(n NPC) error {
 	}
 	if len(s.npcs) >= MaxNPCs {
 		return errFull
+	}
+	if s.nameTaken(n.Name, "") {
+		return errDupName
 	}
 	n.ID = idPrefix + strconv.Itoa(s.seq+1)
 	return s.commit(s.seq+1, append(slices.Clone(s.npcs), n))
@@ -138,6 +148,9 @@ func (s *Store) Update(n NPC) error {
 	i := s.index(n.ID)
 	if i < 0 {
 		return errNoNPC
+	}
+	if s.nameTaken(n.Name, n.ID) {
+		return errDupName
 	}
 	next := slices.Clone(s.npcs)
 	next[i] = n

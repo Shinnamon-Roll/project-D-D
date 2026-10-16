@@ -122,6 +122,9 @@ const th = {
   hpDec: 'ลดเลือด {name}',
   hpInc: 'เพิ่มเลือด {name}',
   hpOf: 'เลือด {name}',
+  npcNameTaken: 'ชื่อนี้มีใน pool แล้ว',
+  tokenDup: 'เพิ่มอีกตัว',
+  tokenDupOf: 'เพิ่มอีกตัวแบบ {name}',
 
   // NotesPanel
   storyNotes: 'โน้ตเนื้อเรื่อง',
@@ -375,6 +378,9 @@ const en: Record<keyof typeof th, string> = {
   hpDec: 'Lower {name} HP',
   hpInc: 'Raise {name} HP',
   hpOf: '{name} HP',
+  npcNameTaken: 'That name is already in the pool',
+  tokenDup: 'Duplicate',
+  tokenDupOf: 'Duplicate {name}',
 
   storyNotes: 'Story notes',
   notesAdd: '+ Add note',

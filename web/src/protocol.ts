@@ -253,6 +253,7 @@ export interface ClientEvents {
   'token.adjustHp': { tokenId: string; delta: number }
   'token.move': { tokenId: string; col: number; row: number }
   'token.remove': { tokenId: string }
+  'token.duplicate': { tokenId: string } // DM/co-DM: copy of an NPC token on the nearest free cell, named by the server
   'fog.add': { sceneId: string; col: number; row: number; w: number; h: number }
   'fog.remove': { sceneId: string; fogId: string }
   'note.add': { title: string }

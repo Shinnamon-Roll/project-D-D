@@ -15,7 +15,7 @@
    - ยอมแพ้: ไม่มีช่อง
 5. ส่งแล้ว → ป้ายใหญ่กลางจอทุกคน + บรรทัดในบันทึกการเล่น (ทุกคน) + DM log
 
-## ข้อความ (TH / EN) — ชื่อ NPC ตามกติกา feed เดิม (ไม่โชว์เลข #n)
+## ข้อความ (TH / EN) — ชื่อ NPC = ชื่อ token เต็ม รวมเลข `#n` ทั้ง feed, ป้าย และ DM log (เช่น "Goblin #2 โจมตี Ayla — โดน! −5") ตาม [`npc-names.md`](npc-names.md)
 | action | TH | EN | ป้าย |
 |---|---|---|---|
 | talk | Goblin คุยกับ Ayla: “ส่งทองมา!” (ไม่มีข้อความ = Goblin คุยกับ Ayla) | Goblin talks with Ayla: “…” | talk |

@@ -7,6 +7,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"log/slog"
+	"maps"
 	"net/http"
 	"strings"
 	"sync"
@@ -191,7 +192,7 @@ func (h *Hub) handle(c *conn, m message) {
 		return
 	}
 	by, status := h.seatNameLocked(c.clientID), h.room.st.Status
-	before, beforeAttacks := mustJSON(h.room.PlayerState()), mustJSON(h.room.Attacks())
+	before, beforeMine := mustJSON(h.room.PlayerState()), h.myAttacksLocked()
 	if err := h.room.Apply(c.clientID, m.Type, m.Payload); err != nil {
 		typ := m.Type
 		if r := []rune(typ); len(r) > 40 { // unknown types are client input; keep log lines short (cut on runes, not bytes)
@@ -207,9 +208,9 @@ func (h *Hub) handle(c *conn, m message) {
 	}
 	h.log.Info("event "+m.Type, attrs...)
 	v := h.viewsLocked()
-	// Players get a state only when their view (or a pending attack, i.e. maybe their myAttack) changed, or they
-	// sent the event, so note.*, npc.* and edits of hidden tokens send them nothing.
-	playerChanged := !bytes.Equal(before, v.player) || !bytes.Equal(beforeAttacks, mustJSON(h.room.Attacks()))
+	// Players get a state only when their view or some player's myAttack changed, or they sent the event, so
+	// note.*, npc.* and edits of hidden tokens (a rename shows in the DM's attacks only) send them nothing.
+	playerChanged := !bytes.Equal(before, v.player) || !maps.Equal(beforeMine, h.myAttacksLocked())
 	var banner json.RawMessage
 	if b := h.room.Banner(); b != nil {
 		banner = mustJSON(b)
@@ -264,6 +265,17 @@ func mustJSON(v any) json.RawMessage {
 		panic(err) // state, notes and npcs hold only plain types
 	}
 	return b
+}
+
+// myAttacksLocked is each connected client's myAttack JSON, by clientId.
+func (h *Hub) myAttacksLocked() map[string]string {
+	out := map[string]string{}
+	for o := range h.conns {
+		if o.clientID != "" {
+			out[o.clientID] = string(mustJSON(h.room.MyAttack(o.clientID)))
+		}
+	}
+	return out
 }
 
 func (h *Hub) viewsLocked() views {

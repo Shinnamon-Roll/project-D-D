@@ -11,6 +11,7 @@
 
 ## วางบนแมพ
 - `npc.place {npcId, sceneId}` → token ใหม่ในฉาก (ช่องว่างแรก), `hp = hpMax`, `hidden` = ค่าจาก pool, รูปจาก pool; วางตัวเดียวกันซ้ำได้ (ชื่อ token ต่อท้าย #2, #3)
+  - กฎชื่อ token ไม่ซ้ำ + ปุ่ม Duplicate: ดู [npc-names.md](../features/npc-names.md)
 - แทนที่ event เดิม `token.addNpc` (ชื่ออย่างเดียว)
 - DM ต่อ token NPC: **ซ่อน/เปิดเผย** (`token.setHidden {tokenId, hidden}`), **HP −/+** (`token.adjustHp {tokenId, delta}` clamp 0..hpMax), ลบ (เดิม) — อยู่ในรายการ token ฝั่งข้อมูล
 - บนแมพ: token NPC ใช้รูป; HP 0 = token จาง + กากบาท; DM เห็น token ที่ซ่อนแบบโปร่ง + ไอคอนตาปิด

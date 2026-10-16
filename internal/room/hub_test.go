@@ -657,6 +657,29 @@ func TestHubCombat(t *testing.T) {
 		t.Fatalf("second resolve: %v", fs)
 	}
 
+	// Target hidden, then a visible Wolf placed: the hidden one becomes "Wolf #2" for the DM only. The DM's attacks
+	// and resolve log name "Wolf #2"; p1's myAttack keeps "Wolf" (the final loop checks no player sees "Wolf #2").
+	got = do(p1, "attack.declare", m{"targetTokenId": ids["Wolf"]})
+	attackID = only(got[dm], "state")[0].p["attacks"].([]any)[0].(map[string]any)["id"]
+	do(dm, "token.setHidden", m{"tokenId": ids["Wolf"], "hidden": true})
+	got = do(dm, "npc.place", m{"npcId": "npc1", "sceneId": sc})
+	if a := only(got[dm], "state")[0].p["attacks"].([]any); len(a) != 1 || a[0].(map[string]any)["targetName"] != "Wolf #2" {
+		t.Fatalf("dm attacks after the hidden rename: %v", a)
+	}
+	if st := only(got[p1], "state"); len(st) != 1 || st[0].p["myAttack"].(map[string]any)["targetName"] != "Wolf" {
+		t.Fatalf("p1 after the hidden rename: %v", got[p1])
+	}
+	got = do(dm, "token.adjustHp", m{"tokenId": ids["Wolf"], "delta": 1}) // hidden-only edit: still no player frame
+	for _, c := range []*wsClient{p1, p2, watcher} {
+		if len(got[c]) != 0 {
+			t.Fatalf("player got frames for a hidden edit: %v", got[c])
+		}
+	}
+	got = do(dm, "attack.resolve", m{"attackId": attackID, "hit": false})
+	if lg := only(got[dm], "log"); len(lg) != 1 || lg[0].p["text"].(map[string]any)["en"] != "Aldric Vane → Wolf #2: miss" {
+		t.Fatalf("dm resolve log after the hidden rename: %v", got[dm])
+	}
+
 	// A DM reconnect gets the whole log in its hello state, and no log frames for it.
 	dm2 := dial(t, srv)
 	dm2.send("hello", m{"clientId": secrets[0]})
@@ -675,7 +698,7 @@ func TestHubCombat(t *testing.T) {
 	}
 	for c, fs := range players {
 		for _, f := range fs {
-			if f.typ == "log" || f.p["attacks"] != nil || f.p["dmLog"] != nil || strings.Contains(f.raw, "Secret-Ghost") ||
+			if f.typ == "log" || f.p["attacks"] != nil || f.p["dmLog"] != nil || strings.Contains(f.raw, "Secret-Ghost") || strings.Contains(f.raw, "Wolf #2") ||
 				strings.Contains(f.raw, "3 damage (HP") {
 				t.Fatalf("player %p got DM-only data: %s", c, f.raw)
 			}

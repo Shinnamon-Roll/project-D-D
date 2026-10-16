@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"slices"
-	"strings"
 
 	"projectdnd/internal/rules"
 )
@@ -64,12 +63,23 @@ func (r *Room) addLog(th, en string) {
 	r.fresh = append(r.fresh, LogEntry{At: r.now().UnixMilli(), Text: rules.L{TH: th, EN: en}})
 }
 
-// Attacks returns the pending attacks (DM view, never nil). Callers must not mutate it.
+// Attacks returns a copy of the pending attacks (DM view, never nil) with each target's current name, which a
+// hidden target may have changed since the declare (displace); TargetName as declared is the attacker's MyAttack.
 func (r *Room) Attacks() []Attack {
-	if r.attacks == nil {
-		return []Attack{}
+	out := make([]Attack, len(r.attacks))
+	for i, a := range r.attacks {
+		a.TargetName = r.targetName(a)
+		out[i] = a
 	}
-	return r.attacks
+	return out
+}
+
+// targetName is a's target token's current name (DM views), or the declared one if the token is gone.
+func (r *Room) targetName(a Attack) string {
+	if t := r.token(a.TargetTokenID); t != nil {
+		return t.Name
+	}
+	return a.TargetName
 }
 
 // MyAttack returns the pending attack of clientID's character, or nil.
@@ -202,7 +212,8 @@ func (r *Room) attackCancel(s *Seat) error {
 	if a == nil {
 		return errors.New("you have no pending attack")
 	}
-	r.addLog("ยกเลิกการโจมตี "+a.TargetName, "cancelled the attack on "+a.TargetName)
+	name := r.targetName(*a)
+	r.addLog("ยกเลิกการโจมตี "+name, "cancelled the attack on "+name)
 	r.attacks = slices.DeleteFunc(r.attacks, func(x Attack) bool { return x.ByCharacterID == c.ID })
 	return nil
 }
@@ -236,7 +247,7 @@ func (r *Room) attackResolve(s *Seat, payload json.RawMessage) error {
 	if t != nil && t.CharacterID != "" {
 		c = r.character(t.CharacterID)
 	}
-	target := rules.L{TH: a.TargetName, EN: a.TargetName}
+	target := rules.L{TH: r.targetName(a), EN: r.targetName(a)}
 	if c != nil {
 		target = c.Name
 	}
@@ -300,7 +311,7 @@ func checkDamage(hit bool, d *int) (int, error) {
 }
 
 // npcAct is the DM making a visible NPC token talk to, attack, gift or surrender to a player character in combat
-// (docs/features/npc-actions.md). Feed and banner name the NPC without npc.place's "#n"; the DM log keeps it.
+// (docs/features/npc-actions.md). Feed, banner and DM log name the NPC by its full token name, "#n" included.
 func (r *Room) npcAct(s *Seat, payload json.RawMessage) error {
 	p, err := decode[struct {
 		TokenID  string `json:"tokenId"`
@@ -387,9 +398,8 @@ func (r *Room) npcAct(s *Seat, payload json.RawMessage) error {
 	default:
 		return errors.New("kind must be talk, attack, gift or surrender")
 	}
-	name := r.npcPublicName(t)
-	r.pushFeed(name+th, name+en)
-	r.addLog(t.Name+th, t.Name+en)
+	name := t.Name
+	r.addFeed(name+th, name+en)
 	r.banner = &Banner{Kind: kind, Text: rules.L{TH: name + th, EN: name + en}}
 	if kind == "hit" || kind == "miss" { // same banner text as attack.resolve: the big word says hit/miss
 		r.banner.Text = rules.L{TH: name + " → " + who.TH, EN: name + " → " + who.EN}
@@ -398,14 +408,6 @@ func (r *Room) npcAct(s *Seat, payload json.RawMessage) error {
 		downed()
 	}
 	return nil
-}
-
-// npcPublicName is t's pool NPC name when t.Name is that name plus npc.place's " #n" suffix, else t.Name.
-func (r *Room) npcPublicName(t *Token) string {
-	if n, ok := r.npcs.Get(t.NpcID); ok && strings.HasPrefix(t.Name, n.Name+" #") {
-		return n.Name
-	}
-	return t.Name
 }
 
 // moveLog adds "moved <name> from <from> to <to>". A move of the same token by the same seat within moveQuiet

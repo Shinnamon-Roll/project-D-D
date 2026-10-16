@@ -543,6 +543,8 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await shot(2)
   // Reveal both NPC tokens and move them in: 3, then 4 visible.
   const [npc2] = (await npcIds()).filter((id) => id !== npcTok)
+  const NPC2 = `${NPC} #2` // a second copy of a pool NPC gets the next number; feed and banners show it in full
+  await expect(tid(dm, `token-${npc2}`).locator('> span').first()).toHaveText(NPC2)
   for (const [id, n] of [[npcTok, '3'], [npc2, '4']]) {
     await tid(dm, `token-hide-${id}`).click()
     await expect(tid(dm, `token-hide-${id}`)).toHaveAttribute('aria-pressed', 'false')
@@ -689,7 +691,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(tid(dm, 'map-stage')).toHaveAttribute('data-selected-token', npc2)
   await tapTok(dm, tokenId)
   await expect(dlg).toBeVisible()
-  await expect(dlg.locator('h2')).toContainText(NPC) // the DM sees the token's own name, maybe with "#2"
+  await expect(dlg.locator('h2')).toContainText(NPC2) // the DM sees the token's own name
   await expect(dlg.locator('h2')).toContainText(`→ ${heroName}`)
   await expect(tid(dm, 'map-stage')).toHaveAttribute('data-selected-token', npc2) // the NPC stays selected
   await expect(tid(dm, 'npc-act-talk')).toBeFocused()
@@ -703,7 +705,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await tid(dm, 'npc-act-send').click()
   await expect(dlg).toHaveCount(0)
   await banner('talk', 'ส่งทองมา!')
-  await expect(tid(pl, 'feed')).toContainText(`${NPC} คุยกับ ${heroName}: “ส่งทองมา!”`)
+  await expect(tid(pl, 'feed')).toContainText(`${NPC2} คุยกับ ${heroName}: “ส่งทองมา!”`)
   // Attack, hit for 4: Ayla's HP drops.
   const [h0, hm] = (await tid(pl, 'sheet-hp').textContent())!.split('/').map(Number)
   await tapTok(dm, tokenId)
@@ -713,9 +715,9 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await tid(dm, 'npc-act-damage').fill('4')
   if (process.env.SHOTS) await dm.screenshot({ path: `${process.env.SHOTS}/dm-npc-act.png`, animations: 'disabled' })
   await tid(dm, 'npc-act-send').click()
-  await banner('hit', NPC)
+  await banner('hit', NPC2)
   await expect(tid(pl, 'sheet-hp')).toHaveText(`${Math.max(0, h0 - 4)}/${hm}`)
-  await expect(tid(pl, 'feed')).toContainText(`${NPC} โจมตี ${heroName} — โดน! −4`)
+  await expect(tid(pl, 'feed')).toContainText(`${NPC2} โจมตี ${heroName} — โดน! −4`)
   // Gift from the token list's Action button (pick the target in the dialog): it lands in Ayla's bag.
   await tid(dm, `npc-act-open-${npc2}`).click()
   await expect(dlg).toBeVisible()
@@ -732,7 +734,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await tapTok(dm, tokenId)
   await tid(dm, 'npc-act-surrender').click()
   await tid(dm, 'npc-act-send').click()
-  await banner('surrender', `${NPC} ยอมแพ้ต่อ ${heroName}`)
+  await banner('surrender', `${NPC2} ยอมแพ้ต่อ ${heroName}`)
   if (process.env.SHOTS) {
     await pl.waitForTimeout(400) // past the scale-in
     await pl.screenshot({ path: `${process.env.SHOTS}/player-banner-surrender.png` })
@@ -742,6 +744,39 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await tid(dm, 'combat-toggle').click()
   await expect(tid(pl, 'combat-indicator')).toHaveCount(0)
   await expect(tid(pl, 'attack-btn')).toHaveCount(0)
+
+  // 7g. Unique names: the pool refuses a name it already has (any case); a second placement is "#2"; Duplicate goes on from the highest number.
+  const GOB = 'Cave Goblin'
+  await expect(tid(dm, 'dm-menu-npc')).toHaveAttribute('aria-expanded', 'true')
+  await tid(dm, 'npc-add').click()
+  await tid(dm, 'npc-form-name').fill(` ${NPC.toUpperCase()} `)
+  await expect(tid(dm, 'npc-form-name-taken')).toHaveText('ชื่อนี้มีใน pool แล้ว')
+  await expect(tid(dm, 'npc-form-name')).toHaveAttribute('aria-invalid', 'true')
+  await expect(tid(dm, 'npc-save')).toBeDisabled()
+  await tid(dm, 'npc-form-name').fill(GOB)
+  await expect(tid(dm, 'npc-form-name-taken')).toHaveCount(0)
+  await tid(dm, 'npc-form-hp').fill('7')
+  if (await tid(dm, 'npc-form-hidden').isChecked()) await tid(dm, 'npc-form-hidden').uncheck()
+  await tid(dm, 'npc-save').click()
+  const gobItem = dm.locator('[data-testid^="npc-item-"]', { hasText: GOB })
+  await expect(gobItem).toHaveCount(1)
+  const gobId = (await gobItem.getAttribute('data-testid'))!.replace('npc-item-', '')
+  const gobNames = (page: Page) => tid(page, 'token-list').locator('li > span:first-child', { hasText: GOB })
+  await tid(dm, `npc-place-${gobId}`).click()
+  await expect(gobNames(dm)).toHaveText([GOB])
+  await tid(dm, `npc-place-${gobId}`).click()
+  await expect(gobNames(dm)).toHaveText([GOB, `${GOB} #2`])
+  const gob1 = (await tid(dm, 'token-list').locator('li', { hasText: GOB }).first().getAttribute('data-testid'))!.replace('token-', '')
+  await expect(tid(dm, `token-dup-${gob1}`)).toHaveAccessibleName(`เพิ่มอีกตัวแบบ ${GOB}`)
+  await expect(tid(pl, `token-dup-${gob1}`)).toHaveCount(0)
+  await tid(dm, `token-dup-${gob1}`).click()
+  await expect(gobNames(dm)).toHaveText([GOB, `${GOB} #2`, `${GOB} #3`])
+  await expect(gobNames(pl)).toHaveText([GOB, `${GOB} #2`, `${GOB} #3`])
+  await expect(tid(pl, 'feed')).toContainText(`เพิ่ม ${GOB} #3`)
+  await expect(tid(dm, 'feed')).toContainText(`เพิ่ม ${GOB} #3`)
+  const gob3 = (await tid(dm, 'token-list').locator('li', { hasText: `${GOB} #3` }).getAttribute('data-testid'))!.replace('token-', '')
+  await expect(tid(dm, `token-hp-${gob3}`)).toHaveText('7/7')
+  await expect(tid(dm, 'error-banner')).toHaveCount(0)
 
   // Phone: stacked, the map pane still never scrolls and the page has no sideways scroll.
   await pl.setViewportSize({ width: 390, height: 844 })

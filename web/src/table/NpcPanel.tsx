@@ -94,6 +94,7 @@ export default function NpcPanel({ scene }: { scene?: Scene }) {
 
 function NpcForm({ npc, onDone }: { npc?: Npc; onDone: () => void }) {
   const t = useT()
+  const npcs = useStore((s) => s.npcs)
   const [name, setName] = useState(npc?.name ?? '')
   const [imageUrl, setImageUrl] = useState(npc?.imageUrl ?? '')
   const [hp, setHp] = useState(String(npc?.hpMax ?? 10))
@@ -101,7 +102,9 @@ function NpcForm({ npc, onDone }: { npc?: Npc; onDone: () => void }) {
   const [uploading, setUploading] = useState(false)
 
   const hpMax = Number(hp)
-  const nameOk = name.trim().length >= 1 && name.trim().length <= 40
+  // UX only, the server checks too: same name as another pool NPC (trimmed, case-insensitive). Editing may keep its own name.
+  const taken = npcs.some((n) => n.id !== npc?.id && n.name.trim().toLowerCase() === name.trim().toLowerCase())
+  const nameOk = name.trim().length >= 1 && name.trim().length <= 40 && !taken
   const hpOk = Number.isInteger(hpMax) && hpMax >= 1 && hpMax <= 999
 
   const save = () => {
@@ -143,8 +146,21 @@ function NpcForm({ npc, onDone }: { npc?: Npc; onDone: () => void }) {
       </div>
       <label>
         {t('npcName')}
-        <input autoFocus data-testid="npc-form-name" maxLength={40} value={name} aria-invalid={!nameOk} onChange={(e) => setName(e.target.value)} />
+        <input
+          autoFocus
+          data-testid="npc-form-name"
+          maxLength={40}
+          value={name}
+          aria-invalid={!nameOk}
+          aria-describedby={taken ? 'npc-name-taken' : undefined}
+          onChange={(e) => setName(e.target.value)}
+        />
       </label>
+      {taken && (
+        <small className="name-taken" id="npc-name-taken" role="alert" data-testid="npc-form-name-taken">
+          {t('npcNameTaken')}
+        </small>
+      )}
       <label>
         {t('npcHp')}
         <input data-testid="npc-form-hp" type="number" min={1} max={999} step={1} value={hp} aria-invalid={!hpOk} onChange={(e) => setHp(e.target.value)} />
