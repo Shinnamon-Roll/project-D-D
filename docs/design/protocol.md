@@ -69,11 +69,11 @@ Roles: **DM** = seat kind `dm` or `codm` (co-DM has every DM right except removi
 | `roster.update` | `{classId, entry: RosterEntry}` | DM | any | classId is the key (`entry.id` is ignored); limits below; affects later picks only; persisted |
 | `roster.reset` | `{classId?}` | DM | any | `""`/missing = every class back to its default; persisted |
 | `scene.add` | `{name, imageUrl, grid}` | DM | `creating`/`playing` | imageUrl must start with `/uploads/`; grid: cellSize 10–400, cols/rows 1–200 |
-| `scene.update` | `{sceneId, name, grid}` | DM | `creating`/`playing` | same grid limits (cellSize is an int: send `round(imgW/cols)`; offsetX/offsetY 0). Grid shrink: that scene's tokens clamp to the nearest edge cell `[0,cols-1]×[0,rows-1]`; fog rects clip to the grid, rects fully outside are dropped |
-| `scene.select` | `{sceneId}` | DM | `playing` | sets `currentSceneId`; adds a token for every character without one in that scene, at row 0, col 0..n (name = `heroName.en`, imageUrl = character `art`) |
-| `npc.place` | `{npcId, sceneId}` | DM | `playing` | copies the pool NPC into a new token on the first free cell (row-major) of the scene; `hp = hpMax`, `hidden`, `imageUrl` from the pool; name `<name>`, then `<name> #2`, `#3`… (first name not used by a token in that scene); a visible NPC ignores hidden tokens for both the cell and the name (may stack on one; a name may repeat after a reveal); full scene → error. Replaces `token.addNpc` (removed v0.11.0) |
-| `token.move` | `{tokenId, col, row}` | DM any token; player only own character's token | `playing` | 0 ≤ col < cols, 0 ≤ row < rows of the token's scene. A player gets `you can only move your own token` for a missing token too (no hidden-token oracle) |
-| `token.setHidden` | `{tokenId, hidden}` | DM | `playing` | NPC tokens placed from the pool only |
+| `scene.update` | `{sceneId, name, grid}` | DM | `creating`/`playing` | same grid limits (cellSize is an int: send `round(imgW/cols)`; offsetX/offsetY 0). Grid shrink: that scene's tokens clamp to the nearest edge cell `[0,cols-1]×[0,rows-1]`; a clamped visible token whose cell already holds 4 visible tokens goes to the nearest cell (Chebyshev distance, then row-major) with room; fog rects clip to the grid, rects fully outside are dropped |
+| `scene.select` | `{sceneId}` | DM | `playing` | sets `currentSceneId`; adds a token for every character without one in that scene, one per cell row-major from 0,0, skipping cells with 4 visible tokens and wrapping around; no cell with room → `scene has no free cell` (name = `heroName.en`, imageUrl = character `art`) |
+| `npc.place` | `{npcId, sceneId}` | DM | `playing` | copies the pool NPC into a new token on the first least-crowded cell (row-major) of the scene; `hp = hpMax`, `hidden`, `imageUrl` from the pool; name `<name>`, then `<name> #2`, `#3`… (first name not used by a token in that scene); a visible NPC ignores hidden tokens for both the cell and the name (may stack on one; a name may repeat after a reveal); a hidden NPC counts every token for its cell and always fits; visible NPC with every cell holding 4 visible → `scene has no free cell`. Replaces `token.addNpc` (removed v0.11.0) |
+| `token.move` | `{tokenId, col, row}` | DM any token; player only own character's token | `playing` | 0 ≤ col < cols, 0 ≤ row < rows of the token's scene. A player gets `you can only move your own token` for a missing token too (no hidden-token oracle). Target cell already holding 4 visible tokens (the mover not counted; hidden tokens never count) → `that cell is full (max 4)`; a hidden token may move anywhere |
+| `token.setHidden` | `{tokenId, hidden}` | DM | `playing` | NPC tokens placed from the pool only. Reveal (`hidden: false`) on a cell already holding 4 visible tokens → `that cell is full (max 4)` (move it first); hiding is always allowed |
 | `token.adjustHp` | `{tokenId, delta}` | DM | `playing` | NPC tokens placed from the pool only; `-999 ≤ delta ≤ 999` (int); `hp` clamps to `0..hpMax` |
 | `token.remove` | `{tokenId}` | DM | `playing` | |
 | `fog.add` | `{sceneId, col, row, w, h}` | DM | `playing` | w,h ≥ 1, rect inside grid |
@@ -105,6 +105,7 @@ preferred first: 192.168 → 10 → 172.16 (Docker/VM bridges usually last). Loo
 - `hello.clientId`: 8–64 chars `[A-Za-z0-9_-]`; any event before `hello`, or a second `hello` → error.
 - Image URLs: exactly `/uploads/<name>` (no extra `/`, `..`, `?`, `#`; name ≤64).
 - `scene.update` clamps tokens and clips/drops fog in a shrunken grid; `scene.select` wraps auto-placed tokens to the next row.
+- At most 4 visible tokens per cell (`MaxPerCell`, v0.13.0, `docs/features/shared-cell.md`); hidden tokens never count, so the full-cell error never reveals one.
 - A co-DM may remove their own seat; an empty co-DM seat survives `game.start`.
 - Hub drops a client with >32 queued messages (it reconnects and gets fresh state).
 

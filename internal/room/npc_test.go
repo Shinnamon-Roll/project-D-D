@@ -127,13 +127,16 @@ func TestNpcPlace(t *testing.T) {
 	}
 	fail(t, r, "dm", "npc.place", m{"npcId": "npc1", "sceneId": sc})
 
-	// A full scene is rejected.
+	// A scene whose cells all hold MaxPerCell visible tokens is rejected.
 	ok(t, r, "dm", "scene.add", m{"name": "Tiny", "imageUrl": "/uploads/a.png", "grid": m{"cellSize": 50, "cols": 1, "rows": 2}})
 	tiny := r.State().Scenes[1].ID
 	ok(t, r, "dm", "npc.place", m{"npcId": "npc2", "sceneId": tiny})
 	ok(t, r, "dm", "npc.place", m{"npcId": "npc2", "sceneId": tiny})
 	if tk := r.State().Tokens[len(r.State().Tokens)-1]; tk.Name != "Wolf #2" || tk.Col != 0 || tk.Row != 1 {
 		t.Fatalf("second row: %+v", tk) // names are counted per scene
+	}
+	for range 2*MaxPerCell - 2 { // then the least-crowded cell, until both hold MaxPerCell
+		ok(t, r, "dm", "npc.place", m{"npcId": "npc2", "sceneId": tiny})
 	}
 	fail(t, r, "dm", "npc.place", m{"npcId": "npc2", "sceneId": tiny})
 }

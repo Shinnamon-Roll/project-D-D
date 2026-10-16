@@ -31,6 +31,7 @@ const (
 	KindPlayer = "player"
 
 	MaxPlayerSeats = 6
+	MaxPerCell     = 4 // visible tokens per grid cell; hidden tokens never count
 	maxName        = 32
 )
 
@@ -289,7 +290,20 @@ func decode[T any](raw json.RawMessage) (T, error) {
 var (
 	errNotSeated = errors.New("you are not seated")
 	errNotDM     = errors.New("only the DM can do that")
+	errCellFull  = fmt.Errorf("that cell is full (max %d)", MaxPerCell)
 )
+
+// visibleAt counts the visible tokens on one cell of a scene, not counting token skip.
+// Hidden tokens never count, so a full-cell error never hints that a hidden token exists.
+func (r *Room) visibleAt(sceneID string, col, row int, skip string) int {
+	n := 0
+	for _, t := range r.st.Tokens {
+		if t.SceneID == sceneID && t.Col == col && t.Row == row && !t.Hidden && t.ID != skip {
+			n++
+		}
+	}
+	return n
+}
 
 func (r *Room) needStatus(ok ...string) error {
 	if slices.Contains(ok, r.st.Status) {
@@ -634,10 +648,24 @@ func (r *Room) sceneUpsert(s *Seat, typ string, payload json.RawMessage) error {
 		return errors.New("no such scene")
 	}
 	sc.Name, sc.Grid = name, p.Grid
-	// Keep tokens on the board when the grid shrinks.
+	// Keep tokens on the board when the grid shrinks. A clamped visible token that would overfill its cell
+	// goes to the nearest cell with room. Tokens not yet clamped sit outside the new grid, so they never count.
 	for i := range r.st.Tokens {
-		if t := &r.st.Tokens[i]; t.SceneID == sc.ID {
-			t.Col, t.Row = min(t.Col, p.Grid.Cols-1), min(t.Row, p.Grid.Rows-1)
+		t := &r.st.Tokens[i]
+		if t.SceneID != sc.ID || (t.Col < p.Grid.Cols && t.Row < p.Grid.Rows) {
+			continue
+		}
+		t.Col, t.Row = min(t.Col, p.Grid.Cols-1), min(t.Row, p.Grid.Rows-1)
+		if !t.Hidden && r.visibleAt(sc.ID, t.Col, t.Row, t.ID) >= MaxPerCell {
+			// shortcut: every cell full leaves the token over the limit; needs > 4*cols*rows visible tokens.
+			best, c0, r0 := -1, t.Col, t.Row
+			for c := range p.Grid.Cols * p.Grid.Rows {
+				col, row := c%p.Grid.Cols, c/p.Grid.Cols
+				d := max(abs(col-c0), abs(row-r0))
+				if (best < 0 || d < best) && r.visibleAt(sc.ID, col, row, t.ID) < MaxPerCell {
+					best, t.Col, t.Row = d, col, row
+				}
+			}
 		}
 	}
 	// Clip fog to the grid; drop rects left fully outside. New slice: State() shares the old one.
@@ -666,21 +694,34 @@ func (r *Room) sceneSelect(s *Seat, payload json.RawMessage) error {
 	if sc == nil {
 		return errors.New("no such scene")
 	}
-	r.st.CurrentSceneID = sc.ID
-	placed := 0
+	// One token per cell, row-major from 0,0, skipping full cells; wrap around when the grid runs out.
+	n, cells, next := len(r.st.Tokens), sc.Grid.Cols*sc.Grid.Rows, 0
 	for _, c := range r.st.Characters {
 		if slices.ContainsFunc(r.st.Tokens, func(t Token) bool { return t.SceneID == sc.ID && t.CharacterID == c.ID }) {
 			continue
 		}
-		// Row 0, col 0..n; wrap to the next row if the grid is narrower than the party.
-		col, row := placed%sc.Grid.Cols, min(placed/sc.Grid.Cols, sc.Grid.Rows-1)
+		cell := -1
+		for k := range cells {
+			if i := (next + k) % cells; r.visibleAt(sc.ID, i%sc.Grid.Cols, i/sc.Grid.Cols, "") < MaxPerCell {
+				cell = i
+				break
+			}
+		}
+		if cell < 0 {
+			r.st.Tokens = r.st.Tokens[:n] // state unchanged on error
+			return errors.New("scene has no free cell")
+		}
 		r.st.Tokens = append(r.st.Tokens, Token{
-			ID: r.id("t"), SceneID: sc.ID, CharacterID: c.ID, Name: c.Name.EN, ImageURL: c.Art, Col: col, Row: row,
+			ID: r.id("t"), SceneID: sc.ID, CharacterID: c.ID, Name: c.Name.EN, ImageURL: c.Art,
+			Col: cell % sc.Grid.Cols, Row: cell / sc.Grid.Cols,
 		})
-		placed++
+		next = cell + 1
 	}
+	r.st.CurrentSceneID = sc.ID
 	return nil
 }
+
+func abs(x int) int { return max(x, -x) }
 
 func (r *Room) tokenMove(s *Seat, payload json.RawMessage) error {
 	p, err := decode[struct {
@@ -708,6 +749,9 @@ func (r *Room) tokenMove(s *Seat, payload json.RawMessage) error {
 	sc := r.scene(t.SceneID)
 	if sc == nil || p.Col < 0 || p.Row < 0 || p.Col >= sc.Grid.Cols || p.Row >= sc.Grid.Rows {
 		return errors.New("target cell is outside the grid")
+	}
+	if !t.Hidden && r.visibleAt(t.SceneID, p.Col, p.Row, t.ID) >= MaxPerCell {
+		return errCellFull
 	}
 	t.Col, t.Row = p.Col, p.Row
 	return nil
@@ -781,7 +825,7 @@ func (r *Room) npc(typ string, payload json.RawMessage) error {
 	return nil
 }
 
-// npcPlace puts a copy of a pool NPC on the first free cell (row-major) of a scene.
+// npcPlace puts a copy of a pool NPC on the first least-crowded cell (row-major) of a scene.
 func (r *Room) npcPlace(s *Seat, payload json.RawMessage) error {
 	p, err := decode[struct {
 		NpcID   string `json:"npcId"`
@@ -803,22 +847,22 @@ func (r *Room) npcPlace(s *Seat, payload json.RawMessage) error {
 	}
 	// A visible token ignores hidden ones for its cell and "#n" suffix, so neither hints that hidden tokens exist.
 	// It may stack on a hidden token (the DM can move it); a name may repeat after a reveal.
-	used := map[[2]int]bool{}
+	// A hidden one counts every token for its cell but never fills a cell, so it always fits.
+	used := map[[2]int]int{}
 	names := map[string]bool{}
 	for _, t := range r.st.Tokens {
 		if t.SceneID == sc.ID && (n.Hidden || !t.Hidden) {
-			used[[2]int{t.Col, t.Row}] = true
+			used[[2]int{t.Col, t.Row}]++
 			names[t.Name] = true
 		}
 	}
-	cell := -1
+	cell := 0
 	for i := range sc.Grid.Cols * sc.Grid.Rows {
-		if !used[[2]int{i % sc.Grid.Cols, i / sc.Grid.Cols}] {
+		if used[[2]int{i % sc.Grid.Cols, i / sc.Grid.Cols}] < used[[2]int{cell % sc.Grid.Cols, cell / sc.Grid.Cols}] {
 			cell = i
-			break
 		}
 	}
-	if cell < 0 {
+	if !n.Hidden && used[[2]int{cell % sc.Grid.Cols, cell / sc.Grid.Cols}] >= MaxPerCell {
 		return errors.New("scene has no free cell")
 	}
 	name := n.Name // second copy in the scene: "<name> #2", then #3, ...
@@ -854,6 +898,9 @@ func (r *Room) tokenNpcEdit(s *Seat, typ string, payload json.RawMessage) error 
 		return errors.New("only NPC tokens from the pool")
 	}
 	if typ == "token.setHidden" {
+		if t.Hidden && !p.Hidden && r.visibleAt(t.SceneID, t.Col, t.Row, t.ID) >= MaxPerCell {
+			return errCellFull // the DM moves it first
+		}
 		t.Hidden = p.Hidden
 		return nil
 	}

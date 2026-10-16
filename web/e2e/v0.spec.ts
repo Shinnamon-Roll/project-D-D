@@ -38,7 +38,8 @@ const noPageScroll = (page: Page) =>
 // shortcut: the server has one global in-memory room, so this needs a fresh server per run (no --repeat-each, no retries); add a reset hook if more specs appear.
 test('v0: DM + player full flow', async ({ browser }) => {
   const viewport = { width: 1440, height: 900 }
-  const dmCtx = await browser.newContext({ viewport })
+  // DM: tokens snap instead of gliding, so canvas clicks land on settled circles
+  const dmCtx = await browser.newContext({ viewport, reducedMotion: 'reduce' })
   const plCtx = await browser.newContext({ viewport })
   const dm = await dmCtx.newPage()
   const pl = await plCtx.newPage()
@@ -460,6 +461,75 @@ test('v0: DM + player full flow', async ({ browser }) => {
   expect(plTokens.length).toBeGreaterThan(0)
   expect(plTokens.filter((x) => x.hidden || x.hp !== undefined || x.hpMax !== undefined || x.name !== NPC)).toEqual([])
   expect(plFrames.filter((f) => f.includes('"npcs"'))).toEqual([])
+
+  // 7d. Shared cell: up to 4 visible tokens split one cell and shrink; a 5th is refused; the DM picks one small circle.
+  const mapTok = (page: Page, id: string) => page.getByTestId(`map-token-${id}`)
+  const radius = async (page: Page, id: string) => Number(await mapTok(page, id).getAttribute('data-r'))
+  const dmMove = async (id: string, col: number, row: number) => {
+    await tid(dm, `token-col-${id}`).fill(String(col))
+    await tid(dm, `token-row-${id}`).fill(String(row))
+    await tid(dm, `token-move-${id}`).click()
+  }
+  const npcIds = async () =>
+    Promise.all((await tid(dm, 'token-list').locator('li', { hasText: NPC }).all()).map(async (li) => (await li.getAttribute('data-testid'))!.replace('token-', '')))
+  // Close-up of cell (6, 6) on the player's map once the 150ms glide has settled.
+  const shot = async (n: number) => {
+    if (!process.env.SHOTS) return
+    await pl.waitForTimeout(400)
+    const [c, d] = [await cellPoint(pl, 6, 6), await cellPoint(pl, 7, 6)]
+    const k = d.x - c.x
+    await pl.screenshot({ path: `${process.env.SHOTS}/cell-${n}.png`, clip: { x: c.x - 2.5 * k, y: c.y - 1.5 * k, width: 5 * k, height: 3 * k } })
+  }
+  const bramTok = (await qr.locator('[data-testid^="token-move-"]').getAttribute('data-testid'))!.replace('token-move-', '')
+  await expect(mapTok(pl, tokenId)).toHaveAttribute('data-cell-count', '1')
+  const r1 = await radius(pl, tokenId)
+  p = await cellPoint(pl, 6, 6)
+  await pl.mouse.click(p.x, p.y)
+  await expect(tid(pl, `token-pos-${tokenId}`)).toHaveText('(6, 6)')
+  p = await cellPoint(qr, 6, 6)
+  await qr.mouse.click(p.x, p.y)
+  await expect(mapTok(pl, tokenId)).toHaveAttribute('data-cell-count', '2')
+  const r2 = await radius(pl, tokenId)
+  expect(r2).toBeLessThan(r1 * 0.6)
+  await shot(2)
+  // Reveal both NPC tokens and move them in: 3, then 4 visible.
+  const [npc2] = (await npcIds()).filter((id) => id !== npcTok)
+  for (const [id, n] of [[npcTok, '3'], [npc2, '4']]) {
+    await tid(dm, `token-hide-${id}`).click()
+    await expect(tid(dm, `token-hide-${id}`)).toHaveAttribute('aria-pressed', 'false')
+    await dmMove(id, 6, 6)
+    await expect(mapTok(pl, tokenId)).toHaveAttribute('data-cell-count', n)
+    await expect(mapTok(pl, id)).toHaveAttribute('data-cell-count', n)
+    await shot(Number(n))
+  }
+  expect(await radius(pl, tokenId)).toBeLessThan(r2)
+  // A 5th visible token is refused: the cell keeps 4, the token stays put.
+  await tid(dm, `npc-place-${npcId}`).click()
+  await expect(tid(dm, 'token-list').locator('li', { hasText: NPC })).toHaveCount(3)
+  const [npc3] = (await npcIds()).filter((id) => id !== npcTok && id !== npc2)
+  await tid(dm, `token-hide-${npc3}`).click()
+  await expect(tid(pl, `token-${npc3}`)).toBeVisible()
+  const npc3Pos = await tid(dm, `token-pos-${npc3}`).textContent()
+  await dmMove(npc3, 6, 6)
+  await expect(tid(dm, 'error-banner')).toContainText('that cell is full (max 4)')
+  await expect(tid(dm, `token-pos-${npc3}`)).toHaveText(npc3Pos!)
+  await expect(mapTok(pl, tokenId)).toHaveAttribute('data-cell-count', '4')
+  // DM clicks Bram's small circle (not the cell centre): exactly that token is selected, then moves it out.
+  await dm.evaluate(() => new Promise(requestAnimationFrame)) // Konva redraws its hit canvas on the next frame
+  const dmBox = (await dm.locator('[data-testid="map-stage"] .konvajs-content').boundingBox())!
+  const bx = Number(await mapTok(dm, bramTok).getAttribute('data-x'))
+  const by = Number(await mapTok(dm, bramTok).getAttribute('data-y'))
+  await dm.mouse.click(dmBox.x + bx, dmBox.y + by)
+  await expect(tid(dm, 'map-stage')).toHaveAttribute('data-selected-token', bramTok)
+  p = await cellPoint(dm, 7, 6)
+  await dm.mouse.click(p.x, p.y)
+  await expect(tid(pl, `token-pos-${bramTok}`)).toHaveText('(7, 6)')
+  await expect(mapTok(pl, tokenId)).toHaveAttribute('data-cell-count', '3')
+  // Ayla goes back for the phone check below.
+  p = await cellPoint(pl, 2, 1)
+  await pl.mouse.click(p.x, p.y)
+  await expect(tid(pl, `token-pos-${tokenId}`)).toHaveText('(2, 1)')
+  await expect(tid(dm, 'error-banner')).toHaveCount(0, { timeout: 10_000 }) // the refusal banner times out after 6s
 
   // Phone: stacked, the map pane still never scrolls and the page has no sideways scroll.
   await pl.setViewportSize({ width: 390, height: 844 })
