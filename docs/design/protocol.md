@@ -107,7 +107,7 @@ Roles: **DM** = seat kind `dm` or `codm` (co-DM has every DM right except removi
 | `npc.act` | `{tokenId, targetId, kind, text?, hit?, damage?, item?: {name, qty}}` | DM | `playing`, `combat` | see "NPC actions" below |
 
 Unknown `type`, malformed payload, or failed check → `error` to sender. Removed in v0.12.0 (now unknown types):
-`ruleset.update`, `ruleset.loadPreset`, `character.submit`, `character.grant`. Removed in v0.17.0 (rules v2, now
+`ruleset.update`, `ruleset.loadPreset`, `character.submit`, `character.grant`. Removed in v0.18.0 (rules v2, now
 `unknown event type "<type>"`): `skill.addCustom`, `skill.editCustom`, `skill.removeCustom`, `skill.use`,
 `character.setStats`; `character.adjust` has no `mp` and `party.rest` needs `kind`.
 
