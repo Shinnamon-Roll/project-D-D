@@ -16,6 +16,7 @@ import (
 
 	"projectdnd/internal/notes"
 	"projectdnd/internal/npcs"
+	"projectdnd/internal/rules"
 )
 
 const (
@@ -52,11 +53,11 @@ type message struct {
 }
 
 // NewHub logs connections and events to log; it never logs clientIds (bearer secrets), note text or NPC names.
-// n holds the DM notes (see notes.Load), p the NPC pool (see npcs.Load); uploads is the upload directory,
-// used to check that NPC images exist.
-func NewHub(log *slog.Logger, n *notes.Store, p *npcs.Store, uploads string) *Hub {
+// n holds the DM notes (see notes.Load), p the NPC pool (see npcs.Load), ro the roster (see rules.LoadRoster);
+// uploads is the upload directory, used to check that NPC and roster images exist.
+func NewHub(log *slog.Logger, n *notes.Store, p *npcs.Store, ro *rules.RosterStore, uploads string) *Hub {
 	r := New()
-	r.notes, r.npcs, r.uploads = n, p, uploads
+	r.notes, r.npcs, r.roster, r.uploads = n, p, ro, uploads
 	return &Hub{room: r, conns: map[*conn]struct{}{}, log: log}
 }
 

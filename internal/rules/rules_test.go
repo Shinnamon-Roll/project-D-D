@@ -1,40 +1,16 @@
 package rules
 
 import (
+	"bytes"
+	"encoding/json"
+	"errors"
+	"log/slog"
+	"os"
+	"path/filepath"
+	"reflect"
 	"strings"
 	"testing"
 )
-
-func TestPresetDnD5e(t *testing.T) {
-	r := PresetDnD5e()
-	if err := ValidateRuleset(r); err != nil {
-		t.Fatalf("preset invalid: %v", err)
-	}
-	if len(r.Skills) != 18 || r.StatPoints != 27 || r.StartingSkillPicks != 2 {
-		t.Fatalf("preset shape: %d skills, %d points, %d picks", len(r.Skills), r.StatPoints, r.StartingSkillPicks)
-	}
-	if !strings.Contains(r.Attribution, `System Reference Document 5.2.1 ("SRD 5.2.1")`) {
-		t.Fatalf("attribution missing: %q", r.Attribution)
-	}
-	for _, s := range r.Stats {
-		switch s.Key {
-		case "hp", "ac":
-			if s.Max != s.Base {
-				t.Errorf("%s: max %d != base %d", s.Key, s.Max, s.Base)
-			}
-		default:
-			if s.Base != 8 || s.Min != 8 || s.Max != 15 {
-				t.Errorf("%s: %+v", s.Key, s)
-			}
-		}
-	}
-	// Copies are independent.
-	a, b := PresetDnD5e(), PresetDnD5e()
-	a.Stats[0].Max = 99
-	if b.Stats[0].Max == 99 {
-		t.Fatal("preset shares slices between calls")
-	}
-}
 
 func TestCampaigns(t *testing.T) {
 	c := Campaigns()
@@ -43,92 +19,234 @@ func TestCampaigns(t *testing.T) {
 	}
 }
 
-func TestValidateRuleset(t *testing.T) {
-	tests := []struct {
-		name   string
-		mutate func(r *Ruleset)
-		ok     bool
-	}{
-		{"preset", func(r *Ruleset) {}, true},
-		{"empty custom", func(r *Ruleset) { *r = Ruleset{Name: "Custom"} }, true},
-		{"no name", func(r *Ruleset) { r.Name = "" }, false},
-		{"dup stat", func(r *Ruleset) { r.Stats[1].Key = "str" }, false},
-		{"base above max", func(r *Ruleset) { r.Stats[0].Base = 16 }, false},
-		{"min above base", func(r *Ruleset) { r.Stats[0].Min = 9 }, false},
-		{"negative points", func(r *Ruleset) { r.StatPoints = -1 }, false},
-		{"negative picks", func(r *Ruleset) { r.StartingSkillPicks = -1 }, false},
-		{"points unreachable", func(r *Ruleset) { r.StatPoints = 43 }, false},
-		{"picks exceed skills", func(r *Ruleset) { r.StartingSkillPicks = 19 }, false},
-		{"dup skill", func(r *Ruleset) { r.Skills[1].ID = "athletics" }, false},
-		{"skill unknown stat", func(r *Ruleset) { r.Skills[0].StatKey = "luck" }, false},
-		{"skill no stat ok", func(r *Ruleset) { r.Skills[0].StatKey = "" }, true},
-		{"dup item", func(r *Ruleset) { r.Items[1].ID = "backpack" }, false},
-		{"starting unknown item", func(r *Ruleset) { r.StartingItems[0].ItemID = "sword" }, false},
-		{"starting zero qty", func(r *Ruleset) { r.StartingItems[0].Qty = 0 }, false},
-		{"long stat name", func(r *Ruleset) { r.Stats[0].Name = strings.Repeat("x", 65) }, false},
-		{"skill desc 500 runes", func(r *Ruleset) { r.Skills[0].Description = strings.Repeat("ก", 500) }, true},
-		{"skill desc 501 runes", func(r *Ruleset) { r.Skills[0].Description = strings.Repeat("ก", 501) }, false},
-		{"skill desc newline ok", func(r *Ruleset) { r.Skills[0].Description = "line 1\nline 2" }, true},
-		{"skill desc control char", func(r *Ruleset) { r.Skills[0].Description = "bad\x00" }, false},
+func TestDefaultRosterMatchesDoc(t *testing.T) {
+	b, err := os.ReadFile("../../docs/design/roster.md")
+	if err != nil {
+		t.Fatal(err)
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			r := PresetDnD5e()
-			tt.mutate(&r)
-			if err := ValidateRuleset(r); (err == nil) != tt.ok {
-				t.Fatalf("ok=%v, err=%v", tt.ok, err)
-			}
-		})
+	_, block, _ := strings.Cut(string(b), "## JSON (machine-readable)\n\n```json\n")
+	block, _, _ = strings.Cut(block, "```")
+	var doc []RosterEntry
+	if err := json.Unmarshal([]byte(block), &doc); err != nil {
+		t.Fatal(err)
 	}
-}
-
-func TestNormalizeTrimsSkillDescription(t *testing.T) {
-	r := PresetDnD5e()
-	r.Skills[0].Description = "  " + strings.Repeat("x", 500) + " \n "
-	r.Normalize()
-	if err := ValidateRuleset(r); err != nil || len(r.Skills[0].Description) != 500 {
-		t.Fatalf("trimmed len %d, err %v", len(r.Skills[0].Description), err)
+	got := DefaultRoster()
+	if !reflect.DeepEqual(got, doc) {
+		t.Fatal("internal/rules/roster_default.go differs from the JSON block in docs/design/roster.md")
 	}
-	for _, s := range PresetDnD5e().Skills {
-		if s.Description != "" {
-			t.Fatalf("preset skill %q has a description", s.ID)
+	if len(got) != 10 {
+		t.Fatalf("%d classes", len(got))
+	}
+	for _, e := range got {
+		c, err := cleanEntry(e)
+		if err != nil || !reflect.DeepEqual(c, e) {
+			t.Fatalf("%s: default not clean: %v", e.ID, err)
 		}
 	}
+	got[0].Skills[0].Cost = 99 // copies are independent
+	if DefaultRoster()[0].Skills[0].Cost == 99 || defaults[0].Skills[0].Cost == 99 {
+		t.Fatal("DefaultRoster shares slices")
+	}
 }
 
-func validStats() map[string]int {
-	// 7+7+5+4+2+2 = 27 points above base 8.
-	return map[string]int{"str": 15, "dex": 15, "con": 13, "int": 12, "wis": 10, "cha": 10, "hp": 10, "ac": 10}
-}
-
-func TestValidateCharacter(t *testing.T) {
-	r := PresetDnD5e()
+func TestCleanEntry(t *testing.T) {
+	long := strings.Repeat("ก", MaxName+1)
 	tests := []struct {
 		name   string
-		stats  func(m map[string]int)
-		skills []string
+		mutate func(e *RosterEntry)
 		ok     bool
 	}{
-		{"valid", func(m map[string]int) {}, []string{"stealth", "arcana"}, true},
-		{"too few points", func(m map[string]int) { m["cha"] = 9 }, []string{"stealth", "arcana"}, false},
-		{"too many points", func(m map[string]int) { m["cha"] = 11 }, []string{"stealth", "arcana"}, false},
-		{"above max", func(m map[string]int) { m["str"] = 16; m["dex"] = 14 }, []string{"stealth", "arcana"}, false},
-		{"below min", func(m map[string]int) { m["cha"] = 7; m["wis"] = 13 }, []string{"stealth", "arcana"}, false},
-		{"points into hp", func(m map[string]int) { m["hp"] = 11; m["cha"] = 9 }, []string{"stealth", "arcana"}, false},
-		{"missing stat", func(m map[string]int) { delete(m, "ac") }, []string{"stealth", "arcana"}, false},
-		{"extra stat", func(m map[string]int) { m["luck"] = 0 }, []string{"stealth", "arcana"}, false},
-		{"one skill", func(m map[string]int) {}, []string{"stealth"}, false},
-		{"three skills", func(m map[string]int) {}, []string{"stealth", "arcana", "history"}, false},
-		{"duplicate skill", func(m map[string]int) {}, []string{"stealth", "stealth"}, false},
-		{"unknown skill", func(m map[string]int) {}, []string{"stealth", "flying"}, false},
+		{"default", func(e *RosterEntry) {}, true},
+		{"unknown class", func(e *RosterEntry) { e.ID = "pirate" }, false},
+		{"hero th empty", func(e *RosterEntry) { e.HeroName.TH = "  " }, false},
+		{"hero en too long", func(e *RosterEntry) { e.HeroName.EN = long }, false},
+		{"hero 40 runes", func(e *RosterEntry) { e.HeroName.TH = strings.Repeat("ก", MaxName) }, true},
+		{"hero newline", func(e *RosterEntry) { e.HeroName.EN = "a\nb" }, false},
+		{"class empty", func(e *RosterEntry) { e.ClassName.EN = "" }, false},
+		{"blurb newline ok", func(e *RosterEntry) { e.Blurb.EN = "a\nb" }, true},
+		{"blurb control", func(e *RosterEntry) { e.Blurb.EN = "a\x00" }, false},
+		{"blurb too long", func(e *RosterEntry) { e.Blurb.TH = strings.Repeat("x", MaxDesc+1) }, false},
+		{"bad role", func(e *RosterEntry) { e.Role = "boss" }, false},
+		{"art upload ok", func(e *RosterEntry) { e.Art = "/uploads/" + strings.Repeat("a", 32) + ".png" }, true},
+		{"art other url", func(e *RosterEntry) { e.Art = "https://x/y.png" }, false},
+		{"art traversal", func(e *RosterEntry) { e.Art = "/uploads/../x.png" }, false},
+		{"hpMax 0", func(e *RosterEntry) { e.Stats.HPMax = 0 }, false},
+		{"hpMax 999", func(e *RosterEntry) { e.Stats.HPMax = 999 }, true},
+		{"hpMax 1000", func(e *RosterEntry) { e.Stats.HPMax = 1000 }, false},
+		{"str 21", func(e *RosterEntry) { e.Stats.Str = 21 }, false},
+		{"agi -1", func(e *RosterEntry) { e.Stats.Agi = -1 }, false},
+		{"end 0", func(e *RosterEntry) { e.Stats.End = 0 }, true},
+		{"mpMax 100", func(e *RosterEntry) { e.Stats.MPMax = 100 }, false},
+		{"mpMax 0", func(e *RosterEntry) { e.Stats.MPMax = 0 }, true},
+		{"no skills", func(e *RosterEntry) { e.Skills = nil }, false},
+		{"6 skills", func(e *RosterEntry) {
+			for i, id := range []string{"a", "b", "c"} {
+				e.Skills = append(e.Skills, e.Skills[i])
+				e.Skills[len(e.Skills)-1].ID = id
+			}
+		}, false},
+		{"dup skill id", func(e *RosterEntry) { e.Skills[1].ID = e.Skills[0].ID }, false},
+		{"bad skill id", func(e *RosterEntry) { e.Skills[0].ID = "Bad Id" }, false},
+		{"skill name empty", func(e *RosterEntry) { e.Skills[0].Name.TH = "" }, false},
+		{"skill desc empty", func(e *RosterEntry) { e.Skills[0].Desc.EN = "" }, false},
+		{"cost 10", func(e *RosterEntry) { e.Skills[0].Cost = 10 }, true},
+		{"cost 11", func(e *RosterEntry) { e.Skills[0].Cost = 11 }, false},
+		{"cost -1", func(e *RosterEntry) { e.Skills[0].Cost = -1 }, false},
+		{"no items", func(e *RosterEntry) { e.Items = nil }, true},
+		{"11 items", func(e *RosterEntry) {
+			for len(e.Items) < MaxItems+1 {
+				e.Items = append(e.Items, e.Items[0])
+			}
+		}, false},
+		{"item qty 0", func(e *RosterEntry) { e.Items[0].Qty = 0 }, false},
+		{"item qty 100", func(e *RosterEntry) { e.Items[0].Qty = 100 }, false},
+		{"item name empty", func(e *RosterEntry) { e.Items[0].Name.EN = " " }, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			m := validStats()
-			tt.stats(m)
-			if err := ValidateCharacter(r, m, tt.skills); (err == nil) != tt.ok {
+			e := DefaultRoster()[0]
+			tt.mutate(&e)
+			if _, err := cleanEntry(e); (err == nil) != tt.ok {
 				t.Fatalf("ok=%v, err=%v", tt.ok, err)
 			}
 		})
 	}
+	e := DefaultRoster()[1]
+	e.HeroName.EN, e.Skills[0].Name.TH = "  Soraya  ", " x "
+	c, err := cleanEntry(e)
+	if err != nil || c.HeroName.EN != "Soraya" || c.Skills[0].Name.TH != "x" || c.Items == nil {
+		t.Fatalf("trim: %+v %v", c, err)
+	}
+}
+
+func TestRosterStore(t *testing.T) {
+	dir := t.TempDir()
+	var logs bytes.Buffer
+	log := slog.New(slog.NewTextHandler(&logs, nil))
+	s, err := LoadRoster(dir, "", log)
+	if err != nil || !reflect.DeepEqual(s.List(), DefaultRoster()) {
+		t.Fatalf("missing file: %v", err)
+	}
+	var zero RosterStore // in-memory store starts at the defaults too
+	if !reflect.DeepEqual(zero.List(), DefaultRoster()) {
+		t.Fatal("zero store")
+	}
+
+	e := DefaultRoster()[2]
+	e.HeroName.EN = " Zed "
+	if err := s.Update(e); err != nil {
+		t.Fatal(err)
+	}
+	e.ID = "pirate"
+	if err := s.Update(e); !errors.Is(err, ErrNoClass) {
+		t.Fatalf("unknown class: %v", err)
+	}
+	if err := s.Reset("pirate"); !errors.Is(err, ErrNoClass) {
+		t.Fatalf("reset unknown: %v", err)
+	}
+	reload := func() *RosterStore {
+		t.Helper()
+		s2, err := LoadRoster(dir, "", log)
+		if err != nil {
+			t.Fatal(err)
+		}
+		return s2
+	}
+	if got, _ := reload().Get("rogue"); got.HeroName.EN != "Zed" {
+		t.Fatalf("persisted %q", got.HeroName.EN)
+	}
+	if fi, err := os.Stat(filepath.Join(dir, rosterFile)); err != nil || fi.Mode().Perm() != 0o600 {
+		t.Fatalf("file mode: %v %v", fi, err)
+	}
+	k := DefaultRoster()[0]
+	k.Stats.Str = 20
+	if err := s.Update(k); err != nil {
+		t.Fatal(err)
+	}
+	if err := s.Reset("rogue"); err != nil {
+		t.Fatal(err)
+	}
+	r2 := reload()
+	if got, _ := r2.Get("rogue"); got.HeroName.EN != "Zarif Kesh" {
+		t.Fatalf("reset rogue: %q", got.HeroName.EN)
+	}
+	if got, _ := r2.Get("knight"); got.Stats.Str != 20 {
+		t.Fatal("knight edit lost by resetting rogue")
+	}
+	if err := s.Reset(""); err != nil {
+		t.Fatal(err)
+	}
+	if !reflect.DeepEqual(reload().List(), DefaultRoster()) {
+		t.Fatal("reset all")
+	}
+
+	// A failed save changes nothing.
+	s.path = filepath.Join(dir, "missing-dir", rosterFile)
+	if err := s.Update(k); err == nil || err.Error() != "could not save roster" {
+		t.Fatalf("save failure: %v", err)
+	}
+	if got, _ := s.Get("knight"); got.Stats.Str == 20 {
+		t.Fatal("failed save changed the roster")
+	}
+}
+
+func TestLoadRosterBadFiles(t *testing.T) {
+	log := slog.New(slog.DiscardHandler)
+	t.Run("corrupt json is quarantined", func(t *testing.T) {
+		dir := t.TempDir()
+		os.WriteFile(filepath.Join(dir, rosterFile), []byte("{nope"), 0o600)
+		s, err := LoadRoster(dir, "", log)
+		if err != nil || !reflect.DeepEqual(s.List(), DefaultRoster()) {
+			t.Fatalf("err %v", err)
+		}
+		if m, _ := filepath.Glob(filepath.Join(dir, rosterFile+".bad-*")); len(m) != 1 {
+			t.Fatalf("quarantine files %v", m)
+		}
+	})
+	t.Run("invalid and duplicate entries fall back to defaults", func(t *testing.T) {
+		dir := t.TempDir()
+		good, bad, dup := DefaultRoster()[0], DefaultRoster()[1], DefaultRoster()[0]
+		good.Stats.Str, bad.Stats.HPMax, dup.Stats.Str = 20, 0, 1
+		b, _ := json.Marshal(rosterFileData{Edits: []RosterEntry{good, bad, dup, {ID: "pirate"}}})
+		os.WriteFile(filepath.Join(dir, rosterFile), b, 0o600)
+		s, err := LoadRoster(dir, "", log)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if k, _ := s.Get("knight"); k.Stats.Str != 20 {
+			t.Fatal("valid edit not loaded")
+		}
+		if w, _ := s.Get("wizard"); w.Stats.HPMax != DefaultRoster()[1].Stats.HPMax {
+			t.Fatal("invalid edit loaded")
+		}
+		if len(s.List()) != 10 {
+			t.Fatal("roster size")
+		}
+	})
+	t.Run("art whose upload is gone falls back to the class art", func(t *testing.T) {
+		const kept, gone = "/uploads/0123456789abcdef0123456789abcdef.png", "/uploads/fedcba9876543210fedcba9876543210.webp"
+		dir, uploads := t.TempDir(), t.TempDir()
+		os.WriteFile(filepath.Join(uploads, "0123456789abcdef0123456789abcdef.png"), []byte("x"), 0o600)
+		os.Mkdir(filepath.Join(uploads, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.gif"), 0o700) // a dir, not a file
+		k, w, r := DefaultRoster()[0], DefaultRoster()[1], DefaultRoster()[2]
+		k.Art, w.Art, r.Art = kept, gone, "/uploads/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.gif"
+		b, _ := json.Marshal(rosterFileData{Edits: []RosterEntry{k, w, r}})
+		os.WriteFile(filepath.Join(dir, rosterFile), b, 0o600)
+		for _, tc := range []struct {
+			name, uploads, class, want string
+		}{
+			{"file present", uploads, "knight", kept},
+			{"file gone", uploads, "wizard", ""},
+			{"dir, not a file", uploads, "rogue", ""},
+			{"no uploads dir", "", "knight", ""},
+		} {
+			s, err := LoadRoster(dir, tc.uploads, log)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if e, _ := s.Get(tc.class); e.Art != tc.want {
+				t.Errorf("%s: art %q, want %q", tc.name, e.Art, tc.want)
+			}
+		}
+	})
 }

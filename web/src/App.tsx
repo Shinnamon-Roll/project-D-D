@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useMe, useStore } from './store'
 import CampaignMenu from './screens/CampaignMenu'
 import Lobby from './screens/Lobby'
-import CharacterCreate, { CreatingDmView } from './screens/CharacterCreate'
+import CharacterPick from './screens/CharacterPick'
 import Table from './screens/Table'
 import crest from './assets/crest.svg'
 import { setLang, useT, type Lang } from './i18n'
@@ -13,7 +13,7 @@ export default function App() {
   const lastError = useStore((s) => s.lastError)
   const lang = useStore((s) => s.lang)
   const t = useT()
-  const { seat, character, isDm } = useMe()
+  const { seat } = useMe()
   const linkedSeat = new URLSearchParams(location.search).get('seat')
 
   // A seated browser ignores ?seat= from a QR link; drop it so a later leave doesn't re-offer it.
@@ -28,11 +28,8 @@ export default function App() {
   if (!room) screen = <p>{t('connecting')}</p>
   else if (room.status === 'menu') screen = <CampaignMenu />
   else if (room.status === 'lobby') screen = <Lobby />
-  else if (room.status === 'creating') {
-    if (isDm) screen = <CreatingDmView />
-    else if (seat && !character) screen = <CharacterCreate key={JSON.stringify(room.ruleset)} />
-    else screen = <p data-testid="waiting">{t('waitingOthers')}</p>
-  } else screen = <Table />
+  else if (room.status === 'creating') screen = <CharacterPick />
+  else screen = <Table />
 
   return (
     <div className="app">
@@ -72,12 +69,6 @@ export default function App() {
         </p>
       )}
       <main>{screen}</main>
-      {room?.ruleset.attribution && (
-        <footer className="attribution" data-testid="attribution">
-          {room.ruleset.attribution}
-          {lang === 'th' && <small className="attribution-note">{t('attributionNote')}</small>}
-        </footer>
-      )}
     </div>
   )
 }

@@ -44,14 +44,36 @@ type Seat struct {
 	client      string // bearer secret; unexported so it is never serialized
 }
 
+// Character is a player's pick from the roster; character.go holds its events.
 type Character struct {
-	ID          string            `json:"id"`
-	SeatID      string            `json:"seatId"`
-	Name        string            `json:"name"`
-	PortraitURL string            `json:"portraitUrl"`
-	Stats       map[string]int    `json:"stats"`
-	SkillIDs    []string          `json:"skillIds"`
-	Inventory   []rules.ItemStack `json:"inventory"`
+	ID      string             `json:"id"`
+	SeatID  string             `json:"seatId"`
+	ClassID string             `json:"classId"`
+	Name    rules.L            `json:"name"` // heroName when picked
+	Art     string             `json:"art"`
+	HP      int                `json:"hp"`
+	HPMax   int                `json:"hpMax"`
+	MP      int                `json:"mp"`
+	MPMax   int                `json:"mpMax"`
+	Str     int                `json:"str"`
+	End     int                `json:"end"`
+	Agi     int                `json:"agi"`
+	Skills  []CharSkill        `json:"skills"`
+	Items   []rules.RosterItem `json:"items"`
+}
+
+type CharSkill struct {
+	ID   string  `json:"id"`
+	Kind string  `json:"kind"` // "innate" (from the roster) | "custom" (the player's own)
+	Name rules.L `json:"name"`
+	Desc rules.L `json:"desc"`
+	Cost int     `json:"cost"`
+}
+
+// FeedEntry is one line of the action log every client sees. Text holds names only, never clientIds.
+type FeedEntry struct {
+	At   int64   `json:"at"` // unix milliseconds
+	Text rules.L `json:"text"`
 }
 
 type Grid struct {
@@ -94,15 +116,16 @@ type Token struct {
 
 // State is the RoomState sent to every client.
 type State struct {
-	Status         string           `json:"status"`
-	Campaigns      []rules.Campaign `json:"campaigns"`
-	CampaignID     string           `json:"campaignId"`
-	Seats          []Seat           `json:"seats"`
-	Ruleset        rules.Ruleset    `json:"ruleset"`
-	Characters     []Character      `json:"characters"`
-	Scenes         []Scene          `json:"scenes"`
-	CurrentSceneID string           `json:"currentSceneId"`
-	Tokens         []Token          `json:"tokens"`
+	Status         string              `json:"status"`
+	Campaigns      []rules.Campaign    `json:"campaigns"`
+	CampaignID     string              `json:"campaignId"`
+	Seats          []Seat              `json:"seats"`
+	Roster         []rules.RosterEntry `json:"roster"` // filled by State() from the roster store
+	Characters     []Character         `json:"characters"`
+	Scenes         []Scene             `json:"scenes"`
+	CurrentSceneID string              `json:"currentSceneId"`
+	Tokens         []Token             `json:"tokens"`
+	Feed           []FeedEntry         `json:"feed"` // newest last, at most maxFeed
 }
 
 // Room is not safe for concurrent use; the Hub serializes access.
@@ -111,7 +134,8 @@ type Room struct {
 	seq     int
 	notes   *notes.Store // DM-only; never part of State (players must not see it)
 	npcs    *npcs.Store  // DM-only pool; never part of State
-	uploads string       // directory of uploaded files; "" = no uploads exist
+	roster  *rules.RosterStore
+	uploads string // directory of uploaded files; "" = no uploads exist
 }
 
 func New() *Room {
@@ -122,17 +146,21 @@ func New() *Room {
 		Characters: []Character{},
 		Scenes:     []Scene{},
 		Tokens:     []Token{},
-	}, notes: &notes.Store{}, npcs: &npcs.Store{}}
-	r.st.Ruleset.Normalize()
+		Feed:       []FeedEntry{},
+	}, notes: &notes.Store{}, npcs: &npcs.Store{}, roster: &rules.RosterStore{}}
 	return r
 }
 
 // State returns the full state (DM/co-DM view) for serialization. Callers must not mutate it.
-func (r *Room) State() State { return r.st }
+func (r *Room) State() State {
+	st := r.st
+	st.Roster = r.roster.List()
+	return st
+}
 
 // PlayerState is the view for players and unseated connections: no hidden tokens, no NPC hp/hpMax/npcId.
 func (r *Room) PlayerState() State {
-	st := r.st
+	st := r.State()
 	st.Tokens = make([]Token, 0, len(r.st.Tokens))
 	for _, t := range r.st.Tokens {
 		if t.Hidden {
@@ -280,10 +308,7 @@ func (r *Room) needDM(s *Seat, status ...string) error {
 	return nil
 }
 
-var (
-	notMenu = []string{StatusLobby, StatusCreating, StatusPlaying}
-	inGame  = []string{StatusCreating, StatusPlaying}
-)
+var inGame = []string{StatusCreating, StatusPlaying}
 
 // Apply validates and applies one client event. On error the state is unchanged.
 func (r *Room) Apply(clientID, typ string, payload json.RawMessage) error {
@@ -359,41 +384,27 @@ func (r *Room) Apply(clientID, typ string, payload json.RawMessage) error {
 		return nil
 	case "game.start":
 		return r.gameStart(s)
-	case "ruleset.update":
-		p, err := decode[struct {
-			Ruleset rules.Ruleset `json:"ruleset"`
-		}](payload)
-		if err != nil {
-			return err
+	case "character.pick":
+		return r.characterPick(s, payload)
+	case "skill.addCustom", "skill.editCustom", "skill.removeCustom":
+		return r.customSkill(s, typ, payload)
+	case "skill.use":
+		return r.skillUse(s, payload)
+	case "character.adjust":
+		return r.characterAdjust(s, payload)
+	case "character.setStats":
+		return r.characterSetStats(s, payload)
+	case "party.rest":
+		return r.partyRest(s)
+	case "item.give":
+		return r.itemGive(s, payload)
+	case "item.remove":
+		return r.itemRemove(s, payload)
+	case "roster.update", "roster.reset":
+		if !isDM(s) { // any room status, like notes
+			return errNotDM
 		}
-		if err := r.needDM(s, notMenu...); err != nil {
-			return err
-		}
-		p.Ruleset.Normalize() // trims descriptions, so limits apply to the trimmed text
-		if err := rules.ValidateRuleset(p.Ruleset); err != nil {
-			return err
-		}
-		r.st.Ruleset = p.Ruleset
-		return nil
-	case "ruleset.loadPreset":
-		p, err := decode[struct {
-			PresetID string `json:"presetId"`
-		}](payload)
-		if err != nil {
-			return err
-		}
-		if err := r.needDM(s, notMenu...); err != nil {
-			return err
-		}
-		if p.PresetID != rules.PresetDnD5eID {
-			return fmt.Errorf("unknown preset %q", p.PresetID)
-		}
-		r.st.Ruleset = rules.PresetDnD5e()
-		return nil
-	case "character.submit":
-		return r.characterSubmit(s, payload)
-	case "character.grant":
-		return r.characterGrant(s, payload)
+		return r.rosterEdit(typ, payload)
 	case "scene.add", "scene.update":
 		return r.sceneUpsert(s, typ, payload)
 	case "scene.select":
@@ -530,7 +541,6 @@ func (r *Room) campaignSelect(clientID string, s *Seat, payload json.RawMessage)
 		return err
 	}
 	r.st.CampaignID = p.CampaignID
-	r.st.Ruleset = rules.PresetDnD5e() // the only available campaign uses the SRD preset
 	r.st.Seats = []Seat{
 		{ID: r.id("s"), Kind: KindDM, Name: name, Occupied: true, client: clientID},
 		{ID: r.id("s"), Kind: KindPlayer},
@@ -589,121 +599,6 @@ func (r *Room) gameStart(s *Seat) error {
 	}
 	r.st.Seats = slices.DeleteFunc(r.st.Seats, func(x Seat) bool { return x.Kind == KindPlayer && !x.Occupied })
 	r.st.Status = StatusCreating
-	return nil
-}
-
-func (r *Room) characterSubmit(s *Seat, payload json.RawMessage) error {
-	p, err := decode[struct {
-		Name        string         `json:"name"`
-		PortraitURL string         `json:"portraitUrl"`
-		Stats       map[string]int `json:"stats"`
-		SkillIDs    []string       `json:"skillIds"`
-	}](payload)
-	if err != nil {
-		return err
-	}
-	if err := r.needStatus(StatusCreating); err != nil {
-		return err
-	}
-	if s == nil || s.Kind != KindPlayer {
-		return errors.New("only a seated player can create a character")
-	}
-	if s.CharacterID != "" {
-		return errors.New("you already have a character")
-	}
-	name, err := cleanName(p.Name)
-	if err != nil {
-		return err
-	}
-	if p.PortraitURL != "" && !uploadURL(p.PortraitURL) {
-		return errors.New("portraitUrl must be empty or start with /uploads/")
-	}
-	if err := rules.ValidateCharacter(r.st.Ruleset, p.Stats, p.SkillIDs); err != nil {
-		return err
-	}
-	if p.SkillIDs == nil { // keep JSON arrays non-null when startingSkillPicks is 0
-		p.SkillIDs = []string{}
-	}
-	if p.Stats == nil {
-		p.Stats = map[string]int{}
-	}
-	c := Character{
-		ID: r.id("c"), SeatID: s.ID, Name: name, PortraitURL: p.PortraitURL,
-		Stats: p.Stats, SkillIDs: p.SkillIDs,
-		Inventory: append([]rules.ItemStack{}, r.st.Ruleset.StartingItems...),
-	}
-	r.st.Characters = append(r.st.Characters, c)
-	s.CharacterID = c.ID
-	for _, x := range r.st.Seats {
-		if x.Kind == KindPlayer && x.Occupied && x.CharacterID == "" {
-			return nil
-		}
-	}
-	r.st.Status = StatusPlaying
-	return nil
-}
-
-func (r *Room) characterGrant(s *Seat, payload json.RawMessage) error {
-	p, err := decode[struct {
-		CharacterID    string            `json:"characterId"`
-		SetStats       map[string]int    `json:"setStats"`
-		AddSkillIDs    []string          `json:"addSkillIds"`
-		RemoveSkillIDs []string          `json:"removeSkillIds"`
-		AddItems       []rules.ItemStack `json:"addItems"`
-		RemoveItems    []rules.ItemStack `json:"removeItems"`
-	}](payload)
-	if err != nil {
-		return err
-	}
-	if err := r.needDM(s, inGame...); err != nil {
-		return err
-	}
-	c := r.character(p.CharacterID)
-	if c == nil {
-		return errors.New("no such character")
-	}
-	rs := r.st.Ruleset
-	// Validate everything before mutating so a rejected grant changes nothing.
-	for k := range p.SetStats {
-		if !rs.HasStat(k) {
-			return fmt.Errorf("unknown stat %q", k)
-		}
-	}
-	for _, id := range slices.Concat(p.AddSkillIDs, p.RemoveSkillIDs) {
-		if !rs.HasSkill(id) {
-			return fmt.Errorf("unknown skill %q", id)
-		}
-	}
-	for _, it := range slices.Concat(p.AddItems, p.RemoveItems) {
-		if !rs.HasItem(it.ItemID) {
-			return fmt.Errorf("unknown item %q", it.ItemID)
-		}
-		if it.Qty < 1 {
-			return errors.New("item qty must be > 0")
-		}
-	}
-	for k, v := range p.SetStats { // DM bypasses min/max
-		c.Stats[k] = v
-	}
-	for _, id := range p.AddSkillIDs {
-		if !slices.Contains(c.SkillIDs, id) {
-			c.SkillIDs = append(c.SkillIDs, id)
-		}
-	}
-	c.SkillIDs = slices.DeleteFunc(c.SkillIDs, func(id string) bool { return slices.Contains(p.RemoveSkillIDs, id) })
-	for _, add := range p.AddItems {
-		if i := slices.IndexFunc(c.Inventory, func(x rules.ItemStack) bool { return x.ItemID == add.ItemID }); i >= 0 {
-			c.Inventory[i].Qty += add.Qty
-		} else {
-			c.Inventory = append(c.Inventory, add)
-		}
-	}
-	for _, rm := range p.RemoveItems {
-		if i := slices.IndexFunc(c.Inventory, func(x rules.ItemStack) bool { return x.ItemID == rm.ItemID }); i >= 0 {
-			c.Inventory[i].Qty -= rm.Qty
-		}
-	}
-	c.Inventory = slices.DeleteFunc(c.Inventory, func(x rules.ItemStack) bool { return x.Qty <= 0 })
 	return nil
 }
 
@@ -780,7 +675,7 @@ func (r *Room) sceneSelect(s *Seat, payload json.RawMessage) error {
 		// Row 0, col 0..n; wrap to the next row if the grid is narrower than the party.
 		col, row := placed%sc.Grid.Cols, min(placed/sc.Grid.Cols, sc.Grid.Rows-1)
 		r.st.Tokens = append(r.st.Tokens, Token{
-			ID: r.id("t"), SceneID: sc.ID, CharacterID: c.ID, Name: c.Name, ImageURL: c.PortraitURL, Col: col, Row: row,
+			ID: r.id("t"), SceneID: sc.ID, CharacterID: c.ID, Name: c.Name.EN, ImageURL: c.Art, Col: col, Row: row,
 		})
 		placed++
 	}

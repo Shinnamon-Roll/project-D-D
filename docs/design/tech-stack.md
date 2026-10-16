@@ -13,11 +13,13 @@
 | state ห้อง | struct ใน memory + `sync.Mutex` / goroutine เดียวต่อห้อง | v0 ไม่เซฟข้าม session; อัปเกรดทีหลัง = เขียน JSON ลงไฟล์ |
 | ใครเป็นเจ้าของ state | **server** ตัดสินทุกอย่าง | server ตรวจสิทธิ์ → broadcast; ไม่ต้องใช้ CRDT |
 | ลูกเต๋า | **ไม่มีในแอป** — ผู้เล่นทอยลูกเต๋าจริง (ตัดออก 2026-10-16, [conv](../conversations/2026-10-16-remove-dice.md)) | |
-| ตรวจกฎ | Go (`internal/rules`): แต้ม stat, จำนวนสกิล, สิทธิ์ DM/ผู้เล่น | ตรวจที่ server เสมอ หน้าเว็บตรวจซ้ำเพื่อ UX เท่านั้น |
+| ตรวจกฎ | Go (`internal/rules`): roster 10 คลาส (`roster.go` + ค่าเริ่มต้น `roster_default.go`), ขอบเขต stat/สกิล/มานา, สิทธิ์ DM/ผู้เล่น | ตรวจที่ server เสมอ หน้าเว็บตรวจซ้ำเพื่อ UX เท่านั้น · ~~แต้ม stat / ruleset white label / preset 5E~~ แทนที่ด้วย roster 2026-10-16 ([conv](../conversations/2026-10-16-character-roster.md)) |
 | เก็บรูป | โฟลเดอร์ `uploads/` + `http.MaxBytesReader` + ตรวจ `http.DetectContentType` | ไม่ต้องมี cloud storage |
 | **หน้าเว็บ** | **React + Vite + TypeScript** | มาตรฐาน, library เยอะ |
 | แมพ / grid / token / fog | **react-konva** (MIT) | canvas 2D ลาก token ง่าย |
 | state หน้าเว็บ | **Zustand** | เบา |
+| animation | **`motion`** (motion.dev, `motion/react`) | carousel การ์ดเลือกตัวละคร; animate เฉพาะ transform/opacity, รองรับ `prefers-reduced-motion` |
+| QR | **`qrcode`** | QR เข้านั่งในหน้า lobby ([spec](../features/seat-qr.md)) |
 | type ระหว่าง Go ↔ TS | เขียน type ข้อความ (message) ไว้ที่เดียวใน Go แล้ว gen เป็น TS ด้วย **tygo** — หรือเขียนมือถ้ายังน้อย | กันสองฝั่งไม่ตรงกัน |
 | **deploy** | `go build` → **binary ไฟล์เดียว** ที่ฝังหน้าเว็บไว้ด้วย `embed` | ก๊อปไฟล์เดียวไปรันที่ไหนก็ได้ |
 | ทดสอบ | `go test` (กฎ, สิทธิ์) + **Playwright** (2 แท็บ DM + ผู้เล่น) | |
@@ -27,7 +29,7 @@
 go.mod
 cmd/server/main.go     เปิด HTTP + WebSocket, เสิร์ฟหน้าเว็บที่ embed ไว้
 internal/room/         state ห้อง, เก้าอี้, ตัวละคร, ฉาก, token, fog + จัดการ event
-internal/rules/        ruleset, preset D&D 5e (SRD), ตรวจแต้ม stat/สกิล
+internal/rules/        roster 10 คลาส (roster.go, roster_default.go) + ตรวจขอบเขต stat/สกิล
 web/                   React + Vite (package.json มี version SemVer)
 web/dist/              ผล build → ถูก embed เข้า binary (gitignored)
 uploads/               รูปที่อัป (gitignored)
@@ -40,11 +42,17 @@ Version: SemVer อันเดียวของทั้งโปรเจก�
 | `campaign.select` | DM |
 | `seat.sit`, `seat.ready` | ทุกคน (เก้าอี้ตัวเอง) |
 | `seat.add`, `seat.remove`, `seat.openCoDm`, `game.start` | DM |
-| `ruleset.update`, `ruleset.loadPreset` | DM |
-| `character.submit` | ผู้เล่น (ตัวเอง; server ตรวจแต้ม stat/จำนวนสกิล) |
-| `character.grant` (ไอเทม/สกิล/stat) | DM |
+| `character.pick` (เลือก 1 ใน 10 คลาส, ห้ามซ้ำ) | ผู้เล่น (ตัวเอง) |
+| `skill.addCustom` (สูงสุด 3), `skill.use` (หักมานา) | ผู้เล่น (ตัวละครตัวเอง) |
+| `skill.editCustom`, `skill.removeCustom` | เจ้าของ / DM |
+| `character.adjust` (HP/มานา ±), `character.setStats`, `party.rest` | DM |
+| `item.give`, `item.remove` | DM |
+| `roster.update`, `roster.reset` (เก็บ `data/roster.json`) | DM |
+| `note.*`, `npc.*`, `npc.place`, `token.setHidden`, `token.adjustHp` | DM |
 | `scene.add`, `scene.select`, `fog.set` | DM |
 | `token.move` | ผู้เล่น (token ตัวเอง) / DM (ทุกตัว) |
+
+~~`ruleset.update`, `ruleset.loadPreset`, `character.submit`, `character.grant`~~ ลบใน v0.12.0 · รายการเต็ม + เงื่อนไข: [`protocol.md`](protocol.md)
 
 server ส่งกลับ: `state.snapshot` (ตอนเข้า/เชื่อมใหม่) + `state.patch` / event เดิมหลังตรวจผ่าน + `error`
 

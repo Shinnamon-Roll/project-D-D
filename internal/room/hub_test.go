@@ -7,6 +7,7 @@ import (
 	"log/slog"
 	"net/http"
 	"net/http/httptest"
+	"slices"
 	"strings"
 	"sync"
 	"testing"
@@ -16,6 +17,7 @@ import (
 
 	"projectdnd/internal/notes"
 	"projectdnd/internal/npcs"
+	"projectdnd/internal/rules"
 )
 
 type wsClient struct {
@@ -83,7 +85,7 @@ func (l *lockedBuf) String() string {
 
 func TestHub(t *testing.T) {
 	var logs lockedBuf
-	h := NewHub(slog.New(slog.NewTextHandler(&logs, nil)), &notes.Store{}, &npcs.Store{}, "")
+	h := NewHub(slog.New(slog.NewTextHandler(&logs, nil)), &notes.Store{}, &npcs.Store{}, &rules.RosterStore{}, "")
 	srv := httptest.NewServer(http.HandlerFunc(h.ServeWS))
 	defer srv.Close()
 	const dmID, plID = "dm-secret-0001", "pl-secret-0002"
@@ -173,7 +175,7 @@ func TestHub(t *testing.T) {
 // TestHubNotes: notes reach the DM and co-DM only; players get no "notes" key and no note-only broadcasts.
 func TestHubNotes(t *testing.T) {
 	var logs lockedBuf
-	h := NewHub(slog.New(slog.NewTextHandler(&logs, nil)), &notes.Store{}, &npcs.Store{}, "")
+	h := NewHub(slog.New(slog.NewTextHandler(&logs, nil)), &notes.Store{}, &npcs.Store{}, &rules.RosterStore{}, "")
 	srv := httptest.NewServer(http.HandlerFunc(h.ServeWS))
 	defer srv.Close()
 
@@ -263,7 +265,7 @@ func TestHubNotes(t *testing.T) {
 
 // TestHubNotesConcurrent: DM and co-DM write the same note at once; run under -race.
 func TestHubNotesConcurrent(t *testing.T) {
-	h := NewHub(slog.New(slog.DiscardHandler), &notes.Store{}, &npcs.Store{}, "")
+	h := NewHub(slog.New(slog.DiscardHandler), &notes.Store{}, &npcs.Store{}, &rules.RosterStore{}, "")
 	srv := httptest.NewServer(http.HandlerFunc(h.ServeWS))
 	defer srv.Close()
 	dm, co := dial(t, srv), dial(t, srv)
@@ -312,7 +314,7 @@ func TestHubNotesConcurrent(t *testing.T) {
 // TestHubNpcs: the pool and hidden tokens reach the DM only; players never see a hidden NPC's name or any NPC hp.
 func TestHubNpcs(t *testing.T) {
 	var logs lockedBuf
-	h := NewHub(slog.New(slog.NewTextHandler(&logs, nil)), &notes.Store{}, &npcs.Store{}, "")
+	h := NewHub(slog.New(slog.NewTextHandler(&logs, nil)), &notes.Store{}, &npcs.Store{}, &rules.RosterStore{}, "")
 	srv := httptest.NewServer(http.HandlerFunc(h.ServeWS))
 	defer srv.Close()
 	dm, pl := dial(t, srv), dial(t, srv)
@@ -346,7 +348,7 @@ func TestHubNpcs(t *testing.T) {
 		{pl, "seat.sit", m{"seatId": plSeat, "name": "Pat"}},
 		{pl, "seat.ready", m{"ready": true}},
 		{dm, "game.start", m{}},
-		{pl, "character.submit", goodChar("Mira")},
+		{pl, "character.pick", pick("knight")},
 		{dm, "scene.add", m{"name": "Beach", "imageUrl": "/uploads/a.png", "grid": m{"cellSize": 50, "cols": 10, "rows": 5}}},
 		{dm, "scene.select", m{"sceneId": "sc4"}},
 	} {
@@ -387,7 +389,8 @@ func TestHubNpcs(t *testing.T) {
 	if len(toks) != 2 || toks[1].(map[string]any)["name"] != secret {
 		t.Fatalf("revealed token missing: %s", raw)
 	}
-	if _, has := toks[1].(map[string]any)["hp"]; has || p["npcs"] != nil || strings.Contains(raw, `"hpMax"`) {
+	_, hasHP := toks[1].(map[string]any)["hp"]
+	if _, hasMax := toks[1].(map[string]any)["hpMax"]; hasHP || hasMax || p["npcs"] != nil {
 		t.Fatalf("player got hp or the pool: %s", raw)
 	}
 	dm.send("token.adjustHp", m{"tokenId": npc["id"], "delta": -1})
@@ -408,5 +411,76 @@ func TestHubNpcs(t *testing.T) {
 	}
 	if out := logs.String(); strings.Contains(out, secret) || !strings.Contains(out, "event npc.place\" by=Dee") {
 		t.Fatalf("logs:\n%s", out)
+	}
+}
+
+// TestHubPickRace: two players pick the same class at once; exactly one gets it. Run under -race.
+func TestHubPickRace(t *testing.T) {
+	h := NewHub(slog.New(slog.DiscardHandler), &notes.Store{}, &npcs.Store{}, &rules.RosterStore{}, "")
+	srv := httptest.NewServer(http.HandlerFunc(h.ServeWS))
+	defer srv.Close()
+	dm, p1, p2 := dial(t, srv), dial(t, srv), dial(t, srv)
+	all := []*wsClient{dm, p1, p2}
+	// do sends one event that must succeed and returns the state every client then gets.
+	do := func(c *wsClient, typ string, payload any) map[string]any {
+		t.Helper()
+		c.send(typ, payload)
+		var st map[string]any
+		for _, x := range all {
+			typ2, p, raw := x.next()
+			if typ2 != "state" {
+				t.Fatalf("%s: got %s", typ, raw)
+			}
+			st = p
+		}
+		return st
+	}
+	for i, c := range all {
+		c.send("hello", m{"clientId": []string{"dm-secret-0001", "p1-secret-0002", "p2-secret-0003"}[i]})
+		c.next()
+	}
+	seats := func(p map[string]any) []any { return p["room"].(map[string]any)["seats"].([]any) }
+	id := func(s any) any { return s.(map[string]any)["id"] }
+	st := do(dm, "campaign.select", m{"campaignId": "starter-set", "name": "Dee"})
+	do(p1, "seat.sit", m{"seatId": id(seats(st)[1]), "name": "Pat"})
+	st = do(dm, "seat.add", m{})
+	do(p2, "seat.sit", m{"seatId": id(seats(st)[2]), "name": "Sam"})
+	do(p1, "seat.ready", m{"ready": true})
+	do(p2, "seat.ready", m{"ready": true})
+	do(dm, "game.start", m{})
+
+	var wg sync.WaitGroup
+	for _, c := range []*wsClient{p1, p2} {
+		wg.Go(func() { c.send("character.pick", m{"classId": "knight"}) })
+	}
+	wg.Wait()
+	// Each player reads until its outcome: an error (lost) or a state holding a character on its seat (won).
+	won, lost := 0, 0
+	for _, c := range []*wsClient{p1, p2} {
+		for {
+			typ, p, raw := c.next()
+			if typ == "error" {
+				if p["message"] != "that class is already taken" {
+					t.Fatalf("loser error: %s", raw)
+				}
+				lost++
+				break
+			}
+			mine := seatID(p)
+			if slices.ContainsFunc(p["room"].(map[string]any)["characters"].([]any), func(x any) bool {
+				return x.(map[string]any)["seatId"] == mine
+			}) {
+				won++
+				break
+			}
+		}
+	}
+	if won != 1 || lost != 1 {
+		t.Fatalf("won %d lost %d, want 1 and 1", won, lost)
+	}
+	h.mu.Lock()
+	defer h.mu.Unlock()
+	if cs := h.room.st.Characters; len(cs) != 1 || cs[0].ClassID != "knight" {
+		t.Fatalf("characters %+v", cs)
 	}
 }

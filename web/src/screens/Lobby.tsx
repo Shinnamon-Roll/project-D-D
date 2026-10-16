@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import { useMe, useStore } from '../store'
 import { send } from '../ws'
 import { useT } from '../i18n'
-import RulesetEditor from './RulesetEditor'
 import SeatQr from './SeatQr'
 import { NotesButton } from '../table/NotesPanel'
+import { RosterButton } from '../table/RosterEditor'
 
 const kindLabel = { dm: 'kindDm', codm: 'kindCodm', player: 'kindPlayer' } as const
 
@@ -144,10 +144,10 @@ export default function Lobby() {
               {t('start')}
             </button>
             <NotesButton />
+            <RosterButton />
           </div>
         )}
       </section>
-      {isDm && <RulesetEditor key={JSON.stringify(room.ruleset)} />}
       {qrOpen && <SeatQr seatId={qrFor} num={seatNum(qrFor)} onClose={() => setQrFor('')} />}
     </div>
   )

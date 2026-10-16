@@ -19,50 +19,74 @@ export interface Seat {
   characterId: string
 }
 
-export interface StatDef {
-  key: string
-  name: string
-  min: number
-  max: number
-  base: number
+// Text in both UI languages; game content shows text[lang].
+export interface L {
+  th: string
+  en: string
 }
 
-export interface SkillDef {
+export interface RosterSkill {
   id: string
-  name: string
-  statKey: string // may be ""
-  description?: string // DM text, <= 500 chars
+  name: L
+  desc: L
+  cost: number // mana 0-10
 }
 
-export interface ItemDef {
-  id: string
-  name: string
-}
-
-export interface ItemStack {
-  itemId: string
+export interface RosterItem {
+  name: L
   qty: number
 }
 
-export interface Ruleset {
-  name: string
-  attribution: string // "" for custom
-  stats: StatDef[]
-  statPoints: number
-  skills: SkillDef[]
-  startingSkillPicks: number
-  items: ItemDef[]
-  startingItems: ItemStack[]
+export interface CharStats {
+  hpMax: number
+  str: number
+  end: number
+  agi: number
+  mpMax: number
+}
+
+// One of the 10 pre-made characters (server-owned, DM-editable).
+export interface RosterEntry {
+  id: string // classId: knight|wizard|rogue|ranger|cleric|paladin|barbarian|bard|druid|necromancer
+  heroName: L
+  className: L
+  blurb: L
+  role: string
+  art: string // "" = class art by id (src/assets/classes/<id>.svg) | "/uploads/<name>"
+  stats: CharStats
+  skills: RosterSkill[] // 1-5
+  items: RosterItem[] // 0-10
+}
+
+// innate = from the roster, fixed; custom = player-made (name/desc same text in th and en), at most 3.
+export interface CharSkill {
+  id: string
+  kind: 'innate' | 'custom'
+  name: L
+  desc: L
+  cost: number
 }
 
 export interface Character {
   id: string
   seatId: string
-  name: string
-  portraitUrl: string
-  stats: Record<string, number>
-  skillIds: string[]
-  inventory: ItemStack[]
+  classId: string
+  name: L // heroName at pick time
+  art: string
+  hp: number
+  hpMax: number
+  mp: number
+  mpMax: number
+  str: number
+  end: number
+  agi: number
+  skills: CharSkill[]
+  items: RosterItem[]
+}
+
+export interface FeedEntry {
+  at: number // unix ms
+  text: L
 }
 
 export interface Grid {
@@ -124,8 +148,9 @@ export interface RoomState {
   campaigns: Campaign[]
   campaignId: string
   seats: Seat[]
-  ruleset: Ruleset
+  roster: RosterEntry[]
   characters: Character[]
+  feed: FeedEntry[] // latest 50
   scenes: Scene[]
   currentSceneId: string
   tokens: Token[]
@@ -154,17 +179,18 @@ export interface ClientEvents {
   'seat.remove': { seatId: string }
   'seat.openCoDm': Empty
   'game.start': Empty
-  'ruleset.update': { ruleset: Ruleset }
-  'ruleset.loadPreset': { presetId: 'dnd5e-srd' }
-  'character.submit': { name: string; portraitUrl: string; stats: Record<string, number>; skillIds: string[] }
-  'character.grant': {
-    characterId: string
-    setStats?: Record<string, number>
-    addSkillIds?: string[]
-    removeSkillIds?: string[]
-    addItems?: ItemStack[]
-    removeItems?: ItemStack[]
-  }
+  'character.pick': { classId: string }
+  'skill.addCustom': { name: string; desc: string; cost: number }
+  'skill.editCustom': { characterId: string; skillId: string; name: string; desc: string; cost: number }
+  'skill.removeCustom': { characterId: string; skillId: string }
+  'skill.use': { skillId: string }
+  'character.adjust': { characterId: string; hp?: number; mp?: number } // deltas
+  'character.setStats': { characterId: string } & CharStats
+  'party.rest': Empty
+  'item.give': { characterId: string; name: string; qty: number }
+  'item.remove': { characterId: string; index: number; qty: number }
+  'roster.update': { classId: string; entry: RosterEntry }
+  'roster.reset': { classId?: string }
   'scene.add': { name: string; imageUrl: string; grid: Grid }
   'scene.update': { sceneId: string; name: string; grid: Grid }
   'scene.select': { sceneId: string }

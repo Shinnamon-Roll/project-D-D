@@ -28,6 +28,7 @@ interface Props {
   isDm: boolean
   myCharacterId: string
   fogMode: boolean
+  charArt: Record<string, { src: string; icon: boolean }> // characterId -> class art
 }
 
 type Cell = { col: number; row: number }
@@ -48,7 +49,7 @@ const C = {
   font: 'Trirong, Georgia, serif',
 }
 
-export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fogMode }: Props) {
+export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fogMode, charArt }: Props) {
   const t = useT()
   const map = useImg(scene.imageUrl)
   const [selected, setSelected] = useState('')
@@ -152,6 +153,7 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
               key={t.id}
               t={t}
               f={f}
+              art={charArt[t.characterId]}
               selected={t.id === selected}
               // Name label width in cells: up to 3, but no wider than the gap to the nearest token in the same row.
               span={Math.max(1, Math.min(3, ...tokens.filter((o) => o.id !== t.id && o.row === t.row).map((o) => Math.abs(o.col - t.col))))}
@@ -186,9 +188,12 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
   )
 }
 
-function TokenNode({ t, f, selected, span, onSelect }: { t: Token; f: Fit; selected: boolean; span: number; onSelect?: () => void }) {
+function TokenNode(props: { t: Token; f: Fit; art?: { src: string; icon: boolean }; selected: boolean; span: number; onSelect?: () => void }) {
+  const { t, f, art, selected, span, onSelect } = props
   const npc = t.characterId === ''
-  const img = useImg(t.imageUrl || (npc ? silhouette : ''))
+  const img = useImg(t.imageUrl || (npc ? silhouette : (art?.src ?? '')))
+  // a class icon sits inset on the oxblood disc; photos fill it
+  const inset = !t.imageUrl && !npc && art?.icon ? 0.72 : 1
   const down = t.hp === 0 // NPC at 0 HP (only the DM gets hp)
   const k = f.k
   const r = k * 0.42
@@ -224,7 +229,7 @@ function TokenNode({ t, f, selected, span, onSelect }: { t: Token; f: Fit; selec
       />
       {img ? (
         <Group clipFunc={(ctx) => ctx.arc(0, 0, r, 0, Math.PI * 2)}>
-          <KImage image={img} x={-r} y={-r} width={r * 2} height={r * 2} />
+          <KImage image={img} x={-r * inset} y={-r * inset} width={r * 2 * inset} height={r * 2 * inset} />
         </Group>
       ) : (
         <Text text={t.name.slice(0, 1).toUpperCase()} x={-r} y={-r} width={r * 2} height={r * 2} align="center" verticalAlign="middle" fontSize={r} fontFamily={C.font} fill={C.parchment} />

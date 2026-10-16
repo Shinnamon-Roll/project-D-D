@@ -7,7 +7,9 @@ character sheets. Single project at repo root (not a monorepo).
 Replace the paper table: a DM and friends open one link and play together in the browser.
 
 ## Confirmed requirements
-- White label: DM defines stats, skills, items (no hardcoded D&D rules).
+- Fixed 10-class character roster (`docs/features/character-roster.md`, data `docs/design/roster.md`): players pick 1 card each
+  (no duplicates); HP/mana/str/end/agi, mana skills + up to 3 custom skills. DM edits the roster in-app (Ruleset page,
+  saved in `data/roster.json`). NPC pool stays white label (DM defines NPCs). The old white-label ruleset + 5E preset is gone.
 - Private use. One DM (first to click) + optional co-DM; up to 6 player seats added by DM.
 - Flow: lobby + ready → character creation → map with grid, click to move. Full draft: `docs/design/web-flow.md`.
 - Home page = campaign menu, DM picks. First campaign: Starter Set Dragons of Stormwreck Isle (`docs/campaigns/starter-set/`).
@@ -34,8 +36,9 @@ Tests: `go test` + Playwright (2 tabs: DM + player).
   every user request/feedback → `docs/conversations/YYYY-MM-DD-<topic>.md` (verbatim + summary);
   confirmed → `docs/decisions.md`; unclear → `docs/open-questions.md`; out of scope → `docs/ideas.md`.
 - Docs for the user are written in Thai (user's language); keep technical terms in English.
-- Game content: only use D&D 5e SRD (CC-BY-4.0) material. Never copy non-SRD book text,
-  Basic/Free Rules text, official character sheet layout, or adventure maps/text. Recommended: SRD 5.2.1 (not confirmed yet).
+- Game content is original (the roster: names, stories, skills, items written for this app). SRD text is no longer bundled.
+  Never copy D&D book text, Basic/Free Rules text, official character sheet layout, or adventure maps/text.
+  Class art = game-icons.net (CC BY 3.0) with credit shown on the pick screen.
 - Never brand the app "D&D" / "Dungeons & Dragons" (trademark). "5E compatible" is OK.
 - Salem campaign: mechanics ideas only from Salem 1692 (Facade Games). Never copy its card/rule text, art, coined terms
   ("Tryal", "Town Crier", "frame card") or use "Salem 1692" as a title. NPCs fictional; no real 1692 person as the witch.

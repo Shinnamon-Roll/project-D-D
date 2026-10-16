@@ -3,11 +3,10 @@ import type { Grid, Scene } from '../protocol'
 import { useStore } from '../store'
 import { send, upload } from '../ws'
 import { useT, type TKey } from '../i18n'
-import GrantPanel from './GrantPanel'
 import NotesPanel from './NotesPanel'
 import NpcPanel from './NpcPanel'
+import RosterEditor from './RosterEditor'
 import { useImg } from './MapStage'
-import RulesetEditor from '../screens/RulesetEditor'
 
 const validGrid = (g: Grid) =>
   g.cellSize >= 10 && g.cellSize <= 400 && g.cols >= 1 && g.cols <= 200 && g.rows >= 1 && g.rows <= 200
@@ -28,12 +27,11 @@ function imageSize(url: string): Promise<{ w: number; h: number }> {
   })
 }
 
-type Section = 'scenes' | 'fog' | 'npc' | 'grant' | 'notes' | 'ruleset'
+type Section = 'scenes' | 'fog' | 'npc' | 'notes' | 'ruleset'
 const SECTIONS: [Section, TKey][] = [
   ['scenes', 'sceneMap'],
   ['fog', 'fog'],
   ['npc', 'npc'],
-  ['grant', 'grant'],
   ['notes', 'story'],
   ['ruleset', 'ruleset'],
 ]
@@ -171,12 +169,10 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
         )
       case 'npc':
         return <NpcPanel scene={scene} />
-      case 'grant':
-        return <GrantPanel />
       case 'notes':
         return <NotesPanel />
       case 'ruleset':
-        return <RulesetEditor key={JSON.stringify(room.ruleset)} />
+        return <RosterEditor />
     }
   }
 

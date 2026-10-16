@@ -32,11 +32,7 @@ func fail(t *testing.T, r *Room, client, typ string, payload any) {
 
 type m = map[string]any
 
-var goodStats = m{"str": 15, "dex": 15, "con": 13, "int": 12, "wis": 10, "cha": 10, "hp": 10, "ac": 10}
-
-func goodChar(name string) m {
-	return m{"name": name, "portraitUrl": "", "stats": goodStats, "skillIds": []string{"stealth", "arcana"}}
-}
+func pick(classID string) m { return m{"classId": classID} }
 
 // lobby: dm in DM seat, p1 seated in the first player seat.
 func lobby(t *testing.T) (*Room, string) {
@@ -54,7 +50,7 @@ func playing(t *testing.T) (*Room, string) {
 	r, _ := lobby(t)
 	ok(t, r, "p1", "seat.ready", m{"ready": true})
 	ok(t, r, "dm", "game.start", m{})
-	ok(t, r, "p1", "character.submit", goodChar("Mira"))
+	ok(t, r, "p1", "character.pick", pick("knight"))
 	ok(t, r, "dm", "scene.add", m{"name": "Beach", "imageUrl": "/uploads/a.png", "grid": m{"cellSize": 50, "cols": 10, "rows": 5}})
 	sc := r.State().Scenes[0].ID
 	ok(t, r, "dm", "scene.select", m{"sceneId": sc})
@@ -69,11 +65,10 @@ func TestStatusFlow(t *testing.T) {
 	fail(t, r, "dm", "campaign.select", m{"campaignId": "salem", "name": "Dee"})
 	fail(t, r, "dm", "campaign.select", m{"campaignId": "nope", "name": "Dee"})
 	fail(t, r, "dm", "campaign.select", m{"campaignId": "starter-set", "name": ""})
-	fail(t, r, "dm", "ruleset.loadPreset", m{"presetId": "dnd5e-srd"})
 	ok(t, r, "dm", "campaign.select", m{"campaignId": "starter-set", "name": "Dee"})
 	st := r.State()
 	if st.Status != StatusLobby || st.CampaignID != "starter-set" || len(st.Seats) != 2 ||
-		st.Seats[0].Kind != KindDM || st.Seats[1].Kind != KindPlayer || st.Seats[1].Occupied || st.Ruleset.StatPoints != 27 {
+		st.Seats[0].Kind != KindDM || st.Seats[1].Kind != KindPlayer || st.Seats[1].Occupied || len(st.Roster) != 10 {
 		t.Fatalf("after select: %+v", st)
 	}
 	fail(t, r, "x", "campaign.select", m{"campaignId": "starter-set", "name": "X"})
@@ -85,7 +80,7 @@ func TestStatusFlow(t *testing.T) {
 	fail(t, r, "dm", "game.start", m{}) // not ready
 	ok(t, r, "p1", "seat.ready", m{"ready": true})
 	fail(t, r, "p1", "game.start", m{})
-	fail(t, r, "p1", "character.submit", goodChar("Mira")) // still lobby
+	fail(t, r, "p1", "character.pick", pick("knight")) // still lobby
 	ok(t, r, "dm", "game.start", m{})
 	st = r.State()
 	if st.Status != StatusCreating || len(st.Seats) != 2 {
@@ -94,16 +89,16 @@ func TestStatusFlow(t *testing.T) {
 	fail(t, r, "dm", "seat.add", m{})
 	fail(t, r, "p1", "seat.leave", m{})
 	fail(t, r, "dm", "scene.select", m{"sceneId": "x"})
-	ok(t, r, "p1", "character.submit", goodChar("Mira"))
+	ok(t, r, "p1", "character.pick", pick("knight"))
 	st = r.State()
 	if st.Status != StatusPlaying {
 		t.Fatalf("status %s", st.Status)
 	}
 	c := st.Characters[0]
-	if c.SeatID != p1 || st.Seats[1].CharacterID != c.ID || len(c.Inventory) != len(st.Ruleset.StartingItems) {
+	if c.SeatID != p1 || st.Seats[1].CharacterID != c.ID || c.ClassID != "knight" {
 		t.Fatalf("character: %+v", c)
 	}
-	fail(t, r, "p1", "character.submit", goodChar("Again"))
+	fail(t, r, "p1", "character.pick", pick("wizard"))
 }
 
 func TestCreatingWaitsForAllPlayers(t *testing.T) {
@@ -113,12 +108,13 @@ func TestCreatingWaitsForAllPlayers(t *testing.T) {
 	ok(t, r, "p1", "seat.ready", m{"ready": true})
 	ok(t, r, "p2", "seat.ready", m{"ready": true})
 	ok(t, r, "dm", "game.start", m{})
-	ok(t, r, "p1", "character.submit", goodChar("Mira"))
+	ok(t, r, "p1", "character.pick", pick("knight"))
 	if r.State().Status != StatusCreating {
-		t.Fatal("moved to playing before p2 submitted")
+		t.Fatal("moved to playing before p2 picked")
 	}
-	fail(t, r, "dm", "character.submit", goodChar("DM char"))
-	ok(t, r, "p2", "character.submit", goodChar("Bo"))
+	fail(t, r, "dm", "character.pick", pick("wizard"))
+	fail(t, r, "p2", "character.pick", pick("knight")) // taken
+	ok(t, r, "p2", "character.pick", pick("wizard"))
 	if r.State().Status != StatusPlaying {
 		t.Fatal("not playing")
 	}
@@ -195,9 +191,13 @@ func TestPermissionsAndUnknown(t *testing.T) {
 		typ     string
 		payload any
 	}{
-		{"ruleset.loadPreset", m{"presetId": "dnd5e-srd"}},
-		{"ruleset.update", m{"ruleset": m{"name": "Custom"}}},
-		{"character.grant", m{"characterId": r.State().Characters[0].ID, "setStats": m{"str": 20}}},
+		{"character.adjust", m{"characterId": r.State().Characters[0].ID, "hp": -1}},
+		{"character.setStats", m{"characterId": r.State().Characters[0].ID, "hpMax": 9, "mpMax": 9, "str": 1, "end": 1, "agi": 1}},
+		{"party.rest", m{}},
+		{"item.give", m{"characterId": r.State().Characters[0].ID, "name": "Rope", "qty": 1}},
+		{"item.remove", m{"characterId": r.State().Characters[0].ID, "index": 0, "qty": 1}},
+		{"roster.reset", m{}},
+		{"roster.update", m{"classId": "knight", "entry": r.State().Roster[0]}},
 		{"scene.add", m{"name": "X", "imageUrl": "/uploads/b.png", "grid": m{"cellSize": 50, "cols": 5, "rows": 5}}},
 		{"scene.update", m{"sceneId": sc, "name": "X", "grid": m{"cellSize": 50, "cols": 5, "rows": 5}}},
 		{"scene.select", m{"sceneId": sc}},
@@ -213,81 +213,21 @@ func TestPermissionsAndUnknown(t *testing.T) {
 	fail(t, r, "dm", "dice.roll", m{"notation": "1d20"})                 // removed 2026-10-16: physical dice
 	fail(t, r, "dm", "token.addNpc", m{"sceneId": sc, "name": "Goblin"}) // removed v0.11.0: npc.place
 	fail(t, r, "dm", "hello", m{"clientId": "x"})
-	if err := r.Apply("dm", "ruleset.loadPreset", json.RawMessage(`{"presetId":`)); err == nil {
-		t.Fatal("malformed payload accepted")
+	// removed with the roster (v0.12.0)
+	fail(t, r, "dm", "ruleset.update", m{"ruleset": m{"name": "Custom"}})
+	fail(t, r, "dm", "ruleset.loadPreset", m{"presetId": "dnd5e-srd"})
+	fail(t, r, "p1", "character.submit", m{"name": "Mira"})
+	fail(t, r, "dm", "character.grant", m{"characterId": r.State().Characters[0].ID})
+	if err := r.Apply("dm", "item.give", json.RawMessage(`{"characterId":`)); err == nil || err.Error() != "malformed payload" {
+		t.Fatalf("malformed payload: %v", err)
 	}
-	fail(t, r, "dm", "ruleset.loadPreset", m{"presetId": 5})
-	fail(t, r, "dm", "ruleset.loadPreset", m{"presetId": "other"})
-	fail(t, r, "dm", "ruleset.update", m{"ruleset": m{"name": "Bad", "statPoints": -1}})
-	ok(t, r, "dm", "ruleset.update", m{"ruleset": m{"name": "Custom"}})
-	if rs := r.State().Ruleset; rs.Name != "Custom" || rs.Stats == nil || rs.StartingItems == nil {
-		t.Fatalf("ruleset: %+v", rs)
-	}
-	ok(t, r, "dm", "ruleset.loadPreset", m{"presetId": "dnd5e-srd"})
-}
-
-func TestCharacterValidation(t *testing.T) {
-	r, _ := lobby(t)
-	ok(t, r, "p1", "seat.ready", m{"ready": true})
-	ok(t, r, "dm", "game.start", m{})
-	bad := []m{
-		{"name": "", "stats": goodStats, "skillIds": []string{"stealth", "arcana"}},
-		{"name": "A", "portraitUrl": "http://evil/x.png", "stats": goodStats, "skillIds": []string{"stealth", "arcana"}},
-		{"name": "A", "portraitUrl": "/uploads/../x", "stats": goodStats, "skillIds": []string{"stealth", "arcana"}},
-		{"name": "A", "stats": m{"str": 15}, "skillIds": []string{"stealth", "arcana"}},
-		{"name": "A", "stats": goodStats, "skillIds": []string{"stealth"}},
-		{"name": "A", "stats": goodStats, "skillIds": []string{"stealth", "stealth"}},
-		{"name": "A", "stats": goodStats, "skillIds": []string{"stealth", "flying"}},
-	}
-	over := m{}
-	for k, v := range goodStats {
-		over[k] = v
-	}
-	over["cha"] = 11
-	bad = append(bad, m{"name": "A", "stats": over, "skillIds": []string{"stealth", "arcana"}})
-	for _, p := range bad {
-		fail(t, r, "p1", "character.submit", p)
-	}
-	ok(t, r, "p1", "character.submit", m{"name": "A", "portraitUrl": "/uploads/p.png", "stats": goodStats, "skillIds": []string{"stealth", "arcana"}})
-}
-
-func TestGrant(t *testing.T) {
-	r, _ := playing(t)
-	cid := r.State().Characters[0].ID
-	fail(t, r, "dm", "character.grant", m{"characterId": "nope"})
-	fail(t, r, "dm", "character.grant", m{"characterId": cid, "setStats": m{"luck": 1}})
-	fail(t, r, "dm", "character.grant", m{"characterId": cid, "addSkillIds": []string{"flying"}})
-	fail(t, r, "dm", "character.grant", m{"characterId": cid, "addItems": []m{{"itemId": "sword", "qty": 1}}})
-	fail(t, r, "dm", "character.grant", m{"characterId": cid, "addItems": []m{{"itemId": "rope", "qty": 0}}})
-	// One bad part rejects the whole grant.
-	fail(t, r, "dm", "character.grant", m{"characterId": cid, "setStats": m{"str": 20}, "removeItems": []m{{"itemId": "rope", "qty": -1}}})
-
-	ok(t, r, "dm", "character.grant", m{
-		"characterId": cid, "setStats": m{"str": 20, "hp": 12},
-		"addSkillIds": []string{"history", "stealth"}, "removeSkillIds": []string{"arcana"},
-		"addItems":    []m{{"itemId": "healing-potion", "qty": 2}, {"itemId": "torch", "qty": 1}},
-		"removeItems": []m{{"itemId": "rope", "qty": 5}, {"itemId": "rations", "qty": 2}},
-	})
-	c := r.State().Characters[0]
-	if c.Stats["str"] != 20 || c.Stats["hp"] != 12 {
-		t.Fatalf("stats %v", c.Stats)
-	}
-	if strings.Join(c.SkillIDs, ",") != "stealth,history" {
-		t.Fatalf("skills %v", c.SkillIDs)
-	}
-	qty := map[string]int{}
-	for _, it := range c.Inventory {
-		qty[it.ItemID] = it.Qty
-	}
-	if _, has := qty["rope"]; has || qty["rations"] != 3 || qty["torch"] != 6 || qty["healing-potion"] != 2 {
-		t.Fatalf("inventory %v", qty)
-	}
+	fail(t, r, "dm", "item.give", m{"characterId": r.State().Characters[0].ID, "name": "Rope", "qty": "1"})
 }
 
 func TestScenesTokensFog(t *testing.T) {
 	r, sc := playing(t)
 	st := r.State()
-	if st.CurrentSceneID != sc || len(st.Tokens) != 1 || st.Tokens[0].Col != 0 || st.Tokens[0].Row != 0 || st.Tokens[0].Name != "Mira" {
+	if st.CurrentSceneID != sc || len(st.Tokens) != 1 || st.Tokens[0].Col != 0 || st.Tokens[0].Row != 0 || st.Tokens[0].Name != "Aldric Vane" {
 		t.Fatalf("auto place: %+v", st.Tokens)
 	}
 	// Selecting again does not duplicate.
@@ -364,8 +304,8 @@ func TestSceneAutoPlaceWraps(t *testing.T) {
 		ok(t, r, c, "seat.ready", m{"ready": true})
 	}
 	ok(t, r, "dm", "game.start", m{})
-	for _, c := range []string{"p1", "p2", "p3"} {
-		ok(t, r, c, "character.submit", goodChar(c))
+	for c, class := range map[string]string{"p1": "knight", "p2": "wizard", "p3": "rogue"} {
+		ok(t, r, c, "character.pick", pick(class))
 	}
 	ok(t, r, "dm", "scene.add", m{"name": "Hall", "imageUrl": "/uploads/h.png", "grid": m{"cellSize": 50, "cols": 2, "rows": 3}})
 	ok(t, r, "dm", "scene.select", m{"sceneId": r.State().Scenes[0].ID})

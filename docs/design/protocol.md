@@ -26,18 +26,8 @@ Source of truth for both sides. Go structs in `internal/` and `web/src/protocol.
                 { "id": "salem", "name": "Salem", "status": "coming_soon" }],
   "campaignId": "",                       // "" in menu
   "seats": [{ "id": "s1", "kind": "dm" | "codm" | "player", "name": "", "occupied": false, "ready": false, "characterId": "" }],
-  "ruleset": {
-    "name": "D&D 5e (SRD 5.2.1)",
-    "attribution": "This work includes material from the System Reference Document 5.2.1 ...",  // "" for custom
-    "stats":  [{ "key": "str", "name": "STR", "min": 8, "max": 15, "base": 8 }],
-    "statPoints": 27,                     // points a player adds on top of base at creation
-    "skills": [{ "id": "athletics", "name": "Athletics", "statKey": "str", "description": "" }],   // statKey may be ""; description optional (preset: "")
-    "startingSkillPicks": 2,
-    "items":  [{ "id": "rope", "name": "Rope" }],
-    "startingItems": [{ "itemId": "rope", "qty": 1 }]
-  },
-  "characters": [{ "id": "c1", "seatId": "s2", "name": "Mira", "portraitUrl": "/uploads/x.png",
-                   "stats": { "str": 10 }, "skillIds": ["athletics"], "inventory": [{ "itemId": "rope", "qty": 1 }] }],
+  "roster": [ /* RosterEntry x 10, see "Character roster" below; same for every connection */ ],
+  "characters": [ /* Character, see "Character roster" below */ ],
   "scenes": [{ "id": "sc1", "name": "Beach", "imageUrl": "/uploads/y.png",
                "grid": { "cellSize": 50, "offsetX": 0, "offsetY": 0, "cols": 20, "rows": 15 },
                "fog": [{ "id": "f1", "col": 0, "row": 0, "w": 3, "h": 2 }] }],
@@ -48,6 +38,8 @@ Source of truth for both sides. Go structs in `internal/` and `web/src/protocol.
                "col": 1, "row": 0, "hidden": true, "hp": 7, "hpMax": 7 }]
                                           // characterId "" = NPC token; hp/hpMax only on NPC tokens and only for DM/co-DM;
                                           // hidden tokens only for DM/co-DM
+                                          // character tokens: name = heroName.en, imageUrl = character art ("" = class art)
+  "feed": [{ "at": 1760000000000, "text": { "th": "...", "en": "..." } }]   // newest last, at most 50
 }
 ```
 
@@ -56,7 +48,7 @@ Roles: **DM** = seat kind `dm` or `codm` (co-DM has every DM right except removi
 | type | payload | who | when | effect / validation |
 |---|---|---|---|---|
 | `hello` | `{clientId}` | anyone | any | bind connection; must be first |
-| `campaign.select` | `{campaignId, name}` | anyone not seated | `menu` | campaign must be `available`; sender sits in a new `dm` seat; ruleset = campaign preset; status → `lobby`; 1 empty `player` seat created |
+| `campaign.select` | `{campaignId, name}` | anyone not seated | `menu` | campaign must be `available`; sender sits in a new `dm` seat; status → `lobby`; 1 empty `player` seat created |
 | `seat.sit` | `{seatId, name}` | not seated | `lobby` | seat empty, kind `player` or `codm`; name 1–32 chars |
 | `seat.leave` | `{}` | seated, not `dm` | `lobby` | frees seat, clears ready |
 | `seat.ready` | `{ready}` | player | `lobby` | |
@@ -64,13 +56,21 @@ Roles: **DM** = seat kind `dm` or `codm` (co-DM has every DM right except removi
 | `seat.remove` | `{seatId}` | DM | `lobby` | not the `dm` seat; kicks occupant |
 | `seat.openCoDm` | `{}` | DM | `lobby` | max 1 `codm` seat |
 | `game.start` | `{}` | DM | `lobby` | ≥1 occupied player seat, all occupied player seats ready; empty player seats are removed; → `creating` |
-| `ruleset.update` | `{ruleset}` | DM | not `menu` | unique keys/ids; `min ≤ base ≤ max`; counts ≥ 0; startingItems reference items |
-| `ruleset.loadPreset` | `{presetId: "dnd5e-srd"}` | DM | not `menu` | replace ruleset |
-| `character.submit` | `{name, portraitUrl, stats, skillIds}` | player without character | `creating` | every stat key present, `min ≤ v ≤ max`, `Σ(v − base) == statPoints`; exactly `startingSkillPicks` distinct known skills; inventory = startingItems; when every player has a character → `playing` |
-| `character.grant` | `{characterId, setStats?, addSkillIds?, removeSkillIds?, addItems?, removeItems?}` | DM | `creating`/`playing` | DM bypasses min/max; skills/items must exist in ruleset; qty > 0; item qty never below 0 (removed at 0) |
+| `character.pick` | `{classId}` | player without character | `creating` | class in the roster and not taken by another character; creates the Character from the current roster entry (`hp = hpMax`, `mp = mpMax`, innate skills, items copied); when every occupied player seat has a character → `playing` |
+| `skill.addCustom` | `{name, desc, cost}` | owner (player with a character) | `creating`/`playing` | name trimmed 1–40, desc trimmed ≤ 300 (newlines ok), cost int 0–10; at most 3 custom skills; `th = en =` the typed text |
+| `skill.editCustom` | `{characterId, skillId, name, desc, cost}` | owner or DM | `creating`/`playing` | same limits; `kind: "custom"` only |
+| `skill.removeCustom` | `{characterId, skillId}` | owner or DM | `creating`/`playing` | `kind: "custom"` only |
+| `skill.use` | `{skillId}` | owner | `playing` | skill of the sender's own character (innate or custom); `mp ≥ cost` → `mp −= cost` |
+| `character.adjust` | `{characterId, hp?, mp?}` | DM | `creating`/`playing` | deltas, int −999..999, at least one; result clamps to `0..max` |
+| `character.setStats` | `{characterId, hpMax, mpMax, str, end, agi}` | DM | `creating`/`playing` | hpMax 1–999, mpMax 0–99, str/end/agi 0–20; `hp`/`mp` clamp down to the new max |
+| `party.rest` | `{}` | DM | `playing` | every character `mp = mpMax` (hp unchanged) |
+| `item.give` | `{characterId, name, qty}` | DM | `creating`/`playing` | name trimmed 1–40, qty 1–99; a stack whose `name.th` or `name.en` equals name gets `+qty` (stack ≤ 999); else a new stack `{name: {th: name, en: name}, qty}` (≤ 50 stacks) |
+| `item.remove` | `{characterId, index, qty}` | DM | `creating`/`playing` | index into `items`; qty ≥ 1; qty ≥ stack qty removes the stack |
+| `roster.update` | `{classId, entry: RosterEntry}` | DM | any | classId is the key (`entry.id` is ignored); limits below; affects later picks only; persisted |
+| `roster.reset` | `{classId?}` | DM | any | `""`/missing = every class back to its default; persisted |
 | `scene.add` | `{name, imageUrl, grid}` | DM | `creating`/`playing` | imageUrl must start with `/uploads/`; grid: cellSize 10–400, cols/rows 1–200 |
 | `scene.update` | `{sceneId, name, grid}` | DM | `creating`/`playing` | same grid limits (cellSize is an int: send `round(imgW/cols)`; offsetX/offsetY 0). Grid shrink: that scene's tokens clamp to the nearest edge cell `[0,cols-1]×[0,rows-1]`; fog rects clip to the grid, rects fully outside are dropped |
-| `scene.select` | `{sceneId}` | DM | `playing` | sets `currentSceneId`; adds a token for every character without one in that scene, at row 0, col 0..n |
+| `scene.select` | `{sceneId}` | DM | `playing` | sets `currentSceneId`; adds a token for every character without one in that scene, at row 0, col 0..n (name = `heroName.en`, imageUrl = character `art`) |
 | `npc.place` | `{npcId, sceneId}` | DM | `playing` | copies the pool NPC into a new token on the first free cell (row-major) of the scene; `hp = hpMax`, `hidden`, `imageUrl` from the pool; name `<name>`, then `<name> #2`, `#3`… (first name not used by a token in that scene); a visible NPC ignores hidden tokens for both the cell and the name (may stack on one; a name may repeat after a reveal); full scene → error. Replaces `token.addNpc` (removed v0.11.0) |
 | `token.move` | `{tokenId, col, row}` | DM any token; player only own character's token | `playing` | 0 ≤ col < cols, 0 ≤ row < rows of the token's scene. A player gets `you can only move your own token` for a missing token too (no hidden-token oracle) |
 | `token.setHidden` | `{tokenId, hidden}` | DM | `playing` | NPC tokens placed from the pool only |
@@ -86,7 +86,8 @@ Roles: **DM** = seat kind `dm` or `codm` (co-DM has every DM right except removi
 | `npc.update` | `{id, name, imageUrl, hpMax, hidden}` | DM | any | same checks; tokens already placed keep their copy |
 | `npc.remove` | `{id}` | DM | any | tokens already placed stay |
 
-Unknown `type`, malformed payload, or failed check → `error` to sender.
+Unknown `type`, malformed payload, or failed check → `error` to sender. Removed in v0.12.0 (now unknown types):
+`ruleset.update`, `ruleset.loadPreset`, `character.submit`, `character.grant`.
 
 ## Upload
 `POST /api/upload`, header `X-Client-ID: <clientId>` of a **seated** client, multipart field `file`.
@@ -100,14 +101,11 @@ Default `-addr 0.0.0.0:8080` (reachable from other devices on the LAN; use `-add
 preferred first: 192.168 → 10 → 172.16 (Docker/VM bridges usually last). Loopback bind → `[]`.
 
 ## Server limits beyond the table (implemented v0.2)
-- Ruleset: names/keys/ids 1–64 chars, attribution ≤1000, skill `statKey` "" or an existing stat, `startingSkillPicks` ≤ number of skills, `statPoints` ≤ Σ(max − base), startingItems qty ≥ 1 and unique. Skill `description` optional: trimmed, ≤500 chars (runes), newlines allowed, other control characters rejected; preset skills send `""` (frontend shows SRD text when the skill id matches the preset and description is empty).
-- Names (DM, seat, character, scene): 1–32 chars. Pool NPC names: 1–40.
+- Names (DM, seat, scene): 1–32 chars. Pool NPC names: 1–40.
 - `hello.clientId`: 8–64 chars `[A-Za-z0-9_-]`; any event before `hello`, or a second `hello` → error.
 - Image URLs: exactly `/uploads/<name>` (no extra `/`, `..`, `?`, `#`; name ≤64).
 - `scene.update` clamps tokens and clips/drops fog in a shrunken grid; `scene.select` wraps auto-placed tokens to the next row.
-- `character.grant`: `setStats` keys and `removeSkillIds` must exist.
 - A co-DM may remove their own seat; an empty co-DM seat survives `game.start`.
-- Preset HP and AC: min = max = base = 10 (DM sets them via grant).
 - Hub drops a client with >32 queued messages (it reconnects and gets fresh state).
 
 ## `GET /api/lan`
@@ -149,3 +147,56 @@ The `state` payload has a top-level `"build": "<16 hex>"`, random per server pro
 - Persisted to `<-data>/npcs.json` exactly like notes (atomic write, dir `0700`, file `0600`, corrupt file → `npcs.json.bad-<random>`).
 - Logs name the event and sender only (`event npc.place by=<name>`), never NPC or token names.
 - Token ids share the room counter (`t<seq>`): accepted: id gaps may hint that hidden tokens exist; names/hp/position never leak.
+
+## Character roster (v0.12.0, `docs/features/character-roster.md`)
+```ts
+type L = { th: string; en: string }
+type RosterSkill = { id: string; name: L; desc: L; cost: number }
+type RosterItem  = { name: L; qty: number }
+type RosterEntry = {
+  id: string            // classId: knight|wizard|rogue|ranger|cleric|paladin|barbarian|bard|druid|necromancer
+  heroName: L; className: L; blurb: L
+  role: string          // tank|damage|healer|support|control|hybrid
+  art: string           // "" = class art by id (web/src/assets/classes/<id>.svg) | "/uploads/<generated name>"
+  stats: { hpMax: number; str: number; end: number; agi: number; mpMax: number }
+  skills: RosterSkill[] // 1-5
+  items: RosterItem[]   // 0-10
+}
+type CharSkill = { id: string; kind: 'innate' | 'custom'; name: L; desc: L; cost: number }
+type Character = {
+  id: string; seatId: string; classId: string
+  name: L               // heroName at pick time
+  art: string           // entry art at pick time
+  hp: number; hpMax: number; mp: number; mpMax: number; str: number; end: number; agi: number
+  skills: CharSkill[]   // innate (roster order) then custom (≤ 3, ids "cs_<n>")
+  items: { name: L; qty: number }[]
+}
+type FeedEntry = { at: number; text: L }   // at = unix ms
+```
+- `roster` is in every `RoomState` (DM and players alike; nothing secret). Default = the JSON block in
+  `docs/design/roster.md` (Go: `internal/rules/roster_default.go`, kept in sync by a test).
+- `roster.update` limits: heroName/className th+en trimmed 1–40, blurb th+en trimmed 1–300 (newlines ok), role in the
+  enum, stats as `character.setStats`, skills 1–5 with unique id `[a-z0-9-]{1,40}`, name th+en 1–40, desc th+en 1–300,
+  cost 0–10; items 0–10 with name th+en 1–40, qty 1–99; `art` "" or an existing `/uploads/<32 hex>.<png|jpg|gif|webp>`.
+  Text with control characters (other than newline in blurb/desc) is rejected.
+- Persisted to `<-data>/roster.json` as `{"edits": RosterEntry[]}` (edited classes only; unedited classes follow the
+  built-in defaults), atomic write like notes. Missing file = defaults; invalid JSON → `roster.json.bad-<random>` +
+  defaults; an entry that fails validation on load is dropped (that class uses its default) and logged.
+- `feed` keeps the newest 50 entries. Lines are written by the server, never by clients, and hold seat and hero names only
+  (no clientIds). Events that add a line: `character.pick` ("Pat picked Aldric Vane (Knight)"), `skill.use`
+  ("Aldric Vane used Last Stand (−4 MP)"), `character.adjust` ("DM: Aldric Vane HP −5 (31/36), MP +2 (4/4)" — the
+  change after clamping), `character.setStats`, `party.rest` ("DM: rest — mana refilled"), `item.give`, `item.remove`
+  ("DM: removed Field Bandage Roll ×2 from Aldric Vane" — the qty actually removed). Custom-skill and roster events add none.
+- Errors: `only a seated player can pick a character`, `you already have a character`, `no such class`,
+  `that class is already taken`, `you have no character`, `no such character`, `no such skill`, `no such item`,
+  `only custom skills can be changed`, `you can only change your own character's skills`, `at most 3 custom skills`,
+  `skill name must be 1-40 characters`, `skill desc must be at most 300 characters`, `skill cost must be 0-10`,
+  `not enough mana`, `hp or mp delta is required`, `delta must be -999 to 999`, `hpMax must be 1-999`, `mpMax must be 0-99`,
+  `str, end and agi must be 0-20`, `item name must be 1-40 characters`, `item qty must be 1-99`,
+  `an item stack holds at most 999`, `at most 50 different items`, `qty must be at least 1`,
+  `heroName must be 1-40 characters (th and en)`, `className must be 1-40 characters (th and en)`,
+  `blurb must be 1-300 characters (th and en)`, `role must be one of tank, damage, healer, support, control, hybrid`,
+  `art must be empty or an uploaded image`, `a class needs 1-5 skills`, `skill id must be 1-40 characters a-z, 0-9 or -`,
+  `duplicate skill id`, `skill name must be 1-40 characters (th and en)`, `skill desc must be 1-300 characters (th and en)`,
+  `a class starts with at most 10 items`, `item name must be 1-40 characters (th and en)`, `could not save roster`,
+  plus the shared `only the DM can do that`, `not allowed while the room is <status>`, `malformed payload`.

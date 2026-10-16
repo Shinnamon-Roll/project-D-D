@@ -14,6 +14,7 @@ import (
 	"projectdnd/internal/notes"
 	"projectdnd/internal/npcs"
 	"projectdnd/internal/room"
+	"projectdnd/internal/rules"
 	"projectdnd/internal/webui"
 )
 
@@ -29,7 +30,7 @@ type Server struct {
 }
 
 // Start binds addr and serves in the background. Binding happens before Start returns,
-// so a busy port is reported here, not later. data holds persistent files (notes.json, npcs.json).
+// so a busy port is reported here, not later. data holds persistent files (notes.json, npcs.json, roster.json).
 func Start(addr, uploads, data string, log *slog.Logger) (*Server, error) {
 	dist, err := fs.Sub(webui.Dist, "dist")
 	if err != nil {
@@ -46,11 +47,15 @@ func Start(addr, uploads, data string, log *slog.Logger) (*Server, error) {
 	if err != nil {
 		return nil, err
 	}
+	ro, err := rules.LoadRoster(data, uploads, log)
+	if err != nil {
+		return nil, err
+	}
 	ln, err := net.Listen("tcp", addr)
 	if err != nil {
 		return nil, err
 	}
-	hub := room.NewHub(log, ns, ps, uploads)
+	hub := room.NewHub(log, ns, ps, ro, uploads)
 	base, cancel := context.WithCancel(context.Background())
 	s := &Server{
 		hub: hub,

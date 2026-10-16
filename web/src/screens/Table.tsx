@@ -2,10 +2,13 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import type { Grid, Token } from '../protocol'
 import { useMe, useStore } from '../store'
 import { send } from '../ws'
-import { useT } from '../i18n'
+import { useL, useT } from '../i18n'
 import MapStage from '../table/MapStage'
 import DmPanel from '../table/DmPanel'
 import SheetPanel from '../table/SheetPanel'
+import FeedPanel from '../table/FeedPanel'
+import PartyBar from '../table/PartyBar'
+import { classArt } from '../classArt'
 import { EyeIcon, EyeOffIcon } from '../table/icons'
 
 const PCT_KEY = 'table.mapPct'
@@ -35,9 +38,13 @@ export default function Table() {
   const scene = room.scenes.find((s) => s.id === sceneId)
   // Players never see tokens under fog (their own token stays visible); the DM sees all.
   const fogged = (t: Token) => scene?.fog.some((f) => t.col >= f.col && t.col < f.col + f.w && t.row >= f.row && t.row < f.row + f.h)
-  const tokens = room.tokens.filter(
-    (t) => t.sceneId === scene?.id && (isDm || (t.characterId !== '' && t.characterId === character?.id) || !fogged(t)),
-  )
+  const tx = useL()
+  const heroName = (t: Token) => room.characters.find((c) => c.id === t.characterId)?.name
+  const tokens = room.tokens
+    .filter((t) => t.sceneId === scene?.id && (isDm || (t.characterId !== '' && t.characterId === character?.id) || !fogged(t)))
+    .map((t) => (heroName(t) ? { ...t, name: tx(heroName(t)) } : t)) // hero names follow the UI language
+  // Character tokens show their class art (or upload) unless the token has its own image.
+  const charArt = Object.fromEntries(room.characters.map((c) => [c.id, classArt(c.classId, c.art)]))
   const canMove = (t: Token) => isDm || (t.characterId !== '' && t.characterId === character?.id)
 
   // Splitter: map pane share of the table width (info pane = rest, 22–60%, never under 280px).
@@ -68,6 +75,7 @@ export default function Table() {
   return (
     <div className="table" ref={tableRef} style={{ '--map-pct': `${mapPct}%` } as CSSProperties}>
       <div className="map-area">
+        {isDm && <PartyBar />}
         {scene ? (
           <>
             <h2>
@@ -81,6 +89,7 @@ export default function Table() {
               isDm={isDm}
               myCharacterId={character?.id ?? ''}
               fogMode={isDm && fogMode}
+              charArt={charArt}
             />
           </>
         ) : (
@@ -129,6 +138,7 @@ export default function Table() {
       />
       <aside className="side">
         {character && <SheetPanel character={character} />}
+        <FeedPanel />
         {isDm && (
           <DmPanel scene={scene} onView={setViewId} onPreview={setPreview} fogMode={fogMode} setFogMode={setFogMode} />
         )}

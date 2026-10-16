@@ -23,6 +23,8 @@
 | `--iron` | `#4a4f55` | token NPC, ปุ่มรอง |
 | `--moss` | `#4f6b3a` | สถานะ ok |
 | `--blood` | `#a12a2a` | error/danger |
+| `--mana` | `#2f4f7a` | แถบมานา (สีเย็นสีเดียวในพาเลต: น้ำหมึกน้ำเงิน) — ใช้เป็นต้นของ gradient |
+| `--mana-hi` | `#4d77ad` | ปลาย gradient แถบมานา, เส้นมานาเล็กใต้รูปปาร์ตี้ |
 
 Contrast: `--ink` บน `--parchment` ≈ 12:1, ข้อความ `--parchment` บน `--oxblood` ≈ 7:1 (ผ่าน WCAG AA)
 
