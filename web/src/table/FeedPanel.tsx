@@ -1,7 +1,6 @@
 import { useStore } from '../store'
 import { useL, useT } from '../i18n'
-
-const hhmm = (at: number) => new Date(at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+import { hhmm, vitalClass } from './Combat'
 
 // Latest actions (skill use, rest, items…), newest first. Polite live region: new lines are read out.
 export default function FeedPanel() {
@@ -18,7 +17,7 @@ export default function FeedPanel() {
           .reverse()
           .map((e, i) => (
             // position from the oldest end stays put as new lines arrive on top
-            <li key={feed.length - 1 - i}>
+            <li key={feed.length - 1 - i} className={vitalClass(e.text)}>
               <time dateTime={new Date(e.at).toISOString()}>{hhmm(e.at)}</time> {tx(e.text)}
             </li>
           ))}

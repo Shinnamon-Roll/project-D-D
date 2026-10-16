@@ -399,7 +399,8 @@ button.card.locked .title { color: #b5a283; }
   height: 100%;
 }
 .map-area { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
-.map-area > h2 { color: var(--gold); text-shadow: 0 1px 0 #000; margin: 0 0 8px; font-size: 1.05rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.map-head { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; min-width: 0; }
+.map-head > h2 { flex: 1; min-width: 0; color: var(--gold); text-shadow: 0 1px 0 #000; margin: 0; font-size: 1.05rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .side { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 4px 6px 4px 4px; }
 .side > .panel:last-child, .side > .token-list:last-child { margin-bottom: 0; }
 /* 14px hit area; a 2px gold rule + 3-dot grip always show, brighter on hover/focus */
@@ -682,6 +683,11 @@ button.use-btn { min-width: 4em; }
 .feed { list-style: none; max-height: 210px; overflow-y: auto; margin: 0; padding: 0; font-size: 0.86rem; }
 .feed li { padding: 3px 0; border-bottom: 1px dotted var(--line); }
 .feed time { margin-right: 6px; color: var(--muted); font-size: 0.76rem; font-variant-numeric: tabular-nums; }
+/* deaths (server lines with a skull) and revives stand out in the feed and the DM log */
+.feed li.revive { margin: 2px 0; padding: 4px 6px; border-left: 3px solid var(--oxblood); font-weight: 700; }
+.feed li.death { margin: 2px 0; padding: 4px 6px; border-left: 3px solid var(--oxblood); background: rgba(122, 31, 31, 0.1); color: var(--oxblood); font-weight: 700; }
+.dm-log { max-height: 320px; }
+.dm-log .log-actor { margin-right: 6px; font-family: var(--font-display); font-weight: 700; color: var(--oxblood); }
 
 /* ---------- DM party bar (top of the map pane, on wood) ---------- */
 .party-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin: 0 5px 8px; }
@@ -785,3 +791,100 @@ button.art-opt[aria-pressed='true'] { box-shadow: 0 0 0 2px var(--parchment), 0 
 .roster-actions { margin-top: 16px; padding-top: 10px; border-top: 1px solid var(--line); }
 .roster-actions button.primary { padding: 7px 24px; }
 dialog.roster-modal { width: min(820px, calc(100vw - 32px)); }
+
+/* ---------- combat ---------- */
+svg.ico { flex: none; margin-right: 5px; vertical-align: -0.15em; }
+/* in combat the map frame turns from gold to oxblood, for everyone */
+.table.in-combat .stage { box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6), inset 0 0 30px rgba(0, 0, 0, 0.8), 0 0 0 4px var(--wood-2), 0 0 0 5px var(--oxblood-hi), 0 12px 30px rgba(0, 0, 0, 0.6); }
+.stage.aiming { cursor: crosshair; }
+.combat-badge {
+  flex: none; padding: 1px 12px; border: 1px solid var(--gold); border-radius: 14px;
+  background: linear-gradient(180deg, var(--oxblood-hi), var(--oxblood)); color: #f6e7c1;
+  font-family: var(--font-display); font-size: 0.82rem; letter-spacing: 0.05em; white-space: nowrap;
+}
+.map-head:not(:has(h2)) { justify-content: flex-end; }
+/* DM switch in the party bar: brass pill like Rest, oxblood when on */
+button.combat-toggle {
+  margin-left: auto; padding: 5px 14px; border-radius: 16px;
+  background: radial-gradient(circle at 40% 35%, #3d2c1e, var(--wood-2)); color: var(--gold);
+  border: 1px solid var(--gold-dim); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 0.04em;
+}
+button.combat-toggle:hover:not(:disabled) { background: radial-gradient(circle at 40% 35%, #4a3524, #33251b); border-color: var(--gold); color: #f3d77a; }
+button.combat-toggle[aria-pressed='true'], button.combat-toggle[aria-pressed='true']:hover:not(:disabled) {
+  background: linear-gradient(180deg, var(--oxblood-hi), var(--oxblood)); color: #f6e7c1; border-color: var(--gold);
+  box-shadow: 0 0 0 1px #4d1010, 0 0 12px rgba(155, 45, 45, 0.6);
+}
+button.combat-toggle + button.party-rest { margin-left: 0; }
+.party-bar :focus-visible { outline-color: var(--gold); }
+
+/* player's attack controls, at the top of the sheet */
+.attack-ctl { margin: 8px 0 4px; }
+button.attack-btn { width: 100%; padding: 8px; font-size: 1.05rem; font-family: var(--font-display); letter-spacing: 0.06em; }
+.attack-ctl.aiming, .attack-ctl.pending { padding: 8px 10px; border: 1px solid var(--oxblood); border-left-width: 4px; border-radius: 3px; background: rgba(122, 31, 31, 0.08); }
+.attack-ctl.aiming label { display: block; margin: 6px 0; }
+.attack-ctl.aiming select { width: 100%; }
+.attack-ctl.aiming .row { justify-content: flex-end; }
+.attack-hint { margin: 0; font-size: 0.88rem; }
+.attack-ctl.pending { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.attack-ctl.pending p { flex: 1 1 12em; margin: 0; font-size: 0.9rem; }
+.attack-ctl.pending strong { color: var(--oxblood); font-family: var(--font-display); }
+
+/* DM: pending attacks pinned to the top of the screen */
+.attack-alerts {
+  position: fixed; top: 64px; left: 50%; z-index: 30; transform: translateX(-50%);
+  display: flex; flex-direction: column; gap: 8px;
+  width: min(460px, calc(100vw - 32px)); max-height: 60dvh; overflow-y: auto;
+}
+.attack-alert {
+  padding: 10px 12px; border: 1px solid var(--gold); border-left: 5px solid var(--oxblood-hi); border-radius: 3px;
+  background: linear-gradient(180deg, #33251b, var(--wood-2)); color: var(--parchment);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(0, 0, 0, 0.6);
+  animation: alert-in 0.18s ease-out;
+}
+@keyframes alert-in { from { opacity: 0; transform: translateY(-10px); } }
+.attack-alert-what { display: flex; align-items: baseline; gap: 8px; margin: 0 0 8px; font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; }
+.attack-alert-what time { margin-left: auto; color: var(--muted); font-family: var(--font-body); font-weight: 400; font-size: 0.78rem; }
+.attack-alert-act { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px; }
+.attack-dmg { display: flex; flex-direction: column; gap: 3px; font-size: 0.8rem; color: #d8c595; margin-right: auto; }
+.attack-dmg small { color: var(--muted); }
+.attack-dmg input { width: 7em; }
+.attack-alert-act button { min-width: 6.5em; padding: 6px 14px; }
+button.miss { background: linear-gradient(180deg, #6a7077, var(--iron)); color: #eef0f2; border-color: #8d949b; }
+button.miss:hover:not(:disabled) { background: linear-gradient(180deg, #7a8188, #565c62); border-color: #c3c8cd; }
+.attack-alert :focus-visible { outline-color: var(--gold); }
+@media (prefers-reduced-motion: reduce) { .attack-alert { animation: none; } }
+
+/* everyone: the big Hit!/Miss! seal, ~2s, never takes a click */
+.combat-banner-host { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; pointer-events: none; }
+.combat-banner {
+  display: grid; justify-items: center; gap: 2px;
+  min-width: min(440px, calc(100vw - 32px)); max-width: calc(100vw - 32px); padding: 18px 40px 22px;
+  border-radius: 10px; text-align: center;
+  animation: banner 2s ease-out forwards;
+}
+.combat-banner strong { font-family: var(--font-display); font-weight: 700; font-size: clamp(3.4rem, 12vw, 7rem); line-height: 1.1; letter-spacing: 0.04em; }
+.combat-banner span { font-size: clamp(1rem, 3vw, 1.3rem); overflow-wrap: anywhere; }
+.combat-banner.hit {
+  background: radial-gradient(ellipse at 50% 35%, var(--oxblood-hi), var(--oxblood) 60%, #4d1010);
+  border: 2px solid var(--gold);
+  box-shadow: inset 0 0 0 4px #4d1010, inset 0 0 0 5px var(--gold-dim), 0 0 0 100vmax rgba(20, 6, 4, 0.35), 0 18px 50px rgba(0, 0, 0, 0.8);
+  color: #f6e7c1;
+}
+.combat-banner.hit strong { color: #f3d77a; text-shadow: 0 2px 0 #3a0c0c, 0 0 24px rgba(243, 215, 122, 0.45); }
+.combat-banner.miss {
+  background: radial-gradient(ellipse at 50% 35%, #646a71, var(--iron) 60%, #2c3034);
+  border: 2px solid #9aa1a8;
+  box-shadow: inset 0 0 0 4px #2c3034, inset 0 0 0 5px #7d848b, 0 0 0 100vmax rgba(8, 10, 12, 0.35), 0 18px 50px rgba(0, 0, 0, 0.8);
+  color: #e3e6e9;
+}
+.combat-banner.miss strong { color: #d9dde0; text-shadow: 0 2px 0 #1d2023; }
+@keyframes banner {
+  0% { opacity: 0; transform: scale(0.55); }
+  12% { opacity: 1; transform: scale(1.07); }
+  20% { transform: scale(1); }
+  78% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1); }
+}
+@keyframes banner-fade { 0% { opacity: 0; } 12%, 78% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .combat-banner { animation-name: banner-fade; } }

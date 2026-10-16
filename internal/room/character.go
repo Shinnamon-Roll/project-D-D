@@ -9,7 +9,6 @@ import (
 	"slices"
 	"strconv"
 	"strings"
-	"time"
 
 	"projectdnd/internal/rules"
 )
@@ -31,9 +30,15 @@ var (
 	errNoItem      = errors.New("no such item")
 )
 
-// addFeed appends one bilingual log line, keeping the newest maxFeed.
+// addFeed appends one bilingual line to the public feed and the same line to the DM log.
 func (r *Room) addFeed(th, en string) {
-	r.st.Feed = append(r.st.Feed, FeedEntry{At: time.Now().UnixMilli(), Text: rules.L{TH: th, EN: en}})
+	r.pushFeed(th, en)
+	r.addLog(th, en)
+}
+
+// pushFeed appends one line to the public feed only, keeping the newest maxFeed.
+func (r *Room) pushFeed(th, en string) {
+	r.st.Feed = append(r.st.Feed, FeedEntry{At: r.now().UnixMilli(), Text: rules.L{TH: th, EN: en}})
 	if n := len(r.st.Feed); n > maxFeed {
 		r.st.Feed = slices.Clone(r.st.Feed[n-maxFeed:])
 	}
@@ -155,7 +160,9 @@ func (r *Room) customSkill(s *Seat, typ string, payload json.RawMessage) error {
 			return errors.New("only custom skills can be changed")
 		}
 		if typ == "skill.removeCustom" {
+			k := c.Skills[i].Name
 			c.Skills = slices.Delete(c.Skills, i, i+1)
+			r.addLog(fmt.Sprintf("ลบสกิล %s ของ %s", k.TH, c.Name.TH), fmt.Sprintf("removed skill %s from %s", k.EN, c.Name.EN))
 			return nil
 		}
 	}
@@ -174,6 +181,7 @@ func (r *Room) customSkill(s *Seat, typ string, payload json.RawMessage) error {
 	if typ == "skill.editCustom" {
 		k.ID = c.Skills[i].ID
 		c.Skills[i] = k
+		r.addLog(fmt.Sprintf("แก้สกิล %s ของ %s", name, c.Name.TH), fmt.Sprintf("edited skill %s of %s", name, c.Name.EN))
 		return nil
 	}
 	custom := 0
@@ -187,6 +195,7 @@ func (r *Room) customSkill(s *Seat, typ string, payload json.RawMessage) error {
 	}
 	k.ID = r.id("cs_") // "_" never appears in roster skill ids, so custom ids cannot collide with innate ones
 	c.Skills = append(c.Skills, k)
+	r.addLog(fmt.Sprintf("เพิ่มสกิล %s ให้ %s", name, c.Name.TH), fmt.Sprintf("added skill %s to %s", name, c.Name.EN))
 	return nil
 }
 
@@ -240,10 +249,10 @@ func (r *Room) characterAdjust(s *Seat, payload json.RawMessage) error {
 		}
 	}
 	var th, en []string
+	oldHP := c.HP
 	if p.HP != nil {
-		old := c.HP
 		c.HP = min(max(c.HP+*p.HP, 0), c.HPMax)
-		if d := c.HP - old; d != 0 {
+		if d := c.HP - oldHP; d != 0 {
 			th = append(th, fmt.Sprintf("เลือด %s (%d/%d)", signed(d), c.HP, c.HPMax))
 			en = append(en, fmt.Sprintf("HP %s (%d/%d)", signed(d), c.HP, c.HPMax))
 		}
@@ -260,6 +269,7 @@ func (r *Room) characterAdjust(s *Seat, payload json.RawMessage) error {
 		return nil // clamped to no change: nothing to log
 	}
 	r.addFeed("DM: "+c.Name.TH+" "+strings.Join(th, ", "), "DM: "+c.Name.EN+" "+strings.Join(en, ", "))
+	r.downed(c.Name, oldHP, c.HP, true, false)
 	return nil
 }
 
@@ -378,7 +388,15 @@ func (r *Room) rosterEdit(typ string, payload json.RawMessage) error {
 		return err
 	}
 	if typ == "roster.reset" {
-		return r.roster.Reset(p.ClassID)
+		if err := r.roster.Reset(p.ClassID); err != nil {
+			return err
+		}
+		if p.ClassID == "" {
+			r.addLog("รีเซ็ต roster ทุกคลาส", "reset every roster class")
+		} else {
+			r.addLog("รีเซ็ตคลาส "+p.ClassID+" ใน roster", "reset roster class "+p.ClassID)
+		}
+		return nil
 	}
 	if !rules.IsClass(p.ClassID) {
 		return rules.ErrNoClass
@@ -387,5 +405,9 @@ func (r *Room) rosterEdit(typ string, payload json.RawMessage) error {
 	if p.Entry.Art != "" && !r.uploadedFile(p.Entry.Art) {
 		return errors.New("art must be empty or an uploaded image")
 	}
-	return r.roster.Update(p.Entry)
+	if err := r.roster.Update(p.Entry); err != nil {
+		return err
+	}
+	r.addLog("แก้คลาส "+p.ClassID+" ใน roster", "edited roster class "+p.ClassID)
+	return nil
 }

@@ -1,5 +1,5 @@
 import type { ClientEvents, ServerMessage } from './protocol'
-import { isDmSeat, showError, useStore } from './store'
+import { LOG_CAP, isDmSeat, showBanner, showError, useStore } from './store'
 import { translate } from './i18n'
 
 // crypto.randomUUID only exists in secure contexts (https/localhost); plain-http LAN needs the fallback.
@@ -61,17 +61,22 @@ export function connect() {
     }
     if (msg.type === 'state') {
       checkBuild(msg.payload.build)
-      const { room, you, notes, npcs } = msg.payload
-      // No "notes"/"npcs" key = unchanged (sent only on connect and their own events); losing the DM seat clears them.
+      const { room, you, notes, npcs, attacks, myAttack, dmLog } = msg.payload
+      // No "notes"/"npcs"/"dmLog" key = unchanged (sent only on connect and their own events); losing the DM seat clears them.
       const dm = isDmSeat(room.seats.find((s) => s.id === you.seatId))
       useStore.setState((s) => ({
         room,
         you,
         notes: !dm ? [] : notes === undefined ? s.notes : (notes ?? []),
         npcs: !dm ? [] : npcs === undefined ? s.npcs : (npcs ?? []),
+        attacks: dm ? (attacks ?? []) : [],
+        myAttack: myAttack ?? null,
+        dmLog: !dm ? [] : dmLog === undefined ? s.dmLog : (dmLog ?? []).slice(-LOG_CAP),
       }))
     }
     else if (msg.type === 'error') showError(msg.payload.message)
+    else if (msg.type === 'banner') showBanner(msg.payload.kind, msg.payload.text)
+    else if (msg.type === 'log') useStore.setState((s) => ({ dmLog: [...s.dmLog, msg.payload].slice(-LOG_CAP) }))
   }
   ws.onclose = () => {
     useStore.setState({ connected: false })

@@ -38,13 +38,14 @@ type Hub struct {
 	mu    sync.Mutex
 	room  *Room
 	conns map[*conn]struct{}
+	live  map[string]int // clientId -> connections that said hello and have not closed yet
 	log   *slog.Logger
 }
 
 type conn struct {
 	clientID string // "" until hello
 	send     chan []byte
-	dm       bool // DM/co-DM when its last state was sent; a false->true change resends notes and npcs
+	dm       bool // DM/co-DM when its last state was sent; a false->true change resends notes, npcs and dmLog
 }
 
 type message struct {
@@ -58,7 +59,7 @@ type message struct {
 func NewHub(log *slog.Logger, n *notes.Store, p *npcs.Store, ro *rules.RosterStore, uploads string) *Hub {
 	r := New()
 	r.notes, r.npcs, r.roster, r.uploads = n, p, ro, uploads
-	return &Hub{room: r, conns: map[*conn]struct{}{}, log: log}
+	return &Hub{room: r, conns: map[*conn]struct{}{}, live: map[string]int{}, log: log}
 }
 
 // Clients returns the number of open WebSocket connections.
@@ -126,6 +127,12 @@ func (h *Hub) ServeWS(w http.ResponseWriter, r *http.Request) {
 		h.drop(c)
 		h.mu.Lock()
 		name := h.seatNameLocked(c.clientID)
+		if c.clientID != "" {
+			if h.live[c.clientID]--; h.live[c.clientID] == 0 { // last connection of this clientId
+				delete(h.live, c.clientID)
+				h.presenceLocked(c, false)
+			}
+		}
 		h.mu.Unlock()
 		h.log.Info("ws disconnected", "seat", name)
 	}()
@@ -173,7 +180,10 @@ func (h *Hub) handle(c *conn, m message) {
 			return
 		}
 		c.clientID = p.ClientID
-		h.sendStateLocked(c, h.viewsLocked(), true, true)
+		if h.live[c.clientID]++; h.live[c.clientID] == 1 { // first connection of this clientId
+			h.presenceLocked(c, true)
+		}
+		h.sendStateLocked(c, h.viewsLocked(), "hello")
 		return
 	}
 	if c.clientID == "" {
@@ -181,7 +191,7 @@ func (h *Hub) handle(c *conn, m message) {
 		return
 	}
 	by, status := h.seatNameLocked(c.clientID), h.room.st.Status
-	before := mustJSON(h.room.PlayerState())
+	before, beforeAttacks := mustJSON(h.room.PlayerState()), mustJSON(h.room.Attacks())
 	if err := h.room.Apply(c.clientID, m.Type, m.Payload); err != nil {
 		typ := m.Type
 		if r := []rune(typ); len(r) > 40 { // unknown types are client input; keep log lines short (cut on runes, not bytes)
@@ -197,13 +207,44 @@ func (h *Hub) handle(c *conn, m message) {
 	}
 	h.log.Info("event "+m.Type, attrs...)
 	v := h.viewsLocked()
-	// Players get a state only when their view changed (or they sent the event), so note.*, npc.* and edits
-	// of hidden tokens send them nothing.
-	playerChanged := !bytes.Equal(before, v.player)
-	withNotes, withNpcs := strings.HasPrefix(m.Type, "note."), strings.HasPrefix(m.Type, "npc.")
+	// Players get a state only when their view (or a pending attack, i.e. maybe their myAttack) changed, or they
+	// sent the event, so note.*, npc.* and edits of hidden tokens send them nothing.
+	playerChanged := !bytes.Equal(before, v.player) || !bytes.Equal(beforeAttacks, mustJSON(h.room.Attacks()))
+	var banner json.RawMessage
+	if b := h.room.Banner(); b != nil {
+		banner = mustJSON(b)
+	}
+	fresh := h.room.Fresh()
 	for o := range h.conns {
-		if o.clientID != "" && (o == c || playerChanged || isDM(h.room.seatOf(o.clientID))) {
-			h.sendStateLocked(o, v, withNotes, withNpcs)
+		if o.clientID == "" {
+			continue
+		}
+		dm, fullLog := isDM(h.room.seatOf(o.clientID)), false
+		if o == c || playerChanged || dm {
+			fullLog = h.sendStateLocked(o, v, m.Type)
+		}
+		if banner != nil {
+			h.enqueueLocked(o, "banner", banner)
+		}
+		if dm && !fullLog { // a full dmLog already holds this event's lines
+			for _, e := range fresh {
+				h.enqueueLocked(o, "log", mustJSON(e))
+			}
+		}
+	}
+}
+
+// presenceLocked logs a seated client joining or leaving and sends the line as a "log" frame to every DM/co-DM
+// connection except c (on join, c's hello state already carries it in dmLog; on leave, c is gone).
+func (h *Hub) presenceLocked(c *conn, joined bool) {
+	e := h.room.LogPresence(c.clientID, joined)
+	if e == nil {
+		return
+	}
+	b := mustJSON(e)
+	for o := range h.conns {
+		if o != c && o.clientID != "" && isDM(h.room.seatOf(o.clientID)) {
+			h.enqueueLocked(o, "log", b)
 		}
 	}
 }
@@ -229,34 +270,47 @@ func (h *Hub) viewsLocked() views {
 	return views{mustJSON(h.room.State()), mustJSON(h.room.PlayerState())}
 }
 
-// sendStateLocked sends the full room to a DM or co-DM and the player view to anyone else. The "notes" and
-// "npcs" keys go only to a DM or co-DM, and only when withNotes/withNpcs (hello, note.*/npc.* events) or the
-// connection has just become DM/co-DM. Without a key the client keeps its previous notes/npcs.
-func (h *Hub) sendStateLocked(c *conn, v views, withNotes, withNpcs bool) {
+// sendStateLocked sends the full room to a DM or co-DM and the player view to anyone else; typ is the event
+// that caused it ("hello" for the reply to hello). DM/co-DM only: "attacks" always; "notes"/"npcs" on hello, a
+// note.*/npc.* event or when the connection has just become DM/co-DM; "dmLog" (full) on hello or just becoming
+// DM/co-DM. Without a key the client keeps its previous notes/npcs/dmLog. Everyone else gets "myAttack"
+// (their own pending attack or null). Reports whether it sent the full dmLog.
+func (h *Hub) sendStateLocked(c *conn, v views, typ string) (fullLog bool) {
 	type you struct {
 		SeatID string `json:"seatId"`
 	}
+	hello := typ == "hello"
 	dm := isDM(h.room.seatOf(c.clientID))
 	room := v.player
-	var notes, npcs json.RawMessage // nil: omitempty drops the key
+	var notes, npcs, attacks, dmLog, myAttack json.RawMessage // nil: omitempty drops the key
 	if dm {
 		room = v.full
-		if withNotes || !c.dm {
+		if hello || strings.HasPrefix(typ, "note.") || !c.dm {
 			notes = mustJSON(h.room.notes.List())
 		}
-		if withNpcs || !c.dm {
+		if hello || strings.HasPrefix(typ, "npc.") || !c.dm {
 			npcs = mustJSON(h.room.npcs.List())
 		}
+		attacks = mustJSON(h.room.Attacks())
+		if fullLog = hello || !c.dm; fullLog {
+			dmLog = mustJSON(h.room.DMLog())
+		}
+	} else {
+		myAttack = mustJSON(h.room.MyAttack(c.clientID)) // "null" when none: the key is always there
 	}
 	c.dm = dm
 	p, _ := json.Marshal(struct {
-		Room  json.RawMessage `json:"room"`
-		You   you             `json:"you"`
-		Build string          `json:"build"`
-		Notes json.RawMessage `json:"notes,omitempty"`
-		Npcs  json.RawMessage `json:"npcs,omitempty"`
-	}{room, you{h.room.SeatID(c.clientID)}, buildID, notes, npcs})
+		Room     json.RawMessage `json:"room"`
+		You      you             `json:"you"`
+		Build    string          `json:"build"`
+		Notes    json.RawMessage `json:"notes,omitempty"`
+		Npcs     json.RawMessage `json:"npcs,omitempty"`
+		Attacks  json.RawMessage `json:"attacks,omitempty"`
+		MyAttack json.RawMessage `json:"myAttack,omitempty"`
+		DMLog    json.RawMessage `json:"dmLog,omitempty"`
+	}{room, you{h.room.SeatID(c.clientID)}, buildID, notes, npcs, attacks, myAttack, dmLog})
 	h.enqueueLocked(c, "state", p)
+	return fullLog
 }
 
 func (h *Hub) errorLocked(c *conn, msg string) {

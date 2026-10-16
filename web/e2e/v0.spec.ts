@@ -11,13 +11,14 @@ const MAP_W = 200
 const MAP_H = 150
 
 // Page coords of a cell's centre: the taller of map and grid is contain-fit and centred; the grid spans the map width.
-async function cellPoint(page: Page, col: number, row: number) {
+// Centre of a cell; off moves the point by a share of a cell (e.g. to miss tokens that share the cell).
+async function cellPoint(page: Page, col: number, row: number, off: [number, number] = [0, 0]) {
   const [cols, rows] = (await tid(page, 'map-stage').getAttribute('data-grid'))!.split('x').map(Number)
   const gridH = Math.max(MAP_H, (rows * MAP_W) / cols)
   const box = (await page.locator('[data-testid="map-stage"] .konvajs-content').boundingBox())!
   const s = Math.min(box.width / MAP_W, box.height / gridH)
   const k = (MAP_W * s) / cols
-  return { x: box.x + (box.width - MAP_W * s) / 2 + (col + 0.5) * k, y: box.y + (box.height - gridH * s) / 2 + (row + 0.5) * k }
+  return { x: box.x + (box.width - MAP_W * s) / 2 + (col + 0.5 + off[0]) * k, y: box.y + (box.height - gridH * s) / 2 + (row + 0.5 + off[1]) * k }
 }
 // Mouse swipe across the carousel track: dx < 0 moves to the next card.
 async function swipe(page: Page, dx: number) {
@@ -181,7 +182,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await expect(pl.getByRole('dialog')).toBeVisible()
   await expect(tid(pl, 'skill-info-desc')).not.toBeEmpty()
   await pl.keyboard.press('Escape')
-  await expect(pl.getByRole('dialog')).toHaveCount(0)
+  await expect(tid(pl, 'skill-info-modal')).toHaveCount(0)
   await expect(info).toBeFocused()
   if (process.env.SHOTS) {
     await pl.screenshot({ path: `${process.env.SHOTS}/pick-1440.png` })
@@ -192,7 +193,8 @@ test('v0: DM + player full flow', async ({ browser }) => {
   // DM watches the same carousel without pick buttons.
   await expect(tid(dm, 'carousel')).toBeVisible()
   await expect(dm.locator('[data-testid^="pick-"]')).toHaveCount(0)
-  const heroName = (await tid(pl, `card-${classId}`).locator('h2').textContent())!
+  const heroName = (await tid(pl, `card-${classId}`).locator('.hero-head h2').textContent())!
+  const bramHero = (await tid(pl, `card-${bramClass}`).locator('.hero-head h2').textContent())!
   await tid(pl, `pick-${classId}`).click()
 
   // Bram sees Ayla's card taken and its button disabled; the DM sees who took what.
@@ -326,19 +328,19 @@ test('v0: DM + player full flow', async ({ browser }) => {
   expect(await noPageScroll(dm)).toBe(true)
   expect(await noPageScroll(pl)).toBe(true)
 
-  // 6. Player taps a cell on the canvas; DM sees the new cell. The token row form still works too.
-  // Two heroes on the map; the player's own token is the one with a move form. Ayla picked first: cell (0, 0).
-  const own = pl.locator('[data-testid^="token-move-"]')
-  await expect(own).toHaveCount(1)
-  const tokenId = (await own.getAttribute('data-testid'))!.replace('token-move-', '')
+  // 6. Player taps cells on the canvas; DM sees the new cell. The token list has no number inputs any more.
+  // Two heroes on the map, listed by hero name. Ayla picked first: cell (0, 0).
+  const tokIdOf = async (page: Page, name: string) =>
+    (await tid(page, 'token-list').locator('li', { hasText: name }).getAttribute('data-testid'))!.replace('token-', '')
+  const tokenId = await tokIdOf(pl, heroName)
   await expect(tid(pl, `token-pos-${tokenId}`)).toHaveText('(0, 0)')
+  await expect(pl.locator('.token-list input')).toHaveCount(0)
   let p = await cellPoint(pl, 2, 1)
   await pl.mouse.click(p.x, p.y)
   await expect(tid(dm, `token-pos-${tokenId}`)).toHaveText('(2, 1)')
-  await expect(tid(pl, `token-pos-${tokenId}`)).toHaveText('(2, 1)') // the row remounts on its own state: fill after that
-  await tid(pl, `token-col-${tokenId}`).fill('3')
-  await tid(pl, `token-row-${tokenId}`).fill('2')
-  await tid(pl, `token-move-${tokenId}`).click()
+  await expect(tid(pl, `token-pos-${tokenId}`)).toHaveText('(2, 1)')
+  p = await cellPoint(pl, 3, 2)
+  await pl.mouse.click(p.x, p.y)
   await expect(tid(dm, `token-pos-${tokenId}`)).toHaveText('(3, 2)')
 
   // 6b. DM taps the token, then a cell.
@@ -478,10 +480,15 @@ test('v0: DM + player full flow', async ({ browser }) => {
   // 7d. Shared cell: up to 4 visible tokens split one cell and shrink; a 5th is refused; the DM picks one small circle.
   const mapTok = (page: Page, id: string) => page.getByTestId(`map-token-${id}`)
   const radius = async (page: Page, id: string) => Number(await mapTok(page, id).getAttribute('data-r'))
+  // DM taps exactly the token's drawn circle (it may share a cell), then the target cell.
   const dmMove = async (id: string, col: number, row: number) => {
-    await tid(dm, `token-col-${id}`).fill(String(col))
-    await tid(dm, `token-row-${id}`).fill(String(row))
-    await tid(dm, `token-move-${id}`).click()
+    await dm.evaluate(() => new Promise(requestAnimationFrame)) // Konva redraws its hit canvas on the next frame
+    const box = (await dm.locator('[data-testid="map-stage"] .konvajs-content').boundingBox())!
+    await dm.mouse.click(box.x + Number(await mapTok(dm, id).getAttribute('data-x')), box.y + Number(await mapTok(dm, id).getAttribute('data-y')))
+    await expect(tid(dm, 'map-stage')).toHaveAttribute('data-selected-token', id)
+    // a tap on a token selects it instead: aim at the bottom edge, between the slots of 2, 3 or 4 shared tokens
+    const c = await cellPoint(dm, col, row, [0, 0.44])
+    await dm.mouse.click(c.x, c.y)
   }
   const npcIds = async () =>
     Promise.all((await tid(dm, 'token-list').locator('li', { hasText: NPC }).all()).map(async (li) => (await li.getAttribute('data-testid'))!.replace('token-', '')))
@@ -493,7 +500,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
     const k = d.x - c.x
     await pl.screenshot({ path: `${process.env.SHOTS}/cell-${n}.png`, clip: { x: c.x - 2.5 * k, y: c.y - 1.5 * k, width: 5 * k, height: 3 * k } })
   }
-  const bramTok = (await qr.locator('[data-testid^="token-move-"]').getAttribute('data-testid'))!.replace('token-move-', '')
+  const bramTok = await tokIdOf(qr, bramHero)
   await expect(mapTok(pl, tokenId)).toHaveAttribute('data-cell-count', '1')
   const r1 = await radius(pl, tokenId)
   p = await cellPoint(pl, 6, 6)
@@ -547,6 +554,99 @@ test('v0: DM + player full flow', async ({ browser }) => {
   await pl.mouse.click(p.x, p.y)
   await expect(tid(pl, `token-pos-${tokenId}`)).toHaveText('(2, 1)')
   await expect(tid(dm, 'error-banner')).toHaveCount(0, { timeout: 10_000 }) // the refusal banner times out after 6s
+
+  // 7e. Combat: the DM turns it on; everyone sees it. Players get Attack only in combat.
+  await expect(tid(pl, 'attack-btn')).toHaveCount(0)
+  await expect(tid(pl, 'combat-toggle')).toHaveCount(0)
+  await tid(dm, 'combat-toggle').click()
+  await expect(tid(dm, 'combat-toggle')).toHaveAttribute('aria-pressed', 'true')
+  for (const page of [dm, pl, qr]) await expect(tid(page, 'combat-indicator')).toBeVisible()
+  // Attack → Esc leaves target mode; Attack again → tap the NPC's circle on the map → it is the picked target.
+  await tid(pl, 'attack-btn').click()
+  await expect(tid(pl, 'attack-confirm')).toBeDisabled()
+  await pl.keyboard.press('Escape')
+  await expect(tid(pl, 'attack-btn')).toBeFocused()
+  await tid(pl, 'attack-btn').click()
+  await pl.evaluate(() => new Promise(requestAnimationFrame))
+  const plBox = (await pl.locator('[data-testid="map-stage"] .konvajs-content').boundingBox())!
+  await pl.mouse.click(plBox.x + Number(await mapTok(pl, npc2).getAttribute('data-x')), plBox.y + Number(await mapTok(pl, npc2).getAttribute('data-y')))
+  await expect(tid(pl, 'attack-target-select')).toHaveValue(npc2)
+  await expect(tid(pl, `token-pos-${tokenId}`)).toHaveText('(2, 1)') // aiming never moves
+  await tid(pl, 'attack-confirm').click()
+  await expect(tid(pl, 'attack-pending')).toContainText(NPC)
+  await expect(tid(pl, 'attack-cancel')).toBeFocused()
+  const alerts = dm.locator('[data-testid^="attack-alert-"]')
+  await expect(alerts).toHaveCount(1)
+  await expect(alerts).toContainText(heroName)
+  await expect(alerts).toContainText(NPC)
+  // Ayla cancels: the DM's alert goes away. She attacks again from the list.
+  await tid(pl, 'attack-cancel').click()
+  await expect(alerts).toHaveCount(0)
+  await expect(tid(pl, 'attack-btn')).toBeFocused()
+  const declare = async (target: string) => {
+    await tid(pl, 'attack-btn').click()
+    await tid(pl, 'attack-target-select').selectOption(target)
+    await tid(pl, 'attack-confirm').click()
+    await expect(alerts).toHaveCount(1)
+    return (await alerts.getAttribute('data-testid'))!.replace('attack-alert-', '')
+  }
+  let atk = await declare(npc2)
+  if (process.env.SHOTS) await dm.screenshot({ path: `${process.env.SHOTS}/dm-attack-alert.png`, animations: 'disabled' })
+  // Hit for 3: both players see the big banner, the NPC loses 3 HP (DM only), the feed says hit.
+  await tid(dm, `attack-dmg-${atk}`).fill('3')
+  await tid(dm, `attack-hit-${atk}`).click()
+  await expect(tid(dm, 'attack-alerts')).toBeFocused() // answered alert gone, none left: focus lands on the region
+  await Promise.all(
+    [pl, qr].map(async (page) => {
+      await expect(tid(page, 'combat-banner')).toHaveAttribute('data-kind', 'hit')
+      await expect(tid(page, 'combat-banner')).toContainText('โดน!')
+    }),
+  )
+  if (process.env.SHOTS) {
+    await pl.waitForTimeout(400) // past the scale-in
+    await pl.screenshot({ path: `${process.env.SHOTS}/player-banner-hit.png` })
+  }
+  await expect(tid(pl, 'combat-banner')).toContainText(NPC)
+  await expect(alerts).toHaveCount(0)
+  await expect(tid(dm, `token-hp-${npc2}`)).toHaveText('9/12')
+  await expect(tid(pl, 'attack-pending')).toHaveCount(0)
+  await expect(tid(pl, 'feed')).toContainText('โดน!')
+  // Miss: same size banner, "ไม่โดน!", HP unchanged.
+  atk = await declare(npc2)
+  await tid(dm, `attack-miss-${atk}`).click()
+  await Promise.all(
+    [pl, qr].map(async (page) => {
+      await expect(tid(page, 'combat-banner')).toHaveAttribute('data-kind', 'miss')
+      await expect(tid(page, 'combat-banner')).toContainText('ไม่โดน!')
+    }),
+  )
+  if (process.env.SHOTS) {
+    await qr.waitForTimeout(400)
+    await qr.screenshot({ path: `${process.env.SHOTS}/player-banner-miss.png` })
+  }
+  await expect(tid(dm, `token-hp-${npc2}`)).toHaveText('9/12')
+  // A killing blow: the NPC drops to 0 and a death line stands out in the feed and the DM log.
+  atk = await declare(npcTok)
+  await tid(dm, `attack-dmg-${atk}`).fill('999')
+  await tid(dm, `attack-hit-${atk}`).click()
+  await expect(tid(dm, `token-hp-${npcTok}`)).toHaveText('0/12')
+  await expect(tid(pl, 'feed').locator('li.death')).toContainText('💀')
+  // DM log: every kind of action, newest first; the player never gets the log, the waiting attacks or log lines.
+  await tid(dm, 'dm-menu-log').click()
+  const log = tid(dm, 'dm-log')
+  await expect(log.locator('li.death').first()).toContainText('💀')
+  await expect(log.locator('li').first()).toContainText('💀')
+  await expect(log).toContainText(NPC)
+  // token moves: from → to, 0-based col,row; Ayla's quick (0,0)→(2,1)→(3,2) merges into one line
+  await expect(log).toContainText(/ย้าย .+ จาก \(0,0\) ไป \(3,2\)/)
+  await expect(log).toContainText('Ember Spit') // skill use
+  if (process.env.SHOTS) await dm.screenshot({ path: `${process.env.SHOTS}/dm-log.png`, animations: 'disabled' })
+  expect(plFrames.filter((f) => f.includes('"dmLog"') || f.includes('"type":"log"') || f.includes('"attacks"'))).toEqual([])
+  expect(plFrames.filter((f) => f.includes('"type":"banner"')).length).toBe(3)
+  // Combat off: the indicator and Attack go away.
+  await tid(dm, 'combat-toggle').click()
+  await expect(tid(pl, 'combat-indicator')).toHaveCount(0)
+  await expect(tid(pl, 'attack-btn')).toHaveCount(0)
 
   // Phone: stacked, the map pane still never scrolls and the page has no sideways scroll.
   await pl.setViewportSize({ width: 390, height: 844 })

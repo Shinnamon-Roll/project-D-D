@@ -154,6 +154,24 @@ export interface RoomState {
   scenes: Scene[]
   currentSceneId: string
   tokens: Token[]
+  combat: boolean // combat mode, set by DM/co-DM
+}
+
+// A declared attack waiting for the DM's hit/miss. DM/co-DM only.
+export interface Attack {
+  id: string
+  byCharacterId: string
+  byName: L // attacker's hero name
+  targetTokenId: string
+  targetName: string
+  at: number // unix ms
+}
+
+// One line of the DM log ("who did what"). DM/co-DM only.
+export interface LogEntry {
+  at: number // unix ms
+  actor: string
+  text: L
 }
 
 export interface You {
@@ -163,8 +181,26 @@ export interface You {
 // Server → client
 export type ServerMessage =
   // build: random per server process. notes/npcs: DM/co-DM only, sent on connect and on their own events; no key = unchanged. Players never get them.
-  | { type: 'state'; payload: { room: RoomState; you: You; build?: string; notes?: Note[] | null; npcs?: Npc[] | null } }
+  // attacks: DM/co-DM only, every state. myAttack: a player's own pending attack. dmLog: DM/co-DM only, full list on
+  // hello / becoming DM; no key = keep the previous list (later lines come as "log" messages).
+  | {
+      type: 'state'
+      payload: {
+        room: RoomState
+        you: You
+        build?: string
+        notes?: Note[] | null
+        npcs?: Npc[] | null
+        attacks?: Attack[] | null
+        myAttack?: { id: string; targetName: string } | null
+        dmLog?: LogEntry[] | null
+      }
+    }
   | { type: 'error'; payload: { message: string } }
+  // Not in state: shown once, to every connection, after attack.resolve.
+  | { type: 'banner'; payload: { kind: 'hit' | 'miss'; text: L } }
+  // Appended to the DM log; DM/co-DM connections only.
+  | { type: 'log'; payload: LogEntry }
 
 type Empty = Record<string, never>
 
@@ -208,4 +244,8 @@ export interface ClientEvents {
   'note.update': { id: string; title: string; body: string }
   'note.remove': { id: string }
   'note.move': { id: string; index: number }
+  'combat.set': { on: boolean }
+  'attack.declare': { targetTokenId: string }
+  'attack.cancel': Empty
+  'attack.resolve': { attackId: string; hit: boolean; damage?: number }
 }

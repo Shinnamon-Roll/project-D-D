@@ -7,6 +7,7 @@ import NotesPanel from './NotesPanel'
 import NpcPanel from './NpcPanel'
 import RosterEditor from './RosterEditor'
 import { useImg } from './MapStage'
+import { LogPanel } from './Combat'
 
 const validGrid = (g: Grid) =>
   g.cellSize >= 10 && g.cellSize <= 400 && g.cols >= 1 && g.cols <= 200 && g.rows >= 1 && g.rows <= 200
@@ -27,12 +28,13 @@ function imageSize(url: string): Promise<{ w: number; h: number }> {
   })
 }
 
-type Section = 'scenes' | 'fog' | 'npc' | 'notes' | 'ruleset'
+type Section = 'scenes' | 'fog' | 'npc' | 'notes' | 'log' | 'ruleset'
 const SECTIONS: [Section, TKey][] = [
   ['scenes', 'sceneMap'],
   ['fog', 'fog'],
   ['npc', 'npc'],
   ['notes', 'story'],
+  ['log', 'dmLog'],
   ['ruleset', 'ruleset'],
 ]
 const SECTION_KEY = 'dm.section'
@@ -171,6 +173,8 @@ export default function DmPanel({ scene, onView, onPreview, fogMode, setFogMode 
         return <NpcPanel scene={scene} />
       case 'notes':
         return <NotesPanel />
+      case 'log':
+        return <LogPanel />
       case 'ruleset':
         return <RosterEditor />
     }

@@ -6,6 +6,7 @@ import CharacterPick from './screens/CharacterPick'
 import Table from './screens/Table'
 import crest from './assets/crest.svg'
 import { setLang, useT, type Lang } from './i18n'
+import { CombatBanner } from './table/Combat'
 
 export default function App() {
   const room = useStore((s) => s.room)
@@ -69,6 +70,7 @@ export default function App() {
         </p>
       )}
       <main>{screen}</main>
+      <CombatBanner />
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import type { Character } from '../protocol'
 import { useStore } from '../store'
 import { useL, useT, type TKey } from '../i18n'
@@ -18,7 +19,7 @@ export function Meter({ kind, label, value, max, testid = `sheet-${kind}` }: { k
 }
 
 // The player's own sheet: HP/mana, stats, innate + own skills with Use, gear.
-export default function SheetPanel({ character: c }: { character: Character }) {
+export default function SheetPanel({ character: c, children }: { character: Character; children?: ReactNode }) {
   const t = useT()
   const tx = useL()
   const entry = useStore((s) => s.room!.roster.find((r) => r.id === c.classId))
@@ -38,6 +39,7 @@ export default function SheetPanel({ character: c }: { character: Character }) {
           {entry && <p className="hero-class">{tx(entry.className)}</p>}
         </div>
       </header>
+      {children}
       <Meter kind="hp" label={t('statHp')} value={c.hp} max={c.hpMax} />
       <Meter kind="mp" label={t('statMp')} value={c.mp} max={c.mpMax} />
       <dl className="stats-grid">

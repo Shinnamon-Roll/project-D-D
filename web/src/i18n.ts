@@ -67,9 +67,6 @@ const th = {
   waitingScene: 'รอ DM เลือกฉาก',
   mapWidth: 'ขนาดแมพ',
   tokens: 'โทเคน',
-  tokenCol: '{name} คอลัมน์',
-  tokenRow: '{name} แถว',
-  move: 'ย้าย',
   map: 'แมพ: {name}',
 
   // DmPanel
@@ -224,6 +221,29 @@ const th = {
   startItems: 'ของเริ่มต้น',
   itemN: 'ของชิ้นที่ {n}',
   addItem: '+ เพิ่มของ',
+
+  // Combat / attacks / DM log
+  combat: 'โหมดต่อสู้',
+  combatOn: 'กำลังต่อสู้',
+  attack: 'โจมตี',
+  attackPick: 'เลือกเป้า: จิ้ม token บนแมพ หรือเลือกจากรายการ (Esc = ยกเลิก)',
+  attackTarget: 'เป้า',
+  attackChoose: '— เลือกเป้า —',
+  attackConfirm: 'ยืนยันโจมตี',
+  attackNoTargets: 'ไม่มีเป้าที่มองเห็นในฉากนี้',
+  attackPending: 'รอ DM ตัดสิน — ทอยลูกเต๋าของคุณ!',
+  attackPendingOn: 'โจมตี {name}',
+  attackCancel: 'ยกเลิกการโจมตี',
+  attackAlerts: 'การโจมตีรอตัดสิน',
+  attackAlert: '{by} โจมตี {target}',
+  attackHit: 'โดน',
+  attackMiss: 'ไม่โดน',
+  attackDmg: 'ดาเมจ',
+  attackDmgHint: 'ไม่บังคับ',
+  bannerHit: 'โดน!',
+  bannerMiss: 'ไม่โดน!',
+  dmLog: 'Log',
+  logEmpty: 'ยังไม่มีรายการ',
 }
 
 const en: Record<keyof typeof th, string> = {
@@ -284,9 +304,6 @@ const en: Record<keyof typeof th, string> = {
   waitingScene: 'Waiting for the DM to pick a scene',
   mapWidth: 'Map width',
   tokens: 'Tokens',
-  tokenCol: '{name} col',
-  tokenRow: '{name} row',
-  move: 'Move',
   map: 'Map: {name}',
 
   scenes: 'Scenes',
@@ -434,6 +451,28 @@ const en: Record<keyof typeof th, string> = {
   startItems: 'Starting gear',
   itemN: 'Item {n}',
   addItem: '+ Add item',
+
+  combat: 'Combat',
+  combatOn: 'In combat',
+  attack: 'Attack',
+  attackPick: 'Pick a target: tap a token on the map or choose from the list (Esc cancels)',
+  attackTarget: 'Target',
+  attackChoose: '— pick a target —',
+  attackConfirm: 'Attack',
+  attackNoTargets: 'No visible targets in this scene',
+  attackPending: 'Waiting for the DM — roll your dice!',
+  attackPendingOn: 'Attacking {name}',
+  attackCancel: 'Cancel attack',
+  attackAlerts: 'Attacks to resolve',
+  attackAlert: '{by} attacks {target}',
+  attackHit: 'Hit',
+  attackMiss: 'Miss',
+  attackDmg: 'Damage',
+  attackDmgHint: 'optional',
+  bannerHit: 'Hit!',
+  bannerMiss: 'Miss!',
+  dmLog: 'Log',
+  logEmpty: 'Nothing logged yet',
 }
 
 export type TKey = keyof typeof th

@@ -12,3 +12,9 @@
 
 ## สรุป
 - Spec: [`../features/combat-log.md`](../features/combat-log.md)
+
+## คำขอเพิ่ม (คำต่อคำ)
+> not only battle log it's all log when we move when we died when we fight
+
+## สรุป
+- Log = ทุกการกระทำ (ย้าย, ต่อสู้, ตาย ฯลฯ) — เพิ่มเหตุการณ์ **ตาย/ล้ม** (HP ถึง 0) และ **ฟื้น** ลงใน Log + feed

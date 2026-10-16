@@ -22,3 +22,12 @@ export function EyeOffIcon() {
     </svg>
   )
 }
+
+// Crossed swords: combat mode and attacks. The ⚔ glyph renders like a close "×" in the UI fonts.
+export function SwordsIcon() {
+  return (
+    <svg {...svg} className="ico">
+      <path d="M4 4l12 12M14 19l5-5M17 17l3 3M20 4L8 16M5 14l5 5M7 17l-3 3" />
+    </svg>
+  )
+}

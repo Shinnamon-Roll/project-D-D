@@ -28,6 +28,8 @@ interface Props {
   myCharacterId: string
   fogMode: boolean
   charArt: Record<string, { src: string; icon: boolean }> // characterId -> class art
+  aim: string | null // player picking an attack target: null = off, '' = none picked, else the token id
+  onAim: (tokenId: string) => void
 }
 
 type Cell = { col: number; row: number }
@@ -80,7 +82,7 @@ const C = {
   font: 'Trirong, Georgia, serif',
 }
 
-export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fogMode, charArt }: Props) {
+export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fogMode, charArt, aim, onAim }: Props) {
   const t = useT()
   const map = useImg(scene.imageUrl)
   const [selected, setSelected] = useState('')
@@ -141,8 +143,9 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
     setDrag(null)
   }
   // Tap a cell: the DM moves the selected token there; a player moves their own token.
+  // While picking an attack target a tap never moves; only a tap on a token (handled on the token) counts.
   const onTap = (e: Konva.KonvaEventObject<PointerEvent>) => {
-    if (fogMode) return
+    if (fogMode || aim !== null) return
     const id = isDm ? selected : mine?.id
     const c = cellAt(e)
     const t = tokens.find((t) => t.id === id)
@@ -163,12 +166,13 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
   return (
     <div
       ref={box}
-      className={`stage ${fogMode ? 'fog-mode' : ''}`}
+      className={`stage ${fogMode ? 'fog-mode' : ''} ${aim !== null ? 'aiming' : ''}`}
       data-testid="map-stage"
       data-scene-id={scene.id}
       data-fog-count={scene.fog.length}
       data-grid={`${cols}x${rows}`}
       data-selected-token={selected}
+      data-aim={aim ?? undefined}
       style={{ '--map-aspect': imgW / gridH } as CSSProperties}
       aria-label={t('map', { name: scene.name })}
     >
@@ -181,18 +185,25 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
         </Layer>
         <Layer listening={!fogMode}>
           {/* hidden tokens first so overflow piled on a slot never covers a visible one; the selected token last so its name sits on top */}
-          {[...tokens].sort((a, b) => drawRank(a, selected) - drawRank(b, selected)).map((t) => (
+          {[...tokens].sort((a, b) => drawRank(a, selected || aim || '') - drawRank(b, selected || aim || '')).map((t) => (
             <TokenNode
               key={t.id}
               t={t}
               f={f}
               place={places.get(t.id)!}
               art={charArt[t.characterId]}
-              selected={t.id === selected}
+              selected={t.id === selected || (!!aim && t.id === aim)}
               // Name label width in cells: up to 3, but no wider than the gap to the nearest other cell's token in the same row.
               span={Math.max(1, Math.min(3, ...tokens.filter((o) => o.row === t.row && o.col !== t.col).map((o) => Math.abs(o.col - t.col))))}
-              // Only the DM selects; a player's tap on any token falls through to the cell under it.
-              onSelect={isDm ? () => setSelected(t.id === selected ? '' : t.id) : undefined}
+              // Only the DM selects; a player's tap on any token falls through to the cell under it,
+              // except while aiming, when a tap on another token picks it as the target.
+              onSelect={
+                isDm
+                  ? () => setSelected(t.id === selected ? '' : t.id)
+                  : aim !== null && t.id !== mine?.id
+                    ? () => onAim(t.id)
+                    : undefined
+              }
             />
           ))}
         </Layer>

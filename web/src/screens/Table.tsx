@@ -9,7 +9,8 @@ import SheetPanel from '../table/SheetPanel'
 import FeedPanel from '../table/FeedPanel'
 import PartyBar from '../table/PartyBar'
 import { classArt } from '../classArt'
-import { EyeIcon, EyeOffIcon } from '../table/icons'
+import { EyeIcon, EyeOffIcon, SwordsIcon } from '../table/icons'
+import { AttackAlerts, AttackControl } from '../table/Combat'
 
 const PCT_KEY = 'table.mapPct'
 const MAP_MIN = 40
@@ -33,6 +34,8 @@ export default function Table() {
   const [viewId, setViewId] = useState('') // DM may view/calibrate a scene that is not active yet
   const [preview, setPreview] = useState<Grid | null>(null)
   const [fogMode, setFogMode] = useState(false)
+  const myAttack = useStore((s) => s.myAttack)
+  const [aimWant, setAim] = useState<string | null>(null) // attack targeting: null = off, '' = nothing picked yet
 
   const sceneId = isDm ? viewId || room.currentSceneId || room.scenes.at(-1)?.id : room.currentSceneId
   const scene = room.scenes.find((s) => s.id === sceneId)
@@ -46,6 +49,10 @@ export default function Table() {
   // Character tokens show their class art (or upload) unless the token has its own image.
   const charArt = Object.fromEntries(room.characters.map((c) => [c.id, classArt(c.classId, c.art)]))
   const canMove = (t: Token) => isDm || (t.characterId !== '' && t.characterId === character?.id)
+  // Attack targets: what this player can see in the scene, minus their own token. The server re-checks.
+  const targets = isDm || !character ? [] : tokens.filter((t) => t.characterId !== character.id)
+  const aiming = room.combat && !myAttack && character ? aimWant : null
+  const aim = aiming && !targets.some((t) => t.id === aiming) ? '' : aiming
 
   // Splitter: map pane share of the table width (info pane = rest, 22–60%, never under 280px).
   const tableRef = useRef<HTMLDivElement>(null)
@@ -73,15 +80,28 @@ export default function Table() {
   useEffect(() => () => cancelAnimationFrame(frame.current), [])
 
   return (
-    <div className="table" ref={tableRef} style={{ '--map-pct': `${mapPct}%` } as CSSProperties}>
+    <div className={`table${room.combat ? ' in-combat' : ''}`} ref={tableRef} style={{ '--map-pct': `${mapPct}%` } as CSSProperties}>
+      {isDm && <AttackAlerts />}
       <div className="map-area">
         {isDm && <PartyBar />}
+        {(scene || room.combat) && (
+          <div className="map-head">
+            {scene && (
+              <h2>
+                {scene.name}
+                {isDm && scene.id !== room.currentSceneId && <small className="muted"> {t('notShown')}</small>}
+              </h2>
+            )}
+            {room.combat && (
+              <span className="combat-badge" data-testid="combat-indicator" role="status">
+                <SwordsIcon />
+                {t('combatOn')}
+              </span>
+            )}
+          </div>
+        )}
         {scene ? (
           <>
-            <h2>
-              {scene.name}
-              {isDm && scene.id !== room.currentSceneId && <small className="muted"> {t('notShown')}</small>}
-            </h2>
             <MapStage
               scene={scene}
               grid={isDm && preview ? preview : scene.grid}
@@ -90,6 +110,8 @@ export default function Table() {
               myCharacterId={character?.id ?? ''}
               fogMode={isDm && fogMode}
               charArt={charArt}
+              aim={aim}
+              onAim={setAim}
             />
           </>
         ) : (
@@ -137,7 +159,11 @@ export default function Table() {
         }}
       />
       <aside className="side">
-        {character && <SheetPanel character={character} />}
+        {character && (
+          <SheetPanel character={character}>
+            {room.combat && <AttackControl targets={targets} aim={aim} setAim={setAim} />}
+          </SheetPanel>
+        )}
         <FeedPanel />
         {isDm && (
           <DmPanel scene={scene} onView={setViewId} onPreview={setPreview} fogMode={fogMode} setFogMode={setFogMode} />
@@ -145,7 +171,7 @@ export default function Table() {
         {scene && (
           <ul className="token-list" data-testid="token-list" aria-label={t('tokens')}>
             {tokens.map((t) => (
-              <TokenRow key={t.id + t.col + ',' + t.row} t={t} movable={canMove(t)} dmNpc={isDm && t.characterId === ''} />
+              <TokenRow key={t.id} t={t} dmNpc={isDm && t.characterId === ''} />
             ))}
           </ul>
         )}
@@ -154,32 +180,15 @@ export default function Table() {
   )
 }
 
-// Keyboard/screen-reader alternative to clicking on the canvas; also shows each token's cell.
-function TokenRow({ t, movable, dmNpc }: { t: Token; movable: boolean; dmNpc: boolean }) {
+// Each token's cell, plus the DM's NPC controls. Moving is by tapping the map only.
+function TokenRow({ t, dmNpc }: { t: Token; dmNpc: boolean }) {
   const tr = useT()
-  const [col, setCol] = useState(t.col)
-  const [row, setRow] = useState(t.row)
   return (
     <li data-testid={`token-${t.id}`} className={t.hidden ? 'is-hidden' : undefined}>
       <span>{t.name}</span>{' '}
       <span data-testid={`token-pos-${t.id}`}>
         ({t.col}, {t.row})
       </span>
-      {movable && (
-        <form
-          className="row inline"
-          onSubmit={(e) => {
-            e.preventDefault()
-            send('token.move', { tokenId: t.id, col, row })
-          }}
-        >
-          <input aria-label={tr('tokenCol', { name: t.name })} data-testid={`token-col-${t.id}`} type="number" min={0} value={col} onChange={(e) => setCol(Number(e.target.value))} />
-          <input aria-label={tr('tokenRow', { name: t.name })} data-testid={`token-row-${t.id}`} type="number" min={0} value={row} onChange={(e) => setRow(Number(e.target.value))} />
-          <button data-testid={`token-move-${t.id}`} type="submit">
-            {tr('move')}
-          </button>
-        </form>
-      )}
       {dmNpc && (
         <button
           className="eye-toggle"

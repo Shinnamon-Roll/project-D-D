@@ -16,6 +16,10 @@ Source of truth for both sides. Go structs in `internal/` and `web/src/protocol.
     "keep the previous notes". See "DM notes" below.
   - Same rule for `npcs: Npc[]` (the NPC pool, see "NPC pool" below). **`room` is filtered per connection**: DM/co-DM
     get every token; players and unseated connections get no `hidden: true` tokens and no `hp`/`hpMax`/`npcId` on any token.
+  - Combat (v0.14.0, see "Combat mode, attacks and DM log" below): DM/co-DM `state` also has `attacks: Attack[]` (every
+    state) and sometimes `dmLog: LogEntry[]`; every other connection's `state` has `myAttack: {id, targetName} | null`.
+  - `banner {kind: "hit" | "miss", text: L}` — ephemeral, to **every** connection once after `attack.resolve`; not in state.
+  - `log LogEntry` — one new DM log line, DM/co-DM connections only, sent after the `state` of the event that made it.
 - Reconnect: same `clientId` → same seat (no room number in v0).
 
 ## RoomState
@@ -39,7 +43,8 @@ Source of truth for both sides. Go structs in `internal/` and `web/src/protocol.
                                           // characterId "" = NPC token; hp/hpMax only on NPC tokens and only for DM/co-DM;
                                           // hidden tokens only for DM/co-DM
                                           // character tokens: name = heroName.en, imageUrl = character art ("" = class art)
-  "feed": [{ "at": 1760000000000, "text": { "th": "...", "en": "..." } }]   // newest last, at most 50
+  "feed": [{ "at": 1760000000000, "text": { "th": "...", "en": "..." } }],  // newest last, at most 50
+  "combat": false                         // combat mode (combat.set); same for every connection
 }
 ```
 
@@ -85,9 +90,55 @@ Roles: **DM** = seat kind `dm` or `codm` (co-DM has every DM right except removi
 | `npc.add` | `{name, imageUrl, hpMax, hidden}` | DM | any | name trimmed 1–40 chars; `hpMax` 1–999; `imageUrl` "" or an existing `/uploads/<generated name>`; max 100 NPCs |
 | `npc.update` | `{id, name, imageUrl, hpMax, hidden}` | DM | any | same checks; tokens already placed keep their copy |
 | `npc.remove` | `{id}` | DM | any | tokens already placed stay |
+| `combat.set` | `{on}` | DM | `playing` | sets `combat`; same value again = no change, no line; `on: false` cancels every pending attack |
+| `attack.declare` | `{targetTokenId}` | player with a character | `playing`, `combat` | at most 1 pending attack per character; attacker needs a token in `currentSceneId`; target exists and is not hidden (a hidden token gets the same `no such target` as a missing one), is not the attacker's own token, and is in the attacker's scene |
+| `attack.cancel` | `{}` | player with a pending attack | `playing` | removes it |
+| `attack.resolve` | `{attackId, hit, damage?}` | DM | `playing` | damage int 0–999, only with `hit: true` (miss + damage > 0 → error); hit + damage: NPC token `hp` or the target character's `hp` −= damage, clamp 0; the attack is removed (second resolve → `no such attack`); banner to everyone |
 
 Unknown `type`, malformed payload, or failed check → `error` to sender. Removed in v0.12.0 (now unknown types):
 `ruleset.update`, `ruleset.loadPreset`, `character.submit`, `character.grant`.
+
+## Combat mode, attacks and DM log (v0.14.0, `docs/features/combat-log.md`)
+```ts
+type Attack   = { id: string; byCharacterId: string; byName: L; targetTokenId: string; targetName: string; at: number }
+type LogEntry = { at: number; actor: string; text: L }   // at = unix ms; actor = sender's seat name, never a clientId
+```
+- Pending attacks are **not** in `RoomState`. DM/co-DM `state` carries `attacks: Attack[]` (`[]` when none) on every
+  state; player and unseated `state` carries `myAttack: {id, targetName}` (own pending attack) or `null` — never `attacks`.
+  Players also get a `state` whenever the pending-attack list changes (so their `myAttack` is current).
+- `byName` = attacker hero name; `targetName` = target token name (character tokens: `heroName.en`). Attack ids `a<seq>`.
+- `token.remove` drops pending attacks on that token. `combat.set {on: false}` drops all.
+- Feed after `attack.resolve`: miss `"Aldric Vane → Goblin: miss"` / `"… : ไม่โดน"`; hit on an NPC `"… : hit!"` / `"… : โดน!"`
+  (never numbers); hit on a character with damage `"Aldric Vane → Mira: hit! −3 (HP 9/12)"` / `"… : โดน! −3 (เลือด 9/12)"`.
+  The DM log gets the NPC numbers: `"Aldric Vane → Goblin: hit, 3 damage (HP 4/7)"`; a target without HP:
+  `"Aldric Vane → Goblin: hit, 3 damage (no HP)"` / `"… : โดน ดาเมจ 3 (ไม่มีเลือด)"`.
+- Target **hidden** at resolve time (hidden after the declare): every result line goes to the DM log only — no feed
+  line and **no `banner`** (players must not learn the result).
+- `banner.text` = `"<attacker> → <target>"` (th: hero/character names in Thai, en in English).
+- Death / revive (attack.resolve, character.adjust, token.adjustHp), when hp goes from > 0 to 0 or from 0 to > 0:
+  character `"💀 <name> is knocked out (HP 0)"` / `"💀 <name> หมดสติ (HP 0)"`; NPC `"💀 <name> falls (HP 0)"` /
+  `"💀 <name> ล้มลง (HP 0)"`; back up `"<name> is back up"` / `"<name> ฟื้นขึ้น"`. Feed + DM log, except for a **hidden**
+  NPC token: DM log only.
+- `combat.set` feed: `"Combat started"` / `"เข้าสู่โหมดต่อสู้"` (no ⚔: fonts render it as ×), `"Combat ended"` / `"จบการต่อสู้"`.
+- DM log: in memory only (lost on restart), newest 300. Every successful event adds its line(s): every feed line, plus
+  seat sit/leave/ready, seat add/remove, co-DM seat, game start, custom skills, roster edit/reset, scene add/edit/select,
+  NPC pool add/edit/remove, npc.place, hide/reveal, NPC hp, token move (`"moved Wolf from (0,0) to (4,3)"`, 0-based
+  col,row), token remove, fog add/remove, attack declare/cancel/resolve, combat on/off (+ cancelled count). Notes only
+  as `"edited note <title>"`, at most once per note per 60 s (never the body). Failed events add nothing.
+- Token moves: moves of the **same token by the same seat** within 3 s of that line's first move share one line —
+  the server rewrites the stored line in place (first `from`, latest `to`, `at` = latest move) and sends **no** `log`
+  frame for it, so the client stays append-only and spamming moves cannot push older lines out of the 300. The live
+  list may show the first destination until the next full `dmLog` (hello / becoming DM); the map shows the real cell.
+- Presence: a **seated** client's first open connection (by clientId) adds `"joined the room"` / `"เข้าห้อง"`, its
+  last closed connection `"left the room"` / `"ออกจากห้อง"` (actor = seat name). Extra tabs and unseated clients add
+  nothing. Sent as a `log` frame to the other DM/co-DM connections (a joining DM gets it inside its hello `dmLog`).
+- `state.dmLog` (full list, oldest first) goes to a DM/co-DM connection only in the reply to `hello` and in the first
+  `state` after it becomes DM/co-DM; **no key = keep the previous list**. Each new line then comes as a `log` message
+  after the event's `state`; a connection that just got the full `dmLog` does not get those lines again.
+- Errors: `combat mode is off`, `you have no character`, `you already have a pending attack`,
+  `your token is not in this scene`, `no such target`, `you cannot attack yourself`, `target is not in this scene`,
+  `you have no pending attack`, `no such attack`, `damage must be 0-999`, `a miss deals no damage`,
+  plus the shared `only the DM can do that`, `not allowed while the room is <status>`, `malformed payload`.
 
 ## Upload
 `POST /api/upload`, header `X-Client-ID: <clientId>` of a **seated** client, multipart field `file`.

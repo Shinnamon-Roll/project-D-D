@@ -263,7 +263,14 @@ func TestCharacterAdjust(t *testing.T) {
 				}
 				return
 			}
-			if f := lastFeed(r); f.EN != tc.feedEN || !strings.HasPrefix(f.TH, "DM: อัลดริก เวน ") {
+			f := lastFeed(r)
+			if tc.wantHP == 0 { // knocked out: the skull line follows the DM line
+				if f.EN != "💀 Aldric Vane is knocked out (HP 0)" {
+					t.Fatalf("death line %+v", f)
+				}
+				f = r.State().Feed[len(r.State().Feed)-2].Text
+			}
+			if f.EN != tc.feedEN || !strings.HasPrefix(f.TH, "DM: อัลดริก เวน ") {
 				t.Fatalf("feed %+v", f)
 			}
 		})

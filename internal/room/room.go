@@ -13,6 +13,7 @@ import (
 	"slices"
 	"strconv"
 	"strings"
+	"time"
 	"unicode/utf8"
 
 	"projectdnd/internal/notes"
@@ -127,6 +128,7 @@ type State struct {
 	CurrentSceneID string              `json:"currentSceneId"`
 	Tokens         []Token             `json:"tokens"`
 	Feed           []FeedEntry         `json:"feed"` // newest last, at most maxFeed
+	Combat         bool                `json:"combat"`
 }
 
 // Room is not safe for concurrent use; the Hub serializes access.
@@ -137,6 +139,13 @@ type Room struct {
 	npcs    *npcs.Store  // DM-only pool; never part of State
 	roster  *rules.RosterStore
 	uploads string // directory of uploaded files; "" = no uploads exist
+
+	attacks    []Attack         // pending, DM-only; never part of State
+	dmLog      []LogEntry       // DM-only, oldest first, at most maxLog; never part of State
+	fresh      []LogEntry       // log lines of the event being applied; Apply keeps them only on success
+	banner     *Banner          // set by attack.resolve for the event being applied
+	noteLogged map[string]int64 // note id -> unix ms of its last "edited note" log line
+	now        func() time.Time
 }
 
 func New() *Room {
@@ -148,7 +157,7 @@ func New() *Room {
 		Scenes:     []Scene{},
 		Tokens:     []Token{},
 		Feed:       []FeedEntry{},
-	}, notes: &notes.Store{}, npcs: &npcs.Store{}, roster: &rules.RosterStore{}}
+	}, notes: &notes.Store{}, npcs: &npcs.Store{}, roster: &rules.RosterStore{}, now: time.Now}
 	return r
 }
 
@@ -325,7 +334,38 @@ func (r *Room) needDM(s *Seat, status ...string) error {
 var inGame = []string{StatusCreating, StatusPlaying}
 
 // Apply validates and applies one client event. On error the state is unchanged.
+// On success the event's DM log lines are in Fresh() (already appended to DMLog) and a hit/miss in Banner().
 func (r *Room) Apply(clientID, typ string, payload json.RawMessage) error {
+	r.fresh, r.banner = nil, nil
+	actor := r.actorName(clientID) // before the event: seat.leave clears the name
+	if err := r.apply(clientID, typ, payload); err != nil {
+		r.fresh, r.banner = nil, nil
+		return err
+	}
+	if actor == "" { // campaign.select, seat.sit: named only after the event
+		actor = r.actorName(clientID)
+	}
+	for i := range r.fresh {
+		r.fresh[i].Actor = actor
+	}
+	r.keepLog(r.fresh...)
+	return nil
+}
+
+// Fresh returns the DM log lines added by the last successful Apply. Callers must not mutate it.
+func (r *Room) Fresh() []LogEntry { return r.fresh }
+
+// Banner returns the hit/miss banner of the last successful Apply, or nil.
+func (r *Room) Banner() *Banner { return r.banner }
+
+func (r *Room) actorName(clientID string) string {
+	if s := r.seatOf(clientID); s != nil {
+		return s.Name
+	}
+	return ""
+}
+
+func (r *Room) apply(clientID, typ string, payload json.RawMessage) error {
 	s := r.seatOf(clientID)
 	switch typ {
 	case "campaign.select":
@@ -343,6 +383,7 @@ func (r *Room) Apply(clientID, typ string, payload json.RawMessage) error {
 			return errors.New("the DM cannot leave the DM seat")
 		}
 		*s = Seat{ID: s.ID, Kind: s.Kind}
+		r.addLog("ลุกจากที่นั่ง", "left their seat")
 		return nil
 	case "seat.ready":
 		p, err := decode[struct {
@@ -358,6 +399,11 @@ func (r *Room) Apply(clientID, typ string, payload json.RawMessage) error {
 			return errors.New("only a seated player can mark ready")
 		}
 		s.Ready = p.Ready
+		if p.Ready {
+			r.addLog("พร้อมแล้ว", "is ready")
+		} else {
+			r.addLog("ยังไม่พร้อม", "is not ready")
+		}
 		return nil
 	case "seat.add":
 		if err := r.needDM(s, StatusLobby); err != nil {
@@ -367,6 +413,7 @@ func (r *Room) Apply(clientID, typ string, payload json.RawMessage) error {
 			return fmt.Errorf("at most %d player seats", MaxPlayerSeats)
 		}
 		r.st.Seats = append(r.st.Seats, Seat{ID: r.id("s"), Kind: KindPlayer})
+		r.addLog("เพิ่มที่นั่งผู้เล่น", "added a player seat")
 		return nil
 	case "seat.remove":
 		p, err := decode[struct {
@@ -385,6 +432,11 @@ func (r *Room) Apply(clientID, typ string, payload json.RawMessage) error {
 		if t.Kind == KindDM {
 			return errors.New("the DM seat cannot be removed")
 		}
+		if t.Occupied {
+			r.addLog("ลบที่นั่งของ "+t.Name, "removed "+t.Name+"'s seat")
+		} else {
+			r.addLog("ลบที่นั่งว่าง", "removed an empty seat")
+		}
 		r.st.Seats = slices.DeleteFunc(r.st.Seats, func(x Seat) bool { return x.ID == p.SeatID })
 		return nil
 	case "seat.openCoDm":
@@ -395,6 +447,7 @@ func (r *Room) Apply(clientID, typ string, payload json.RawMessage) error {
 			return errors.New("there is already a co-DM seat")
 		}
 		r.st.Seats = append(r.st.Seats, Seat{ID: r.id("s"), Kind: KindCoDM})
+		r.addLog("เปิดที่นั่ง co-DM", "opened a co-DM seat")
 		return nil
 	case "game.start":
 		return r.gameStart(s)
@@ -439,9 +492,12 @@ func (r *Room) Apply(clientID, typ string, payload json.RawMessage) error {
 		if err := r.needDM(s, StatusPlaying); err != nil {
 			return err
 		}
-		if r.token(p.TokenID) == nil {
+		t := r.token(p.TokenID)
+		if t == nil {
 			return errors.New("no such token")
 		}
+		r.addLog("ลบ "+t.Name+" ออกจากแมพ", "removed "+t.Name+" from the map")
+		r.attacks = slices.DeleteFunc(r.attacks, func(a Attack) bool { return a.TargetTokenID == p.TokenID })
 		r.st.Tokens = slices.DeleteFunc(r.st.Tokens, func(t Token) bool { return t.ID == p.TokenID })
 		return nil
 	case "fog.add":
@@ -466,6 +522,7 @@ func (r *Room) Apply(clientID, typ string, payload json.RawMessage) error {
 		if len(sc.Fog) == n {
 			return errors.New("no such fog")
 		}
+		r.addLog("ลบหมอกใน "+sc.Name, "removed fog in "+sc.Name)
 		return nil
 	case "note.add", "note.update", "note.remove", "note.move":
 		if !isDM(s) { // any room status: the DM prepares the story before the game starts
@@ -477,6 +534,14 @@ func (r *Room) Apply(clientID, typ string, payload json.RawMessage) error {
 			return errNotDM
 		}
 		return r.npc(typ, payload)
+	case "combat.set":
+		return r.combatSet(s, payload)
+	case "attack.declare":
+		return r.attackDeclare(s, payload)
+	case "attack.cancel":
+		return r.attackCancel(s)
+	case "attack.resolve":
+		return r.attackResolve(s, payload)
 	}
 	return fmt.Errorf("unknown event type %q", typ)
 }
@@ -560,6 +625,7 @@ func (r *Room) campaignSelect(clientID string, s *Seat, payload json.RawMessage)
 		{ID: r.id("s"), Kind: KindPlayer},
 	}
 	r.st.Status = StatusLobby
+	r.addLog("เปิดห้อง: "+r.st.Campaigns[i].Name, "opened the room: "+r.st.Campaigns[i].Name)
 	return nil
 }
 
@@ -592,6 +658,11 @@ func (r *Room) seatSit(clientID string, s *Seat, payload json.RawMessage) error 
 		return err
 	}
 	*t = Seat{ID: t.ID, Kind: t.Kind, Name: name, Occupied: true, client: clientID}
+	if t.Kind == KindCoDM {
+		r.addLog("นั่งที่นั่ง co-DM", "took the co-DM seat")
+	} else {
+		r.addLog("นั่งที่นั่งผู้เล่น", "took a player seat")
+	}
 	return nil
 }
 
@@ -613,6 +684,7 @@ func (r *Room) gameStart(s *Seat) error {
 	}
 	r.st.Seats = slices.DeleteFunc(r.st.Seats, func(x Seat) bool { return x.Kind == KindPlayer && !x.Occupied })
 	r.st.Status = StatusCreating
+	r.addLog("เริ่มเกม — สร้างตัวละคร", "started the game — character creation")
 	return nil
 }
 
@@ -641,6 +713,7 @@ func (r *Room) sceneUpsert(s *Seat, typ string, payload json.RawMessage) error {
 			return errors.New("imageUrl must start with /uploads/")
 		}
 		r.st.Scenes = append(r.st.Scenes, Scene{ID: r.id("sc"), Name: name, ImageURL: p.ImageURL, Grid: p.Grid, Fog: []Fog{}})
+		r.addLog(fmt.Sprintf("เพิ่มฉาก %s (กริด %d×%d)", name, p.Grid.Cols, p.Grid.Rows), fmt.Sprintf("added scene %s (grid %d×%d)", name, p.Grid.Cols, p.Grid.Rows))
 		return nil
 	}
 	sc := r.scene(p.SceneID)
@@ -686,6 +759,7 @@ func (r *Room) sceneUpsert(s *Seat, typ string, payload json.RawMessage) error {
 		}
 	}
 	sc.Fog = fog
+	r.addLog(fmt.Sprintf("แก้ฉาก %s (กริด %d×%d)", name, p.Grid.Cols, p.Grid.Rows), fmt.Sprintf("edited scene %s (grid %d×%d)", name, p.Grid.Cols, p.Grid.Rows))
 	return nil
 }
 
@@ -727,10 +801,14 @@ func (r *Room) sceneSelect(s *Seat, payload json.RawMessage) error {
 		next = cell + 1
 	}
 	r.st.CurrentSceneID = sc.ID
+	r.addLog("เปลี่ยนไปฉาก "+sc.Name, "switched to scene "+sc.Name)
 	return nil
 }
 
 func abs(x int) int { return max(x, -x) }
+
+// cellText formats a grid cell for log lines: "(col,row)", 0-based like the protocol.
+func cellText(col, row int) string { return fmt.Sprintf("(%d,%d)", col, row) }
 
 func (r *Room) tokenMove(s *Seat, payload json.RawMessage) error {
 	p, err := decode[struct {
@@ -762,7 +840,9 @@ func (r *Room) tokenMove(s *Seat, payload json.RawMessage) error {
 	if !t.Hidden && r.visibleAt(t.SceneID, p.Col, p.Row, t.ID) >= MaxPerCell {
 		return errCellFull
 	}
+	from := cellText(t.Col, t.Row)
 	t.Col, t.Row = p.Col, p.Row
+	r.moveLog(s.ID+"/"+t.ID, t.Name, from, cellText(p.Col, p.Row))
 	return nil
 }
 
@@ -788,6 +868,8 @@ func (r *Room) fogAdd(s *Seat, payload json.RawMessage) error {
 		return errors.New("fog rectangle must be inside the grid")
 	}
 	sc.Fog = append(sc.Fog, Fog{ID: r.id("f"), Col: p.Col, Row: p.Row, W: p.W, H: p.H})
+	r.addLog(fmt.Sprintf("เพิ่มหมอก %d×%d ที่ %s ใน %s", p.W, p.H, cellText(p.Col, p.Row), sc.Name),
+		fmt.Sprintf("added fog %d×%d at %s in %s", p.W, p.H, cellText(p.Col, p.Row), sc.Name))
 	return nil
 }
 
@@ -801,15 +883,32 @@ func (r *Room) note(typ string, payload json.RawMessage) error {
 	if err != nil {
 		return err
 	}
+	title := "" // a removed note's title, read before it goes
+	if i := slices.IndexFunc(r.notes.List(), func(n notes.Note) bool { return n.ID == p.ID }); i >= 0 {
+		title = r.notes.List()[i].Title
+	}
 	switch typ {
 	case "note.add":
-		return r.notes.Add(p.Title)
+		err = r.notes.Add(p.Title)
 	case "note.update":
-		return r.notes.Update(p.ID, p.Title, p.Body)
+		err = r.notes.Update(p.ID, p.Title, p.Body)
 	case "note.remove":
-		return r.notes.Remove(p.ID)
+		err = r.notes.Remove(p.ID)
+	default:
+		err = r.notes.Move(p.ID, p.Index)
 	}
-	return r.notes.Move(p.ID, p.Index)
+	if err != nil {
+		return err
+	}
+	l := r.notes.List()
+	if typ == "note.add" {
+		p.ID = l[len(l)-1].ID
+	}
+	if i := slices.IndexFunc(l, func(n notes.Note) bool { return n.ID == p.ID }); i >= 0 {
+		title = l[i].Title
+	}
+	r.noteLog(p.ID, title)
+	return nil
 }
 
 var errNpcImage = errors.New("imageUrl must be empty or an uploaded image")
@@ -819,18 +918,29 @@ func (r *Room) npc(typ string, payload json.RawMessage) error {
 	if err != nil {
 		return err
 	}
-	switch typ {
-	case "npc.remove":
-		return r.npcs.Remove(p.ID)
-	case "npc.add", "npc.update":
-		if p.ImageURL != "" && !r.uploadedFile(p.ImageURL) {
-			return errNpcImage
+	if typ == "npc.remove" {
+		n, _ := r.npcs.Get(p.ID)
+		if err := r.npcs.Remove(p.ID); err != nil {
+			return err
 		}
-		if typ == "npc.add" {
-			return r.npcs.Add(p)
-		}
-		return r.npcs.Update(p)
+		r.addLog("ลบ NPC "+n.Name+" ออกจากคลัง", "removed NPC "+n.Name+" from the pool")
+		return nil
 	}
+	if p.ImageURL != "" && !r.uploadedFile(p.ImageURL) {
+		return errNpcImage
+	}
+	name := strings.TrimSpace(p.Name)
+	if typ == "npc.add" {
+		if err := r.npcs.Add(p); err != nil {
+			return err
+		}
+		r.addLog("เพิ่ม NPC "+name+" ในคลัง", "added NPC "+name+" to the pool")
+		return nil
+	}
+	if err := r.npcs.Update(p); err != nil {
+		return err
+	}
+	r.addLog("แก้ NPC "+name, "edited NPC "+name)
 	return nil
 }
 
@@ -883,6 +993,11 @@ func (r *Room) npcPlace(s *Seat, payload json.RawMessage) error {
 		ID: r.id("t"), SceneID: sc.ID, NpcID: n.ID, Name: name, ImageURL: n.ImageURL,
 		Col: cell % sc.Grid.Cols, Row: cell / sc.Grid.Cols, Hidden: n.Hidden, HP: &hp, HPMax: &hpMax,
 	})
+	th, en := fmt.Sprintf("วาง %s ในฉาก %s", name, sc.Name), fmt.Sprintf("placed %s in %s", name, sc.Name)
+	if n.Hidden {
+		th, en = th+" (ซ่อน)", en+" (hidden)"
+	}
+	r.addLog(th, en)
 	return nil
 }
 
@@ -911,11 +1026,21 @@ func (r *Room) tokenNpcEdit(s *Seat, typ string, payload json.RawMessage) error 
 			return errCellFull // the DM moves it first
 		}
 		t.Hidden = p.Hidden
+		if p.Hidden {
+			r.addLog("ซ่อน "+t.Name, "hid "+t.Name)
+		} else {
+			r.addLog("เปิดเผย "+t.Name, "revealed "+t.Name)
+		}
 		return nil
 	}
 	if p.Delta < -npcs.MaxHP || p.Delta > npcs.MaxHP {
 		return fmt.Errorf("delta must be -%d to %d", npcs.MaxHP, npcs.MaxHP)
 	}
-	*t.HP = min(max(*t.HP+p.Delta, 0), *t.HPMax)
+	old := *t.HP
+	*t.HP = min(max(old+p.Delta, 0), *t.HPMax)
+	if d := *t.HP - old; d != 0 {
+		r.addLog(fmt.Sprintf("%s เลือด %s (%d/%d)", t.Name, signed(d), *t.HP, *t.HPMax), fmt.Sprintf("%s HP %s (%d/%d)", t.Name, signed(d), *t.HP, *t.HPMax))
+	}
+	r.downed(rules.L{TH: t.Name, EN: t.Name}, old, *t.HP, false, t.Hidden)
 	return nil
 }

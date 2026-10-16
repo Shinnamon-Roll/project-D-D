@@ -5,6 +5,7 @@ import { send } from '../ws'
 import { useL, useT, type TKey } from '../i18n'
 import { CustomSkills, Medallion, SkillList } from './Skills'
 import { Meter } from './SheetPanel'
+import { SwordsIcon } from './icons'
 
 const MAX_STACK = 999 // server's largest stack: item.remove with this qty always takes the whole stack
 const STAT_FORM: [keyof CharStats, TKey, number, number][] = [
@@ -74,6 +75,16 @@ export default function PartyBar() {
             )
           })}
         </ul>
+        <button
+          className="combat-toggle"
+          data-testid="combat-toggle"
+          aria-pressed={room.combat}
+          disabled={room.status !== 'playing'}
+          onClick={() => send('combat.set', { on: !room.combat })}
+        >
+          <SwordsIcon />
+          {t('combat')}
+        </button>
         <button className="party-rest" data-testid="party-rest" disabled={room.status !== 'playing'} onClick={() => send('party.rest', {})}>
           {t('partyRest')}
         </button>

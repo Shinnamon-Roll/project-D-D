@@ -44,8 +44,19 @@ func (c *wsClient) send(typ string, payload any) {
 	}
 }
 
-// next reads one message and returns its type, payload and raw text.
+// next reads one message, skipping DM "log" lines, and returns its type, payload and raw text.
 func (c *wsClient) next() (string, map[string]any, string) {
+	c.t.Helper()
+	for {
+		typ, p, raw := c.nextAny()
+		if typ != "log" {
+			return typ, p, raw
+		}
+	}
+}
+
+// nextAny reads one message of any type.
+func (c *wsClient) nextAny() (string, map[string]any, string) {
 	c.t.Helper()
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
@@ -482,5 +493,295 @@ func TestHubPickRace(t *testing.T) {
 	defer h.mu.Unlock()
 	if cs := h.room.st.Characters; len(cs) != 1 || cs[0].ClassID != "knight" {
 		t.Fatalf("characters %+v", cs)
+	}
+}
+
+type frame struct {
+	typ string
+	p   map[string]any
+	raw string
+}
+
+// settle returns every frame c received up to the error for a probe it sends now. The hub handles one
+// connection's messages in order, so all output of events processed before the probe comes first.
+func (c *wsClient) settle() []frame {
+	c.t.Helper()
+	c.send("probe", m{})
+	var out []frame
+	for {
+		typ, p, raw := c.nextAny()
+		if typ == "error" && p["message"] == `unknown event type "probe"` {
+			return out
+		}
+		out = append(out, frame{typ, p, raw})
+	}
+}
+
+func only(fs []frame, typ string) []frame {
+	var out []frame
+	for _, f := range fs {
+		if f.typ == typ {
+			out = append(out, f)
+		}
+	}
+	return out
+}
+
+// TestHubCombat: attacks and the DM log reach DM/co-DM connections only; players see their own myAttack;
+// every connection gets the banner once; a hidden NPC's death reaches nobody but the DMs. Run under -race.
+func TestHubCombat(t *testing.T) {
+	h := NewHub(slog.New(slog.DiscardHandler), &notes.Store{}, &npcs.Store{}, &rules.RosterStore{}, "")
+	srv := httptest.NewServer(http.HandlerFunc(h.ServeWS))
+	defer srv.Close()
+	dm, p1, p2, watcher := dial(t, srv), dial(t, srv), dial(t, srv), dial(t, srv)
+	all := []*wsClient{dm, p1, p2, watcher}
+	secrets := []string{"dm-secret-0001", "p1-secret-0002", "p2-secret-0003", "wa-secret-0004"}
+	for i, c := range all {
+		c.send("hello", m{"clientId": secrets[i]})
+		if _, p, _ := c.next(); p["dmLog"] != nil || p["attacks"] != nil {
+			t.Fatal("unseated hello got dmLog or attacks")
+		}
+	}
+	players := map[*wsClient][]frame{}
+	// do sends one event and returns what each connection got for it (players' frames are also kept).
+	do := func(c *wsClient, typ string, payload any) map[*wsClient][]frame {
+		t.Helper()
+		c.send(typ, payload)
+		got := map[*wsClient][]frame{c: c.settle()}
+		for _, o := range all {
+			if o != c {
+				got[o] = o.settle()
+			}
+		}
+		for _, o := range []*wsClient{p1, p2, watcher} {
+			players[o] = append(players[o], got[o]...)
+		}
+		for _, f := range got[c] {
+			if f.typ == "error" {
+				t.Fatalf("%s: %s", typ, f.raw)
+			}
+		}
+		return got
+	}
+
+	got := do(dm, "campaign.select", m{"campaignId": "starter-set", "name": "Dee"})
+	st := only(got[dm], "state")
+	if len(st) != 1 || len(only(got[dm], "log")) != 0 {
+		t.Fatalf("new DM: want 1 state with the full log and no log frame, got %v", got[dm])
+	}
+	if l, ok := st[0].p["dmLog"].([]any); !ok || len(l) != 1 || !strings.Contains(st[0].raw, "opened the room") {
+		t.Fatalf("new DM dmLog: %s", st[0].raw)
+	}
+	seats := st[0].p["room"].(map[string]any)["seats"].([]any)
+	got = do(dm, "seat.add", m{})
+	if lg := only(got[dm], "log"); len(lg) != 1 || only(got[dm], "state")[0].p["dmLog"] != nil {
+		t.Fatalf("dm after seat.add: %v", got[dm])
+	}
+	seats = only(got[dm], "state")[0].p["room"].(map[string]any)["seats"].([]any)
+	do(p1, "seat.sit", m{"seatId": seats[1].(map[string]any)["id"], "name": "Pat"})
+	do(p2, "seat.sit", m{"seatId": seats[2].(map[string]any)["id"], "name": "Sam"})
+	do(p1, "seat.ready", m{"ready": true})
+	do(p2, "seat.ready", m{"ready": true})
+	do(dm, "game.start", m{})
+	do(p1, "character.pick", pick("knight"))
+	do(p2, "character.pick", pick("wizard"))
+	got = do(dm, "scene.add", m{"name": "Beach", "imageUrl": "/uploads/a.png", "grid": m{"cellSize": 50, "cols": 10, "rows": 5}})
+	sc := only(got[dm], "state")[0].p["room"].(map[string]any)["scenes"].([]any)[0].(map[string]any)["id"]
+	do(dm, "scene.select", m{"sceneId": sc})
+	do(dm, "npc.add", m{"name": "Wolf", "hpMax": 5})
+	do(dm, "npc.add", m{"name": "Secret-Ghost", "hpMax": 5, "hidden": true})
+	do(dm, "npc.place", m{"npcId": "npc1", "sceneId": sc})
+	got = do(dm, "npc.place", m{"npcId": "npc2", "sceneId": sc})
+	ids := map[string]string{}
+	for _, x := range only(got[dm], "state")[0].p["room"].(map[string]any)["tokens"].([]any) {
+		tk := x.(map[string]any)
+		ids[tk["name"].(string)] = tk["id"].(string)
+	}
+	do(dm, "combat.set", m{"on": true})
+
+	got = do(p1, "attack.declare", m{"targetTokenId": ids["Wolf"]})
+	my := only(got[p1], "state")[0].p
+	if a, ok := my["myAttack"].(map[string]any); !ok || a["targetName"] != "Wolf" || a["id"] == "" {
+		t.Fatalf("p1 myAttack: %v", my["myAttack"])
+	}
+	if st := only(got[p2], "state"); len(st) != 1 || st[0].p["myAttack"] != nil {
+		t.Fatalf("p2 after p1's declare: %v", got[p2])
+	} else if _, has := st[0].p["myAttack"]; !has {
+		t.Fatal("p2 state has no myAttack key")
+	}
+	dst := only(got[dm], "state")[0]
+	atk, _ := dst.p["attacks"].([]any)
+	if len(atk) != 1 || atk[0].(map[string]any)["targetName"] != "Wolf" || atk[0].(map[string]any)["byCharacterId"] == "" {
+		t.Fatalf("dm attacks: %s", dst.raw)
+	}
+	if _, has := dst.p["myAttack"]; has {
+		t.Fatal("dm got myAttack")
+	}
+	if lg := only(got[dm], "log"); len(lg) != 1 || lg[0].p["actor"] != "Pat" ||
+		lg[0].p["text"].(map[string]any)["en"] != "Aldric Vane attacks Wolf" {
+		t.Fatalf("dm log frames: %v", got[dm])
+	}
+	attackID := atk[0].(map[string]any)["id"]
+
+	got = do(dm, "attack.resolve", m{"attackId": attackID, "hit": true, "damage": 3})
+	for _, c := range all {
+		b := only(got[c], "banner")
+		if len(b) != 1 || b[0].p["kind"] != "hit" || b[0].p["text"].(map[string]any)["en"] != "Aldric Vane → Wolf" {
+			t.Fatalf("banner: %v", got[c])
+		}
+	}
+	if st := only(got[p1], "state"); len(st) != 1 || st[0].p["myAttack"] != nil {
+		t.Fatalf("p1 myAttack after resolve: %v", got[p1])
+	}
+	if lg := only(got[dm], "log"); len(lg) != 1 || lg[0].p["actor"] != "Dee" ||
+		!strings.Contains(lg[0].raw, "hit, 3 damage (HP 2/5)") {
+		t.Fatalf("dm resolve log: %v", got[dm])
+	}
+	if a := only(got[dm], "state")[0].p["attacks"].([]any); len(a) != 0 {
+		t.Fatalf("attacks after resolve: %v", a)
+	}
+
+	// Hidden NPC knocked out: players get nothing at all; the DM gets the skull in a log frame.
+	got = do(dm, "token.adjustHp", m{"tokenId": ids["Secret-Ghost"], "delta": -9})
+	for _, c := range []*wsClient{p1, p2, watcher} {
+		if len(got[c]) != 0 {
+			t.Fatalf("player got frames for a hidden NPC's hp: %v", got[c])
+		}
+	}
+	if lg := only(got[dm], "log"); len(lg) != 2 || !strings.Contains(lg[1].raw, "💀 Secret-Ghost falls (HP 0)") {
+		t.Fatalf("dm hidden death log: %v", got[dm])
+	}
+	dm.send("attack.resolve", m{"attackId": attackID, "hit": false}) // resolve twice
+	if fs := dm.settle(); len(fs) != 1 || fs[0].typ != "error" || fs[0].p["message"] != "no such attack" {
+		t.Fatalf("second resolve: %v", fs)
+	}
+
+	// A DM reconnect gets the whole log in its hello state, and no log frames for it.
+	dm2 := dial(t, srv)
+	dm2.send("hello", m{"clientId": secrets[0]})
+	fs := dm2.settle()
+	if len(fs) != 1 || fs[0].typ != "state" {
+		t.Fatalf("dm reconnect: %v", fs)
+	}
+	l, _ := fs[0].p["dmLog"].([]any)
+	if len(l) < 20 || !strings.Contains(fs[0].raw, "Secret-Ghost falls") || fs[0].p["attacks"] == nil {
+		t.Fatalf("dm reconnect dmLog: %d entries", len(l))
+	}
+	for _, s := range secrets {
+		if strings.Contains(fs[0].raw, s) {
+			t.Fatal("clientId in the DM log")
+		}
+	}
+	for c, fs := range players {
+		for _, f := range fs {
+			if f.typ == "log" || f.p["attacks"] != nil || f.p["dmLog"] != nil || strings.Contains(f.raw, "Secret-Ghost") ||
+				strings.Contains(f.raw, "3 damage (HP") {
+				t.Fatalf("player %p got DM-only data: %s", c, f.raw)
+			}
+			if _, has := f.p["attacks"]; has {
+				t.Fatalf("player got the attacks key: %s", f.raw)
+			}
+			if _, has := f.p["dmLog"]; has {
+				t.Fatalf("player got the dmLog key: %s", f.raw)
+			}
+		}
+	}
+}
+
+// TestHubPresence: a seated clientId's first connection logs "joined the room" and its last disconnection
+// "left the room", as log frames to DM/co-DM connections only; extra tabs and unseated clients log nothing.
+func TestHubPresence(t *testing.T) {
+	h := NewHub(slog.New(slog.DiscardHandler), &notes.Store{}, &npcs.Store{}, &rules.RosterStore{}, "")
+	srv := httptest.NewServer(http.HandlerFunc(h.ServeWS))
+	defer srv.Close()
+	// waitLive blocks until the hub counts n open connections for id (disconnects are handled asynchronously).
+	waitLive := func(id string, n int) {
+		t.Helper()
+		for range 200 {
+			h.mu.Lock()
+			got := h.live[id]
+			h.mu.Unlock()
+			if got == n {
+				return
+			}
+			time.Sleep(5 * time.Millisecond)
+		}
+		t.Fatalf("live[%s] never reached %d", id, n)
+	}
+	presence := func(fs []frame) []string {
+		var out []string
+		for _, f := range only(fs, "log") {
+			if en := f.p["text"].(map[string]any)["en"]; en == "joined the room" || en == "left the room" {
+				out = append(out, f.p["actor"].(string)+" "+en.(string))
+			}
+		}
+		return out
+	}
+	expect := func(c *wsClient, want ...string) {
+		t.Helper()
+		if got := presence(c.settle()); !slices.Equal(got, want) {
+			t.Fatalf("presence frames %q, want %q", got, want)
+		}
+	}
+
+	dm := dial(t, srv)
+	dm.send("hello", m{"clientId": "dm-secret-0001"})
+	dm.settle()
+	dm.send("campaign.select", m{"campaignId": "starter-set", "name": "Dee"})
+	dm.send("seat.add", m{})
+	fs := dm.settle()
+	seats := only(fs, "state")[1].p["room"].(map[string]any)["seats"].([]any)
+
+	p1 := dial(t, srv)
+	p1.send("hello", m{"clientId": "p1-secret-0002"})
+	p1.send("seat.sit", m{"seatId": seats[1].(map[string]any)["id"], "name": "Pat"})
+	p1.settle()
+	expect(dm) // unseated at hello: nothing
+
+	watcher := dial(t, srv) // never seated
+	watcher.send("hello", m{"clientId": "wa-secret-0004"})
+	watcher.settle()
+	watcher.ws.CloseNow()
+	waitLive("wa-secret-0004", 0)
+	expect(dm)
+
+	p1.ws.CloseNow() // last connection of Pat
+	waitLive("p1-secret-0002", 0)
+	expect(dm, "Pat left the room")
+
+	a, b := dial(t, srv), dial(t, srv) // Pat back in two tabs: one join line
+	a.send("hello", m{"clientId": "p1-secret-0002"})
+	a.settle()
+	b.send("hello", m{"clientId": "p1-secret-0002"})
+	b.settle()
+	expect(dm, "Pat joined the room")
+	a.ws.CloseNow()
+	waitLive("p1-secret-0002", 1)
+	expect(dm)
+	for _, f := range b.settle() {
+		if f.typ == "log" {
+			t.Fatalf("player got a log frame: %s", f.raw)
+		}
+	}
+
+	dm2 := dial(t, srv) // DM second tab: no join line, nothing extra for the first tab
+	dm2.send("hello", m{"clientId": "dm-secret-0001"})
+	if fs := dm2.settle(); len(fs) != 1 || fs[0].typ != "state" {
+		t.Fatalf("dm second tab: %v", fs)
+	}
+	expect(dm)
+
+	b.ws.CloseNow()
+	waitLive("p1-secret-0002", 0)
+	expect(dm, "Pat left the room")
+	expect(dm2, "Pat left the room")
+
+	// Both lines are in the full log a new DM connection gets, stamped with Pat's seat name, never a clientId.
+	dm3 := dial(t, srv)
+	dm3.send("hello", m{"clientId": "dm-secret-0001"})
+	st := dm3.settle()[0]
+	if n := strings.Count(st.raw, `"actor":"Pat","text":{"th":"ออกจากห้อง","en":"left the room"}`); n != 2 ||
+		!strings.Contains(st.raw, `"en":"joined the room"`) || strings.Contains(st.raw, "secret") {
+		t.Fatalf("dmLog presence lines: %s", st.raw)
 	}
 }
