@@ -3,7 +3,7 @@ import type { Npc, Scene } from '../protocol'
 import { useStore } from '../store'
 import { send, upload } from '../ws'
 import { useT } from '../i18n'
-import { EyeOffIcon } from './icons'
+import { EyeIcon, EyeOffIcon } from './icons'
 import silhouette from '../assets/npc-silhouette.svg'
 
 const MAX_NPCS = 100
@@ -51,12 +51,16 @@ export default function NpcPanel({ scene }: { scene?: Scene }) {
               <span className="npc-name">{n.name}</span>
               <span className="npc-meta">
                 HP {n.hpMax}
-                {n.hidden && (
-                  <span className="npc-hidden" title={t('npcHiddenBadge')}>
-                    <EyeOffIcon />
-                    <span className="sr-only">{t('npcHiddenBadge')}</span>
-                  </span>
-                )}
+                <button
+                  className="eye-toggle"
+                  data-testid={`npc-hidden-${n.id}`}
+                  aria-pressed={n.hidden}
+                  aria-label={t(n.hidden ? 'npcIsHidden' : 'npcIsShown', { name: n.name })}
+                  title={t(n.hidden ? 'npcIsHidden' : 'npcIsShown', { name: n.name })}
+                  onClick={() => send('npc.update', { id: n.id, name: n.name, imageUrl: n.imageUrl, hpMax: n.hpMax, hidden: !n.hidden })}
+                >
+                  {n.hidden ? <EyeOffIcon /> : <EyeIcon />}
+                </button>
               </span>
               <span className="npc-actions">
                 <button

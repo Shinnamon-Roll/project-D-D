@@ -21,7 +21,18 @@ async function cellPoint(page: Page, col: number, row: number) {
 }
 // Mouse swipe across the carousel track: dx < 0 moves to the next card.
 async function swipe(page: Page, dx: number) {
-  const box = (await page.locator('.hero-card[data-current="true"]').boundingBox())!
+  // The spring keeps moving after a key press or the last swipe: wait until the current card holds still.
+  const cur = page.locator('.hero-card[data-current="true"]')
+  let last = NaN
+  await expect
+    .poll(async () => {
+      const x = (await cur.boundingBox())!.x
+      const moved = Math.abs(x - last)
+      last = x
+      return moved
+    }, { intervals: [100] })
+    .toBeLessThan(0.5)
+  const box = (await cur.boundingBox())!
   const x = box.x + box.width / 2
   const y = box.y + 60 // card header: no buttons there
   await page.mouse.move(x, y)
@@ -432,8 +443,9 @@ test('v0: DM + player full flow', async ({ browser }) => {
   // The server sends players a state only when their view changes, so the leak check runs on all frames at the end.
   await expect(tid(pl, 'token-list')).not.toContainText(NPC)
 
-  // Reveal: the player sees the token but never its HP. DM lowers HP by one.
+  // Reveal with the eye toggle: the player sees the token but never its HP. DM lowers HP by one.
   await tid(dm, `token-hide-${npcTok}`).click()
+  await expect(tid(dm, `token-hide-${npcTok}`)).toHaveAttribute('aria-pressed', 'false')
   await expect(tid(pl, `token-${npcTok}`)).toContainText(NPC)
   await expect(tid(pl, `token-hp-${npcTok}`)).toHaveCount(0)
   await expect(tid(pl, `token-hide-${npcTok}`)).toHaveCount(0)
@@ -455,6 +467,7 @@ test('v0: DM + player full flow', async ({ browser }) => {
   }
   // Hide the first again: the player loses it. That state is sent after the second place, so every frame is in by now.
   await tid(dm, `token-hide-${npcTok}`).click()
+  await expect(tid(dm, `token-hide-${npcTok}`)).toHaveAttribute('aria-pressed', 'true')
   await expect(tid(pl, 'token-list')).not.toContainText(NPC)
   type Tok = { name: string; hidden?: boolean; hp?: number; hpMax?: number }
   const plTokens = plFrames.flatMap((f) => (JSON.parse(f).payload?.room?.tokens ?? []) as Tok[]).filter((x) => x.name.startsWith(NPC))
@@ -504,10 +517,14 @@ test('v0: DM + player full flow', async ({ browser }) => {
   }
   expect(await radius(pl, tokenId)).toBeLessThan(r2)
   // A 5th visible token is refused: the cell keeps 4, the token stays put.
+  // The pool's eye toggle flips the NPC to "placed visible", so this token reaches the player at once.
+  await expect(tid(dm, `npc-hidden-${npcId}`)).toHaveAttribute('aria-pressed', 'true')
+  await tid(dm, `npc-hidden-${npcId}`).click()
+  await expect(tid(dm, `npc-hidden-${npcId}`)).toHaveAttribute('aria-pressed', 'false')
   await tid(dm, `npc-place-${npcId}`).click()
   await expect(tid(dm, 'token-list').locator('li', { hasText: NPC })).toHaveCount(3)
   const [npc3] = (await npcIds()).filter((id) => id !== npcTok && id !== npc2)
-  await tid(dm, `token-hide-${npc3}`).click()
+  await expect(tid(dm, `token-hide-${npc3}`)).toHaveAttribute('aria-pressed', 'false')
   await expect(tid(pl, `token-${npc3}`)).toBeVisible()
   const npc3Pos = await tid(dm, `token-pos-${npc3}`).textContent()
   await dmMove(npc3, 6, 6)

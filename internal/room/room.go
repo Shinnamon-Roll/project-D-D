@@ -647,6 +647,15 @@ func (r *Room) sceneUpsert(s *Seat, typ string, payload json.RawMessage) error {
 	if sc == nil {
 		return errors.New("no such scene")
 	}
+	visible := 0
+	for _, t := range r.st.Tokens {
+		if t.SceneID == sc.ID && !t.Hidden {
+			visible++
+		}
+	}
+	if need := (visible + MaxPerCell - 1) / MaxPerCell; p.Grid.Cols*p.Grid.Rows < need {
+		return fmt.Errorf("grid too small: %d visible tokens need at least %d cells", visible, need)
+	}
 	sc.Name, sc.Grid = name, p.Grid
 	// Keep tokens on the board when the grid shrinks. A clamped visible token that would overfill its cell
 	// goes to the nearest cell with room. Tokens not yet clamped sit outside the new grid, so they never count.
@@ -657,7 +666,7 @@ func (r *Room) sceneUpsert(s *Seat, typ string, payload json.RawMessage) error {
 		}
 		t.Col, t.Row = min(t.Col, p.Grid.Cols-1), min(t.Row, p.Grid.Rows-1)
 		if !t.Hidden && r.visibleAt(sc.ID, t.Col, t.Row, t.ID) >= MaxPerCell {
-			// shortcut: every cell full leaves the token over the limit; needs > 4*cols*rows visible tokens.
+			// Always finds a cell: the grid holds at least ceil(visible/4) cells (checked above).
 			best, c0, r0 := -1, t.Col, t.Row
 			for c := range p.Grid.Cols * p.Grid.Rows {
 				col, row := c%p.Grid.Cols, c/p.Grid.Cols

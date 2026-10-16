@@ -22,3 +22,9 @@
 
 ## Done
 Go tests: สิทธิ์, limits, imageUrl ต้องเป็น uploads, persist/reload, ผู้เล่นไม่ได้รับ hidden token / hp / pool, place ซ้ำ + ชื่อ #n, adjustHp clamp · e2e: DM + NPC (ใส่รูป, ชื่อ, ปกปิด, HP) → วาง → ผู้เล่นไม่เห็น (และ WS frame ไม่มีชื่อ NPC นั้น) → DM เปิดเผย → ผู้เล่นเห็น → DM −HP
+
+## แก้ไข (คำขอเพิ่ม): ไอคอนตาเป็น toggle
+- ปุ่มไอคอนตาอย่างเดียว (ไม่มีข้อความ, `aria-label` บอกสถานะ + `aria-pressed`): ตาเปิด = มองเห็น, ตาปิด = ซ่อน; คลิกสลับ
+  - แถว token NPC (`token-hide-<tokenId>`) → `token.setHidden`
+  - แถว NPC Pool (`npc-hidden-<id>`) → `npc.update` เปลี่ยนค่าเริ่มต้น hidden
+- บนแมพ **ไม่มีไอคอนตา** — token ที่ซ่อนแสดงแบบโปร่ง (~45%) สำหรับ DM เท่านั้น

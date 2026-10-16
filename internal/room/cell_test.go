@@ -1,6 +1,9 @@
 package room
 
-import "testing"
+import (
+	"slices"
+	"testing"
+)
 
 const cellFull = "that cell is full (max 4)"
 
@@ -203,6 +206,88 @@ func TestSceneShrinkRelocatesFromFullCell(t *testing.T) {
 			if n := r.visibleAt(sc, 2, 2, ""); n > MaxPerCell {
 				t.Fatalf("%d visible tokens on 2,2", n)
 			}
+		})
+	}
+}
+
+func TestSceneSelectPlacesPartyOnTinyGrid(t *testing.T) {
+	type pos struct{ col, row int }
+	for _, tc := range []struct {
+		name    string
+		cols    int
+		fill    []pos // one visible NPC per entry, before select
+		hidden  int   // hidden NPCs on 0,0
+		want    []pos // knight, wizard
+		wantErr bool
+	}{
+		{"2x1 empty: one per cell", 2, nil, 0, []pos{{0, 0}, {1, 0}}, false},
+		{"2x1 second full: wrap to first", 2, []pos{{1, 0}, {1, 0}, {1, 0}, {1, 0}}, 0, []pos{{0, 0}, {0, 0}}, false},
+		{"2x1 first full: both skip it", 2, []pos{{0, 0}, {0, 0}, {0, 0}, {0, 0}}, 0, []pos{{1, 0}, {1, 0}}, false},
+		{"2x1 room for one only", 2, []pos{{0, 0}, {0, 0}, {0, 0}, {1, 0}, {1, 0}, {1, 0}, {1, 0}}, 0, nil, true},
+		{"1x1 two free slots", 1, []pos{{0, 0}, {0, 0}}, 0, []pos{{0, 0}, {0, 0}}, false},
+		{"1x1 hidden do not fill", 1, nil, 4, []pos{{0, 0}, {0, 0}}, false},
+		{"1x1 room for one only", 1, []pos{{0, 0}, {0, 0}, {0, 0}}, 0, nil, true},
+		{"1x1 full", 1, []pos{{0, 0}, {0, 0}, {0, 0}, {0, 0}}, 0, nil, true},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			r, knight, wizard := party(t)
+			withPool(t, r)
+			ok(t, r, "dm", "scene.add", m{"name": "Beach", "imageUrl": "/uploads/a.png", "grid": m{"cellSize": 50, "cols": 10, "rows": 5}})
+			ok(t, r, "dm", "scene.select", m{"sceneId": r.State().Scenes[0].ID}) // currentSceneId set before the tiny scene
+			ok(t, r, "dm", "scene.add", m{"name": "Cell", "imageUrl": "/uploads/a.png", "grid": m{"cellSize": 50, "cols": tc.cols, "rows": 1}})
+			sc := r.State().Scenes[1].ID
+			for _, f := range tc.fill {
+				put(t, r, sc, "npc1", f.col, f.row)
+			}
+			for range tc.hidden {
+				put(t, r, sc, "npc2", 0, 0)
+			}
+			if tc.wantErr {
+				failWith(t, r, "dm", "scene.select", m{"sceneId": sc}, "scene has no free cell") // tokens + currentSceneId unchanged
+				return
+			}
+			ok(t, r, "dm", "scene.select", m{"sceneId": sc})
+			for i, c := range []string{knight, wizard} {
+				j := slices.IndexFunc(r.State().Tokens, func(tk Token) bool { return tk.SceneID == sc && tk.CharacterID == c })
+				if j < 0 {
+					t.Fatalf("no token for %s", c)
+				}
+				if tk := r.State().Tokens[j]; tk.Col != tc.want[i].col || tk.Row != tc.want[i].row {
+					t.Fatalf("%s at %d,%d, want %+v", c, tk.Col, tk.Row, tc.want[i])
+				}
+			}
+		})
+	}
+}
+
+func TestSceneUpdateRefusesTooSmallGrid(t *testing.T) {
+	for _, tc := range []struct {
+		name            string
+		visible, hidden int // NPCs on the 10x5 scene besides Mira
+		cols, rows      int
+		wantErr         string
+	}{
+		{"1x1 fits 4 visible", 3, 0, 1, 1, ""},
+		{"1x1 too small for 5 visible", 4, 0, 1, 1, "grid too small: 5 visible tokens need at least 2 cells"},
+		{"hidden do not count", 3, 3, 1, 1, ""},
+		{"2x1 fits 8 visible", 7, 0, 2, 1, ""},
+		{"2x1 too small for 9 visible", 8, 0, 2, 1, "grid too small: 9 visible tokens need at least 3 cells"},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			r, sc := playing(t) // Mira on 0,0
+			withPool(t, r)
+			for i := range tc.visible {
+				put(t, r, sc, "npc1", 1+i, 1)
+			}
+			for i := range tc.hidden {
+				put(t, r, sc, "npc2", 1+i, 2)
+			}
+			p := m{"sceneId": sc, "name": "Beach", "grid": m{"cellSize": 50, "cols": tc.cols, "rows": tc.rows}}
+			if tc.wantErr != "" {
+				failWith(t, r, "dm", "scene.update", p, tc.wantErr)
+				return
+			}
+			ok(t, r, "dm", "scene.update", p)
 		})
 	}
 }

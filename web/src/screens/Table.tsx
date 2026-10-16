@@ -182,13 +182,14 @@ function TokenRow({ t, movable, dmNpc }: { t: Token; movable: boolean; dmNpc: bo
       )}
       {dmNpc && (
         <button
-          className="hide-toggle"
+          className="eye-toggle"
           data-testid={`token-hide-${t.id}`}
           aria-pressed={!!t.hidden}
-          aria-label={tr('tokenHiddenNamed', { name: t.name })}
+          aria-label={tr(t.hidden ? 'tokenIsHidden' : 'tokenIsShown', { name: t.name })}
+          title={tr(t.hidden ? 'tokenIsHidden' : 'tokenIsShown', { name: t.name })}
           onClick={() => send('token.setHidden', { tokenId: t.id, hidden: !t.hidden })}
         >
-          {t.hidden ? <EyeOffIcon /> : <EyeIcon />} {tr('tokenHidden')}
+          {t.hidden ? <EyeOffIcon /> : <EyeIcon />}
         </button>
       )}
       {dmNpc && t.hp !== undefined && t.hpMax !== undefined && (

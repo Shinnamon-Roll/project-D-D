@@ -524,7 +524,6 @@ dialog.skill-modal { width: min(520px, calc(100vw - 32px)); text-align: left; }
 .npc-list .npc-thumb { grid-row: span 2; }
 .npc-name { font-family: var(--font-display); font-weight: 700; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .npc-meta { display: inline-flex; align-items: center; gap: 6px; justify-self: end; font-size: 0.85rem; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
-.npc-hidden { display: inline-flex; color: var(--oxblood); }
 .npc-actions { grid-column: 2 / -1; display: flex; flex-wrap: wrap; gap: 6px; }
 .npc-actions button { padding: 2px 10px; font-size: 0.85rem; }
 .npc-thumb {
@@ -548,8 +547,8 @@ label.switch input:focus-visible + .switch-track { outline: 2px solid var(--gold
 
 /* NPC token rows (DM): hide toggle + HP stepper */
 .token-list li.is-hidden > span:first-child { opacity: 0.6; font-style: italic; }
-button.hide-toggle { display: inline-flex; align-items: center; gap: 5px; padding: 2px 9px; font-size: 0.8rem; }
-button.hide-toggle[aria-pressed='true'] { background: var(--wood-2); color: var(--gold); border-color: var(--gold-dim); }
+button.eye-toggle { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; padding: 0; }
+button.eye-toggle[aria-pressed='true'] { background: var(--wood-2); color: var(--gold); border-color: var(--gold-dim); }
 .hp-ctl { display: inline-flex; align-items: center; gap: 4px; }
 .hp-ctl button { width: 26px; height: 26px; padding: 0; line-height: 1; }
 .hp-ctl output { min-width: 5ch; text-align: center; color: var(--parchment); font-variant-numeric: tabular-nums; }

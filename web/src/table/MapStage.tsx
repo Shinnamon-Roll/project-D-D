@@ -1,10 +1,9 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react'
-import { Circle, Group, Image as KImage, Layer, Line, Path, Rect, Stage, Text } from 'react-konva'
+import { Circle, Group, Image as KImage, Layer, Line, Rect, Stage, Text } from 'react-konva'
 import Konva from 'konva'
 import type { Grid, Scene, Token } from '../protocol'
 import { send } from '../ws'
 import { useT } from '../i18n'
-import { EYE_OFF_SLASH, EYE_PATH } from './icons'
 import silhouette from '../assets/npc-silhouette.svg'
 
 export function useImg(url: string) {
@@ -64,6 +63,8 @@ function layout(tokens: Token[]) {
   }
   return out
 }
+
+const drawRank = (t: Token, selected: string) => (t.id === selected ? 2 : t.hidden ? 0 : 1)
 
 // Konva can't read CSS vars; mirrors the tokens in docs/design/visual-theme.md.
 const C = {
@@ -179,8 +180,8 @@ export default function MapStage({ scene, grid, tokens, isDm, myCharacterId, fog
           ))}
         </Layer>
         <Layer listening={!fogMode}>
-          {/* the selected token is drawn last so its name sits on top */}
-          {[...tokens].sort((a, b) => Number(a.id === selected) - Number(b.id === selected)).map((t) => (
+          {/* hidden tokens first so overflow piled on a slot never covers a visible one; the selected token last so its name sits on top */}
+          {[...tokens].sort((a, b) => drawRank(a, selected) - drawRank(b, selected)).map((t) => (
             <TokenNode
               key={t.id}
               t={t}
@@ -318,16 +319,6 @@ function TokenNode(props: { t: Token; f: Fit; place: Place; art?: { src: string;
           <Group listening={false}>
             <Line points={[-r * 0.6, -r * 0.6, r * 0.6, r * 0.6]} stroke={C.blood} strokeWidth={Math.max(2, k * 0.08)} lineCap="round" />
             <Line points={[r * 0.6, -r * 0.6, -r * 0.6, r * 0.6]} stroke={C.blood} strokeWidth={Math.max(2, k * 0.08)} lineCap="round" />
-          </Group>
-        )}
-        {t.hidden && (
-          // eye-off badge, top right; the 24-unit icon paths scaled to the badge (at least 6px on screen)
-          <Group x={r * 0.72} y={-r * 0.72} listening={false}>
-            <Circle radius={Math.max(6 / scale, r * 0.42)} fill={C.ink} stroke={C.gold} strokeWidth={1 / scale} />
-            <Group scaleX={Math.max(6 / scale, r * 0.42) / 16} scaleY={Math.max(6 / scale, r * 0.42) / 16} offsetX={12} offsetY={12}>
-              <Path data={EYE_PATH} stroke={C.parchment} strokeWidth={2} />
-              <Path data={EYE_OFF_SLASH} stroke={C.gold} strokeWidth={2.5} lineCap="round" />
-            </Group>
           </Group>
         )}
       </Group>
